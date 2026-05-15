@@ -1,0 +1,144 @@
+
+<div style="padding: 1rem 0;">
+  <h2 class="sr-only">CEF four-quadrant scatter chart: current discount/premium vs 1-year z-score, with yield labels. Data as of 05/13/2026.</h2>
+
+  <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
+    <div style="display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: var(--color-text-secondary);">
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:50%;background:#1D9E75;display:inline-block;"></span>Discount + positive z-score</span>
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:50%;background:#378ADD;display:inline-block;"></span>Premium + positive z-score</span>
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:50%;background:#D85A30;display:inline-block;"></span>Discount + negative z-score</span>
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:50%;background:#888780;display:inline-block;"></span>Premium + negative z-score</span>
+    </div>
+    <span style="font-size: 11px; color: var(--color-text-tertiary); white-space:nowrap;">Fund data as of 05/13/2026</span>
+  </div>
+
+  <div style="position:relative;width:100%;height:560px;">
+    <canvas id="qChart" role="img" aria-label="Scatter plot of 26 CEFs by 1-year z-score (x) vs current discount/premium (y) with ticker and yield labels. Data as of 05/13/2026.">CEF quadrant chart: x-axis is 1-year z-score, y-axis is discount/premium percentage.</canvas>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
+<script>
+const funds = [
+  {ticker:'ADX',  z1y:1.59,  dp:-3.93,  yield:7.70},
+  {ticker:'AIO',  z1y:-1.07, dp:-11.01, yield:6.90},
+  {ticker:'ASGI', z1y:0.97,  dp:4.32,   yield:11.66},
+  {ticker:'BME',  z1y:1.51,  dp:-4.00,  yield:7.95},
+  {ticker:'BST',  z1y:-2.36, dp:-9.18,  yield:6.62},
+  {ticker:'BUI',  z1y:-1.10, dp:-1.15,  yield:5.93},
+  {ticker:'CSQ',  z1y:-1.37, dp:-10.07, yield:7.19},
+  {ticker:'DNP',  z1y:0.34,  dp:6.57,   yield:7.29},
+  {ticker:'EOS',  z1y:-1.51, dp:-9.83,  yield:8.07},
+  {ticker:'ERH',  z1y:0.91,  dp:-6.78,  yield:8.56},
+  {ticker:'GDV',  z1y:1.10,  dp:-9.96,  yield:6.16},
+  {ticker:'GLU',  z1y:-1.24, dp:-2.57,  yield:6.71},
+  {ticker:'GOF',  z1y:-1.05, dp:5.80,   yield:19.00},
+  {ticker:'NBXG', z1y:-2.03, dp:-15.29, yield:9.25},
+  {ticker:'NIE',  z1y:-2.09, dp:-11.67, yield:7.47},
+  {ticker:'PCN',  z1y:-1.36, dp:4.03,   yield:11.37},
+  {ticker:'PDI',  z1y:-0.59, dp:8.15,   yield:15.46},
+  {ticker:'PDO',  z1y:-2.19, dp:0.87,   yield:11.97},
+  {ticker:'PDX',  z1y:-0.19, dp:-9.52,  yield:7.49},
+  {ticker:'RFI',  z1y:-2.16, dp:-3.39,  yield:8.41},
+  {ticker:'RLTY', z1y:-1.45, dp:-8.40,  yield:8.40},
+  {ticker:'RNP',  z1y:-1.34, dp:-4.80,  yield:7.83},
+  {ticker:'RQI',  z1y:1.11,  dp:-1.05,  yield:8.17},
+  {ticker:'STK',  z1y:1.00,  dp:0.17,   yield:3.57},
+  {ticker:'UTF',  z1y:-0.39, dp:-5.16,  yield:7.33},
+  {ticker:'UTG',  z1y:0.79,  dp:0.58,   yield:5.58},
+];
+
+function quadrantColor(z, dp) {
+  if (z >= 0 && dp < 0) return '#1D9E75';
+  if (z >= 0 && dp >= 0) return '#378ADD';
+  if (z < 0 && dp < 0) return '#D85A30';
+  return '#888780';
+}
+
+const data = funds.map(f => ({
+  x: f.z1y,
+  y: f.dp,
+  label: f.ticker,
+  yield: f.yield,
+  bgColor: quadrantColor(f.z1y, f.dp)
+}));
+
+Chart.register(ChartDataLabels);
+
+const ctx = document.getElementById('qChart').getContext('2d');
+new Chart(ctx, {
+  type: 'scatter',
+  data: {
+    datasets: [{
+      data: data,
+      backgroundColor: data.map(d => d.bgColor + 'CC'),
+      borderColor: data.map(d => d.bgColor),
+      borderWidth: 1.5,
+      pointRadius: 7,
+      pointHoverRadius: 9,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    layout: { padding: { top: 24, right: 44, bottom: 20, left: 20 } },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => {
+            const d = ctx.raw;
+            return `${d.label}  |  Yield: ${d.yield.toFixed(2)}%  |  Z-Score: ${d.x.toFixed(2)}  |  Disc/Prem: ${d.y.toFixed(2)}%`;
+          }
+        }
+      },
+      datalabels: {
+        formatter: (val) => `${val.label}\n${val.yield.toFixed(2)}%`,
+        font: { size: 9.5, weight: '500' },
+        color: (ctx) => ctx.dataset.data[ctx.dataIndex].bgColor,
+        align: 'top',
+        offset: 5,
+        textAlign: 'center',
+        lineHeight: 1.3,
+      },
+    },
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: '1-Year Z-Score',
+          font: { size: 13, weight: '500' },
+          color: '#888780'
+        },
+        grid: {
+          color: ctx => ctx.tick.value === 0 ? 'rgba(100,100,100,0.5)' : 'rgba(150,150,150,0.12)',
+          lineWidth: ctx => ctx.tick.value === 0 ? 1.5 : 1,
+        },
+        ticks: { color: '#888780', font: { size: 11 } },
+        min: -3.0,
+        max: 3.5,
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Discount / Premium (%)',
+          font: { size: 13, weight: '500' },
+          color: '#888780'
+        },
+        grid: {
+          color: ctx => ctx.tick.value === 0 ? 'rgba(100,100,100,0.5)' : 'rgba(150,150,150,0.12)',
+          lineWidth: ctx => ctx.tick.value === 0 ? 1.5 : 1,
+        },
+        ticks: {
+          color: '#888780',
+          font: { size: 11 },
+          callback: v => v.toFixed(0) + '%'
+        },
+        min: -18,
+        max: 14,
+      }
+    }
+  }
+});
+</script>
