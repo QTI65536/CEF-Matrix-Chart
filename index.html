@@ -1,7 +1,5 @@
 
 <div style="padding: 1rem 0;">
-  <h2 class="sr-only">CEF four-quadrant scatter chart: current discount/premium vs 1-year z-score, with yield labels. Data as of 05/13/2026.</h2>
-
   <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
     <div style="display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: var(--color-text-secondary);">
       <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:50%;background:#1D9E75;display:inline-block;"></span>Discount + positive z-score</span>
@@ -12,8 +10,12 @@
     <span style="font-size: 11px; color: var(--color-text-tertiary); white-space:nowrap;">Fund data as of 05/13/2026</span>
   </div>
 
-  <div style="position:relative;width:100%;height:560px;">
-    <canvas id="qChart" role="img" aria-label="Scatter plot of 26 CEFs by 1-year z-score (x) vs current discount/premium (y) with ticker and yield labels. Data as of 05/13/2026.">CEF quadrant chart: x-axis is 1-year z-score, y-axis is discount/premium percentage.</canvas>
+  <div style="position:relative;width:100%;height:540px;">
+    <canvas id="qChart"></canvas>
+  </div>
+
+  <div style="margin-top:12px; padding: 10px 14px; border-top: 1px solid rgba(150,150,150,0.2); font-size: 10.5px; color: var(--color-text-tertiary); line-height: 1.55;">
+    <em>This chart is for informational purposes only and does not constitute investment advice. Data sourced from fund provider reports as of 05/13/2026. Past performance, distribution rates, and discount/premium levels are not guarantees of future results. Closed-end funds involve risks including the use of leverage, market volatility, and the possibility that shares may trade at a discount to net asset value. Please consult a qualified financial advisor before making any investment decisions.</em>
   </div>
 </div>
 
