@@ -1,86 +1,85 @@
 
-<div style="padding: 1rem 0;">
-  <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
-    <div style="display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: var(--color-text-secondary);">
-      <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:50%;background:#1D9E75;display:inline-block;"></span>Discount + positive z-score</span>
-      <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:50%;background:#378ADD;display:inline-block;"></span>Premium + positive z-score</span>
-      <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:50%;background:#D85A30;display:inline-block;"></span>Discount + negative z-score</span>
-      <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:50%;background:#888780;display:inline-block;"></span>Premium + negative z-score</span>
+<h2 class="sr-only">CEF four-quadrant scatter chart showing current discount/premium vs 1-year z-score, with vertical lines showing 52-week average discount/premium for each fund. Data as of 05/15/2026.</h2>
+
+<div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px; flex-wrap:wrap; gap:8px; padding-top:1rem;">
+  <div style="display:flex; flex-wrap:wrap; gap:14px; font-size:12px; color:var(--color-text-secondary);">
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:50%;background:#1D9E75;display:inline-block;"></span>Discount + positive z-score</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:50%;background:#378ADD;display:inline-block;"></span>Premium + positive z-score</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:50%;background:#D85A30;display:inline-block;"></span>Discount + negative z-score</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:50%;background:#888780;display:inline-block;"></span>Premium + negative z-score</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:2px;background:rgba(136,135,128,0.6);display:inline-block;"></span><span style="width:6px;height:6px;border-radius:1px;background:rgba(136,135,128,0.6);display:inline-block;"></span>52-wk avg disc/prem</span>
+  </div>
+  <span style="font-size:11px;color:var(--color-text-tertiary);white-space:nowrap;">Fund data as of 05/15/2026</span>
+</div>
+
+<div style="position:relative;width:100%;height:560px;">
+  <canvas id="qChart" role="img" aria-label="Scatter plot of 26 CEFs: x-axis is 1-year z-score, y-axis is current discount/premium. Vertical line segments show the 52-week average discount/premium per fund.">CEF quadrant scatter chart with 52-week average range indicators.</canvas>
+</div>
+
+<div style="margin-top:14px; padding:12px 14px; border-top:0.5px solid var(--color-border-tertiary);">
+  <p style="font-size:11px; font-weight:500; color:var(--color-text-secondary); margin:0 0 8px 0; text-transform:uppercase; letter-spacing:0.04em;">Notable moves vs. prior day (05/14/2026)</p>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:8px;">
+    <div style="display:flex;gap:8px;align-items:flex-start;">
+      <i class="ti ti-trending-up" style="font-size:15px;color:#1D9E75;margin-top:1px;" aria-hidden="true"></i>
+      <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>BST</strong> partially recovered — 1-year z-score improved from <strong>-3.50</strong> to <strong>-2.56</strong> and discount tightened slightly to <strong>-9.59%</strong>.</p>
     </div>
-    <span style="font-size: 11px; color: var(--color-text-tertiary); white-space:nowrap;">Fund data as of 05/15/2026</span>
-  </div>
-
-  <div style="position:relative;width:100%;height:540px;">
-    <canvas id="qChart"></canvas>
-  </div>
-
-  <!-- Movement Commentary -->
-  <div style="margin-top:14px; padding: 12px 14px; border-top: 1px solid rgba(150,150,150,0.2);">
-    <p style="font-size: 11.5px; font-weight: 600; color: var(--color-text-secondary); margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 0.04em;">Notable Moves vs. Prior Day (05/14/2026)</p>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px;">
-      <div style="display:flex; gap:8px; align-items:flex-start;">
-        <span style="font-size:13px; margin-top:1px;">📈</span>
-        <p style="margin:0; font-size: 11px; color: var(--color-text-secondary); line-height:1.5;"><strong>BST</strong> partially recovered — 1-year z-score improved from <strong>-3.50</strong> to <strong>-2.56</strong> and discount tightened slightly to <strong>-9.59%</strong>.</p>
-      </div>
-      <div style="display:flex; gap:8px; align-items:flex-start;">
-        <span style="font-size:13px; margin-top:1px;">📈</span>
-        <p style="margin:0; font-size: 11px; color: var(--color-text-secondary); line-height:1.5;"><strong>UTG</strong> pushed further into premium territory, rising to <strong>+1.25%</strong> with a strengthening z-score of <strong>1.41</strong>.</p>
-      </div>
-      <div style="display:flex; gap:8px; align-items:flex-start;">
-        <span style="font-size:13px; margin-top:1px;">⚠️</span>
-        <p style="margin:0; font-size: 11px; color: var(--color-text-secondary); line-height:1.5;"><strong>PDO</strong> flipped to a slight discount of <strong>-0.08%</strong> as its z-score deteriorated further to <strong>-2.73</strong>.</p>
-      </div>
-      <div style="display:flex; gap:8px; align-items:flex-start;">
-        <span style="font-size:13px; margin-top:1px;">📉</span>
-        <p style="margin:0; font-size: 11px; color: var(--color-text-secondary); line-height:1.5;"><strong>RFI</strong> deepened its slide — z-score hit <strong>-2.59</strong> with discount widening to <strong>-4.48%</strong>, among the weakest momentum readings in the set.</p>
-      </div>
-      <div style="display:flex; gap:8px; align-items:flex-start;">
-        <span style="font-size:13px; margin-top:1px;">🔄</span>
-        <p style="margin:0; font-size: 11px; color: var(--color-text-secondary); line-height:1.5;"><strong>DNP</strong> expanded its premium to <strong>+7.58%</strong> — the widest in the universe — while its z-score improved to <strong>0.72</strong>.</p>
-      </div>
-      <div style="display:flex; gap:8px; align-items:flex-start;">
-        <span style="font-size:13px; margin-top:1px;">📉</span>
-        <p style="margin:0; font-size: 11px; color: var(--color-text-secondary); line-height:1.5;"><strong>STK</strong> continued to drift — discount widened to <strong>-3.47%</strong> and z-score turned negative at <strong>-0.27</strong>, moving it into the orange quadrant.</p>
-      </div>
+    <div style="display:flex;gap:8px;align-items:flex-start;">
+      <i class="ti ti-trending-up" style="font-size:15px;color:#1D9E75;margin-top:1px;" aria-hidden="true"></i>
+      <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>UTG</strong> pushed further into premium territory, rising to <strong>+1.25%</strong> with a strengthening z-score of <strong>1.41</strong>.</p>
+    </div>
+    <div style="display:flex;gap:8px;align-items:flex-start;">
+      <i class="ti ti-alert-triangle" style="font-size:15px;color:#D85A30;margin-top:1px;" aria-hidden="true"></i>
+      <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>PDO</strong> flipped to a slight discount of <strong>-0.08%</strong> as its z-score deteriorated further to <strong>-2.73</strong>.</p>
+    </div>
+    <div style="display:flex;gap:8px;align-items:flex-start;">
+      <i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;" aria-hidden="true"></i>
+      <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>RFI</strong> deepened its slide — z-score hit <strong>-2.59</strong> with discount widening to <strong>-4.48%</strong>, among the weakest momentum readings in the set.</p>
+    </div>
+    <div style="display:flex;gap:8px;align-items:flex-start;">
+      <i class="ti ti-arrows-horizontal" style="font-size:15px;color:#378ADD;margin-top:1px;" aria-hidden="true"></i>
+      <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>DNP</strong> expanded its premium to <strong>+7.58%</strong> — the widest in the universe — while its z-score improved to <strong>0.72</strong>.</p>
+    </div>
+    <div style="display:flex;gap:8px;align-items:flex-start;">
+      <i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;" aria-hidden="true"></i>
+      <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>STK</strong> continued to drift — discount widened to <strong>-3.47%</strong> and z-score turned negative at <strong>-0.27</strong>, moving it into the orange quadrant.</p>
     </div>
   </div>
+</div>
 
-  <!-- Disclaimer -->
-  <div style="margin-top:10px; padding: 10px 14px; border-top: 1px solid rgba(150,150,150,0.2); font-size: 10.5px; color: var(--color-text-tertiary); line-height: 1.55;">
-    <em>This chart is for informational purposes only and does not constitute investment advice. Data sourced from fund provider reports as of 05/15/2026. Past performance, distribution rates, and discount/premium levels are not guarantees of future results. Closed-end funds involve risks including the use of leverage, market volatility, and the possibility that shares may trade at a discount to net asset value. Please consult a qualified financial advisor before making any investment decisions.</em>
-  </div>
+<div style="margin-top:10px; padding:10px 14px; border-top:0.5px solid var(--color-border-tertiary); font-size:10.5px; color:var(--color-text-tertiary); line-height:1.55;">
+  <em>This chart is for informational purposes only and does not constitute investment advice. Data sourced from fund provider reports as of 05/15/2026. Past performance, distribution rates, and discount/premium levels are not guarantees of future results. Closed-end funds involve risks including the use of leverage, market volatility, and the possibility that shares may trade at a discount to net asset value. Please consult a qualified financial advisor before making any investment decisions.</em>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
 <script>
 const funds = [
-  {ticker:'ADX',  z1y:1.96,  dp:-3.20,  yield:7.66},
-  {ticker:'AIO',  z1y:-0.79, dp:-9.34,  yield:6.87},
-  {ticker:'ASGI', z1y:1.04,  dp:4.62,   yield:11.72},
-  {ticker:'BME',  z1y:1.62,  dp:-3.76,  yield:8.13},
-  {ticker:'BST',  z1y:-2.56, dp:-9.59,  yield:6.62},
-  {ticker:'BUI',  z1y:-0.71, dp:0.15,   yield:5.97},
-  {ticker:'CSQ',  z1y:-1.28, dp:-9.88,  yield:7.29},
-  {ticker:'DNP',  z1y:0.72,  dp:7.58,   yield:7.32},
-  {ticker:'EOS',  z1y:-1.65, dp:-10.49, yield:8.18},
-  {ticker:'ERH',  z1y:0.00,  dp:-8.07,  yield:8.83},
-  {ticker:'GDV',  z1y:0.87,  dp:-10.14, yield:6.27},
-  {ticker:'GLU',  z1y:-0.54, dp:-0.91,  yield:6.76},
-  {ticker:'GOF',  z1y:-1.14, dp:4.61,   yield:19.63},
-  {ticker:'NBXG', z1y:-1.38, dp:-14.33, yield:9.30},
-  {ticker:'NIE',  z1y:-1.34, dp:-11.03, yield:7.49},
-  {ticker:'PCN',  z1y:-1.58, dp:3.43,   yield:11.49},
-  {ticker:'PDI',  z1y:-0.88, dp:7.05,   yield:15.69},
-  {ticker:'PDO',  z1y:-2.73, dp:-0.08,  yield:12.13},
-  {ticker:'PDX',  z1y:-0.27, dp:-9.69,  yield:7.44},
-  {ticker:'RFI',  z1y:-2.59, dp:-4.48,  yield:8.65},
-  {ticker:'RLTY', z1y:-1.47, dp:-8.46,  yield:8.59},
-  {ticker:'RNP',  z1y:-1.42, dp:-5.20,  yield:8.00},
-  {ticker:'RQI',  z1y:1.11,  dp:-1.00,  yield:8.35},
-  {ticker:'STK',  z1y:-0.27, dp:-3.47,  yield:3.70},
-  {ticker:'UTF',  z1y:-0.33, dp:-4.93,  yield:7.38},
-  {ticker:'UTG',  z1y:1.41,  dp:1.25,   yield:5.68},
+  {ticker:'ADX',  z1y:1.96,  dp:-3.20,  avg52:-6.73, yield:7.66},
+  {ticker:'AIO',  z1y:-0.79, dp:-9.34,  avg52:-4.38, yield:6.87},
+  {ticker:'ASGI', z1y:1.04,  dp:4.62,   avg52:0.58,  yield:11.72},
+  {ticker:'BME',  z1y:1.62,  dp:-3.76,  avg52:-6.57, yield:8.13},
+  {ticker:'BST',  z1y:-2.56, dp:-9.59,  avg52:-5.97, yield:6.62},
+  {ticker:'BUI',  z1y:-0.71, dp:0.15,   avg52:2.51,  yield:5.97},
+  {ticker:'CSQ',  z1y:-1.28, dp:-9.88,  avg52:-6.58, yield:7.29},
+  {ticker:'DNP',  z1y:0.72,  dp:7.58,   avg52:5.67,  yield:7.32},
+  {ticker:'EOS',  z1y:-1.65, dp:-10.49, avg52:-3.95, yield:8.18},
+  {ticker:'ERH',  z1y:0.00,  dp:-8.07,  avg52:-8.07, yield:8.83},
+  {ticker:'GDV',  z1y:0.87,  dp:-10.14, avg52:-10.86,yield:6.27},
+  {ticker:'GLU',  z1y:-0.54, dp:-0.91,  avg52:0.39,  yield:6.76},
+  {ticker:'GOF',  z1y:-1.14, dp:4.61,   avg52:17.07, yield:19.63},
+  {ticker:'NBXG', z1y:-1.38, dp:-14.33, avg52:-12.20,yield:9.30},
+  {ticker:'NIE',  z1y:-1.34, dp:-11.03, avg52:-9.83, yield:7.49},
+  {ticker:'PCN',  z1y:-1.58, dp:3.43,   avg52:7.26,  yield:11.49},
+  {ticker:'PDI',  z1y:-0.88, dp:7.05,   avg52:10.28, yield:15.69},
+  {ticker:'PDO',  z1y:-2.73, dp:-0.08,  avg52:4.03,  yield:12.13},
+  {ticker:'PDX',  z1y:-0.27, dp:-9.69,  avg52:-9.17, yield:7.44},
+  {ticker:'RFI',  z1y:-2.59, dp:-4.48,  avg52:1.21,  yield:8.65},
+  {ticker:'RLTY', z1y:-1.47, dp:-8.46,  avg52:-6.30, yield:8.59},
+  {ticker:'RNP',  z1y:-1.42, dp:-5.20,  avg52:0.38,  yield:8.00},
+  {ticker:'RQI',  z1y:1.11,  dp:-1.00,  avg52:-3.21, yield:8.35},
+  {ticker:'STK',  z1y:-0.27, dp:-3.47,  avg52:-2.72, yield:3.70},
+  {ticker:'UTF',  z1y:-0.33, dp:-4.93,  avg52:-3.25, yield:7.38},
+  {ticker:'UTG',  z1y:1.41,  dp:1.25,   avg52:-0.24, yield:5.68},
 ];
 
 function quadrantColor(z, dp) {
@@ -90,47 +89,85 @@ function quadrantColor(z, dp) {
   return '#888780';
 }
 
-const data = funds.map(f => ({
+const scatterData = funds.map(f => ({
   x: f.z1y,
   y: f.dp,
   label: f.ticker,
   yield: f.yield,
+  avg52: f.avg52,
   bgColor: quadrantColor(f.z1y, f.dp)
 }));
 
-Chart.register(ChartDataLabels);
+const rangePlugin = {
+  id: 'rangeLines',
+  afterDatasetsDraw(chart) {
+    const {ctx, scales: {x, y}} = chart;
+    const meta = chart.getDatasetMeta(0);
+    funds.forEach((f, i) => {
+      const pt = meta.data[i];
+      if (!pt) return;
+      const px = pt.x;
+      const pyAvg = y.getPixelForValue(f.avg52);
+      const pyCur = y.getPixelForValue(f.dp);
+      const halfW = 5;
+      ctx.save();
+      ctx.strokeStyle = 'rgba(136,135,128,0.65)';
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([3, 2]);
+      ctx.beginPath();
+      ctx.moveTo(px, pyCur);
+      ctx.lineTo(px, pyAvg);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.beginPath();
+      ctx.moveTo(px - halfW, pyAvg);
+      ctx.lineTo(px + halfW, pyAvg);
+      ctx.stroke();
+      ctx.restore();
+    });
+  }
+};
+
+Chart.register(ChartDataLabels, rangePlugin);
 
 const ctx = document.getElementById('qChart').getContext('2d');
 new Chart(ctx, {
   type: 'scatter',
   data: {
     datasets: [{
-      data: data,
-      backgroundColor: data.map(d => d.bgColor + 'CC'),
-      borderColor: data.map(d => d.bgColor),
+      data: scatterData,
+      backgroundColor: scatterData.map(d => d.bgColor + 'CC'),
+      borderColor: scatterData.map(d => d.bgColor),
       borderWidth: 1.5,
       pointRadius: 7,
       pointHoverRadius: 9,
+      order: 1,
     }]
   },
   options: {
     responsive: true,
     maintainAspectRatio: false,
-    layout: { padding: { top: 24, right: 44, bottom: 20, left: 20 } },
+    layout: {padding: {top: 28, right: 48, bottom: 20, left: 20}},
     plugins: {
-      legend: { display: false },
+      legend: {display: false},
       tooltip: {
         callbacks: {
           label: ctx => {
             const d = ctx.raw;
-            return `${d.label}  |  Yield: ${d.yield.toFixed(2)}%  |  Z-Score: ${d.x.toFixed(2)}  |  Disc/Prem: ${d.y.toFixed(2)}%`;
+            const diff = (d.y - d.avg52).toFixed(2);
+            const sign = diff > 0 ? '+' : '';
+            return [
+              `${d.label}  |  Yield: ${d.yield.toFixed(2)}%`,
+              `Z-Score: ${d.x.toFixed(2)}  |  Disc/Prem: ${d.y.toFixed(2)}%`,
+              `52-wk avg: ${d.avg52.toFixed(2)}%  (${sign}${diff} vs avg)`
+            ];
           }
         }
       },
       datalabels: {
-        formatter: (val) => `${val.label}\n${val.yield.toFixed(2)}%`,
-        font: { size: 9.5, weight: '500' },
-        color: (ctx) => ctx.dataset.data[ctx.dataIndex].bgColor,
+        formatter: val => `${val.label}\n${val.yield.toFixed(2)}%`,
+        font: {size: 9.5, weight: '500'},
+        color: ctx => ctx.dataset.data[ctx.dataIndex].bgColor,
         align: 'top',
         offset: 5,
         textAlign: 'center',
@@ -139,38 +176,24 @@ new Chart(ctx, {
     },
     scales: {
       x: {
-        title: {
-          display: true,
-          text: '1-Year Z-Score',
-          font: { size: 13, weight: '500' },
-          color: '#888780'
-        },
+        title: {display: true, text: '1-Year Z-Score', font: {size: 13, weight: '500'}, color: '#888780'},
         grid: {
           color: ctx => ctx.tick.value === 0 ? 'rgba(100,100,100,0.5)' : 'rgba(150,150,150,0.12)',
           lineWidth: ctx => ctx.tick.value === 0 ? 1.5 : 1,
         },
-        ticks: { color: '#888780', font: { size: 11 } },
+        ticks: {color: '#888780', font: {size: 11}},
         min: -3.5,
         max: 3.5,
       },
       y: {
-        title: {
-          display: true,
-          text: 'Discount / Premium (%)',
-          font: { size: 13, weight: '500' },
-          color: '#888780'
-        },
+        title: {display: true, text: 'Discount / Premium (%)', font: {size: 13, weight: '500'}, color: '#888780'},
         grid: {
           color: ctx => ctx.tick.value === 0 ? 'rgba(100,100,100,0.5)' : 'rgba(150,150,150,0.12)',
           lineWidth: ctx => ctx.tick.value === 0 ? 1.5 : 1,
         },
-        ticks: {
-          color: '#888780',
-          font: { size: 11 },
-          callback: v => v.toFixed(0) + '%'
-        },
+        ticks: {color: '#888780', font: {size: 11}, callback: v => v.toFixed(0) + '%'},
         min: -18,
-        max: 14,
+        max: 20,
       }
     }
   }
