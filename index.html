@@ -1,85 +1,123 @@
 
-<h2 class="sr-only">CEF four-quadrant scatter chart showing current discount/premium vs 1-year z-score, with vertical lines showing 52-week average discount/premium for each fund. Data as of 05/18/2026.</h2>
+<style>
+#search-box { width: 180px; padding: 5px 10px; font-size: 12px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); background: var(--color-background-primary); color: var(--color-text-primary); }
+#search-box:focus { outline: none; border-color: var(--color-border-primary); }
+.q-btn { font-size: 11px; padding: 4px 10px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); background: var(--color-background-primary); color: var(--color-text-secondary); cursor: pointer; transition: background 0.15s; }
+.q-btn:hover { background: var(--color-background-secondary); }
+.q-btn.active { background: var(--color-background-secondary); color: var(--color-text-primary); border-color: var(--color-border-primary); font-weight: 500; }
+#detail-panel { display:none; background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-lg); padding: 14px 16px; margin-top: 10px; }
+.dp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap: 8px; margin-top: 10px; }
+.dp-metric { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 8px 10px; }
+.dp-metric .lbl { font-size: 10px; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 2px; }
+.dp-metric .val { font-size: 14px; font-weight: 500; color: var(--color-text-primary); }
+</style>
 
-<div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px; flex-wrap:wrap; gap:8px; padding-top:1rem;">
-  <div style="display:flex; flex-wrap:wrap; gap:14px; font-size:12px; color:var(--color-text-secondary);">
-    <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:50%;background:#1D9E75;display:inline-block;"></span>Discount + positive z-score</span>
-    <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:50%;background:#378ADD;display:inline-block;"></span>Premium + positive z-score</span>
-    <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:50%;background:#D85A30;display:inline-block;"></span>Discount + negative z-score</span>
-    <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:50%;background:#888780;display:inline-block;"></span>Premium + negative z-score</span>
-    <span style="display:flex;align-items:center;gap:4px;"><span style="width:14px;height:2px;background:rgba(136,135,128,0.6);display:inline-block;"></span><span style="width:6px;height:6px;border-radius:1px;background:rgba(136,135,128,0.6);display:inline-block;"></span>52-wk avg disc/prem</span>
+<div style="padding-top:1rem;">
+
+  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:10px;">
+    <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+      <input id="search-box" type="text" placeholder="Search ticker…" aria-label="Search fund by ticker" />
+      <div style="display:flex; gap:6px; flex-wrap:wrap;" role="group" aria-label="Filter by quadrant">
+        <button class="q-btn active" data-q="all">All</button>
+        <button class="q-btn" data-q="green" style="border-left:3px solid #1D9E75;">Disc + Z+</button>
+        <button class="q-btn" data-q="blue" style="border-left:3px solid #378ADD;">Prem + Z+</button>
+        <button class="q-btn" data-q="orange" style="border-left:3px solid #D85A30;">Disc + Z−</button>
+        <button class="q-btn" data-q="gray" style="border-left:3px solid #888780;">Prem + Z−</button>
+      </div>
+    </div>
+    <span style="font-size:11px;color:var(--color-text-tertiary);white-space:nowrap;">Fund data as of 05/18/2026</span>
   </div>
-  <span style="font-size:11px;color:var(--color-text-tertiary);white-space:nowrap;">Fund data as of 05/18/2026</span>
-</div>
 
-<div style="position:relative;width:100%;height:560px;">
-  <canvas id="qChart" role="img" aria-label="Scatter plot of 26 CEFs: x-axis is 1-year z-score, y-axis is current discount/premium with dashed lines to 52-week average. Data as of 05/18/2026.">CEF quadrant scatter chart with 52-week average range indicators.</canvas>
-</div>
+  <div style="display:flex; flex-wrap:wrap; gap:14px; font-size:11px; color:var(--color-text-secondary); margin-bottom:8px;">
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#1D9E75;display:inline-block;"></span>Discount + positive z-score</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#378ADD;display:inline-block;"></span>Premium + positive z-score</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#D85A30;display:inline-block;"></span>Discount + negative z-score</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#888780;display:inline-block;"></span>Premium + negative z-score</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:14px;height:2px;background:rgba(136,135,128,0.55);display:inline-block;"></span><span style="width:5px;height:5px;border-radius:1px;background:rgba(136,135,128,0.55);display:inline-block;"></span>52-wk avg</span>
+    <span style="font-size:10px;color:var(--color-text-tertiary);">Click any dot for details</span>
+  </div>
 
-<div style="margin-top:14px; padding:12px 14px; border-top:0.5px solid var(--color-border-tertiary);">
-  <p style="font-size:11px; font-weight:500; color:var(--color-text-secondary); margin:0 0 8px 0; text-transform:uppercase; letter-spacing:0.04em;">Notable moves vs. prior day (05/15/2026)</p>
-  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:8px;">
-    <div style="display:flex;gap:8px;align-items:flex-start;">
-      <i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;" aria-hidden="true"></i>
-      <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>EOS</strong> hit a new low — discount widened to <strong>-11.42%</strong> and z-score deteriorated to <strong>-1.87</strong>, the deepest discount in the set after NBXG.</p>
+  <div style="position:relative;width:100%;height:540px;">
+    <canvas id="qChart" role="img" aria-label="Scatter plot of 26 CEFs: x-axis 1-year z-score, y-axis current discount/premium with 52-week average indicators. Click any fund for details.">CEF quadrant scatter chart. Click a fund dot to see full data.</canvas>
+  </div>
+
+  <div id="detail-panel" role="region" aria-live="polite" aria-label="Fund detail panel">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <div>
+        <span id="dp-ticker" style="font-size:18px; font-weight:500; color:var(--color-text-primary);"></span>
+        <span id="dp-quadrant" style="font-size:11px; margin-left:8px; padding:2px 8px; border-radius:var(--border-radius-md);"></span>
+      </div>
+      <button id="dp-close" style="background:none;border:none;cursor:pointer;color:var(--color-text-secondary);font-size:18px;" aria-label="Close detail panel"><i class="ti ti-x"></i></button>
     </div>
-    <div style="display:flex;gap:8px;align-items:flex-start;">
-      <i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;" aria-hidden="true"></i>
-      <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>BST</strong> slid again — z-score weakened further to <strong>-3.35</strong> with discount holding wide at <strong>-10.83%</strong>, remaining the most negative z-score in the universe.</p>
-    </div>
-    <div style="display:flex;gap:8px;align-items:flex-start;">
-      <i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;" aria-hidden="true"></i>
-      <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>GLU</strong> saw a notable move — discount widened sharply to <strong>-4.22%</strong> from <strong>-0.91%</strong> with z-score dropping to <strong>-1.89</strong>.</p>
-    </div>
-    <div style="display:flex;gap:8px;align-items:flex-start;">
-      <i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;" aria-hidden="true"></i>
-      <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>UTG</strong> reversed — slipped from a <strong>+1.25%</strong> premium to a slight <strong>-0.17%</strong> discount, with z-score dropping back to near-zero at <strong>0.07</strong>.</p>
-    </div>
-    <div style="display:flex;gap:8px;align-items:flex-start;">
-      <i class="ti ti-trending-down" style="font-size:15px;color:#888780;margin-top:1px;" aria-hidden="true"></i>
-      <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>DNP</strong> premium compressed from <strong>+7.58%</strong> to <strong>+5.99%</strong> as z-score faded to <strong>0.12</strong>, nearing the quadrant boundary.</p>
-    </div>
-    <div style="display:flex;gap:8px;align-items:flex-start;">
-      <i class="ti ti-trending-up" style="font-size:15px;color:#378ADD;margin-top:1px;" aria-hidden="true"></i>
-      <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>ASGI</strong> continued to strengthen — premium expanded to <strong>+5.02%</strong> with z-score climbing to <strong>1.14</strong>, the most positive premium in the universe.</p>
+    <div class="dp-grid" id="dp-grid"></div>
+  </div>
+
+  <div style="margin-top:14px; padding:12px 14px; border-top:0.5px solid var(--color-border-tertiary);">
+    <p style="font-size:11px; font-weight:500; color:var(--color-text-secondary); margin:0 0 8px 0; text-transform:uppercase; letter-spacing:0.04em;">Notable moves vs. prior day (05/15/2026)</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:8px;">
+      <div style="display:flex;gap:8px;align-items:flex-start;">
+        <i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;" aria-hidden="true"></i>
+        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>EOS</strong> hit a new low — discount widened to <strong>-11.42%</strong> and z-score deteriorated to <strong>-1.87</strong>, the deepest discount in the set after NBXG.</p>
+      </div>
+      <div style="display:flex;gap:8px;align-items:flex-start;">
+        <i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;" aria-hidden="true"></i>
+        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>BST</strong> slid again — z-score weakened further to <strong>-3.35</strong> with discount holding wide at <strong>-10.83%</strong>, remaining the most negative z-score in the universe.</p>
+      </div>
+      <div style="display:flex;gap:8px;align-items:flex-start;">
+        <i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;" aria-hidden="true"></i>
+        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>GLU</strong> saw a notable move — discount widened sharply to <strong>-4.22%</strong> from <strong>-0.91%</strong> with z-score dropping to <strong>-1.89</strong>.</p>
+      </div>
+      <div style="display:flex;gap:8px;align-items:flex-start;">
+        <i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;" aria-hidden="true"></i>
+        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>UTG</strong> reversed — slipped from a <strong>+1.25%</strong> premium to a slight <strong>-0.17%</strong> discount, with z-score dropping back to near-zero at <strong>0.07</strong>.</p>
+      </div>
+      <div style="display:flex;gap:8px;align-items:flex-start;">
+        <i class="ti ti-trending-down" style="font-size:15px;color:#888780;margin-top:1px;" aria-hidden="true"></i>
+        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>DNP</strong> premium compressed from <strong>+7.58%</strong> to <strong>+5.99%</strong> as z-score faded to <strong>0.12</strong>, nearing the quadrant boundary.</p>
+      </div>
+      <div style="display:flex;gap:8px;align-items:flex-start;">
+        <i class="ti ti-trending-up" style="font-size:15px;color:#378ADD;margin-top:1px;" aria-hidden="true"></i>
+        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>ASGI</strong> continued to strengthen — premium expanded to <strong>+5.02%</strong> with z-score climbing to <strong>1.14</strong>, the most positive premium in the universe.</p>
+      </div>
     </div>
   </div>
-</div>
 
-<div style="margin-top:10px; padding:10px 14px; border-top:0.5px solid var(--color-border-tertiary); font-size:10.5px; color:var(--color-text-tertiary); line-height:1.55;">
-  <em>This chart is for informational purposes only and does not constitute investment advice. Data sourced from fund provider reports as of 05/18/2026. Past performance, distribution rates, and discount/premium levels are not guarantees of future results. Closed-end funds involve risks including the use of leverage, market volatility, and the possibility that shares may trade at a discount to net asset value. Please consult a qualified financial advisor before making any investment decisions.</em>
+  <div style="margin-top:10px; padding:10px 14px; border-top:0.5px solid var(--color-border-tertiary); font-size:10.5px; color:var(--color-text-tertiary); line-height:1.55;">
+    <em>This chart is for informational purposes only and does not constitute investment advice. Data sourced from fund provider reports as of 05/18/2026. Past performance, distribution rates, and discount/premium levels are not guarantees of future results. Closed-end funds involve risks including the use of leverage, market volatility, and the possibility that shares may trade at a discount to net asset value. Please consult a qualified financial advisor before making any investment decisions.</em>
+  </div>
+
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
 <script>
-const funds = [
-  {ticker:'ADX',  z1y:1.40,  dp:-4.18,  avg52:-6.71, yield:7.75},
-  {ticker:'AIO',  z1y:-0.83, dp:-9.64,  avg52:-4.43, yield:7.03},
-  {ticker:'ASGI', z1y:1.14,  dp:5.02,   avg52:0.63,  yield:11.57},
-  {ticker:'BME',  z1y:1.65,  dp:-3.69,  avg52:-6.55, yield:8.14},
-  {ticker:'BST',  z1y:-3.35, dp:-10.83, avg52:-5.99, yield:6.77},
-  {ticker:'BUI',  z1y:-0.99, dp:-0.80,  avg52:2.51,  yield:5.98},
-  {ticker:'CSQ',  z1y:-1.38, dp:-10.18, avg52:-6.61, yield:7.37},
-  {ticker:'DNP',  z1y:0.12,  dp:5.99,   avg52:5.67,  yield:7.34},
-  {ticker:'EOS',  z1y:-1.87, dp:-11.42, avg52:-4.00, yield:8.27},
-  {ticker:'ERH',  z1y:-0.74, dp:-9.11,  avg52:-8.06, yield:8.96},
-  {ticker:'GDV',  z1y:0.77,  dp:-10.22, avg52:-10.85,yield:6.25},
-  {ticker:'GLU',  z1y:-1.89, dp:-4.22,  avg52:0.37,  yield:6.93},
-  {ticker:'GOF',  z1y:-1.17, dp:4.23,   avg52:16.97, yield:19.70},
-  {ticker:'NBXG', z1y:-1.84, dp:-15.08, avg52:-12.21,yield:9.47},
-  {ticker:'NIE',  z1y:-1.60, dp:-11.26, avg52:-9.84, yield:7.58},
-  {ticker:'PCN',  z1y:-1.99, dp:2.38,   avg52:7.23,  yield:11.62},
-  {ticker:'PDI',  z1y:-1.24, dp:5.65,   avg52:10.26, yield:15.90},
-  {ticker:'PDO',  z1y:-2.03, dp:0.95,   avg52:4.01,  yield:12.01},
-  {ticker:'PDX',  z1y:-0.26, dp:-9.66,  avg52:-9.17, yield:7.41},
-  {ticker:'RFI',  z1y:-2.53, dp:-4.43,  avg52:1.18,  yield:8.56},
-  {ticker:'RLTY', z1y:-1.56, dp:-8.61,  avg52:-6.31, yield:8.52},
-  {ticker:'RNP',  z1y:-1.35, dp:-4.98,  avg52:0.35,  yield:7.91},
-  {ticker:'RQI',  z1y:0.89,  dp:-1.44,  avg52:-3.20, yield:8.28},
-  {ticker:'STK',  z1y:-0.39, dp:-3.82,  avg52:-2.76, yield:3.81},
-  {ticker:'UTF',  z1y:-0.56, dp:-6.09,  avg52:-3.28, yield:7.42},
-  {ticker:'UTG',  z1y:0.07,  dp:-0.17,  avg52:-0.25, yield:5.88},
+const ALL_FUNDS = [
+  {ticker:'ADX',  z1y:1.40,  dp:-4.18,  avg52:-6.71, yield:7.75, lev:'0.00%',  nav:25.84, price:24.76, ytdP:'7.10%',  ytdN:'5.50%',  ret1P:'37.95%', ret1N:'30.50%', freq:'Quarterly', inception:'10/01/1929'},
+  {ticker:'AIO',  z1y:-0.83, dp:-9.64,  avg52:-4.43, yield:7.03, lev:'11.76%', nav:28.32, price:25.59, ytdP:'15.54%', ytdN:'17.96%', ret1P:'33.45%', ret1N:'50.39%', freq:'Monthly',   inception:'10/31/2019'},
+  {ticker:'ASGI', z1y:1.14,  dp:5.02,   avg52:0.63,  yield:11.57,lev:'0.81%',  nav:22.71, price:23.85, ytdP:'11.31%', ytdN:'11.78%', ret1P:'43.20%', ret1N:'25.63%', freq:'Monthly',   inception:'07/28/2020'},
+  {ticker:'BME',  z1y:1.65,  dp:-3.69,  avg52:-6.55, yield:8.14, lev:'0.17%',  nav:40.11, price:38.63, ytdP:'-1.92%', ytdN:'-5.09%', ret1P:'13.36%', ret1N:'8.60%',  freq:'Monthly',   inception:'03/28/2005'},
+  {ticker:'BST',  z1y:-3.35, dp:-10.83, avg52:-5.99, yield:6.77, lev:'0.10%',  nav:49.69, price:44.31, ytdP:'6.36%',  ytdN:'11.36%', ret1P:'39.81%', ret1N:'47.39%', freq:'Monthly',   inception:'10/29/2014'},
+  {ticker:'BUI',  z1y:-0.99, dp:-0.80,  avg52:2.51,  yield:5.98, lev:'0.11%',  nav:27.52, price:27.30, ytdP:'10.99%', ytdN:'19.32%', ret1P:'33.00%', ret1N:'37.65%', freq:'Monthly',   inception:'11/23/2011'},
+  {ticker:'CSQ',  z1y:-1.38, dp:-10.18, avg52:-6.61, yield:7.37, lev:'27.81%', nav:22.21, price:19.95, ytdP:'3.92%',  ytdN:'7.82%',  ret1P:'30.79%', ret1N:'41.42%', freq:'Monthly',   inception:'03/26/2004'},
+  {ticker:'DNP',  z1y:0.12,  dp:5.99,   avg52:5.67,  yield:7.34, lev:'22.68%', nav:10.02, price:10.62, ytdP:'11.32%', ytdN:'16.42%', ret1P:'22.37%', ret1N:'21.23%', freq:'Monthly',   inception:'01/21/1987'},
+  {ticker:'EOS',  z1y:-1.87, dp:-11.42, avg52:-4.00, yield:8.27, lev:'--',     nav:24.95, price:22.10, ytdP:'-1.24%', ytdN:'2.01%',  ret1P:'14.36%', ret1N:'23.65%', freq:'Monthly',   inception:'01/26/2005'},
+  {ticker:'ERH',  z1y:-0.74, dp:-9.11,  avg52:-8.06, yield:8.96, lev:'21.06%', nav:12.73, price:11.57, ytdP:'9.51%',  ytdN:'9.21%',  ret1P:'26.39%', ret1N:'21.27%', freq:'Monthly',   inception:'04/30/2004'},
+  {ticker:'GDV',  z1y:0.77,  dp:-10.22, avg52:-10.85,yield:6.25, lev:'14.62%', nav:32.09, price:28.81, ytdP:'7.79%',  ytdN:'7.48%',  ret1P:'32.69%', ret1N:'27.01%', freq:'Monthly',   inception:'11/28/2003'},
+  {ticker:'GLU',  z1y:-1.89, dp:-4.22,  avg52:0.37,  yield:6.93, lev:'17.88%', nav:19.89, price:19.05, ytdP:'5.23%',  ytdN:'13.52%', ret1P:'29.28%', ret1N:'34.97%', freq:'Monthly',   inception:'05/25/2004'},
+  {ticker:'GOF',  z1y:-1.17, dp:4.23,   avg52:16.97, yield:19.70,lev:'11.56%', nav:10.64, price:11.09, ytdP:'-5.41%', ytdN:'1.53%',  ret1P:'-6.16%', ret1N:'16.17%', freq:'Monthly',   inception:'07/26/2007'},
+  {ticker:'NBXG', z1y:-1.84, dp:-15.08, avg52:-12.21,yield:9.47, lev:'--',     nav:17.90, price:15.20, ytdP:'4.54%',  ytdN:'4.98%',  ret1P:'31.37%', ret1N:'32.45%', freq:'Monthly',   inception:'05/25/2021'},
+  {ticker:'NIE',  z1y:-1.60, dp:-11.26, avg52:-9.84, yield:7.58, lev:'--',     nav:29.74, price:26.39, ytdP:'6.41%',  ytdN:'8.28%',  ret1P:'31.57%', ret1N:'33.00%', freq:'Quarterly', inception:'02/27/2007'},
+  {ticker:'PCN',  z1y:-1.99, dp:2.38,   avg52:7.23,  yield:11.62,lev:'5.94%',  nav:11.35, price:11.62, ytdP:'-2.16%', ytdN:'0.61%',  ret1P:'5.26%',  ret1N:'11.26%', freq:'Monthly',   inception:'12/21/2001'},
+  {ticker:'PDI',  z1y:-1.24, dp:5.65,   avg52:10.26, yield:15.90,lev:'32.23%', nav:15.75, price:16.64, ytdP:'3.75%',  ytdN:'0.37%',  ret1P:'9.65%',  ret1N:'12.82%', freq:'Monthly',   inception:'05/25/2012'},
+  {ticker:'PDO',  z1y:-2.03, dp:0.95,   avg52:4.01,  yield:12.01,lev:'34.83%', nav:12.66, price:12.78, ytdP:'0.45%',  ytdN:'-0.07%', ret1P:'10.99%', ret1N:'12.49%', freq:'Monthly',   inception:'01/29/2021'},
+  {ticker:'PDX',  z1y:-0.26, dp:-9.66,  avg52:-9.17, yield:7.41, lev:'22.34%', nav:23.91, price:21.60, ytdP:'15.76%', ytdN:'15.07%', ret1P:'19.89%', ret1N:'21.21%', freq:'Monthly',   inception:'01/30/2019'},
+  {ticker:'RFI',  z1y:-2.53, dp:-4.43,  avg52:1.18,  yield:8.56, lev:'0.04%',  nav:11.73, price:11.21, ytdP:'8.49%',  ytdN:'10.42%', ret1P:'7.08%',  ret1N:'11.53%', freq:'Monthly',   inception:'09/27/1993'},
+  {ticker:'RLTY', z1y:-1.56, dp:-8.61,  avg52:-6.31, yield:8.52, lev:'33.21%', nav:16.96, price:15.50, ytdP:'10.40%', ytdN:'12.37%', ret1P:'14.95%', ret1N:'18.20%', freq:'Monthly',   inception:'02/24/2022'},
+  {ticker:'RNP',  z1y:-1.35, dp:-4.98,  avg52:0.35,  yield:7.91, lev:'30.17%', nav:21.70, price:20.62, ytdP:'8.74%',  ytdN:'9.54%',  ret1P:'6.50%',  ret1N:'14.36%', freq:'Monthly',   inception:'06/27/2003'},
+  {ticker:'RQI',  z1y:0.89,  dp:-1.44,  avg52:-3.20, yield:8.28, lev:'28.53%', nav:13.23, price:13.04, ytdP:'20.65%', ytdN:'14.68%', ret1P:'20.27%', ret1N:'14.76%', freq:'Monthly',   inception:'02/28/2002'},
+  {ticker:'STK',  z1y:-0.39, dp:-3.82,  avg52:-2.76, yield:3.81, lev:'--',     nav:50.55, price:48.62, ytdP:'34.45%', ytdN:'34.12%', ret1P:'91.17%', ret1N:'103.09%',freq:'Quarterly', inception:'11/25/2009'},
+  {ticker:'UTF',  z1y:-0.56, dp:-6.09,  avg52:-3.28, yield:7.42, lev:'27.59%', nav:28.40, price:26.67, ytdP:'15.05%', ytdN:'16.61%', ret1P:'14.89%', ret1N:'27.30%', freq:'Monthly',   inception:'03/30/2004'},
+  {ticker:'UTG',  z1y:0.07,  dp:-0.17,  avg52:-0.25, yield:5.88, lev:'19.09%', nav:40.90, price:40.83, ytdP:'19.12%', ytdN:'23.41%', ret1P:'39.53%', ret1N:'43.86%', freq:'Monthly',   inception:'02/24/2004'},
 ];
 
 function quadrantColor(z, dp) {
@@ -88,41 +126,63 @@ function quadrantColor(z, dp) {
   if (z < 0 && dp < 0) return '#D85A30';
   return '#888780';
 }
+function quadrantKey(z, dp) {
+  if (z >= 0 && dp < 0) return 'green';
+  if (z >= 0 && dp >= 0) return 'blue';
+  if (z < 0 && dp < 0) return 'orange';
+  return 'gray';
+}
+function quadrantLabel(k) {
+  return {green:'Discount + Z+', blue:'Premium + Z+', orange:'Discount + Z−', gray:'Premium + Z−'}[k];
+}
+function quadrantBg(k) {
+  return {green:'#E1F5EE', blue:'#E6F1FB', orange:'#FAECE7', gray:'#F1EFE8'}[k];
+}
+function quadrantTxt(k) {
+  return {green:'#0F6E56', blue:'#185FA5', orange:'#993C1D', gray:'#5F5E5A'}[k];
+}
 
-const scatterData = funds.map(f => ({
-  x: f.z1y,
-  y: f.dp,
-  label: f.ticker,
-  yield: f.yield,
-  avg52: f.avg52,
-  bgColor: quadrantColor(f.z1y, f.dp)
-}));
+let activeQuadrant = 'all';
+let searchTerm = '';
+let chartRef = null;
+
+function buildScatterData(funds) {
+  return funds.map(f => ({
+    x: f.z1y, y: f.dp,
+    label: f.ticker, yield: f.yield, avg52: f.avg52,
+    bgColor: quadrantColor(f.z1y, f.dp),
+    qKey: quadrantKey(f.z1y, f.dp),
+    _fund: f
+  }));
+}
+
+function getVisibility(d) {
+  const qOk = activeQuadrant === 'all' || d.qKey === activeQuadrant;
+  const sOk = searchTerm === '' || d.label.toLowerCase().includes(searchTerm);
+  return { visible: qOk && sOk, dimmed: qOk && !sOk || !qOk && sOk, hidden: !qOk && !sOk };
+}
 
 const rangePlugin = {
   id: 'rangeLines',
   afterDatasetsDraw(chart) {
-    const {ctx, scales: {x, y}} = chart;
+    const {ctx, scales:{x,y}} = chart;
     const meta = chart.getDatasetMeta(0);
-    funds.forEach((f, i) => {
+    chart.data.datasets[0].data.forEach((d, i) => {
       const pt = meta.data[i];
       if (!pt) return;
+      const vis = getVisibility(d);
+      if (vis.hidden) return;
+      const alpha = vis.dimmed ? 0.15 : 0.65;
       const px = pt.x;
-      const pyAvg = y.getPixelForValue(f.avg52);
-      const pyCur = y.getPixelForValue(f.dp);
-      const halfW = 5;
+      const pyAvg = y.getPixelForValue(d.avg52);
+      const pyCur = y.getPixelForValue(d.y);
       ctx.save();
-      ctx.strokeStyle = 'rgba(136,135,128,0.65)';
+      ctx.strokeStyle = `rgba(136,135,128,${alpha})`;
       ctx.lineWidth = 1.5;
-      ctx.setLineDash([3, 2]);
-      ctx.beginPath();
-      ctx.moveTo(px, pyCur);
-      ctx.lineTo(px, pyAvg);
-      ctx.stroke();
+      ctx.setLineDash([3,2]);
+      ctx.beginPath(); ctx.moveTo(px, pyCur); ctx.lineTo(px, pyAvg); ctx.stroke();
       ctx.setLineDash([]);
-      ctx.beginPath();
-      ctx.moveTo(px - halfW, pyAvg);
-      ctx.lineTo(px + halfW, pyAvg);
-      ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(px-5, pyAvg); ctx.lineTo(px+5, pyAvg); ctx.stroke();
       ctx.restore();
     });
   }
@@ -130,30 +190,31 @@ const rangePlugin = {
 
 Chart.register(ChartDataLabels, rangePlugin);
 
-const ctx = document.getElementById('qChart').getContext('2d');
-new Chart(ctx, {
+const scatterData = buildScatterData(ALL_FUNDS);
+
+const ctx2 = document.getElementById('qChart').getContext('2d');
+chartRef = new Chart(ctx2, {
   type: 'scatter',
   data: {
-    datasets: [{
+    datasets:[{
       data: scatterData,
       backgroundColor: scatterData.map(d => d.bgColor + 'CC'),
       borderColor: scatterData.map(d => d.bgColor),
       borderWidth: 1.5,
-      pointRadius: 7,
+      pointRadius: scatterData.map(() => 7),
       pointHoverRadius: 9,
-      order: 1,
     }]
   },
   options: {
     responsive: true,
     maintainAspectRatio: false,
-    layout: {padding: {top: 28, right: 48, bottom: 20, left: 20}},
+    layout: {padding:{top:28,right:48,bottom:20,left:20}},
     plugins: {
-      legend: {display: false},
+      legend: {display:false},
       tooltip: {
         callbacks: {
-          label: ctx => {
-            const d = ctx.raw;
+          label: c => {
+            const d = c.raw;
             const diff = (d.y - d.avg52).toFixed(2);
             const sign = diff > 0 ? '+' : '';
             return [
@@ -166,36 +227,111 @@ new Chart(ctx, {
       },
       datalabels: {
         formatter: val => `${val.label}\n${val.yield.toFixed(2)}%`,
-        font: {size: 9.5, weight: '500'},
-        color: ctx => ctx.dataset.data[ctx.dataIndex].bgColor,
-        align: 'top',
-        offset: 5,
-        textAlign: 'center',
-        lineHeight: 1.3,
+        font: ctx => {
+          const vis = getVisibility(ctx.dataset.data[ctx.dataIndex]);
+          return {size: 9.5, weight: vis.dimmed ? '400' : '500'};
+        },
+        color: ctx => {
+          const d = ctx.dataset.data[ctx.dataIndex];
+          const vis = getVisibility(d);
+          if (vis.hidden) return 'transparent';
+          if (vis.dimmed) return 'rgba(136,135,128,0.3)';
+          return d.bgColor;
+        },
+        align:'top', offset:5, textAlign:'center', lineHeight:1.3,
       },
+    },
+    onClick: (evt, elements) => {
+      if (!elements.length) return;
+      const d = scatterData[elements[0].index];
+      if (getVisibility(d).hidden) return;
+      showDetail(d._fund, d.qKey);
     },
     scales: {
       x: {
-        title: {display: true, text: '1-Year Z-Score', font: {size: 13, weight: '500'}, color: '#888780'},
-        grid: {
-          color: ctx => ctx.tick.value === 0 ? 'rgba(100,100,100,0.5)' : 'rgba(150,150,150,0.12)',
-          lineWidth: ctx => ctx.tick.value === 0 ? 1.5 : 1,
-        },
-        ticks: {color: '#888780', font: {size: 11}},
-        min: -4.0,
-        max: 3.5,
+        title:{display:true, text:'1-Year Z-Score', font:{size:13,weight:'500'}, color:'#888780'},
+        grid:{color:c=>c.tick.value===0?'rgba(100,100,100,0.5)':'rgba(150,150,150,0.12)', lineWidth:c=>c.tick.value===0?1.5:1},
+        ticks:{color:'#888780', font:{size:11}},
+        min:-4.0, max:3.5,
       },
       y: {
-        title: {display: true, text: 'Discount / Premium (%)', font: {size: 13, weight: '500'}, color: '#888780'},
-        grid: {
-          color: ctx => ctx.tick.value === 0 ? 'rgba(100,100,100,0.5)' : 'rgba(150,150,150,0.12)',
-          lineWidth: ctx => ctx.tick.value === 0 ? 1.5 : 1,
-        },
-        ticks: {color: '#888780', font: {size: 11}, callback: v => v.toFixed(0) + '%'},
-        min: -18,
-        max: 20,
+        title:{display:true, text:'Discount / Premium (%)', font:{size:13,weight:'500'}, color:'#888780'},
+        grid:{color:c=>c.tick.value===0?'rgba(100,100,100,0.5)':'rgba(150,150,150,0.12)', lineWidth:c=>c.tick.value===0?1.5:1},
+        ticks:{color:'#888780', font:{size:11}, callback:v=>v.toFixed(0)+'%'},
+        min:-18, max:20,
       }
     }
   }
+});
+
+function updateChart() {
+  const ds = chartRef.data.datasets[0];
+  ds.backgroundColor = scatterData.map(d => {
+    const vis = getVisibility(d);
+    if (vis.hidden) return 'transparent';
+    if (vis.dimmed) return d.bgColor + '33';
+    return d.bgColor + 'CC';
+  });
+  ds.borderColor = scatterData.map(d => {
+    const vis = getVisibility(d);
+    if (vis.hidden) return 'transparent';
+    if (vis.dimmed) return d.bgColor + '44';
+    return d.bgColor;
+  });
+  ds.pointRadius = scatterData.map(d => getVisibility(d).hidden ? 0 : 7);
+  chartRef.update('none');
+}
+
+function showDetail(f, qKey) {
+  const panel = document.getElementById('detail-panel');
+  document.getElementById('dp-ticker').textContent = f.ticker;
+  const qBadge = document.getElementById('dp-quadrant');
+  qBadge.textContent = quadrantLabel(qKey);
+  qBadge.style.background = quadrantBg(qKey);
+  qBadge.style.color = quadrantTxt(qKey);
+
+  const diff = (f.dp - f.avg52).toFixed(2);
+  const sign = diff > 0 ? '+' : '';
+  const metrics = [
+    {lbl:'Share Price',    val:`$${f.price.toFixed(2)}`},
+    {lbl:'NAV',            val:`$${f.nav.toFixed(2)}`},
+    {lbl:'Disc / Prem',   val:`${f.dp.toFixed(2)}%`},
+    {lbl:'52-wk avg D/P', val:`${f.avg52.toFixed(2)}% (${sign}${diff})`},
+    {lbl:'Yield',          val:`${f.yield.toFixed(2)}%`},
+    {lbl:'1-yr Z-score',  val:f.z1y.toFixed(2)},
+    {lbl:'Leverage',       val:f.lev},
+    {lbl:'YTD (Price)',    val:f.ytdP},
+    {lbl:'YTD (NAV)',      val:f.ytdN},
+    {lbl:'1-yr Rtn Price', val:f.ret1P},
+    {lbl:'1-yr Rtn NAV',  val:f.ret1N},
+    {lbl:'Distribution',   val:f.freq},
+  ];
+  const grid = document.getElementById('dp-grid');
+  grid.innerHTML = metrics.map(m => `
+    <div class="dp-metric">
+      <div class="lbl">${m.lbl}</div>
+      <div class="val">${m.val}</div>
+    </div>`).join('');
+  panel.style.display = 'block';
+}
+
+document.getElementById('dp-close').addEventListener('click', () => {
+  document.getElementById('detail-panel').style.display = 'none';
+});
+
+document.querySelectorAll('.q-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.q-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeQuadrant = btn.dataset.q;
+    document.getElementById('detail-panel').style.display = 'none';
+    updateChart();
+  });
+});
+
+document.getElementById('search-box').addEventListener('input', e => {
+  searchTerm = e.target.value.trim().toLowerCase();
+  document.getElementById('detail-panel').style.display = 'none';
+  updateChart();
 });
 </script>
