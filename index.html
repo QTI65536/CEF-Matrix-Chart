@@ -1,23 +1,25 @@
 
 <style>
-#search-box { width: 180px; padding: 5px 10px; font-size: 12px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); background: var(--color-background-primary); color: var(--color-text-primary); }
-#search-box:focus { outline: none; border-color: var(--color-border-primary); }
-.q-btn { font-size: 11px; padding: 4px 10px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); background: var(--color-background-primary); color: var(--color-text-secondary); cursor: pointer; transition: background 0.15s; }
-.q-btn:hover { background: var(--color-background-secondary); }
-.q-btn.active { background: var(--color-background-secondary); color: var(--color-text-primary); border-color: var(--color-border-primary); font-weight: 500; }
-#detail-panel { display:none; background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-lg); padding: 14px 16px; margin-top: 10px; }
-.dp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap: 8px; margin-top: 10px; }
-.dp-metric { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 8px 10px; }
-.dp-metric .lbl { font-size: 10px; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 2px; }
-.dp-metric .val { font-size: 14px; font-weight: 500; color: var(--color-text-primary); }
+#search-box{width:260px;padding:5px 10px;font-size:12px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);}
+#search-box:focus{outline:none;border-color:var(--color-border-primary);}
+#search-box::placeholder{color:var(--color-text-tertiary);}
+.q-btn{font-size:11px;padding:4px 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-secondary);cursor:pointer;transition:background 0.15s;}
+.q-btn:hover{background:var(--color-background-secondary);}
+.q-btn.active{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary);font-weight:500;}
+#detail-panel{display:none;background:var(--color-background-primary);border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-lg);padding:14px 16px;margin-top:10px;}
+.dp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-top:10px;}
+.dp-metric{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:8px 10px;}
+.dp-metric .lbl{font-size:10px;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:2px;}
+.dp-metric .val{font-size:14px;font-weight:500;color:var(--color-text-primary);}
+#trail-info{display:none;margin-top:8px;font-size:11px;color:var(--color-text-secondary);}
+.trail-row{padding:8px 14px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);margin-bottom:6px;}
 </style>
 
 <div style="padding-top:1rem;">
-
-  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:10px;">
-    <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
-      <input id="search-box" type="text" placeholder="Search ticker…" aria-label="Search fund by ticker" />
-      <div style="display:flex; gap:6px; flex-wrap:wrap;" role="group" aria-label="Filter by quadrant">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:10px;">
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+      <input id="search-box" type="text" placeholder="Search tickers, e.g. BST, EOS, RFI" aria-label="Search funds by ticker, comma or space separated"/>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;" role="group" aria-label="Filter by quadrant">
         <button class="q-btn active" data-q="all">All</button>
         <button class="q-btn" data-q="green" style="border-left:3px solid #1D9E75;">Disc + Z+</button>
         <button class="q-btn" data-q="blue" style="border-left:3px solid #378ADD;">Prem + Z+</button>
@@ -25,313 +27,354 @@
         <button class="q-btn" data-q="gray" style="border-left:3px solid #888780;">Prem + Z−</button>
       </div>
     </div>
-    <span style="font-size:11px;color:var(--color-text-tertiary);white-space:nowrap;">Fund data as of 05/18/2026</span>
+    <span style="font-size:11px;color:var(--color-text-tertiary);white-space:nowrap;">Fund data as of 05/19/2026</span>
   </div>
 
-  <div style="display:flex; flex-wrap:wrap; gap:14px; font-size:11px; color:var(--color-text-secondary); margin-bottom:8px;">
+  <div style="display:flex;flex-wrap:wrap;gap:14px;font-size:11px;color:var(--color-text-secondary);margin-bottom:8px;">
     <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#1D9E75;display:inline-block;"></span>Discount + positive z-score</span>
     <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#378ADD;display:inline-block;"></span>Premium + positive z-score</span>
     <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#D85A30;display:inline-block;"></span>Discount + negative z-score</span>
     <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#888780;display:inline-block;"></span>Premium + negative z-score</span>
     <span style="display:flex;align-items:center;gap:4px;"><span style="width:14px;height:2px;background:rgba(136,135,128,0.55);display:inline-block;"></span><span style="width:5px;height:5px;border-radius:1px;background:rgba(136,135,128,0.55);display:inline-block;"></span>52-wk avg</span>
-    <span style="font-size:10px;color:var(--color-text-tertiary);">Click any dot for details</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;border:1.5px dashed #888;background:transparent;display:inline-block;"></span>Prior days (ghost)</span>
+    <span style="font-size:10px;color:var(--color-text-tertiary);">Search tickers (comma/space) · Click dot for details</span>
   </div>
 
-  <div style="position:relative;width:100%;height:540px;">
-    <canvas id="qChart" role="img" aria-label="Scatter plot of 26 CEFs: x-axis 1-year z-score, y-axis current discount/premium with 52-week average indicators. Click any fund for details.">CEF quadrant scatter chart. Click a fund dot to see full data.</canvas>
+  <div style="position:relative;width:100%;height:560px;">
+    <canvas id="qChart" role="img" aria-label="Scatter plot of 28 CEFs. Search multiple tickers to show ghost trails. X-axis: 1-year z-score. Y-axis: discount/premium. Data as of 05/19/2026.">CEF quadrant scatter chart with 28 funds including new addition BDJ.</canvas>
   </div>
+
+  <div id="trail-info"></div>
 
   <div id="detail-panel" role="region" aria-live="polite" aria-label="Fund detail panel">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
       <div>
-        <span id="dp-ticker" style="font-size:18px; font-weight:500; color:var(--color-text-primary);"></span>
-        <span id="dp-quadrant" style="font-size:11px; margin-left:8px; padding:2px 8px; border-radius:var(--border-radius-md);"></span>
+        <span id="dp-ticker" style="font-size:18px;font-weight:500;color:var(--color-text-primary);"></span>
+        <span id="dp-quadrant" style="font-size:11px;margin-left:8px;padding:2px 8px;border-radius:var(--border-radius-md);"></span>
+        <span id="dp-new" style="display:none;font-size:10px;margin-left:6px;padding:2px 7px;border-radius:var(--border-radius-md);background:#E6F1FB;color:#185FA5;font-weight:500;">New</span>
       </div>
       <button id="dp-close" style="background:none;border:none;cursor:pointer;color:var(--color-text-secondary);font-size:18px;" aria-label="Close detail panel"><i class="ti ti-x"></i></button>
     </div>
     <div class="dp-grid" id="dp-grid"></div>
   </div>
 
-  <div style="margin-top:14px; padding:12px 14px; border-top:0.5px solid var(--color-border-tertiary);">
-    <p style="font-size:11px; font-weight:500; color:var(--color-text-secondary); margin:0 0 8px 0; text-transform:uppercase; letter-spacing:0.04em;">Notable moves vs. prior day (05/15/2026)</p>
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:8px;">
-      <div style="display:flex;gap:8px;align-items:flex-start;">
-        <i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;" aria-hidden="true"></i>
-        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>EOS</strong> hit a new low — discount widened to <strong>-11.42%</strong> and z-score deteriorated to <strong>-1.87</strong>, the deepest discount in the set after NBXG.</p>
-      </div>
-      <div style="display:flex;gap:8px;align-items:flex-start;">
-        <i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;" aria-hidden="true"></i>
-        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>BST</strong> slid again — z-score weakened further to <strong>-3.35</strong> with discount holding wide at <strong>-10.83%</strong>, remaining the most negative z-score in the universe.</p>
-      </div>
-      <div style="display:flex;gap:8px;align-items:flex-start;">
-        <i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;" aria-hidden="true"></i>
-        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>GLU</strong> saw a notable move — discount widened sharply to <strong>-4.22%</strong> from <strong>-0.91%</strong> with z-score dropping to <strong>-1.89</strong>.</p>
-      </div>
-      <div style="display:flex;gap:8px;align-items:flex-start;">
-        <i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;" aria-hidden="true"></i>
-        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>UTG</strong> reversed — slipped from a <strong>+1.25%</strong> premium to a slight <strong>-0.17%</strong> discount, with z-score dropping back to near-zero at <strong>0.07</strong>.</p>
-      </div>
-      <div style="display:flex;gap:8px;align-items:flex-start;">
-        <i class="ti ti-trending-down" style="font-size:15px;color:#888780;margin-top:1px;" aria-hidden="true"></i>
-        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>DNP</strong> premium compressed from <strong>+7.58%</strong> to <strong>+5.99%</strong> as z-score faded to <strong>0.12</strong>, nearing the quadrant boundary.</p>
-      </div>
-      <div style="display:flex;gap:8px;align-items:flex-start;">
-        <i class="ti ti-trending-up" style="font-size:15px;color:#378ADD;margin-top:1px;" aria-hidden="true"></i>
-        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>ASGI</strong> continued to strengthen — premium expanded to <strong>+5.02%</strong> with z-score climbing to <strong>1.14</strong>, the most positive premium in the universe.</p>
-      </div>
+  <div style="margin-top:14px;padding:12px 14px;border-top:0.5px solid var(--color-border-tertiary);">
+    <p style="font-size:11px;font-weight:500;color:var(--color-text-secondary);margin:0 0 8px 0;text-transform:uppercase;letter-spacing:0.04em;">Notable additions &amp; moves</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;">
+      <div style="display:flex;gap:8px;align-items:flex-start;"><i class="ti ti-sparkles" style="font-size:15px;color:#185FA5;margin-top:1px;" aria-hidden="true"></i><p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>BDJ</strong> added to the universe — enters at a <strong>-8.46%</strong> discount with a 1-yr z-score of <strong>-2.57</strong>, placing it deep in the orange quadrant alongside EOS and BST.</p></div>
+      <div style="display:flex;gap:8px;align-items:flex-start;"><i class="ti ti-sparkles" style="font-size:15px;color:#185FA5;margin-top:1px;" aria-hidden="true"></i><p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>EOI</strong> also new — at <strong>-7.23%</strong> discount / z-score <strong>-2.29</strong>. Both new additions enter in significantly discounted territory relative to their 52-week averages.</p></div>
+      <div style="display:flex;gap:8px;align-items:flex-start;"><i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;" aria-hidden="true"></i><p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>RLTY</strong> deteriorated sharply — discount widened to <strong>-9.50%</strong> and z-score dropped to <strong>-2.14</strong> from <strong>-1.56</strong>.</p></div>
+      <div style="display:flex;gap:8px;align-items:flex-start;"><i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;" aria-hidden="true"></i><p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>RFI</strong> continued sliding — z-score worsened to <strong>-2.82</strong> with discount widening to <strong>-5.18%</strong>.</p></div>
+      <div style="display:flex;gap:8px;align-items:flex-start;"><i class="ti ti-trending-up" style="font-size:15px;color:#378ADD;margin-top:1px;" aria-hidden="true"></i><p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>ASGI</strong> extended its run — premium widened to <strong>+5.42%</strong> with z-score at <strong>1.24</strong>.</p></div>
+      <div style="display:flex;gap:8px;align-items:flex-start;"><i class="ti ti-trending-up" style="font-size:15px;color:#1D9E75;margin-top:1px;" aria-hidden="true"></i><p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>BST</strong> partially recovered — z-score improved from <strong>-3.35</strong> to <strong>-2.99</strong>, discount tightened to <strong>-10.38%</strong>.</p></div>
     </div>
   </div>
 
-  <div style="margin-top:10px; padding:10px 14px; border-top:0.5px solid var(--color-border-tertiary); font-size:10.5px; color:var(--color-text-tertiary); line-height:1.55;">
-    <em>This chart is for informational purposes only and does not constitute investment advice. Data sourced from fund provider reports as of 05/18/2026. Past performance, distribution rates, and discount/premium levels are not guarantees of future results. Closed-end funds involve risks including the use of leverage, market volatility, and the possibility that shares may trade at a discount to net asset value. Please consult a qualified financial advisor before making any investment decisions.</em>
+  <div style="margin-top:10px;padding:10px 14px;border-top:0.5px solid var(--color-border-tertiary);font-size:10.5px;color:var(--color-text-tertiary);line-height:1.55;">
+    <em>This chart is for informational purposes only and does not constitute investment advice. Data sourced from fund provider reports as of 05/19/2026. Past performance, distribution rates, and discount/premium levels are not guarantees of future results. Closed-end funds involve risks including the use of leverage, market volatility, and the possibility that shares may trade at a discount to net asset value. Please consult a qualified financial advisor before making any investment decisions.</em>
   </div>
-
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
 <script>
-const ALL_FUNDS = [
-  {ticker:'ADX',  z1y:1.40,  dp:-4.18,  avg52:-6.71, yield:7.75, lev:'0.00%',  nav:25.84, price:24.76, ytdP:'7.10%',  ytdN:'5.50%',  ret1P:'37.95%', ret1N:'30.50%', freq:'Quarterly', inception:'10/01/1929'},
-  {ticker:'AIO',  z1y:-0.83, dp:-9.64,  avg52:-4.43, yield:7.03, lev:'11.76%', nav:28.32, price:25.59, ytdP:'15.54%', ytdN:'17.96%', ret1P:'33.45%', ret1N:'50.39%', freq:'Monthly',   inception:'10/31/2019'},
-  {ticker:'ASGI', z1y:1.14,  dp:5.02,   avg52:0.63,  yield:11.57,lev:'0.81%',  nav:22.71, price:23.85, ytdP:'11.31%', ytdN:'11.78%', ret1P:'43.20%', ret1N:'25.63%', freq:'Monthly',   inception:'07/28/2020'},
-  {ticker:'BME',  z1y:1.65,  dp:-3.69,  avg52:-6.55, yield:8.14, lev:'0.17%',  nav:40.11, price:38.63, ytdP:'-1.92%', ytdN:'-5.09%', ret1P:'13.36%', ret1N:'8.60%',  freq:'Monthly',   inception:'03/28/2005'},
-  {ticker:'BST',  z1y:-3.35, dp:-10.83, avg52:-5.99, yield:6.77, lev:'0.10%',  nav:49.69, price:44.31, ytdP:'6.36%',  ytdN:'11.36%', ret1P:'39.81%', ret1N:'47.39%', freq:'Monthly',   inception:'10/29/2014'},
-  {ticker:'BUI',  z1y:-0.99, dp:-0.80,  avg52:2.51,  yield:5.98, lev:'0.11%',  nav:27.52, price:27.30, ytdP:'10.99%', ytdN:'19.32%', ret1P:'33.00%', ret1N:'37.65%', freq:'Monthly',   inception:'11/23/2011'},
-  {ticker:'CSQ',  z1y:-1.38, dp:-10.18, avg52:-6.61, yield:7.37, lev:'27.81%', nav:22.21, price:19.95, ytdP:'3.92%',  ytdN:'7.82%',  ret1P:'30.79%', ret1N:'41.42%', freq:'Monthly',   inception:'03/26/2004'},
-  {ticker:'DNP',  z1y:0.12,  dp:5.99,   avg52:5.67,  yield:7.34, lev:'22.68%', nav:10.02, price:10.62, ytdP:'11.32%', ytdN:'16.42%', ret1P:'22.37%', ret1N:'21.23%', freq:'Monthly',   inception:'01/21/1987'},
-  {ticker:'EOS',  z1y:-1.87, dp:-11.42, avg52:-4.00, yield:8.27, lev:'--',     nav:24.95, price:22.10, ytdP:'-1.24%', ytdN:'2.01%',  ret1P:'14.36%', ret1N:'23.65%', freq:'Monthly',   inception:'01/26/2005'},
-  {ticker:'ERH',  z1y:-0.74, dp:-9.11,  avg52:-8.06, yield:8.96, lev:'21.06%', nav:12.73, price:11.57, ytdP:'9.51%',  ytdN:'9.21%',  ret1P:'26.39%', ret1N:'21.27%', freq:'Monthly',   inception:'04/30/2004'},
-  {ticker:'GDV',  z1y:0.77,  dp:-10.22, avg52:-10.85,yield:6.25, lev:'14.62%', nav:32.09, price:28.81, ytdP:'7.79%',  ytdN:'7.48%',  ret1P:'32.69%', ret1N:'27.01%', freq:'Monthly',   inception:'11/28/2003'},
-  {ticker:'GLU',  z1y:-1.89, dp:-4.22,  avg52:0.37,  yield:6.93, lev:'17.88%', nav:19.89, price:19.05, ytdP:'5.23%',  ytdN:'13.52%', ret1P:'29.28%', ret1N:'34.97%', freq:'Monthly',   inception:'05/25/2004'},
-  {ticker:'GOF',  z1y:-1.17, dp:4.23,   avg52:16.97, yield:19.70,lev:'11.56%', nav:10.64, price:11.09, ytdP:'-5.41%', ytdN:'1.53%',  ret1P:'-6.16%', ret1N:'16.17%', freq:'Monthly',   inception:'07/26/2007'},
-  {ticker:'NBXG', z1y:-1.84, dp:-15.08, avg52:-12.21,yield:9.47, lev:'--',     nav:17.90, price:15.20, ytdP:'4.54%',  ytdN:'4.98%',  ret1P:'31.37%', ret1N:'32.45%', freq:'Monthly',   inception:'05/25/2021'},
-  {ticker:'NIE',  z1y:-1.60, dp:-11.26, avg52:-9.84, yield:7.58, lev:'--',     nav:29.74, price:26.39, ytdP:'6.41%',  ytdN:'8.28%',  ret1P:'31.57%', ret1N:'33.00%', freq:'Quarterly', inception:'02/27/2007'},
-  {ticker:'PCN',  z1y:-1.99, dp:2.38,   avg52:7.23,  yield:11.62,lev:'5.94%',  nav:11.35, price:11.62, ytdP:'-2.16%', ytdN:'0.61%',  ret1P:'5.26%',  ret1N:'11.26%', freq:'Monthly',   inception:'12/21/2001'},
-  {ticker:'PDI',  z1y:-1.24, dp:5.65,   avg52:10.26, yield:15.90,lev:'32.23%', nav:15.75, price:16.64, ytdP:'3.75%',  ytdN:'0.37%',  ret1P:'9.65%',  ret1N:'12.82%', freq:'Monthly',   inception:'05/25/2012'},
-  {ticker:'PDO',  z1y:-2.03, dp:0.95,   avg52:4.01,  yield:12.01,lev:'34.83%', nav:12.66, price:12.78, ytdP:'0.45%',  ytdN:'-0.07%', ret1P:'10.99%', ret1N:'12.49%', freq:'Monthly',   inception:'01/29/2021'},
-  {ticker:'PDX',  z1y:-0.26, dp:-9.66,  avg52:-9.17, yield:7.41, lev:'22.34%', nav:23.91, price:21.60, ytdP:'15.76%', ytdN:'15.07%', ret1P:'19.89%', ret1N:'21.21%', freq:'Monthly',   inception:'01/30/2019'},
-  {ticker:'RFI',  z1y:-2.53, dp:-4.43,  avg52:1.18,  yield:8.56, lev:'0.04%',  nav:11.73, price:11.21, ytdP:'8.49%',  ytdN:'10.42%', ret1P:'7.08%',  ret1N:'11.53%', freq:'Monthly',   inception:'09/27/1993'},
-  {ticker:'RLTY', z1y:-1.56, dp:-8.61,  avg52:-6.31, yield:8.52, lev:'33.21%', nav:16.96, price:15.50, ytdP:'10.40%', ytdN:'12.37%', ret1P:'14.95%', ret1N:'18.20%', freq:'Monthly',   inception:'02/24/2022'},
-  {ticker:'RNP',  z1y:-1.35, dp:-4.98,  avg52:0.35,  yield:7.91, lev:'30.17%', nav:21.70, price:20.62, ytdP:'8.74%',  ytdN:'9.54%',  ret1P:'6.50%',  ret1N:'14.36%', freq:'Monthly',   inception:'06/27/2003'},
-  {ticker:'RQI',  z1y:0.89,  dp:-1.44,  avg52:-3.20, yield:8.28, lev:'28.53%', nav:13.23, price:13.04, ytdP:'20.65%', ytdN:'14.68%', ret1P:'20.27%', ret1N:'14.76%', freq:'Monthly',   inception:'02/28/2002'},
-  {ticker:'STK',  z1y:-0.39, dp:-3.82,  avg52:-2.76, yield:3.81, lev:'--',     nav:50.55, price:48.62, ytdP:'34.45%', ytdN:'34.12%', ret1P:'91.17%', ret1N:'103.09%',freq:'Quarterly', inception:'11/25/2009'},
-  {ticker:'UTF',  z1y:-0.56, dp:-6.09,  avg52:-3.28, yield:7.42, lev:'27.59%', nav:28.40, price:26.67, ytdP:'15.05%', ytdN:'16.61%', ret1P:'14.89%', ret1N:'27.30%', freq:'Monthly',   inception:'03/30/2004'},
-  {ticker:'UTG',  z1y:0.07,  dp:-0.17,  avg52:-0.25, yield:5.88, lev:'19.09%', nav:40.90, price:40.83, ytdP:'19.12%', ytdN:'23.41%', ret1P:'39.53%', ret1N:'43.86%', freq:'Monthly',   inception:'02/24/2004'},
+const NEW_TICKERS=new Set(['EOI','BDJ']);
+
+const HISTORY={
+  '05/13/2026':{ADX:{z1y:1.59,dp:-3.93},AIO:{z1y:-1.07,dp:-11.01},ASGI:{z1y:0.97,dp:4.32},BME:{z1y:1.51,dp:-4.00},BST:{z1y:-2.36,dp:-9.18},BUI:{z1y:-1.10,dp:-1.15},CSQ:{z1y:-1.37,dp:-10.07},DNP:{z1y:0.34,dp:6.57},EOS:{z1y:-1.51,dp:-9.83},ERH:{z1y:0.91,dp:-6.78},GDV:{z1y:1.10,dp:-9.96},GLU:{z1y:-1.24,dp:-2.57},GOF:{z1y:-1.05,dp:5.80},NBXG:{z1y:-2.03,dp:-15.29},NIE:{z1y:-2.09,dp:-11.67},PCN:{z1y:-1.36,dp:4.03},PDI:{z1y:-0.59,dp:8.15},PDO:{z1y:-2.19,dp:0.87},PDX:{z1y:-0.19,dp:-9.52},RFI:{z1y:-2.16,dp:-3.39},RLTY:{z1y:-1.45,dp:-8.40},RNP:{z1y:-1.34,dp:-4.80},RQI:{z1y:1.11,dp:-1.05},STK:{z1y:1.00,dp:0.17},UTF:{z1y:-0.39,dp:-5.16},UTG:{z1y:0.79,dp:0.58}},
+  '05/14/2026':{ADX:{z1y:1.76,dp:-3.59},AIO:{z1y:-0.92,dp:-10.14},ASGI:{z1y:0.92,dp:4.12},BME:{z1y:1.82,dp:-3.44},BST:{z1y:-3.50,dp:-10.88},BUI:{z1y:-0.92,dp:-0.57},CSQ:{z1y:-1.43,dp:-10.26},DNP:{z1y:0.37,dp:6.63},EOS:{z1y:-1.55,dp:-10.04},ERH:{z1y:0.51,dp:-7.36},GDV:{z1y:0.87,dp:-10.15},GLU:{z1y:-0.95,dp:-1.89},GOF:{z1y:-1.07,dp:5.51},NBXG:{z1y:-1.76,dp:-14.91},NIE:{z1y:-1.73,dp:-11.37},PCN:{z1y:-1.67,dp:3.24},PDI:{z1y:-1.01,dp:6.57},PDO:{z1y:-2.62,dp:0.16},PDX:{z1y:-0.22,dp:-9.59},RFI:{z1y:-2.22,dp:-3.57},RLTY:{z1y:-1.43,dp:-8.37},RNP:{z1y:-1.27,dp:-4.59},RQI:{z1y:1.32,dp:-0.60},STK:{z1y:0.43,dp:-1.49},UTF:{z1y:-0.50,dp:-5.71},UTG:{z1y:0.81,dp:1.25}},
+  '05/15/2026':{ADX:{z1y:1.96,dp:-3.20},AIO:{z1y:-0.79,dp:-9.34},ASGI:{z1y:1.04,dp:4.62},BME:{z1y:1.62,dp:-3.76},BST:{z1y:-2.56,dp:-9.59},BUI:{z1y:-0.71,dp:0.15},CSQ:{z1y:-1.28,dp:-9.88},DNP:{z1y:0.72,dp:7.58},EOS:{z1y:-1.65,dp:-10.49},ERH:{z1y:0.00,dp:-8.07},GDV:{z1y:0.87,dp:-10.14},GLU:{z1y:-0.54,dp:-0.91},GOF:{z1y:-1.14,dp:4.61},NBXG:{z1y:-1.38,dp:-14.33},NIE:{z1y:-1.34,dp:-11.03},PCN:{z1y:-1.58,dp:3.43},PDI:{z1y:-0.88,dp:7.05},PDO:{z1y:-2.73,dp:-0.08},PDX:{z1y:-0.27,dp:-9.69},RFI:{z1y:-2.59,dp:-4.48},RLTY:{z1y:-1.47,dp:-8.46},RNP:{z1y:-1.42,dp:-5.20},RQI:{z1y:1.11,dp:-1.00},STK:{z1y:-0.27,dp:-3.47},UTF:{z1y:-0.33,dp:-4.93},UTG:{z1y:1.41,dp:1.25}},
+  '05/18/2026':{ADX:{z1y:1.40,dp:-4.18},AIO:{z1y:-0.83,dp:-9.64},ASGI:{z1y:1.14,dp:5.02},BME:{z1y:1.65,dp:-3.69},BST:{z1y:-3.35,dp:-10.83},BUI:{z1y:-0.99,dp:-0.80},CSQ:{z1y:-1.38,dp:-10.18},DNP:{z1y:0.12,dp:5.99},EOS:{z1y:-1.87,dp:-11.42},ERH:{z1y:-0.74,dp:-9.11},GDV:{z1y:0.77,dp:-10.22},GLU:{z1y:-1.89,dp:-4.22},GOF:{z1y:-1.17,dp:4.23},NBXG:{z1y:-1.84,dp:-15.08},NIE:{z1y:-1.60,dp:-11.26},PCN:{z1y:-1.99,dp:2.38},PDI:{z1y:-1.24,dp:5.65},PDO:{z1y:-2.03,dp:0.95},PDX:{z1y:-0.26,dp:-9.66},RFI:{z1y:-2.53,dp:-4.43},RLTY:{z1y:-1.56,dp:-8.61},RNP:{z1y:-1.35,dp:-4.98},RQI:{z1y:0.89,dp:-1.44},STK:{z1y:-0.39,dp:-3.82},UTF:{z1y:-0.56,dp:-6.09},UTG:{z1y:0.07,dp:-0.17}},
+  '05/19/2026':{ADX:{z1y:1.29,dp:-4.37},AIO:{z1y:-0.83,dp:-9.64},ASGI:{z1y:1.24,dp:5.42},BDJ:{z1y:-2.57,dp:-8.46},BME:{z1y:1.65,dp:-3.49},BST:{z1y:-2.99,dp:-10.38},BUI:{z1y:-0.99,dp:-0.80},CSQ:{z1y:-1.53,dp:-10.59},DNP:{z1y:0.12,dp:5.99},EOI:{z1y:-2.29,dp:-7.23},EOS:{z1y:-1.87,dp:-10.59},ERH:{z1y:-0.74,dp:-9.11},GDV:{z1y:0.77,dp:-10.22},GLU:{z1y:-1.89,dp:-4.22},GOF:{z1y:-1.19,dp:3.86},NBXG:{z1y:-1.84,dp:-14.47},NIE:{z1y:-1.60,dp:-11.26},PCN:{z1y:-1.99,dp:2.30},PDI:{z1y:-1.24,dp:4.90},PDO:{z1y:-2.03,dp:0.71},PDX:{z1y:-0.26,dp:-10.82},RFI:{z1y:-2.82,dp:-5.18},RLTY:{z1y:-2.14,dp:-9.50},RNP:{z1y:-1.43,dp:-5.33},RQI:{z1y:0.66,dp:-1.88},STK:{z1y:-0.39,dp:-3.82},UTF:{z1y:-0.73,dp:-6.98},UTG:{z1y:-0.23,dp:-0.49}}
+};
+const DATES=['05/13/2026','05/14/2026','05/15/2026','05/18/2026','05/19/2026'];
+const TODAY='05/19/2026';
+const TRAIL_COLORS=['#7F77DD','#D85A30','#1D9E75','#BA7517','#D4537E','#378ADD','#639922'];
+
+const ALL_FUNDS=[
+  {ticker:'ADX', z1y:1.29, dp:-4.37, avg52:-6.70, yield:7.83, lev:'0.00%', nav:25.65,price:24.53,ytdP:'7.10%', ytdN:'5.50%', ret1P:'37.95%',ret1N:'30.50%', freq:'Quarterly'},
+  {ticker:'AIO', z1y:-0.83,dp:-9.64, avg52:-4.43, yield:7.03, lev:'11.55%',nav:28.32,price:25.18,ytdP:'15.54%',ytdN:'17.96%',ret1P:'33.45%',ret1N:'50.39%', freq:'Monthly'},
+  {ticker:'ASGI',z1y:1.24, dp:5.42,  avg52:0.68,  yield:11.57,lev:'0.81%', nav:22.71,price:23.93,ytdP:'11.31%',ytdN:'11.78%',ret1P:'43.20%',ret1N:'25.63%', freq:'Monthly'},
+  {ticker:'BDJ', z1y:-2.57,dp:-8.46, avg52:-5.64, yield:8.28, lev:'0.12%', nav:9.86, price:8.98, ytdP:'0.23%', ytdN:'4.69%', ret1P:'23.22%',ret1N:'22.27%', freq:'Monthly'},
+  {ticker:'BME', z1y:1.65, dp:-3.49, avg52:-6.54, yield:8.06, lev:'0.17%', nav:40.11,price:39.03,ytdP:'-1.92%',ytdN:'-5.09%',ret1P:'13.36%',ret1N:'8.60%',  freq:'Monthly'},
+  {ticker:'BST', z1y:-2.99,dp:-10.38,avg52:-6.02, yield:6.77, lev:'0.10%', nav:49.69,price:44.19,ytdP:'6.36%', ytdN:'11.36%',ret1P:'39.81%',ret1N:'47.39%', freq:'Monthly'},
+  {ticker:'BUI', z1y:-0.99,dp:-0.80, avg52:2.51,  yield:5.98, lev:'0.11%', nav:27.52,price:27.45,ytdP:'10.99%',ytdN:'19.32%',ret1P:'33.00%',ret1N:'37.65%', freq:'Monthly'},
+  {ticker:'CSQ', z1y:-1.53,dp:-10.59,avg52:-6.64, yield:7.47, lev:'27.99%',nav:22.01,price:19.68,ytdP:'3.92%', ytdN:'7.82%', ret1P:'30.79%',ret1N:'41.42%', freq:'Monthly'},
+  {ticker:'DNP', z1y:0.12, dp:5.99,  avg52:5.67,  yield:7.28, lev:'22.68%',nav:10.02,price:10.71,ytdP:'11.32%',ytdN:'16.42%',ret1P:'22.37%',ret1N:'21.23%', freq:'Monthly'},
+  {ticker:'EOI', z1y:-2.29,dp:-7.23, avg52:-1.61, yield:8.23, lev:'--',    nav:21.18,price:19.50,ytdP:'-0.72%',ytdN:'2.19%', ret1P:'14.49%',ret1N:'21.39%', freq:'Monthly'},
+  {ticker:'EOS', z1y:-1.87,dp:-10.59,avg52:-4.05, yield:8.26, lev:'--',    nav:24.95,price:22.12,ytdP:'-1.24%',ytdN:'2.01%', ret1P:'14.36%',ret1N:'23.65%', freq:'Monthly'},
+  {ticker:'ERH', z1y:-0.74,dp:-9.11, avg52:-8.06, yield:8.91, lev:'21.06%',nav:12.73,price:11.63,ytdP:'9.51%', ytdN:'9.21%', ret1P:'26.39%',ret1N:'21.27%', freq:'Monthly'},
+  {ticker:'GDV', z1y:0.77, dp:-10.22,avg52:-10.85,yield:6.25, lev:'14.62%',nav:32.09,price:28.79,ytdP:'7.79%', ytdN:'7.48%', ret1P:'32.69%',ret1N:'27.01%', freq:'Monthly'},
+  {ticker:'GLU', z1y:-1.89,dp:-4.22, avg52:0.37,  yield:6.90, lev:'17.88%',nav:19.89,price:19.14,ytdP:'5.23%', ytdN:'13.52%',ret1P:'29.28%',ret1N:'34.97%', freq:'Monthly'},
+  {ticker:'GOF', z1y:-1.19,dp:3.86,  avg52:16.87, yield:19.70,lev:'11.56%',nav:10.64,price:11.02,ytdP:'-5.41%',ytdN:'1.53%', ret1P:'-6.16%',ret1N:'16.17%', freq:'Monthly'},
+  {ticker:'NBXG',z1y:-1.84,dp:-14.47,avg52:-12.22,yield:9.47, lev:'--',    nav:17.90,price:15.13,ytdP:'4.54%', ytdN:'4.98%', ret1P:'31.37%',ret1N:'32.45%', freq:'Monthly'},
+  {ticker:'NIE', z1y:-1.60,dp:-11.26,avg52:-9.84, yield:7.58, lev:'--',    nav:29.74,price:26.11,ytdP:'6.41%', ytdN:'8.28%', ret1P:'31.57%',ret1N:'33.00%', freq:'Quarterly'},
+  {ticker:'PCN', z1y:-1.99,dp:2.30,  avg52:7.20,  yield:11.67,lev:'5.96%', nav:11.35,price:11.57,ytdP:'-2.16%',ytdN:'0.61%', ret1P:'5.26%', ret1N:'11.26%', freq:'Monthly'},
+  {ticker:'PDI', z1y:-1.24,dp:4.90,  avg52:10.22, yield:15.90,lev:'32.23%',nav:15.75,price:16.47,ytdP:'3.75%', ytdN:'0.37%', ret1P:'9.65%', ret1N:'12.82%', freq:'Monthly'},
+  {ticker:'PDO', z1y:-2.03,dp:0.71,  avg52:3.99,  yield:12.01,lev:'34.83%',nav:12.66,price:12.71,ytdP:'0.45%', ytdN:'-0.07%',ret1P:'10.99%',ret1N:'12.49%', freq:'Monthly'},
+  {ticker:'PDX', z1y:-0.26,dp:-10.82,avg52:-9.18, yield:7.41, lev:'22.26%',nav:23.91,price:21.42,ytdP:'15.76%',ytdN:'15.07%',ret1P:'19.89%',ret1N:'21.21%', freq:'Monthly'},
+  {ticker:'RFI', z1y:-2.82,dp:-5.18, avg52:1.15,  yield:8.59, lev:'0.04%', nav:11.73,price:11.17,ytdP:'8.49%', ytdN:'10.42%',ret1P:'7.08%', ret1N:'11.53%', freq:'Monthly'},
+  {ticker:'RLTY',z1y:-2.14,dp:-9.50, avg52:-6.33, yield:8.52, lev:'33.09%',nav:16.96,price:15.43,ytdP:'10.40%',ytdN:'12.37%',ret1P:'14.95%',ret1N:'18.20%', freq:'Monthly'},
+  {ticker:'RNP', z1y:-1.43,dp:-5.33, avg52:0.31,  yield:7.93, lev:'30.17%',nav:21.70,price:20.59,ytdP:'8.74%', ytdN:'9.54%', ret1P:'6.50%', ret1N:'14.36%', freq:'Monthly'},
+  {ticker:'RQI', z1y:0.66, dp:-1.88, avg52:-3.19, yield:8.27, lev:'28.53%',nav:13.23,price:13.06,ytdP:'20.65%',ytdN:'14.68%',ret1P:'20.27%',ret1N:'14.76%', freq:'Monthly'},
+  {ticker:'STK', z1y:-0.39,dp:-3.82, avg52:-2.76, yield:3.81, lev:'--',    nav:50.55,price:49.27,ytdP:'34.45%',ytdN:'34.12%',ret1P:'91.17%',ret1N:'103.09%',freq:'Quarterly'},
+  {ticker:'UTF', z1y:-0.73,dp:-6.98, avg52:-3.32, yield:7.43, lev:'27.59%',nav:28.40,price:26.65,ytdP:'15.05%',ytdN:'16.61%',ret1P:'14.89%',ret1N:'27.30%', freq:'Monthly'},
+  {ticker:'UTG', z1y:-0.23,dp:-0.49, avg52:-0.24, yield:5.89, lev:'19.08%',nav:40.92,price:40.72,ytdP:'19.12%',ytdN:'23.41%',ret1P:'39.53%',ret1N:'43.86%', freq:'Monthly'},
 ];
 
-function quadrantColor(z, dp) {
-  if (z >= 0 && dp < 0) return '#1D9E75';
-  if (z >= 0 && dp >= 0) return '#378ADD';
-  if (z < 0 && dp < 0) return '#D85A30';
-  return '#888780';
-}
-function quadrantKey(z, dp) {
-  if (z >= 0 && dp < 0) return 'green';
-  if (z >= 0 && dp >= 0) return 'blue';
-  if (z < 0 && dp < 0) return 'orange';
-  return 'gray';
-}
-function quadrantLabel(k) {
-  return {green:'Discount + Z+', blue:'Premium + Z+', orange:'Discount + Z−', gray:'Premium + Z−'}[k];
-}
-function quadrantBg(k) {
-  return {green:'#E1F5EE', blue:'#E6F1FB', orange:'#FAECE7', gray:'#F1EFE8'}[k];
-}
-function quadrantTxt(k) {
-  return {green:'#0F6E56', blue:'#185FA5', orange:'#993C1D', gray:'#5F5E5A'}[k];
+function quadrantColor(z,dp){if(z>=0&&dp<0)return'#1D9E75';if(z>=0&&dp>=0)return'#378ADD';if(z<0&&dp<0)return'#D85A30';return'#888780';}
+function quadrantKey(z,dp){if(z>=0&&dp<0)return'green';if(z>=0&&dp>=0)return'blue';if(z<0&&dp<0)return'orange';return'gray';}
+function quadrantLabel(k){return{green:'Discount + Z+',blue:'Premium + Z+',orange:'Discount + Z−',gray:'Premium + Z−'}[k];}
+function quadrantBg(k){return{green:'#E1F5EE',blue:'#E6F1FB',orange:'#FAECE7',gray:'#F1EFE8'}[k];}
+function quadrantTxt(k){return{green:'#0F6E56',blue:'#185FA5',orange:'#993C1D',gray:'#5F5E5A'}[k];}
+
+let activeQuadrant='all',searchTerms=[],chartRef=null;
+
+function parseSearch(raw){
+  return raw.trim().toUpperCase().split(/[\s,]+/).map(s=>s.trim()).filter(s=>s.length>0);
 }
 
-let activeQuadrant = 'all';
-let searchTerm = '';
-let chartRef = null;
+const scatterData=ALL_FUNDS.map(f=>({
+  x:f.z1y,y:f.dp,label:f.ticker,yield:f.yield,avg52:f.avg52,
+  bgColor:quadrantColor(f.z1y,f.dp),qKey:quadrantKey(f.z1y,f.dp),_fund:f,
+  isNew:NEW_TICKERS.has(f.ticker)
+}));
 
-function buildScatterData(funds) {
-  return funds.map(f => ({
-    x: f.z1y, y: f.dp,
-    label: f.ticker, yield: f.yield, avg52: f.avg52,
-    bgColor: quadrantColor(f.z1y, f.dp),
-    qKey: quadrantKey(f.z1y, f.dp),
-    _fund: f
-  }));
+function getVisibility(d){
+  const qOk=activeQuadrant==='all'||d.qKey===activeQuadrant;
+  const anySearch=searchTerms.length>0;
+  const matched=anySearch&&searchTerms.includes(d.label);
+  if(!anySearch)return{visible:qOk,dimmed:!qOk,hidden:false};
+  if(matched&&qOk)return{visible:true,dimmed:false,hidden:false};
+  return{visible:false,dimmed:true,hidden:false};
 }
 
-function getVisibility(d) {
-  const qOk = activeQuadrant === 'all' || d.qKey === activeQuadrant;
-  const sOk = searchTerm === '' || d.label.toLowerCase().includes(searchTerm);
-  return { visible: qOk && sOk, dimmed: qOk && !sOk || !qOk && sOk, hidden: !qOk && !sOk };
-}
+const ghostPlugin={
+  id:'ghostTrail',
+  afterDatasetsDraw(chart){
+    if(!searchTerms.length)return;
+    const{ctx,scales:{x,y}}=chart;
+    const ghostDates=DATES.slice(0,-1);
+    const opacities=[0.15,0.25,0.40,0.58];
+    const radii=[3,4,5,6];
+    searchTerms.forEach((ticker,ti)=>{
+      if(!HISTORY[TODAY][ticker])return;
+      const f=ALL_FUNDS.find(f=>f.ticker===ticker);
+      if(!f)return;
+      const color=TRAIL_COLORS[ti%TRAIL_COLORS.length];
+      const allPoints=DATES.map(d=>({date:d,...(HISTORY[d][ticker]||HISTORY[TODAY][ticker])}));
+      ghostDates.forEach((date,i)=>{
+        if(!HISTORY[date][ticker])return;
+        const pt=allPoints[i];
+        const px=x.getPixelForValue(pt.z1y),py=y.getPixelForValue(pt.dp);
+        const r=radii[i];
+        ctx.save();
+        ctx.globalAlpha=opacities[i];
+        ctx.beginPath();ctx.arc(px,py,r,0,Math.PI*2);
+        ctx.fillStyle=color;ctx.fill();
+        ctx.strokeStyle=color;ctx.lineWidth=1.5;ctx.setLineDash([2,2]);ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.font='9px sans-serif';ctx.fillStyle=color;ctx.textAlign='center';
+        ctx.fillText(date.slice(0,5),px,py-r-3);
+        ctx.restore();
+      });
+      for(let i=0;i<allPoints.length-1;i++){
+        if(!HISTORY[DATES[i]][ticker])continue;
+        const a=allPoints[i],b=allPoints[i+1];
+        const ax=x.getPixelForValue(a.z1y),ay=y.getPixelForValue(a.dp);
+        const bx=x.getPixelForValue(b.z1y),by=y.getPixelForValue(b.dp);
+        const isLast=i===allPoints.length-2;
+        ctx.save();
+        ctx.globalAlpha=isLast?0.85:opacities[i]+0.1;
+        ctx.strokeStyle=color;ctx.lineWidth=isLast?2:1;
+        ctx.setLineDash(isLast?[]:[3,3]);
+        ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(bx,by);ctx.stroke();
+        ctx.setLineDash([]);
+        const angle=Math.atan2(by-ay,bx-ax);
+        const mx=(ax+bx)/2,my=(ay+by)/2;
+        ctx.beginPath();
+        ctx.moveTo(mx+Math.cos(angle)*8,my+Math.sin(angle)*8);
+        ctx.lineTo(mx+Math.cos(angle+2.4)*5,my+Math.sin(angle+2.4)*5);
+        ctx.lineTo(mx+Math.cos(angle-2.4)*5,my+Math.sin(angle-2.4)*5);
+        ctx.closePath();ctx.fillStyle=color;ctx.fill();
+        ctx.restore();
+      }
+    });
+  }
+};
 
-const rangePlugin = {
-  id: 'rangeLines',
-  afterDatasetsDraw(chart) {
-    const {ctx, scales:{x,y}} = chart;
-    const meta = chart.getDatasetMeta(0);
-    chart.data.datasets[0].data.forEach((d, i) => {
-      const pt = meta.data[i];
-      if (!pt) return;
-      const vis = getVisibility(d);
-      if (vis.hidden) return;
-      const alpha = vis.dimmed ? 0.15 : 0.65;
-      const px = pt.x;
-      const pyAvg = y.getPixelForValue(d.avg52);
-      const pyCur = y.getPixelForValue(d.y);
+const rangePlugin={
+  id:'rangeLines',
+  afterDatasetsDraw(chart){
+    const{ctx,scales:{x,y}}=chart;
+    const meta=chart.getDatasetMeta(0);
+    scatterData.forEach((d,i)=>{
+      const pt=meta.data[i];if(!pt)return;
+      const vis=getVisibility(d);if(vis.hidden)return;
+      const alpha=vis.dimmed?0.10:0.65;
+      const px=pt.x,pyAvg=y.getPixelForValue(d.avg52),pyCur=y.getPixelForValue(d.y);
       ctx.save();
-      ctx.strokeStyle = `rgba(136,135,128,${alpha})`;
-      ctx.lineWidth = 1.5;
-      ctx.setLineDash([3,2]);
-      ctx.beginPath(); ctx.moveTo(px, pyCur); ctx.lineTo(px, pyAvg); ctx.stroke();
+      ctx.strokeStyle=`rgba(136,135,128,${alpha})`;
+      ctx.lineWidth=1.5;ctx.setLineDash([3,2]);
+      ctx.beginPath();ctx.moveTo(px,pyCur);ctx.lineTo(px,pyAvg);ctx.stroke();
       ctx.setLineDash([]);
-      ctx.beginPath(); ctx.moveTo(px-5, pyAvg); ctx.lineTo(px+5, pyAvg); ctx.stroke();
+      ctx.beginPath();ctx.moveTo(px-5,pyAvg);ctx.lineTo(px+5,pyAvg);ctx.stroke();
       ctx.restore();
     });
   }
 };
 
-Chart.register(ChartDataLabels, rangePlugin);
+const newBadgePlugin={
+  id:'newBadge',
+  afterDatasetsDraw(chart){
+    const{ctx,scales:{x,y}}=chart;
+    scatterData.forEach(d=>{
+      if(!d.isNew)return;
+      const vis=getVisibility(d);if(vis.dimmed)return;
+      const px=x.getPixelForValue(d.x),py=y.getPixelForValue(d.y);
+      ctx.save();
+      ctx.font='bold 8px sans-serif';ctx.fillStyle='#185FA5';ctx.textAlign='center';
+      ctx.fillText('NEW',px,py+17);
+      ctx.restore();
+    });
+  }
+};
 
-const scatterData = buildScatterData(ALL_FUNDS);
+Chart.register(ChartDataLabels,ghostPlugin,rangePlugin,newBadgePlugin);
 
-const ctx2 = document.getElementById('qChart').getContext('2d');
-chartRef = new Chart(ctx2, {
-  type: 'scatter',
-  data: {
-    datasets:[{
-      data: scatterData,
-      backgroundColor: scatterData.map(d => d.bgColor + 'CC'),
-      borderColor: scatterData.map(d => d.bgColor),
-      borderWidth: 1.5,
-      pointRadius: scatterData.map(() => 7),
-      pointHoverRadius: 9,
-    }]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    layout: {padding:{top:28,right:48,bottom:20,left:20}},
-    plugins: {
-      legend: {display:false},
-      tooltip: {
-        callbacks: {
-          label: c => {
-            const d = c.raw;
-            const diff = (d.y - d.avg52).toFixed(2);
-            const sign = diff > 0 ? '+' : '';
-            return [
-              `${d.label}  |  Yield: ${d.yield.toFixed(2)}%`,
-              `Z-Score: ${d.x.toFixed(2)}  |  Disc/Prem: ${d.y.toFixed(2)}%`,
-              `52-wk avg: ${d.avg52.toFixed(2)}%  (${sign}${diff} vs avg)`
-            ];
-          }
-        }
-      },
-      datalabels: {
-        formatter: val => `${val.label}\n${val.yield.toFixed(2)}%`,
-        font: ctx => {
-          const vis = getVisibility(ctx.dataset.data[ctx.dataIndex]);
-          return {size: 9.5, weight: vis.dimmed ? '400' : '500'};
+const ctxEl=document.getElementById('qChart').getContext('2d');
+chartRef=new Chart(ctxEl,{
+  type:'scatter',
+  data:{datasets:[{
+    data:scatterData,
+    backgroundColor:scatterData.map(d=>d.bgColor+'CC'),
+    borderColor:scatterData.map(d=>d.isNew?'#185FA5':d.bgColor),
+    borderWidth:scatterData.map(d=>d.isNew?2.5:1.5),
+    pointRadius:scatterData.map(()=>7),
+    pointHoverRadius:9,
+    pointStyle:scatterData.map(d=>d.isNew?'rectRot':'circle'),
+  }]},
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    layout:{padding:{top:28,right:48,bottom:20,left:20}},
+    plugins:{
+      legend:{display:false},
+      tooltip:{callbacks:{label:c=>{
+        const d=c.raw;
+        const diff=(d.y-d.avg52).toFixed(2);
+        const sign=diff>0?'+':'';
+        return[`${d.label}${d.isNew?' [NEW]':''}  |  Yield: ${d.yield.toFixed(2)}%`,`Z-Score: ${d.x.toFixed(2)}  |  Disc/Prem: ${d.y.toFixed(2)}%`,`52-wk avg: ${d.avg52.toFixed(2)}%  (${sign}${diff} vs avg)`];
+      }}},
+      datalabels:{
+        formatter:val=>`${val.label}\n${val.yield.toFixed(2)}%`,
+        font:ctx=>{const vis=getVisibility(ctx.dataset.data[ctx.dataIndex]);return{size:9.5,weight:vis.dimmed?'400':'500'};},
+        color:ctx=>{
+          const d=ctx.dataset.data[ctx.dataIndex];
+          const vis=getVisibility(d);
+          if(vis.hidden)return'transparent';
+          if(vis.dimmed)return'rgba(136,135,128,0.2)';
+          const idx=searchTerms.indexOf(d.label);
+          if(idx>=0)return TRAIL_COLORS[idx%TRAIL_COLORS.length];
+          return d.isNew?'#185FA5':d.bgColor;
         },
-        color: ctx => {
-          const d = ctx.dataset.data[ctx.dataIndex];
-          const vis = getVisibility(d);
-          if (vis.hidden) return 'transparent';
-          if (vis.dimmed) return 'rgba(136,135,128,0.3)';
-          return d.bgColor;
-        },
-        align:'top', offset:5, textAlign:'center', lineHeight:1.3,
+        align:'top',offset:5,textAlign:'center',lineHeight:1.3,
       },
     },
-    onClick: (evt, elements) => {
-      if (!elements.length) return;
-      const d = scatterData[elements[0].index];
-      if (getVisibility(d).hidden) return;
-      showDetail(d._fund, d.qKey);
+    onClick:(evt,elements)=>{
+      if(!elements.length)return;
+      const d=scatterData[elements[0].index];
+      showDetail(d._fund,d.qKey,d.isNew);
     },
-    scales: {
-      x: {
-        title:{display:true, text:'1-Year Z-Score', font:{size:13,weight:'500'}, color:'#888780'},
-        grid:{color:c=>c.tick.value===0?'rgba(100,100,100,0.5)':'rgba(150,150,150,0.12)', lineWidth:c=>c.tick.value===0?1.5:1},
-        ticks:{color:'#888780', font:{size:11}},
-        min:-4.0, max:3.5,
-      },
-      y: {
-        title:{display:true, text:'Discount / Premium (%)', font:{size:13,weight:'500'}, color:'#888780'},
-        grid:{color:c=>c.tick.value===0?'rgba(100,100,100,0.5)':'rgba(150,150,150,0.12)', lineWidth:c=>c.tick.value===0?1.5:1},
-        ticks:{color:'#888780', font:{size:11}, callback:v=>v.toFixed(0)+'%'},
-        min:-18, max:20,
-      }
+    scales:{
+      x:{title:{display:true,text:'1-Year Z-Score',font:{size:13,weight:'500'},color:'#888780'},grid:{color:c=>c.tick.value===0?'rgba(100,100,100,0.5)':'rgba(150,150,150,0.12)',lineWidth:c=>c.tick.value===0?1.5:1},ticks:{color:'#888780',font:{size:11}},min:-4.0,max:3.5},
+      y:{title:{display:true,text:'Discount / Premium (%)',font:{size:13,weight:'500'},color:'#888780'},grid:{color:c=>c.tick.value===0?'rgba(100,100,100,0.5)':'rgba(150,150,150,0.12)',lineWidth:c=>c.tick.value===0?1.5:1},ticks:{color:'#888780',font:{size:11},callback:v=>v.toFixed(0)+'%'},min:-18,max:20}
     }
   }
 });
 
-function updateChart() {
-  const ds = chartRef.data.datasets[0];
-  ds.backgroundColor = scatterData.map(d => {
-    const vis = getVisibility(d);
-    if (vis.hidden) return 'transparent';
-    if (vis.dimmed) return d.bgColor + '33';
-    return d.bgColor + 'CC';
+function updateChart(){
+  const ds=chartRef.data.datasets[0];
+  ds.backgroundColor=scatterData.map(d=>{
+    const v=getVisibility(d);
+    if(v.hidden)return'transparent';
+    if(v.dimmed)return d.bgColor+'1A';
+    const idx=searchTerms.indexOf(d.label);
+    if(idx>=0)return TRAIL_COLORS[idx%TRAIL_COLORS.length]+'CC';
+    return d.bgColor+'CC';
   });
-  ds.borderColor = scatterData.map(d => {
-    const vis = getVisibility(d);
-    if (vis.hidden) return 'transparent';
-    if (vis.dimmed) return d.bgColor + '44';
-    return d.bgColor;
+  ds.borderColor=scatterData.map(d=>{
+    const v=getVisibility(d);
+    if(v.hidden)return'transparent';
+    if(v.dimmed)return d.bgColor+'25';
+    const idx=searchTerms.indexOf(d.label);
+    if(idx>=0)return TRAIL_COLORS[idx%TRAIL_COLORS.length];
+    return d.isNew?'#185FA5':d.bgColor;
   });
-  ds.pointRadius = scatterData.map(d => getVisibility(d).hidden ? 0 : 7);
+  ds.borderWidth=scatterData.map(d=>{const idx=searchTerms.indexOf(d.label);return(idx>=0||d.isNew)?2.5:1.5;});
+  ds.pointRadius=scatterData.map(d=>{if(getVisibility(d).hidden)return 0;return searchTerms.includes(d.label)?9:7;});
   chartRef.update('none');
+  renderTrailInfo();
 }
 
-function showDetail(f, qKey) {
-  const panel = document.getElementById('detail-panel');
-  document.getElementById('dp-ticker').textContent = f.ticker;
-  const qBadge = document.getElementById('dp-quadrant');
-  qBadge.textContent = quadrantLabel(qKey);
-  qBadge.style.background = quadrantBg(qKey);
-  qBadge.style.color = quadrantTxt(qKey);
+function renderTrailInfo(){
+  const el=document.getElementById('trail-info');
+  if(!searchTerms.length){el.style.display='none';el.innerHTML='';return;}
+  const valid=searchTerms.filter(t=>HISTORY[TODAY][t]);
+  if(!valid.length){el.style.display='none';return;}
+  el.style.display='block';
+  el.innerHTML=valid.map((ticker,ti)=>{
+    const color=TRAIL_COLORS[ti%TRAIL_COLORS.length];
+    const f=ALL_FUNDS.find(f=>f.ticker===ticker);if(!f)return'';
+    const avail=DATES.filter(d=>HISTORY[d][ticker]);
+    const rows=avail.map(date=>{
+      const pt=HISTORY[date][ticker];
+      const isToday=date===TODAY;
+      return`<span style="margin-right:12px;${isToday?`font-weight:500;color:${color};`:'opacity:0.65;'}">
+        ${date.slice(0,5)}: Z ${pt.z1y.toFixed(2)} / D/P ${pt.dp.toFixed(2)}%${isToday?' ←':''}
+      </span>`;
+    }).join('');
+    const first=HISTORY[avail[0]][ticker],last=HISTORY[TODAY][ticker];
+    const dz=(last.z1y-first.z1y).toFixed(2),dd=(last.dp-first.dp).toFixed(2);
+    const signZ=dz>=0?'+':'',signD=dd>=0?'+':'';
+    const newNote=NEW_TICKERS.has(ticker)?` <span style="background:#E6F1FB;color:#185FA5;font-size:10px;padding:1px 6px;border-radius:4px;font-weight:500;">New</span>`:'';
+    return`<div class="trail-row">
+      <span style="font-weight:500;color:${color};">${ticker}</span>${newNote} &nbsp;|&nbsp; ${rows}<br>
+      <span style="font-size:10px;color:var(--color-text-tertiary);">Net move: Z-score ${signZ}${dz} · Disc/Prem ${signD}${dd}%${NEW_TICKERS.has(ticker)?' · First session in universe':''}</span>
+    </div>`;
+  }).join('');
+}
 
-  const diff = (f.dp - f.avg52).toFixed(2);
-  const sign = diff > 0 ? '+' : '';
-  const metrics = [
-    {lbl:'Share Price',    val:`$${f.price.toFixed(2)}`},
-    {lbl:'NAV',            val:`$${f.nav.toFixed(2)}`},
-    {lbl:'Disc / Prem',   val:`${f.dp.toFixed(2)}%`},
-    {lbl:'52-wk avg D/P', val:`${f.avg52.toFixed(2)}% (${sign}${diff})`},
-    {lbl:'Yield',          val:`${f.yield.toFixed(2)}%`},
-    {lbl:'1-yr Z-score',  val:f.z1y.toFixed(2)},
-    {lbl:'Leverage',       val:f.lev},
-    {lbl:'YTD (Price)',    val:f.ytdP},
-    {lbl:'YTD (NAV)',      val:f.ytdN},
-    {lbl:'1-yr Rtn Price', val:f.ret1P},
-    {lbl:'1-yr Rtn NAV',  val:f.ret1N},
-    {lbl:'Distribution',   val:f.freq},
+function showDetail(f,qKey,isNew){
+  const panel=document.getElementById('detail-panel');
+  document.getElementById('dp-ticker').textContent=f.ticker;
+  const qBadge=document.getElementById('dp-quadrant');
+  qBadge.textContent=quadrantLabel(qKey);qBadge.style.background=quadrantBg(qKey);qBadge.style.color=quadrantTxt(qKey);
+  document.getElementById('dp-new').style.display=isNew?'inline':'none';
+  const diff=(f.dp-f.avg52).toFixed(2),sign=diff>0?'+':'';
+  const metrics=[
+    {lbl:'Share Price',val:`$${f.price.toFixed(2)}`},{lbl:'NAV',val:`$${f.nav.toFixed(2)}`},
+    {lbl:'Disc / Prem',val:`${f.dp.toFixed(2)}%`},{lbl:'52-wk avg D/P',val:`${f.avg52.toFixed(2)}% (${sign}${diff})`},
+    {lbl:'Yield',val:`${f.yield.toFixed(2)}%`},{lbl:'1-yr Z-score',val:f.z1y.toFixed(2)},
+    {lbl:'Leverage',val:f.lev},{lbl:'YTD (Price)',val:f.ytdP},
+    {lbl:'YTD (NAV)',val:f.ytdN},{lbl:'1-yr Rtn Price',val:f.ret1P},
+    {lbl:'1-yr Rtn NAV',val:f.ret1N},{lbl:'Distribution',val:f.freq},
   ];
-  const grid = document.getElementById('dp-grid');
-  grid.innerHTML = metrics.map(m => `
-    <div class="dp-metric">
-      <div class="lbl">${m.lbl}</div>
-      <div class="val">${m.val}</div>
-    </div>`).join('');
-  panel.style.display = 'block';
+  document.getElementById('dp-grid').innerHTML=metrics.map(m=>`<div class="dp-metric"><div class="lbl">${m.lbl}</div><div class="val">${m.val}</div></div>`).join('');
+  panel.style.display='block';
 }
 
-document.getElementById('dp-close').addEventListener('click', () => {
-  document.getElementById('detail-panel').style.display = 'none';
-});
-
-document.querySelectorAll('.q-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.q-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    activeQuadrant = btn.dataset.q;
-    document.getElementById('detail-panel').style.display = 'none';
+document.getElementById('dp-close').addEventListener('click',()=>{document.getElementById('detail-panel').style.display='none';});
+document.querySelectorAll('.q-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.q-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');activeQuadrant=btn.dataset.q;
+    document.getElementById('detail-panel').style.display='none';
     updateChart();
   });
 });
-
-document.getElementById('search-box').addEventListener('input', e => {
-  searchTerm = e.target.value.trim().toLowerCase();
-  document.getElementById('detail-panel').style.display = 'none';
+document.getElementById('search-box').addEventListener('input',e=>{
+  searchTerms=parseSearch(e.target.value);
+  document.getElementById('detail-panel').style.display='none';
   updateChart();
 });
 </script>
