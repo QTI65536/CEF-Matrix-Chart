@@ -33,6 +33,9 @@
 #cluster-legend{display:none;flex-wrap:wrap;gap:8px;font-size:11px;margin-bottom:6px;}
 #peer-result{display:none;padding:8px 12px;border-radius:var(--border-radius-md);font-size:11px;margin-top:0;margin-bottom:6px;}
 .sep{width:0.5px;height:20px;background:var(--color-border-secondary);}
+.z-tag{font-size:10px;padding:1px 5px;border-radius:3px;font-weight:500;margin-left:3px;}
+.z-val{font-weight:600;}
+.z-arrow{font-size:11px;}
 </style>
 
 <div style="padding-top:1rem;">
@@ -82,11 +85,21 @@
   <div id="peer-result"></div>
   <div id="cluster-legend"></div>
 
+  <!-- Z-score key -->
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;padding:7px 12px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);font-size:11px;color:var(--color-text-secondary);align-items:center;">
+    <span style="font-weight:500;color:var(--color-text-primary);">Z-Score guide:</span>
+    <span><strong style="color:#D85A30;">More negative</strong> = discount wider than history → cheaper valuation</span>
+    <span style="color:var(--color-text-tertiary);">|</span>
+    <span><strong style="color:#1D9E75;">Less negative / more positive</strong> = discount narrowing → momentum improving</span>
+    <span style="color:var(--color-text-tertiary);">|</span>
+    <span>Sweet spot: deeply negative <em>value</em> z-score that is <em>trending</em> less negative (green quadrant)</span>
+  </div>
+
   <div style="display:flex;flex-wrap:wrap;gap:12px;font-size:11px;color:var(--color-text-secondary);margin-bottom:8px;">
-    <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#1D9E75;display:inline-block;"></span>Discount + Z+</span>
-    <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#378ADD;display:inline-block;"></span>Premium + Z+</span>
-    <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#D85A30;display:inline-block;"></span>Discount + Z−</span>
-    <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#888780;display:inline-block;"></span>Premium + Z−</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#1D9E75;display:inline-block;"></span>Discount + Z narrowing</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#378ADD;display:inline-block;"></span>Premium + Z narrowing</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#D85A30;display:inline-block;"></span>Discount + Z widening</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#888780;display:inline-block;"></span>Premium + Z widening</span>
     <span style="display:flex;align-items:center;gap:4px;"><span style="width:14px;height:2px;background:rgba(136,135,128,0.55);display:inline-block;"></span><span style="width:5px;height:5px;border-radius:1px;background:rgba(136,135,128,0.55);display:inline-block;"></span>52-wk avg</span>
     <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;border:1.5px dashed #888;background:transparent;display:inline-block;"></span>Ghost trail</span>
     <span style="font-size:10px;color:var(--color-text-tertiary);">Search tickers · Click dot for details</span>
@@ -113,15 +126,60 @@
     <div id="dp-peers" style="margin-top:10px;display:none;"></div>
   </div>
 
+  <!-- Notable moves with corrected z-score language -->
   <div style="margin-top:14px;padding:12px 14px;border-top:0.5px solid var(--color-border-tertiary);">
-    <p style="font-size:11px;font-weight:500;color:var(--color-text-secondary);margin:0 0 8px 0;text-transform:uppercase;letter-spacing:0.04em;">Notable moves vs. prior day (05/20/2026)</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;">
-      <div style="display:flex;gap:8px;align-items:flex-start;"><i class="ti ti-trending-up" style="font-size:15px;color:#1D9E75;margin-top:1px;"></i><p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>PDX</strong> recovered sharply — discount tightened to <strong>-8.81%</strong> from <strong>-10.82%</strong> and z-score improved to <strong>-0.10</strong>, nearly crossing into the green quadrant.</p></div>
-      <div style="display:flex;gap:8px;align-items:flex-start;"><i class="ti ti-trending-up" style="font-size:15px;color:#1D9E75;margin-top:1px;"></i><p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>STK</strong> continued its rally — discount narrowed to <strong>-1.78%</strong> and z-score strengthened to <strong>+0.39</strong>, solidifying its position in the green quadrant.</p></div>
-      <div style="display:flex;gap:8px;align-items:flex-start;"><i class="ti ti-trending-up" style="font-size:15px;color:#378ADD;margin-top:1px;"></i><p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>BUI</strong> flipped to a premium — now at <strong>+0.91%</strong> with z-score improving to <strong>-0.48</strong>, moving into the gray quadrant.</p></div>
-      <div style="display:flex;gap:8px;align-items:flex-start;"><i class="ti ti-trending-up" style="font-size:15px;color:#378ADD;margin-top:1px;"></i><p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>DNP</strong> expanded its premium to <strong>+6.73%</strong> with z-score climbing to <strong>+0.40</strong>, moving firmly into the blue quadrant.</p></div>
-      <div style="display:flex;gap:8px;align-items:flex-start;"><i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;"></i><p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>NBXG</strong> widened further — discount deepened to <strong>-15.46%</strong>, the widest in the universe, with z-score at <strong>-1.53</strong>.</p></div>
-      <div style="display:flex;gap:8px;align-items:flex-start;"><i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;"></i><p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.5;"><strong>AIO</strong> slid further — discount widened to <strong>-11.02%</strong> and z-score deteriorated to <strong>-1.04</strong>.</p></div>
+    <p style="font-size:11px;font-weight:500;color:var(--color-text-secondary);margin:0 0 4px 0;text-transform:uppercase;letter-spacing:0.04em;">Notable moves vs. prior day (05/20/2026)</p>
+    <p style="font-size:10px;color:var(--color-text-tertiary);margin:0 0 10px 0;">Z-score: more negative = cheaper vs history (valuation); less negative / more positive = discount narrowing (momentum)</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;">
+
+      <div style="display:flex;gap:8px;align-items:flex-start;">
+        <i class="ti ti-trending-up" style="font-size:15px;color:#1D9E75;margin-top:1px;"></i>
+        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
+          <strong>PDX</strong> — discount tightened to <strong>-8.81%</strong> (from -10.82%).<br>
+          Z-score 1Y: <span style="color:#D85A30;font-weight:600;">-0.87</span> → <span style="color:#1D9E75;font-weight:600;">-0.10</span> — momentum improving (discount narrowing vs history), though still trades cheaper than its own norm.
+        </p>
+      </div>
+
+      <div style="display:flex;gap:8px;align-items:flex-start;">
+        <i class="ti ti-trending-up" style="font-size:15px;color:#1D9E75;margin-top:1px;"></i>
+        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
+          <strong>STK</strong> — discount narrowed to <strong>-1.78%</strong> (from -1.85%).<br>
+          Z-score 1Y: <span style="color:#D85A30;font-weight:600;">-0.39</span> → <span style="color:#1D9E75;font-weight:600;">+0.39</span> — momentum crossed positive, meaning the discount is now <em>narrower</em> than its historical average.
+        </p>
+      </div>
+
+      <div style="display:flex;gap:8px;align-items:flex-start;">
+        <i class="ti ti-trending-up" style="font-size:15px;color:#888780;margin-top:1px;"></i>
+        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
+          <strong>BUI</strong> — flipped to a small premium at <strong>+0.91%</strong> (from -0.25%).<br>
+          Z-score 1Y: <span style="color:#D85A30;font-weight:600;">-0.82</span> → <span style="color:#888780;font-weight:600;">-0.48</span> — still below its historical norm (discount was typically wider), but narrowing. Moved into gray quadrant.
+        </p>
+      </div>
+
+      <div style="display:flex;gap:8px;align-items:flex-start;">
+        <i class="ti ti-trending-up" style="font-size:15px;color:#378ADD;margin-top:1px;"></i>
+        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
+          <strong>DNP</strong> — premium expanded to <strong>+6.73%</strong> (from +5.62%).<br>
+          Z-score 1Y: <span style="color:#888780;font-weight:600;">-0.02</span> → <span style="color:#378ADD;font-weight:600;">+0.40</span> — now trading richer than its own historical average; premium expanding beyond the norm.
+        </p>
+      </div>
+
+      <div style="display:flex;gap:8px;align-items:flex-start;">
+        <i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;"></i>
+        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
+          <strong>NBXG</strong> — discount deepened to <strong>-15.46%</strong> (from -14.64%), widest in universe.<br>
+          Z-score 1Y: <span style="color:#D85A30;font-weight:600;">-1.44</span> → <span style="color:#D85A30;font-weight:600;">-1.53</span> — moving further below its historical norm; both cheap on valuation <em>and</em> momentum is working against it.
+        </p>
+      </div>
+
+      <div style="display:flex;gap:8px;align-items:flex-start;">
+        <i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;"></i>
+        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
+          <strong>AIO</strong> — discount widened to <strong>-11.02%</strong> (from -10.61%).<br>
+          Z-score 1Y: <span style="color:#D85A30;font-weight:600;">-0.98</span> → <span style="color:#D85A30;font-weight:600;">-1.04</span> — discount widening further below its historical average; cheap on valuation, but momentum is adverse.
+        </p>
+      </div>
+
     </div>
   </div>
 
@@ -191,7 +249,7 @@ const ANIM_DURATION=500;
 
 function qColor(z,dp){if(z>=0&&dp<0)return'#1D9E75';if(z>=0&&dp>=0)return'#378ADD';if(z<0&&dp<0)return'#D85A30';return'#888780';}
 function qKey(z,dp){if(z>=0&&dp<0)return'green';if(z>=0&&dp>=0)return'blue';if(z<0&&dp<0)return'orange';return'gray';}
-function qLabel(k){return{green:'Discount + Z+',blue:'Premium + Z+',orange:'Discount + Z−',gray:'Premium + Z−'}[k];}
+function qLabel(k){return{green:'Discount + Z narrowing',blue:'Premium + Z narrowing',orange:'Discount + Z widening',gray:'Premium + Z widening'}[k];}
 function qBg(k){return{green:'#E1F5EE',blue:'#E6F1FB',orange:'#FAECE7',gray:'#F1EFE8'}[k];}
 function qTxt(k){return{green:'#0F6E56',blue:'#185FA5',orange:'#993C1D',gray:'#5F5E5A'}[k];}
 function easeInOut(t){return t<0.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
@@ -216,7 +274,6 @@ function kMeans(pts,k,iters=80){
   const remap=new Array(k);means.forEach((m,rank)=>remap[m.j]=rank);
   return assign.map(a=>remap[a]);
 }
-
 function convexHull(pts){
   if(pts.length<2)return pts;
   pts=pts.slice().sort((a,b)=>a.x-b.x||a.y-b.y);
@@ -239,16 +296,12 @@ function buildAll(period){
   scatterData.forEach((d,i)=>d.cluster=clusterAssign[i]);
 }
 function getPeerCluster(){const idx=ALL_FUNDS.findIndex(f=>f.ticker===peerTicker);return idx>=0?clusterAssign[idx]:-1;}
-
 function getVis(d){
   const isSearched=searchTerms.length>0&&searchTerms.includes(d.label);
   const pc=getPeerCluster();
   const isPeer=peerTicker&&(d.label===peerTicker||d.cluster===pc);
   const qOk=activeQuadrant==='all'||d.qKey===activeQuadrant;
-  if(searchTerms.length>0){
-    if(isSearched)return{visible:true,dimmed:false,hidden:false};
-    return{visible:false,dimmed:true,hidden:false};
-  }
+  if(searchTerms.length>0){if(isSearched)return{visible:true,dimmed:false,hidden:false};return{visible:false,dimmed:true,hidden:false};}
   if(peerTicker){
     if(isPeer&&qOk)return{visible:true,dimmed:false,hidden:false};
     if(isPeer&&!qOk)return{visible:true,dimmed:true,hidden:false};
@@ -256,7 +309,6 @@ function getVis(d){
   }
   return{visible:qOk,dimmed:!qOk,hidden:false};
 }
-
 buildAll();
 
 function startPeriodTransition(from,to){
@@ -285,34 +337,28 @@ const clusterPlugin={id:'clusterShading',beforeDatasetsDraw(chart){
     ctx.save();ctx.beginPath();
     if(exp.length===2){ctx.moveTo(exp[0].x-10,exp[0].y);ctx.lineTo(exp[1].x+10,exp[1].y);}
     else{ctx.moveTo(exp[0].x,exp[0].y);exp.forEach(p=>ctx.lineTo(p.x,p.y));}
-    ctx.closePath();
-    ctx.fillStyle=isPeer?pal.fill.replace('0.13','0.24'):pal.fill;ctx.fill();
+    ctx.closePath();ctx.fillStyle=isPeer?pal.fill.replace('0.13','0.24'):pal.fill;ctx.fill();
     ctx.strokeStyle=pal.stroke;ctx.lineWidth=isPeer?2:1;ctx.setLineDash(isPeer?[]:[4,3]);ctx.stroke();ctx.setLineDash([]);
     const cx2=exp.reduce((s,p)=>s+p.x,0)/exp.length,cy2=Math.min(...exp.map(p=>p.y))-9;
     ctx.font=`${isPeer?'600':'500'} 10px sans-serif`;ctx.fillStyle=pal.stroke;ctx.textAlign='center';
     ctx.fillText(CLUSTER_NAMES[k]+(isPeer?` ← ${peerTicker}`:''),cx2,cy2);ctx.restore();
   }
 }};
-
 const alertRingPlugin={id:'alertRings',afterDatasetsDraw(chart){
   if(!showAlerts||animating)return;
   const{ctx,scales:{x,y}}=chart;
   scatterData.forEach(d=>{if(d.deviation<threshold)return;const vis=getVis(d);if(vis.hidden||vis.dimmed)return;
     const px=x.getPixelForValue(d.x),py=y.getPixelForValue(d.y);ctx.save();
     ctx.beginPath();ctx.arc(px,py,13,0,Math.PI*2);ctx.strokeStyle='#D85A30';ctx.lineWidth=2.5;ctx.stroke();
-    ctx.beginPath();ctx.arc(px,py,17,0,Math.PI*2);ctx.strokeStyle='rgba(216,90,48,0.35)';ctx.lineWidth=1.5;ctx.stroke();ctx.restore();
-  });
+    ctx.beginPath();ctx.arc(px,py,17,0,Math.PI*2);ctx.strokeStyle='rgba(216,90,48,0.35)';ctx.lineWidth=1.5;ctx.stroke();ctx.restore();});
 }};
-
 const peerRingPlugin={id:'peerRings',afterDatasetsDraw(chart){
   if(!peerTicker||!showClusters||animating)return;
   const{ctx,scales:{x,y}}=chart;const pc=getPeerCluster();
   scatterData.forEach(d=>{if(d.cluster!==pc)return;const pal=CLUSTER_PALETTE[pc];
     const px=x.getPixelForValue(d.x),py=y.getPixelForValue(d.y);ctx.save();
-    ctx.beginPath();ctx.arc(px,py,11,0,Math.PI*2);ctx.strokeStyle=pal.stroke;ctx.lineWidth=d.label===peerTicker?2.5:1.5;ctx.stroke();ctx.restore();
-  });
+    ctx.beginPath();ctx.arc(px,py,11,0,Math.PI*2);ctx.strokeStyle=pal.stroke;ctx.lineWidth=d.label===peerTicker?2.5:1.5;ctx.stroke();ctx.restore();});
 }};
-
 const ghostPlugin={id:'ghostTrail',afterDatasetsDraw(chart){
   if(!searchTerms.length||animating)return;
   const{ctx,scales:{x,y}}=chart;
@@ -343,7 +389,6 @@ const ghostPlugin={id:'ghostTrail',afterDatasetsDraw(chart){
     }
   });
 }};
-
 const rangePlugin={id:'rangeLines',afterDatasetsDraw(chart){
   if(animating)return;
   const{ctx,scales:{x,y}}=chart;
@@ -351,17 +396,14 @@ const rangePlugin={id:'rangeLines',afterDatasetsDraw(chart){
     const px=x.getPixelForValue(d.x),pyAvg=y.getPixelForValue(d.avg52),pyCur=y.getPixelForValue(d.y);
     ctx.save();ctx.strokeStyle=`rgba(136,135,128,${alpha})`;ctx.lineWidth=1.5;ctx.setLineDash([3,2]);
     ctx.beginPath();ctx.moveTo(px,pyCur);ctx.lineTo(px,pyAvg);ctx.stroke();ctx.setLineDash([]);
-    ctx.beginPath();ctx.moveTo(px-5,pyAvg);ctx.lineTo(px+5,pyAvg);ctx.stroke();ctx.restore();
-  });
+    ctx.beginPath();ctx.moveTo(px-5,pyAvg);ctx.lineTo(px+5,pyAvg);ctx.stroke();ctx.restore();});
 }};
-
 const newBadgePlugin={id:'newBadge',afterDatasetsDraw(chart){
   if(animating)return;
   const{ctx,scales:{x,y}}=chart;
   scatterData.forEach(d=>{if(!d.isNew)return;const vis=getVis(d);if(vis.dimmed)return;
     const px=x.getPixelForValue(d.x),py=y.getPixelForValue(d.y);
-    ctx.save();ctx.font='bold 8px sans-serif';ctx.fillStyle='#185FA5';ctx.textAlign='center';ctx.fillText('NEW',px,py+17);ctx.restore();
-  });
+    ctx.save();ctx.font='bold 8px sans-serif';ctx.fillStyle='#185FA5';ctx.textAlign='center';ctx.fillText('NEW',px,py+17);ctx.restore();});
 }};
 
 Chart.register(ChartDataLabels,clusterPlugin,ghostPlugin,alertRingPlugin,peerRingPlugin,rangePlugin,newBadgePlugin);
@@ -379,12 +421,12 @@ chartRef=new Chart(ctxEl,{
         const d=c.raw;const diff=(d.y-d.avg52).toFixed(2);const sign=diff>0?'+':'';
         const alertTag=(showAlerts&&d.deviation>=threshold)?' ⚠':'';
         const peerTag=(peerTicker&&showClusters&&d.cluster===getPeerCluster()&&d.label!==peerTicker)?` — peer of ${peerTicker}`:'';
+        const zSign=d.x<0?'↓ cheaper than norm':'↑ pricier than norm';
         return[`${d.label}${d.isNew?' [NEW]':''}${alertTag}${peerTag}  |  Yield: ${d.yield.toFixed(2)}%`,
-          `${PERIOD_LABELS[activePeriod]}: ${d.x.toFixed(2)}  |  Disc/Prem: ${d.y.toFixed(2)}%`,
+          `${PERIOD_LABELS[activePeriod]}: ${d.x.toFixed(2)} (${zSign})  |  Disc/Prem: ${d.y.toFixed(2)}%`,
           `3M: ${d.z3m.toFixed(2)}  ·  6M: ${d.z6m.toFixed(2)}  ·  1Y: ${d.z1y.toFixed(2)}`,
           `52-wk avg: ${d.avg52.toFixed(2)}%  (${sign}${diff})`,
-          showClusters?`${CLUSTER_NAMES[d.cluster]} cluster`:''].filter(Boolean);
-      }}},
+          showClusters?`${CLUSTER_NAMES[d.cluster]} cluster`:''].filter(Boolean);}}},
       datalabels:{formatter:val=>`${val.label}\n${val.yield.toFixed(2)}%`,
         font:ctx=>{const vis=getVis(ctx.dataset.data[ctx.dataIndex]);return{size:9.5,weight:vis.dimmed?'400':'500'};},
         color:ctx=>{if(animating)return'transparent';const d=ctx.dataset.data[ctx.dataIndex];const vis=getVis(d);
@@ -419,7 +461,6 @@ function applyStyles(){
     if(peerTicker&&showClusters&&d.cluster===getPeerCluster())return d.label===peerTicker?10:8;return 7;});
   ds.pointStyle=scatterData.map(d=>d.isNew?'rectRot':'circle');
 }
-
 function fullUpdate(){applyStyles();chartRef.options.scales.x.title.text=PERIOD_LABELS[activePeriod];chartRef.update('none');renderSidePanels();}
 function renderSidePanels(){renderClusterLegend();renderPeerResult();renderAlertPanel();renderTrailInfo();}
 
@@ -430,8 +471,7 @@ function renderClusterLegend(){
     const members=scatterData.filter(d=>d.cluster===k).map(d=>d.label).join(', ');
     const pal=CLUSTER_PALETTE[k];const isPeer=peerTicker&&k===pc;
     return`<span style="display:flex;align-items:center;gap:5px;padding:3px 10px;border:${isPeer?'1.5px solid':'0.5px dashed'} ${pal.stroke};border-radius:var(--border-radius-md);background:${pal.fill};font-size:10px;color:${pal.stroke};">
-      <span style="font-weight:600;">${CLUSTER_NAMES[k]}${isPeer?' ★':''}:</span> ${members}
-    </span>`;}).join('');
+      <span style="font-weight:600;">${CLUSTER_NAMES[k]}${isPeer?' ★':''}:</span> ${members}</span>`;}).join('');
 }
 function renderPeerResult(){
   const el=document.getElementById('peer-result');if(!peerTicker||!showClusters){el.style.display='none';return;}
@@ -463,8 +503,9 @@ function renderTrailInfo(){
     const dz=firstPt?((todayPt[activePeriod]-firstPt[activePeriod]).toFixed(2)):'n/a';
     const dd=firstPt?((todayPt.dp-firstPt.dp).toFixed(2)):'n/a';
     const signZ=parseFloat(dz)>=0?'+':'',signD=parseFloat(dd)>=0?'+':'';
+    const zInterp=parseFloat(dz)>0?'discount narrowing vs history':'discount widening vs history';
     return`<div class="trail-row"><span style="font-weight:500;color:${color};">${ticker}</span>${newNote} &nbsp;|&nbsp; ${rows}<span style="font-weight:500;color:${color};">05/21: Z ${todayPt[activePeriod].toFixed(2)} / D/P ${todayPt.dp.toFixed(2)}% ←</span><br>
-    <span style="font-size:10px;color:var(--color-text-tertiary);">Net move: Z ${signZ}${dz} · D/P ${signD}${dd}%</span></div>`;
+    <span style="font-size:10px;color:var(--color-text-tertiary);">Z-score move: ${signZ}${dz} (${zInterp}) · D/P move: ${signD}${dd}%</span></div>`;
   }).join('');
 }
 function showDetail(f,quadKey,isNew,cluster){
@@ -485,30 +526,4 @@ function showDetail(f,quadKey,isNew,cluster){
   document.getElementById('detail-panel').style.display='block';
 }
 
-document.getElementById('dp-close').addEventListener('click',()=>{document.getElementById('detail-panel').style.display='none';});
-document.querySelectorAll('.z-switch button').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    if(animating)return;const newPeriod=btn.dataset.period;if(newPeriod===activePeriod)return;
-    document.querySelectorAll('.z-switch button').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');document.getElementById('detail-panel').style.display='none';
-    startPeriodTransition(activePeriod,newPeriod);
-  });
-});
-document.getElementById('cluster-btn').addEventListener('click',()=>{
-  showClusters=!showClusters;const btn=document.getElementById('cluster-btn');
-  btn.classList.toggle('cluster-on',showClusters);btn.setAttribute('aria-pressed',showClusters);
-  document.getElementById('cluster-controls').classList.toggle('visible',showClusters);
-  if(!showClusters){peerTicker='';document.getElementById('peer-box').value='';document.getElementById('peer-clear').style.display='none';}
-  fullUpdate();
-});
-document.getElementById('peer-box').addEventListener('input',e=>{
-  const v=e.target.value.trim().toUpperCase();peerTicker=ALL_FUNDS.find(f=>f.ticker===v)?v:'';
-  document.getElementById('peer-clear').style.display=v?'block':'none';
-  searchTerms=[];document.getElementById('search-box').value='';document.getElementById('detail-panel').style.display='none';fullUpdate();
-});
-document.getElementById('peer-clear').addEventListener('click',()=>{peerTicker='';document.getElementById('peer-box').value='';document.getElementById('peer-clear').style.display='none';fullUpdate();});
-document.getElementById('alert-btn').addEventListener('click',()=>{showAlerts=!showAlerts;const btn=document.getElementById('alert-btn');btn.classList.toggle('alert-on',showAlerts);btn.setAttribute('aria-pressed',showAlerts);document.getElementById('threshold-row').classList.toggle('visible',showAlerts);fullUpdate();});
-document.getElementById('thresh-slider').addEventListener('input',e=>{threshold=parseInt(e.target.value);document.getElementById('thresh-val').textContent=threshold+'%';fullUpdate();});
-document.querySelectorAll('.q-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.q-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');activeQuadrant=btn.dataset.q;document.getElementById('detail-panel').style.display='none';fullUpdate();});});
-document.getElementById('search-box').addEventListener('input',e=>{searchTerms=parseSearch(e.target.value);if(searchTerms.length){peerTicker='';document.getElementById('peer-box').value='';document.getElementById('peer-clear').style.display='none';}document.getElementById('detail-panel').style.display='none';fullUpdate();});
-</script>
+document.get
