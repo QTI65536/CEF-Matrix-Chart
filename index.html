@@ -1,31 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CEF Matrix — 05/26/2026</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+  <style>
+    body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#111;}
+    :root{
+      --color-text-primary:#111;--color-text-secondary:#555;--color-text-tertiary:#999;
+      --color-background-primary:#fff;--color-background-secondary:#f5f5f4;
+      --color-border-primary:#aaa;--color-border-secondary:#ddd;--color-border-tertiary:#eee;
+      --border-radius-md:6px;--border-radius-lg:10px;
+    }
+    #search-box{width:200px;padding:5px 10px;font-size:12px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);}
+    #search-box:focus{outline:none;border-color:var(--color-border-primary);}
+    #search-box::placeholder{color:var(--color-text-tertiary);}
+    .q-btn{font-size:11px;padding:4px 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-secondary);cursor:pointer;transition:background 0.15s;}
+    .q-btn:hover{background:var(--color-background-secondary);}
+    .q-btn.active{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary);font-weight:500;}
+    .feat-btn{font-size:11px;padding:4px 11px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-secondary);cursor:pointer;display:flex;align-items:center;gap:5px;transition:background 0.15s;}
+    .feat-btn:hover{background:var(--color-background-secondary);}
+    .feat-btn.alert-on{background:#FAECE7;color:#993C1D;border-color:#D85A30;}
+    .z-switch{display:flex;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);overflow:hidden;}
+    .z-switch button{font-size:11px;padding:4px 11px;border:none;border-right:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);cursor:pointer;transition:background 0.15s;white-space:nowrap;}
+    .z-switch button:last-child{border-right:none;}
+    .z-switch button:hover{background:var(--color-background-secondary);}
+    .z-switch button.active{background:var(--color-background-secondary);color:var(--color-text-primary);font-weight:500;}
+    #threshold-row{display:none;align-items:center;gap:8px;padding:6px 10px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);font-size:11px;color:var(--color-text-secondary);}
+    #threshold-row.visible{display:flex;}
+    #detail-panel{display:none;background:var(--color-background-primary);border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-lg);padding:14px 16px;margin-top:10px;}
+    .dp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-top:10px;}
+    .dp-metric{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:8px 10px;}
+    .dp-metric .lbl{font-size:10px;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:2px;}
+    .dp-metric .val{font-size:14px;font-weight:500;color:var(--color-text-primary);}
+    #trail-info{display:none;margin-top:8px;font-size:11px;color:var(--color-text-secondary);}
+    .trail-row{padding:8px 14px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);margin-bottom:6px;}
+    #alert-panel{display:none;margin-top:8px;padding:10px 14px;background:#FAECE7;border:0.5px solid #D85A30;border-radius:var(--border-radius-md);}
+    .sep{width:0.5px;height:20px;background:var(--color-border-secondary);}
+    #load-error{display:none;background:#fee2e2;color:#991b1b;padding:12px 16px;border-radius:var(--border-radius-md);font-size:13px;margin-bottom:12px;border:1px solid #fca5a5;}
+  </style>
+</head>
+<body>
 
-<style>
-#search-box{width:200px;padding:5px 10px;font-size:12px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);}
-#search-box:focus{outline:none;border-color:var(--color-border-primary);}
-#search-box::placeholder{color:var(--color-text-tertiary);}
-.q-btn{font-size:11px;padding:4px 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-secondary);cursor:pointer;transition:background 0.15s;}
-.q-btn:hover{background:var(--color-background-secondary);}
-.q-btn.active{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary);font-weight:500;}
-.feat-btn{font-size:11px;padding:4px 11px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-secondary);cursor:pointer;display:flex;align-items:center;gap:5px;transition:background 0.15s;}
-.feat-btn:hover{background:var(--color-background-secondary);}
-.feat-btn.alert-on{background:#FAECE7;color:#993C1D;border-color:#D85A30;}
-.z-switch{display:flex;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);overflow:hidden;}
-.z-switch button{font-size:11px;padding:4px 11px;border:none;border-right:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);cursor:pointer;transition:background 0.15s;white-space:nowrap;}
-.z-switch button:last-child{border-right:none;}
-.z-switch button:hover{background:var(--color-background-secondary);}
-.z-switch button.active{background:var(--color-background-secondary);color:var(--color-text-primary);font-weight:500;}
-#threshold-row{display:none;align-items:center;gap:8px;padding:6px 10px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);font-size:11px;color:var(--color-text-secondary);}
-#threshold-row.visible{display:flex;}
-#detail-panel{display:none;background:var(--color-background-primary);border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-lg);padding:14px 16px;margin-top:10px;}
-.dp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-top:10px;}
-.dp-metric{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:8px 10px;}
-.dp-metric .lbl{font-size:10px;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:2px;}
-.dp-metric .val{font-size:14px;font-weight:500;color:var(--color-text-primary);}
-#trail-info{display:none;margin-top:8px;font-size:11px;color:var(--color-text-secondary);}
-.trail-row{padding:8px 14px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);margin-bottom:6px;}
-#alert-panel{display:none;margin-top:8px;padding:10px 14px;background:#FAECE7;border:0.5px solid #D85A30;border-radius:var(--border-radius-md);}
-.sep{width:0.5px;height:20px;background:var(--color-border-secondary);}
-</style>
+<!-- ── ERROR BANNER (shown if CDN scripts fail) ── -->
+<div id="load-error"></div>
 
 <div style="padding-top:1rem;">
   <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:10px;">
@@ -102,7 +121,6 @@
     <p style="font-size:11px;font-weight:500;color:var(--color-text-secondary);margin:0 0 4px 0;text-transform:uppercase;letter-spacing:0.04em;">Notable moves vs. prior session (05/25/2026)</p>
     <p style="font-size:10px;color:var(--color-text-tertiary);margin:0 0 10px 0;">Z-score: more negative = cheaper vs history (valuation); less negative / positive = discount narrowing (momentum)</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;">
-
       <div style="display:flex;gap:8px;align-items:flex-start;">
         <i class="ti ti-trending-up" style="font-size:15px;color:#378ADD;margin-top:1px;"></i>
         <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
@@ -110,7 +128,6 @@
           Z-score 1Y: <span style="color:#378ADD;font-weight:600;">+1.79</span> → <span style="color:#378ADD;font-weight:600;">+2.42</span> — momentum accelerating rapidly; valuation now stretched well above historical average.
         </p>
       </div>
-
       <div style="display:flex;gap:8px;align-items:flex-start;">
         <i class="ti ti-trending-up" style="font-size:15px;color:#1D9E75;margin-top:1px;"></i>
         <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
@@ -118,7 +135,6 @@
           Z-score 1Y: <span style="color:#1D9E75;font-weight:600;">+0.21</span> → <span style="color:#1D9E75;font-weight:600;">+0.86</span> — momentum strengthening; discount now meaningfully narrower than its historical average.
         </p>
       </div>
-
       <div style="display:flex;gap:8px;align-items:flex-start;">
         <i class="ti ti-trending-up" style="font-size:15px;color:#378ADD;margin-top:1px;"></i>
         <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
@@ -126,31 +142,27 @@
           Z-score 1Y: <span style="color:#888780;font-weight:600;">-0.04</span> → <span style="color:#378ADD;font-weight:600;">+0.50</span> — crossed back into positive; moved from gray to blue quadrant.
         </p>
       </div>
-
       <div style="display:flex;gap:8px;align-items:flex-start;">
         <i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;"></i>
         <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
           <strong>NIE</strong> — discount deepened to <strong>-12.34%</strong> (from -12.11%).<br>
-          Z-score 1Y: <span style="color:#D85A30;font-weight:600;">-2.44</span> → <span style="color:#D85A30;font-weight:600;">-2.65</span> — now the most adversely trending discount fund in the universe; cheapening on valuation with adverse momentum continuing.
+          Z-score 1Y: <span style="color:#D85A30;font-weight:600;">-2.44</span> → <span style="color:#D85A30;font-weight:600;">-2.65</span> — now the most adversely trending discount fund in the universe.
         </p>
       </div>
-
       <div style="display:flex;gap:8px;align-items:flex-start;">
         <i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;"></i>
         <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
           <strong>AIO</strong> — discount widened to <strong>-11.46%</strong> (from -10.90%).<br>
-          Z-score 1Y: <span style="color:#D85A30;font-weight:600;">-0.99</span> → <span style="color:#D85A30;font-weight:600;">-1.08</span> — continuing to widen vs historical norm; cheap on valuation, momentum remains adverse.
+          Z-score 1Y: <span style="color:#D85A30;font-weight:600;">-0.99</span> → <span style="color:#D85A30;font-weight:600;">-1.08</span> — continuing to widen vs historical norm; cheap on valuation, momentum adverse.
         </p>
       </div>
-
       <div style="display:flex;gap:8px;align-items:flex-start;">
         <i class="ti ti-trending-up" style="font-size:15px;color:#1D9E75;margin-top:1px;"></i>
         <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
           <strong>BST</strong> — discount narrowed to <strong>-7.77%</strong> (from -8.29%).<br>
-          Z-score 1Y: <span style="color:#D85A30;font-weight:600;">-1.48</span> → <span style="color:#D85A30;font-weight:600;">-1.12</span> — still cheaper than its historical norm (valuation signal intact), but momentum improving notably.
+          Z-score 1Y: <span style="color:#D85A30;font-weight:600;">-1.48</span> → <span style="color:#D85A30;font-weight:600;">-1.12</span> — still cheaper than historical norm, but momentum improving notably.
         </p>
       </div>
-
     </div>
   </div>
 
@@ -159,8 +171,42 @@
   </div>
 </div>
 
+<!-- ═══════════════════════════════════════════════════════
+     STEP 1 — Error detection: fires if any script fails to load
+     ═══════════════════════════════════════════════════════ -->
+<script>
+window.addEventListener('error', function(e) {
+  if (e.target && e.target.tagName === 'SCRIPT') {
+    var banner = document.getElementById('load-error');
+    banner.style.display = 'block';
+    banner.innerHTML = '⚠️ Script failed to load: <code>' + e.target.src + '</code><br>The chart cannot render. Check your internet connection or see the README for offline setup.';
+  }
+}, true);
+</script>
+
+<!-- ═══════════════════════════════════════════════════════
+     STEP 2 — Chart.js: cdnjs primary, jsdelivr fallback
+     ═══════════════════════════════════════════════════════ -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+if (typeof Chart === 'undefined') {
+  document.write('<scr'+'ipt src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"><\/scr'+'ipt>');
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════════
+     STEP 3 — Datalabels plugin: cdnjs primary, jsdelivr fallback
+     ═══════════════════════════════════════════════════════ -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
+<script>
+if (typeof ChartDataLabels === 'undefined') {
+  document.write('<scr'+'ipt src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"><\/scr'+'ipt>');
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════════
+     STEP 4 — Chart application code
+     ═══════════════════════════════════════════════════════ -->
 <script>
 const NEW_TICKERS=new Set([]);
 const TRAIL_COLORS=['#7F77DD','#D85A30','#1D9E75','#BA7517','#D4537E','#378ADD','#639922'];
@@ -397,4 +443,8 @@ document.querySelectorAll('.z-switch button').forEach(btn=>{btn.addEventListener
 document.getElementById('alert-btn').addEventListener('click',()=>{showAlerts=!showAlerts;const btn=document.getElementById('alert-btn');btn.classList.toggle('alert-on',showAlerts);btn.setAttribute('aria-pressed',showAlerts);document.getElementById('threshold-row').classList.toggle('visible',showAlerts);fullUpdate();});
 document.getElementById('thresh-slider').addEventListener('input',e=>{threshold=parseInt(e.target.value);document.getElementById('thresh-val').textContent=threshold+'%';fullUpdate();});
 document.querySelectorAll('.q-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.q-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');activeQuadrant=btn.dataset.q;document.getElementById('detail-panel').style.display='none';fullUpdate();});});
-document.getElementById('search-box').addEventLis
+document.getElementById('search-box').addEventListener('input',e=>{searchTerms=parseSearch(e.target.value);document.getElementById('detail-panel').style.display='none';fullUpdate();});
+</script>
+
+</body>
+</html>
