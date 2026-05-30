@@ -39,7 +39,7 @@
         <button class="q-btn" data-q="gray" style="border-left:3px solid #888780;">Prem+Z widening</button>
       </div>
     </div>
-    <span style="font-size:11px;color:var(--color-text-tertiary);white-space:nowrap;">Fund data as of 05/27/2026</span>
+    <span style="font-size:11px;color:var(--color-text-tertiary);white-space:nowrap;">Fund data as of 05/29/2026</span>
   </div>
 
   <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px;">
@@ -81,7 +81,7 @@
   </div>
 
   <div style="position:relative;width:100%;height:560px;">
-    <canvas id="qChart" role="img" aria-label="CEF scatter matrix 31 funds as of 05/27/2026."></canvas>
+    <canvas id="qChart" role="img" aria-label="CEF scatter matrix 31 funds as of 05/29/2026."></canvas>
   </div>
 
   <div id="alert-panel" role="alert" aria-live="polite"></div>
@@ -99,54 +99,49 @@
   </div>
 
   <div style="margin-top:14px;padding:12px 14px;border-top:0.5px solid var(--color-border-tertiary);">
-    <p style="font-size:11px;font-weight:500;color:var(--color-text-secondary);margin:0 0 4px 0;text-transform:uppercase;letter-spacing:0.04em;">Notable moves vs. prior session (05/26/2026)</p>
-    <p style="font-size:10px;color:var(--color-text-tertiary);margin:0 0 10px 0;">Z-score: more negative = cheaper vs history (valuation); less negative / positive = discount narrowing (momentum)</p>
+    <p style="font-size:11px;font-weight:500;color:var(--color-text-secondary);margin:0 0 4px 0;text-transform:uppercase;letter-spacing:0.04em;">Notable moves vs. prior session (05/28/2026)</p>
+    <p style="font-size:10px;color:var(--color-text-tertiary);margin:0 0 10px 0;">Z-score: more negative = cheaper vs history (valuation); less negative / positive = discount narrowing (momentum). Quadrant only changes when z-score OR D/P crosses zero.</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;">
 
       <div style="display:flex;gap:8px;align-items:flex-start;">
         <i class="ti ti-trending-up" style="font-size:15px;color:#1D9E75;margin-top:1px;"></i>
         <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
-          <strong>AIO</strong> — discount tightened dramatically to <strong>-8.99%</strong> (from -11.46%).<br>
-          Z-score 1Y: <span style="color:#D85A30;font-weight:600;">-1.08</span> → <span style="color:#D85A30;font-weight:600;">-0.67</span> — still cheaper than its historical norm (valuation intact), but momentum improving sharply. Moved from orange to green quadrant.
+          <strong>BST</strong> — discount tightened to <strong>-5.51%</strong> (from -5.76%). Z-score 1Y: <span style="color:#D85A30;font-weight:600;">-0.69</span> → <span style="color:#1D9E75;font-weight:600;">+0.23</span>. Z-score crossed zero (now positive), D/P negative → <strong>quadrant change: orange → green</strong>. Discount now narrower than its -6.11% historical average for the first time in this series.
         </p>
       </div>
 
       <div style="display:flex;gap:8px;align-items:flex-start;">
         <i class="ti ti-trending-up" style="font-size:15px;color:#1D9E75;margin-top:1px;"></i>
         <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
-          <strong>HTD</strong> — discount narrowed to <strong>-4.93%</strong> (from -5.50%).<br>
-          Z-score 1Y: <span style="color:#1D9E75;font-weight:600;">+0.86</span> → <span style="color:#1D9E75;font-weight:600;">+1.31</span> — momentum accelerating; discount now notably narrower than its historical average.
-        </p>
-      </div>
-
-      <div style="display:flex;gap:8px;align-items:flex-start;">
-        <i class="ti ti-trending-up" style="font-size:15px;color:#378ADD;margin-top:1px;"></i>
-        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
-          <strong>STK</strong> — premium held at <strong>+3.25%</strong> (from +3.14%). Z-score 1Y: <span style="color:#378ADD;font-weight:600;">+2.42</span> → <span style="color:#378ADD;font-weight:600;">+2.47</span> — continues to trade well above its historical average; momentum still the strongest in the universe.
-        </p>
-      </div>
-
-      <div style="display:flex;gap:8px;align-items:flex-start;">
-        <i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;"></i>
-        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
-          <strong>BDJ</strong> — discount widened to <strong>-8.58%</strong> (from -8.08%).<br>
-          Z-score 1Y: <span style="color:#D85A30;font-weight:600;">-1.77</span> → <span style="color:#D85A30;font-weight:600;">-2.11</span> — moving further below its historical norm; deepening valuation signal but adverse momentum.
-        </p>
-      </div>
-
-      <div style="display:flex;gap:8px;align-items:flex-start;">
-        <i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;"></i>
-        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
-          <strong>RFI</strong> — discount tightened modestly to <strong>-5.29%</strong> (from -5.77%).<br>
-          Z-score 1Y: <span style="color:#D85A30;font-weight:600;">-2.82</span> → <span style="color:#D85A30;font-weight:600;">-2.57</span> — still the most adversely positioned fund vs its own history (52-wk avg is <strong>+0.95%</strong>); deep valuation but momentum adverse.
+          <strong>ERH</strong> — discount tightened to <strong>-7.64%</strong> (unchanged). Z-score 1Y: <span style="color:#D85A30;font-weight:600;">-0.22</span> → <span style="color:#1D9E75;font-weight:600;">+0.27</span>. Z-score crossed zero (now positive), D/P negative → <strong>quadrant change: orange → green</strong>. Discount now narrower than its -8.02% historical norm.
         </p>
       </div>
 
       <div style="display:flex;gap:8px;align-items:flex-start;">
         <i class="ti ti-trending-up" style="font-size:15px;color:#1D9E75;margin-top:1px;"></i>
         <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
-          <strong>BST</strong> — discount narrowed further to <strong>-7.14%</strong> (from -7.77%).<br>
-          Z-score 1Y: <span style="color:#D85A30;font-weight:600;">-1.12</span> → <span style="color:#D85A30;font-weight:600;">-0.69</span> — momentum improving consistently; still cheap vs history but the narrowing trend is clear.
+          <strong>UTG</strong> — D/P crossed zero to <strong>+0.14%</strong> (from -0.37%), z-score 1Y: <span style="color:#D85A30;font-weight:600;">-0.12</span> → <span style="color:#1D9E75;font-weight:600;">+0.37</span>. Both signs flipped → <strong>quadrant change: orange → blue</strong>. Now trading at a slim premium with narrowing momentum.
+        </p>
+      </div>
+
+      <div style="display:flex;gap:8px;align-items:flex-start;">
+        <i class="ti ti-trending-up" style="font-size:15px;color:#1D9E75;margin-top:1px;"></i>
+        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
+          <strong>HTD</strong> — discount held at <strong>-3.92%</strong>. Z-score 1Y: <span style="color:#1D9E75;font-weight:600;">+1.31</span> → <span style="color:#1D9E75;font-weight:600;">+2.09</span>. Z-score positive, D/P negative → remains <strong>green quadrant</strong>. Momentum accelerating sharply — discount now significantly narrower than its -6.55% historical average.
+        </p>
+      </div>
+
+      <div style="display:flex;gap:8px;align-items:flex-start;">
+        <i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;"></i>
+        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
+          <strong>NIE</strong> — discount tightened to <strong>-11.86%</strong> (from -12.29%). Z-score 1Y: <span style="color:#D85A30;font-weight:600;">-2.56</span> → <span style="color:#D85A30;font-weight:600;">-2.07</span>. Z-score negative, D/P negative → <strong>orange quadrant</strong>. Momentum improving within orange; still deeply below its -9.95% historical norm (valuation signal intact).
+        </p>
+      </div>
+
+      <div style="display:flex;gap:8px;align-items:flex-start;">
+        <i class="ti ti-trending-up" style="font-size:15px;color:#1D9E75;margin-top:1px;"></i>
+        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
+          <strong>BDJ</strong> — discount tightened to <strong>-7.58%</strong> (from -7.78%). Z-score 1Y: <span style="color:#D85A30;font-weight:600;">-2.11</span> → <span style="color:#D85A30;font-weight:600;">-1.52</span>. Z-score negative, D/P negative → <strong>orange quadrant</strong>. Improving momentum within orange; still significantly cheaper than its -5.69% historical average — strong valuation signal.
         </p>
       </div>
 
@@ -154,7 +149,7 @@
   </div>
 
   <div style="margin-top:10px;padding:10px 14px;border-top:0.5px solid var(--color-border-tertiary);font-size:10.5px;color:var(--color-text-tertiary);line-height:1.55;">
-    <em>This chart is for informational purposes only and does not constitute investment advice. Data sourced from fund provider reports as of 05/27/2026. Past performance, distribution rates, and discount/premium levels are not guarantees of future results. Closed-end funds involve risks including the use of leverage, market volatility, and the possibility that shares may trade at a discount to net asset value. Please consult a qualified financial advisor before making any investment decisions.</em>
+    <em>This chart is for informational purposes only and does not constitute investment advice. Data sourced from fund provider reports as of 05/29/2026. Past performance, distribution rates, and discount/premium levels are not guarantees of future results. Closed-end funds involve risks including the use of leverage, market volatility, and the possibility that shares may trade at a discount to net asset value. Please consult a qualified financial advisor before making any investment decisions.</em>
   </div>
 </div>
 
@@ -168,46 +163,46 @@ const TRAIL_COLORS=['#7F77DD','#D85A30','#1D9E75','#BA7517','#D4537E','#378ADD',
 
 const HISTORY={
   '05/13/2026':{ADX:{z3m:0.51,z6m:1.02,z1y:1.59,dp:-3.93},AIO:{z3m:-0.53,z6m:-0.89,z1y:-1.07,dp:-11.01},ASGI:{z3m:0.22,z6m:0.36,z1y:0.97,dp:4.32},BME:{z3m:0.22,z6m:0.82,z1y:1.51,dp:-4.00},BST:{z3m:-1.44,z6m:-1.73,z1y:-2.36,dp:-9.18},BUI:{z3m:-0.26,z6m:-0.80,z1y:-1.10,dp:-1.15},CSQ:{z3m:-0.57,z6m:-1.15,z1y:-1.37,dp:-10.07},DNP:{z3m:1.77,z6m:0.42,z1y:0.34,dp:6.57},EOS:{z3m:-1.62,z6m:-2.07,z1y:-1.51,dp:-9.83},ERH:{z3m:1.15,z6m:1.21,z1y:0.91,dp:-6.78},GDV:{z3m:0.41,z6m:0.77,z1y:1.10,dp:-9.96},GLU:{z3m:-0.75,z6m:-1.30,z1y:-1.24,dp:-2.57},GOF:{z3m:0.48,z6m:-0.39,z1y:-1.05,dp:5.80},NBXG:{z3m:-1.52,z6m:-1.75,z1y:-2.03,dp:-15.29},NIE:{z3m:-1.03,z6m:-1.56,z1y:-2.09,dp:-11.67},PCN:{z3m:-0.39,z6m:-0.98,z1y:-1.36,dp:4.03},PDI:{z3m:-0.15,z6m:0.23,z1y:-0.59,dp:8.15},PDO:{z3m:-1.09,z6m:-1.71,z1y:-2.19,dp:0.87},PDX:{z3m:1.12,z6m:0.92,z1y:-0.19,dp:-9.52},RFI:{z3m:-1.95,z6m:-2.43,z1y:-2.16,dp:-3.39},RLTY:{z3m:-0.58,z6m:-1.15,z1y:-1.45,dp:-8.40},RNP:{z3m:-1.24,z6m:-1.27,z1y:-1.34,dp:-4.80},RQI:{z3m:-0.22,z6m:0.58,z1y:1.11,dp:-1.05},STK:{z3m:2.64,z6m:3.31,z1y:1.00,dp:0.17},UTF:{z3m:2.37,z6m:1.13,z1y:-0.39,dp:-5.16},UTG:{z3m:1.23,z6m:0.94,z1y:0.79,dp:0.58}},
-  '05/20/2026':{ADX:{z3m:0.04,z6m:0.79,z1y:1.37,dp:-4.21},AIO:{z3m:-0.13,z6m:-0.59,z1y:-0.98,dp:-10.61},ASGI:{z3m:0.90,z6m:1.02,z1y:1.44,dp:6.23},BDJ:{z3m:-1.18,z6m:-1.73,z1y:-2.12,dp:-8.46},BME:{z3m:0.70,z6m:1.08,z1y:1.74,dp:-3.49},BST:{z3m:-1.74,z6m:-2.24,z1y:-2.99,dp:-10.38},BUI:{z3m:0.03,z6m:-0.56,z1y:-0.82,dp:-0.25},CSQ:{z3m:-0.64,z6m:-1.18,z1y:-1.38,dp:-10.22},DNP:{z3m:1.16,z6m:0.15,z1y:-0.02,dp:5.62},EOI:{z3m:-1.80,z6m:-1.75,z1y:-2.03,dp:-7.16},EOS:{z3m:-1.92,z6m:-2.35,z1y:-1.65,dp:-10.51},ERH:{z3m:-0.67,z6m:-0.94,z1y:-0.82,dp:-9.21},ETG:{z3m:-0.28,z6m:-1.06,z1y:-1.71,dp:-9.26},GDV:{z3m:0.77,z6m:1.20,z1y:1.60,dp:-9.64},GLU:{z3m:-1.19,z6m:-1.70,z1y:-1.81,dp:-4.06},GOF:{z3m:0.25,z6m:-0.63,z1y:-1.10,dp:4.78},HTD:{z3m:1.03,z6m:0.82,z1y:0.44,dp:-6.06},NBXG:{z3m:-0.48,z6m:-0.96,z1y:-1.44,dp:-14.64},NIE:{z3m:-0.91,z6m:-1.47,z1y:-2.00,dp:-11.64},NXG:{z3m:-0.21,z6m:-0.87,z1y:-1.06,dp:-4.64},PCN:{z3m:-1.26,z6m:-1.83,z1y:-2.00,dp:2.30},PDI:{z3m:-1.84,z6m:-1.33,z1y:-1.43,dp:4.90},PDO:{z3m:-1.01,z6m:-1.65,z1y:-2.15,dp:0.71},PDX:{z3m:-0.12,z6m:-0.37,z1y:-0.87,dp:-10.82},RFI:{z3m:-2.16,z6m:-2.83,z1y:-2.53,dp:-4.63},RLTY:{z3m:-1.05,z6m:-1.58,z1y:-1.73,dp:-8.93},RNP:{z3m:-1.33,z6m:-1.49,z1y:-1.39,dp:-5.23},RQI:{z3m:-0.79,z6m:0.35,z1y:0.85,dp:-1.48},STK:{z3m:1.14,z6m:1.61,z1y:0.35,dp:-1.85},UTF:{z3m:1.00,z6m:0.20,z1y:-0.60,dp:-6.35},UTG:{z3m:-0.55,z6m:-0.76,z1y:-0.54,dp:-0.82}},
   '05/22/2026':{ADX:{z3m:0.24,z6m:0.88,z1y:1.42,dp:-4.06},AIO:{z3m:-0.85,z6m:-1.03,z1y:-1.07,dp:-11.28},ASGI:{z3m:0.90,z6m:1.02,z1y:1.45,dp:6.55},BDJ:{z3m:-0.89,z6m:-1.46,z1y:-1.78,dp:-8.02},BME:{z3m:0.12,z6m:0.69,z1y:1.38,dp:-4.00},BST:{z3m:-1.26,z6m:-1.76,z1y:-2.35,dp:-8.29},BUI:{z3m:0.33,z6m:-0.27,z1y:-0.48,dp:0.90},CSQ:{z3m:-0.58,z6m:-1.13,z1y:-1.36,dp:-10.18},DNP:{z3m:1.33,z6m:0.34,z1y:0.23,dp:6.29},EOI:{z3m:-1.66,z6m:-1.70,z1y:-1.97,dp:-7.20},EOS:{z3m:-0.43,z6m:-1.05,z1y:-1.20,dp:-8.89},ERH:{z3m:-0.67,z6m:-0.92,z1y:-0.83,dp:-9.22},ETG:{z3m:-0.56,z6m:-1.23,z1y:-1.92,dp:-9.74},GDV:{z3m:0.35,z6m:0.69,z1y:1.11,dp:-9.98},GLU:{z3m:-1.37,z6m:-1.82,z1y:-2.00,dp:-4.64},GOF:{z3m:0.25,z6m:-0.63,z1y:-1.09,dp:3.64},HTD:{z3m:0.59,z6m:0.37,z1y:0.02,dp:-6.59},NBXG:{z3m:-1.56,z6m:-1.76,z1y:-2.03,dp:-15.46},NIE:{z3m:-0.59,z6m:-1.15,z1y:-1.68,dp:-11.38},NXG:{z3m:-1.60,z6m:-1.99,z1y:-2.38,dp:-9.38},PCN:{z3m:-0.82,z6m:-1.42,z1y:-1.69,dp:3.00},PDI:{z3m:-1.18,z6m:-0.85,z1y:-1.13,dp:5.97},PDO:{z3m:-0.67,z6m:-1.25,z1y:-1.66,dp:1.42},PDX:{z3m:1.65,z6m:1.53,z1y:0.19,dp:-8.81},RFI:{z3m:-2.47,z6m:-3.22,z1y:-2.81,dp:-5.37},RLTY:{z3m:-1.90,z6m:-2.32,z1y:-2.23,dp:-8.96},RNP:{z3m:-1.63,z6m:-1.82,z1y:-1.50,dp:-5.67},RQI:{z3m:-0.55,z6m:0.40,z1y:0.92,dp:-1.41},STK:{z3m:1.99,z6m:2.61,z1y:0.94,dp:-0.42},UTF:{z3m:0.85,z6m:0.08,z1y:-0.63,dp:-6.35},UTG:{z3m:-0.96,z6m:-1.20,z1y:-0.88,dp:-1.18}},
   '05/26/2026':{ADX:{z3m:0.29,z6m:0.92,z1y:1.45,dp:-3.96},AIO:{z3m:-0.98,z6m:-1.12,z1y:-1.08,dp:-11.46},ASGI:{z3m:1.17,z6m:1.25,z1y:1.63,dp:7.02},BDJ:{z3m:-0.85,z6m:-1.43,z1y:-1.77,dp:-8.08},BME:{z3m:0.67,z6m:1.03,z1y:1.67,dp:-3.48},BST:{z3m:-0.29,z6m:-0.79,z1y:-1.12,dp:-7.77},BUI:{z3m:0.34,z6m:-0.42,z1y:-0.66,dp:0.29},CSQ:{z3m:-1.15,z6m:-1.43,z1y:-1.51,dp:-10.63},DNP:{z3m:1.46,z6m:0.56,z1y:0.50,dp:6.97},EOI:{z3m:-1.53,z6m:-1.69,z1y:-1.93,dp:-7.25},EOS:{z3m:-0.78,z6m:-1.37,z1y:-1.30,dp:-9.42},ERH:{z3m:-0.14,z6m:-0.24,z1y:-0.35,dp:-8.52},ETG:{z3m:-0.44,z6m:-1.15,z1y:-1.83,dp:-9.68},GDV:{z3m:0.08,z6m:0.36,z1y:0.79,dp:-10.21},GLU:{z3m:-0.96,z6m:-1.47,z1y:-1.61,dp:-3.78},GOF:{z3m:-0.78,z6m:-1.17,z1y:-1.26,dp:2.61},HTD:{z3m:1.37,z6m:1.32,z1y:0.86,dp:-5.50},NBXG:{z3m:1.35,z6m:0.55,z1y:-0.34,dp:-12.80},NIE:{z3m:-1.60,z6m:-2.07,z1y:-2.65,dp:-12.34},NXG:{z3m:-1.24,z6m:-1.71,z1y:-2.09,dp:-8.67},PCN:{z3m:-1.12,z6m:-1.63,z1y:-1.85,dp:2.45},PDI:{z3m:-1.48,z6m:-1.18,z1y:-1.30,dp:5.24},PDO:{z3m:-0.46,z6m:-1.06,z1y:-1.46,dp:1.65},PDX:{z3m:1.71,z6m:1.70,z1y:0.32,dp:-8.55},RFI:{z3m:-2.34,z6m:-3.06,z1y:-2.82,dp:-5.77},RLTY:{z3m:-0.82,z6m:-1.38,z1y:-1.61,dp:-8.86},RNP:{z3m:-1.67,z6m:-1.94,z1y:-1.54,dp:-6.05},RQI:{z3m:-0.94,z6m:0.23,z1y:0.76,dp:-1.62},STK:{z3m:3.25,z6m:4.34,z1y:2.42,dp:3.14},UTF:{z3m:1.41,z6m:0.65,z1y:-0.45,dp:-5.74},UTG:{z3m:-1.42,z6m:-1.74,z1y:-1.29,dp:-1.63}},
-  '05/27/2026':{ADX:{z3m:-0.03,z6m:0.77,z1y:1.33,dp:-4.16},AIO:{z3m:1.80,z6m:0.67,z1y:-0.67,dp:-8.99},ASGI:{z3m:1.25,z6m:1.31,z1y:1.67,dp:7.22},BDJ:{z3m:-1.21,z6m:-1.68,z1y:-2.11,dp:-8.58},BME:{z3m:0.47,z6m:0.89,z1y:1.54,dp:-3.69},BST:{z3m:0.06,z6m:-0.45,z1y:-0.69,dp:-7.14},BUI:{z3m:0.31,z6m:-0.49,z1y:-0.75,dp:0.00},CSQ:{z3m:-0.49,z6m:-1.09,z1y:-1.33,dp:-10.20},DNP:{z3m:1.49,z6m:0.64,z1y:0.58,dp:7.21},EOI:{z3m:-1.40,z6m:-1.60,z1y:-1.85,dp:-7.07},EOS:{z3m:-0.86,z6m:-1.43,z1y:-1.32,dp:-9.53},ERH:{z3m:0.01,z6m:-0.07,z1y:-0.22,dp:-8.33},ETG:{z3m:-0.67,z6m:-1.27,z1y:-1.97,dp:-10.00},GDV:{z3m:0.53,z6m:0.92,z1y:1.34,dp:-9.81},GLU:{z3m:-0.95,z6m:-1.46,z1y:-1.61,dp:-3.81},GOF:{z3m:-0.86,z6m:-1.21,z1y:-1.27,dp:2.42},HTD:{z3m:1.75,z6m:1.83,z1y:1.31,dp:-4.93},NBXG:{z3m:0.08,z6m:-0.44,z1y:-1.06,dp:-13.95},NIE:{z3m:-1.51,z6m:-1.97,z1y:-2.56,dp:-12.29},NXG:{z3m:-0.82,z6m:-1.37,z1y:-1.70,dp:-7.33},PCN:{z3m:-0.67,z6m:-1.29,z1y:-1.59,dp:3.06},PDI:{z3m:-1.54,z6m:-1.27,z1y:-1.34,dp:5.05},PDO:{z3m:-0.21,z6m:-0.81,z1y:-1.16,dp:2.12},PDX:{z3m:1.56,z6m:1.58,z1y:0.26,dp:-8.66},RFI:{z3m:-2.00,z6m:-2.65,z1y:-2.57,dp:-5.29},RLTY:{z3m:-0.64,z6m:-1.23,z1y:-1.51,dp:-8.72},RNP:{z3m:-1.48,z6m:-1.75,z1y:-1.48,dp:-5.84},RQI:{z3m:-1.06,z6m:0.18,z1y:0.72,dp:-1.70},STK:{z3m:3.00,z6m:4.09,z1y:2.47,dp:3.25},UTF:{z3m:1.65,z6m:0.91,z1y:-0.38,dp:-5.38},UTG:{z3m:-0.63,z6m:-0.93,z1y:-0.66,dp:-0.95}}
+  '05/28/2026':{ADX:{z3m:0.44,z6m:0.97,z1y:1.48,dp:-3.86},AIO:{z3m:1.80,z6m:0.67,z1y:-0.67,dp:-8.99},ASGI:{z3m:1.44,z6m:1.53,z1y:1.85,dp:7.89},BDJ:{z3m:-1.21,z6m:-1.68,z1y:-2.11,dp:-7.78},BME:{z3m:0.47,z6m:0.89,z1y:1.54,dp:-3.88},BST:{z3m:0.06,z6m:-0.45,z1y:-0.69,dp:-5.76},BUI:{z3m:0.31,z6m:-0.49,z1y:-0.75,dp:0.00},CSQ:{z3m:-0.95,z6m:-1.29,z1y:-1.44,dp:-10.50},DNP:{z3m:1.49,z6m:0.64,z1y:0.58,dp:7.21},EOI:{z3m:-1.40,z6m:-1.60,z1y:-1.85,dp:-6.39},EOS:{z3m:-0.86,z6m:-1.43,z1y:-1.32,dp:-9.22},ERH:{z3m:0.01,z6m:-0.07,z1y:-0.22,dp:-7.64},ETG:{z3m:-0.67,z6m:-1.27,z1y:-1.97,dp:-9.40},GDV:{z3m:0.53,z6m:0.92,z1y:1.34,dp:-9.81},GLU:{z3m:-0.95,z6m:-1.46,z1y:-1.61,dp:-3.81},GOF:{z3m:-0.12,z6m:-0.85,z1y:-1.14,dp:3.72},HTD:{z3m:1.75,z6m:1.83,z1y:1.31,dp:-3.92},NBXG:{z3m:0.08,z6m:-0.44,z1y:-1.06,dp:-13.16},NIE:{z3m:-1.51,z6m:-1.97,z1y:-2.56,dp:-12.29},NXG:{z3m:-0.82,z6m:-1.37,z1y:-1.70,dp:-7.33},PCN:{z3m:-0.67,z6m:-1.29,z1y:-1.59,dp:3.15},PDI:{z3m:-1.54,z6m:-1.27,z1y:-1.34,dp:5.42},PDO:{z3m:-0.21,z6m:-0.81,z1y:-1.16,dp:1.96},PDX:{z3m:1.56,z6m:1.58,z1y:0.26,dp:-8.57},RFI:{z3m:-1.63,z6m:-2.23,z1y:-2.30,dp:-4.71},RLTY:{z3m:-0.16,z6m:-0.84,z1y:-1.25,dp:-8.34},RNP:{z3m:-0.71,z6m:-0.94,z1y:-1.19,dp:-4.72},RQI:{z3m:0.40,z6m:0.57,z1y:1.15,dp:-0.82},STK:{z3m:3.00,z6m:4.09,z1y:2.47,dp:3.25},UTF:{z3m:2.25,z6m:1.51,z1y:-0.20,dp:-4.56},UTG:{z3m:0.03,z6m:-0.24,z1y:-0.12,dp:-0.37}},
+  '05/29/2026':{ADX:{z3m:0.74,z6m:1.11,z1y:1.57,dp:-3.66},AIO:{z3m:1.99,z6m:0.88,z1y:-0.63,dp:-8.74},ASGI:{z3m:1.48,z6m:1.59,z1y:1.91,dp:8.12},BDJ:{z3m:-0.60,z6m:-1.21,z1y:-1.52,dp:-7.58},BME:{z3m:0.29,z6m:0.75,z1y:1.42,dp:-3.20},BST:{z3m:0.78,z6m:0.30,z1y:0.23,dp:-5.51},BUI:{z3m:0.45,z6m:-0.37,z1y:-0.61,dp:0.47},CSQ:{z3m:-0.01,z6m:-0.84,z1y:-1.20,dp:-9.90},DNP:{z3m:1.55,z6m:0.72,z1y:0.69,dp:7.50},EOI:{z3m:-1.03,z6m:-1.28,z1y:-1.59,dp:-6.30},EOS:{z3m:-0.57,z6m:-1.19,z1y:-1.23,dp:-9.17},ERH:{z3m:0.52,z6m:0.59,z1y:0.27,dp:-7.64},ETG:{z3m:-0.17,z6m:-1.00,z1y:-1.65,dp:-9.33},GDV:{z3m:0.22,z6m:0.55,z1y:0.98,dp:-10.07},GLU:{z3m:-0.86,z6m:-1.39,z1y:-1.53,dp:-3.63},GOF:{z3m:-0.01,z6m:-0.80,z1y:-1.11,dp:3.90},HTD:{z3m:2.40,z6m:2.64,z1y:2.09,dp:-3.92},NBXG:{z3m:1.21,z6m:0.52,z1y:-0.39,dp:-12.89},NIE:{z3m:-0.96,z6m:-1.50,z1y:-2.07,dp:-11.86},NXG:{z3m:-0.67,z6m:-1.23,z1y:-1.55,dp:-6.83},PCN:{z3m:-0.60,z6m:-1.23,z1y:-1.55,dp:3.15},PDI:{z3m:-1.29,z6m:-1.08,z1y:-1.23,dp:5.42},PDO:{z3m:-0.28,z6m:-0.88,z1y:-1.25,dp:1.96},PDX:{z3m:1.58,z6m:1.63,z1y:0.31,dp:-8.57},RFI:{z3m:-1.56,z6m:-2.15,z1y:-2.25,dp:-4.66},RLTY:{z3m:0.18,z6m:-0.56,z1y:-1.06,dp:-8.06},RNP:{z3m:-0.19,z6m:-0.40,z1y:-0.99,dp:-3.97},RQI:{z3m:1.59,z6m:0.90,z1y:1.50,dp:-0.07},STK:{z3m:2.83,z6m:3.88,z1y:2.54,dp:3.36},UTF:{z3m:2.43,z6m:1.77,z1y:-0.11,dp:-4.16},UTG:{z3m:0.61,z6m:0.37,z1y:0.37,dp:0.14}}
 };
-const DATES=['05/13/2026','05/20/2026','05/22/2026','05/26/2026','05/27/2026'];
-const TODAY='05/27/2026';
+const DATES=['05/13/2026','05/22/2026','05/26/2026','05/28/2026','05/29/2026'];
+const TODAY='05/29/2026';
 
 const ALL_FUNDS=[
-  {ticker:'ADX', z3m:-0.03,z6m:0.77, z1y:1.33, dp:-4.16, avg52:-6.61, yield:7.64, lev:'0.00%', nav:26.22,price:25.13,ytdP:'7.10%', ytdN:'5.50%', ret1P:'37.95%',ret1N:'30.50%', freq:'Quarterly'},
-  {ticker:'AIO', z3m:1.80, z6m:0.67, z1y:-0.67,dp:-8.99, avg52:-4.81, yield:6.68, lev:'11.31%',nav:29.60,price:26.94,ytdP:'15.54%',ytdN:'17.96%',ret1P:'33.45%',ret1N:'50.39%', freq:'Monthly'},
-  {ticker:'ASGI',z3m:1.25, z6m:1.31, z1y:1.67, dp:7.22,  avg52:1.01,  yield:11.40,lev:'0.81%', nav:22.58,price:24.21,ytdP:'11.31%',ytdN:'11.78%',ret1P:'43.20%',ret1N:'25.63%', freq:'Monthly'},
-  {ticker:'BDJ', z3m:-1.21,z6m:-1.68,z1y:-2.11,dp:-8.58, avg52:-5.68, yield:8.11, lev:'0.12%', nav:10.02,price:9.16, ytdP:'0.23%', ytdN:'4.69%', ret1P:'23.22%',ret1N:'22.27%', freq:'Monthly'},
-  {ticker:'BME', z3m:0.47, z6m:0.89, z1y:1.54, dp:-3.69, avg52:-6.46, yield:7.93, lev:'0.17%', nav:41.18,price:39.66,ytdP:'-1.92%',ytdN:'-5.09%',ret1P:'13.36%',ret1N:'8.60%',  freq:'Monthly'},
-  {ticker:'BST', z3m:0.06, z6m:-0.45,z1y:-0.69,dp:-7.14, avg52:-6.10, yield:6.23, lev:'0.10%', nav:51.84,price:48.14,ytdP:'6.36%', ytdN:'11.36%',ret1P:'39.81%',ret1N:'47.39%', freq:'Monthly'},
-  {ticker:'BUI', z3m:0.31, z6m:-0.49,z1y:-0.75,dp:0.00,  avg52:2.51,  yield:5.84, lev:'0.11%', nav:27.95,price:27.95,ytdP:'10.99%',ytdN:'19.32%',ret1P:'33.00%',ret1N:'37.65%', freq:'Monthly'},
-  {ticker:'CSQ', z3m:-0.49,z6m:-1.09,z1y:-1.33,dp:-10.20,avg52:-6.83, yield:7.16, lev:'27.24%',nav:22.85,price:20.52,ytdP:'3.92%', ytdN:'7.82%', ret1P:'30.79%',ret1N:'41.42%', freq:'Monthly'},
-  {ticker:'DNP', z3m:1.49, z6m:0.64, z1y:0.58, dp:7.21,  avg52:5.67,  yield:7.19, lev:'22.51%',nav:10.12,price:10.85,ytdP:'11.32%',ytdN:'16.42%',ret1P:'22.37%',ret1N:'21.23%', freq:'Monthly'},
-  {ticker:'EOI', z3m:-1.40,z6m:-1.60,z1y:-1.85,dp:-7.07, avg52:-1.80, yield:8.09, lev:'--',    nav:21.35,price:19.84,ytdP:'-0.72%',ytdN:'2.19%', ret1P:'14.49%',ret1N:'21.39%', freq:'Monthly'},
-  {ticker:'EOS', z3m:-0.86,z6m:-1.43,z1y:-1.32,dp:-9.53, avg52:-4.31, yield:8.05, lev:'--',    nav:25.08,price:22.69,ytdP:'-1.24%',ytdN:'2.01%', ret1P:'14.36%',ret1N:'23.65%', freq:'Monthly'},
-  {ticker:'ERH', z3m:0.01, z6m:-0.07,z1y:-0.22,dp:-8.33, avg52:-8.03, yield:8.73, lev:'20.62%',nav:13.08,price:11.99,ytdP:'9.51%', ytdN:'9.21%', ret1P:'26.39%',ret1N:'21.27%', freq:'Monthly'},
-  {ticker:'ETG', z3m:-0.67,z6m:-1.27,z1y:-1.97,dp:-10.00,avg52:-6.06, yield:6.74, lev:'15.93%',nav:25.59,price:23.03,ytdP:'0.36%', ytdN:'5.92%', ret1P:'31.11%',ret1N:'33.50%', freq:'Monthly'},
-  {ticker:'GDV', z3m:0.53, z6m:0.92, z1y:1.34, dp:-9.81, avg52:-10.77,yield:6.13, lev:'14.45%',nav:32.53,price:29.34,ytdP:'7.79%', ytdN:'7.48%', ret1P:'32.69%',ret1N:'27.01%', freq:'Monthly'},
-  {ticker:'GLU', z3m:-0.95,z6m:-1.46,z1y:-1.61,dp:-3.81, avg52:0.27,  yield:6.75, lev:'17.56%',nav:20.33,price:19.56,ytdP:'5.23%', ytdN:'13.52%',ret1P:'29.28%',ret1N:'34.97%', freq:'Monthly'},
-  {ticker:'GOF', z3m:-0.86,z6m:-1.21,z1y:-1.27,dp:2.42,  avg52:16.31, yield:19.87,lev:'11.46%',nav:10.74,price:11.00,ytdP:'-5.41%',ytdN:'1.53%', ret1P:'-6.16%',ret1N:'16.17%', freq:'Monthly'},
-  {ticker:'HTD', z3m:1.75, z6m:1.83, z1y:1.31, dp:-4.93, avg52:-6.57, yield:7.39, lev:'30.93%',nav:26.97,price:25.64,ytdP:'12.45%',ytdN:'10.99%',ret1P:'22.19%',ret1N:'20.35%', freq:'Monthly'},
-  {ticker:'NBXG',z3m:0.08, z6m:-0.44,z1y:-1.06,dp:-13.95,avg52:-12.27,yield:8.91, lev:'--',    nav:18.78,price:16.16,ytdP:'4.54%', ytdN:'4.98%', ret1P:'31.37%',ret1N:'32.45%', freq:'Monthly'},
-  {ticker:'NIE', z3m:-1.51,z6m:-1.97,z1y:-2.56,dp:-12.29,avg52:-9.93, yield:7.49, lev:'--',    nav:30.44,price:26.70,ytdP:'6.41%', ytdN:'8.28%', ret1P:'31.57%',ret1N:'33.00%', freq:'Quarterly'},
-  {ticker:'NXG', z3m:-0.82,z6m:-1.37,z1y:-1.70,dp:-7.33, avg52:-1.16, yield:11.09,lev:'22.19%',nav:63.04,price:58.42,ytdP:'18.15%',ytdN:'37.71%',ret1P:'47.82%',ret1N:'71.39%', freq:'Monthly'},
-  {ticker:'PCN', z3m:-0.67,z6m:-1.29,z1y:-1.59,dp:3.06,  avg52:7.07,  yield:11.47,lev:'5.91%', nav:11.42,price:11.77,ytdP:'-2.16%',ytdN:'0.61%', ret1P:'5.26%', ret1N:'11.26%', freq:'Monthly'},
-  {ticker:'PDI', z3m:-1.54,z6m:-1.27,z1y:-1.34,dp:5.05,  avg52:10.10, yield:15.89,lev:'32.09%',nav:15.85,price:16.65,ytdP:'3.75%', ytdN:'0.37%', ret1P:'9.65%', ret1N:'12.82%', freq:'Monthly'},
-  {ticker:'PDO', z3m:-0.21,z6m:-0.81,z1y:-1.16,dp:2.12,  avg52:3.94,  yield:11.81,lev:'34.71%',nav:12.73,price:13.00,ytdP:'0.45%', ytdN:'-0.07%',ret1P:'10.99%',ret1N:'12.49%', freq:'Monthly'},
-  {ticker:'PDX', z3m:1.56, z6m:1.58, z1y:0.26, dp:-8.66, avg52:-9.15, yield:7.44, lev:'22.60%',nav:23.56,price:21.52,ytdP:'15.76%',ytdN:'15.07%',ret1P:'19.89%',ret1N:'21.21%', freq:'Monthly'},
-  {ticker:'RFI', z3m:-2.00,z6m:-2.65,z1y:-2.57,dp:-5.29, avg52:0.95,  yield:8.50, lev:'0.04%', nav:11.92,price:11.29,ytdP:'8.49%', ytdN:'10.42%',ret1P:'7.08%', ret1N:'11.53%', freq:'Monthly'},
-  {ticker:'RLTY',z3m:-0.64,z6m:-1.23,z1y:-1.51,dp:-8.72, avg52:-6.40, yield:8.35, lev:'32.76%',nav:17.31,price:15.80,ytdP:'10.40%',ytdN:'12.37%',ret1P:'14.95%',ret1N:'18.20%', freq:'Monthly'},
-  {ticker:'RNP', z3m:-1.48,z6m:-1.75,z1y:-1.48,dp:-5.84, avg52:0.12,  yield:7.85, lev:'29.80%',nav:22.09,price:20.80,ytdP:'8.74%', ytdN:'9.54%', ret1P:'6.50%', ret1N:'14.36%', freq:'Monthly'},
-  {ticker:'RQI', z3m:-1.06,z6m:0.18, z1y:0.72, dp:-1.70, avg52:-3.13, yield:8.12, lev:'28.08%',nav:13.53,price:13.30,ytdP:'20.65%',ytdN:'14.68%',ret1P:'20.27%',ret1N:'14.76%', freq:'Monthly'},
-  {ticker:'STK', z3m:3.00, z6m:4.09, z1y:2.47, dp:3.25,  avg52:-2.87, yield:3.35, lev:'--',    nav:53.51,price:55.25,ytdP:'34.45%',ytdN:'34.12%',ret1P:'91.17%',ret1N:'103.09%',freq:'Quarterly'},
-  {ticker:'UTF', z3m:1.65, z6m:0.91, z1y:-0.38,dp:-5.38, avg52:-3.54, yield:7.31, lev:'27.44%',nav:28.62,price:27.08,ytdP:'15.05%',ytdN:'16.61%',ret1P:'14.89%',ret1N:'27.30%', freq:'Monthly'},
-  {ticker:'UTG', z3m:-0.63,z6m:-0.93,z1y:-0.66,dp:-0.95, avg52:-0.25, yield:5.61, lev:'18.26%',nav:43.19,price:42.78,ytdP:'19.12%',ytdN:'23.41%',ret1P:'39.53%',ret1N:'43.86%', freq:'Monthly'},
+  {ticker:'ADX', z3m:0.74, z6m:1.11, z1y:1.57, dp:-3.66, avg52:-6.57, yield:7.56, lev:'0.00%', nav:26.47,price:25.50,ytdP:'7.10%', ytdN:'5.50%', ret1P:'37.95%',ret1N:'30.50%', freq:'Quarterly'},
+  {ticker:'AIO', z3m:1.99, z6m:0.88, z1y:-0.63,dp:-8.74, avg52:-4.86, yield:6.65, lev:'11.30%',nav:29.64,price:26.90,ytdP:'15.54%',ytdN:'17.96%',ret1P:'33.45%',ret1N:'50.39%', freq:'Monthly'},
+  {ticker:'ASGI',z3m:1.48, z6m:1.59, z1y:1.91, dp:8.12,  avg52:1.16,  yield:11.40,lev:'0.82%', nav:22.43,price:24.10,ytdP:'11.31%',ytdN:'11.78%',ret1P:'43.20%',ret1N:'25.63%', freq:'Monthly'},
+  {ticker:'BDJ', z3m:-0.60,z6m:-1.21,z1y:-1.52,dp:-7.58, avg52:-5.69, yield:8.03, lev:'0.12%', nav:10.03,price:9.26, ytdP:'0.23%', ytdN:'4.69%', ret1P:'23.22%',ret1N:'22.27%', freq:'Monthly'},
+  {ticker:'BME', z3m:0.29, z6m:0.75, z1y:1.42, dp:-3.20, avg52:-6.43, yield:7.84, lev:'0.17%', nav:41.74,price:40.23,ytdP:'-1.92%',ytdN:'-5.09%',ret1P:'13.36%',ret1N:'8.60%',  freq:'Monthly'},
+  {ticker:'BST', z3m:0.78, z6m:0.30, z1y:0.23, dp:-5.51, avg52:-6.11, yield:6.09, lev:'0.10%', nav:52.26,price:49.53,ytdP:'6.36%', ytdN:'11.36%',ret1P:'39.81%',ret1N:'47.39%', freq:'Monthly'},
+  {ticker:'BUI', z3m:0.45, z6m:-0.37,z1y:-0.61,dp:0.47,  avg52:2.52,  yield:5.84, lev:'0.11%', nav:27.80,price:27.86,ytdP:'10.99%',ytdN:'19.32%',ret1P:'33.00%',ret1N:'37.65%', freq:'Monthly'},
+  {ticker:'CSQ', z3m:-0.01,z6m:-0.84,z1y:-1.20,dp:-9.90, avg52:-6.91, yield:7.15, lev:'27.11%',nav:23.00,price:20.72,ytdP:'3.92%', ytdN:'7.82%', ret1P:'30.79%',ret1N:'41.42%', freq:'Monthly'},
+  {ticker:'DNP', z3m:1.55, z6m:0.72, z1y:0.69, dp:7.50,  avg52:5.68,  yield:7.26, lev:'22.83%',nav:10.00,price:10.62,ytdP:'11.32%',ytdN:'16.42%',ret1P:'22.37%',ret1N:'21.23%', freq:'Monthly'},
+  {ticker:'EOI', z3m:-1.03,z6m:-1.28,z1y:-1.59,dp:-6.30, avg52:-1.87, yield:8.00, lev:'--',    nav:21.43,price:20.08,ytdP:'-0.72%',ytdN:'2.19%', ret1P:'14.49%',ret1N:'21.39%', freq:'Monthly'},
+  {ticker:'EOS', z3m:-0.57,z6m:-1.19,z1y:-1.23,dp:-9.17, avg52:-4.42, yield:7.97, lev:'--',    nav:25.26,price:22.97,ytdP:'-1.24%',ytdN:'2.01%', ret1P:'14.36%',ret1N:'23.65%', freq:'Monthly'},
+  {ticker:'ERH', z3m:0.52, z6m:0.59, z1y:0.27, dp:-7.64, avg52:-8.02, yield:8.75, lev:'20.78%',nav:12.95,price:12.01,ytdP:'9.51%', ytdN:'9.21%', ret1P:'26.39%',ret1N:'21.27%', freq:'Monthly'},
+  {ticker:'ETG', z3m:-0.17,z6m:-1.00,z1y:-1.65,dp:-9.33, avg52:-6.10, yield:6.68, lev:'15.90%',nav:25.65,price:23.33,ytdP:'0.36%', ytdN:'5.92%', ret1P:'31.11%',ret1N:'33.50%', freq:'Monthly'},
+  {ticker:'GDV', z3m:0.22, z6m:0.55, z1y:0.98, dp:-10.07,avg52:-10.76,yield:6.14, lev:'14.43%',nav:32.58,price:29.24,ytdP:'7.79%', ytdN:'7.48%', ret1P:'32.69%',ret1N:'27.01%', freq:'Monthly'},
+  {ticker:'GLU', z3m:-0.86,z6m:-1.39,z1y:-1.53,dp:-3.63, avg52:0.25,  yield:6.77, lev:'17.62%',nav:20.24,price:19.40,ytdP:'5.23%', ytdN:'13.52%',ret1P:'29.28%',ret1N:'34.97%', freq:'Monthly'},
+  {ticker:'GOF', z3m:-0.01,z6m:-0.80,z1y:-1.11,dp:3.90,  avg52:16.08, yield:19.58,lev:'11.43%',nav:10.76,price:11.20,ytdP:'-5.41%',ytdN:'1.53%', ret1P:'-6.16%',ret1N:'16.17%', freq:'Monthly'},
+  {ticker:'HTD', z3m:2.40, z6m:2.64, z1y:2.09, dp:-3.92, avg52:-6.55, yield:7.37, lev:'31.09%',nav:26.77,price:25.64,ytdP:'12.45%',ytdN:'10.99%',ret1P:'22.19%',ret1N:'20.35%', freq:'Monthly'},
+  {ticker:'NBXG',z3m:1.21, z6m:0.52, z1y:-0.39,dp:-12.89,avg52:-12.28,yield:8.70, lev:'--',    nav:19.07,price:16.69,ytdP:'4.54%', ytdN:'4.98%', ret1P:'31.37%',ret1N:'32.45%', freq:'Monthly'},
+  {ticker:'NIE', z3m:-0.96,z6m:-1.50,z1y:-2.07,dp:-11.86,avg52:-9.95, yield:7.43, lev:'--',    nav:30.52,price:26.93,ytdP:'6.41%', ytdN:'8.28%', ret1P:'31.57%',ret1N:'33.00%', freq:'Quarterly'},
+  {ticker:'NXG', z3m:-0.67,z6m:-1.23,z1y:-1.55,dp:-6.83, avg52:-1.20, yield:11.03,lev:'26.96%',nav:63.08,price:58.11,ytdP:'18.15%',ytdN:'37.71%',ret1P:'47.82%',ret1N:'71.39%', freq:'Monthly'},
+  {ticker:'PCN', z3m:-0.60,z6m:-1.23,z1y:-1.55,dp:3.15,  avg52:7.05,  yield:11.44,lev:'5.90%', nav:11.44,price:11.82,ytdP:'-2.16%',ytdN:'0.61%', ret1P:'5.26%', ret1N:'11.26%', freq:'Monthly'},
+  {ticker:'PDI', z3m:-1.29,z6m:-1.08,z1y:-1.23,dp:5.42,  avg52:10.08, yield:15.81,lev:'32.05%',nav:15.88,price:16.77,ytdP:'3.75%', ytdN:'0.37%', ret1P:'9.65%', ret1N:'12.82%', freq:'Monthly'},
+  {ticker:'PDO', z3m:-0.28,z6m:-0.88,z1y:-1.25,dp:1.96,  avg52:3.94,  yield:11.81,lev:'34.67%',nav:12.75,price:13.15,ytdP:'0.45%', ytdN:'-0.07%',ret1P:'10.99%',ret1N:'12.49%', freq:'Monthly'},
+  {ticker:'PDX', z3m:1.58, z6m:1.63, z1y:0.31, dp:-8.57, avg52:-9.15, yield:7.43, lev:'22.59%',nav:23.57,price:21.66,ytdP:'15.76%',ytdN:'15.07%',ret1P:'19.89%',ret1N:'21.21%', freq:'Monthly'},
+  {ticker:'RFI', z3m:-1.56,z6m:-2.15,z1y:-2.25,dp:-4.66, avg52:0.88,  yield:8.47, lev:'0.04%', nav:11.90,price:11.26,ytdP:'8.49%', ytdN:'10.42%',ret1P:'7.08%', ret1N:'11.53%', freq:'Monthly'},
+  {ticker:'RLTY',z3m:0.18, z6m:-0.56,z1y:-1.06,dp:-8.06, avg52:-6.42, yield:8.34, lev:'33.00%',nav:17.27,price:15.74,ytdP:'10.40%',ytdN:'12.37%',ret1P:'14.95%',ret1N:'18.20%', freq:'Monthly'},
+  {ticker:'RNP', z3m:-0.19,z6m:-0.40,z1y:-0.99,dp:-3.97, avg52:0.05,  yield:7.77, lev:'29.97%',nav:22.05,price:21.04,ytdP:'8.74%', ytdN:'9.54%', ret1P:'6.50%', ret1N:'14.36%', freq:'Monthly'},
+  {ticker:'RQI', z3m:1.59, z6m:0.90, z1y:1.50, dp:-0.07, avg52:-3.10, yield:8.07, lev:'28.35%',nav:13.49,price:13.34,ytdP:'20.65%',ytdN:'14.68%',ret1P:'20.27%',ret1N:'14.76%', freq:'Monthly'},
+  {ticker:'STK', z3m:2.83, z6m:3.88, z1y:2.54, dp:3.36,  avg52:-2.87, yield:3.33, lev:'--',    nav:53.79,price:55.76,ytdP:'34.45%',ytdN:'34.12%',ret1P:'91.17%',ret1N:'103.09%',freq:'Quarterly'},
+  {ticker:'UTF', z3m:2.43, z6m:1.77, z1y:-0.11,dp:-4.16, avg52:-3.63, yield:7.33, lev:'27.80%',nav:28.29,price:26.93,ytdP:'15.05%',ytdN:'16.61%',ret1P:'14.89%',ret1N:'27.30%', freq:'Monthly'},
+  {ticker:'UTG', z3m:0.61, z6m:0.37, z1y:0.37, dp:0.14,  avg52:-0.25, yield:5.63, lev:'18.54%',nav:42.39,price:42.45,ytdP:'19.12%',ytdN:'23.41%',ret1P:'39.53%',ret1N:'43.86%', freq:'Monthly'},
 ];
 
 const PERIOD_LABELS={z3m:'Z-Score 3M',z6m:'Z-Score 6M',z1y:'Z-Score 1Y'};
@@ -379,7 +374,7 @@ function renderTrailInfo(){
     const dd=firstPt?((todayPt.dp-firstPt.dp).toFixed(2)):'n/a';
     const signZ=parseFloat(dz)>=0?'+':'',signD=parseFloat(dd)>=0?'+':'';
     const zInterp=parseFloat(dz)>0?'discount narrowing vs history':'discount widening vs history';
-    return`<div class="trail-row"><span style="font-weight:500;color:${color};">${ticker}</span> &nbsp;|&nbsp; ${rows}<span style="font-weight:500;color:${color};">05/27: Z ${todayPt[activePeriod].toFixed(2)} / D/P ${todayPt.dp.toFixed(2)}% ←</span><br>
+    return`<div class="trail-row"><span style="font-weight:500;color:${color};">${ticker}</span> &nbsp;|&nbsp; ${rows}<span style="font-weight:500;color:${color};">05/29: Z ${todayPt[activePeriod].toFixed(2)} / D/P ${todayPt.dp.toFixed(2)}% ←</span><br>
     <span style="font-size:10px;color:var(--color-text-tertiary);">Z-score move: ${signZ}${dz} (${zInterp}) · D/P move: ${signD}${dd}%</span></div>`;
   }).join('');
 }
