@@ -1,16 +1,16 @@
 
 <style>
-#search-box{width:200px;padding:5px 10px;font-size:12px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);}
+#search-box{width:180px;padding:5px 10px;font-size:12px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);}
 #search-box:focus{outline:none;border-color:var(--color-border-primary);}
 #search-box::placeholder{color:var(--color-text-tertiary);}
-.q-btn{font-size:11px;padding:4px 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-secondary);cursor:pointer;transition:background 0.15s;}
+.q-btn{font-size:11px;padding:4px 9px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-secondary);cursor:pointer;transition:background 0.15s;}
 .q-btn:hover{background:var(--color-background-secondary);}
 .q-btn.active{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary);font-weight:500;}
-.feat-btn{font-size:11px;padding:4px 11px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-secondary);cursor:pointer;display:flex;align-items:center;gap:5px;transition:background 0.15s;}
+.feat-btn{font-size:11px;padding:4px 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-secondary);cursor:pointer;display:flex;align-items:center;gap:5px;transition:background 0.15s;}
 .feat-btn:hover{background:var(--color-background-secondary);}
 .feat-btn.alert-on{background:#FAECE7;color:#993C1D;border-color:#D85A30;}
 .z-switch{display:flex;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);overflow:hidden;}
-.z-switch button{font-size:11px;padding:4px 11px;border:none;border-right:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);cursor:pointer;transition:background 0.15s;white-space:nowrap;}
+.z-switch button{font-size:11px;padding:4px 10px;border:none;border-right:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);cursor:pointer;transition:background 0.15s;white-space:nowrap;}
 .z-switch button:last-child{border-right:none;}
 .z-switch button:hover{background:var(--color-background-secondary);}
 .z-switch button.active{background:var(--color-background-secondary);color:var(--color-text-primary);font-weight:500;}
@@ -25,132 +25,114 @@
 .trail-row{padding:8px 14px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);margin-bottom:6px;}
 #alert-panel{display:none;margin-top:8px;padding:10px 14px;background:#FAECE7;border:0.5px solid #D85A30;border-radius:var(--border-radius-md);}
 .sep{width:0.5px;height:20px;background:var(--color-border-secondary);}
+#tm-bar{background:var(--color-background-secondary);border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-lg);padding:12px 16px;margin-bottom:10px;}
+#tm-bar .tm-label{font-size:11px;color:var(--color-text-secondary);font-weight:500;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+#date-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;background:var(--color-background-primary);border:0.5px solid var(--color-border-primary);border-radius:var(--border-radius-md);font-size:13px;font-weight:500;color:var(--color-text-primary);}
+#nav-btns{display:flex;gap:6px;}
+#nav-btns button{font-size:11px;padding:4px 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-secondary);cursor:pointer;}
+#nav-btns button:hover{background:var(--color-background-secondary);}
+#nav-btns button:disabled{opacity:0.35;cursor:default;}
+#pip-track{position:relative;margin-top:10px;}
+#pip-row{display:flex;justify-content:space-between;align-items:flex-start;padding:0 2px;}
+.pip-item{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;flex:1;}
+.pip-item .pip-dot{width:9px;height:9px;border-radius:50%;background:var(--color-border-secondary);transition:background 0.2s,transform 0.2s;}
+.pip-item.active .pip-dot{background:#1D9E75;transform:scale(1.45);}
+.pip-item .pip-lbl{font-size:9px;color:var(--color-text-tertiary);text-align:center;line-height:1.25;white-space:nowrap;transition:color 0.2s,font-weight 0.2s;}
+.pip-item.active .pip-lbl{color:#1D9E75;font-weight:500;}
+.pip-item:hover .pip-dot{background:#888780;}
+.pip-item:hover .pip-lbl{color:var(--color-text-secondary);}
 </style>
 
-<div style="padding-top:1rem;">
-  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:10px;">
-    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
-      <input id="search-box" type="text" placeholder="Search tickers…" aria-label="Search funds by ticker"/>
-      <div style="display:flex;gap:5px;flex-wrap:wrap;" role="group" aria-label="Filter by quadrant">
-        <button class="q-btn active" data-q="all">All</button>
-        <button class="q-btn" data-q="green" style="border-left:3px solid #1D9E75;">Disc+Z narrowing</button>
-        <button class="q-btn" data-q="blue" style="border-left:3px solid #378ADD;">Prem+Z narrowing</button>
-        <button class="q-btn" data-q="orange" style="border-left:3px solid #D85A30;">Disc+Z widening</button>
-        <button class="q-btn" data-q="gray" style="border-left:3px solid #888780;">Prem+Z widening</button>
+<div style="padding-top:0.75rem;">
+
+<div id="tm-bar">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+    <div class="tm-label"><i class="ti ti-clock-hour-4" aria-hidden="true" style="font-size:15px;"></i> Time machine <span style="font-weight:400;color:var(--color-text-tertiary);">— drag slider or click a date</span></div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div id="date-badge"><i class="ti ti-calendar" aria-hidden="true" style="font-size:14px;color:var(--color-text-tertiary);"></i><span id="badge-text">06/03/2026</span></div>
+      <div id="nav-btns">
+        <button id="btn-prev" aria-label="Previous day"><i class="ti ti-chevron-left"></i></button>
+        <button id="btn-next" aria-label="Next day"><i class="ti ti-chevron-right"></i></button>
       </div>
     </div>
-    <span style="font-size:11px;color:var(--color-text-tertiary);white-space:nowrap;">Fund data as of 06/03/2026</span>
   </div>
+  <input type="range" id="tm-slider" min="0" max="10" value="10" step="1" style="width:100%;"/>
+  <div id="pip-track">
+    <div id="pip-row"></div>
+  </div>
+</div>
 
-  <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px;">
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:10px;">
+  <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+    <input id="search-box" type="text" placeholder="Search tickers…" aria-label="Search funds by ticker"/>
+    <div style="display:flex;gap:5px;flex-wrap:wrap;" role="group" aria-label="Filter by quadrant">
+      <button class="q-btn active" data-q="all">All</button>
+      <button class="q-btn" data-q="green" style="border-left:3px solid #1D9E75;">Disc+Z↑</button>
+      <button class="q-btn" data-q="blue" style="border-left:3px solid #378ADD;">Prem+Z↑</button>
+      <button class="q-btn" data-q="orange" style="border-left:3px solid #D85A30;">Disc+Z↓</button>
+      <button class="q-btn" data-q="gray" style="border-left:3px solid #888780;">Prem+Z↓</button>
+    </div>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;">
     <div style="display:flex;align-items:center;gap:6px;">
-      <span style="font-size:11px;color:var(--color-text-secondary);">Z-Score:</span>
-      <div class="z-switch" role="group" aria-label="Z-score period selector">
+      <span style="font-size:11px;color:var(--color-text-secondary);">Z:</span>
+      <div class="z-switch" role="group">
         <button data-period="z3m">3M</button>
         <button data-period="z6m">6M</button>
         <button data-period="z1y" class="active">1Y</button>
       </div>
     </div>
     <div class="sep"></div>
-    <button class="feat-btn" id="alert-btn" aria-pressed="false"><i class="ti ti-bell-exclamation" aria-hidden="true"></i> Threshold alerts</button>
+    <button class="feat-btn" id="alert-btn" aria-pressed="false"><i class="ti ti-bell-exclamation" aria-hidden="true"></i> Alerts</button>
     <div id="threshold-row">
       <span>Flag &gt;</span>
-      <input type="range" id="thresh-slider" min="1" max="20" value="5" step="1" style="width:80px;"/>
+      <input type="range" id="thresh-slider" min="1" max="20" value="5" step="1" style="width:70px;"/>
       <span id="thresh-val" style="font-weight:500;min-width:28px;">5%</span>
-      <span>from 52-wk avg</span>
     </div>
   </div>
+</div>
 
-  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;padding:7px 12px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);font-size:11px;color:var(--color-text-secondary);align-items:center;">
-    <span style="font-weight:500;color:var(--color-text-primary);">Z-Score guide:</span>
-    <span><strong style="color:#D85A30;">More negative</strong> = discount wider than history → cheaper valuation</span>
-    <span style="color:var(--color-text-tertiary);">|</span>
-    <span><strong style="color:#1D9E75;">Less negative / positive</strong> = discount narrowing → momentum improving</span>
-    <span style="color:var(--color-text-tertiary);">|</span>
-    <span>Sweet spot: deeply negative z-score <em>trending less negative</em> (green quadrant)</span>
-  </div>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;padding:7px 12px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);font-size:11px;color:var(--color-text-secondary);align-items:center;">
+  <span style="font-weight:500;color:var(--color-text-primary);">Z-Score guide:</span>
+  <span><strong style="color:#D85A30;">More negative</strong> = cheaper vs history</span>
+  <span style="color:var(--color-text-tertiary);">|</span>
+  <span><strong style="color:#1D9E75;">Less negative / positive</strong> = momentum improving</span>
+  <span style="color:var(--color-text-tertiary);">|</span>
+  <span>Sweet spot: deeply negative z-score trending less negative (green)</span>
+</div>
 
-  <div style="display:flex;flex-wrap:wrap;gap:12px;font-size:11px;color:var(--color-text-secondary);margin-bottom:8px;">
-    <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#1D9E75;display:inline-block;"></span>Discount + Z narrowing</span>
-    <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#378ADD;display:inline-block;"></span>Premium + Z narrowing</span>
-    <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#D85A30;display:inline-block;"></span>Discount + Z widening</span>
-    <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#888780;display:inline-block;"></span>Premium + Z widening</span>
-    <span style="display:flex;align-items:center;gap:4px;"><span style="width:14px;height:2px;background:rgba(136,135,128,0.55);display:inline-block;"></span><span style="width:5px;height:5px;border-radius:1px;background:rgba(136,135,128,0.55);display:inline-block;"></span>52-wk avg</span>
-    <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;border:1.5px dashed #888;background:transparent;display:inline-block;"></span>Ghost trail</span>
-    <span style="font-size:10px;color:var(--color-text-tertiary);">Search tickers · Click dot for details</span>
-  </div>
+<div style="display:flex;flex-wrap:wrap;gap:10px;font-size:11px;color:var(--color-text-secondary);margin-bottom:8px;">
+  <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#1D9E75;display:inline-block;"></span>Discount + Z narrowing</span>
+  <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#378ADD;display:inline-block;"></span>Premium + Z narrowing</span>
+  <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#D85A30;display:inline-block;"></span>Discount + Z widening</span>
+  <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#888780;display:inline-block;"></span>Premium + Z widening</span>
+  <span style="display:flex;align-items:center;gap:4px;"><span style="width:14px;height:2px;background:rgba(136,135,128,0.55);display:inline-block;"></span>52-wk avg</span>
+  <span style="font-size:10px;color:var(--color-text-tertiary);">Search · Click dot for details</span>
+</div>
 
-  <div style="position:relative;width:100%;height:560px;">
-    <canvas id="qChart" role="img" aria-label="CEF scatter matrix 31 funds as of 06/03/2026."></canvas>
-  </div>
+<div style="position:relative;width:100%;height:520px;">
+  <canvas id="qChart" role="img" aria-label="CEF scatter matrix with time machine slider."></canvas>
+</div>
 
-  <div id="alert-panel" role="alert" aria-live="polite"></div>
-  <div id="trail-info"></div>
+<div id="alert-panel" role="alert" aria-live="polite"></div>
+<div id="trail-info"></div>
 
-  <div id="detail-panel" role="region" aria-live="polite">
-    <div style="display:flex;justify-content:space-between;align-items:center;">
-      <div>
-        <span id="dp-ticker" style="font-size:18px;font-weight:500;color:var(--color-text-primary);"></span>
-        <span id="dp-quadrant" style="font-size:11px;margin-left:8px;padding:2px 8px;border-radius:var(--border-radius-md);"></span>
-      </div>
-      <button id="dp-close" style="background:none;border:none;cursor:pointer;color:var(--color-text-secondary);font-size:18px;" aria-label="Close"><i class="ti ti-x"></i></button>
+<div id="detail-panel" role="region" aria-live="polite">
+  <div style="display:flex;justify-content:space-between;align-items:center;">
+    <div>
+      <span id="dp-ticker" style="font-size:18px;font-weight:500;color:var(--color-text-primary);"></span>
+      <span id="dp-quadrant" style="font-size:11px;margin-left:8px;padding:2px 8px;border-radius:var(--border-radius-md);"></span>
     </div>
-    <div class="dp-grid" id="dp-grid"></div>
+    <button id="dp-close" style="background:none;border:none;cursor:pointer;color:var(--color-text-secondary);font-size:18px;" aria-label="Close"><i class="ti ti-x"></i></button>
   </div>
+  <div class="dp-grid" id="dp-grid"></div>
+</div>
 
-  <div style="margin-top:14px;padding:12px 14px;border-top:0.5px solid var(--color-border-tertiary);">
-    <p style="font-size:11px;font-weight:500;color:var(--color-text-secondary);margin:0 0 4px 0;text-transform:uppercase;letter-spacing:0.04em;">Notable moves vs. prior session (06/02/2026)</p>
-    <p style="font-size:10px;color:var(--color-text-tertiary);margin:0 0 10px 0;">Z-score: more negative = cheaper vs history (valuation); less negative / positive = discount narrowing (momentum). Quadrant only changes when z-score OR D/P crosses zero.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;">
+<div id="commentary-box" style="margin-top:12px;padding:12px 14px;border-top:0.5px solid var(--color-border-tertiary);"></div>
 
-      <div style="display:flex;gap:8px;align-items:flex-start;">
-        <i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;"></i>
-        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
-          <strong>UTG</strong> — D/P turned negative to <strong>-0.87%</strong> (from +0.07%), z-score 1Y: <span style="color:#378ADD;font-weight:600;">+0.30</span> → <span style="color:#D85A30;font-weight:600;">-0.58</span>. Both signs flipped → <strong>quadrant change: blue → orange</strong>. Back below its historical average after only two sessions above zero.
-        </p>
-      </div>
-
-      <div style="display:flex;gap:8px;align-items:flex-start;">
-        <i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;"></i>
-        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
-          <strong>BUI</strong> — D/P turned negative to <strong>-0.87%</strong> (from +0.81%), z-score 1Y: <span style="color:#888780;font-weight:600;">-0.52</span> → <span style="color:#D85A30;font-weight:600;">-1.02</span>. D/P crossed zero → <strong>quadrant change: gray → orange</strong>. Now trading at a discount, adverse momentum.
-        </p>
-      </div>
-
-      <div style="display:flex;gap:8px;align-items:flex-start;">
-        <i class="ti ti-trending-down" style="font-size:15px;color:#888780;margin-top:1px;"></i>
-        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
-          <strong>ASGI</strong> — z-score crossed zero to <strong>-0.08</strong> (from +0.20), D/P: <span style="color:#888780;font-weight:600;">+0.94%</span> (positive). Z-score negative, D/P positive → <strong>quadrant change: blue → gray</strong>. Premium compressing toward its +1.25% historical average.
-        </p>
-      </div>
-
-      <div style="display:flex;gap:8px;align-items:flex-start;">
-        <i class="ti ti-trending-down" style="font-size:15px;color:#378ADD;margin-top:1px;"></i>
-        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
-          <strong>STK</strong> — premium compressed further to <strong>+0.63%</strong> (from +1.92%). Z-score 1Y: <span style="color:#378ADD;font-weight:600;">+1.99</span> → <span style="color:#378ADD;font-weight:600;">+1.49</span>. Z-score positive, D/P positive → <strong>blue quadrant</strong> (unchanged). Premium has now collapsed from +3.95% peak on 06/01 to +0.63% — near-par after two down sessions.
-        </p>
-      </div>
-
-      <div style="display:flex;gap:8px;align-items:flex-start;">
-        <i class="ti ti-trending-down" style="font-size:15px;color:#D85A30;margin-top:1px;"></i>
-        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
-          <strong>AIO</strong> — discount widened sharply to <strong>-11.38%</strong> (from -9.98%). Z-score 1Y: <span style="color:#D85A30;font-weight:600;">-0.82</span> → <span style="color:#D85A30;font-weight:600;">-1.04</span>. Z-score negative, D/P negative → <strong>orange quadrant</strong> (unchanged). Discount deepening; now nearly 6.3 points below its -5.06% historical average.
-        </p>
-      </div>
-
-      <div style="display:flex;gap:8px;align-items:flex-start;">
-        <i class="ti ti-trending-down" style="font-size:15px;color:#1D9E75;margin-top:1px;"></i>
-        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);line-height:1.6;">
-          <strong>ERH</strong> — discount widened to <strong>-6.98%</strong> (from -5.51%). Z-score 1Y: <span style="color:#1D9E75;font-weight:600;">+1.81</span> → <span style="color:#1D9E75;font-weight:600;">+0.73</span>. Z-score positive, D/P negative → <strong>green quadrant</strong> (unchanged). Momentum pulling back but still above zero; discount still narrower than -7.98% historical average.
-        </p>
-      </div>
-
-    </div>
-  </div>
-
-  <div style="margin-top:10px;padding:10px 14px;border-top:0.5px solid var(--color-border-tertiary);font-size:10.5px;color:var(--color-text-tertiary);line-height:1.55;">
-    <em>This chart is for informational purposes only and does not constitute investment advice. Data sourced from fund provider reports as of 06/03/2026. Past performance, distribution rates, and discount/premium levels are not guarantees of future results. Closed-end funds involve risks including the use of leverage, market volatility, and the possibility that shares may trade at a discount to net asset value. Please consult a qualified financial advisor before making any investment decisions.</em>
-  </div>
+<div style="margin-top:8px;padding:10px 14px;border-top:0.5px solid var(--color-border-tertiary);font-size:10.5px;color:var(--color-text-tertiary);line-height:1.55;">
+  <em>For informational purposes only. Not investment advice. Past performance is no guarantee of future results.</em>
+</div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
@@ -159,53 +141,26 @@
 <script>if(typeof ChartDataLabels==='undefined'){document.write('<scr'+'ipt src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"><\/scr'+'ipt>');}</script>
 <script>
 const TRAIL_COLORS=['#7F77DD','#D85A30','#1D9E75','#BA7517','#D4537E','#378ADD','#639922'];
-
-const HISTORY={
-  '05/13/2026':{ADX:{z3m:0.51,z6m:1.02,z1y:1.59,dp:-3.93},AIO:{z3m:-0.53,z6m:-0.89,z1y:-1.07,dp:-11.01},ASGI:{z3m:0.22,z6m:0.36,z1y:0.97,dp:4.32},BME:{z3m:0.22,z6m:0.82,z1y:1.51,dp:-4.00},BST:{z3m:-1.44,z6m:-1.73,z1y:-2.36,dp:-9.18},BUI:{z3m:-0.26,z6m:-0.80,z1y:-1.10,dp:-1.15},CSQ:{z3m:-0.57,z6m:-1.15,z1y:-1.37,dp:-10.07},DNP:{z3m:1.77,z6m:0.42,z1y:0.34,dp:6.57},EOS:{z3m:-1.62,z6m:-2.07,z1y:-1.51,dp:-9.83},ERH:{z3m:1.15,z6m:1.21,z1y:0.91,dp:-6.78},GDV:{z3m:0.41,z6m:0.77,z1y:1.10,dp:-9.96},GLU:{z3m:-0.75,z6m:-1.30,z1y:-1.24,dp:-2.57},GOF:{z3m:0.48,z6m:-0.39,z1y:-1.05,dp:5.80},NBXG:{z3m:-1.52,z6m:-1.75,z1y:-2.03,dp:-15.29},NIE:{z3m:-1.03,z6m:-1.56,z1y:-2.09,dp:-11.67},PCN:{z3m:-0.39,z6m:-0.98,z1y:-1.36,dp:4.03},PDI:{z3m:-0.15,z6m:0.23,z1y:-0.59,dp:8.15},PDO:{z3m:-1.09,z6m:-1.71,z1y:-2.19,dp:0.87},PDX:{z3m:1.12,z6m:0.92,z1y:-0.19,dp:-9.52},RFI:{z3m:-1.95,z6m:-2.43,z1y:-2.16,dp:-3.39},RLTY:{z3m:-0.58,z6m:-1.15,z1y:-1.45,dp:-8.40},RNP:{z3m:-1.24,z6m:-1.27,z1y:-1.34,dp:-4.80},RQI:{z3m:-0.22,z6m:0.58,z1y:1.11,dp:-1.05},STK:{z3m:2.64,z6m:3.31,z1y:1.00,dp:0.17},UTF:{z3m:2.37,z6m:1.13,z1y:-0.39,dp:-5.16},UTG:{z3m:1.23,z6m:0.94,z1y:0.79,dp:0.58}},
-  '05/22/2026':{ADX:{z3m:0.24,z6m:0.88,z1y:1.42,dp:-4.06},AIO:{z3m:-0.85,z6m:-1.03,z1y:-1.07,dp:-11.28},ASGI:{z3m:0.90,z6m:1.02,z1y:1.45,dp:6.55},BDJ:{z3m:-0.89,z6m:-1.46,z1y:-1.78,dp:-8.02},BME:{z3m:0.12,z6m:0.69,z1y:1.38,dp:-4.00},BST:{z3m:-1.26,z6m:-1.76,z1y:-2.35,dp:-8.29},BUI:{z3m:0.33,z6m:-0.27,z1y:-0.48,dp:0.90},CSQ:{z3m:-0.58,z6m:-1.13,z1y:-1.36,dp:-10.18},DNP:{z3m:1.33,z6m:0.34,z1y:0.23,dp:6.29},EOI:{z3m:-1.66,z6m:-1.70,z1y:-1.97,dp:-7.20},EOS:{z3m:-0.43,z6m:-1.05,z1y:-1.20,dp:-8.89},ERH:{z3m:-0.67,z6m:-0.92,z1y:-0.83,dp:-9.22},ETG:{z3m:-0.56,z6m:-1.23,z1y:-1.92,dp:-9.74},GDV:{z3m:0.35,z6m:0.69,z1y:1.11,dp:-9.98},GLU:{z3m:-1.37,z6m:-1.82,z1y:-2.00,dp:-4.64},GOF:{z3m:0.25,z6m:-0.63,z1y:-1.09,dp:3.64},HTD:{z3m:0.59,z6m:0.37,z1y:0.02,dp:-6.59},NBXG:{z3m:-1.56,z6m:-1.76,z1y:-2.03,dp:-15.46},NIE:{z3m:-0.59,z6m:-1.15,z1y:-1.68,dp:-11.38},NXG:{z3m:-1.60,z6m:-1.99,z1y:-2.38,dp:-9.38},PCN:{z3m:-0.82,z6m:-1.42,z1y:-1.69,dp:3.00},PDI:{z3m:-1.18,z6m:-0.85,z1y:-1.13,dp:5.97},PDO:{z3m:-0.67,z6m:-1.25,z1y:-1.66,dp:1.42},PDX:{z3m:1.65,z6m:1.53,z1y:0.19,dp:-8.81},RFI:{z3m:-2.47,z6m:-3.22,z1y:-2.81,dp:-5.37},RLTY:{z3m:-1.90,z6m:-2.32,z1y:-2.23,dp:-8.96},RNP:{z3m:-1.63,z6m:-1.82,z1y:-1.50,dp:-5.67},RQI:{z3m:-0.55,z6m:0.40,z1y:0.92,dp:-1.41},STK:{z3m:1.99,z6m:2.61,z1y:0.94,dp:-0.42},UTF:{z3m:0.85,z6m:0.08,z1y:-0.63,dp:-6.35},UTG:{z3m:-0.96,z6m:-1.20,z1y:-0.88,dp:-1.18}},
-  '05/29/2026':{ADX:{z3m:0.74,z6m:1.11,z1y:1.57,dp:-3.66},AIO:{z3m:1.99,z6m:0.88,z1y:-0.63,dp:-8.74},ASGI:{z3m:1.48,z6m:1.59,z1y:1.91,dp:8.12},BDJ:{z3m:-0.60,z6m:-1.21,z1y:-1.52,dp:-7.58},BME:{z3m:0.29,z6m:0.75,z1y:1.42,dp:-3.20},BST:{z3m:0.78,z6m:0.30,z1y:0.23,dp:-5.51},BUI:{z3m:0.45,z6m:-0.37,z1y:-0.61,dp:0.47},CSQ:{z3m:-0.01,z6m:-0.84,z1y:-1.20,dp:-9.90},DNP:{z3m:1.55,z6m:0.72,z1y:0.69,dp:7.50},EOI:{z3m:-1.03,z6m:-1.28,z1y:-1.59,dp:-6.30},EOS:{z3m:-0.57,z6m:-1.19,z1y:-1.23,dp:-9.17},ERH:{z3m:0.52,z6m:0.59,z1y:0.27,dp:-7.64},ETG:{z3m:-0.17,z6m:-1.00,z1y:-1.65,dp:-9.33},GDV:{z3m:0.22,z6m:0.55,z1y:0.98,dp:-10.07},GLU:{z3m:-0.86,z6m:-1.39,z1y:-1.53,dp:-3.63},GOF:{z3m:-0.01,z6m:-0.80,z1y:-1.11,dp:3.90},HTD:{z3m:2.40,z6m:2.64,z1y:2.09,dp:-3.92},NBXG:{z3m:1.21,z6m:0.52,z1y:-0.39,dp:-12.89},NIE:{z3m:-0.96,z6m:-1.50,z1y:-2.07,dp:-11.86},NXG:{z3m:-0.67,z6m:-1.23,z1y:-1.55,dp:-6.83},PCN:{z3m:-0.60,z6m:-1.23,z1y:-1.55,dp:3.15},PDI:{z3m:-1.29,z6m:-1.08,z1y:-1.23,dp:5.42},PDO:{z3m:-0.28,z6m:-0.88,z1y:-1.25,dp:1.96},PDX:{z3m:1.58,z6m:1.63,z1y:0.31,dp:-8.57},RFI:{z3m:-1.56,z6m:-2.15,z1y:-2.25,dp:-4.66},RLTY:{z3m:0.18,z6m:-0.56,z1y:-1.06,dp:-8.06},RNP:{z3m:-0.19,z6m:-0.40,z1y:-0.99,dp:-3.97},RQI:{z3m:1.59,z6m:0.90,z1y:1.50,dp:-0.07},STK:{z3m:2.83,z6m:3.88,z1y:2.54,dp:3.36},UTF:{z3m:2.43,z6m:1.77,z1y:-0.11,dp:-4.16},UTG:{z3m:0.61,z6m:0.37,z1y:0.37,dp:0.14}},
-  '06/02/2026':{ADX:{z3m:0.68,z6m:1.07,z1y:1.54,dp:-3.68},AIO:{z3m:0.61,z6m:-0.03,z1y:-0.82,dp:-9.98},ASGI:{z3m:-0.62,z6m:-0.68,z1y:0.20,dp:1.93},BDJ:{z3m:-0.61,z6m:-1.20,z1y:-1.52,dp:-7.81},BME:{z3m:1.53,z6m:1.63,z1y:2.15,dp:-2.49},BST:{z3m:-0.66,z6m:-1.16,z1y:-1.56,dp:-8.46},BUI:{z3m:0.54,z6m:-0.28,z1y:-0.52,dp:0.81},CSQ:{z3m:-1.07,z6m:-1.31,z1y:-1.45,dp:-10.59},DNP:{z3m:1.85,z6m:1.06,z1y:1.13,dp:8.69},EOI:{z3m:-1.30,z6m:-1.54,z1y:-1.77,dp:-6.99},EOS:{z3m:-0.98,z6m:-1.48,z1y:-1.33,dp:-9.69},ERH:{z3m:2.03,z6m:2.57,z1y:1.81,dp:-5.51},ETG:{z3m:-0.73,z6m:-1.26,z1y:-1.95,dp:-10.08},GDV:{z3m:0.24,z6m:0.57,z1y:1.00,dp:-10.05},GLU:{z3m:-0.66,z6m:-1.23,z1y:-1.34,dp:-3.21},GOF:{z3m:-0.33,z6m:-0.93,z1y:-1.16,dp:3.34},HTD:{z3m:2.31,z6m:2.67,z1y:2.21,dp:-3.69},NBXG:{z3m:1.12,z6m:0.48,z1y:-0.42,dp:-12.95},NIE:{z3m:-1.53,z6m:-1.94,z1y:-2.54,dp:-12.35},NXG:{z3m:-0.29,z6m:-0.91,z1y:-1.19,dp:-5.61},PCN:{z3m:-1.03,z6m:-1.51,z1y:-1.76,dp:2.53},PDI:{z3m:-1.78,z6m:-1.51,z1y:-1.47,dp:4.45},PDO:{z3m:-0.33,z6m:-0.91,z1y:-1.30,dp:1.88},PDX:{z3m:1.91,z6m:2.09,z1y:0.65,dp:-7.94},RFI:{z3m:-1.34,z6m:-1.90,z1y:-2.09,dp:-4.37},RLTY:{z3m:0.13,z6m:-0.61,z1y:-1.09,dp:-8.13},RNP:{z3m:-0.32,z6m:-0.54,z1y:-1.04,dp:-4.20},RQI:{z3m:1.58,z6m:0.87,z1y:1.48,dp:-0.08},STK:{z3m:1.97,z6m:2.82,z1y:1.99,dp:1.92},UTF:{z3m:2.04,z6m:1.57,z1y:-0.14,dp:-4.34},UTG:{z3m:0.53,z6m:0.29,z1y:0.30,dp:0.07}},
-  '06/03/2026':{ADX:{z3m:0.50,z6m:0.98,z1y:1.47,dp:-3.78},AIO:{z3m:-0.91,z6m:-1.09,z1y:-1.04,dp:-11.38},ASGI:{z3m:-0.93,z6m:-1.03,z1y:-0.08,dp:0.94},BDJ:{z3m:-1.35,z6m:-1.69,z1y:-2.17,dp:-8.19},BME:{z3m:1.44,z6m:1.57,z1y:2.09,dp:-2.55},BST:{z3m:-0.71,z6m:-1.22,z1y:-1.64,dp:-8.60},BUI:{z3m:0.06,z6m:-0.69,z1y:-1.02,dp:-0.87},CSQ:{z3m:-1.39,z6m:-1.43,z1y:-1.52,dp:-10.79},DNP:{z3m:1.60,z6m:0.90,z1y:0.92,dp:8.14},EOI:{z3m:-1.25,z6m:-1.53,z1y:-1.74,dp:-6.95},EOS:{z3m:-0.55,z6m:-1.16,z1y:-1.21,dp:-9.25},ERH:{z3m:0.94,z6m:1.18,z1y:0.73,dp:-6.98},ETG:{z3m:-0.16,z6m:-0.97,z1y:-1.62,dp:-9.43},GDV:{z3m:-0.46,z6m:-0.24,z1y:0.17,dp:-10.62},GLU:{z3m:-1.13,z6m:-1.55,z1y:-1.78,dp:-4.36},GOF:{z3m:-0.80,z6m:-1.14,z1y:-1.22,dp:2.50},HTD:{z3m:1.31,z6m:1.54,z1y:1.12,dp:-5.08},NBXG:{z3m:0.55,z6m:0.02,z1y:-0.75,dp:-13.48},NIE:{z3m:-1.48,z6m:-1.89,z1y:-2.50,dp:-12.34},NXG:{z3m:-0.78,z6m:-1.30,z1y:-1.65,dp:-7.34},PCN:{z3m:-1.11,z6m:-1.53,z1y:-1.77,dp:2.44},PDI:{z3m:-1.54,z6m:-1.35,z1y:-1.37,dp:4.76},PDO:{z3m:-0.14,z6m:-0.74,z1y:-1.10,dp:2.18},PDX:{z3m:1.77,z6m:1.96,z1y:0.60,dp:-8.02},RFI:{z3m:-1.34,z6m:-1.90,z1y:-2.09,dp:-4.38},RLTY:{z3m:0.13,z6m:-0.61,z1y:-1.09,dp:-7.96},RNP:{z3m:-0.32,z6m:-0.54,z1y:-1.04,dp:-3.97},RQI:{z3m:1.58,z6m:0.87,z1y:1.48,dp:0.00},STK:{z3m:1.39,z6m:2.10,z1y:1.49,dp:0.63},UTF:{z3m:2.04,z6m:1.57,z1y:-0.14,dp:-4.01},UTG:{z3m:-0.53,z6m:-0.80,z1y:-0.58,dp:-0.87}}
-};
-const DATES=['05/13/2026','05/22/2026','05/29/2026','06/02/2026','06/03/2026'];
-const TODAY='06/03/2026';
-
-const ALL_FUNDS=[
-  {ticker:'ADX', z3m:0.50, z6m:0.98, z1y:1.47, dp:-3.78, avg52:-6.53, yield:7.55, lev:'0.00%', nav:26.43,price:25.43,ytdP:'13.75%',ytdN:'11.22%',ret1P:'35.19%',ret1N:'29.00%', freq:'Quarterly'},
-  {ticker:'AIO', z3m:-0.91,z6m:-1.09,z1y:-1.04,dp:-11.38,avg52:-5.06, yield:6.57, lev:'10.88%',nav:30.92,price:27.43,ytdP:'27.70%',ytdN:'27.50%',ret1P:'29.45%',ret1N:'51.84%', freq:'Monthly'},
-  {ticker:'ASGI',z3m:-0.93,z6m:-1.03,z1y:-0.08,dp:0.94,  avg52:1.25,  yield:12.13,lev:'0.82%', nav:22.32,price:22.44,ytdP:'13.29%',ytdN:'9.81%', ret1P:'39.72%',ret1N:'19.79%', freq:'Monthly'},
-  {ticker:'BDJ', z3m:-1.35,z6m:-1.69,z1y:-2.17,dp:-8.19, avg52:-5.71, yield:8.08, lev:'0.12%', nav:10.05,price:9.19, ytdP:'1.03%', ytdN:'6.19%', ret1P:'18.84%',ret1N:'19.82%', freq:'Monthly'},
-  {ticker:'BME', z3m:1.44, z6m:1.57, z1y:2.09, dp:-2.55, avg52:-6.39, yield:8.02, lev:'0.17%', nav:40.36,price:39.21,ytdP:'1.03%', ytdN:'-2.50%',ret1P:'21.49%',ret1N:'16.17%', freq:'Monthly'},
-  {ticker:'BST', z3m:-0.71,z6m:-1.22,z1y:-1.64,dp:-8.60, avg52:-6.16, yield:6.02, lev:'0.09%', nav:54.53,price:49.09,ytdP:'25.97%',ytdN:'27.12%',ret1P:'50.74%',ret1N:'51.86%', freq:'Monthly'},
-  {ticker:'BUI', z3m:0.06, z6m:-0.69,z1y:-1.02,dp:-0.87, avg52:2.53,  yield:6.02, lev:'0.11%', nav:27.60,price:27.11,ytdP:'12.75%',ytdN:'17.26%',ret1P:'29.69%',ret1N:'28.20%', freq:'Monthly'},
-  {ticker:'CSQ', z3m:-1.39,z6m:-1.43,z1y:-1.52,dp:-10.79,avg52:-6.99, yield:7.17, lev:'26.96%',nav:22.98,price:20.50,ytdP:'10.47%',ytdN:'14.79%',ret1P:'28.37%',ret1N:'39.40%', freq:'Monthly'},
-  {ticker:'DNP', z3m:1.60, z6m:0.90, z1y:0.92, dp:8.14,  avg52:5.69,  yield:7.33, lev:'23.02%',nav:9.83, price:10.64,ytdP:'9.76%', ytdN:'11.42%',ret1P:'17.37%',ret1N:'16.21%', freq:'Monthly'},
-  {ticker:'EOI', z3m:-1.25,z6m:-1.53,z1y:-1.74,dp:-6.95, avg52:-1.93, yield:8.11, lev:'--',    nav:21.43,price:19.79,ytdP:'0.97%', ytdN:'4.94%', ret1P:'8.70%', ret1N:'17.71%', freq:'Monthly'},
-  {ticker:'EOS', z3m:-0.55,z6m:-1.16,z1y:-1.21,dp:-9.25, avg52:-4.48, yield:8.03, lev:'--',    nav:25.31,price:22.77,ytdP:'1.56%', ytdN:'6.77%', ret1P:'8.45%', ret1N:'20.97%', freq:'Monthly'},
-  {ticker:'ERH', z3m:0.94, z6m:1.18, z1y:0.73, dp:-6.98, avg52:-7.98, yield:8.81, lev:'21.04%',nav:12.75,price:11.88,ytdP:'5.20%', ytdN:'4.06%', ret1P:'14.82%',ret1N:'11.24%', freq:'Monthly'},
-  {ticker:'ETG', z3m:-0.16,z6m:-0.97,z1y:-1.62,dp:-9.43, avg52:-6.13, yield:6.72, lev:'15.78%',nav:25.88,price:23.10,ytdP:'3.96%', ytdN:'11.22%',ret1P:'25.17%',ret1N:'31.16%', freq:'Monthly'},
-  {ticker:'GDV', z3m:-0.46,z6m:-0.24,z1y:0.17, dp:-10.62,avg52:-10.74,yield:6.20, lev:'14.40%',nav:32.66,price:29.02,ytdP:'8.09%', ytdN:'8.27%', ret1P:'25.38%',ret1N:'21.82%', freq:'Monthly'},
-  {ticker:'GLU', z3m:-1.13,z6m:-1.55,z1y:-1.78,dp:-4.36, avg52:0.22,  yield:6.85, lev:'17.67%',nav:20.17,price:19.27,ytdP:'3.52%', ytdN:'12.80%',ret1P:'24.14%',ret1N:'28.16%', freq:'Monthly'},
-  {ticker:'GOF', z3m:-0.80,z6m:-1.14,z1y:-1.22,dp:2.50,  avg52:15.93, yield:19.79,lev:'11.43%',nav:10.78,price:11.04,ytdP:'-5.73%',ytdN:'2.79%', ret1P:'-9.37%',ret1N:'14.54%', freq:'Monthly'},
-  {ticker:'HTD', z3m:1.31, z6m:1.54, z1y:1.12, dp:-5.08, avg52:-6.51, yield:7.51, lev:'31.24%',nav:26.58,price:25.24,ytdP:'11.84%',ytdN:'7.72%', ret1P:'20.20%',ret1N:'15.03%', freq:'Monthly'},
-  {ticker:'NBXG',z3m:0.55, z6m:0.02, z1y:-0.75,dp:-13.48,avg52:-12.29,yield:8.56, lev:'--',    nav:19.44,price:16.61,ytdP:'20.60%',ytdN:'19.73%',ret1P:'38.70%',ret1N:'39.04%', freq:'Monthly'},
-  {ticker:'NIE', z3m:-1.48,z6m:-1.89,z1y:-2.50,dp:-12.34,avg52:-9.99, yield:7.39, lev:'--',    nav:30.87,price:27.07,ytdP:'10.30%',ytdN:'13.30%',ret1P:'28.73%',ret1N:'32.12%', freq:'Quarterly'},
-  {ticker:'NXG', z3m:-0.78,z6m:-1.30,z1y:-1.65,dp:-7.34, avg52:-1.31, yield:12.19,lev:'22.00%',nav:63.75,price:59.69,ytdP:'20.94%',ytdN:'37.66%',ret1P:'40.14%',ret1N:'55.01%', freq:'Monthly'},
-  {ticker:'PCN', z3m:-1.11,z6m:-1.53,z1y:-1.77,dp:2.44,  avg52:6.98,  yield:11.58,lev:'5.88%', nav:11.49,price:11.66,ytdP:'-2.84%',ytdN:'0.72%', ret1P:'3.73%', ret1N:'9.37%',  freq:'Monthly'},
-  {ticker:'PDI', z3m:-1.54,z6m:-1.35,z1y:-1.37,dp:4.76,  avg52:10.01, yield:15.82,lev:'31.94%',nav:15.96,price:16.73,ytdP:'1.03%', ytdN:'0.63%', ret1P:'4.36%', ret1N:'10.63%', freq:'Monthly'},
-  {ticker:'PDO', z3m:-0.14,z6m:-0.74,z1y:-1.10,dp:2.18,  avg52:3.92,  yield:11.72,lev:'34.55%',nav:12.82,price:13.00,ytdP:'-0.21%',ytdN:'0.38%', ret1P:'10.22%',ret1N:'10.50%', freq:'Monthly'},
-  {ticker:'PDX', z3m:1.77, z6m:1.96, z1y:0.60, dp:-8.02, avg52:-9.15, yield:7.39, lev:'22.60%',nav:23.56,price:21.52,ytdP:'18.24%',ytdN:'14.21%',ret1P:'15.12%',ret1N:'13.18%', freq:'Monthly'},
-  {ticker:'RFI', z3m:-1.34,z6m:-1.90,z1y:-2.09,dp:-4.38, avg52:0.79,  yield:8.62, lev:'0.04%', nav:11.66,price:11.14,ytdP:'5.49%', ytdN:'10.23%',ret1P:'0.79%', ret1N:'10.38%', freq:'Monthly'},
-  {ticker:'RLTY',z3m:0.13, z6m:-0.61,z1y:-1.09,dp:-7.96, avg52:-6.44, yield:8.52, lev:'33.34%',nav:16.86,price:15.49,ytdP:'10.96%',ytdN:'12.49%',ret1P:'13.78%',ret1N:'16.04%', freq:'Monthly'},
-  {ticker:'RNP', z3m:-0.32,z6m:-0.54,z1y:-1.04,dp:-3.97, avg52:-0.02, yield:7.85, lev:'30.19%',nav:21.68,price:20.78,ytdP:'9.45%', ytdN:'9.61%', ret1P:'4.62%', ret1N:'12.39%', freq:'Monthly'},
-  {ticker:'RQI', z3m:1.58, z6m:0.87, z1y:1.48, dp:0.00,  avg52:-3.06, yield:8.24, lev:'28.71%',nav:13.12,price:13.11,ytdP:'21.01%',ytdN:'14.33%',ret1P:'17.54%',ret1N:'12.99%', freq:'Monthly'},
-  {ticker:'STK', z3m:1.39, z6m:2.10, z1y:1.49, dp:0.63,  avg52:-2.90, yield:3.21, lev:'--',    nav:57.32,price:57.57,ytdP:'54.80%',ytdN:'44.65%',ret1P:'111.60%',ret1N:'112.64%',freq:'Quarterly'},
-  {ticker:'UTF', z3m:2.04, z6m:1.57, z1y:-0.14,dp:-4.01, avg52:-3.70, yield:7.39, lev:'27.81%',nav:28.09,price:26.80,ytdP:'15.15%',ytdN:'12.94%',ret1P:'10.64%',ret1N:'20.12%', freq:'Monthly'},
-  {ticker:'UTG', z3m:-0.53,z6m:-0.80,z1y:-0.58,dp:-0.87, avg52:-0.25, yield:5.73, lev:'18.38%',nav:42.29,price:41.92,ytdP:'18.34%',ytdN:'19.47%',ret1P:'30.60%',ret1N:'29.90%', freq:'Monthly'},
-];
-
 const PERIOD_LABELS={z3m:'Z-Score 3M',z6m:'Z-Score 6M',z1y:'Z-Score 1Y'};
-const ANIM_DURATION=500;
+const ANIM_DURATION=400;
+
+const ALL_DATES=['05/13/2026','05/20/2026','05/22/2026','05/25/2026','05/26/2026','05/27/2026','05/28/2026','05/29/2026','06/01/2026','06/02/2026','06/03/2026'];
+
+const SNAPSHOT={
+  '05/13/2026':{ADX:{z3m:0.51,z6m:1.02,z1y:1.59,dp:-3.93,avg52:-6.62,yield:7.62,lev:'0.00%',nav:26.23,price:25.19,freq:'Quarterly'},AIO:{z3m:-0.53,z6m:-0.89,z1y:-1.07,dp:-11.01,avg52:-4.76,yield:6.83,lev:'11.26%',nav:29.76,price:26.35,freq:'Monthly'},ASGI:{z3m:0.22,z6m:0.36,z1y:0.97,dp:4.32,avg52:0.95,yield:11.39,lev:'0.81%',nav:22.64,price:24.23,freq:'Monthly'},BDJ:{z3m:-0.92,z6m:-1.40,z1y:-1.70,dp:-7.95,avg52:-5.67,yield:8.07,lev:'0.12%',nav:10.02,price:9.22,freq:'Monthly'},BME:{z3m:0.22,z6m:0.82,z1y:1.51,dp:-4.00,avg52:-6.48,yield:7.93,lev:'0.17%',nav:41.09,price:39.66,freq:'Monthly'},BST:{z3m:-1.44,z6m:-1.73,z1y:-2.36,dp:-9.18,avg52:-6.09,yield:6.27,lev:'0.10%',nav:51.86,price:47.83,freq:'Monthly'},BUI:{z3m:-0.26,z6m:-0.80,z1y:-1.10,dp:-1.15,avg52:2.50,yield:5.80,lev:'0.11%',nav:28.07,price:28.15,freq:'Monthly'},CSQ:{z3m:-0.57,z6m:-1.15,z1y:-1.37,dp:-10.07,avg52:-6.80,yield:7.20,lev:'27.24%',nav:22.85,price:20.42,freq:'Monthly'},DNP:{z3m:1.77,z6m:0.42,z1y:0.34,dp:6.57,avg52:5.67,yield:7.16,lev:'22.41%',nav:10.18,price:10.89,freq:'Monthly'},EOI:{z3m:-1.80,z6m:-1.75,z1y:-2.03,dp:-7.16,avg52:-1.77,yield:8.10,lev:'--',nav:21.37,price:19.82,freq:'Monthly'},EOS:{z3m:-1.62,z6m:-2.07,z1y:-1.51,dp:-9.83,avg52:-4.27,yield:8.05,lev:'--',nav:25.06,price:22.70,freq:'Monthly'},ERH:{z3m:1.15,z6m:1.21,z1y:0.91,dp:-6.78,avg52:-8.04,yield:8.70,lev:'20.53%',nav:13.15,price:12.03,freq:'Monthly'},ETG:{z3m:-0.20,z6m:-0.95,z1y:-1.60,dp:-9.33,avg52:-6.04,yield:6.73,lev:'15.97%',nav:25.51,price:23.04,freq:'Monthly'},GDV:{z3m:0.41,z6m:0.77,z1y:1.10,dp:-9.96,avg52:-10.78,yield:6.15,lev:'14.42%',nav:32.61,price:29.28,freq:'Monthly'},GLU:{z3m:-0.75,z6m:-1.30,z1y:-1.24,dp:-2.57,avg52:0.28,yield:6.73,lev:'17.53%',nav:20.37,price:19.60,freq:'Monthly'},GOF:{z3m:0.48,z6m:-0.39,z1y:-1.05,dp:5.80,avg52:16.41,yield:19.85,lev:'11.47%',nav:10.73,price:11.01,freq:'Monthly'},HTD:{z3m:0.84,z6m:0.69,z1y:0.33,dp:-6.49,avg52:-6.58,yield:7.41,lev:'30.85%',nav:27.07,price:25.58,freq:'Monthly'},NBXG:{z3m:-1.52,z6m:-1.75,z1y:-2.03,dp:-15.29,avg52:-12.26,yield:8.85,lev:'--',nav:18.67,price:16.28,freq:'Monthly'},NIE:{z3m:-1.03,z6m:-1.56,z1y:-2.09,dp:-11.67,avg52:-9.92,yield:7.50,lev:'--',nav:30.40,price:26.65,freq:'Quarterly'},NXG:{z3m:-0.47,z6m:-1.08,z1y:-1.38,dp:-6.28,avg52:-1.13,yield:11.08,lev:'21.92%',nav:64.03,price:58.48,freq:'Monthly'},PCN:{z3m:-0.39,z6m:-0.98,z1y:-1.36,dp:4.03,avg52:7.09,yield:11.55,lev:'5.91%',nav:11.41,price:11.69,freq:'Monthly'},PDI:{z3m:-0.15,z6m:0.23,z1y:-0.59,dp:8.15,avg52:10.12,yield:15.88,lev:'32.12%',nav:15.83,price:16.66,freq:'Monthly'},PDO:{z3m:-1.09,z6m:-1.71,z1y:-2.19,dp:0.87,avg52:3.94,yield:11.88,lev:'34.74%',nav:12.71,price:12.92,freq:'Monthly'},PDX:{z3m:1.12,z6m:0.92,z1y:-0.19,dp:-9.52,avg52:-9.16,yield:7.38,lev:'22.47%',nav:23.73,price:21.70,freq:'Monthly'},RFI:{z3m:-1.95,z6m:-2.43,z1y:-2.16,dp:-3.39,avg52:0.98,yield:8.52,lev:'0.04%',nav:11.91,price:11.27,freq:'Monthly'},RLTY:{z3m:-0.58,z6m:-1.15,z1y:-1.45,dp:-8.40,avg52:-6.39,yield:8.33,lev:'32.65%',nav:17.39,price:15.85,freq:'Monthly'},RNP:{z3m:-1.24,z6m:-1.27,z1y:-1.34,dp:-4.80,avg52:0.15,yield:7.84,lev:'29.74%',nav:22.15,price:20.81,freq:'Monthly'},RQI:{z3m:-0.22,z6m:0.58,z1y:1.11,dp:-1.05,avg52:-3.14,yield:8.08,lev:'27.99%',nav:13.59,price:13.37,freq:'Monthly'},STK:{z3m:2.64,z6m:3.31,z1y:1.00,dp:0.17,avg52:-2.86,yield:3.32,lev:'--',nav:54.08,price:55.78,freq:'Quarterly'},UTF:{z3m:2.37,z6m:1.13,z1y:-0.39,dp:-5.16,avg52:-3.50,yield:7.31,lev:'27.35%',nav:28.74,price:27.09,freq:'Monthly'},UTG:{z3m:1.23,z6m:0.94,z1y:0.79,dp:0.58,avg52:-0.25,yield:5.60,lev:'18.13%',nav:43.58,price:42.87,freq:'Monthly'}},
+  '05/20/2026':{ADX:{z3m:0.04,z6m:0.79,z1y:1.37,dp:-4.21,avg52:-6.61,yield:7.64,lev:'0.00%',nav:26.22,price:25.13,freq:'Quarterly'},AIO:{z3m:-0.13,z6m:-0.59,z1y:-0.98,dp:-10.61,avg52:-4.81,yield:6.68,lev:'11.31%',nav:29.60,price:26.94,freq:'Monthly'},ASGI:{z3m:0.90,z6m:1.02,z1y:1.44,dp:6.23,avg52:1.01,yield:11.40,lev:'0.81%',nav:22.58,price:24.21,freq:'Monthly'},BDJ:{z3m:-1.18,z6m:-1.73,z1y:-2.12,dp:-8.46,avg52:-5.68,yield:8.11,lev:'0.12%',nav:10.02,price:9.16,freq:'Monthly'},BME:{z3m:0.70,z6m:1.08,z1y:1.74,dp:-3.49,avg52:-6.46,yield:7.93,lev:'0.17%',nav:41.18,price:39.66,freq:'Monthly'},BST:{z3m:-1.74,z6m:-2.24,z1y:-2.99,dp:-10.38,avg52:-6.10,yield:6.23,lev:'0.10%',nav:51.84,price:48.14,freq:'Monthly'},BUI:{z3m:0.03,z6m:-0.56,z1y:-0.82,dp:-0.25,avg52:2.51,yield:5.84,lev:'0.11%',nav:27.95,price:27.95,freq:'Monthly'},CSQ:{z3m:-0.64,z6m:-1.18,z1y:-1.38,dp:-10.22,avg52:-6.83,yield:7.16,lev:'27.24%',nav:22.85,price:20.52,freq:'Monthly'},DNP:{z3m:1.16,z6m:0.15,z1y:-0.02,dp:5.62,avg52:5.67,yield:7.19,lev:'22.51%',nav:10.12,price:10.85,freq:'Monthly'},EOI:{z3m:-1.80,z6m:-1.75,z1y:-2.03,dp:-7.16,avg52:-1.80,yield:8.09,lev:'--',nav:21.35,price:19.84,freq:'Monthly'},EOS:{z3m:-1.92,z6m:-2.35,z1y:-1.65,dp:-10.51,avg52:-4.31,yield:8.05,lev:'--',nav:25.08,price:22.69,freq:'Monthly'},ERH:{z3m:-0.67,z6m:-0.94,z1y:-0.82,dp:-9.21,avg52:-8.03,yield:8.73,lev:'20.62%',nav:13.08,price:11.99,freq:'Monthly'},ETG:{z3m:-0.28,z6m:-1.06,z1y:-1.71,dp:-9.26,avg52:-6.06,yield:6.74,lev:'15.93%',nav:25.59,price:23.03,freq:'Monthly'},GDV:{z3m:0.77,z6m:1.20,z1y:1.60,dp:-9.64,avg52:-10.77,yield:6.13,lev:'14.45%',nav:32.53,price:29.34,freq:'Monthly'},GLU:{z3m:-1.19,z6m:-1.70,z1y:-1.81,dp:-4.06,avg52:0.27,yield:6.75,lev:'17.56%',nav:20.33,price:19.56,freq:'Monthly'},GOF:{z3m:0.25,z6m:-0.63,z1y:-1.10,dp:4.78,avg52:16.31,yield:19.87,lev:'11.46%',nav:10.74,price:11.00,freq:'Monthly'},HTD:{z3m:1.75,z6m:1.83,z1y:1.31,dp:-4.93,avg52:-6.57,yield:7.39,lev:'30.93%',nav:26.97,price:25.64,freq:'Monthly'},NBXG:{z3m:0.08,z6m:-0.44,z1y:-1.06,dp:-13.95,avg52:-12.27,yield:8.91,lev:'--',nav:18.78,price:16.16,freq:'Monthly'},NIE:{z3m:-1.51,z6m:-1.97,z1y:-2.56,dp:-12.29,avg52:-9.93,yield:7.49,lev:'--',nav:30.44,price:26.70,freq:'Quarterly'},NXG:{z3m:-0.82,z6m:-1.37,z1y:-1.70,dp:-7.33,avg52:-1.16,yield:11.09,lev:'22.19%',nav:63.04,price:58.42,freq:'Monthly'},PCN:{z3m:-0.67,z6m:-1.29,z1y:-1.59,dp:3.06,avg52:7.07,yield:11.47,lev:'5.91%',nav:11.42,price:11.77,freq:'Monthly'},PDI:{z3m:-1.54,z6m:-1.27,z1y:-1.34,dp:5.05,avg52:10.10,yield:15.89,lev:'32.09%',nav:15.85,price:16.65,freq:'Monthly'},PDO:{z3m:-0.21,z6m:-0.81,z1y:-1.16,dp:2.12,avg52:3.94,yield:11.81,lev:'34.71%',nav:12.73,price:13.00,freq:'Monthly'},PDX:{z3m:1.56,z6m:1.58,z1y:0.26,dp:-8.66,avg52:-9.15,yield:7.44,lev:'22.60%',nav:23.56,price:21.52,freq:'Monthly'},RFI:{z3m:-2.00,z6m:-2.65,z1y:-2.57,dp:-5.29,avg52:0.95,yield:8.50,lev:'0.04%',nav:11.92,price:11.29,freq:'Monthly'},RLTY:{z3m:-0.64,z6m:-1.23,z1y:-1.51,dp:-8.72,avg52:-6.40,yield:8.35,lev:'32.76%',nav:17.31,price:15.80,freq:'Monthly'},RNP:{z3m:-1.48,z6m:-1.75,z1y:-1.48,dp:-5.84,avg52:0.12,yield:7.85,lev:'29.80%',nav:22.09,price:20.80,freq:'Monthly'},RQI:{z3m:0.40,z6m:0.57,z1y:1.15,dp:-0.82,avg52:-3.12,yield:8.12,lev:'28.08%',nav:13.53,price:13.38,freq:'Monthly'},STK:{z3m:3.00,z6m:4.09,z1y:2.47,dp:3.25,avg52:-2.87,yield:3.35,lev:'--',nav:53.51,price:55.25,freq:'Quarterly'},UTF:{z3m:1.65,z6m:0.91,z1y:-0.38,dp:-5.38,avg52:-3.54,yield:7.31,lev:'27.44%',nav:28.62,price:27.08,freq:'Monthly'},UTG:{z3m:-0.63,z6m:-0.93,z1y:-0.66,dp:-0.95,avg52:-0.25,yield:5.61,lev:'18.26%',nav:43.19,price:42.78,freq:'Monthly'}},
+  '05/22/2026':{ADX:{z3m:0.24,z6m:0.88,z1y:1.42,dp:-4.06,avg52:-6.61,yield:7.64,lev:'0.00%',nav:26.22,price:25.13,freq:'Quarterly'},AIO:{z3m:-0.85,z6m:-1.03,z1y:-1.07,dp:-11.28,avg52:-4.81,yield:6.68,lev:'11.31%',nav:29.60,price:26.94,freq:'Monthly'},ASGI:{z3m:0.90,z6m:1.02,z1y:1.45,dp:6.55,avg52:1.01,yield:11.40,lev:'0.81%',nav:22.58,price:24.21,freq:'Monthly'},BDJ:{z3m:-0.89,z6m:-1.46,z1y:-1.78,dp:-8.02,avg52:-5.68,yield:8.11,lev:'0.12%',nav:10.02,price:9.16,freq:'Monthly'},BME:{z3m:0.12,z6m:0.69,z1y:1.38,dp:-4.00,avg52:-6.46,yield:7.93,lev:'0.17%',nav:41.18,price:39.66,freq:'Monthly'},BST:{z3m:-1.26,z6m:-1.76,z1y:-2.35,dp:-8.29,avg52:-6.10,yield:6.23,lev:'0.10%',nav:51.84,price:48.14,freq:'Monthly'},BUI:{z3m:0.33,z6m:-0.27,z1y:-0.48,dp:0.90,avg52:2.51,yield:5.84,lev:'0.11%',nav:27.95,price:27.95,freq:'Monthly'},CSQ:{z3m:-0.58,z6m:-1.13,z1y:-1.36,dp:-10.18,avg52:-6.83,yield:7.16,lev:'27.24%',nav:22.85,price:20.52,freq:'Monthly'},DNP:{z3m:1.33,z6m:0.34,z1y:0.23,dp:6.29,avg52:5.67,yield:7.19,lev:'22.51%',nav:10.12,price:10.85,freq:'Monthly'},EOI:{z3m:-1.66,z6m:-1.70,z1y:-1.97,dp:-7.20,avg52:-1.80,yield:8.09,lev:'--',nav:21.35,price:19.84,freq:'Monthly'},EOS:{z3m:-0.43,z6m:-1.05,z1y:-1.20,dp:-8.89,avg52:-4.31,yield:8.05,lev:'--',nav:25.08,price:22.69,freq:'Monthly'},ERH:{z3m:-0.67,z6m:-0.92,z1y:-0.83,dp:-9.22,avg52:-8.03,yield:8.73,lev:'20.62%',nav:13.08,price:11.99,freq:'Monthly'},ETG:{z3m:-0.56,z6m:-1.23,z1y:-1.92,dp:-9.74,avg52:-6.06,yield:6.74,lev:'15.93%',nav:25.59,price:23.03,freq:'Monthly'},GDV:{z3m:0.35,z6m:0.69,z1y:1.11,dp:-9.98,avg52:-10.77,yield:6.13,lev:'14.45%',nav:32.53,price:29.34,freq:'Monthly'},GLU:{z3m:-1.37,z6m:-1.82,z1y:-2.00,dp:-4.64,avg52:0.27,yield:6.75,lev:'17.56%',nav:20.33,price:19.56,freq:'Monthly'},GOF:{z3m:0.25,z6m:-0.63,z1y:-1.09,dp:3.64,avg52:16.31,yield:19.87,lev:'11.46%',nav:10.74,price:11.00,freq:'Monthly'},HTD:{z3m:0.59,z6m:0.37,z1y:0.02,dp:-6.59,avg52:-6.57,yield:7.39,lev:'30.93%',nav:26.97,price:25.64,freq:'Monthly'},NBXG:{z3m:-1.56,z6m:-1.76,z1y:-2.03,dp:-15.46,avg52:-12.27,yield:8.91,lev:'--',nav:18.78,price:16.16,freq:'Monthly'},NIE:{z3m:-0.59,z6m:-1.15,z1y:-1.68,dp:-11.38,avg52:-9.93,yield:7.49,lev:'--',nav:30.44,price:26.70,freq:'Quarterly'},NXG:{z3m:-1.60,z6m:-1.99,z1y:-2.38,dp:-9.38,avg52:-1.16,yield:11.09,lev:'22.19%',nav:63.04,price:58.42,freq:'Monthly'},PCN:{z3m:-0.82,z6m:-1.42,z1y:-1.69,dp:3.00,avg52:7.07,yield:11.47,lev:'5.91%',nav:11.42,price:11.77,freq:'Monthly'},PDI:{z3m:-1.18,z6m:-0.85,z1y:-1.13,dp:5.97,avg52:10.10,yield:15.89,lev:'32.09%',nav:15.85,price:16.65,freq:'Monthly'},PDO:{z3m:-0.67,z6m:-1.25,z1y:-1.66,dp:1.42,avg52:3.94,yield:11.81,lev:'34.71%',nav:12.73,price:13.00,freq:'Monthly'},PDX:{z3m:1.65,z6m:1.53,z1y:0.19,dp:-8.81,avg52:-9.15,yield:7.44,lev:'22.60%',nav:23.56,price:21.52,freq:'Monthly'},RFI:{z3m:-2.47,z6m:-3.22,z1y:-2.81,dp:-5.37,avg52:0.95,yield:8.50,lev:'0.04%',nav:11.92,price:11.29,freq:'Monthly'},RLTY:{z3m:-1.90,z6m:-2.32,z1y:-2.23,dp:-8.96,avg52:-6.40,yield:8.35,lev:'32.76%',nav:17.31,price:15.80,freq:'Monthly'},RNP:{z3m:-1.63,z6m:-1.82,z1y:-1.50,dp:-5.67,avg52:0.12,yield:7.85,lev:'29.80%',nav:22.09,price:20.80,freq:'Monthly'},RQI:{z3m:-0.55,z6m:0.40,z1y:0.92,dp:-1.41,avg52:-3.12,yield:8.12,lev:'28.08%',nav:13.53,price:13.38,freq:'Monthly'},STK:{z3m:1.99,z6m:2.61,z1y:0.94,dp:-0.42,avg52:-2.87,yield:3.35,lev:'--',nav:53.51,price:55.25,freq:'Quarterly'},UTF:{z3m:0.85,z6m:0.08,z1y:-0.63,dp:-6.35,avg52:-3.54,yield:7.31,lev:'27.44%',nav:28.62,price:27.08,freq:'Monthly'},UTG:{z3m:-0.96,z6m:-1.20,z1y:-0.88,dp:-1.18,avg52:-0.25,yield:5.61,lev:'18.26%',nav:43.19,price:42.78,freq:'Monthly'}},
+  '05/25/2026':{ADX:{z3m:0.16,z6m:0.86,z1y:1.41,dp:-4.06,avg52:-6.61,yield:7.64,lev:'0.00%',nav:26.22,price:25.13,freq:'Quarterly'},AIO:{z3m:-0.38,z6m:-0.74,z1y:-0.99,dp:-10.90,avg52:-4.81,yield:6.68,lev:'11.31%',nav:29.60,price:26.94,freq:'Monthly'},ASGI:{z3m:0.99,z6m:1.09,z1y:1.51,dp:6.55,avg52:1.01,yield:11.40,lev:'0.81%',nav:22.58,price:24.21,freq:'Monthly'},BDJ:{z3m:-0.82,z6m:-1.41,z1y:-1.73,dp:-8.02,avg52:-5.68,yield:8.11,lev:'0.12%',nav:10.02,price:9.16,freq:'Monthly'},BME:{z3m:0.19,z6m:0.71,z1y:1.40,dp:-4.00,avg52:-6.46,yield:7.93,lev:'0.17%',nav:41.18,price:39.66,freq:'Monthly'},BST:{z3m:-0.63,z6m:-1.06,z1y:-1.48,dp:-8.29,avg52:-6.10,yield:6.23,lev:'0.10%',nav:51.84,price:48.14,freq:'Monthly'},BUI:{z3m:0.35,z6m:-0.36,z1y:-0.59,dp:0.54,avg52:2.51,yield:5.84,lev:'0.11%',nav:27.95,price:27.95,freq:'Monthly'},CSQ:{z3m:-0.28,z6m:-0.97,z1y:-1.27,dp:-10.00,avg52:-6.83,yield:7.16,lev:'27.24%',nav:22.85,price:20.52,freq:'Monthly'},DNP:{z3m:1.00,z6m:0.15,z1y:-0.04,dp:5.56,avg52:5.67,yield:7.19,lev:'22.51%',nav:10.12,price:10.85,freq:'Monthly'},EOI:{z3m:-1.54,z6m:-1.67,z1y:-1.93,dp:-7.19,avg52:-1.80,yield:8.09,lev:'--',nav:21.35,price:19.84,freq:'Monthly'},EOS:{z3m:-0.93,z6m:-1.50,z1y:-1.35,dp:-9.57,avg52:-4.31,yield:8.05,lev:'--',nav:25.08,price:22.69,freq:'Monthly'},ERH:{z3m:-0.21,z6m:-0.33,z1y:-0.40,dp:-8.61,avg52:-8.03,yield:8.73,lev:'20.62%',nav:13.08,price:11.99,freq:'Monthly'},ETG:{z3m:-0.20,z6m:-1.02,z1y:-1.67,dp:-9.33,avg52:-6.06,yield:6.74,lev:'15.93%',nav:25.59,price:23.03,freq:'Monthly'},GDV:{z3m:-0.02,z6m:0.24,z1y:0.67,dp:-10.30,avg52:-10.77,yield:6.13,lev:'14.45%',nav:32.53,price:29.34,freq:'Monthly'},GLU:{z3m:-1.14,z6m:-1.62,z1y:-1.79,dp:-4.20,avg52:0.27,yield:6.75,lev:'17.56%',nav:20.33,price:19.56,freq:'Monthly'},GOF:{z3m:-0.24,z6m:-0.91,z1y:-1.17,dp:3.64,avg52:16.31,yield:19.87,lev:'11.46%',nav:10.74,price:11.00,freq:'Monthly'},HTD:{z3m:0.74,z6m:0.60,z1y:0.21,dp:-6.33,avg52:-6.57,yield:7.39,lev:'30.93%',nav:26.97,price:25.64,freq:'Monthly'},NBXG:{z3m:1.09,z6m:0.30,z1y:-0.52,dp:-13.08,avg52:-12.27,yield:8.91,lev:'--',nav:18.78,price:16.16,freq:'Monthly'},NIE:{z3m:-1.36,z6m:-1.88,z1y:-2.44,dp:-12.11,avg52:-9.93,yield:7.49,lev:'--',nav:30.44,price:26.70,freq:'Quarterly'},NXG:{z3m:-1.32,z6m:-1.76,z1y:-2.12,dp:-8.56,avg52:-1.16,yield:11.09,lev:'22.19%',nav:63.04,price:58.42,freq:'Monthly'},PCN:{z3m:-0.71,z6m:-1.33,z1y:-1.62,dp:3.08,avg52:7.07,yield:11.47,lev:'5.91%',nav:11.42,price:11.77,freq:'Monthly'},PDI:{z3m:-1.44,z6m:-1.12,z1y:-1.27,dp:5.39,avg52:10.10,yield:15.89,lev:'32.09%',nav:15.85,price:16.65,freq:'Monthly'},PDO:{z3m:-1.00,z6m:-1.64,z1y:-2.17,dp:0.55,avg52:3.94,yield:11.81,lev:'34.71%',nav:12.73,price:13.00,freq:'Monthly'},PDX:{z3m:1.24,z6m:1.13,z1y:-0.01,dp:-9.19,avg52:-9.15,yield:7.44,lev:'22.60%',nav:23.56,price:21.52,freq:'Monthly'},RFI:{z3m:-2.23,z6m:-2.94,z1y:-2.71,dp:-5.37,avg52:0.95,yield:8.50,lev:'0.04%',nav:11.92,price:11.29,freq:'Monthly'},RLTY:{z3m:-0.97,z6m:-1.51,z1y:-1.70,dp:-8.96,avg52:-6.40,yield:8.35,lev:'32.76%',nav:17.31,price:15.80,freq:'Monthly'},RNP:{z3m:-1.47,z6m:-1.71,z1y:-1.46,dp:-5.67,avg52:0.12,yield:7.85,lev:'29.80%',nav:22.09,price:20.80,freq:'Monthly'},RQI:{z3m:-0.66,z6m:0.36,z1y:0.88,dp:-1.41,avg52:-3.12,yield:8.12,lev:'28.08%',nav:13.53,price:13.38,freq:'Monthly'},STK:{z3m:2.77,z6m:3.68,z1y:1.79,dp:1.64,avg52:-2.87,yield:3.35,lev:'--',nav:53.51,price:55.25,freq:'Quarterly'},UTF:{z3m:0.91,z6m:0.19,z1y:-0.58,dp:-6.35,avg52:-3.54,yield:7.31,lev:'27.44%',nav:28.62,price:27.08,freq:'Monthly'},UTG:{z3m:-0.94,z6m:-1.23,z1y:-0.88,dp:-1.18,avg52:-0.25,yield:5.61,lev:'18.26%',nav:43.19,price:42.78,freq:'Monthly'}},
+  '05/26/2026':{ADX:{z3m:0.29,z6m:0.92,z1y:1.45,dp:-3.96,avg52:-6.61,yield:7.64,lev:'0.00%',nav:26.22,price:25.13,freq:'Quarterly'},AIO:{z3m:-0.98,z6m:-1.12,z1y:-1.08,dp:-11.46,avg52:-4.81,yield:6.68,lev:'11.31%',nav:29.60,price:26.94,freq:'Monthly'},ASGI:{z3m:1.17,z6m:1.25,z1y:1.63,dp:7.02,avg52:1.01,yield:11.40,lev:'0.81%',nav:22.58,price:24.21,freq:'Monthly'},BDJ:{z3m:-0.85,z6m:-1.43,z1y:-1.77,dp:-8.08,avg52:-5.68,yield:8.11,lev:'0.12%',nav:10.02,price:9.16,freq:'Monthly'},BME:{z3m:0.67,z6m:1.03,z1y:1.67,dp:-3.48,avg52:-6.46,yield:7.93,lev:'0.17%',nav:41.18,price:39.66,freq:'Monthly'},BST:{z3m:-0.29,z6m:-0.79,z1y:-1.12,dp:-7.77,avg52:-6.10,yield:6.23,lev:'0.10%',nav:51.84,price:48.14,freq:'Monthly'},BUI:{z3m:0.34,z6m:-0.42,z1y:-0.66,dp:0.29,avg52:2.51,yield:5.84,lev:'0.11%',nav:27.95,price:27.95,freq:'Monthly'},CSQ:{z3m:-1.15,z6m:-1.43,z1y:-1.51,dp:-10.63,avg52:-6.83,yield:7.16,lev:'27.24%',nav:22.85,price:20.52,freq:'Monthly'},DNP:{z3m:1.46,z6m:0.56,z1y:0.50,dp:6.97,avg52:5.67,yield:7.19,lev:'22.51%',nav:10.12,price:10.85,freq:'Monthly'},EOI:{z3m:-1.53,z6m:-1.69,z1y:-1.93,dp:-7.25,avg52:-1.80,yield:8.09,lev:'--',nav:21.35,price:19.84,freq:'Monthly'},EOS:{z3m:-0.78,z6m:-1.37,z1y:-1.30,dp:-9.42,avg52:-4.31,yield:8.05,lev:'--',nav:25.08,price:22.69,freq:'Monthly'},ERH:{z3m:-0.14,z6m:-0.24,z1y:-0.35,dp:-8.52,avg52:-8.03,yield:8.73,lev:'20.62%',nav:13.08,price:11.99,freq:'Monthly'},ETG:{z3m:-0.44,z6m:-1.15,z1y:-1.83,dp:-9.68,avg52:-6.06,yield:6.74,lev:'15.93%',nav:25.59,price:23.03,freq:'Monthly'},GDV:{z3m:0.08,z6m:0.36,z1y:0.79,dp:-10.21,avg52:-10.77,yield:6.13,lev:'14.45%',nav:32.53,price:29.34,freq:'Monthly'},GLU:{z3m:-0.96,z6m:-1.47,z1y:-1.61,dp:-3.78,avg52:0.27,yield:6.75,lev:'17.56%',nav:20.33,price:19.56,freq:'Monthly'},GOF:{z3m:-0.78,z6m:-1.17,z1y:-1.26,dp:2.61,avg52:16.31,yield:19.87,lev:'11.46%',nav:10.74,price:11.00,freq:'Monthly'},HTD:{z3m:1.37,z6m:1.32,z1y:0.86,dp:-5.50,avg52:-6.57,yield:7.39,lev:'30.93%',nav:26.97,price:25.64,freq:'Monthly'},NBXG:{z3m:1.35,z6m:0.55,z1y:-0.34,dp:-12.80,avg52:-12.27,yield:8.91,lev:'--',nav:18.78,price:16.16,freq:'Monthly'},NIE:{z3m:-1.60,z6m:-2.07,z1y:-2.65,dp:-12.34,avg52:-9.93,yield:7.49,lev:'--',nav:30.44,price:26.70,freq:'Quarterly'},NXG:{z3m:-1.24,z6m:-1.71,z1y:-2.09,dp:-8.67,avg52:-1.16,yield:11.09,lev:'22.19%',nav:63.04,price:58.42,freq:'Monthly'},PCN:{z3m:-1.12,z6m:-1.63,z1y:-1.85,dp:2.45,avg52:7.07,yield:11.47,lev:'5.91%',nav:11.42,price:11.77,freq:'Monthly'},PDI:{z3m:-1.48,z6m:-1.18,z1y:-1.30,dp:5.24,avg52:10.10,yield:15.89,lev:'32.09%',nav:15.85,price:16.65,freq:'Monthly'},PDO:{z3m:-0.46,z6m:-1.06,z1y:-1.46,dp:1.65,avg52:3.94,yield:11.81,lev:'34.71%',nav:12.73,price:13.00,freq:'Monthly'},PDX:{z3m:1.71,z6m:1.70,z1y:0.32,dp:-8.55,avg52:-9.15,yield:7.44,lev:'22.60%',nav:23.56,price:21.52,freq:'Monthly'},RFI:{z3m:-2.34,z6m:-3.06,z1y:-2.82,dp:-5.77,avg52:0.95,yield:8.50,lev:'0.04%',nav:11.92,price:11.29,freq:'Monthly'},RLTY:{z3m:-0.82,z6m:-1.38,z1y:-1.61,dp:-8.86,avg52:-6.40,yield:8.35,lev:'32.76%',nav:17.31,price:15.80,freq:'Monthly'},RNP:{z3m:-1.67,z6m:-1.94,z1y:-1.54,dp:-6.05,avg52:0.12,yield:7.85,lev:'29.80%',nav:22.09,price:20.80,freq:'Monthly'},RQI:{z3m:-0.94,z6m:0.23,z1y:0.76,dp:-1.62,avg52:-3.12,yield:8.12,lev:'28.08%',nav:13.53,price:13.38,freq:'Monthly'},STK:{z3m:3.25,z6m:4.34,z1y:2.42,dp:3.14,avg52:-2.87,yield:3.35,lev:'--',nav:53.51,price:55.25,freq:'Quarterly'},UTF:{z3m:1.41,z6m:0.65,z1y:-0.45,dp:-5.74,avg52:-3.54,yield:7.31,lev:'27.44%',nav:28.62,price:27.08,freq:'Monthly'},UTG:{z3m:-1.42,z6m:-1.74,z1y:-1.29,dp:-1.63,avg52:-0.25,yield:5.61,lev:'18.26%',nav:43.19,price:42.78,freq:'Monthly'}},
+  '05/27/2026':{ADX:{z3m:-0.03,z6m:0.77,z1y:1.33,dp:-4.16,avg52:-6.61,yield:7.64,lev:'0.00%',nav:26.22,price:25.13,freq:'Quarterly'},AIO:{z3m:1.80,z6m:0.67,z1y:-0.67,dp:-8.99,avg52:-4.81,yield:6.68,lev:'11.31%',nav:29.60,price:26.94,freq:'Monthly'},ASGI:{z3m:1.25,z6m:1.31,z1y:1.67,dp:7.22,avg52:1.01,yield:11.40,lev:'0.81%',nav:22.58,price:24.21,freq:'Monthly'},BDJ:{z3m:-1.21,z6m:-1.68,z1y:-2.11,dp:-8.58,avg52:-5.68,yield:8.11,lev:'0.12%',nav:10.02,price:9.16,freq:'Monthly'},BME:{z3m:0.47,z6m:0.89,z1y:1.54,dp:-3.69,avg52:-6.46,yield:7.93,lev:'0.17%',nav:41.18,price:39.66,freq:'Monthly'},BST:{z3m:0.06,z6m:-0.45,z1y:-0.69,dp:-7.14,avg52:-6.10,yield:6.23,lev:'0.10%',nav:51.84,price:48.14,freq:'Monthly'},BUI:{z3m:0.31,z6m:-0.49,z1y:-0.75,dp:0.00,avg52:2.51,yield:5.84,lev:'0.11%',nav:27.95,price:27.95,freq:'Monthly'},CSQ:{z3m:-0.49,z6m:-1.09,z1y:-1.33,dp:-10.20,avg52:-6.83,yield:7.16,lev:'27.24%',nav:22.85,price:20.52,freq:'Monthly'},DNP:{z3m:1.49,z6m:0.64,z1y:0.58,dp:7.21,avg52:5.67,yield:7.19,lev:'22.51%',nav:10.12,price:10.85,freq:'Monthly'},EOI:{z3m:-1.40,z6m:-1.60,z1y:-1.85,dp:-7.07,avg52:-1.80,yield:8.09,lev:'--',nav:21.35,price:19.84,freq:'Monthly'},EOS:{z3m:-0.86,z6m:-1.43,z1y:-1.32,dp:-9.53,avg52:-4.31,yield:8.05,lev:'--',nav:25.08,price:22.69,freq:'Monthly'},ERH:{z3m:0.01,z6m:-0.07,z1y:-0.22,dp:-8.33,avg52:-8.03,yield:8.73,lev:'20.62%',nav:13.08,price:11.99,freq:'Monthly'},ETG:{z3m:-0.67,z6m:-1.27,z1y:-1.97,dp:-10.00,avg52:-6.06,yield:6.74,lev:'15.93%',nav:25.59,price:23.03,freq:'Monthly'},GDV:{z3m:0.53,z6m:0.92,z1y:1.34,dp:-9.81,avg52:-10.77,yield:6.13,lev:'14.45%',nav:32.53,price:29.34,freq:'Monthly'},GLU:{z3m:-0.95,z6m:-1.46,z1y:-1.61,dp:-3.81,avg52:0.27,yield:6.75,lev:'17.56%',nav:20.33,price:19.56,freq:'Monthly'},GOF:{z3m:-0.86,z6m:-1.21,z1y:-1.27,dp:2.42,avg52:16.31,yield:19.87,lev:'11.46%',nav:10.74,price:11.00,freq:'Monthly'},HTD:{z3m:1.75,z6m:1.83,z1y:1.31,dp:-4.93,avg52:-6.57,yield:7.39,lev:'30.93%',nav:26.97,price:25.64,freq:'Monthly'},NBXG:{z3m:0.08,z6m:-0.44,z1y:-1.06,dp:-13.95,avg52:-12.27,yield:8.91,lev:'--',nav:18.78,price:16.16,freq:'Monthly'},NIE:{z3m:-1.51,z6m:-1.97,z1y:-2.56,dp:-12.29,avg52:-9.93,yield:7.49,lev:'--',nav:30.44,price:26.70,freq:'Quarterly'},NXG:{z3m:-0.82,z6m:-1.37,z1y:-1.70,dp:-7.33,avg52:-1.16,yield:11.09,lev:'22.19%',nav:63.04,price:58.42,freq:'Monthly'},PCN:{z3m:-0.67,z6m:-1.29,z1y:-1.59,dp:3.06,avg52:7.07,yield:11.47,lev:'5.91%',nav:11.42,price:11.77,freq:'Monthly'},PDI:{z3m:-1.54,z6m:-1.27,z1y:-1.34,dp:5.05,avg52:10.10,yield:15.89,lev:'32.09%',nav:15.85,price:16.65,freq:'Monthly'},PDO:{z3m:-0.21,z6m:-0.81,z1y:-1.16,dp:2.12,avg52:3.94,yield:11.81,lev:'34.71%',nav:12.73,price:13.00,freq:'Monthly'},PDX:{z3m:1.56,z6m:1.58,z1y:0.26,dp:-8.66,avg52:-9.15,yield:7.44,lev:'22.60%',nav:23.56,price:21.52,freq:'Monthly'},RFI:{z3m:-2.00,z6m:-2.65,z1y:-2.57,dp:-5.29,avg52:0.95,yield:8.50,lev:'0.04%',nav:11.92,price:11.29,freq:'Monthly'},RLTY:{z3m:-0.64,z6m:-1.23,z1y:-1.51,dp:-8.72,avg52:-6.40,yield:8.35,lev:'32.76%',nav:17.31,price:15.80,freq:'Monthly'},RNP:{z3m:-1.48,z6m:-1.75,z1y:-1.48,dp:-5.84,avg52:0.12,yield:7.85,lev:'29.80%',nav:22.09,price:20.80,freq:'Monthly'},RQI:{z3m:-1.06,z6m:0.18,z1y:0.72,dp:-1.70,avg52:-3.12,yield:8.12,lev:'28.08%',nav:13.53,price:13.38,freq:'Monthly'},STK:{z3m:3.00,z6m:4.09,z1y:2.47,dp:3.25,avg52:-2.87,yield:3.35,lev:'--',nav:53.51,price:55.25,freq:'Quarterly'},UTF:{z3m:1.65,z6m:0.91,z1y:-0.38,dp:-5.38,avg52:-3.54,yield:7.31,lev:'27.44%',nav:28.62,price:27.08,freq:'Monthly'},UTG:{z3m:-0.63,z6m:-0.93,z1y:-0.66,dp:-0.95,avg52:-0.25,yield:5.61,lev:'18.26%',nav:43.19,price:42.78,freq:'Monthly'}},
+  '05/28/2026':{ADX:{z3m:0.44,z6m:0.97,z1y:1.48,dp:-3.86,avg52:-6.59,yield:7.56,lev:'0.00%',nav:26.41,price:25.39,freq:'Quarterly'},AIO:{z3m:1.80,z6m:0.67,z1y:-0.67,dp:-8.99,avg52:-4.81,yield:6.68,lev:'11.31%',nav:29.60,price:27.05,freq:'Monthly'},ASGI:{z3m:1.44,z6m:1.53,z1y:1.85,dp:7.89,avg52:1.07,yield:11.40,lev:'0.81%',nav:22.58,price:24.20,freq:'Monthly'},BDJ:{z3m:-1.21,z6m:-1.68,z1y:-2.11,dp:-7.78,avg52:-5.68,yield:8.11,lev:'0.12%',nav:10.02,price:9.25,freq:'Monthly'},BME:{z3m:0.47,z6m:0.89,z1y:1.54,dp:-3.88,avg52:-6.45,yield:7.93,lev:'0.17%',nav:41.18,price:40.12,freq:'Monthly'},BST:{z3m:0.06,z6m:-0.45,z1y:-0.69,dp:-5.76,avg52:-6.10,yield:6.23,lev:'0.10%',nav:51.84,price:49.25,freq:'Monthly'},BUI:{z3m:0.31,z6m:-0.49,z1y:-0.75,dp:0.00,avg52:2.51,yield:5.84,lev:'0.11%',nav:27.95,price:27.93,freq:'Monthly'},CSQ:{z3m:-0.95,z6m:-1.29,z1y:-1.44,dp:-10.50,avg52:-6.86,yield:7.16,lev:'27.24%',nav:23.00,price:20.59,freq:'Monthly'},DNP:{z3m:1.49,z6m:0.64,z1y:0.58,dp:7.21,avg52:5.67,yield:7.26,lev:'22.51%',nav:10.12,price:10.75,freq:'Monthly'},EOI:{z3m:-1.40,z6m:-1.60,z1y:-1.85,dp:-6.39,avg52:-1.83,yield:8.09,lev:'--',nav:21.35,price:20.06,freq:'Monthly'},EOS:{z3m:-0.86,z6m:-1.43,z1y:-1.32,dp:-9.22,avg52:-4.35,yield:8.05,lev:'--',nav:25.08,price:22.93,freq:'Monthly'},ERH:{z3m:0.01,z6m:-0.07,z1y:-0.22,dp:-7.64,avg52:-8.02,yield:8.73,lev:'20.62%',nav:13.08,price:11.96,freq:'Monthly'},ETG:{z3m:-0.67,z6m:-1.27,z1y:-1.97,dp:-9.40,avg52:-6.07,yield:6.74,lev:'15.93%',nav:25.59,price:23.24,freq:'Monthly'},GDV:{z3m:0.53,z6m:0.92,z1y:1.34,dp:-9.81,avg52:-10.77,yield:6.13,lev:'14.45%',nav:32.53,price:29.30,freq:'Monthly'},GLU:{z3m:-0.95,z6m:-1.46,z1y:-1.61,dp:-3.81,avg52:0.27,yield:6.75,lev:'17.56%',nav:20.33,price:19.51,freq:'Monthly'},GOF:{z3m:-0.12,z6m:-0.85,z1y:-1.14,dp:3.72,avg52:16.22,yield:19.87,lev:'11.46%',nav:10.74,price:11.16,freq:'Monthly'},HTD:{z3m:1.75,z6m:1.83,z1y:1.31,dp:-3.92,avg52:-6.55,yield:7.39,lev:'30.93%',nav:26.97,price:25.72,freq:'Monthly'},NBXG:{z3m:0.08,z6m:-0.44,z1y:-1.06,dp:-13.16,avg52:-12.27,yield:8.91,lev:'--',nav:18.78,price:16.56,freq:'Monthly'},NIE:{z3m:-1.51,z6m:-1.97,z1y:-2.56,dp:-12.29,avg52:-9.93,yield:7.49,lev:'--',nav:30.44,price:26.90,freq:'Quarterly'},NXG:{z3m:-0.82,z6m:-1.37,z1y:-1.70,dp:-7.33,avg52:-1.16,yield:11.09,lev:'26.97%',nav:63.04,price:58.77,freq:'Monthly'},PCN:{z3m:-0.67,z6m:-1.29,z1y:-1.59,dp:3.15,avg52:7.05,yield:11.47,lev:'5.91%',nav:11.42,price:11.80,freq:'Monthly'},PDI:{z3m:-1.54,z6m:-1.27,z1y:-1.34,dp:5.42,avg52:10.08,yield:15.89,lev:'32.09%',nav:15.85,price:16.74,freq:'Monthly'},PDO:{z3m:-0.21,z6m:-0.81,z1y:-1.16,dp:1.96,avg52:3.94,yield:11.81,lev:'34.71%',nav:12.73,price:13.00,freq:'Monthly'},PDX:{z3m:1.56,z6m:1.58,z1y:0.26,dp:-8.57,avg52:-9.15,yield:7.44,lev:'22.60%',nav:23.56,price:21.55,freq:'Monthly'},RFI:{z3m:-1.63,z6m:-2.23,z1y:-2.30,dp:-4.71,avg52:0.92,yield:8.47,lev:'0.04%',nav:11.92,price:11.34,freq:'Monthly'},RLTY:{z3m:-0.16,z6m:-0.84,z1y:-1.25,dp:-8.34,avg52:-6.41,yield:8.35,lev:'32.76%',nav:17.31,price:15.83,freq:'Monthly'},RNP:{z3m:-0.71,z6m:-0.94,z1y:-1.19,dp:-4.72,avg52:0.09,yield:7.85,lev:'29.80%',nav:22.09,price:21.01,freq:'Monthly'},RQI:{z3m:0.40,z6m:0.57,z1y:1.15,dp:-0.82,avg52:-3.12,yield:8.12,lev:'28.08%',nav:13.53,price:13.38,freq:'Monthly'},STK:{z3m:3.00,z6m:4.09,z1y:2.47,dp:3.25,avg52:-2.87,yield:3.35,lev:'--',nav:53.51,price:55.60,freq:'Quarterly'},UTF:{z3m:2.25,z6m:1.51,z1y:-0.20,dp:-4.56,avg52:-3.57,yield:7.31,lev:'27.44%',nav:28.62,price:27.00,freq:'Monthly'},UTG:{z3m:0.03,z6m:-0.24,z1y:-0.12,dp:-0.37,avg52:-0.25,yield:5.61,lev:'18.26%',nav:43.19,price:42.65,freq:'Monthly'}},
+  '05/29/2026':{ADX:{z3m:0.74,z6m:1.11,z1y:1.57,dp:-3.66,avg52:-6.57,yield:7.56,lev:'0.00%',nav:26.47,price:25.50,freq:'Quarterly'},AIO:{z3m:1.99,z6m:0.88,z1y:-0.63,dp:-8.74,avg52:-4.86,yield:6.65,lev:'11.30%',nav:29.64,price:26.90,freq:'Monthly'},ASGI:{z3m:1.48,z6m:1.59,z1y:1.91,dp:8.12,avg52:1.16,yield:11.40,lev:'0.82%',nav:22.43,price:24.10,freq:'Monthly'},BDJ:{z3m:-0.60,z6m:-1.21,z1y:-1.52,dp:-7.58,avg52:-5.69,yield:8.03,lev:'0.12%',nav:10.03,price:9.26,freq:'Monthly'},BME:{z3m:0.29,z6m:0.75,z1y:1.42,dp:-3.20,avg52:-6.43,yield:7.84,lev:'0.17%',nav:41.74,price:40.23,freq:'Monthly'},BST:{z3m:0.78,z6m:0.30,z1y:0.23,dp:-5.51,avg52:-6.11,yield:6.09,lev:'0.10%',nav:52.26,price:49.53,freq:'Monthly'},BUI:{z3m:0.45,z6m:-0.37,z1y:-0.61,dp:0.47,avg52:2.52,yield:5.84,lev:'0.11%',nav:27.80,price:27.86,freq:'Monthly'},CSQ:{z3m:-0.01,z6m:-0.84,z1y:-1.20,dp:-9.90,avg52:-6.91,yield:7.15,lev:'27.11%',nav:23.00,price:20.72,freq:'Monthly'},DNP:{z3m:1.55,z6m:0.72,z1y:0.69,dp:7.50,avg52:5.68,yield:7.26,lev:'22.83%',nav:10.00,price:10.62,freq:'Monthly'},EOI:{z3m:-1.03,z6m:-1.28,z1y:-1.59,dp:-6.30,avg52:-1.87,yield:8.00,lev:'--',nav:21.43,price:20.08,freq:'Monthly'},EOS:{z3m:-0.57,z6m:-1.19,z1y:-1.23,dp:-9.17,avg52:-4.42,yield:7.97,lev:'--',nav:25.26,price:22.97,freq:'Monthly'},ERH:{z3m:0.52,z6m:0.59,z1y:0.27,dp:-7.64,avg52:-8.02,yield:8.75,lev:'20.78%',nav:12.95,price:12.01,freq:'Monthly'},ETG:{z3m:-0.17,z6m:-1.00,z1y:-1.65,dp:-9.33,avg52:-6.10,yield:6.68,lev:'15.90%',nav:25.65,price:23.33,freq:'Monthly'},GDV:{z3m:0.22,z6m:0.55,z1y:0.98,dp:-10.07,avg52:-10.76,yield:6.14,lev:'14.43%',nav:32.58,price:29.24,freq:'Monthly'},GLU:{z3m:-0.86,z6m:-1.39,z1y:-1.53,dp:-3.63,avg52:0.25,yield:6.77,lev:'17.62%',nav:20.24,price:19.40,freq:'Monthly'},GOF:{z3m:-0.01,z6m:-0.80,z1y:-1.11,dp:3.90,avg52:16.08,yield:19.58,lev:'11.43%',nav:10.76,price:11.20,freq:'Monthly'},HTD:{z3m:2.40,z6m:2.64,z1y:2.09,dp:-3.92,avg52:-6.55,yield:7.37,lev:'31.09%',nav:26.77,price:25.64,freq:'Monthly'},NBXG:{z3m:1.21,z6m:0.52,z1y:-0.39,dp:-12.89,avg52:-12.28,yield:8.70,lev:'--',nav:19.07,price:16.69,freq:'Monthly'},NIE:{z3m:-0.96,z6m:-1.50,z1y:-2.07,dp:-11.86,avg52:-9.95,yield:7.43,lev:'--',nav:30.52,price:26.93,freq:'Quarterly'},NXG:{z3m:-0.67,z6m:-1.23,z1y:-1.55,dp:-6.83,avg52:-1.20,yield:11.03,lev:'26.96%',nav:63.08,price:58.11,freq:'Monthly'},PCN:{z3m:-0.60,z6m:-1.23,z1y:-1.55,dp:3.15,avg52:7.05,yield:11.44,lev:'5.90%',nav:11.44,price:11.82,freq:'Monthly'},PDI:{z3m:-1.29,z6m:-1.08,z1y:-1.23,dp:5.42,avg52:10.08,yield:15.81,lev:'32.05%',nav:15.88,price:16.77,freq:'Monthly'},PDO:{z3m:-0.28,z6m:-0.88,z1y:-1.25,dp:1.96,avg52:3.94,yield:11.81,lev:'34.67%',nav:12.75,price:13.15,freq:'Monthly'},PDX:{z3m:1.58,z6m:1.63,z1y:0.31,dp:-8.57,avg52:-9.15,yield:7.43,lev:'22.59%',nav:23.57,price:21.66,freq:'Monthly'},RFI:{z3m:-1.56,z6m:-2.15,z1y:-2.25,dp:-4.66,avg52:0.88,yield:8.47,lev:'0.04%',nav:11.90,price:11.26,freq:'Monthly'},RLTY:{z3m:0.18,z6m:-0.56,z1y:-1.06,dp:-8.06,avg52:-6.42,yield:8.34,lev:'33.00%',nav:17.27,price:15.74,freq:'Monthly'},RNP:{z3m:-0.19,z6m:-0.40,z1y:-0.99,dp:-3.97,avg52:0.05,yield:7.77,lev:'29.97%',nav:22.05,price:21.04,freq:'Monthly'},RQI:{z3m:1.59,z6m:0.90,z1y:1.50,dp:-0.07,avg52:-3.10,yield:8.07,lev:'28.35%',nav:13.49,price:13.34,freq:'Monthly'},STK:{z3m:2.83,z6m:3.88,z1y:2.54,dp:3.36,avg52:-2.87,yield:3.33,lev:'--',nav:53.79,price:55.76,freq:'Quarterly'},UTF:{z3m:2.43,z6m:1.77,z1y:-0.11,dp:-4.16,avg52:-3.63,yield:7.33,lev:'27.80%',nav:28.29,price:26.93,freq:'Monthly'},UTG:{z3m:0.61,z6m:0.37,z1y:0.37,dp:0.14,avg52:-0.25,yield:5.63,lev:'18.54%',nav:42.39,price:42.45,freq:'Monthly'}},
+  '06/01/2026':{ADX:{z3m:0.63,z6m:1.05,z1y:1.53,dp:-3.73,avg52:-6.56,yield:7.51,lev:'0.00%',nav:26.55,price:25.56,freq:'Quarterly'},AIO:{z3m:1.78,z6m:0.81,z1y:-0.63,dp:-8.86,avg52:-4.99,yield:6.69,lev:'11.28%',nav:29.69,price:27.06,freq:'Monthly'},ASGI:{z3m:0.73,z6m:0.78,z1y:1.30,dp:5.92,avg52:1.18,yield:11.45,lev:'0.82%',nav:22.29,price:23.61,freq:'Monthly'},BDJ:{z3m:-0.45,z6m:-1.09,z1y:-1.37,dp:-8.08,avg52:-5.69,yield:8.02,lev:'0.12%',nav:10.02,price:9.21,freq:'Monthly'},BME:{z3m:0.91,z6m:1.19,z1y:1.78,dp:-3.75,avg52:-6.42,yield:7.82,lev:'0.17%',nav:41.56,price:40.00,freq:'Monthly'},BST:{z3m:0.90,z6m:0.43,z1y:0.40,dp:-5.93,avg52:-6.11,yield:6.06,lev:'0.10%',nav:52.42,price:49.31,freq:'Monthly'},BUI:{z3m:0.06,z6m:-0.68,z1y:-1.00,dp:-0.80,avg52:2.52,yield:5.86,lev:'0.11%',nav:27.63,price:27.41,freq:'Monthly'},CSQ:{z3m:-0.37,z6m:-1.01,z1y:-1.29,dp:-10.13,avg52:-6.91,yield:7.11,lev:'27.11%',nav:23.00,price:20.65,freq:'Monthly'},DNP:{z3m:1.20,z6m:0.48,z1y:0.39,dp:6.70,avg52:5.68,yield:7.42,lev:'22.98%',nav:9.85,price:10.51,freq:'Monthly'},EOI:{z3m:-0.97,z6m:-1.23,z1y:-1.54,dp:-6.91,avg52:-1.89,yield:8.00,lev:'--',nav:21.43,price:19.95,freq:'Monthly'},EOS:{z3m:-0.52,z6m:-1.15,z1y:-1.21,dp:-9.37,avg52:-4.44,yield:7.96,lev:'--',nav:25.29,price:22.92,freq:'Monthly'},ERH:{z3m:1.06,z6m:1.29,z1y:0.81,dp:-8.22,avg52:-8.00,yield:8.72,lev:'20.84%',nav:12.90,price:11.84,freq:'Monthly'},ETG:{z3m:-0.12,z6m:-0.96,z1y:-1.60,dp:-9.48,avg52:-6.11,yield:6.65,lev:'15.85%',nav:25.73,price:23.29,freq:'Monthly'},GDV:{z3m:0.16,z6m:0.48,z1y:0.90,dp:-10.27,avg52:-10.75,yield:6.16,lev:'14.45%',nav:32.53,price:29.19,freq:'Monthly'},GLU:{z3m:-0.94,z6m:-1.44,z1y:-1.61,dp:-4.41,avg52:0.23,yield:6.80,lev:'17.67%',nav:20.18,price:19.29,freq:'Monthly'},GOF:{z3m:-0.39,z6m:-0.96,z1y:-1.16,dp:3.25,avg52:16.03,yield:19.51,lev:'11.43%',nav:10.78,price:11.13,freq:'Monthly'},HTD:{z3m:2.41,z6m:2.72,z1y:2.22,dp:-4.88,avg52:-6.53,yield:7.39,lev:'31.20%',nav:26.63,price:25.33,freq:'Monthly'},NBXG:{z3m:1.78,z6m:1.06,z1y:-0.02,dp:-12.32,avg52:-12.28,yield:8.63,lev:'--',nav:19.16,price:16.80,freq:'Monthly'},NIE:{z3m:-0.79,z6m:-1.36,z1y:-1.91,dp:-11.83,avg52:-9.97,yield:7.43,lev:'--',nav:30.51,price:26.90,freq:'Quarterly'},NXG:{z3m:-0.91,z6m:-1.42,z1y:-1.77,dp:-6.78,avg52:-1.27,yield:11.15,lev:'27.00%',nav:62.95,price:58.68,freq:'Monthly'},PCN:{z3m:-0.60,z6m:-1.22,z1y:-1.53,dp:2.71,avg52:7.00,yield:11.42,lev:'5.89%',nav:11.46,price:11.77,freq:'Monthly'},PDI:{z3m:-1.64,z6m:-1.39,z1y:-1.40,dp:4.72,avg52:10.04,yield:15.78,lev:'32.02%',nav:15.90,price:16.65,freq:'Monthly'},PDO:{z3m:-0.21,z6m:-0.79,z1y:-1.15,dp:2.11,avg52:3.93,yield:11.67,lev:'34.64%',nav:12.77,price:13.04,freq:'Monthly'},PDX:{z3m:2.35,z6m:2.56,z1y:0.89,dp:-7.35,avg52:-9.15,yield:7.39,lev:'22.71%',nav:23.41,price:21.69,freq:'Monthly'},RFI:{z3m:-1.56,z6m:-2.15,z1y:-2.25,dp:-4.66,avg52:0.88,yield:8.63,lev:'0.04%',nav:11.81,price:11.12,freq:'Monthly'},RLTY:{z3m:-1.60,z6m:-1.96,z1y:-1.99,dp:-9.52,avg52:-6.43,yield:8.39,lev:'33.00%',nav:17.12,price:15.49,freq:'Monthly'},RNP:{z3m:-0.19,z6m:-0.40,z1y:-0.99,dp:-3.97,avg52:0.05,yield:7.76,lev:'29.97%',nav:21.91,price:20.75,freq:'Monthly'},RQI:{z3m:1.59,z6m:0.90,z1y:1.50,dp:-0.07,avg52:-3.10,yield:8.10,lev:'28.35%',nav:13.35,price:13.07,freq:'Monthly'},STK:{z3m:2.73,z6m:3.77,z1y:2.81,dp:3.95,avg52:-2.88,yield:3.32,lev:'--',nav:54.21,price:56.35,freq:'Quarterly'},UTF:{z3m:2.43,z6m:1.77,z1y:-0.11,dp:-4.16,avg52:-3.63,yield:7.35,lev:'27.80%',nav:28.10,price:26.69,freq:'Monthly'},UTG:{z3m:0.53,z6m:0.29,z1y:0.30,dp:0.07,avg52:-0.25,yield:5.65,lev:'18.84%',nav:42.39,price:41.59,freq:'Monthly'}},
+  '06/02/2026':{ADX:{z3m:0.68,z6m:1.07,z1y:1.54,dp:-3.68,avg52:-6.54,yield:7.49,lev:'0.00%',nav:26.60,price:25.62,freq:'Quarterly'},AIO:{z3m:0.61,z6m:-0.03,z1y:-0.82,dp:-9.98,avg52:-4.99,yield:6.57,lev:'11.28%',nav:30.06,price:27.40,freq:'Monthly'},ASGI:{z3m:-0.62,z6m:-0.68,z1y:0.20,dp:1.93,avg52:1.22,yield:12.13,lev:'0.83%',nav:22.16,price:22.75,freq:'Monthly'},BDJ:{z3m:-0.61,z6m:-1.20,z1y:-1.52,dp:-7.81,avg52:-5.69,yield:8.10,lev:'0.12%',nav:9.99,price:9.17,freq:'Monthly'},BME:{z3m:1.53,z6m:1.63,z1y:2.15,dp:-2.49,avg52:-6.42,yield:8.00,lev:'0.17%',nav:41.02,price:39.33,freq:'Monthly'},BST:{z3m:-0.66,z6m:-1.16,z1y:-1.56,dp:-8.46,avg52:-6.12,yield:6.02,lev:'0.10%',nav:53.87,price:49.84,freq:'Monthly'},BUI:{z3m:0.54,z6m:-0.28,z1y:-0.52,dp:0.81,avg52:2.53,yield:5.95,lev:'0.11%',nav:27.19,price:27.36,freq:'Monthly'},CSQ:{z3m:-1.07,z6m:-1.31,z1y:-1.45,dp:-10.59,avg52:-6.96,yield:7.09,lev:'26.96%',nav:23.18,price:20.73,freq:'Monthly'},DNP:{z3m:1.85,z6m:1.06,z1y:1.13,dp:8.69,avg52:5.69,yield:7.34,lev:'22.98%',nav:9.67,price:10.63,freq:'Monthly'},EOI:{z3m:-1.30,z6m:-1.54,z1y:-1.77,dp:-6.99,avg52:-1.89,yield:8.05,lev:'--',nav:21.45,price:19.94,freq:'Monthly'},EOS:{z3m:-0.98,z6m:-1.48,z1y:-1.33,dp:-9.69,avg52:-4.44,yield:7.96,lev:'--',nav:25.38,price:22.97,freq:'Monthly'},ERH:{z3m:2.03,z6m:2.57,z1y:1.81,dp:-5.51,avg52:-7.99,yield:8.83,lev:'20.84%',nav:12.53,price:11.86,freq:'Monthly'},ETG:{z3m:-0.73,z6m:-1.26,z1y:-1.95,dp:-10.08,avg52:-6.11,yield:6.62,lev:'15.77%',nav:25.90,price:23.44,freq:'Monthly'},GDV:{z3m:0.24,z6m:0.57,z1y:1.00,dp:-10.05,avg52:-10.75,yield:6.17,lev:'14.45%',nav:32.45,price:29.19,freq:'Monthly'},GLU:{z3m:-0.66,z6m:-1.23,z1y:-1.34,dp:-3.21,avg52:0.23,yield:6.84,lev:'17.67%',nav:19.93,price:19.29,freq:'Monthly'},GOF:{z3m:-0.33,z6m:-0.93,z1y:-1.16,dp:3.34,avg52:16.03,yield:19.63,lev:'11.43%',nav:10.77,price:11.05,freq:'Monthly'},HTD:{z3m:2.31,z6m:2.67,z1y:2.21,dp:-3.69,avg52:-6.52,yield:7.51,lev:'31.20%',nav:26.30,price:25.23,freq:'Monthly'},NBXG:{z3m:1.12,z6m:0.48,z1y:-0.42,dp:-12.95,avg52:-12.28,yield:8.56,lev:'--',nav:19.30,price:16.82,freq:'Monthly'},NIE:{z3m:-1.53,z6m:-1.94,z1y:-2.54,dp:-12.35,avg52:-9.97,yield:7.39,lev:'--',nav:30.69,price:27.06,freq:'Quarterly'},NXG:{z3m:-0.29,z6m:-0.91,z1y:-1.19,dp:-5.61,avg52:-1.27,yield:10.97,lev:'27.25%',nav:62.17,price:59.07,freq:'Monthly'},PCN:{z3m:-1.03,z6m:-1.51,z1y:-1.76,dp:2.53,avg52:7.00,yield:11.47,lev:'5.88%',nav:11.48,price:11.77,freq:'Monthly'},PDI:{z3m:-1.78,z6m:-1.51,z1y:-1.47,dp:4.45,avg52:10.04,yield:15.83,lev:'32.02%',nav:15.94,price:16.72,freq:'Monthly'},PDO:{z3m:-0.33,z6m:-0.91,z1y:-1.30,dp:1.88,avg52:3.93,yield:11.72,lev:'34.64%',nav:12.80,price:13.10,freq:'Monthly'},PDX:{z3m:1.91,z6m:2.09,z1y:0.65,dp:-7.94,avg52:-9.15,yield:7.39,lev:'22.71%',nav:23.56,price:21.67,freq:'Monthly'},RFI:{z3m:-1.34,z6m:-1.90,z1y:-2.09,dp:-4.37,avg52:0.83,yield:8.61,lev:'0.04%',nav:11.63,price:11.15,freq:'Monthly'},RLTY:{z3m:0.13,z6m:-0.61,z1y:-1.09,dp:-8.13,avg52:-6.43,yield:8.52,lev:'33.34%',nav:16.80,price:15.49,freq:'Monthly'},RNP:{z3m:-0.32,z6m:-0.54,z1y:-1.04,dp:-4.20,avg52:0.01,yield:7.86,lev:'30.25%',nav:21.62,price:20.77,freq:'Monthly'},RQI:{z3m:1.58,z6m:0.87,z1y:1.48,dp:-0.08,avg52:-3.08,yield:8.24,lev:'28.78%',nav:13.07,price:13.11,freq:'Monthly'},STK:{z3m:1.97,z6m:2.82,z1y:1.99,dp:1.92,avg52:-2.89,yield:3.28,lev:'--',nav:55.29,price:57.68,freq:'Quarterly'},UTF:{z3m:2.04,z6m:1.57,z1y:-0.14,dp:-4.34,avg52:-3.67,yield:7.37,lev:'28.06%',nav:27.74,price:26.87,freq:'Monthly'},UTG:{z3m:0.53,z6m:0.29,z1y:0.30,dp:0.07,avg52:-0.25,yield:5.72,lev:'18.84%',nav:41.56,price:41.97,freq:'Monthly'}},
+  '06/03/2026':{ADX:{z3m:0.50,z6m:0.98,z1y:1.47,dp:-3.78,avg52:-6.53,yield:7.55,lev:'0.00%',nav:26.43,price:25.43,freq:'Quarterly'},AIO:{z3m:-0.91,z6m:-1.09,z1y:-1.04,dp:-11.38,avg52:-5.06,yield:6.57,lev:'10.88%',nav:30.92,price:27.43,freq:'Monthly'},ASGI:{z3m:-0.93,z6m:-1.03,z1y:-0.08,dp:0.94,avg52:1.25,yield:12.13,lev:'0.82%',nav:22.32,price:22.44,freq:'Monthly'},BDJ:{z3m:-1.35,z6m:-1.69,z1y:-2.17,dp:-8.19,avg52:-5.71,yield:8.08,lev:'0.12%',nav:10.05,price:9.19,freq:'Monthly'},BME:{z3m:1.44,z6m:1.57,z1y:2.09,dp:-2.55,avg52:-6.39,yield:8.02,lev:'0.17%',nav:40.36,price:39.21,freq:'Monthly'},BST:{z3m:-0.71,z6m:-1.22,z1y:-1.64,dp:-8.60,avg52:-6.16,yield:6.02,lev:'0.09%',nav:54.53,price:49.09,freq:'Monthly'},BUI:{z3m:0.06,z6m:-0.69,z1y:-1.02,dp:-0.87,avg52:2.53,yield:6.02,lev:'0.11%',nav:27.60,price:27.11,freq:'Monthly'},CSQ:{z3m:-1.39,z6m:-1.43,z1y:-1.52,dp:-10.79,avg52:-6.99,yield:7.17,lev:'26.96%',nav:22.98,price:20.50,freq:'Monthly'},DNP:{z3m:1.60,z6m:0.90,z1y:0.92,dp:8.14,avg52:5.69,yield:7.33,lev:'23.02%',nav:9.83,price:10.64,freq:'Monthly'},EOI:{z3m:-1.25,z6m:-1.53,z1y:-1.74,dp:-6.95,avg52:-1.93,yield:8.11,lev:'--',nav:21.43,price:19.79,freq:'Monthly'},EOS:{z3m:-0.55,z6m:-1.16,z1y:-1.21,dp:-9.25,avg52:-4.48,yield:8.03,lev:'--',nav:25.31,price:22.77,freq:'Monthly'},ERH:{z3m:0.94,z6m:1.18,z1y:0.73,dp:-6.98,avg52:-7.98,yield:8.81,lev:'21.04%',nav:12.75,price:11.88,freq:'Monthly'},ETG:{z3m:-0.16,z6m:-0.97,z1y:-1.62,dp:-9.43,avg52:-6.13,yield:6.72,lev:'15.78%',nav:25.88,price:23.10,freq:'Monthly'},GDV:{z3m:-0.46,z6m:-0.24,z1y:0.17,dp:-10.62,avg52:-10.74,yield:6.20,lev:'14.40%',nav:32.66,price:29.02,freq:'Monthly'},GLU:{z3m:-1.13,z6m:-1.55,z1y:-1.78,dp:-4.36,avg52:0.22,yield:6.85,lev:'17.67%',nav:20.17,price:19.27,freq:'Monthly'},GOF:{z3m:-0.80,z6m:-1.14,z1y:-1.22,dp:2.50,avg52:15.93,yield:19.79,lev:'11.43%',nav:10.78,price:11.04,freq:'Monthly'},HTD:{z3m:1.31,z6m:1.54,z1y:1.12,dp:-5.08,avg52:-6.51,yield:7.51,lev:'31.24%',nav:26.58,price:25.24,freq:'Monthly'},NBXG:{z3m:0.55,z6m:0.02,z1y:-0.75,dp:-13.48,avg52:-12.29,yield:8.56,lev:'--',nav:19.44,price:16.61,freq:'Monthly'},NIE:{z3m:-1.48,z6m:-1.89,z1y:-2.50,dp:-12.34,avg52:-9.99,yield:7.39,lev:'--',nav:30.87,price:27.07,freq:'Quarterly'},NXG:{z3m:-0.78,z6m:-1.30,z1y:-1.65,dp:-7.34,avg52:-1.31,yield:12.19,lev:'22.00%',nav:63.75,price:59.69,freq:'Monthly'},PCN:{z3m:-1.11,z6m:-1.53,z1y:-1.77,dp:2.44,avg52:6.98,yield:11.58,lev:'5.88%',nav:11.49,price:11.66,freq:'Monthly'},PDI:{z3m:-1.54,z6m:-1.35,z1y:-1.37,dp:4.76,avg52:10.01,yield:15.82,lev:'31.94%',nav:15.96,price:16.73,freq:'Monthly'},PDO:{z3m:-0.14,z6m:-0.74,z1y:-1.10,dp:2.18,avg52:3.92,yield:11.72,lev:'34.55%',nav:12.82,price:13.00,freq:'Monthly'},PDX:{z3m:1.77,z6m:1.96,z1y:0.60,dp:-8.02,avg52:-9.15,yield:7.39,lev:'22.60%',nav:23.56,price:21.52,freq:'Monthly'},RFI:{z3m:-1.34,z6m:-1.90,z1y:-2.09,dp:-4.38,avg52:0.79,yield:8.62,lev:'0.04%',nav:11.66,price:11.14,freq:'Monthly'},RLTY:{z3m:0.13,z6m:-0.61,z1y:-1.09,dp:-7.96,avg52:-6.44,yield:8.52,lev:'33.34%',nav:16.86,price:15.49,freq:'Monthly'},RNP:{z3m:-0.32,z6m:-0.54,z1y:-1.04,dp:-3.97,avg52:-0.02,yield:7.85,lev:'30.19%',nav:21.68,price:20.78,freq:'Monthly'},RQI:{z3m:1.58,z6m:0.87,z1y:1.48,dp:0.00,avg52:-3.06,yield:8.24,lev:'28.71%',nav:13.12,price:13.11,freq:'Monthly'},STK:{z3m:1.39,z6m:2.10,z1y:1.49,dp:0.63,avg52:-2.90,yield:3.21,lev:'--',nav:57.32,price:57.57,freq:'Quarterly'},UTF:{z3m:2.04,z6m:1.57,z1y:-0.14,dp:-4.01,avg52:-3.70,yield:7.39,lev:'27.81%',nav:28.09,price:26.80,freq:'Monthly'},UTG:{z3m:-0.53,z6m:-0.80,z1y:-0.58,dp:-0.87,avg52:-0.25,yield:5.73,lev:'18.38%',nav:42.29,price:41.92,freq:'Monthly'}}
+};
+
+const NET_CHANGE={'05/13/2026':'—','05/20/2026':'+$3.78','05/22/2026':'-$0.72','05/25/2026':'+$1.44','05/26/2026':'+$0.62','05/27/2026':'-$0.25','05/28/2026':'+$4.08','05/29/2026':'+$3.89','06/01/2026':'-$3.78','06/02/2026':'-$1.20','06/03/2026':'-$1.11'};
 
 function qColor(z,dp){if(z>=0&&dp<0)return'#1D9E75';if(z>=0&&dp>=0)return'#378ADD';if(z<0&&dp<0)return'#D85A30';return'#888780';}
 function qKey(z,dp){if(z>=0&&dp<0)return'green';if(z>=0&&dp>=0)return'blue';if(z<0&&dp<0)return'orange';return'gray';}
@@ -214,15 +169,21 @@ function qBg(k){return{green:'#E1F5EE',blue:'#E6F1FB',orange:'#FAECE7',gray:'#F1
 function qTxt(k){return{green:'#0F6E56',blue:'#185FA5',orange:'#993C1D',gray:'#5F5E5A'}[k];}
 function easeInOut(t){return t<0.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
 
-let activePeriod='z1y',prevPeriod='z1y',activeQuadrant='all',searchTerms=[],showAlerts=false,threshold=5,chartRef=null;
+let activePeriod='z1y',activeQuadrant='all',searchTerms=[],showAlerts=false,threshold=5,chartRef=null;
 let animStart=null,animating=false;
 let scatterData=[];
+let currentDateIdx=ALL_DATES.length-1;
 
-function parseSearch(r){return r.trim().toUpperCase().split(/[\s,]+/).map(s=>s.trim()).filter(Boolean);}
+function getCurrentDate(){return ALL_DATES[currentDateIdx];}
+function getSnapshot(date){return SNAPSHOT[date]||{};}
 
-function buildAll(period){
-  const p=period||activePeriod;
-  scatterData=ALL_FUNDS.map(f=>{const z=f[p];return{x:z,y:f.dp,label:f.ticker,yield:f.yield,avg52:f.avg52,z3m:f.z3m,z6m:f.z6m,z1y:f.z1y,bgColor:qColor(z,f.dp),qKey:qKey(z,f.dp),_fund:f,deviation:Math.abs(f.dp-f.avg52)};});
+function buildAll(){
+  const snap=getSnapshot(getCurrentDate());
+  const p=activePeriod;
+  scatterData=Object.entries(snap).map(([ticker,f])=>{
+    const z=f[p];
+    return{x:z,y:f.dp,label:ticker,yield:f.yield,avg52:f.avg52,z3m:f.z3m,z6m:f.z6m,z1y:f.z1y,bgColor:qColor(z,f.dp),qKey:qKey(z,f.dp),_fund:{...f,ticker},deviation:Math.abs(f.dp-f.avg52)};
+  });
 }
 
 function getVis(d){
@@ -234,105 +195,119 @@ function getVis(d){
 
 buildAll();
 
-function startPeriodTransition(from,to){
-  prevPeriod=from;activePeriod=to;animStart=null;animating=true;
-  buildAll(to);requestAnimationFrame(animStep);
+function animateToDate(newIdx){
+  if(animating)return;
+  const oldIdx=currentDateIdx;
+  currentDateIdx=newIdx;
+  const oldSnap=getSnapshot(ALL_DATES[oldIdx]);
+  const newSnap=getSnapshot(ALL_DATES[newIdx]);
+  buildAll();
+  const tickers=Object.keys(newSnap);
+  animStart=null;animating=true;
+  function step(ts){
+    if(!animStart)animStart=ts;
+    const t=easeInOut(Math.min((ts-animStart)/ANIM_DURATION,1));
+    const ds=chartRef.data.datasets[0];
+    ds.data.forEach((d,i)=>{
+      const tk=tickers[i];if(!tk)return;
+      const ov=oldSnap[tk],nv=newSnap[tk];if(!ov||!nv)return;
+      const op=activePeriod,oz=ov[op]||0,nz=nv[op]||0,odp=ov.dp||0,ndp=nv.dp||0;
+      d.x=oz+(nz-oz)*t;d.y=odp+(ndp-odp)*t;
+    });
+    chartRef.update('none');
+    if(t<1){requestAnimationFrame(step);}
+    else{animating=false;buildAll();applyStyles();chartRef.update('none');updateUI();}
+  }
+  requestAnimationFrame(step);
+  updateUI();
 }
-function animStep(ts){
-  if(!animStart)animStart=ts;
-  const t=easeInOut(Math.min((ts-animStart)/ANIM_DURATION,1));
-  const ds=chartRef.data.datasets[0];
-  ALL_FUNDS.forEach((f,i)=>{ds.data[i].x=f[prevPeriod]+(f[activePeriod]-f[prevPeriod])*t;});
-  chartRef.options.scales.x.title.text=PERIOD_LABELS[activePeriod];
-  chartRef.update('none');
-  if(t<1){requestAnimationFrame(animStep);}
-  else{animating=false;buildAll(activePeriod);applyStyles();chartRef.update('none');renderSidePanels();}
+
+function updateUI(){
+  const date=getCurrentDate();
+  document.getElementById('badge-text').textContent=date;
+  document.getElementById('btn-prev').disabled=currentDateIdx===0;
+  document.getElementById('btn-next').disabled=currentDateIdx===ALL_DATES.length-1;
+  document.getElementById('tm-slider').value=currentDateIdx;
+  document.querySelectorAll('.pip-item').forEach((p,i)=>p.classList.toggle('active',i===currentDateIdx));
+  const nc=NET_CHANGE[date]||'—';
+  const ncColor=nc.startsWith('+')?' style="color:#1D9E75;font-weight:500;"':nc.startsWith('-')?' style="color:#D85A30;font-weight:500;"':'';
+  renderCommentary(date,nc,ncColor);
 }
+
+function renderCommentary(date,nc,ncColor){
+  const snap=getSnapshot(date);
+  const funds=Object.entries(snap).map(([t,f])=>({t,z:f[activePeriod],dp:f.dp,avg52:f.avg52}));
+  funds.sort((a,b)=>a.z-b.z);
+  const cheapest=funds.slice(0,3);
+  const hottest=funds.filter(f=>f.z>=0&&f.dp<0).sort((a,b)=>b.z-a.z).slice(0,2);
+  const orange=funds.filter(f=>f.z<0&&f.dp<0).length;
+  const green=funds.filter(f=>f.z>=0&&f.dp<0).length;
+  const blue=funds.filter(f=>f.z>=0&&f.dp>=0).length;
+  const gray=funds.filter(f=>f.z<0&&f.dp>=0).length;
+  document.getElementById('commentary-box').innerHTML=`
+  <p style="font-size:11px;font-weight:500;color:var(--color-text-secondary);margin:0 0 6px 0;text-transform:uppercase;letter-spacing:0.04em;">Snapshot — ${date} <span${ncColor}>${nc}</span></p>
+  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
+    <span style="font-size:11px;padding:2px 8px;background:#E1F5EE;color:#0F6E56;border-radius:var(--border-radius-md);">Green ${green}</span>
+    <span style="font-size:11px;padding:2px 8px;background:#E6F1FB;color:#185FA5;border-radius:var(--border-radius-md);">Blue ${blue}</span>
+    <span style="font-size:11px;padding:2px 8px;background:#FAECE7;color:#993C1D;border-radius:var(--border-radius-md);">Orange ${orange}</span>
+    <span style="font-size:11px;padding:2px 8px;background:#F1EFE8;color:#5F5E5A;border-radius:var(--border-radius-md);">Gray ${gray}</span>
+  </div>
+  <p style="font-size:11px;color:var(--color-text-secondary);margin:0 0 3px 0;"><strong>Deepest valuation (most negative z-score 1Y):</strong> ${cheapest.map(f=>`<span style="color:#D85A30;font-weight:600;">${f.t}</span> ${f.z.toFixed(2)}`).join(' · ')}</p>
+  ${hottest.length?`<p style="font-size:11px;color:var(--color-text-secondary);margin:0;"><strong>Strongest green momentum:</strong> ${hottest.map(f=>`<span style="color:#1D9E75;font-weight:600;">${f.t}</span> +${f.z.toFixed(2)}`).join(' · ')}</p>`:''}`;
+}
+
+const rangePlugin={id:'rangeLines',afterDatasetsDraw(chart){
+  if(animating)return;
+  const{ctx,scales:{x,y}}=chart;
+  scatterData.forEach(d=>{const vis=getVis(d);const alpha=vis.dimmed?0.08:0.55;
+    const px=x.getPixelForValue(d.x),pyAvg=y.getPixelForValue(d.avg52),pyCur=y.getPixelForValue(d.y);
+    ctx.save();ctx.strokeStyle=`rgba(136,135,128,${alpha})`;ctx.lineWidth=1.2;ctx.setLineDash([3,2]);
+    ctx.beginPath();ctx.moveTo(px,pyCur);ctx.lineTo(px,pyAvg);ctx.stroke();ctx.setLineDash([]);
+    ctx.beginPath();ctx.moveTo(px-4,pyAvg);ctx.lineTo(px+4,pyAvg);ctx.stroke();ctx.restore();});
+}};
 
 const alertRingPlugin={id:'alertRings',afterDatasetsDraw(chart){
   if(!showAlerts||animating)return;
   const{ctx,scales:{x,y}}=chart;
   scatterData.forEach(d=>{if(d.deviation<threshold)return;const vis=getVis(d);if(vis.dimmed)return;
     const px=x.getPixelForValue(d.x),py=y.getPixelForValue(d.y);ctx.save();
-    ctx.beginPath();ctx.arc(px,py,13,0,Math.PI*2);ctx.strokeStyle='#D85A30';ctx.lineWidth=2.5;ctx.stroke();
-    ctx.beginPath();ctx.arc(px,py,17,0,Math.PI*2);ctx.strokeStyle='rgba(216,90,48,0.35)';ctx.lineWidth=1.5;ctx.stroke();ctx.restore();});
+    ctx.beginPath();ctx.arc(px,py,12,0,Math.PI*2);ctx.strokeStyle='#D85A30';ctx.lineWidth=2;ctx.stroke();
+    ctx.beginPath();ctx.arc(px,py,16,0,Math.PI*2);ctx.strokeStyle='rgba(216,90,48,0.3)';ctx.lineWidth=1.2;ctx.stroke();ctx.restore();});
 }};
 
-const ghostPlugin={id:'ghostTrail',afterDatasetsDraw(chart){
-  if(!searchTerms.length||animating)return;
-  const{ctx,scales:{x,y}}=chart;
-  searchTerms.forEach((ticker,ti)=>{
-    const todayPt=HISTORY[TODAY][ticker];if(!todayPt)return;
-    const color=TRAIL_COLORS[ti%TRAIL_COLORS.length];
-    const trailDates=DATES.slice(0,-1).filter(d=>HISTORY[d][ticker]);
-    const opacities=[0.12,0.22,0.32,0.48];const radii=[3,3,4,5];
-    trailDates.forEach((date,i)=>{
-      const pt=HISTORY[date][ticker];const r=radii[i]||5;const alpha=opacities[i]||0.2;
-      const px=x.getPixelForValue(pt[activePeriod]),py=y.getPixelForValue(pt.dp);
-      ctx.save();ctx.globalAlpha=alpha;ctx.beginPath();ctx.arc(px,py,r,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();
-      ctx.strokeStyle=color;ctx.lineWidth=1.5;ctx.setLineDash([2,2]);ctx.stroke();ctx.setLineDash([]);
-      ctx.font='9px sans-serif';ctx.fillStyle=color;ctx.textAlign='center';ctx.fillText(date.slice(0,5),px,py-r-3);ctx.restore();
-    });
-    const allPts=[...trailDates.map(d=>({...HISTORY[d][ticker],date:d})),{...todayPt,date:TODAY}];
-    for(let i=0;i<allPts.length-1;i++){
-      const a=allPts[i],b=allPts[i+1];
-      const ax=x.getPixelForValue(a[activePeriod]),ay=y.getPixelForValue(a.dp);
-      const bx=x.getPixelForValue(b[activePeriod]),by=y.getPixelForValue(b.dp);
-      const isLast=i===allPts.length-2;
-      ctx.save();ctx.globalAlpha=isLast?0.85:(opacities[i]||0.2)+0.1;ctx.strokeStyle=color;ctx.lineWidth=isLast?2:1;
-      ctx.setLineDash(isLast?[]:[3,3]);ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(bx,by);ctx.stroke();ctx.setLineDash([]);
-      const angle=Math.atan2(by-ay,bx-ax),mx=(ax+bx)/2,my=(ay+by)/2;
-      ctx.beginPath();ctx.moveTo(mx+Math.cos(angle)*8,my+Math.sin(angle)*8);
-      ctx.lineTo(mx+Math.cos(angle+2.4)*5,my+Math.sin(angle+2.4)*5);ctx.lineTo(mx+Math.cos(angle-2.4)*5,my+Math.sin(angle-2.4)*5);
-      ctx.closePath();ctx.fillStyle=color;ctx.fill();ctx.restore();
-    }
-  });
-}};
-
-const rangePlugin={id:'rangeLines',afterDatasetsDraw(chart){
-  if(animating)return;
-  const{ctx,scales:{x,y}}=chart;
-  scatterData.forEach(d=>{const vis=getVis(d);const alpha=vis.dimmed?0.08:0.65;
-    const px=x.getPixelForValue(d.x),pyAvg=y.getPixelForValue(d.avg52),pyCur=y.getPixelForValue(d.y);
-    ctx.save();ctx.strokeStyle=`rgba(136,135,128,${alpha})`;ctx.lineWidth=1.5;ctx.setLineDash([3,2]);
-    ctx.beginPath();ctx.moveTo(px,pyCur);ctx.lineTo(px,pyAvg);ctx.stroke();ctx.setLineDash([]);
-    ctx.beginPath();ctx.moveTo(px-5,pyAvg);ctx.lineTo(px+5,pyAvg);ctx.stroke();ctx.restore();});
-}};
-
-Chart.register(ChartDataLabels,ghostPlugin,alertRingPlugin,rangePlugin);
+Chart.register(ChartDataLabels,rangePlugin,alertRingPlugin);
 
 const ctxEl=document.getElementById('qChart').getContext('2d');
 chartRef=new Chart(ctxEl,{
   type:'scatter',
   data:{datasets:[{data:scatterData,backgroundColor:scatterData.map(d=>d.bgColor+'CC'),borderColor:scatterData.map(d=>d.bgColor),borderWidth:1.5,pointRadius:7,pointHoverRadius:9}]},
   options:{
-    responsive:true,maintainAspectRatio:false,layout:{padding:{top:28,right:48,bottom:20,left:20}},
+    responsive:true,maintainAspectRatio:false,layout:{padding:{top:24,right:44,bottom:18,left:18}},
     animation:{duration:0},
     plugins:{
       legend:{display:false},
       tooltip:{enabled:true,filter:()=>!animating,callbacks:{label:c=>{
         const d=c.raw;const diff=(d.y-d.avg52).toFixed(2);const sign=diff>0?'+':'';
-        const alertTag=(showAlerts&&d.deviation>=threshold)?' ⚠':'';
-        const zSign=d.x<0?'↓ cheaper than norm':'↑ pricier than norm';
-        return[`${d.label}${alertTag}  |  Yield: ${d.yield.toFixed(2)}%`,
-          `${PERIOD_LABELS[activePeriod]}: ${d.x.toFixed(2)} (${zSign})  |  Disc/Prem: ${d.y.toFixed(2)}%`,
+        const zSign=d.x<0?'↓ cheaper':'↑ pricier';
+        return[`${d.label}  |  Yield: ${d.yield.toFixed(2)}%`,
+          `${PERIOD_LABELS[activePeriod]}: ${d.x.toFixed(2)} (${zSign})  |  D/P: ${d.y.toFixed(2)}%`,
           `3M: ${d.z3m.toFixed(2)}  ·  6M: ${d.z6m.toFixed(2)}  ·  1Y: ${d.z1y.toFixed(2)}`,
           `52-wk avg: ${d.avg52.toFixed(2)}%  (${sign}${diff})`];}}},
       datalabels:{formatter:val=>`${val.label}\n${val.yield.toFixed(2)}%`,
-        font:ctx=>{const vis=getVis(ctx.dataset.data[ctx.dataIndex]);return{size:9.5,weight:vis.dimmed?'400':'500'};},
+        font:ctx=>{const vis=getVis(ctx.dataset.data[ctx.dataIndex]);return{size:9,weight:vis.dimmed?'400':'500'};},
         color:ctx=>{if(animating)return'transparent';const d=ctx.dataset.data[ctx.dataIndex];const vis=getVis(d);
           if(vis.dimmed)return'rgba(136,135,128,0.18)';
           const idx=searchTerms.indexOf(d.label);if(idx>=0)return TRAIL_COLORS[idx%TRAIL_COLORS.length];
           return d.bgColor;},
-        align:'top',offset:5,textAlign:'center',lineHeight:1.3}},
+        align:'top',offset:4,textAlign:'center',lineHeight:1.3}},
     onClick:(evt,elements)=>{if(!elements.length||animating)return;const d=scatterData[elements[0].index];showDetail(d._fund,d.qKey);},
     scales:{
-      x:{title:{display:true,text:PERIOD_LABELS['z1y'],font:{size:13,weight:'500'},color:'#888780'},
-         grid:{color:c=>c.tick.value===0?'rgba(100,100,100,0.5)':'rgba(150,150,150,0.12)',lineWidth:c=>c.tick.value===0?1.5:1},
-         ticks:{color:'#888780',font:{size:11}},min:-4.0,max:4.5},
-      y:{title:{display:true,text:'Discount / Premium (%)',font:{size:13,weight:'500'},color:'#888780'},
-         grid:{color:c=>c.tick.value===0?'rgba(100,100,100,0.5)':'rgba(150,150,150,0.12)',lineWidth:c=>c.tick.value===0?1.5:1},
-         ticks:{color:'#888780',font:{size:11},callback:v=>v.toFixed(0)+'%'},min:-18,max:24}}
+      x:{title:{display:true,text:PERIOD_LABELS['z1y'],font:{size:12,weight:'500'},color:'#888780'},
+         grid:{color:c=>c.tick.value===0?'rgba(100,100,100,0.45)':'rgba(150,150,150,0.1)',lineWidth:c=>c.tick.value===0?1.5:1},
+         ticks:{color:'#888780',font:{size:10}},min:-4.0,max:4.5},
+      y:{title:{display:true,text:'Discount / Premium (%)',font:{size:12,weight:'500'},color:'#888780'},
+         grid:{color:c=>c.tick.value===0?'rgba(100,100,100,0.45)':'rgba(150,150,150,0.1)',lineWidth:c=>c.tick.value===0?1.5:1},
+         ticks:{color:'#888780',font:{size:10},callback:v=>v.toFixed(0)+'%'},min:-18,max:24}}
   }
 });
 
@@ -343,38 +318,33 @@ function applyStyles(){
     const idx=searchTerms.indexOf(d.label);if(idx>=0)return TRAIL_COLORS[idx%TRAIL_COLORS.length]+'CC';return d.bgColor+'CC';});
   ds.borderColor=scatterData.map(d=>{const v=getVis(d);if(v.dimmed)return d.bgColor+'20';
     const idx=searchTerms.indexOf(d.label);if(idx>=0)return TRAIL_COLORS[idx%TRAIL_COLORS.length];return d.bgColor;});
-  ds.borderWidth=scatterData.map(d=>{const idx=searchTerms.indexOf(d.label);return idx>=0?2.5:1.5;});
-  ds.pointRadius=scatterData.map(d=>getVis(d).dimmed?4:searchTerms.includes(d.label)?9:7);
+  ds.borderWidth=scatterData.map(d=>searchTerms.includes(d.label)?2.5:1.5);
+  ds.pointRadius=scatterData.map(d=>getVis(d).dimmed?3.5:searchTerms.includes(d.label)?9:7);
 }
 
-function fullUpdate(){applyStyles();chartRef.options.scales.x.title.text=PERIOD_LABELS[activePeriod];chartRef.update('none');renderSidePanels();}
+function fullUpdate(){buildAll();applyStyles();chartRef.options.scales.x.title.text=PERIOD_LABELS[activePeriod];chartRef.update('none');renderSidePanels();updateUI();}
 function renderSidePanels(){renderAlertPanel();renderTrailInfo();}
 
 function renderAlertPanel(){
   const el=document.getElementById('alert-panel');if(!showAlerts){el.style.display='none';return;}
-  const flagged=ALL_FUNDS.filter(f=>Math.abs(f.dp-f.avg52)>=threshold).sort((a,b)=>Math.abs(b.dp-b.avg52)-Math.abs(a.dp-a.avg52));
-  if(!flagged.length){el.style.display='block';el.innerHTML=`<span style="font-size:11px;color:#993C1D;"><i class="ti ti-bell-check"></i> No funds exceed ${threshold}%.</span>`;return;}
+  const flagged=scatterData.filter(d=>d.deviation>=threshold).sort((a,b)=>b.deviation-a.deviation);
+  if(!flagged.length){el.style.display='block';el.innerHTML=`<span style="font-size:11px;color:#993C1D;">No funds exceed ${threshold}%.</span>`;return;}
   el.style.display='block';
-  el.innerHTML=`<div style="font-size:11px;font-weight:500;color:#993C1D;margin-bottom:6px;"><i class="ti ti-bell-exclamation"></i> ${flagged.length} fund${flagged.length>1?'s':''} flagged — moved ≥${threshold}% from 52-wk avg</div>
-  <div style="display:flex;flex-wrap:wrap;gap:6px;">${flagged.map(f=>{const diff=(f.dp-f.avg52).toFixed(2);const sign=diff>0?'+':'';return`<span style="font-size:11px;padding:3px 8px;background:rgba(216,90,48,0.15);border:0.5px solid #D85A30;border-radius:var(--border-radius-md);color:#993C1D;"><strong>${f.ticker}</strong> ${sign}${diff}%</span>`;}).join('')}</div>`;
+  el.innerHTML=`<div style="font-size:11px;font-weight:500;color:#993C1D;margin-bottom:6px;">${flagged.length} fund${flagged.length>1?'s':''} flagged — ≥${threshold}% from 52-wk avg</div>
+  <div style="display:flex;flex-wrap:wrap;gap:6px;">${flagged.map(d=>{const diff=(d.y-d.avg52).toFixed(2);const sign=diff>0?'+':'';return`<span style="font-size:11px;padding:3px 8px;background:rgba(216,90,48,0.15);border:0.5px solid #D85A30;border-radius:var(--border-radius-md);color:#993C1D;"><strong>${d.label}</strong> ${sign}${diff}%</span>`;}).join('')}</div>`;
 }
 
 function renderTrailInfo(){
   const el=document.getElementById('trail-info');if(!searchTerms.length){el.style.display='none';el.innerHTML='';return;}
-  const valid=searchTerms.filter(t=>HISTORY[TODAY][t]);if(!valid.length){el.style.display='none';return;}
+  const date=getCurrentDate();const dateIdx=currentDateIdx;
+  const valid=searchTerms.filter(t=>getSnapshot(date)[t]);if(!valid.length){el.style.display='none';return;}
   el.style.display='block';
   el.innerHTML=valid.map((ticker,ti)=>{
-    const color=TRAIL_COLORS[ti%TRAIL_COLORS.length];const f=ALL_FUNDS.find(f=>f.ticker===ticker);if(!f)return'';
-    const todayPt=HISTORY[TODAY][ticker];
-    const trailDates=DATES.slice(0,-1).filter(d=>HISTORY[d][ticker]);
-    const rows=trailDates.map(date=>{const pt=HISTORY[date][ticker];return`<span style="margin-right:12px;opacity:0.65;">${date.slice(0,5)}: Z ${pt[activePeriod].toFixed(2)} / D/P ${pt.dp.toFixed(2)}%</span>`;}).join('');
-    const firstDate=trailDates[0];const firstPt=firstDate?HISTORY[firstDate][ticker]:null;
-    const dz=firstPt?((todayPt[activePeriod]-firstPt[activePeriod]).toFixed(2)):'n/a';
-    const dd=firstPt?((todayPt.dp-firstPt.dp).toFixed(2)):'n/a';
-    const signZ=parseFloat(dz)>=0?'+':'',signD=parseFloat(dd)>=0?'+':'';
-    const zInterp=parseFloat(dz)>0?'discount narrowing vs history':'discount widening vs history';
-    return`<div class="trail-row"><span style="font-weight:500;color:${color};">${ticker}</span> &nbsp;|&nbsp; ${rows}<span style="font-weight:500;color:${color};">06/03: Z ${todayPt[activePeriod].toFixed(2)} / D/P ${todayPt.dp.toFixed(2)}% ←</span><br>
-    <span style="font-size:10px;color:var(--color-text-tertiary);">Z-score move: ${signZ}${dz} (${zInterp}) · D/P move: ${signD}${dd}%</span></div>`;
+    const color=TRAIL_COLORS[ti%TRAIL_COLORS.length];
+    const todayPt=getSnapshot(date)[ticker];if(!todayPt)return'';
+    const trailRows=ALL_DATES.slice(0,dateIdx).filter(d=>SNAPSHOT[d]&&SNAPSHOT[d][ticker]).slice(-4).map(d=>{
+      const pt=SNAPSHOT[d][ticker];return`<span style="margin-right:10px;opacity:0.65;">${d.slice(5,10)}: Z ${pt[activePeriod].toFixed(2)} / ${pt.dp.toFixed(2)}%</span>`;}).join('');
+    return`<div class="trail-row"><span style="font-weight:500;color:${color};">${ticker}</span> &nbsp;|&nbsp; ${trailRows}<span style="font-weight:500;color:${color};">${date.slice(5,10)}: Z ${todayPt[activePeriod].toFixed(2)} / D/P ${todayPt.dp.toFixed(2)}% ←</span></div>`;
   }).join('');
 }
 
@@ -382,15 +352,41 @@ function showDetail(f,quadKey){
   document.getElementById('dp-ticker').textContent=f.ticker;
   const qBadge=document.getElementById('dp-quadrant');qBadge.textContent=qLabel(quadKey);qBadge.style.background=qBg(quadKey);qBadge.style.color=qTxt(quadKey);
   const diff=(f.dp-f.avg52).toFixed(2),sign=diff>0?'+':'';
-  const metrics=[{lbl:'Share Price',val:`$${f.price.toFixed(2)}`},{lbl:'NAV',val:`$${f.nav.toFixed(2)}`},{lbl:'Disc / Prem',val:`${f.dp.toFixed(2)}%`},{lbl:'52-wk avg D/P',val:`${f.avg52.toFixed(2)}% (${sign}${diff})`},{lbl:'Yield',val:`${f.yield.toFixed(2)}%`},{lbl:'Z-Score 3M',val:f.z3m.toFixed(2)},{lbl:'Z-Score 6M',val:f.z6m.toFixed(2)},{lbl:'Z-Score 1Y',val:f.z1y.toFixed(2)},{lbl:'Leverage',val:f.lev},{lbl:'YTD (Price)',val:f.ytdP},{lbl:'1-yr Rtn Price',val:f.ret1P},{lbl:'Distribution',val:f.freq}];
+  const metrics=[{lbl:'Share Price',val:`$${f.price.toFixed(2)}`},{lbl:'NAV',val:`$${f.nav.toFixed(2)}`},{lbl:'Disc / Prem',val:`${f.dp.toFixed(2)}%`},{lbl:'52-wk avg',val:`${f.avg52.toFixed(2)}% (${sign}${diff})`},{lbl:'Yield',val:`${f.yield.toFixed(2)}%`},{lbl:'Z 3M',val:f.z3m.toFixed(2)},{lbl:'Z 6M',val:f.z6m.toFixed(2)},{lbl:'Z 1Y',val:f.z1y.toFixed(2)},{lbl:'Leverage',val:f.lev},{lbl:'Distribution',val:f.freq}];
   document.getElementById('dp-grid').innerHTML=metrics.map(m=>`<div class="dp-metric"><div class="lbl">${m.lbl}</div><div class="val">${m.val}</div></div>`).join('');
   document.getElementById('detail-panel').style.display='block';
 }
 
+const tmSlider=document.getElementById('tm-slider');
+tmSlider.addEventListener('input',e=>{
+  const idx=parseInt(e.target.value);
+  if(idx!==currentDateIdx)animateToDate(idx);
+});
+
+document.getElementById('btn-prev').addEventListener('click',()=>{if(currentDateIdx>0)animateToDate(currentDateIdx-1);});
+document.getElementById('btn-next').addEventListener('click',()=>{if(currentDateIdx<ALL_DATES.length-1)animateToDate(currentDateIdx+1);});
+
+const pipRow=document.getElementById('pip-row');
+pipRow.innerHTML=ALL_DATES.map((d,i)=>{
+  const parts=d.split('/');
+  const line1=parts[0]+'/'+parts[1];
+  const line2=parts[2];
+  return`<div class="pip-item${i===currentDateIdx?' active':''}" data-i="${i}">
+    <div class="pip-dot"></div>
+    <div class="pip-lbl">${line1}<br>${line2}</div>
+  </div>`;
+}).join('');
+
+pipRow.querySelectorAll('.pip-item').forEach(pip=>{
+  pip.addEventListener('click',()=>{const i=parseInt(pip.dataset.i);if(i!==currentDateIdx)animateToDate(i);});
+});
+
 document.getElementById('dp-close').addEventListener('click',()=>{document.getElementById('detail-panel').style.display='none';});
-document.querySelectorAll('.z-switch button').forEach(btn=>{btn.addEventListener('click',()=>{if(animating)return;const newPeriod=btn.dataset.period;if(newPeriod===activePeriod)return;document.querySelectorAll('.z-switch button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.getElementById('detail-panel').style.display='none';startPeriodTransition(activePeriod,newPeriod);});});
+document.querySelectorAll('.z-switch button').forEach(btn=>{btn.addEventListener('click',()=>{if(animating)return;const p=btn.dataset.period;if(p===activePeriod)return;document.querySelectorAll('.z-switch button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');activePeriod=p;document.getElementById('detail-panel').style.display='none';fullUpdate();});});
 document.getElementById('alert-btn').addEventListener('click',()=>{showAlerts=!showAlerts;const btn=document.getElementById('alert-btn');btn.classList.toggle('alert-on',showAlerts);btn.setAttribute('aria-pressed',showAlerts);document.getElementById('threshold-row').classList.toggle('visible',showAlerts);fullUpdate();});
 document.getElementById('thresh-slider').addEventListener('input',e=>{threshold=parseInt(e.target.value);document.getElementById('thresh-val').textContent=threshold+'%';fullUpdate();});
 document.querySelectorAll('.q-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.q-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');activeQuadrant=btn.dataset.q;document.getElementById('detail-panel').style.display='none';fullUpdate();});});
-document.getElementById('search-box').addEventListener('input',e=>{searchTerms=parseSearch(e.target.value);document.getElementById('detail-panel').style.display='none';fullUpdate();});
+document.getElementById('search-box').addEventListener('input',e=>{searchTerms=e.target.value.trim().toUpperCase().split(/[\s,]+/).filter(Boolean);document.getElementById('detail-panel').style.display='none';fullUpdate();});
+
+applyStyles();chartRef.update('none');updateUI();
 </script>
