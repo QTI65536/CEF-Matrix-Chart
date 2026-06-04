@@ -57,15 +57,13 @@
     </div>
   </div>
   <input type="range" id="tm-slider" min="0" max="10" value="10" step="1" style="width:100%;"/>
-  <div id="pip-track">
-    <div id="pip-row"></div>
-  </div>
+  <div id="pip-track"><div id="pip-row"></div></div>
 </div>
 
 <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:10px;">
   <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
     <input id="search-box" type="text" placeholder="Search tickers…" aria-label="Search funds by ticker"/>
-    <div style="display:flex;gap:5px;flex-wrap:wrap;" role="group" aria-label="Filter by quadrant">
+    <div style="display:flex;gap:5px;flex-wrap:wrap;" role="group">
       <button class="q-btn active" data-q="all">All</button>
       <button class="q-btn" data-q="green" style="border-left:3px solid #1D9E75;">Disc+Z↑</button>
       <button class="q-btn" data-q="blue" style="border-left:3px solid #378ADD;">Prem+Z↑</button>
@@ -140,10 +138,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
 <script>if(typeof ChartDataLabels==='undefined'){document.write('<scr'+'ipt src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"><\/scr'+'ipt>');}</script>
 <script>
-const TRAIL_COLORS=['#7F77DD','#D85A30','#1D9E75','#BA7517','#D4537E','#378ADD','#639922'];
 const PERIOD_LABELS={z3m:'Z-Score 3M',z6m:'Z-Score 6M',z1y:'Z-Score 1Y'};
 const ANIM_DURATION=400;
-
 const ALL_DATES=['05/13/2026','05/20/2026','05/22/2026','05/25/2026','05/26/2026','05/27/2026','05/28/2026','05/29/2026','06/01/2026','06/02/2026','06/03/2026'];
 
 const SNAPSHOT={
@@ -182,7 +178,8 @@ function buildAll(){
   const p=activePeriod;
   scatterData=Object.entries(snap).map(([ticker,f])=>{
     const z=f[p];
-    return{x:z,y:f.dp,label:ticker,yield:f.yield,avg52:f.avg52,z3m:f.z3m,z6m:f.z6m,z1y:f.z1y,bgColor:qColor(z,f.dp),qKey:qKey(z,f.dp),_fund:{...f,ticker},deviation:Math.abs(f.dp-f.avg52)};
+    const bgColor=qColor(z,f.dp);
+    return{x:z,y:f.dp,label:ticker,yield:f.yield,avg52:f.avg52,z3m:f.z3m,z6m:f.z6m,z1y:f.z1y,bgColor,qKey:qKey(z,f.dp),_fund:{...f,ticker},deviation:Math.abs(f.dp-f.avg52)};
   });
 }
 
@@ -191,6 +188,10 @@ function getVis(d){
   const qOk=activeQuadrant==='all'||d.qKey===activeQuadrant;
   if(searchTerms.length>0){if(isSearched)return{visible:true,dimmed:false};return{visible:false,dimmed:true};}
   return{visible:qOk,dimmed:!qOk};
+}
+
+function getSearchColor(d){
+  return d.bgColor;
 }
 
 buildAll();
@@ -236,7 +237,7 @@ function updateUI(){
 
 function renderCommentary(date,nc,ncColor){
   const snap=getSnapshot(date);
-  const funds=Object.entries(snap).map(([t,f])=>({t,z:f[activePeriod],dp:f.dp,avg52:f.avg52}));
+  const funds=Object.entries(snap).map(([t,f])=>({t,z:f[activePeriod],dp:f.dp}));
   funds.sort((a,b)=>a.z-b.z);
   const cheapest=funds.slice(0,3);
   const hottest=funds.filter(f=>f.z>=0&&f.dp<0).sort((a,b)=>b.z-a.z).slice(0,2);
@@ -252,7 +253,7 @@ function renderCommentary(date,nc,ncColor){
     <span style="font-size:11px;padding:2px 8px;background:#FAECE7;color:#993C1D;border-radius:var(--border-radius-md);">Orange ${orange}</span>
     <span style="font-size:11px;padding:2px 8px;background:#F1EFE8;color:#5F5E5A;border-radius:var(--border-radius-md);">Gray ${gray}</span>
   </div>
-  <p style="font-size:11px;color:var(--color-text-secondary);margin:0 0 3px 0;"><strong>Deepest valuation (most negative z-score 1Y):</strong> ${cheapest.map(f=>`<span style="color:#D85A30;font-weight:600;">${f.t}</span> ${f.z.toFixed(2)}`).join(' · ')}</p>
+  <p style="font-size:11px;color:var(--color-text-secondary);margin:0 0 3px 0;"><strong>Deepest valuation:</strong> ${cheapest.map(f=>`<span style="color:#D85A30;font-weight:600;">${f.t}</span> ${f.z.toFixed(2)}`).join(' · ')}</p>
   ${hottest.length?`<p style="font-size:11px;color:var(--color-text-secondary);margin:0;"><strong>Strongest green momentum:</strong> ${hottest.map(f=>`<span style="color:#1D9E75;font-weight:600;">${f.t}</span> +${f.z.toFixed(2)}`).join(' · ')}</p>`:''}`;
 }
 
@@ -293,13 +294,24 @@ chartRef=new Chart(ctxEl,{
           `${PERIOD_LABELS[activePeriod]}: ${d.x.toFixed(2)} (${zSign})  |  D/P: ${d.y.toFixed(2)}%`,
           `3M: ${d.z3m.toFixed(2)}  ·  6M: ${d.z6m.toFixed(2)}  ·  1Y: ${d.z1y.toFixed(2)}`,
           `52-wk avg: ${d.avg52.toFixed(2)}%  (${sign}${diff})`];}}},
-      datalabels:{formatter:val=>`${val.label}\n${val.yield.toFixed(2)}%`,
-        font:ctx=>{const vis=getVis(ctx.dataset.data[ctx.dataIndex]);return{size:9,weight:vis.dimmed?'400':'500'};},
-        color:ctx=>{if(animating)return'transparent';const d=ctx.dataset.data[ctx.dataIndex];const vis=getVis(d);
+      datalabels:{
+        formatter:val=>`${val.label}\n${val.yield.toFixed(2)}%`,
+        font:ctx=>{
+          const d=ctx.dataset.data[ctx.dataIndex];
+          const isSearched=searchTerms.length>0&&searchTerms.includes(d.label);
+          const vis=getVis(d);
+          return{size:isSearched?10:9,weight:(isSearched||!vis.dimmed)?'500':'400'};
+        },
+        color:ctx=>{
+          if(animating)return'transparent';
+          const d=ctx.dataset.data[ctx.dataIndex];
+          const vis=getVis(d);
           if(vis.dimmed)return'rgba(136,135,128,0.18)';
-          const idx=searchTerms.indexOf(d.label);if(idx>=0)return TRAIL_COLORS[idx%TRAIL_COLORS.length];
-          return d.bgColor;},
-        align:'top',offset:4,textAlign:'center',lineHeight:1.3}},
+          return d.bgColor;
+        },
+        align:'top',offset:4,textAlign:'center',lineHeight:1.3
+      }
+    },
     onClick:(evt,elements)=>{if(!elements.length||animating)return;const d=scatterData[elements[0].index];showDetail(d._fund,d.qKey);},
     scales:{
       x:{title:{display:true,text:PERIOD_LABELS['z1y'],font:{size:12,weight:'500'},color:'#888780'},
@@ -314,12 +326,19 @@ chartRef=new Chart(ctxEl,{
 function applyStyles(){
   const ds=chartRef.data.datasets[0];
   ds.data=scatterData;
-  ds.backgroundColor=scatterData.map(d=>{const v=getVis(d);if(v.dimmed)return d.bgColor+'12';
-    const idx=searchTerms.indexOf(d.label);if(idx>=0)return TRAIL_COLORS[idx%TRAIL_COLORS.length]+'CC';return d.bgColor+'CC';});
-  ds.borderColor=scatterData.map(d=>{const v=getVis(d);if(v.dimmed)return d.bgColor+'20';
-    const idx=searchTerms.indexOf(d.label);if(idx>=0)return TRAIL_COLORS[idx%TRAIL_COLORS.length];return d.bgColor;});
-  ds.borderWidth=scatterData.map(d=>searchTerms.includes(d.label)?2.5:1.5);
-  ds.pointRadius=scatterData.map(d=>getVis(d).dimmed?3.5:searchTerms.includes(d.label)?9:7);
+  ds.backgroundColor=scatterData.map(d=>{
+    const v=getVis(d);
+    if(v.dimmed)return d.bgColor+'12';
+    if(searchTerms.includes(d.label))return d.bgColor+'EE';
+    return d.bgColor+'CC';
+  });
+  ds.borderColor=scatterData.map(d=>{
+    const v=getVis(d);
+    if(v.dimmed)return d.bgColor+'20';
+    return d.bgColor;
+  });
+  ds.borderWidth=scatterData.map(d=>searchTerms.includes(d.label)?3:1.5);
+  ds.pointRadius=scatterData.map(d=>getVis(d).dimmed?3.5:searchTerms.includes(d.label)?10:7);
 }
 
 function fullUpdate(){buildAll();applyStyles();chartRef.options.scales.x.title.text=PERIOD_LABELS[activePeriod];chartRef.update('none');renderSidePanels();updateUI();}
@@ -339,12 +358,17 @@ function renderTrailInfo(){
   const date=getCurrentDate();const dateIdx=currentDateIdx;
   const valid=searchTerms.filter(t=>getSnapshot(date)[t]);if(!valid.length){el.style.display='none';return;}
   el.style.display='block';
-  el.innerHTML=valid.map((ticker,ti)=>{
-    const color=TRAIL_COLORS[ti%TRAIL_COLORS.length];
-    const todayPt=getSnapshot(date)[ticker];if(!todayPt)return'';
+  el.innerHTML=valid.map(ticker=>{
+    const snap=getSnapshot(date)[ticker];if(!snap)return'';
+    const z=snap[activePeriod];const dp=snap.dp;
+    const color=qColor(z,dp);
+    const todayPt=snap;
     const trailRows=ALL_DATES.slice(0,dateIdx).filter(d=>SNAPSHOT[d]&&SNAPSHOT[d][ticker]).slice(-4).map(d=>{
-      const pt=SNAPSHOT[d][ticker];return`<span style="margin-right:10px;opacity:0.65;">${d.slice(5,10)}: Z ${pt[activePeriod].toFixed(2)} / ${pt.dp.toFixed(2)}%</span>`;}).join('');
-    return`<div class="trail-row"><span style="font-weight:500;color:${color};">${ticker}</span> &nbsp;|&nbsp; ${trailRows}<span style="font-weight:500;color:${color};">${date.slice(5,10)}: Z ${todayPt[activePeriod].toFixed(2)} / D/P ${todayPt.dp.toFixed(2)}% ←</span></div>`;
+      const pt=SNAPSHOT[d][ticker];
+      const ptColor=qColor(pt[activePeriod],pt.dp);
+      return`<span style="margin-right:10px;opacity:0.65;color:${ptColor};">${d.slice(5,10)}: Z ${pt[activePeriod].toFixed(2)} / ${pt.dp.toFixed(2)}%</span>`;
+    }).join('');
+    return`<div class="trail-row"><span style="font-weight:500;color:${color};">${ticker}</span> &nbsp;|&nbsp; ${trailRows}<span style="font-weight:600;color:${color};">${date.slice(5,10)}: Z ${todayPt[activePeriod].toFixed(2)} / D/P ${todayPt.dp.toFixed(2)}% ←</span></div>`;
   }).join('');
 }
 
@@ -369,11 +393,9 @@ document.getElementById('btn-next').addEventListener('click',()=>{if(currentDate
 const pipRow=document.getElementById('pip-row');
 pipRow.innerHTML=ALL_DATES.map((d,i)=>{
   const parts=d.split('/');
-  const line1=parts[0]+'/'+parts[1];
-  const line2=parts[2];
   return`<div class="pip-item${i===currentDateIdx?' active':''}" data-i="${i}">
     <div class="pip-dot"></div>
-    <div class="pip-lbl">${line1}<br>${line2}</div>
+    <div class="pip-lbl">${parts[0]}/${parts[1]}<br>${parts[2]}</div>
   </div>`;
 }).join('');
 
