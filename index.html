@@ -1,198 +1,167 @@
 
 <style>
-:root{--bg1:#ffffff;--bg2:#f5f5f4;--txt1:#111110;--txt2:#6b6b69;--txt3:#9b9b99;--bdr1:#aaa9a6;--bdr2:#d4d3cf;--bdr3:#e8e7e3;--rmd:6px;--rlg:10px;}
+:root{--bg1:#fff;--bg2:#f5f5f4;--txt1:#111110;--txt2:#6b6b69;--txt3:#9b9b99;--bdr1:#aaa9a6;--bdr2:#d4d3cf;--bdr3:#e8e7e3;--rmd:6px;--rlg:10px;}
 @media(prefers-color-scheme:dark){:root{--bg1:#1c1c1a;--bg2:#262624;--txt1:#f0efeb;--txt2:#a8a7a3;--txt3:#6b6b69;--bdr1:#4a4a47;--bdr2:#38382f;--bdr3:#2e2e2b;}}
 *{box-sizing:border-box;}
-input[type=text]{width:160px;padding:5px 10px;font-size:12px;border:0.5px solid var(--bdr2);border-radius:var(--rmd);background:var(--bg1);color:var(--txt1);}
-input[type=text]:focus{outline:none;border-color:var(--bdr1);}
+input[type=text]{width:150px;padding:5px 9px;font-size:11px;border:.5px solid var(--bdr2);border-radius:var(--rmd);background:var(--bg1);color:var(--txt1);}
 input[type=text]::placeholder{color:var(--txt3);}
-.qb{font-size:11px;padding:4px 9px;border:0.5px solid var(--bdr2);border-radius:var(--rmd);background:var(--bg1);color:var(--txt2);cursor:pointer;}
+.qb,.mb,.nb{font-size:11px;padding:4px 8px;border:.5px solid var(--bdr2);border-radius:var(--rmd);background:var(--bg1);color:var(--txt2);cursor:pointer;}
+.mb{padding:4px 11px;}
 .qb.on{background:var(--bg2);color:var(--txt1);border-color:var(--bdr1);font-weight:500;}
-.mb{font-size:11px;padding:4px 12px;border:0.5px solid var(--bdr2);border-radius:var(--rmd);background:var(--bg1);color:var(--txt2);cursor:pointer;display:inline-flex;align-items:center;gap:5px;}
 .mb.on{background:#E6F1FB;color:#185FA5;border-color:#378ADD;font-weight:500;}
-.zs{display:flex;border:0.5px solid var(--bdr2);border-radius:var(--rmd);overflow:hidden;}
-.zs button{font-size:11px;padding:4px 10px;border:none;border-right:0.5px solid var(--bdr2);background:transparent;color:var(--txt2);cursor:pointer;}
+.nb:disabled{opacity:.35;cursor:default;}
+#pbtn{font-size:11px;padding:4px 11px;border:.5px solid var(--bdr2);border-radius:var(--rmd);background:var(--bg1);color:var(--txt2);cursor:pointer;}
+#pbtn.on{background:#E1F5EE;color:#0F6E56;border-color:#1D9E75;}
+.zs{display:flex;border:.5px solid var(--bdr2);border-radius:var(--rmd);overflow:hidden;}
+.zs button{font-size:11px;padding:4px 9px;border:none;border-right:.5px solid var(--bdr2);background:transparent;color:var(--txt2);cursor:pointer;}
 .zs button:last-child{border-right:none;}
 .zs button.on{background:var(--bg2);color:var(--txt1);font-weight:500;}
-.sep{width:0.5px;height:20px;background:var(--bdr2);}
-#tmbar{background:var(--bg2);border:0.5px solid var(--bdr2);border-radius:var(--rlg);padding:12px 16px;margin-bottom:10px;}
-#badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;background:var(--bg1);border:0.5px solid var(--bdr1);border-radius:var(--rmd);font-size:13px;font-weight:500;color:var(--txt1);}
-.nb{font-size:11px;padding:4px 10px;border:0.5px solid var(--bdr2);border-radius:var(--rmd);background:var(--bg1);color:var(--txt2);cursor:pointer;}
-.nb:disabled{opacity:0.35;cursor:default;}
-#pbtn{font-size:11px;padding:4px 12px;border:0.5px solid var(--bdr2);border-radius:var(--rmd);background:var(--bg1);color:var(--txt2);cursor:pointer;display:inline-flex;align-items:center;gap:5px;}
-#pbtn.on{background:#E1F5EE;color:#0F6E56;border-color:#1D9E75;}
-#pips{display:flex;justify-content:space-between;padding:0 2px;margin-top:10px;}
-.pip{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;flex:1;}
-.pip .dot{width:9px;height:9px;border-radius:50%;background:var(--bdr2);transition:background 0.2s,transform 0.2s;}
+.sep{width:.5px;height:20px;background:var(--bdr2);}
+#tmbar{background:var(--bg2);border:.5px solid var(--bdr2);border-radius:var(--rlg);padding:11px 14px;margin-bottom:10px;}
+#badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;background:var(--bg1);border:.5px solid var(--bdr1);border-radius:var(--rmd);font-size:13px;font-weight:500;color:var(--txt1);}
+#pips{display:flex;justify-content:space-between;padding:0 2px;margin-top:9px;}
+.pip{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;flex:1;}
+.pip .dot{width:9px;height:9px;border-radius:50%;background:var(--bdr2);transition:background .2s,transform .2s;}
 .pip.on .dot{background:#1D9E75;transform:scale(1.45);}
-.pip .lbl{font-size:9px;color:var(--txt3);text-align:center;line-height:1.25;white-space:nowrap;}
+.pip .lbl{font-size:9px;color:var(--txt3);text-align:center;line-height:1.2;white-space:nowrap;}
 .pip.on .lbl{color:#1D9E75;font-weight:500;}
-#scatter-wrap{width:100%;height:500px;position:relative;}
-#delta-wrap{display:none;background:var(--bg2);border:0.5px solid var(--bdr2);border-radius:var(--rlg);overflow:hidden;}
-.dh{display:grid;grid-template-columns:64px 1fr 68px 68px 72px 72px 90px;gap:4px;padding:8px 14px;font-size:10px;color:var(--txt3);text-transform:uppercase;letter-spacing:.04em;border-bottom:0.5px solid var(--bdr2);}
-.dr{display:grid;grid-template-columns:64px 1fr 68px 68px 72px 72px 90px;gap:4px;padding:7px 14px;font-size:11px;border-bottom:0.5px solid var(--bdr3);align-items:center;}
+#cvs-wrap{width:100%;height:510px;}
+#cvs-wrap canvas{width:100%;height:100%;}
+#delta-wrap{display:none;background:var(--bg2);border:.5px solid var(--bdr2);border-radius:var(--rlg);overflow:hidden;}
+.dh,.dr{display:grid;grid-template-columns:60px 1fr 65px 65px 68px 68px 88px;gap:4px;padding:7px 13px;font-size:11px;align-items:center;}
+.dh{font-size:10px;color:var(--txt3);text-transform:uppercase;letter-spacing:.04em;border-bottom:.5px solid var(--bdr2);}
+.dr{border-bottom:.5px solid var(--bdr3);}
 .dr:last-child{border-bottom:none;}
 .dr.up{background:#E1F5EE;border-left:3px solid #1D9E75;}
 .dr.dn{background:#FAECE7;border-left:3px solid #D85A30;}
 .dr.bm{background:#FFF8EC;border-left:3px solid #BA7517;}
-.spark{display:inline-flex;gap:1.5px;align-items:flex-end;height:20px;}
+.spark{display:inline-flex;gap:1.5px;align-items:flex-end;height:18px;}
 .sb{width:5px;border-radius:1px;}
-#dp{display:none;background:var(--bg1);border:0.5px solid var(--bdr2);border-radius:var(--rlg);padding:14px 16px;margin-top:10px;}
-.dpg{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-top:10px;}
-.dpm{background:var(--bg2);border-radius:var(--rmd);padding:8px 10px;}
+#dp-panel{display:none;background:var(--bg1);border:.5px solid var(--bdr2);border-radius:var(--rlg);padding:13px 15px;margin-top:9px;}
+.dpg{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:7px;margin-top:9px;}
+.dpm{background:var(--bg2);border-radius:var(--rmd);padding:7px 9px;}
 .dpm .l{font-size:10px;color:var(--txt3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px;}
-.dpm .v{font-size:14px;font-weight:500;color:var(--txt1);}
-#no-match{display:none;padding:18px 14px;font-size:12px;color:var(--txt3);text-align:center;}
-.al{border-radius:var(--rmd);padding:9px 13px;margin-bottom:6px;font-size:11px;line-height:1.5;}
-.al:last-child{margin-bottom:0;}
-.al-title{font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-size:10px;margin-bottom:2px;}
-.al-green{background:#E1F5EE;border:0.5px solid #1D9E75;}.al-green .al-title{color:#0F6E56;}
-.al-red{background:#FAECE7;border:0.5px solid #D85A30;}.al-red .al-title{color:#993C1D;}
-.al-amber{background:#FFF8EC;border:0.5px solid #BA7517;}.al-amber .al-title{color:#BA7517;}
-.al-blue{background:#E6F1FB;border:0.5px solid #378ADD;}.al-blue .al-title{color:#185FA5;}
-.al-purple{background:#EEF2FF;border:0.5px solid #6366F1;}.al-purple .al-title{color:#4338CA;}
+.dpm .v{font-size:13px;font-weight:500;color:var(--txt1);}
+#nm{display:none;padding:16px;font-size:12px;color:var(--txt3);text-align:center;}
+.al{border-radius:var(--rmd);padding:8px 12px;margin-bottom:5px;font-size:11px;line-height:1.5;}
+.al-t{font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-size:10px;margin-bottom:2px;}
+.g{background:#E1F5EE;border:.5px solid #1D9E75;}.g .al-t{color:#0F6E56;}
+.r{background:#FAECE7;border:.5px solid #D85A30;}.r .al-t{color:#993C1D;}
+.a{background:#FFF8EC;border:.5px solid #BA7517;}.a .al-t{color:#BA7517;}
+.p{background:#EEF2FF;border:.5px solid #6366F1;}.p .al-t{color:#4338CA;}
 </style>
 
-<div style="padding-top:.75rem;">
+<div style="padding-top:.6rem">
 
-<!-- CUSTOM ALERT PANEL — update this section each session -->
-<div id="alert-panel" style="margin-bottom:10px;">
-  <div class="al al-green">
-    <div class="al-title">✅ ERH — Quadrant Change: Orange → Green</div>
-    <div style="color:var(--txt2);">Z1Y +0.25 (from -0.76). D/P -7.59% (negative). Z positive, D/P negative → green. Recovering toward -7.93% historical average.</div>
-  </div>
-  <div class="al al-red">
-    <div class="al-title">⚠ NXG — Quadrant Change: Blue → Orange</div>
-    <div style="color:var(--txt2);">Z1Y -0.52, D/P -3.35%. Premium fully unwound in one session. Pass confirmed correct — no position taken.</div>
-  </div>
-  <div class="al al-red">
-    <div class="al-title">⚠ BST — Add Trigger Reset</div>
-    <div style="color:var(--txt2);">Z1Y worsened to -2.22 (from -1.72). Two-session improvement clock resets to zero. Watch for renewed consecutive improvement.</div>
-  </div>
-  <div class="al al-amber">
-    <div class="al-title">⚡ BUI — One Tick from Blue</div>
-    <div style="color:var(--txt2);">Z1Y -0.12, D/P +2.14% (gray). Second tranche trigger fires when Z crosses zero. Watch Monday 06/16.</div>
-  </div>
-  <div class="al al-red">
-    <div class="al-title">⚠ NBXG — Initiation Watch Paused</div>
-    <div style="color:var(--txt2);">Z1Y worsened to -1.53 (from -0.46). Discount widened to -14.78%. Wait for stabilization before initiating.</div>
-  </div>
-  <div class="al al-purple">
-    <div class="al-title">⚑ RQI — Z3M Anomaly · Fourth Consecutive Session</div>
-    <div style="color:var(--txt2);">Z3M -3.86 persists vs Z1Y -1.16. Using Z1Y for all classification decisions. Data source artifact confirmed.</div>
-  </div>
+<div style="margin-bottom:9px">
+<div class="al g"><div class="al-t">✅ BUI — gray→blue</div><div style="color:var(--txt2)">Z1Y -0.13, D/P +2.12%. Z3M +2.00. Second tranche fires when Z1Y crosses zero.</div></div>
+<div class="al g"><div class="al-t">✅ ERH — green session 2</div><div style="color:var(--txt2)">Z1Y -0.38, D/P -8.44%. Holding green quadrant.</div></div>
+<div class="al r"><div class="al-t">⚠ BST — add trigger session 1 of 2</div><div style="color:var(--txt2)">Z1Y improved -2.22→-1.22. Need session 2 confirmation.</div></div>
+<div class="al r"><div class="al-t">⚠ RNP — deepening</div><div style="color:var(--txt2)">Z3M -2.92, Z6M -2.81, Z1Y -1.79. D/P -7.59% vs avg -0.33%.</div></div>
+<div class="al r"><div class="al-t">⚠ RFI — deepening</div><div style="color:var(--txt2)">Z1Y -2.37, Z6M -2.22. D/P -5.86% vs avg +0.53%.</div></div>
+<div class="al a"><div class="al-t">⚡ EOI — discount widening</div><div style="color:var(--txt2)">Z1Y -1.81, D/P -7.76% vs avg -2.23%.</div></div>
+<div class="al p"><div class="al-t">⚑ RQI — Z3M anomaly session 5</div><div style="color:var(--txt2)">Z3M -3.32 vs Z1Y -1.06. Using Z1Y for classification.</div></div>
 </div>
 
 <div id="tmbar">
-  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
-    <div style="font-size:11px;color:var(--txt2);font-weight:500;">
-      ⏱ Time machine — 10 sessions
-      <span style="font-weight:400;color:var(--txt3);">06/01 → 06/12 · 27 funds</span>
-    </div>
-    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-      <div id="badge">📅 <span id="bdg">06/12/2026</span></div>
-      <div style="display:flex;gap:6px;align-items:center;">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:7px;margin-bottom:9px">
+    <div style="font-size:11px;color:var(--txt2);font-weight:500">⏱ Time machine — 10 sessions <span style="font-weight:400;color:var(--txt3)">06/02→06/15 · 27 funds</span></div>
+    <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+      <div id="badge">📅 <span id="bdg">06/15/2026</span></div>
+      <div style="display:flex;gap:5px">
         <button class="nb" id="bprev">◀</button>
-        <button id="pbtn">▶ <span id="plbl">Play</span></button>
+        <button id="pbtn">▶ Play</button>
         <button class="nb" id="bnext">▶</button>
       </div>
     </div>
   </div>
-  <input type="range" id="slider" min="0" max="9" value="9" step="1" style="width:100%;"/>
+  <input type="range" id="slider" min="0" max="9" value="9" step="1" style="width:100%">
   <div id="pips"></div>
 </div>
 
-<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
-  <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;">
-    <input type="text" id="srch" placeholder="Search tickers…"/>
-    <div style="display:flex;gap:4px;flex-wrap:wrap;">
-      <button class="qb on" data-q="all">All</button>
-      <button class="qb" data-q="green" style="border-left:3px solid #1D9E75;">Disc+Z↑</button>
-      <button class="qb" data-q="blue" style="border-left:3px solid #378ADD;">Prem+Z↑</button>
-      <button class="qb" data-q="orange" style="border-left:3px solid #D85A30;">Disc+Z↓</button>
-      <button class="qb" data-q="gray" style="border-left:3px solid #888780;">Prem+Z↓</button>
-    </div>
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:7px;margin-bottom:9px">
+  <div style="display:flex;gap:5px;flex-wrap:wrap;align-items:center">
+    <input type="text" id="srch" placeholder="Search tickers…">
+    <button class="qb on" data-q="all">All</button>
+    <button class="qb" data-q="green" style="border-left:3px solid #1D9E75">Disc+Z↑</button>
+    <button class="qb" data-q="blue" style="border-left:3px solid #378ADD">Prem+Z↑</button>
+    <button class="qb" data-q="orange" style="border-left:3px solid #D85A30">Disc+Z↓</button>
+    <button class="qb" data-q="gray" style="border-left:3px solid #888780">Prem+Z↓</button>
   </div>
-  <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;">
-    <div class="zs">
-      <button data-p="z3m">3M</button>
-      <button data-p="z6m">6M</button>
-      <button data-p="z1y" class="on">1Y</button>
-    </div>
+  <div style="display:flex;gap:5px;flex-wrap:wrap;align-items:center">
+    <div class="zs"><button data-p="z3m">3M</button><button data-p="z6m">6M</button><button data-p="z1y" class="on">1Y</button></div>
     <div class="sep"></div>
     <button class="mb on" id="mscat" onclick="setMode('scatter')">⬡ Scatter</button>
     <button class="mb" id="mdelta" onclick="setMode('delta')">⇅ Delta</button>
   </div>
 </div>
 
-<div id="leg-s" style="display:flex;flex-wrap:wrap;gap:10px;font-size:11px;color:var(--txt2);margin-bottom:8px;">
-  <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#1D9E75;display:inline-block;"></span>Discount+Z narrowing</span>
-  <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#378ADD;display:inline-block;"></span>Premium+Z narrowing</span>
-  <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#D85A30;display:inline-block;"></span>Discount+Z widening</span>
-  <span style="display:flex;align-items:center;gap:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#888780;display:inline-block;"></span>Premium+Z widening</span>
-  <span style="font-size:10px;color:var(--txt3);">Click dot for details · search highlights</span>
+<div id="leg-s" style="display:flex;flex-wrap:wrap;gap:9px;font-size:11px;color:var(--txt2);margin-bottom:7px">
+  <span style="display:flex;align-items:center;gap:4px"><span style="width:9px;height:9px;border-radius:50%;background:#1D9E75;display:inline-block"></span>Discount+Z↑</span>
+  <span style="display:flex;align-items:center;gap:4px"><span style="width:9px;height:9px;border-radius:50%;background:#378ADD;display:inline-block"></span>Premium+Z↑</span>
+  <span style="display:flex;align-items:center;gap:4px"><span style="width:9px;height:9px;border-radius:50%;background:#D85A30;display:inline-block"></span>Discount+Z↓</span>
+  <span style="display:flex;align-items:center;gap:4px"><span style="width:9px;height:9px;border-radius:50%;background:#888780;display:inline-block"></span>Premium+Z↓</span>
+  <span style="font-size:10px;color:var(--txt3)">Click dot · search highlights · dashed=52wk avg</span>
 </div>
-<div id="leg-d" style="display:none;flex-wrap:wrap;gap:10px;font-size:11px;color:var(--txt2);margin-bottom:8px;">
-  <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;background:#E1F5EE;border-left:3px solid #1D9E75;display:inline-block;"></span>Quadrant upgrade</span>
-  <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;background:#FAECE7;border-left:3px solid #D85A30;display:inline-block;"></span>Quadrant downgrade</span>
-  <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;background:#FFF8EC;border-left:3px solid #BA7517;display:inline-block;"></span>Large move ≥0.50 z</span>
-  <span style="font-size:10px;color:var(--txt3);">Always A→Z · search filters rows</span>
+<div id="leg-d" style="display:none;flex-wrap:wrap;gap:9px;font-size:11px;color:var(--txt2);margin-bottom:7px">
+  <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:#E1F5EE;border-left:3px solid #1D9E75;display:inline-block"></span>Upgrade</span>
+  <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:#FAECE7;border-left:3px solid #D85A30;display:inline-block"></span>Downgrade</span>
+  <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:#FFF8EC;border-left:3px solid #BA7517;display:inline-block"></span>Large move ≥0.50z</span>
+  <span style="font-size:10px;color:var(--txt3)">Always A→Z · search filters rows</span>
 </div>
 
-<div id="scatter-wrap"><canvas id="qc"></canvas></div>
+<div id="cvs-wrap"><canvas id="cvs"></canvas></div>
 
 <div id="delta-wrap">
-  <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:0.5px solid var(--bdr2);">
-    <span style="font-size:12px;font-weight:500;color:var(--txt1);">Session-over-session delta</span>
-    <span id="dsub" style="font-size:11px;color:var(--txt3);"></span>
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 13px;border-bottom:.5px solid var(--bdr2)">
+    <span style="font-size:12px;font-weight:500;color:var(--txt1)">Session delta</span>
+    <span id="dsub" style="font-size:11px;color:var(--txt3)"></span>
   </div>
-  <div class="dh">
-    <span>Ticker</span><span>Z history</span>
-    <span style="text-align:right;">Z prev</span>
-    <span style="text-align:right;">Z now</span>
-    <span style="text-align:right;">Δ Z</span>
-    <span style="text-align:right;">D/P Δ</span>
-    <span style="text-align:right;">Quadrant</span>
-  </div>
-  <div id="drows"></div>
-  <div id="no-match">No tickers match your search.</div>
+  <div class="dh"><span>Ticker</span><span>Z history</span><span style="text-align:right">Z prev</span><span style="text-align:right">Z now</span><span style="text-align:right">Δ Z</span><span style="text-align:right">D/P Δ</span><span style="text-align:right">Quadrant</span></div>
+  <div id="drows"></div><div id="nm">No tickers match.</div>
 </div>
 
-<div id="dp">
-  <div style="display:flex;justify-content:space-between;align-items:center;">
-    <div><span id="dpt" style="font-size:18px;font-weight:500;color:var(--txt1);"></span><span id="dpq" style="font-size:11px;margin-left:8px;padding:2px 8px;border-radius:var(--rmd);"></span></div>
-    <button onclick="document.getElementById('dp').style.display='none'" style="background:none;border:none;cursor:pointer;color:var(--txt2);font-size:18px;">✕</button>
+<div id="dp-panel">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <div><span id="dpt" style="font-size:17px;font-weight:500;color:var(--txt1)"></span><span id="dpq" style="font-size:11px;margin-left:7px;padding:2px 7px;border-radius:var(--rmd)"></span></div>
+    <button onclick="document.getElementById('dp-panel').style.display='none'" style="background:none;border:none;cursor:pointer;color:var(--txt2);font-size:17px">✕</button>
   </div>
   <div class="dpg" id="dpg"></div>
 </div>
 
-<div id="cbox" style="margin-top:12px;padding:12px 14px;border-top:0.5px solid var(--bdr3);"></div>
-<div style="margin-top:8px;padding:10px 14px;border-top:0.5px solid var(--bdr3);font-size:10.5px;color:var(--txt3);line-height:1.55;"><em>For informational purposes only. Not investment advice. Past performance is no guarantee of future results. Always conduct your own due diligence before making investment decisions.</em></div>
+<div id="cbox" style="margin-top:11px;padding:11px 13px;border-top:.5px solid var(--bdr3)"></div>
+<div style="margin-top:7px;padding:9px 13px;border-top:.5px solid var(--bdr3);font-size:10px;color:var(--txt3);line-height:1.5"><em>For informational purposes only. Not investment advice. Past performance is no guarantee of future results. Always conduct your own due diligence before making investment decisions.</em></div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-<script>if(typeof Chart==='undefined'){document.write('<scr'+'ipt src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"><\/scr'+'ipt>');}</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
-<script>if(typeof ChartDataLabels==='undefined'){document.write('<scr'+'ipt src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"><\/scr'+'ipt>');}</script>
 <script>
-const DATES=['06/01/2026','06/02/2026','06/03/2026','06/04/2026','06/05/2026','06/08/2026','06/09/2026','06/10/2026','06/11/2026','06/12/2026'];
-const NC={'06/01/2026':'-$3.78','06/02/2026':'-$1.20','06/03/2026':'-$1.11','06/04/2026':'-$0.61','06/05/2026':'-$14.59','06/08/2026':'-$1.63','06/09/2026':'-$3.46','06/10/2026':'-$9.05','06/11/2026':'+$4.44','06/12/2026':'+$13.79'};
+const DATES=['06/02/2026','06/03/2026','06/04/2026','06/05/2026','06/08/2026','06/09/2026','06/10/2026','06/11/2026','06/12/2026','06/15/2026'];
+const NC={'06/02/2026':'-$1.20','06/03/2026':'-$1.11','06/04/2026':'-$0.61','06/05/2026':'-$14.59','06/08/2026':'-$1.63','06/09/2026':'-$3.46','06/10/2026':'-$9.05','06/11/2026':'+$4.44','06/12/2026':'+$13.79','06/15/2026':'+$5.80'};
 const QO={green:0,blue:1,orange:2,gray:3};
-const SS={
-'06/01/2026':{AIO:{z3m:1.78,z6m:0.81,z1y:-0.63,dp:-8.86,avg:-4.99,yld:6.69,lev:'11.28%',nav:29.69,px:27.06,fr:'Monthly'},ASGI:{z3m:0.73,z6m:0.78,z1y:1.30,dp:5.92,avg:1.18,yld:11.45,lev:'0.82%',nav:22.29,px:23.61,fr:'Monthly'},BDJ:{z3m:-0.45,z6m:-1.09,z1y:-1.37,dp:-8.08,avg:-5.69,yld:8.02,lev:'0.12%',nav:10.02,px:9.21,fr:'Monthly'},BME:{z3m:0.91,z6m:1.19,z1y:1.78,dp:-3.75,avg:-6.42,yld:7.82,lev:'0.17%',nav:41.56,px:40.00,fr:'Monthly'},BST:{z3m:0.90,z6m:0.43,z1y:0.40,dp:-5.93,avg:-6.11,yld:6.06,lev:'0.10%',nav:52.42,px:49.31,fr:'Monthly'},BUI:{z3m:0.06,z6m:-0.68,z1y:-1.00,dp:-0.80,avg:2.52,yld:5.86,lev:'0.11%',nav:27.63,px:27.41,fr:'Monthly'},CSQ:{z3m:-0.37,z6m:-1.01,z1y:-1.29,dp:-10.13,avg:-6.91,yld:7.11,lev:'27.11%',nav:23.00,px:20.65,fr:'Monthly'},DNP:{z3m:1.20,z6m:0.48,z1y:0.39,dp:6.70,avg:5.68,yld:7.42,lev:'22.98%',nav:9.85,px:10.51,fr:'Monthly'},EOI:{z3m:-0.97,z6m:-1.23,z1y:-1.54,dp:-6.91,avg:-1.89,yld:8.00,lev:'--',nav:21.43,px:19.95,fr:'Monthly'},EOS:{z3m:-0.52,z6m:-1.15,z1y:-1.21,dp:-9.37,avg:-4.44,yld:7.96,lev:'--',nav:25.29,px:22.92,fr:'Monthly'},ERH:{z3m:1.06,z6m:1.29,z1y:0.81,dp:-8.22,avg:-8.00,yld:8.72,lev:'20.84%',nav:12.90,px:11.84,fr:'Monthly'},ETG:{z3m:-0.12,z6m:-0.96,z1y:-1.60,dp:-9.48,avg:-6.11,yld:6.65,lev:'15.85%',nav:25.73,px:23.29,fr:'Monthly'},GDV:{z3m:0.16,z6m:0.48,z1y:0.90,dp:-10.27,avg:-10.75,yld:6.16,lev:'14.45%',nav:32.53,px:29.19,fr:'Monthly'},GLU:{z3m:-0.94,z6m:-1.44,z1y:-1.61,dp:-4.41,avg:0.23,yld:6.80,lev:'17.67%',nav:20.18,px:19.29,fr:'Monthly'},HTD:{z3m:2.41,z6m:2.72,z1y:2.22,dp:-4.88,avg:-6.53,yld:7.39,lev:'31.20%',nav:26.63,px:25.33,fr:'Monthly'},NBXG:{z3m:1.78,z6m:1.06,z1y:-0.02,dp:-12.32,avg:-12.28,yld:8.63,lev:'--',nav:19.16,px:16.80,fr:'Monthly'},NXG:{z3m:-0.91,z6m:-1.42,z1y:-1.77,dp:-6.78,avg:-1.27,yld:11.15,lev:'27.00%',nav:62.95,px:58.68,fr:'Monthly'},PCN:{z3m:-0.60,z6m:-1.22,z1y:-1.53,dp:2.71,avg:7.00,yld:11.42,lev:'5.89%',nav:11.46,px:11.77,fr:'Monthly'},PDI:{z3m:-1.64,z6m:-1.39,z1y:-1.40,dp:4.72,avg:10.04,yld:15.78,lev:'32.02%',nav:15.90,px:16.65,fr:'Monthly'},PDO:{z3m:-0.21,z6m:-0.79,z1y:-1.15,dp:2.11,avg:3.93,yld:11.67,lev:'34.64%',nav:12.77,px:13.04,fr:'Monthly'},PDX:{z3m:2.35,z6m:2.56,z1y:0.89,dp:-7.35,avg:-9.15,yld:7.39,lev:'22.71%',nav:23.41,px:21.69,fr:'Monthly'},RFI:{z3m:-1.56,z6m:-2.15,z1y:-2.25,dp:-4.66,avg:0.88,yld:8.63,lev:'0.04%',nav:11.81,px:11.12,fr:'Monthly'},RLTY:{z3m:-1.60,z6m:-1.96,z1y:-1.99,dp:-9.52,avg:-6.43,yld:8.39,lev:'33.00%',nav:17.12,px:15.49,fr:'Monthly'},RNP:{z3m:-0.19,z6m:-0.40,z1y:-0.99,dp:-3.97,avg:0.05,yld:7.76,lev:'29.97%',nav:21.91,px:20.75,fr:'Monthly'},RQI:{z3m:1.59,z6m:0.90,z1y:1.50,dp:-0.07,avg:-3.10,yld:8.10,lev:'28.35%',nav:13.35,px:13.07,fr:'Monthly'},UTF:{z3m:2.43,z6m:1.77,z1y:-0.11,dp:-4.16,avg:-3.63,yld:7.35,lev:'27.80%',nav:28.10,px:26.69,fr:'Monthly'},UTG:{z3m:0.53,z6m:0.29,z1y:0.30,dp:0.07,avg:-0.25,yld:5.65,lev:'18.84%',nav:42.39,px:41.59,fr:'Monthly'}},
-'06/02/2026':{AIO:{z3m:0.61,z6m:-0.03,z1y:-0.82,dp:-9.98,avg:-4.99,yld:6.57,lev:'11.28%',nav:30.06,px:27.40,fr:'Monthly'},ASGI:{z3m:-0.62,z6m:-0.68,z1y:0.20,dp:1.93,avg:1.22,yld:12.13,lev:'0.83%',nav:22.16,px:22.75,fr:'Monthly'},BDJ:{z3m:-0.61,z6m:-1.20,z1y:-1.52,dp:-7.81,avg:-5.69,yld:8.10,lev:'0.12%',nav:9.99,px:9.17,fr:'Monthly'},BME:{z3m:1.53,z6m:1.63,z1y:2.15,dp:-2.49,avg:-6.42,yld:8.00,lev:'0.17%',nav:41.02,px:39.33,fr:'Monthly'},BST:{z3m:-0.66,z6m:-1.16,z1y:-1.56,dp:-8.46,avg:-6.12,yld:6.02,lev:'0.10%',nav:53.87,px:49.84,fr:'Monthly'},BUI:{z3m:0.54,z6m:-0.28,z1y:-0.52,dp:0.81,avg:2.53,yld:5.95,lev:'0.11%',nav:27.19,px:27.36,fr:'Monthly'},CSQ:{z3m:-1.07,z6m:-1.31,z1y:-1.45,dp:-10.59,avg:-6.96,yld:7.09,lev:'26.96%',nav:23.18,px:20.73,fr:'Monthly'},DNP:{z3m:1.85,z6m:1.06,z1y:1.13,dp:8.69,avg:5.69,yld:7.34,lev:'22.98%',nav:9.67,px:10.63,fr:'Monthly'},EOI:{z3m:-1.30,z6m:-1.54,z1y:-1.77,dp:-6.99,avg:-1.89,yld:8.05,lev:'--',nav:21.45,px:19.94,fr:'Monthly'},EOS:{z3m:-0.98,z6m:-1.48,z1y:-1.33,dp:-9.69,avg:-4.44,yld:7.96,lev:'--',nav:25.38,px:22.97,fr:'Monthly'},ERH:{z3m:2.03,z6m:2.57,z1y:1.81,dp:-5.51,avg:-7.99,yld:8.83,lev:'20.84%',nav:12.53,px:11.86,fr:'Monthly'},ETG:{z3m:-0.73,z6m:-1.26,z1y:-1.95,dp:-10.08,avg:-6.11,yld:6.62,lev:'15.77%',nav:25.90,px:23.44,fr:'Monthly'},GDV:{z3m:0.24,z6m:0.57,z1y:1.00,dp:-10.05,avg:-10.75,yld:6.17,lev:'14.45%',nav:32.45,px:29.19,fr:'Monthly'},GLU:{z3m:-0.66,z6m:-1.23,z1y:-1.34,dp:-3.21,avg:0.23,yld:6.84,lev:'17.67%',nav:19.93,px:19.29,fr:'Monthly'},HTD:{z3m:2.31,z6m:2.67,z1y:2.21,dp:-3.69,avg:-6.52,yld:7.51,lev:'31.20%',nav:26.30,px:25.23,fr:'Monthly'},NBXG:{z3m:1.12,z6m:0.48,z1y:-0.42,dp:-12.95,avg:-12.28,yld:8.56,lev:'--',nav:19.30,px:16.82,fr:'Monthly'},NXG:{z3m:-0.29,z6m:-0.91,z1y:-1.19,dp:-5.61,avg:-1.27,yld:10.97,lev:'27.25%',nav:62.17,px:59.07,fr:'Monthly'},PCN:{z3m:-1.03,z6m:-1.51,z1y:-1.76,dp:2.53,avg:7.00,yld:11.47,lev:'5.88%',nav:11.48,px:11.77,fr:'Monthly'},PDI:{z3m:-1.78,z6m:-1.51,z1y:-1.47,dp:4.45,avg:10.04,yld:15.83,lev:'32.02%',nav:15.94,px:16.72,fr:'Monthly'},PDO:{z3m:-0.33,z6m:-0.91,z1y:-1.30,dp:1.88,avg:3.93,yld:11.72,lev:'34.64%',nav:12.80,px:13.10,fr:'Monthly'},PDX:{z3m:1.91,z6m:2.09,z1y:0.65,dp:-7.94,avg:-9.15,yld:7.39,lev:'22.71%',nav:23.56,px:21.67,fr:'Monthly'},RFI:{z3m:-1.34,z6m:-1.90,z1y:-2.09,dp:-4.37,avg:0.83,yld:8.61,lev:'0.04%',nav:11.63,px:11.15,fr:'Monthly'},RLTY:{z3m:0.13,z6m:-0.61,z1y:-1.09,dp:-8.13,avg:-6.43,yld:8.52,lev:'33.34%',nav:16.80,px:15.49,fr:'Monthly'},RNP:{z3m:-0.32,z6m:-0.54,z1y:-1.04,dp:-4.20,avg:0.01,yld:7.86,lev:'30.25%',nav:21.62,px:20.77,fr:'Monthly'},RQI:{z3m:1.58,z6m:0.87,z1y:1.48,dp:-0.08,avg:-3.08,yld:8.24,lev:'28.78%',nav:13.07,px:13.11,fr:'Monthly'},UTF:{z3m:2.04,z6m:1.57,z1y:-0.14,dp:-4.34,avg:-3.67,yld:7.37,lev:'28.06%',nav:27.74,px:26.87,fr:'Monthly'},UTG:{z3m:0.53,z6m:0.29,z1y:0.30,dp:0.07,avg:-0.25,yld:5.72,lev:'18.84%',nav:41.56,px:41.97,fr:'Monthly'}},
-'06/03/2026':{AIO:{z3m:-0.91,z6m:-1.09,z1y:-1.04,dp:-11.38,avg:-5.06,yld:6.57,lev:'10.88%',nav:30.92,px:27.43,fr:'Monthly'},ASGI:{z3m:-0.93,z6m:-1.03,z1y:-0.08,dp:0.94,avg:1.25,yld:12.13,lev:'0.82%',nav:22.32,px:22.44,fr:'Monthly'},BDJ:{z3m:-1.35,z6m:-1.69,z1y:-2.17,dp:-8.19,avg:-5.71,yld:8.08,lev:'0.12%',nav:10.05,px:9.19,fr:'Monthly'},BME:{z3m:1.44,z6m:1.57,z1y:2.09,dp:-2.55,avg:-6.39,yld:8.02,lev:'0.17%',nav:40.36,px:39.21,fr:'Monthly'},BST:{z3m:-0.71,z6m:-1.22,z1y:-1.64,dp:-8.60,avg:-6.16,yld:6.02,lev:'0.09%',nav:54.53,px:49.09,fr:'Monthly'},BUI:{z3m:0.06,z6m:-0.69,z1y:-1.02,dp:-0.87,avg:2.53,yld:6.02,lev:'0.11%',nav:27.60,px:27.11,fr:'Monthly'},CSQ:{z3m:-1.39,z6m:-1.43,z1y:-1.52,dp:-10.79,avg:-6.99,yld:7.17,lev:'26.96%',nav:22.98,px:20.50,fr:'Monthly'},DNP:{z3m:1.60,z6m:0.90,z1y:0.92,dp:8.14,avg:5.69,yld:7.33,lev:'23.02%',nav:9.83,px:10.64,fr:'Monthly'},EOI:{z3m:-1.25,z6m:-1.53,z1y:-1.74,dp:-6.95,avg:-1.93,yld:8.11,lev:'--',nav:21.43,px:19.79,fr:'Monthly'},EOS:{z3m:-0.55,z6m:-1.16,z1y:-1.21,dp:-9.25,avg:-4.48,yld:8.03,lev:'--',nav:25.31,px:22.77,fr:'Monthly'},ERH:{z3m:0.94,z6m:1.18,z1y:0.73,dp:-6.98,avg:-7.98,yld:8.81,lev:'21.04%',nav:12.75,px:11.88,fr:'Monthly'},ETG:{z3m:-0.16,z6m:-0.97,z1y:-1.62,dp:-9.43,avg:-6.13,yld:6.72,lev:'15.78%',nav:25.88,px:23.10,fr:'Monthly'},GDV:{z3m:-0.46,z6m:-0.24,z1y:0.17,dp:-10.62,avg:-10.74,yld:6.20,lev:'14.40%',nav:32.66,px:29.02,fr:'Monthly'},GLU:{z3m:-1.13,z6m:-1.55,z1y:-1.78,dp:-4.36,avg:0.22,yld:6.85,lev:'17.67%',nav:20.17,px:19.27,fr:'Monthly'},HTD:{z3m:1.31,z6m:1.54,z1y:1.12,dp:-5.08,avg:-6.51,yld:7.51,lev:'31.24%',nav:26.58,px:25.24,fr:'Monthly'},NBXG:{z3m:0.55,z6m:0.02,z1y:-0.75,dp:-13.48,avg:-12.29,yld:8.56,lev:'--',nav:19.44,px:16.61,fr:'Monthly'},NXG:{z3m:-0.78,z6m:-1.30,z1y:-1.65,dp:-7.34,avg:-1.31,yld:12.19,lev:'22.00%',nav:63.75,px:59.69,fr:'Monthly'},PCN:{z3m:-1.11,z6m:-1.53,z1y:-1.77,dp:2.44,avg:6.98,yld:11.58,lev:'5.88%',nav:11.49,px:11.66,fr:'Monthly'},PDI:{z3m:-1.54,z6m:-1.35,z1y:-1.37,dp:4.76,avg:10.01,yld:15.82,lev:'31.94%',nav:15.96,px:16.73,fr:'Monthly'},PDO:{z3m:-0.14,z6m:-0.74,z1y:-1.10,dp:2.18,avg:3.92,yld:11.72,lev:'34.55%',nav:12.82,px:13.00,fr:'Monthly'},PDX:{z3m:1.77,z6m:1.96,z1y:0.60,dp:-8.02,avg:-9.15,yld:7.39,lev:'22.60%',nav:23.56,px:21.52,fr:'Monthly'},RFI:{z3m:-1.34,z6m:-1.90,z1y:-2.09,dp:-4.38,avg:0.79,yld:8.62,lev:'0.04%',nav:11.66,px:11.14,fr:'Monthly'},RLTY:{z3m:0.13,z6m:-0.61,z1y:-1.09,dp:-7.96,avg:-6.44,yld:8.52,lev:'33.34%',nav:16.86,px:15.49,fr:'Monthly'},RNP:{z3m:-0.32,z6m:-0.54,z1y:-1.04,dp:-3.97,avg:-0.02,yld:7.85,lev:'30.19%',nav:21.68,px:20.78,fr:'Monthly'},RQI:{z3m:1.58,z6m:0.87,z1y:1.48,dp:0.00,avg:-3.06,yld:8.24,lev:'28.71%',nav:13.12,px:13.11,fr:'Monthly'},UTF:{z3m:2.04,z6m:1.57,z1y:-0.14,dp:-4.01,avg:-3.70,yld:7.39,lev:'27.81%',nav:28.09,px:26.80,fr:'Monthly'},UTG:{z3m:-0.53,z6m:-0.80,z1y:-0.58,dp:-0.87,avg:-0.25,yld:5.73,lev:'18.38%',nav:42.29,px:41.92,fr:'Monthly'}},
-'06/04/2026':{AIO:{z3m:-0.05,z6m:-0.49,z1y:-0.91,dp:-10.62,avg:-5.13,yld:7.89,lev:'10.95%',nav:30.69,px:27.37,fr:'Monthly'},ASGI:{z3m:-0.51,z6m:-0.60,z1y:0.23,dp:2.10,avg:1.28,yld:12.10,lev:'0.82%',nav:22.23,px:22.81,fr:'Monthly'},BDJ:{z3m:-0.91,z6m:-1.36,z1y:-1.75,dp:-8.50,avg:-5.72,yld:8.02,lev:'0.12%',nav:10.01,px:9.26,fr:'Monthly'},BME:{z3m:0.57,z6m:0.92,z1y:1.55,dp:-4.57,avg:-6.38,yld:7.89,lev:'0.17%',nav:40.64,px:39.87,fr:'Monthly'},BST:{z3m:-1.28,z6m:-1.75,z1y:-2.30,dp:-8.78,avg:-6.17,yld:6.16,lev:'0.09%',nav:54.33,px:48.72,fr:'Monthly'},BUI:{z3m:-0.08,z6m:-0.83,z1y:-1.20,dp:-1.45,avg:2.53,yld:5.96,lev:'0.11%',nav:27.51,px:27.38,fr:'Monthly'},CSQ:{z3m:-1.06,z6m:-1.28,z1y:-1.44,dp:-10.61,avg:-7.02,yld:7.12,lev:'27.13%',nav:23.10,px:20.65,fr:'Monthly'},DNP:{z3m:1.74,z6m:1.09,z1y:1.16,dp:8.79,avg:5.70,yld:7.30,lev:'23.11%',nav:9.78,px:10.69,fr:'Monthly'},EOI:{z3m:-1.34,z6m:-1.63,z1y:-1.80,dp:-7.18,avg:-1.96,yld:8.07,lev:'--',nav:21.32,px:19.89,fr:'Monthly'},EOS:{z3m:-0.42,z6m:-1.07,z1y:-1.18,dp:-9.14,avg:-4.52,yld:8.04,lev:'--',nav:25.06,px:22.73,fr:'Monthly'},ERH:{z3m:1.47,z6m:1.84,z1y:1.27,dp:-6.24,avg:-7.97,yld:8.81,lev:'21.14%',nav:12.67,px:11.88,fr:'Monthly'},ETG:{z3m:-0.66,z6m:-1.20,z1y:-1.88,dp:-10.01,avg:-6.15,yld:6.69,lev:'15.89%',nav:25.67,px:23.20,fr:'Monthly'},GDV:{z3m:-0.42,z6m:-0.21,z1y:0.20,dp:-10.60,avg:-10.74,yld:6.20,lev:'14.48%',nav:32.46,px:29.06,fr:'Monthly'},GLU:{z3m:-0.82,z6m:-1.32,z1y:-1.50,dp:-3.66,avg:0.21,yld:6.81,lev:'17.80%',nav:20.00,px:19.38,fr:'Monthly'},HTD:{z3m:1.68,z6m:2.02,z1y:1.61,dp:-4.43,avg:-6.48,yld:7.51,lev:'31.38%',nav:26.41,px:25.24,fr:'Monthly'},NBXG:{z3m:-0.38,z6m:-0.78,z1y:-1.28,dp:-13.53,avg:-12.30,yld:8.66,lev:'--',nav:19.39,px:16.62,fr:'Monthly'},NXG:{z3m:-0.26,z6m:-0.89,z1y:-1.18,dp:-5.64,avg:-1.33,yld:11.93,lev:'26.91%',nav:63.26,px:60.34,fr:'Monthly'},PCN:{z3m:-1.65,z6m:-1.84,z1y:-2.02,dp:1.75,avg:6.93,yld:11.42,lev:'5.89%',nav:11.46,px:11.82,fr:'Monthly'},PDI:{z3m:-1.31,z6m:-1.19,z1y:-1.28,dp:5.09,avg:9.96,yld:15.73,lev:'31.99%',nav:15.92,px:16.82,fr:'Monthly'},PDO:{z3m:-0.40,z6m:-1.00,z1y:-1.43,dp:1.64,avg:3.91,yld:11.71,lev:'34.60%',nav:12.79,px:13.11,fr:'Monthly'},PDX:{z3m:1.25,z6m:1.38,z1y:0.26,dp:-8.66,avg:-9.15,yld:7.45,lev:'22.60%',nav:23.56,px:21.50,fr:'Monthly'},RFI:{z3m:-1.61,z6m:-2.14,z1y:-2.28,dp:-4.98,avg:0.76,yld:8.53,lev:'0.04%',nav:11.65,px:11.26,fr:'Monthly'},RLTY:{z3m:-1.68,z6m:-1.95,z1y:-1.94,dp:-9.49,avg:-6.45,yld:8.49,lev:'33.38%',nav:16.83,px:15.55,fr:'Monthly'},RNP:{z3m:-0.76,z6m:-0.98,z1y:-1.17,dp:-4.82,avg:-0.02,yld:7.80,lev:'30.23%',nav:21.64,px:20.91,fr:'Monthly'},RQI:{z3m:0.50,z6m:0.54,z1y:1.13,dp:-0.75,avg:-3.05,yld:8.11,lev:'28.72%',nav:13.11,px:13.32,fr:'Monthly'},UTF:{z3m:1.97,z6m:1.64,z1y:-0.09,dp:-4.15,avg:-3.73,yld:7.33,lev:'27.93%',nav:27.92,px:27.00,fr:'Monthly'},UTG:{z3m:-1.23,z6m:-1.52,z1y:-1.17,dp:-1.51,avg:-0.26,yld:5.75,lev:'18.58%',nav:42.39,px:41.75,fr:'Monthly'}},
-'06/05/2026':{AIO:{z3m:-0.15,z6m:-0.57,z1y:-0.92,dp:-10.73,avg:-5.21,yld:8.22,lev:'10.96%',nav:30.66,px:26.27,fr:'Monthly'},ASGI:{z3m:-0.51,z6m:-0.60,z1y:0.23,dp:2.10,avg:1.28,yld:12.17,lev:'0.82%',nav:22.34,px:22.68,fr:'Monthly'},BDJ:{z3m:-1.23,z6m:-1.51,z1y:-1.95,dp:-8.50,avg:-5.72,yld:8.12,lev:'0.12%',nav:10.12,px:9.15,fr:'Monthly'},BME:{z3m:-0.38,z6m:0.20,z1y:0.97,dp:-4.57,avg:-6.38,yld:7.87,lev:'0.17%',nav:41.78,px:39.94,fr:'Monthly'},BST:{z3m:-0.77,z6m:-1.28,z1y:-1.71,dp:-8.78,avg:-6.17,yld:6.52,lev:'0.10%',nav:53.41,px:46.02,fr:'Monthly'},BUI:{z3m:0.09,z6m:-0.74,z1y:-1.09,dp:-1.12,avg:2.52,yld:5.97,lev:'0.11%',nav:27.69,px:27.32,fr:'Monthly'},CSQ:{z3m:-1.06,z6m:-1.28,z1y:-1.44,dp:-10.61,avg:-7.02,yld:7.36,lev:'27.03%',nav:23.10,px:19.97,fr:'Monthly'},DNP:{z3m:1.53,z6m:0.95,z1y:0.97,dp:8.31,avg:5.71,yld:7.27,lev:'22.95%',nav:9.87,px:10.73,fr:'Monthly'},EOI:{z3m:-1.25,z6m:-1.58,z1y:-1.74,dp:-7.06,avg:-1.99,yld:8.24,lev:'--',nav:21.40,px:19.48,fr:'Monthly'},EOS:{z3m:-0.78,z6m:-1.30,z1y:-1.26,dp:-9.51,avg:-4.56,yld:8.26,lev:'--',nav:25.12,px:22.12,fr:'Monthly'},ERH:{z3m:1.08,z6m:1.36,z1y:0.88,dp:-6.75,avg:-7.96,yld:8.81,lev:'21.05%',nav:12.74,px:11.89,fr:'Monthly'},ETG:{z3m:-0.67,z6m:-1.20,z1y:-1.88,dp:-10.04,avg:-6.18,yld:6.89,lev:'15.82%',nav:25.79,px:22.53,fr:'Monthly'},GDV:{z3m:-1.48,z6m:-1.45,z1y:-1.11,dp:-11.50,avg:-10.73,yld:6.30,lev:'14.34%',nav:32.83,px:28.57,fr:'Monthly'},GLU:{z3m:-0.90,z6m:-1.36,z1y:-1.57,dp:-3.87,avg:0.20,yld:6.91,lev:'17.68%',nav:20.16,px:19.11,fr:'Monthly'},HTD:{z3m:1.15,z6m:1.43,z1y:1.02,dp:-5.18,avg:-6.48,yld:7.52,lev:'31.21%',nav:26.62,px:25.20,fr:'Monthly'},NBXG:{z3m:0.52,z6m:0.01,z1y:-0.77,dp:-13.53,avg:-12.30,yld:9.05,lev:'--',nav:19.22,px:15.91,fr:'Monthly'},NXG:{z3m:-0.34,z6m:-0.94,z1y:-1.25,dp:-5.94,avg:-1.37,yld:12.24,lev:'26.63%',nav:64.15,px:58.81,fr:'Monthly'},PCN:{z3m:-0.72,z6m:-1.25,z1y:-1.57,dp:2.87,avg:6.93,yld:11.54,lev:'5.88%',nav:11.49,px:11.70,fr:'Monthly'},PDI:{z3m:-1.03,z6m:-0.98,z1y:-1.16,dp:5.52,avg:9.96,yld:15.76,lev:'31.97%',nav:15.94,px:16.79,fr:'Monthly'},PDO:{z3m:0.05,z6m:-0.60,z1y:-0.93,dp:2.42,avg:3.91,yld:11.75,lev:'34.58%',nav:12.80,px:13.06,fr:'Monthly'},PDX:{z3m:0.62,z6m:0.66,z1y:-0.17,dp:-9.47,avg:-9.15,yld:7.53,lev:'22.46%',nav:23.75,px:21.25,fr:'Monthly'},RFI:{z3m:-1.61,z6m:-2.14,z1y:-2.28,dp:-4.98,avg:0.76,yld:8.43,lev:'0.04%',nav:11.85,px:11.39,fr:'Monthly'},RLTY:{z3m:-1.68,z6m:-1.95,z1y:-1.94,dp:-9.49,avg:-6.45,yld:8.39,lev:'32.92%',nav:17.18,px:15.73,fr:'Monthly'},RNP:{z3m:-0.76,z6m:-0.98,z1y:-1.17,dp:-4.82,avg:-0.02,yld:7.81,lev:'29.91%',nav:21.97,px:20.90,fr:'Monthly'},RQI:{z3m:0.50,z6m:0.54,z1y:1.13,dp:-0.75,avg:-3.05,yld:7.98,lev:'28.24%',nav:13.42,px:13.53,fr:'Monthly'},UTF:{z3m:1.97,z6m:1.64,z1y:-0.09,dp:-4.15,avg:-3.73,yld:7.29,lev:'27.75%',nav:28.17,px:27.15,fr:'Monthly'},UTG:{z3m:-1.23,z6m:-1.52,z1y:-1.17,dp:-1.51,avg:-0.26,yld:5.85,lev:'18.54%',nav:42.39,px:41.00,fr:'Monthly'}},
-'06/08/2026':{AIO:{z3m:0.08,z6m:-0.44,z1y:-0.89,dp:-10.58,avg:-5.34,yld:8.17,lev:'11.32%',nav:29.58,px:26.45,fr:'Monthly'},ASGI:{z3m:-0.31,z6m:-0.40,z1y:0.36,dp:2.62,avg:1.34,yld:12.13,lev:'0.83%',nav:22.17,px:22.75,fr:'Monthly'},BDJ:{z3m:-1.60,z6m:-1.57,z1y:-2.06,dp:-8.70,avg:-5.73,yld:8.14,lev:'0.12%',nav:10.00,px:9.13,fr:'Monthly'},BME:{z3m:0.77,z6m:1.02,z1y:1.61,dp:-3.34,avg:-6.36,yld:7.82,lev:'0.17%',nav:41.59,px:40.20,fr:'Monthly'},BST:{z3m:-1.60,z6m:-1.96,z1y:-2.55,dp:-10.14,avg:-6.21,yld:6.52,lev:'0.10%',nav:51.17,px:45.98,fr:'Monthly'},BUI:{z3m:0.96,z6m:-0.44,z1y:-0.75,dp:0.04,avg:2.52,yld:5.97,lev:'0.11%',nav:27.31,px:27.32,fr:'Monthly'},CSQ:{z3m:-1.82,z6m:-1.51,z1y:-1.57,dp:-10.97,avg:-7.08,yld:7.39,lev:'27.69%',nav:22.34,px:19.89,fr:'Monthly'},DNP:{z3m:1.48,z6m:1.01,z1y:1.03,dp:8.48,avg:5.72,yld:7.34,lev:'23.09%',nav:9.79,px:10.62,fr:'Monthly'},EOI:{z3m:-1.46,z6m:-1.80,z1y:-1.87,dp:-7.54,avg:-2.06,yld:8.28,lev:'--',nav:20.96,px:19.38,fr:'Monthly'},EOS:{z3m:-0.63,z6m:-1.19,z1y:-1.22,dp:-9.41,avg:-4.65,yld:8.25,lev:'--',nav:24.45,px:22.15,fr:'Monthly'},ERH:{z3m:0.44,z6m:0.57,z1y:0.24,dp:-7.61,avg:-7.94,yld:8.99,lev:'21.22%',nav:12.61,px:11.65,fr:'Monthly'},ETG:{z3m:-1.39,z6m:-1.43,z1y:-2.13,dp:-10.67,avg:-6.22,yld:6.89,lev:'16.13%',nav:25.21,px:22.52,fr:'Monthly'},GDV:{z3m:-1.61,z6m:-1.63,z1y:-1.38,dp:-11.67,avg:-10.73,yld:6.29,lev:'14.50%',nav:32.39,px:28.61,fr:'Monthly'},GLU:{z3m:-1.26,z6m:-1.53,z1y:-1.83,dp:-4.64,avg:0.17,yld:6.98,lev:'17.91%',nav:19.84,px:18.92,fr:'Monthly'},HTD:{z3m:1.47,z6m:1.94,z1y:1.47,dp:-4.58,avg:-6.46,yld:7.53,lev:'31.39%',nav:26.40,px:25.19,fr:'Monthly'},NBXG:{z3m:1.01,z6m:0.57,z1y:-0.42,dp:-12.98,avg:-12.31,yld:9.06,lev:'--',nav:18.26,px:15.89,fr:'Monthly'},NXG:{z3m:0.51,z6m:-0.26,z1y:-0.47,dp:-3.12,avg:-1.42,yld:12.34,lev:'22.98%',nav:60.25,px:58.37,fr:'Monthly'},PCN:{z3m:-1.29,z6m:-1.54,z1y:-1.79,dp:2.19,avg:6.88,yld:11.56,lev:'5.90%',nav:11.43,px:11.68,fr:'Monthly'},PDI:{z3m:-1.14,z6m:-1.11,z1y:-1.21,dp:5.23,avg:9.91,yld:15.84,lev:'32.06%',nav:15.87,px:16.70,fr:'Monthly'},PDO:{z3m:0.24,z6m:-0.46,z1y:-0.77,dp:2.67,avg:3.90,yld:11.72,lev:'34.67%',nav:12.75,px:13.09,fr:'Monthly'},PDX:{z3m:0.39,z6m:0.44,z1y:-0.30,dp:-9.72,avg:-9.16,yld:7.53,lev:'22.60%',nav:23.55,px:21.26,fr:'Monthly'},RFI:{z3m:-1.20,z6m:-1.71,z1y:-1.98,dp:-4.33,avg:0.70,yld:8.53,lev:'0.04%',nav:11.77,px:11.26,fr:'Monthly'},RLTY:{z3m:0.20,z6m:-0.63,z1y:-1.11,dp:-8.22,avg:-6.47,yld:8.45,lev:'33.12%',nav:17.03,px:15.63,fr:'Monthly'},RNP:{z3m:-1.34,z6m:-1.43,z1y:-1.32,dp:-5.50,avg:-0.12,yld:7.91,lev:'30.06%',nav:21.82,px:20.62,fr:'Monthly'},RQI:{z3m:1.10,z6m:0.69,z1y:1.29,dp:-0.38,avg:-3.03,yld:8.15,lev:'28.43%',nav:13.30,px:13.25,fr:'Monthly'},UTF:{z3m:2.54,z6m:2.40,z1y:0.19,dp:-2.90,avg:-3.79,yld:7.31,lev:'27.95%',nav:27.90,px:27.09,fr:'Monthly'},UTG:{z3m:-0.79,z6m:-1.05,z1y:-0.81,dp:-1.13,avg:-0.26,yld:5.94,lev:'19.10%',nav:40.87,px:40.41,fr:'Monthly'}},
-'06/09/2026':{AIO:{z3m:-0.69,z6m:-0.92,z1y:-0.99,dp:-11.21,avg:-5.41,yld:8.27,lev:'11.37%',nav:29.43,px:26.13,fr:'Monthly'},ASGI:{z3m:-1.55,z6m:-1.66,z1y:-0.66,dp:-0.94,avg:1.36,yld:12.52,lev:'0.82%',nav:22.26,px:22.05,fr:'Monthly'},BDJ:{z3m:-1.15,z6m:-1.36,z1y:-1.81,dp:-8.35,avg:-5.74,yld:8.06,lev:'0.12%',nav:10.06,px:9.22,fr:'Monthly'},BME:{z3m:0.12,z6m:0.53,z1y:1.23,dp:-4.03,avg:-6.35,yld:7.77,lev:'0.16%',nav:42.18,px:40.48,fr:'Monthly'},BST:{z3m:-0.99,z6m:-1.48,z1y:-1.95,dp:-9.24,avg:-6.23,yld:6.51,lev:'0.10%',nav:50.75,px:46.06,fr:'Monthly'},BUI:{z3m:1.46,z6m:-0.25,z1y:-0.52,dp:0.80,avg:2.53,yld:5.91,lev:'0.11%',nav:27.40,px:27.62,fr:'Monthly'},CSQ:{z3m:-1.83,z6m:-1.51,z1y:-1.58,dp:-11.01,avg:-7.12,yld:7.42,lev:'27.77%',nav:22.25,px:19.80,fr:'Monthly'},DNP:{z3m:1.50,z6m:1.08,z1y:1.11,dp:8.70,avg:5.73,yld:7.26,lev:'22.93%',nav:9.88,px:10.74,fr:'Monthly'},EOI:{z3m:-1.51,z6m:-1.88,z1y:-1.92,dp:-7.73,avg:-2.09,yld:8.30,lev:'--',nav:20.96,px:19.34,fr:'Monthly'},EOS:{z3m:-0.74,z6m:-1.25,z1y:-1.24,dp:-9.52,avg:-4.69,yld:8.29,lev:'--',nav:24.36,px:22.04,fr:'Monthly'},ERH:{z3m:-0.66,z6m:-0.81,z1y:-0.86,dp:-9.11,avg:-7.94,yld:9.05,lev:'21.06%',nav:12.73,px:11.57,fr:'Monthly'},ETG:{z3m:-1.16,z6m:-1.33,z1y:-2.02,dp:-10.50,avg:-6.24,yld:6.84,lev:'16.06%',nav:25.33,px:22.67,fr:'Monthly'},GDV:{z3m:-2.52,z6m:-2.68,z1y:-2.61,dp:-12.51,avg:-10.73,yld:6.31,lev:'14.42%',nav:32.62,px:28.54,fr:'Monthly'},GLU:{z3m:-1.82,z6m:-1.81,z1y:-2.23,dp:-5.76,avg:0.15,yld:7.02,lev:'17.83%',nav:19.96,px:18.81,fr:'Monthly'},HTD:{z3m:1.78,z6m:2.40,z1y:1.92,dp:-3.99,avg:-6.44,yld:7.44,lev:'31.27%',nav:26.54,px:25.48,fr:'Monthly'},NBXG:{z3m:0.94,z6m:0.53,z1y:-0.44,dp:-13.02,avg:-12.32,yld:9.06,lev:'--',nav:18.28,px:15.90,fr:'Monthly'},NXG:{z3m:0.91,z6m:0.07,z1y:-0.07,dp:-1.71,avg:-1.45,yld:12.39,lev:'28.26%',nav:59.11,px:58.10,fr:'Monthly'},PCN:{z3m:-1.10,z6m:-1.44,z1y:-1.71,dp:2.36,avg:6.86,yld:11.52,lev:'5.90%',nav:11.45,px:11.72,fr:'Monthly'},PDI:{z3m:-1.24,z6m:-1.22,z1y:-1.27,dp:4.97,avg:9.89,yld:15.86,lev:'32.04%',nav:15.89,px:16.68,fr:'Monthly'},PDO:{z3m:-0.22,z6m:-0.85,z1y:-1.26,dp:1.88,avg:3.90,yld:11.80,lev:'34.64%',nav:12.77,px:13.01,fr:'Monthly'},PDX:{z3m:0.23,z6m:0.29,z1y:-0.39,dp:-9.89,avg:-9.16,yld:7.58,lev:'22.68%',nav:23.45,px:21.13,fr:'Monthly'},RFI:{z3m:-1.37,z6m:-1.87,z1y:-2.10,dp:-4.71,avg:0.67,yld:8.47,lev:'0.04%',nav:11.90,px:11.34,fr:'Monthly'},RLTY:{z3m:-1.02,z6m:-1.44,z1y:-1.62,dp:-9.04,avg:-6.49,yld:8.41,lev:'32.83%',nav:17.25,px:15.69,fr:'Monthly'},RNP:{z3m:-1.11,z6m:-1.26,z1y:-1.25,dp:-5.27,avg:-0.16,yld:7.82,lev:'29.87%',nav:22.02,px:20.86,fr:'Monthly'},RQI:{z3m:-5.68,z6m:-2.05,z1y:-1.39,dp:-5.91,avg:-3.03,yld:8.48,lev:'28.08%',nav:13.53,px:12.73,fr:'Monthly'},UTF:{z3m:2.19,z6m:2.10,z1y:0.12,dp:-3.27,avg:-3.82,yld:7.35,lev:'27.98%',nav:27.85,px:26.94,fr:'Monthly'},UTG:{z3m:-0.66,z6m:-0.87,z1y:-0.68,dp:-0.99,avg:-0.26,yld:5.98,lev:'19.23%',nav:40.54,px:40.14,fr:'Monthly'}},
-'06/10/2026':{AIO:{z3m:-0.69,z6m:-0.92,z1y:-0.99,dp:-11.21,avg:-5.41,yld:8.27,lev:'11.37%',nav:29.43,px:25.83,fr:'Monthly'},ASGI:{z3m:-1.35,z6m:-1.46,z1y:-0.53,dp:-0.45,avg:1.38,yld:12.52,lev:'0.82%',nav:22.26,px:22.16,fr:'Monthly'},BDJ:{z3m:-1.15,z6m:-1.36,z1y:-1.81,dp:-8.35,avg:-5.74,yld:8.06,lev:'0.12%',nav:10.06,px:9.18,fr:'Monthly'},BME:{z3m:0.12,z6m:0.53,z1y:1.23,dp:-3.03,avg:-6.35,yld:7.77,lev:'0.16%',nav:42.18,px:40.31,fr:'Monthly'},BST:{z3m:-0.99,z6m:-1.48,z1y:-1.95,dp:-9.24,avg:-6.23,yld:6.64,lev:'0.10%',nav:50.75,px:45.18,fr:'Monthly'},BUI:{z3m:1.46,z6m:-0.25,z1y:-0.52,dp:0.80,avg:2.53,yld:5.87,lev:'0.11%',nav:27.40,px:27.80,fr:'Monthly'},CSQ:{z3m:-0.63,z6m:-1.06,z1y:-1.33,dp:-10.42,avg:-7.15,yld:7.42,lev:'27.77%',nav:22.25,px:19.52,fr:'Monthly'},DNP:{z3m:1.50,z6m:1.08,z1y:1.11,dp:8.70,avg:5.73,yld:7.26,lev:'22.93%',nav:9.88,px:10.75,fr:'Monthly'},EOI:{z3m:-1.51,z6m:-1.88,z1y:-1.92,dp:-7.73,avg:-2.09,yld:8.30,lev:'--',nav:20.96,px:19.24,fr:'Monthly'},EOS:{z3m:-0.74,z6m:-1.25,z1y:-1.24,dp:-9.52,avg:-4.69,yld:8.29,lev:'--',nav:24.36,px:21.78,fr:'Monthly'},ERH:{z3m:-0.66,z6m:-0.81,z1y:-0.86,dp:-9.11,avg:-7.94,yld:9.05,lev:'21.06%',nav:12.73,px:11.57,fr:'Monthly'},ETG:{z3m:-1.16,z6m:-1.33,z1y:-2.02,dp:-10.50,avg:-6.24,yld:6.84,lev:'16.06%',nav:25.33,px:22.54,fr:'Monthly'},GDV:{z3m:-2.52,z6m:-2.68,z1y:-2.61,dp:-12.51,avg:-10.73,yld:6.31,lev:'14.42%',nav:32.62,px:28.52,fr:'Monthly'},GLU:{z3m:-1.82,z6m:-1.81,z1y:-2.23,dp:-5.76,avg:0.15,yld:7.02,lev:'17.83%',nav:19.96,px:18.80,fr:'Monthly'},HTD:{z3m:1.78,z6m:2.40,z1y:1.92,dp:-4.16,avg:-6.44,yld:7.44,lev:'31.27%',nav:26.54,px:25.59,fr:'Monthly'},NBXG:{z3m:0.94,z6m:0.53,z1y:-0.44,dp:-13.02,avg:-12.32,yld:9.06,lev:'--',nav:18.28,px:15.58,fr:'Monthly'},NXG:{z3m:0.91,z6m:0.07,z1y:-0.07,dp:-1.71,avg:-1.45,yld:12.52,lev:'28.26%',nav:59.11,px:57.51,fr:'Monthly'},PCN:{z3m:-1.10,z6m:-1.44,z1y:-1.71,dp:2.36,avg:6.86,yld:11.53,lev:'5.90%',nav:11.45,px:11.71,fr:'Monthly'},PDI:{z3m:-1.24,z6m:-1.22,z1y:-1.27,dp:4.97,avg:9.89,yld:16.02,lev:'32.04%',nav:15.89,px:16.52,fr:'Monthly'},PDO:{z3m:-0.22,z6m:-0.85,z1y:-1.26,dp:1.88,avg:3.90,yld:11.80,lev:'34.64%',nav:12.77,px:12.99,fr:'Monthly'},PDX:{z3m:0.23,z6m:0.29,z1y:-0.39,dp:-9.89,avg:-9.16,yld:7.64,lev:'22.68%',nav:23.45,px:20.96,fr:'Monthly'},RFI:{z3m:-1.69,z6m:-2.18,z1y:-2.32,dp:-5.37,avg:0.63,yld:8.51,lev:'0.04%',nav:11.90,px:11.28,fr:'Monthly'},RLTY:{z3m:-1.50,z6m:-1.75,z1y:-1.81,dp:-9.38,avg:-6.50,yld:8.41,lev:'32.83%',nav:17.25,px:15.65,fr:'Monthly'},RNP:{z3m:-2.92,z6m:-2.68,z1y:-1.74,dp:-7.35,avg:-0.20,yld:8.00,lev:'29.87%',nav:22.02,px:20.41,fr:'Monthly'},RQI:{z3m:-4.18,z6m:-1.76,z1y:-1.06,dp:-5.24,avg:-3.04,yld:8.41,lev:'28.08%',nav:13.53,px:12.84,fr:'Monthly'},UTF:{z3m:1.89,z6m:1.80,z1y:0.04,dp:-3.65,avg:-3.85,yld:7.35,lev:'27.98%',nav:27.85,px:26.95,fr:'Monthly'},UTG:{z3m:-0.10,z6m:-0.25,z1y:-0.20,dp:-0.48,avg:-0.26,yld:5.98,lev:'19.51%',nav:39.81,px:39.62,fr:'Monthly'}},
-'06/11/2026':{AIO:{z3m:0.29,z6m:-0.29,z1y:-0.85,dp:-10.41,avg:-5.48,yld:8.36,lev:'11.58%',nav:28.83,px:26.62,fr:'Monthly'},ASGI:{z3m:-1.35,z6m:-1.46,z1y:-0.53,dp:-0.09,avg:1.40,yld:12.45,lev:'0.82%',nav:22.26,px:22.41,fr:'Monthly'},BDJ:{z3m:-0.24,z6m:-0.99,z1y:-1.31,dp:-7.92,avg:-5.75,yld:8.09,lev:'0.12%',nav:9.94,px:9.30,fr:'Monthly'},BME:{z3m:1.02,z6m:1.23,z1y:1.75,dp:-2.92,avg:-6.31,yld:7.80,lev:'0.17%',nav:41.57,px:40.89,fr:'Monthly'},BST:{z3m:-0.75,z6m:-1.30,z1y:-1.72,dp:-9.73,avg:-6.27,yld:6.64,lev:'0.10%',nav:49.60,px:46.55,fr:'Monthly'},BUI:{z3m:2.12,z6m:0.05,z1y:-0.15,dp:2.02,avg:2.53,yld:5.87,lev:'0.11%',nav:27.25,px:28.11,fr:'Monthly'},CSQ:{z3m:-0.99,z6m:-1.18,z1y:-1.40,dp:-10.61,avg:-7.18,yld:7.53,lev:'27.69%',nav:22.34,px:19.97,fr:'Monthly'},DNP:{z3m:1.22,z6m:0.87,z1y:0.82,dp:7.93,avg:5.74,yld:7.26,lev:'22.79%',nav:9.96,px:10.74,fr:'Monthly'},EOI:{z3m:-0.93,z6m:-1.43,z1y:-1.57,dp:-7.49,avg:-2.16,yld:8.35,lev:'--',nav:20.63,px:19.40,fr:'Monthly'},EOS:{z3m:-0.01,z6m:-0.80,z1y:-1.07,dp:-9.20,avg:-4.78,yld:8.39,lev:'--',nav:23.90,px:22.01,fr:'Monthly'},ERH:{z3m:-0.57,z6m:-0.67,z1y:-0.76,dp:-8.97,avg:-7.94,yld:9.05,lev:'21.09%',nav:12.71,px:11.69,fr:'Monthly'},ETG:{z3m:0.19,z6m:-0.85,z1y:-1.49,dp:-9.60,avg:-6.28,yld:6.88,lev:'16.31%',nav:24.88,px:23.06,fr:'Monthly'},GDV:{z3m:-1.31,z6m:-1.31,z1y:-1.07,dp:-11.46,avg:-10.73,yld:6.31,lev:'14.57%',nav:32.21,px:28.99,fr:'Monthly'},GLU:{z3m:-1.67,z6m:-1.72,z1y:-2.13,dp:-5.58,avg:0.13,yld:7.02,lev:'17.86%',nav:19.91,px:19.03,fr:'Monthly'},HTD:{z3m:1.61,z6m:2.25,z1y:1.77,dp:-4.16,avg:-6.43,yld:7.41,lev:'31.27%',nav:26.70,px:25.66,fr:'Monthly'},NBXG:{z3m:0.87,z6m:0.49,z1y:-0.46,dp:-13.06,avg:-12.32,yld:9.24,lev:'--',nav:17.92,px:15.91,fr:'Monthly'},NXG:{z3m:1.46,z6m:0.54,z1y:0.48,dp:0.28,avg:-1.46,yld:12.52,lev:'28.88%',nav:57.35,px:57.49,fr:'Monthly'},PCN:{z3m:-1.15,z6m:-1.45,z1y:-1.73,dp:2.27,avg:6.84,yld:11.53,lev:'5.95%',nav:11.45,px:11.63,fr:'Monthly'},PDI:{z3m:-1.74,z6m:-1.67,z1y:-1.52,dp:3.96,avg:9.85,yld:16.02,lev:'32.34%',nav:15.89,px:16.43,fr:'Monthly'},PDO:{z3m:-0.30,z6m:-0.91,z1y:-1.35,dp:1.72,avg:3.89,yld:11.82,lev:'34.87%',nav:12.77,px:12.75,fr:'Monthly'},PDX:{z3m:-0.79,z6m:-0.78,z1y:-1.05,dp:-11.15,avg:-9.17,yld:7.64,lev:'22.67%',nav:23.59,px:20.90,fr:'Monthly'},RFI:{z3m:-1.54,z6m:-2.04,z1y:-2.23,dp:-5.20,avg:0.60,yld:8.51,lev:'0.04%',nav:11.92,px:11.30,fr:'Monthly'},RLTY:{z3m:-0.67,z6m:-1.21,z1y:-1.47,dp:-8.86,avg:-6.51,yld:8.43,lev:'32.81%',nav:17.27,px:15.74,fr:'Monthly'},RNP:{z3m:-2.44,z6m:-2.36,z1y:-1.63,dp:-6.94,avg:-0.24,yld:8.00,lev:'29.86%',nav:22.03,px:20.52,fr:'Monthly'},RQI:{z3m:-3.86,z6m:-1.92,z1y:-1.16,dp:-5.46,avg:-3.04,yld:8.41,lev:'28.05%',nav:13.55,px:12.82,fr:'Monthly'},UTF:{z3m:2.19,z6m:2.18,z1y:0.19,dp:-2.99,avg:-3.88,yld:7.35,lev:'27.90%',nav:27.97,px:27.23,fr:'Monthly'},UTG:{z3m:-0.46,z6m:-0.62,z1y:-0.49,dp:-0.79,avg:-0.26,yld:6.06,lev:'19.26%',nav:39.81,px:40.13,fr:'Monthly'}},
-'06/12/2026':{AIO:{z3m:-0.09,z6m:-0.54,z1y:-0.90,dp:-10.73,avg:-5.56,yld:8.11,lev:'11.24%',nav:29.82,px:26.99,fr:'Monthly'},ASGI:{z3m:-1.21,z6m:-1.31,z1y:-0.44,dp:-0.09,avg:1.43,yld:12.32,lev:'0.82%',nav:22.43,px:22.52,fr:'Monthly'},BDJ:{z3m:-0.58,z6m:-1.12,z1y:-1.50,dp:-7.92,avg:-5.75,yld:7.99,lev:'0.12%',nav:10.10,px:9.36,fr:'Monthly'},BME:{z3m:1.09,z6m:1.30,z1y:1.79,dp:-2.92,avg:-6.31,yld:7.69,lev:'0.17%',nav:42.12,px:40.94,fr:'Monthly'},BST:{z3m:-1.29,z6m:-1.70,z1y:-2.22,dp:-9.73,avg:-6.27,yld:6.44,lev:'0.10%',nav:51.57,px:47.78,fr:'Monthly'},BUI:{z3m:2.11,z6m:0.08,z1y:-0.12,dp:2.14,avg:2.54,yld:5.81,lev:'0.11%',nav:27.52,px:28.45,fr:'Monthly'},CSQ:{z3m:-0.54,z6m:-1.01,z1y:-1.31,dp:-10.40,avg:-7.21,yld:7.32,lev:'27.64%',nav:22.40,px:20.07,fr:'Monthly'},DNP:{z3m:1.25,z6m:0.94,z1y:0.90,dp:8.16,avg:5.74,yld:7.24,lev:'22.84%',nav:9.93,px:10.77,fr:'Monthly'},EOI:{z3m:-1.31,z6m:-1.77,z1y:-1.80,dp:-7.49,avg:-2.16,yld:8.26,lev:'--',nav:20.97,px:19.44,fr:'Monthly'},EOS:{z3m:-0.36,z6m:-1.01,z1y:-1.15,dp:-9.20,avg:-4.78,yld:8.30,lev:'--',nav:24.24,px:22.06,fr:'Monthly'},ERH:{z3m:0.43,z6m:0.59,z1y:0.25,dp:-7.59,avg:-7.93,yld:8.94,lev:'21.17%',nav:12.65,px:11.71,fr:'Monthly'},ETG:{z3m:-0.03,z6m:-0.92,z1y:-1.57,dp:-9.60,avg:-6.28,yld:6.72,lev:'16.31%',nav:25.51,px:23.10,fr:'Monthly'},GDV:{z3m:-1.29,z6m:-1.32,z1y:-1.08,dp:-11.45,avg:-10.73,yld:6.18,lev:'14.37%',nav:32.74,px:29.13,fr:'Monthly'},GLU:{z3m:-1.76,z6m:-1.75,z1y:-2.19,dp:-5.79,avg:0.11,yld:6.90,lev:'17.65%',nav:20.20,px:19.12,fr:'Monthly'},HTD:{z3m:2.06,z6m:2.86,z1y:2.42,dp:-3.28,avg:-6.41,yld:7.36,lev:'31.27%',nav:26.53,px:25.75,fr:'Monthly'},NBXG:{z3m:-1.01,z6m:-1.21,z1y:-1.53,dp:-14.78,avg:-12.33,yld:9.05,lev:'--',nav:18.67,px:16.18,fr:'Monthly'},NXG:{z3m:0.40,z6m:-0.31,z1y:-0.52,dp:-3.35,avg:-1.49,yld:12.52,lev:'28.13%',nav:59.48,px:57.51,fr:'Monthly'},PCN:{z3m:-1.45,z6m:-1.59,z1y:-1.84,dp:1.93,avg:6.81,yld:11.55,lev:'5.91%',nav:11.41,px:11.69,fr:'Monthly'},PDI:{z3m:-1.57,z6m:-1.55,z1y:-1.45,dp:4.19,avg:9.82,yld:16.10,lev:'32.20%',nav:15.77,px:16.30,fr:'Monthly'},PDO:{z3m:-1.13,z6m:-1.64,z1y:-2.24,dp:0.24,avg:3.88,yld:12.04,lev:'34.73%',nav:12.72,px:12.85,fr:'Monthly'},PDX:{z3m:-0.40,z6m:-0.30,z1y:-0.76,dp:-10.61,avg:-9.16,yld:7.66,lev:'22.73%',nav:23.38,px:20.85,fr:'Monthly'},RFI:{z3m:-1.54,z6m:-2.04,z1y:-2.23,dp:-5.20,avg:0.60,yld:8.47,lev:'0.04%',nav:11.92,px:11.33,fr:'Monthly'},RLTY:{z3m:-0.67,z6m:-1.21,z1y:-1.47,dp:-8.86,avg:-6.51,yld:8.39,lev:'32.81%',nav:17.27,px:15.71,fr:'Monthly'},RNP:{z3m:-2.44,z6m:-2.36,z1y:-1.63,dp:-6.94,avg:-0.24,yld:7.96,lev:'29.86%',nav:22.05,px:20.51,fr:'Monthly'},RQI:{z3m:-3.86,z6m:-1.92,z1y:-1.16,dp:-5.46,avg:-3.04,yld:8.32,lev:'28.03%',nav:13.56,px:12.98,fr:'Monthly'},UTF:{z3m:2.19,z6m:2.18,z1y:0.19,dp:-2.99,avg:-3.88,yld:7.23,lev:'27.90%',nav:28.07,px:27.39,fr:'Monthly'},UTG:{z3m:-1.02,z6m:-1.22,z1y:-0.97,dp:-1.31,avg:-0.26,yld:5.89,lev:'18.93%',nav:41.31,px:40.77,fr:'Monthly'}}
+
+// Compact data: [z3m,z6m,z1y,dp,avg,yld,nav,px]
+const RAW={
+'06/02/2026':{AIO:[0.61,-0.03,-0.82,-9.98,-4.99,6.57,30.06,27.40],ASGI:[-0.62,-0.68,0.20,1.93,1.22,12.13,22.16,22.75],BDJ:[-0.61,-1.20,-1.52,-7.81,-5.69,8.10,9.99,9.17],BME:[1.53,1.63,2.15,-2.49,-6.42,8.00,41.02,39.33],BST:[-0.66,-1.16,-1.56,-8.46,-6.12,6.02,53.87,49.84],BUI:[0.54,-0.28,-0.52,0.81,2.53,5.95,27.19,27.36],CSQ:[-1.07,-1.31,-1.45,-10.59,-6.96,7.09,23.18,20.73],DNP:[1.85,1.06,1.13,8.69,5.69,7.34,9.67,10.63],EOI:[-1.30,-1.54,-1.77,-6.99,-1.89,8.05,21.45,19.94],EOS:[-0.98,-1.48,-1.33,-9.69,-4.44,7.96,25.38,22.97],ERH:[2.03,2.57,1.81,-5.51,-7.99,8.83,12.53,11.86],ETG:[-0.73,-1.26,-1.95,-10.08,-6.11,6.62,25.90,23.44],GDV:[0.24,0.57,1.00,-10.05,-10.75,6.17,32.45,29.19],GLU:[-0.66,-1.23,-1.34,-3.21,0.23,6.84,19.93,19.29],HTD:[2.31,2.67,2.21,-3.69,-6.52,7.51,26.30,25.23],NBXG:[1.12,0.48,-0.42,-12.95,-12.28,8.56,19.30,16.82],NXG:[-0.29,-0.91,-1.19,-5.61,-1.27,10.97,62.17,59.07],PCN:[-1.03,-1.51,-1.76,2.53,7.00,11.47,11.48,11.77],PDI:[-1.78,-1.51,-1.47,4.45,10.04,15.83,15.94,16.72],PDO:[-0.33,-0.91,-1.30,1.88,3.93,11.72,12.80,13.10],PDX:[1.91,2.09,0.65,-7.94,-9.15,7.39,23.56,21.67],RFI:[-1.34,-1.90,-2.09,-4.37,0.83,8.61,11.63,11.15],RLTY:[0.13,-0.61,-1.09,-8.13,-6.43,8.52,16.80,15.49],RNP:[-0.32,-0.54,-1.04,-4.20,0.01,7.86,21.62,20.77],RQI:[1.58,0.87,1.48,-0.08,-3.08,8.24,13.07,13.11],UTF:[2.04,1.57,-0.14,-4.34,-3.67,7.37,27.74,26.87],UTG:[0.53,0.29,0.30,0.07,-0.25,5.72,41.56,41.97]},
+'06/03/2026':{AIO:[-0.91,-1.09,-1.04,-11.38,-5.06,6.57,30.92,27.43],ASGI:[-0.93,-1.03,-0.08,0.94,1.25,12.13,22.32,22.44],BDJ:[-1.35,-1.69,-2.17,-8.19,-5.71,8.08,10.05,9.19],BME:[1.44,1.57,2.09,-2.55,-6.39,8.02,40.36,39.21],BST:[-0.71,-1.22,-1.64,-8.60,-6.16,6.02,54.53,49.09],BUI:[0.06,-0.69,-1.02,-0.87,2.53,6.02,27.60,27.11],CSQ:[-1.39,-1.43,-1.52,-10.79,-6.99,7.17,22.98,20.50],DNP:[1.60,0.90,0.92,8.14,5.69,7.33,9.83,10.64],EOI:[-1.25,-1.53,-1.74,-6.95,-1.93,8.11,21.43,19.79],EOS:[-0.55,-1.16,-1.21,-9.25,-4.48,8.03,25.31,22.77],ERH:[0.94,1.18,0.73,-6.98,-7.98,8.81,12.75,11.88],ETG:[-0.16,-0.97,-1.62,-9.43,-6.13,6.72,25.88,23.10],GDV:[-0.46,-0.24,0.17,-10.62,-10.74,6.20,32.66,29.02],GLU:[-1.13,-1.55,-1.78,-4.36,0.22,6.85,20.17,19.27],HTD:[1.31,1.54,1.12,-5.08,-6.51,7.51,26.58,25.24],NBXG:[0.55,0.02,-0.75,-13.48,-12.29,8.56,19.44,16.61],NXG:[-0.78,-1.30,-1.65,-7.34,-1.31,12.19,63.75,59.69],PCN:[-1.11,-1.53,-1.77,2.44,6.98,11.58,11.49,11.66],PDI:[-1.54,-1.35,-1.37,4.76,10.01,15.82,15.96,16.73],PDO:[-0.14,-0.74,-1.10,2.18,3.92,11.72,12.82,13.00],PDX:[1.77,1.96,0.60,-8.02,-9.15,7.39,23.56,21.52],RFI:[-1.34,-1.90,-2.09,-4.38,0.79,8.62,11.66,11.14],RLTY:[0.13,-0.61,-1.09,-7.96,-6.44,8.52,16.86,15.49],RNP:[-0.32,-0.54,-1.04,-3.97,-0.02,7.85,21.68,20.78],RQI:[1.58,0.87,1.48,0.00,-3.06,8.24,13.12,13.11],UTF:[2.04,1.57,-0.14,-4.01,-3.70,7.39,28.09,26.80],UTG:[-0.53,-0.80,-0.58,-0.87,-0.25,5.73,42.29,41.92]},
+'06/04/2026':{AIO:[-0.05,-0.49,-0.91,-10.62,-5.13,7.89,30.69,27.37],ASGI:[-0.51,-0.60,0.23,2.10,1.28,12.10,22.23,22.81],BDJ:[-0.91,-1.36,-1.75,-8.50,-5.72,8.02,10.01,9.26],BME:[0.57,0.92,1.55,-4.57,-6.38,7.89,40.64,39.87],BST:[-1.28,-1.75,-2.30,-8.78,-6.17,6.16,54.33,48.72],BUI:[-0.08,-0.83,-1.20,-1.45,2.53,5.96,27.51,27.38],CSQ:[-1.06,-1.28,-1.44,-10.61,-7.02,7.12,23.10,20.65],DNP:[1.74,1.09,1.16,8.79,5.70,7.30,9.78,10.69],EOI:[-1.34,-1.63,-1.80,-7.18,-1.96,8.07,21.32,19.89],EOS:[-0.42,-1.07,-1.18,-9.14,-4.52,8.04,25.06,22.73],ERH:[1.47,1.84,1.27,-6.24,-7.97,8.81,12.67,11.88],ETG:[-0.66,-1.20,-1.88,-10.01,-6.15,6.69,25.67,23.20],GDV:[-0.42,-0.21,0.20,-10.60,-10.74,6.20,32.46,29.06],GLU:[-0.82,-1.32,-1.50,-3.66,0.21,6.81,20.00,19.38],HTD:[1.68,2.02,1.61,-4.43,-6.48,7.51,26.41,25.24],NBXG:[-0.38,-0.78,-1.28,-13.53,-12.30,8.66,19.39,16.62],NXG:[-0.26,-0.89,-1.18,-5.64,-1.33,11.93,63.26,60.34],PCN:[-1.65,-1.84,-2.02,1.75,6.93,11.42,11.46,11.82],PDI:[-1.31,-1.19,-1.28,5.09,9.96,15.73,15.92,16.82],PDO:[-0.40,-1.00,-1.43,1.64,3.91,11.71,12.79,13.11],PDX:[1.25,1.38,0.26,-8.66,-9.15,7.45,23.56,21.50],RFI:[-1.61,-2.14,-2.28,-4.98,0.76,8.53,11.65,11.26],RLTY:[-1.68,-1.95,-1.94,-9.49,-6.45,8.49,16.83,15.55],RNP:[-0.76,-0.98,-1.17,-4.82,-0.02,7.80,21.64,20.91],RQI:[0.50,0.54,1.13,-0.75,-3.05,8.11,13.11,13.32],UTF:[1.97,1.64,-0.09,-4.15,-3.73,7.33,27.92,27.00],UTG:[-1.23,-1.52,-1.17,-1.51,-0.26,5.75,42.39,41.75]},
+'06/05/2026':{AIO:[-0.15,-0.57,-0.92,-10.73,-5.21,8.22,30.66,26.27],ASGI:[-0.51,-0.60,0.23,2.10,1.28,12.17,22.34,22.68],BDJ:[-1.23,-1.51,-1.95,-8.50,-5.72,8.12,10.12,9.15],BME:[-0.38,0.20,0.97,-4.57,-6.38,7.87,41.78,39.94],BST:[-0.77,-1.28,-1.71,-8.78,-6.17,6.52,53.41,46.02],BUI:[0.09,-0.74,-1.09,-1.12,2.52,5.97,27.69,27.32],CSQ:[-1.06,-1.28,-1.44,-10.61,-7.02,7.36,23.10,19.97],DNP:[1.53,0.95,0.97,8.31,5.71,7.27,9.87,10.73],EOI:[-1.25,-1.58,-1.74,-7.06,-1.99,8.24,21.40,19.48],EOS:[-0.78,-1.30,-1.26,-9.51,-4.56,8.26,25.12,22.12],ERH:[1.08,1.36,0.88,-6.75,-7.96,8.81,12.74,11.89],ETG:[-0.67,-1.20,-1.88,-10.04,-6.18,6.89,25.79,22.53],GDV:[-1.48,-1.45,-1.11,-11.50,-10.73,6.30,32.83,28.57],GLU:[-0.90,-1.36,-1.57,-3.87,0.20,6.91,20.16,19.11],HTD:[1.15,1.43,1.02,-5.18,-6.48,7.52,26.62,25.20],NBXG:[0.52,0.01,-0.77,-13.53,-12.30,9.05,19.22,15.91],NXG:[-0.34,-0.94,-1.25,-5.94,-1.37,12.24,64.15,58.81],PCN:[-0.72,-1.25,-1.57,2.87,6.93,11.54,11.49,11.70],PDI:[-1.03,-0.98,-1.16,5.52,9.96,15.76,15.94,16.79],PDO:[0.05,-0.60,-0.93,2.42,3.91,11.75,12.80,13.06],PDX:[0.62,0.66,-0.17,-9.47,-9.15,7.53,23.75,21.25],RFI:[-1.61,-2.14,-2.28,-4.98,0.76,8.43,11.85,11.39],RLTY:[-1.68,-1.95,-1.94,-9.49,-6.45,8.39,17.18,15.73],RNP:[-0.76,-0.98,-1.17,-4.82,-0.02,7.81,21.97,20.90],RQI:[0.50,0.54,1.13,-0.75,-3.05,7.98,13.42,13.53],UTF:[1.97,1.64,-0.09,-4.15,-3.73,7.29,28.17,27.15],UTG:[-1.23,-1.52,-1.17,-1.51,-0.26,5.85,42.39,41.00]},
+'06/08/2026':{AIO:[0.08,-0.44,-0.89,-10.58,-5.34,8.17,29.58,26.45],ASGI:[-0.31,-0.40,0.36,2.62,1.34,12.13,22.17,22.75],BDJ:[-1.60,-1.57,-2.06,-8.70,-5.73,8.14,10.00,9.13],BME:[0.77,1.02,1.61,-3.34,-6.36,7.82,41.59,40.20],BST:[-1.60,-1.96,-2.55,-10.14,-6.21,6.52,51.17,45.98],BUI:[0.96,-0.44,-0.75,0.04,2.52,5.97,27.31,27.32],CSQ:[-1.82,-1.51,-1.57,-10.97,-7.08,7.39,22.34,19.89],DNP:[1.48,1.01,1.03,8.48,5.72,7.34,9.79,10.62],EOI:[-1.46,-1.80,-1.87,-7.54,-2.06,8.28,20.96,19.38],EOS:[-0.63,-1.19,-1.22,-9.41,-4.65,8.25,24.45,22.15],ERH:[0.44,0.57,0.24,-7.61,-7.94,8.99,12.61,11.65],ETG:[-1.39,-1.43,-2.13,-10.67,-6.22,6.89,25.21,22.52],GDV:[-1.61,-1.63,-1.38,-11.67,-10.73,6.29,32.39,28.61],GLU:[-1.26,-1.53,-1.83,-4.64,0.17,6.98,19.84,18.92],HTD:[1.47,1.94,1.47,-4.58,-6.46,7.53,26.40,25.19],NBXG:[1.01,0.57,-0.42,-12.98,-12.31,9.06,18.26,15.89],NXG:[0.51,-0.26,-0.47,-3.12,-1.42,12.34,60.25,58.37],PCN:[-1.29,-1.54,-1.79,2.19,6.88,11.56,11.43,11.68],PDI:[-1.14,-1.11,-1.21,5.23,9.91,15.84,15.87,16.70],PDO:[0.24,-0.46,-0.77,2.67,3.90,11.72,12.75,13.09],PDX:[0.39,0.44,-0.30,-9.72,-9.16,7.53,23.55,21.26],RFI:[-1.20,-1.71,-1.98,-4.33,0.70,8.53,11.77,11.26],RLTY:[0.20,-0.63,-1.11,-8.22,-6.47,8.45,17.03,15.63],RNP:[-1.34,-1.43,-1.32,-5.50,-0.12,7.91,21.82,20.62],RQI:[1.10,0.69,1.29,-0.38,-3.03,8.15,13.30,13.25],UTF:[2.54,2.40,0.19,-2.90,-3.79,7.31,27.90,27.09],UTG:[-0.79,-1.05,-0.81,-1.13,-0.26,5.94,40.87,40.41]},
+'06/09/2026':{AIO:[-0.69,-0.92,-0.99,-11.21,-5.41,8.27,29.43,26.13],ASGI:[-1.55,-1.66,-0.66,-0.94,1.36,12.52,22.26,22.05],BDJ:[-1.15,-1.36,-1.81,-8.35,-5.74,8.06,10.06,9.22],BME:[0.12,0.53,1.23,-4.03,-6.35,7.77,42.18,40.48],BST:[-0.99,-1.48,-1.95,-9.24,-6.23,6.51,50.75,46.06],BUI:[1.46,-0.25,-0.52,0.80,2.53,5.91,27.40,27.62],CSQ:[-1.83,-1.51,-1.58,-11.01,-7.12,7.42,22.25,19.80],DNP:[1.50,1.08,1.11,8.70,5.73,7.26,9.88,10.74],EOI:[-1.51,-1.88,-1.92,-7.73,-2.09,8.30,20.96,19.34],EOS:[-0.74,-1.25,-1.24,-9.52,-4.69,8.29,24.36,22.04],ERH:[-0.66,-0.81,-0.86,-9.11,-7.94,9.05,12.73,11.57],ETG:[-1.16,-1.33,-2.02,-10.50,-6.24,6.84,25.33,22.67],GDV:[-2.52,-2.68,-2.61,-12.51,-10.73,6.31,32.62,28.54],GLU:[-1.82,-1.81,-2.23,-5.76,0.15,7.02,19.96,18.81],HTD:[1.78,2.40,1.92,-3.99,-6.44,7.44,26.54,25.48],NBXG:[0.94,0.53,-0.44,-13.02,-12.32,9.06,18.28,15.90],NXG:[0.91,0.07,-0.07,-1.71,-1.45,12.39,59.11,58.10],PCN:[-1.10,-1.44,-1.71,2.36,6.86,11.52,11.45,11.72],PDI:[-1.24,-1.22,-1.27,4.97,9.89,15.86,15.89,16.68],PDO:[-0.22,-0.85,-1.26,1.88,3.90,11.80,12.77,13.01],PDX:[0.23,0.29,-0.39,-9.89,-9.16,7.58,23.45,21.13],RFI:[-1.37,-1.87,-2.10,-4.71,0.67,8.47,11.90,11.34],RLTY:[-1.02,-1.44,-1.62,-9.04,-6.49,8.41,17.25,15.69],RNP:[-1.11,-1.26,-1.25,-5.27,-0.16,7.82,22.02,20.86],RQI:[-5.68,-2.05,-1.39,-5.91,-3.03,8.48,13.53,12.73],UTF:[2.19,2.10,0.12,-3.27,-3.82,7.35,27.85,26.94],UTG:[-0.66,-0.87,-0.68,-0.99,-0.26,5.98,40.54,40.14]},
+'06/10/2026':{AIO:[-0.69,-0.92,-0.99,-11.21,-5.41,8.27,29.43,25.83],ASGI:[-1.35,-1.46,-0.53,-0.45,1.38,12.52,22.26,22.16],BDJ:[-1.15,-1.36,-1.81,-8.35,-5.74,8.06,10.06,9.18],BME:[0.12,0.53,1.23,-3.03,-6.35,7.77,42.18,40.31],BST:[-0.99,-1.48,-1.95,-9.24,-6.23,6.64,50.75,45.18],BUI:[1.46,-0.25,-0.52,0.80,2.53,5.87,27.40,27.80],CSQ:[-0.63,-1.06,-1.33,-10.42,-7.15,7.42,22.25,19.52],DNP:[1.50,1.08,1.11,8.70,5.73,7.26,9.88,10.75],EOI:[-1.51,-1.88,-1.92,-7.73,-2.09,8.30,20.96,19.24],EOS:[-0.74,-1.25,-1.24,-9.52,-4.69,8.29,24.36,21.78],ERH:[-0.66,-0.81,-0.86,-9.11,-7.94,9.05,12.73,11.57],ETG:[-1.16,-1.33,-2.02,-10.50,-6.24,6.84,25.33,22.54],GDV:[-2.52,-2.68,-2.61,-12.51,-10.73,6.31,32.62,28.52],GLU:[-1.82,-1.81,-2.23,-5.76,0.15,7.02,19.96,18.80],HTD:[1.78,2.40,1.92,-4.16,-6.44,7.44,26.54,25.59],NBXG:[0.94,0.53,-0.44,-13.02,-12.32,9.06,18.28,15.58],NXG:[0.91,0.07,-0.07,-1.71,-1.45,12.52,59.11,57.51],PCN:[-1.10,-1.44,-1.71,2.36,6.86,11.53,11.45,11.71],PDI:[-1.24,-1.22,-1.27,4.97,9.89,16.02,15.89,16.52],PDO:[-0.22,-0.85,-1.26,1.88,3.90,11.80,12.77,12.99],PDX:[0.23,0.29,-0.39,-9.89,-9.16,7.64,23.45,20.96],RFI:[-1.69,-2.18,-2.32,-5.37,0.63,8.51,11.90,11.28],RLTY:[-1.50,-1.75,-1.81,-9.38,-6.50,8.41,17.25,15.65],RNP:[-2.92,-2.68,-1.74,-7.35,-0.20,8.00,22.02,20.41],RQI:[-4.18,-1.76,-1.06,-5.24,-3.04,8.41,13.53,12.84],UTF:[1.89,1.80,0.04,-3.65,-3.85,7.35,27.85,26.95],UTG:[-0.10,-0.25,-0.20,-0.48,-0.26,5.98,39.81,39.62]},
+'06/11/2026':{AIO:[0.29,-0.29,-0.85,-10.41,-5.48,8.36,28.83,26.62],ASGI:[-1.35,-1.46,-0.53,-0.09,1.40,12.45,22.26,22.41],BDJ:[-0.24,-0.99,-1.31,-7.92,-5.75,8.09,9.94,9.30],BME:[1.02,1.23,1.75,-2.92,-6.31,7.80,41.57,40.89],BST:[-0.75,-1.30,-1.72,-9.73,-6.27,6.64,49.60,46.55],BUI:[2.12,0.05,-0.15,2.02,2.53,5.87,27.25,28.11],CSQ:[-0.99,-1.18,-1.40,-10.61,-7.18,7.53,22.34,19.97],DNP:[1.22,0.87,0.82,7.93,5.74,7.26,9.96,10.74],EOI:[-0.93,-1.43,-1.57,-7.49,-2.16,8.35,20.63,19.40],EOS:[-0.01,-0.80,-1.07,-9.20,-4.78,8.39,23.90,22.01],ERH:[-0.57,-0.67,-0.76,-8.97,-7.94,9.05,12.71,11.69],ETG:[0.19,-0.85,-1.49,-9.60,-6.28,6.88,24.88,23.06],GDV:[-1.31,-1.31,-1.07,-11.46,-10.73,6.31,32.21,28.99],GLU:[-1.67,-1.72,-2.13,-5.58,0.13,7.02,19.91,19.03],HTD:[1.61,2.25,1.77,-4.16,-6.43,7.41,26.70,25.66],NBXG:[0.87,0.49,-0.46,-13.06,-12.32,9.24,17.92,15.91],NXG:[1.46,0.54,0.48,0.28,-1.46,12.52,57.35,57.49],PCN:[-1.15,-1.45,-1.73,2.27,6.84,11.53,11.45,11.63],PDI:[-1.74,-1.67,-1.52,3.96,9.85,16.02,15.89,16.43],PDO:[-0.30,-0.91,-1.35,1.72,3.89,11.82,12.77,12.75],PDX:[-0.79,-0.78,-1.05,-11.15,-9.17,7.64,23.59,20.90],RFI:[-1.54,-2.04,-2.23,-5.20,0.60,8.51,11.92,11.30],RLTY:[-0.67,-1.21,-1.47,-8.86,-6.51,8.43,17.27,15.74],RNP:[-2.44,-2.36,-1.63,-6.94,-0.24,8.00,22.03,20.52],RQI:[-3.86,-1.92,-1.16,-5.46,-3.04,8.41,13.55,12.82],UTF:[2.19,2.18,0.19,-2.99,-3.88,7.35,27.97,27.23],UTG:[-0.46,-0.62,-0.49,-0.79,-0.26,6.06,39.81,40.13]},
+'06/12/2026':{AIO:[-0.09,-0.54,-0.90,-10.73,-5.56,8.11,29.82,26.99],ASGI:[-1.21,-1.31,-0.44,-0.09,1.43,12.32,22.43,22.52],BDJ:[-0.58,-1.12,-1.50,-7.92,-5.75,7.99,10.10,9.36],BME:[1.09,1.30,1.79,-2.92,-6.31,7.69,42.12,40.94],BST:[-1.29,-1.70,-2.22,-9.73,-6.27,6.44,51.57,47.78],BUI:[2.11,0.08,-0.12,2.14,2.54,5.81,27.52,28.45],CSQ:[-0.54,-1.01,-1.31,-10.40,-7.21,7.32,22.40,20.07],DNP:[1.25,0.94,0.90,8.16,5.74,7.24,9.93,10.77],EOI:[-1.31,-1.77,-1.80,-7.49,-2.16,8.26,20.97,19.44],EOS:[-0.36,-1.01,-1.15,-9.20,-4.78,8.30,24.24,22.06],ERH:[0.43,0.59,0.25,-7.59,-7.93,8.94,12.65,11.71],ETG:[-0.03,-0.92,-1.57,-9.60,-6.28,6.72,25.51,23.10],GDV:[-1.29,-1.32,-1.08,-11.45,-10.73,6.18,32.74,29.13],GLU:[-1.76,-1.75,-2.19,-5.79,0.11,6.90,20.20,19.12],HTD:[2.06,2.86,2.42,-3.28,-6.41,7.36,26.53,25.75],NBXG:[-1.01,-1.21,-1.53,-14.78,-12.33,9.05,18.67,16.18],NXG:[0.40,-0.31,-0.52,-3.35,-1.49,12.52,59.48,57.51],PCN:[-1.45,-1.59,-1.84,1.93,6.81,11.55,11.41,11.69],PDI:[-1.57,-1.55,-1.45,4.19,9.82,16.10,15.77,16.30],PDO:[-1.13,-1.64,-2.24,0.24,3.88,12.04,12.72,12.85],PDX:[-0.40,-0.30,-0.76,-10.61,-9.16,7.66,23.38,20.85],RFI:[-1.54,-2.04,-2.23,-5.20,0.60,8.47,11.92,11.33],RLTY:[-0.67,-1.21,-1.47,-8.86,-6.51,8.39,17.27,15.71],RNP:[-2.44,-2.36,-1.63,-6.94,-0.24,7.96,22.05,20.51],RQI:[-3.86,-1.92,-1.16,-5.46,-3.04,8.32,13.56,12.98],UTF:[2.19,2.18,0.19,-2.99,-3.88,7.23,28.07,27.39],UTG:[-1.02,-1.22,-0.97,-1.31,-0.26,5.89,41.31,40.77]},
+'06/15/2026':{AIO:[0.52,-0.15,-0.81,-10.24,-5.63,7.83,30.07,27.57],ASGI:[-1.20,-1.32,-0.50,-0.22,1.45,12.24,22.54,22.54],BDJ:[-0.86,-1.22,-1.64,-8.15,-5.75,7.94,10.19,9.35],BME:[1.23,1.43,1.87,-2.73,-6.30,7.78,42.09,40.42],BST:[-0.19,-0.90,-1.22,-10.07,-6.30,6.22,52.04,48.21],BUI:[2.00,0.07,-0.13,2.12,2.55,5.75,27.86,28.39],CSQ:[-1.70,-1.42,-1.53,-10.98,-7.24,7.20,22.95,20.43],DNP:[0.98,0.72,0.61,7.38,5.75,7.28,10.03,10.72],EOI:[-1.33,-1.79,-1.81,-7.76,-2.23,8.19,21.03,19.60],EOS:[-0.07,-0.84,-1.08,-9.80,-4.86,8.24,24.23,22.18],ERH:[-0.21,-0.19,-0.38,-8.44,-7.93,8.90,12.79,11.77],ETG:[-0.06,-0.93,-1.58,-10.22,-6.32,6.69,25.57,23.19],GDV:[-1.50,-1.64,-1.41,-11.67,-10.72,6.14,32.98,29.30],GLU:[-1.87,-1.79,-2.27,-6.09,0.09,6.94,20.36,19.01],HTD:[1.67,2.38,1.99,-3.81,-6.40,7.37,26.77,25.73],NBXG:[0.20,-0.09,-0.83,-13.66,-12.34,8.66,18.74,16.62],NXG:[-0.02,-0.65,-0.92,-4.83,-1.52,12.54,60.43,57.40],PCN:[-1.25,-1.49,-1.76,2.10,6.79,11.50,11.45,11.74],PDI:[-2.10,-2.05,-1.73,3.03,9.78,16.03,15.82,16.51],PDO:[-0.83,-1.38,-1.93,0.71,3.86,11.82,12.76,12.99],PDX:[-0.96,-0.85,-1.08,-11.24,-9.19,7.68,23.49,20.84],RFI:[-1.73,-2.22,-2.37,-5.86,0.53,8.54,12.01,11.24],RLTY:[-2.25,-2.25,-2.14,-9.28,-6.54,8.39,17.45,15.74],RNP:[-2.92,-2.81,-1.79,-7.59,-0.33,7.98,22.22,20.45],RQI:[-3.32,-1.86,-1.06,-5.67,-3.05,8.42,13.70,12.82],UTF:[1.98,2.00,0.16,-3.05,-3.93,7.23,28.29,27.38],UTG:[-0.46,-0.64,-0.53,-0.83,-0.26,5.75,42.06,41.71]}
 };
 
-function qc(z,dp){if(z>=0&&dp<0)return'#1D9E75';if(z>=0&&dp>=0)return'#378ADD';if(z<0&&dp<0)return'#D85A30';return'#888780';}
+// expand RAW to SS
+const FIELDS=['z3m','z6m','z1y','dp','avg','yld','nav','px'];
+const SS={};
+for(const d of DATES){SS[d]={};for(const t of Object.keys(RAW[d])){const v=RAW[d][t];const o={};FIELDS.forEach((f,i)=>o[f]=v[i]);o.lev='--';o.fr='Monthly';SS[d][t]=o;}}
+const TICKERS=Object.keys(SS['06/15/2026']);
+
 function qk(z,dp){if(z>=0&&dp<0)return'green';if(z>=0&&dp>=0)return'blue';if(z<0&&dp<0)return'orange';return'gray';}
+function qc(z,dp){if(z>=0&&dp<0)return'#1D9E75';if(z>=0&&dp>=0)return'#378ADD';if(z<0&&dp<0)return'#D85A30';return'#888780';}
 function ql(k){return{green:'Discount+Z narrowing',blue:'Premium+Z narrowing',orange:'Discount+Z widening',gray:'Premium+Z widening'}[k];}
 function qbg(k){return{green:'#E1F5EE',blue:'#E6F1FB',orange:'#FAECE7',gray:'#F1EFE8'}[k];}
 function qtx(k){return{green:'#0F6E56',blue:'#185FA5',orange:'#993C1D',gray:'#5F5E5A'}[k];}
@@ -201,88 +170,66 @@ function ei(t){return t<0.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
 let per='z1y',quad='all',terms=[],idx=DATES.length-1,mode='scatter';
 let animating=false,sd=[],aStart=null,chart=null,playing=false,pTimer=null;
 
-function gs(d){return d?SS[d]||{}:{};}
+function gs(d){return SS[d]||{};}
 function gd(){return DATES[idx];}
 function gpd(){return idx>0?DATES[idx-1]:null;}
 
 function buildSD(){
-  const s=gs(gd());
-  sd=Object.entries(s).map(([t,f])=>{
-    const z=f[per];const col=qc(z,f.dp);
-    return{x:z,y:f.dp,label:t,yld:f.yld,avg:f.avg,z3m:f.z3m,z6m:f.z6m,z1y:f.z1y,col,qk:qk(z,f.dp),f:{...f,t},dev:Math.abs(f.dp-f.avg)};
+  sd=Object.entries(gs(gd())).map(([t,f])=>{
+    const zv=f[per],col=qc(zv,f.dp);
+    return{x:zv,y:f.dp,label:t,yld:f.yld,avg:f.avg,z3m:f.z3m,z6m:f.z6m,z1y:f.z1y,col,qk:qk(zv,f.dp),f:{...f,t}};
   });
 }
 
 function vis(d){
-  if(terms.length>0)return terms.includes(d.label)?{dim:false}:{dim:true};
+  if(terms.length>0)return{dim:!terms.includes(d.label)};
   return{dim:quad!=='all'&&d.qk!==quad};
 }
 
+function syncBtns(){
+  document.getElementById('mscat').classList.toggle('on',mode==='scatter');
+  document.getElementById('mdelta').classList.toggle('on',mode==='delta');
+}
+
 function setMode(m){
-  mode=m;
-  document.getElementById('mscat').classList.toggle('on',m==='scatter');
-  document.getElementById('mdelta').classList.toggle('on',m==='delta');
-  if(m==='scatter'){
-    document.getElementById('scatter-wrap').style.display='block';
-    document.getElementById('delta-wrap').style.display='none';
-    document.getElementById('leg-s').style.display='flex';
-    document.getElementById('leg-d').style.display='none';
-    setTimeout(()=>{chart.resize();chart.update('none');},10);
-  } else {
-    document.getElementById('scatter-wrap').style.display='none';
-    document.getElementById('delta-wrap').style.display='block';
-    document.getElementById('leg-s').style.display='none';
-    document.getElementById('leg-d').style.display='flex';
-    renderDelta();
-  }
+  mode=m; syncBtns();
+  document.getElementById('leg-s').style.display=m==='scatter'?'flex':'none';
+  document.getElementById('leg-d').style.display=m==='delta'?'flex':'none';
+  document.getElementById('cvs-wrap').style.display=m==='scatter'?'block':'none';
+  document.getElementById('delta-wrap').style.display=m==='delta'?'block':'none';
+  document.getElementById('dp-panel').style.display='none';
+  if(m==='scatter')setTimeout(()=>chart&&chart.resize(),10);
+  else renderDelta();
 }
 
 function spark(t){
-  const vals=DATES.slice(0,idx+1).map(d=>{const s=gs(d)[t];return s?s[per]:null;}).filter(v=>v!==null);
-  if(vals.length<2)return'<span style="color:var(--txt3);font-size:10px;">—</span>';
+  const vals=DATES.slice(0,idx+1).map(d=>SS[d][t]?SS[d][t][per]:null).filter(v=>v!==null);
+  if(vals.length<2)return'—';
   const mn=Math.min(...vals),mx=Math.max(...vals),rng=mx-mn||0.01;
-  return'<span class="spark">'+vals.map(v=>{
-    const h=Math.max(2,Math.round(((v-mn)/rng)*18));
-    return`<span class="sb" style="height:${h}px;background:${v>=0?'#1D9E75':'#D85A30'};opacity:0.75;"></span>`;
-  }).join('')+'</span>';
+  return'<span class="spark">'+vals.map(v=>{const h=Math.max(2,Math.round(((v-mn)/rng)*18));return`<span class="sb" style="height:${h}px;background:${v>=0?'#1D9E75':'#D85A30'};opacity:.75"></span>`;}).join('')+'</span>';
 }
 
 function renderDelta(){
-  const d=gd(),pd=gpd();
-  const sn=gs(d),sp=gs(pd);
+  const d=gd(),pd=gpd(),sn=gs(d),sp=gs(pd);
   document.getElementById('dsub').textContent=pd?`${pd} → ${d}`:'First session';
-  const allTickers=Object.keys(sn).sort();
-  const visible=terms.length>0?allTickers.filter(t=>terms.includes(t)):allTickers;
-  const nm=document.getElementById('no-match');
-  if(visible.length===0){document.getElementById('drows').innerHTML='';nm.style.display='block';return;}
-  nm.style.display='none';
-  document.getElementById('drows').innerHTML=visible.map(t=>{
-    const f=sn[t],p=sp[t];if(!f)return'';
-    const zn=f[per],zp=p?p[per]:null;
-    const dz=zp!==null?zn-zp:null;
-    const ddp=p?f.dp-p.dp:null;
-    const qn=qk(zn,f.dp),qp=p?qk(zp,p.dp):null;
-    const chg=qp&&qp!==qn;
-    const up=chg&&QO[qn]<QO[qp],dn=chg&&QO[qn]>QO[qp];
-    const bm=!chg&&dz!==null&&Math.abs(dz)>=0.50;
-    const rc=up?'up':dn?'dn':bm?'bm':'';
-    const dzs=dz!==null?(dz>=0?`<span style="color:#1D9E75;">+${dz.toFixed(2)}</span>`:`<span style="color:#D85A30;">${dz.toFixed(2)}</span>`):'—';
-    const dds=ddp!==null?(ddp>=0?`<span style="color:#D85A30;">+${ddp.toFixed(2)}%</span>`:`<span style="color:#1D9E75;">${ddp.toFixed(2)}%</span>`):'—';
-    const qs=chg?`<span style="font-size:10px;padding:1px 5px;border-radius:3px;background:${qbg(qn)};color:${qtx(qn)};">${qp}→${qn}</span>`:`<span style="font-size:10px;color:${qtx(qn)};">${qn}</span>`;
-    return`<div class="dr ${rc}">
-      <span style="font-weight:500;color:${qc(zn,f.dp)};">${t}</span>
-      <span>${spark(t)}</span>
-      <span style="text-align:right;color:var(--txt3);font-size:10px;">${zp!==null?zp.toFixed(2):'—'}</span>
-      <span style="text-align:right;">${zn.toFixed(2)}</span>
-      <span style="text-align:right;">${dzs}</span>
-      <span style="text-align:right;">${dds}</span>
-      <span style="text-align:right;">${qs}</span>
-    </div>`;
+  const all=Object.keys(sn).sort();
+  const list=terms.length>0?all.filter(t=>terms.includes(t)):all;
+  document.getElementById('nm').style.display=list.length?'none':'block';
+  document.getElementById('drows').innerHTML=list.map(t=>{
+    const f=sn[t],p=sp?sp[t]:null;if(!f)return'';
+    const zn=f[per],zp=p?p[per]:null,dz=zp!=null?zn-zp:null,ddp=p?f.dp-p.dp:null;
+    const qn=qk(zn,f.dp),qp=p?qk(zp,p.dp):null,chg=qp&&qp!==qn;
+    const up=chg&&QO[qn]<QO[qp],dn2=chg&&QO[qn]>QO[qp],bm=!chg&&dz!=null&&Math.abs(dz)>=0.50;
+    const rc=up?'up':dn2?'dn':bm?'bm':'';
+    const dzs=dz!=null?(dz>=0?`<span style="color:#1D9E75">+${dz.toFixed(2)}</span>`:`<span style="color:#D85A30">${dz.toFixed(2)}</span>`):'—';
+    const dds=ddp!=null?(ddp>=0?`<span style="color:#D85A30">+${ddp.toFixed(2)}%</span>`:`<span style="color:#1D9E75">${ddp.toFixed(2)}%</span>`):'—';
+    const qs=chg?`<span style="font-size:10px;padding:1px 5px;border-radius:3px;background:${qbg(qn)};color:${qtx(qn)}">${qp}→${qn}</span>`:`<span style="font-size:10px;color:${qtx(qn)}">${qn}</span>`;
+    return`<div class="dr ${rc}"><span style="font-weight:500;color:${qc(zn,f.dp)}">${t}</span><span>${spark(t)}</span><span style="text-align:right;color:var(--txt3);font-size:10px">${zp!=null?zp.toFixed(2):'—'}</span><span style="text-align:right">${zn.toFixed(2)}</span><span style="text-align:right">${dzs}</span><span style="text-align:right">${dds}</span><span style="text-align:right">${qs}</span></div>`;
   }).join('');
 }
 
 function applyStyles(){
-  const ds=chart.data.datasets[0];ds.data=sd;
+  const ds=chart.data.datasets[0]; ds.data=sd;
   ds.backgroundColor=sd.map(d=>vis(d).dim?d.col+'12':terms.includes(d.label)?d.col+'EE':d.col+'CC');
   ds.borderColor=sd.map(d=>vis(d).dim?d.col+'20':d.col);
   ds.borderWidth=sd.map(d=>terms.includes(d.label)?3:1.5);
@@ -291,34 +238,30 @@ function applyStyles(){
 
 function animTo(ni){
   if(animating)return;
-  const oi=idx;idx=ni;
+  const oi=idx; idx=ni;
   const os=gs(DATES[oi]),ns=gs(DATES[ni]);
-  buildSD();const tks=Object.keys(ns);
-  aStart=null;animating=true;
+  buildSD(); aStart=null; animating=true;
+  const tks=Object.keys(ns);
   function step(ts){
     if(!aStart)aStart=ts;
     const t=ei(Math.min((ts-aStart)/400,1));
     if(mode==='scatter'){
       chart.data.datasets[0].data.forEach((d,i)=>{
-        const tk=tks[i];if(!tk)return;
-        const ov=os[tk],nv=ns[tk];if(!ov||!nv)return;
-        d.x=ov[per]+(nv[per]-ov[per])*t;
-        d.y=ov.dp+(nv.dp-ov.dp)*t;
+        const tk=tks[i]; if(!tk)return;
+        const ov=os[tk],nv=ns[tk]; if(!ov||!nv)return;
+        d.x=ov[per]+(nv[per]-ov[per])*t; d.y=ov.dp+(nv.dp-ov.dp)*t;
       });
       chart.update('none');
     }
     if(t<1)requestAnimationFrame(step);
-    else{
-      animating=false;buildSD();
-      if(mode==='scatter'){applyStyles();chart.update('none');}
-      else renderDelta();
-      updateUI();
-    }
+    else{animating=false;buildSD();if(mode==='scatter'){applyStyles();chart.update('none');}else renderDelta();updateUI();}
   }
-  requestAnimationFrame(step);updateUI();
+  requestAnimationFrame(step);
+  updateUI();
 }
 
 function updateUI(){
+  syncBtns();
   const d=gd();
   document.getElementById('bdg').textContent=d;
   document.getElementById('bprev').disabled=idx===0;
@@ -329,76 +272,86 @@ function updateUI(){
   const ncc=nc.startsWith('+')?'color:#1D9E75;font-weight:500':nc.startsWith('-')?'color:#D85A30;font-weight:500':'';
   const sn=gs(d);
   const fs=Object.entries(sn).map(([t,f])=>({t,z:f[per],dp:f.dp})).sort((a,b)=>a.z-b.z);
-  const ch=fs.slice(0,3);
-  const hot=fs.filter(f=>f.z>=0&&f.dp<0).sort((a,b)=>b.z-a.z).slice(0,2);
+  const ch=fs.slice(0,3),hot=fs.filter(f=>f.z>=0&&f.dp<0).sort((a,b)=>b.z-a.z).slice(0,2);
   const og=fs.filter(f=>f.z<0&&f.dp<0).length,gr=fs.filter(f=>f.z>=0&&f.dp<0).length;
   const bl=fs.filter(f=>f.z>=0&&f.dp>=0).length,gy=fs.filter(f=>f.z<0&&f.dp>=0).length;
   document.getElementById('cbox').innerHTML=`
-  <p style="font-size:11px;font-weight:500;color:var(--txt2);margin:0 0 6px;text-transform:uppercase;letter-spacing:.04em;">Snapshot — ${d} <span style="${ncc}">${nc}</span></p>
-  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
-    <span style="font-size:11px;padding:2px 8px;background:#E1F5EE;color:#0F6E56;border-radius:var(--rmd);">Green ${gr}</span>
-    <span style="font-size:11px;padding:2px 8px;background:#E6F1FB;color:#185FA5;border-radius:var(--rmd);">Blue ${bl}</span>
-    <span style="font-size:11px;padding:2px 8px;background:#FAECE7;color:#993C1D;border-radius:var(--rmd);">Orange ${og}</span>
-    <span style="font-size:11px;padding:2px 8px;background:#F1EFE8;color:#5F5E5A;border-radius:var(--rmd);">Gray ${gy}</span>
+  <p style="font-size:11px;font-weight:500;color:var(--txt2);margin:0 0 5px;text-transform:uppercase;letter-spacing:.04em">Snapshot — ${d} <span style="${ncc}">${nc}</span></p>
+  <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:7px">
+    <span style="font-size:11px;padding:2px 7px;background:#E1F5EE;color:#0F6E56;border-radius:var(--rmd)">Green ${gr}</span>
+    <span style="font-size:11px;padding:2px 7px;background:#E6F1FB;color:#185FA5;border-radius:var(--rmd)">Blue ${bl}</span>
+    <span style="font-size:11px;padding:2px 7px;background:#FAECE7;color:#993C1D;border-radius:var(--rmd)">Orange ${og}</span>
+    <span style="font-size:11px;padding:2px 7px;background:#F1EFE8;color:#5F5E5A;border-radius:var(--rmd)">Gray ${gy}</span>
   </div>
-  <p style="font-size:11px;color:var(--txt2);margin:0 0 3px;"><strong>Deepest:</strong> ${ch.map(f=>`<span style="color:#D85A30;font-weight:600;">${f.t}</span> ${f.z.toFixed(2)}`).join(' · ')}</p>
-  ${hot.length?`<p style="font-size:11px;color:var(--txt2);margin:0;"><strong>Strongest green:</strong> ${hot.map(f=>`<span style="color:#1D9E75;font-weight:600;">${f.t}</span> +${f.z.toFixed(2)}`).join(' · ')}</p>`:''}`;
+  <p style="font-size:11px;color:var(--txt2);margin:0 0 3px"><strong>Deepest:</strong> ${ch.map(f=>`<span style="color:#D85A30;font-weight:600">${f.t}</span> ${f.z.toFixed(2)}`).join(' · ')}</p>
+  ${hot.length?`<p style="font-size:11px;color:var(--txt2);margin:0"><strong>Strongest green:</strong> ${hot.map(f=>`<span style="color:#1D9E75;font-weight:600">${f.t}</span> +${f.z.toFixed(2)}`).join(' · ')}</p>`:''}`;
   if(mode==='delta')renderDelta();
 }
 
 function play(){
-  playing=true;
-  document.getElementById('pbtn').innerHTML='⏸ <span>Pause</span>';
-  document.getElementById('pbtn').classList.add('on');
-  if(idx>=DATES.length-1)animTo(0);
-  sched();
+  playing=true; document.getElementById('pbtn').textContent='⏸ Pause'; document.getElementById('pbtn').classList.add('on');
+  if(idx>=DATES.length-1)animTo(0); sched();
 }
-function pause(){
-  playing=false;clearTimeout(pTimer);
-  document.getElementById('pbtn').innerHTML='▶ <span>Play</span>';
-  document.getElementById('pbtn').classList.remove('on');
+function pause2(){
+  playing=false; clearTimeout(pTimer); document.getElementById('pbtn').textContent='▶ Play'; document.getElementById('pbtn').classList.remove('on');
 }
 function sched(){
   if(!playing)return;
-  pTimer=setTimeout(()=>{
-    if(!playing)return;
-    if(idx+1>=DATES.length){pause();return;}
-    animTo(idx+1);sched();
-  },1000);
+  pTimer=setTimeout(()=>{if(!playing)return;if(idx+1>=DATES.length){pause2();return;}animTo(idx+1);sched();},1000);
 }
-document.getElementById('pbtn').onclick=()=>playing?pause():play();
-document.getElementById('bprev').onclick=()=>{pause();if(idx>0)animTo(idx-1);};
-document.getElementById('bnext').onclick=()=>{pause();if(idx<DATES.length-1)animTo(idx+1);};
-document.getElementById('slider').oninput=e=>{pause();const ni=+e.target.value;if(ni!==idx)animTo(ni);};
 
-const pips=document.getElementById('pips');
-pips.innerHTML=DATES.map((d,i)=>{const p=d.split('/');return`<div class="pip${i===idx?' on':''}" data-i="${i}"><div class="dot"></div><div class="lbl">${p[0]}/${p[1]}<br>${p[2]}</div></div>`;}).join('');
-pips.querySelectorAll('.pip').forEach(p=>p.onclick=()=>{pause();const i=+p.dataset.i;if(i!==idx)animTo(i);});
+document.getElementById('pbtn').onclick=()=>playing?pause2():play();
+document.getElementById('bprev').onclick=()=>{pause2();if(idx>0)animTo(idx-1);};
+document.getElementById('bnext').onclick=()=>{pause2();if(idx<DATES.length-1)animTo(idx+1);};
+document.getElementById('slider').oninput=e=>{pause2();const ni=+e.target.value;if(ni!==idx)animTo(ni);};
+
+document.getElementById('pips').innerHTML=DATES.map((d,i)=>{const p=d.split('/');return`<div class="pip${i===idx?' on':''}" data-i="${i}"><div class="dot"></div><div class="lbl">${p[0]}/${p[1]}<br>${p[2]}</div></div>`;}).join('');
+document.querySelectorAll('.pip').forEach(p=>p.onclick=()=>{pause2();const i=+p.dataset.i;if(i!==idx)animTo(i);});
+
+document.querySelectorAll('.qb').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.qb').forEach(x=>x.classList.remove('on')); b.classList.add('on'); quad=b.dataset.q;
+  buildSD(); if(mode==='scatter'){applyStyles();chart.update('none');}else renderDelta();
+});
+document.querySelectorAll('.zs button').forEach(b=>b.onclick=()=>{
+  if(animating)return; const p=b.dataset.p; if(p===per)return;
+  document.querySelectorAll('.zs button').forEach(x=>x.classList.remove('on')); b.classList.add('on'); per=p;
+  chart.options.scales.x.title.text=`Z-Score ${p.toUpperCase()}`; buildSD();
+  if(mode==='scatter'){applyStyles();chart.update('none');}else renderDelta(); updateUI();
+});
+document.getElementById('srch').oninput=e=>{
+  terms=e.target.value.trim().toUpperCase().split(/[\s,]+/).filter(Boolean);
+  document.getElementById('dp-panel').style.display='none';
+  buildSD(); if(mode==='scatter'){applyStyles();chart.update('none');}else renderDelta();
+};
 
 const rl={id:'rl',afterDatasetsDraw(c){
-  if(animating||mode!=='scatter')return;const{ctx,scales:{x,y}}=c;
-  sd.forEach(d=>{const v=vis(d);const a=v.dim?.08:.55;
+  if(animating||mode!=='scatter')return;
+  const{ctx:cx,scales:{x,y}}=c;
+  sd.forEach(d=>{
+    const a=vis(d).dim?.08:.55;
     const px=x.getPixelForValue(d.x),pa=y.getPixelForValue(d.avg),pc=y.getPixelForValue(d.y);
-    ctx.save();ctx.strokeStyle=`rgba(136,135,128,${a})`;ctx.lineWidth=1.2;ctx.setLineDash([3,2]);
-    ctx.beginPath();ctx.moveTo(px,pc);ctx.lineTo(px,pa);ctx.stroke();ctx.setLineDash([]);
-    ctx.beginPath();ctx.moveTo(px-4,pa);ctx.lineTo(px+4,pa);ctx.stroke();ctx.restore();});
+    cx.save();cx.strokeStyle=`rgba(136,135,128,${a})`;cx.lineWidth=1.2;cx.setLineDash([3,2]);
+    cx.beginPath();cx.moveTo(px,pc);cx.lineTo(px,pa);cx.stroke();cx.setLineDash([]);
+    cx.beginPath();cx.moveTo(px-4,pa);cx.lineTo(px+4,pa);cx.stroke();cx.restore();
+  });
 }};
 
 Chart.register(ChartDataLabels,rl);
 buildSD();
-chart=new Chart(document.getElementById('qc').getContext('2d'),{
+chart=new Chart(document.getElementById('cvs').getContext('2d'),{
   type:'scatter',
   data:{datasets:[{data:sd,backgroundColor:sd.map(d=>d.col+'CC'),borderColor:sd.map(d=>d.col),borderWidth:1.5,pointRadius:7,pointHoverRadius:9}]},
   options:{
-    responsive:true,maintainAspectRatio:false,layout:{padding:{top:24,right:44,bottom:18,left:18}},animation:{duration:0},
+    responsive:true,maintainAspectRatio:false,layout:{padding:{top:22,right:42,bottom:16,left:16}},animation:{duration:0},
     plugins:{
       legend:{display:false},
       tooltip:{enabled:true,filter:()=>!animating&&mode==='scatter',callbacks:{label:c=>{
-        const d=c.raw;const df=(d.y-d.avg).toFixed(2);const sg=df>0?'+':'';
-        return[`${d.label}  |  Yield: ${d.yld.toFixed(2)}%`,`Z ${per}: ${d.x.toFixed(2)}  |  D/P: ${d.y.toFixed(2)}%`,`3M: ${d.z3m.toFixed(2)}  ·  6M: ${d.z6m.toFixed(2)}  ·  1Y: ${d.z1y.toFixed(2)}`,`52-wk avg: ${d.avg.toFixed(2)}%  (${sg}${df})`];}}},
-      datalabels:{formatter:v=>`${v.label}\n${v.yld.toFixed(2)}%`,
+        const d=c.raw,df=(d.y-d.avg).toFixed(2),sg=df>0?'+':'';
+        return[`${d.label}  |  Yield: ${d.yld.toFixed(2)}%`,`Z ${per}: ${d.x.toFixed(2)}  |  D/P: ${d.y.toFixed(2)}%`,`3M: ${d.z3m.toFixed(2)}  6M: ${d.z6m.toFixed(2)}  1Y: ${d.z1y.toFixed(2)}`,`52wk avg: ${d.avg.toFixed(2)}% (${sg}${df})`];}}},
+      datalabels:{
+        formatter:v=>`${v.label}\n${v.yld.toFixed(2)}%`,
         font:c=>{const d=c.dataset.data[c.dataIndex];return{size:terms.includes(d.label)?10:9,weight:!vis(d).dim?'500':'400'};},
-        color:c=>{if(animating||mode!=='scatter')return'transparent';const d=c.dataset.data[c.dataIndex];return vis(d).dim?'rgba(136,135,128,0.18)':d.col;},
+        color:c=>{if(animating)return'transparent';const d=c.dataset.data[c.dataIndex];return vis(d).dim?'rgba(136,135,128,.18)':d.col;},
         align:'top',offset:4,textAlign:'center',lineHeight:1.3}},
     onClick:(e,els)=>{
       if(!els.length||animating||mode!=='scatter')return;
@@ -408,44 +361,21 @@ chart=new Chart(document.getElementById('qc').getContext('2d'),{
       const df=(f.dp-f.avg).toFixed(2),sg=df>0?'+':'';
       document.getElementById('dpg').innerHTML=[
         {l:'Price',v:`$${f.px.toFixed(2)}`},{l:'NAV',v:`$${f.nav.toFixed(2)}`},{l:'D/P',v:`${f.dp.toFixed(2)}%`},
-        {l:'52-wk avg',v:`${f.avg.toFixed(2)}% (${sg}${df})`},{l:'Yield',v:`${f.yld.toFixed(2)}%`},
+        {l:'52wk avg',v:`${f.avg.toFixed(2)}% (${sg}${df})`},{l:'Yield',v:`${f.yld.toFixed(2)}%`},
         {l:'Z 3M',v:f.z3m.toFixed(2)},{l:'Z 6M',v:f.z6m.toFixed(2)},{l:'Z 1Y',v:f.z1y.toFixed(2)},
-        {l:'Lev.',v:f.lev},{l:'Dist.',v:f.fr}
       ].map(m=>`<div class="dpm"><div class="l">${m.l}</div><div class="v">${m.v}</div></div>`).join('');
-      document.getElementById('dp').style.display='block';
+      document.getElementById('dp-panel').style.display='block';
     },
     scales:{
-      x:{title:{display:true,text:'Z-Score 1Y',font:{size:12,weight:'500'},color:'#888780'},
-         grid:{color:c=>c.tick.value===0?'rgba(100,100,100,0.45)':'rgba(150,150,150,0.1)',lineWidth:c=>c.tick.value===0?1.5:1},
+      x:{title:{display:true,text:'Z-Score 1Y',font:{size:11,weight:'500'},color:'#888780'},
+         grid:{color:c=>c.tick.value===0?'rgba(100,100,100,.45)':'rgba(150,150,150,.1)',lineWidth:c=>c.tick.value===0?1.5:1},
          ticks:{color:'#888780',font:{size:10}},min:-4.0,max:4.5},
-      y:{title:{display:true,text:'Discount / Premium (%)',font:{size:12,weight:'500'},color:'#888780'},
-         grid:{color:c=>c.tick.value===0?'rgba(100,100,100,0.45)':'rgba(150,150,150,0.1)',lineWidth:c=>c.tick.value===0?1.5:1},
+      y:{title:{display:true,text:'Discount / Premium (%)',font:{size:11,weight:'500'},color:'#888780'},
+         grid:{color:c=>c.tick.value===0?'rgba(100,100,100,.45)':'rgba(150,150,150,.1)',lineWidth:c=>c.tick.value===0?1.5:1},
          ticks:{color:'#888780',font:{size:10},callback:v=>v.toFixed(0)+'%'},min:-16,max:12}}
   }
 });
 
-document.querySelectorAll('.qb').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('.qb').forEach(x=>x.classList.remove('on'));
-  b.classList.add('on');quad=b.dataset.q;buildSD();
-  if(mode==='scatter'){applyStyles();chart.update('none');}else renderDelta();
-});
-document.querySelectorAll('.zs button').forEach(b=>b.onclick=()=>{
-  if(animating)return;const p=b.dataset.p;if(p===per)return;
-  document.querySelectorAll('.zs button').forEach(x=>x.classList.remove('on'));
-  b.classList.add('on');per=p;
-  chart.options.scales.x.title.text=`Z-Score ${p.toUpperCase()}`;
-  buildSD();
-  if(mode==='scatter'){applyStyles();chart.update('none');}else renderDelta();
-  updateUI();
-});
-document.getElementById('srch').oninput=e=>{
-  terms=e.target.value.trim().toUpperCase().split(/[\s,]+/).filter(Boolean);
-  document.getElementById('dp').style.display='none';
-  buildSD();
-  if(mode==='scatter'){applyStyles();chart.update('none');}else renderDelta();
-};
-
-applyStyles();chart.update('none');
-// default: scatter is already visible from HTML, just run updateUI
-updateUI();
+applyStyles(); chart.update('none');
+setMode('scatter'); updateUI();
 </script>
