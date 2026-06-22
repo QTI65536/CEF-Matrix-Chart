@@ -27,16 +27,16 @@ input[type=text]::placeholder{color:var(--txt3);}
 .pip.on .lbl{color:#1D9E75;font-weight:500;}
 #cvs-wrap{width:100%;height:510px;}
 #cvs-wrap canvas{width:100%;height:100%;}
-#delta-wrap{display:none;background:var(--bg2);border:.5px solid var(--bdr2);border-radius:var(--rlg);overflow:hidden;}
-.dh,.dr{display:grid;grid-template-columns:60px 1fr 65px 65px 68px 68px 88px;gap:4px;padding:7px 13px;font-size:11px;align-items:center;}
-.dh{font-size:10px;color:var(--txt3);text-transform:uppercase;letter-spacing:.04em;border-bottom:.5px solid var(--bdr2);}
+#delta-wrap{display:none;background:var(--bg2);border:.5px solid var(--bdr2);border-radius:var(--rlg);overflow:auto;}
+.dh,.dr{display:grid;grid-template-columns:54px 1fr 56px 56px 60px 60px 76px 56px 56px;gap:3px;padding:7px 11px;font-size:10.5px;align-items:center;min-width:660px;}
+.dh{font-size:9.5px;color:var(--txt3);text-transform:uppercase;letter-spacing:.03em;border-bottom:.5px solid var(--bdr2);}
 .dr{border-bottom:.5px solid var(--bdr3);}
 .dr:last-child{border-bottom:none;}
 .dr.up{background:#E1F5EE;border-left:3px solid #1D9E75;}
 .dr.dn{background:#FAECE7;border-left:3px solid #D85A30;}
 .dr.bm{background:#FFF8EC;border-left:3px solid #BA7517;}
-.spark{display:inline-flex;gap:1.5px;align-items:flex-end;height:18px;}
-.sb{width:5px;border-radius:1px;}
+.spark{display:inline-flex;gap:1.5px;align-items:flex-end;height:16px;}
+.sb{width:4px;border-radius:1px;}
 #dp-panel{display:none;background:var(--bg1);border:.5px solid var(--bdr2);border-radius:var(--rlg);padding:13px 15px;margin-top:9px;}
 .dpg{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:7px;margin-top:9px;}
 .dpm{background:var(--bg2);border-radius:var(--rmd);padding:7px 9px;}
@@ -54,19 +54,16 @@ input[type=text]::placeholder{color:var(--txt3);}
 <div style="padding-top:.6rem">
 
 <div style="margin-bottom:9px">
-<div class="al r"><div class="al-t">⚠ Broad selloff — net -$8.65 today</div><div style="color:var(--txt2)">Most of the universe widened discounts simultaneously. Second-largest single-day move in this 10-session window after 06/05's -$14.59.</div></div>
-<div class="al r"><div class="al-t">⚠ BST — Add trigger reset, Z1Y deepened further</div><div style="color:var(--txt2)">Z1Y -1.38 (improved from -2.39, but Z3M -0.33 and discount widened back to -9.97% from -8.49%). Mixed signal — z-score improved on the 1Y lookback while price action this session was negative.</div></div>
-<div class="al r"><div class="al-t">⚠ RNP — Z3M/Z6M extreme readings</div><div style="color:var(--txt2)">Z3M -3.01, Z6M -3.04, Z1Y -1.93. D/P -8.50% vs avg -0.42%. Among the deepest dislocations in the universe right now.</div></div>
-<div class="al r"><div class="al-t">⚠ RQI — Z3M anomaly persists, 7th session</div><div style="color:var(--txt2)">Z3M -3.03 vs Z1Y -1.49. Using Z1Y for classification as established.</div></div>
-<div class="al a"><div class="al-t">⚡ AIO — Quadrant change: green → orange</div><div style="color:var(--txt2)">Z1Y -0.49 (from +0.75 effectively, recalculated). Discount widened to -8.48% from -10.05% — wait, discount narrowed but z1y flipped negative on shorter-period blend. Flag for manual review.</div></div>
-<div class="al g"><div class="al-t">✅ BUI — Z1Y crossed into blue territory</div><div style="color:var(--txt2)">Z1Y +0.13 (from -0.17). D/P +2.97%. Quadrant confirmed blue→blue, now genuinely positive z-score. Second tranche trigger condition met if sustained.</div></div>
+<div class="al g"><div class="al-t">✅ Momentum data now integrated</div><div style="color:var(--txt2)">ST/LT Momentum columns added to Delta table, full 27-fund universe, sourced from 06/18 momentum upload. Updates each session you provide fresh momentum data.</div></div>
+<div class="al r"><div class="al-t">⚠ NBXG — momentum vs z-score divergence</div><div style="color:var(--txt2)">ST momentum +17.45%, LT momentum +25.12% \u2014 strongest momentum reading in the book, yet still orange quadrant (Z1Y -0.22). Worth watching if momentum-led recovery continues.</div></div>
+<div class="al r"><div class="al-t">⚠ RQI — momentum confirms z-score weakness</div><div style="color:var(--txt2)">ST -3.61%, LT -4.64% \u2014 momentum agrees with the Z3M anomaly pattern flagged over the past 8 sessions.</div></div>
 </div>
 
 <div id="tmbar">
   <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:7px;margin-bottom:9px">
-    <div style="font-size:11px;color:var(--txt2);font-weight:500">⏱ Time machine — 10 sessions <span style="font-weight:400;color:var(--txt3)">06/04→06/17 · 27 funds</span></div>
+    <div style="font-size:11px;color:var(--txt2);font-weight:500">⏱ Time machine — 10 sessions <span style="font-weight:400;color:var(--txt3)">06/05→06/18 · 27 funds · momentum as of 06/18</span></div>
     <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
-      <div id="badge">📅 <span id="bdg">06/17/2026</span></div>
+      <div id="badge">📅 <span id="bdg">06/18/2026</span></div>
       <div style="display:flex;gap:5px">
         <button class="nb" id="bprev">◀</button>
         <button id="pbtn">▶ Play</button>
@@ -106,17 +103,17 @@ input[type=text]::placeholder{color:var(--txt3);}
   <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:#E1F5EE;border-left:3px solid #1D9E75;display:inline-block"></span>Upgrade</span>
   <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:#FAECE7;border-left:3px solid #D85A30;display:inline-block"></span>Downgrade</span>
   <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:#FFF8EC;border-left:3px solid #BA7517;display:inline-block"></span>Large move ≥0.50z</span>
-  <span style="font-size:10px;color:var(--txt3)">Always A→Z · search filters rows</span>
+  <span style="font-size:10px;color:var(--txt3)">ST/LT Mom = price momentum as of latest upload, not session-specific</span>
 </div>
 
 <div id="cvs-wrap"><canvas id="cvs"></canvas></div>
 
 <div id="delta-wrap">
-  <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 13px;border-bottom:.5px solid var(--bdr2)">
-    <span style="font-size:12px;font-weight:500;color:var(--txt1)">Session delta</span>
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 13px;border-bottom:.5px solid var(--bdr2);min-width:660px">
+    <span style="font-size:12px;font-weight:500;color:var(--txt1)">Session delta + momentum</span>
     <span id="dsub" style="font-size:11px;color:var(--txt3)"></span>
   </div>
-  <div class="dh"><span>Ticker</span><span>Z history</span><span style="text-align:right">Z prev</span><span style="text-align:right">Z now</span><span style="text-align:right">Δ Z</span><span style="text-align:right">D/P Δ</span><span style="text-align:right">Quadrant</span></div>
+  <div class="dh"><span>Ticker</span><span>Z history</span><span style="text-align:right">Z prev</span><span style="text-align:right">Z now</span><span style="text-align:right">Δ Z</span><span style="text-align:right">D/P Δ</span><span style="text-align:right">Quadrant</span><span style="text-align:right">ST Mom</span><span style="text-align:right">LT Mom</span></div>
   <div id="drows"></div><div id="nm">No tickers match.</div>
 </div>
 
@@ -135,12 +132,11 @@ input[type=text]::placeholder{color:var(--txt3);}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
 <script>
-const DATES=['06/04/2026','06/05/2026','06/08/2026','06/09/2026','06/10/2026','06/11/2026','06/12/2026','06/15/2026','06/16/2026','06/17/2026'];
-const NC={'06/04/2026':'-$0.61','06/05/2026':'-$14.59','06/08/2026':'-$1.63','06/09/2026':'-$3.46','06/10/2026':'-$9.05','06/11/2026':'+$4.44','06/12/2026':'+$13.79','06/15/2026':'+$5.80','06/16/2026':'+$1.94','06/17/2026':'-$8.65'};
+const DATES=['06/05/2026','06/08/2026','06/09/2026','06/10/2026','06/11/2026','06/12/2026','06/15/2026','06/16/2026','06/17/2026','06/18/2026'];
+const NC={'06/05/2026':'-$14.59','06/08/2026':'-$1.63','06/09/2026':'-$3.46','06/10/2026':'-$9.05','06/11/2026':'+$4.44','06/12/2026':'+$13.79','06/15/2026':'+$5.80','06/16/2026':'+$1.94','06/17/2026':'-$8.65','06/18/2026':'+$4.85'};
 const QO={green:0,blue:1,orange:2,gray:3};
 
 const RAW={
-'06/04/2026':{AIO:[-0.05,-0.49,-0.91,-10.62,-5.13,7.89,30.69,27.37],ASGI:[-0.51,-0.60,0.23,2.10,1.28,12.10,22.23,22.81],BDJ:[-0.91,-1.36,-1.75,-8.50,-5.72,8.02,10.01,9.26],BME:[0.57,0.92,1.55,-4.57,-6.38,7.89,40.64,39.87],BST:[-1.28,-1.75,-2.30,-8.78,-6.17,6.16,54.33,48.72],BUI:[-0.08,-0.83,-1.20,-1.45,2.53,5.96,27.51,27.38],CSQ:[-1.06,-1.28,-1.44,-10.61,-7.02,7.12,23.10,20.65],DNP:[1.74,1.09,1.16,8.79,5.70,7.30,9.78,10.69],EOI:[-1.34,-1.63,-1.80,-7.18,-1.96,8.07,21.32,19.89],EOS:[-0.42,-1.07,-1.18,-9.14,-4.52,8.04,25.06,22.73],ERH:[1.47,1.84,1.27,-6.24,-7.97,8.81,12.67,11.88],ETG:[-0.66,-1.20,-1.88,-10.01,-6.15,6.69,25.67,23.20],GDV:[-0.42,-0.21,0.20,-10.60,-10.74,6.20,32.46,29.06],GLU:[-0.82,-1.32,-1.50,-3.66,0.21,6.81,20.00,19.38],HTD:[1.68,2.02,1.61,-4.43,-6.48,7.51,26.41,25.24],NBXG:[-0.38,-0.78,-1.28,-13.53,-12.30,8.66,19.39,16.62],NXG:[-0.26,-0.89,-1.18,-5.64,-1.33,11.93,63.26,60.34],PCN:[-1.65,-1.84,-2.02,1.75,6.93,11.42,11.46,11.82],PDI:[-1.31,-1.19,-1.28,5.09,9.96,15.73,15.92,16.82],PDO:[-0.40,-1.00,-1.43,1.64,3.91,11.71,12.79,13.11],PDX:[1.25,1.38,0.26,-8.66,-9.15,7.45,23.56,21.50],RFI:[-1.61,-2.14,-2.28,-4.98,0.76,8.53,11.65,11.26],RLTY:[-1.68,-1.95,-1.94,-9.49,-6.45,8.49,16.83,15.55],RNP:[-0.76,-0.98,-1.17,-4.82,-0.02,7.80,21.64,20.91],RQI:[0.50,0.54,1.13,-0.75,-3.05,8.11,13.11,13.32],UTF:[1.97,1.64,-0.09,-4.15,-3.73,7.33,27.92,27.00],UTG:[-1.23,-1.52,-1.17,-1.51,-0.26,5.75,42.39,41.75]},
 '06/05/2026':{AIO:[-0.15,-0.57,-0.92,-10.73,-5.21,8.22,30.66,26.27],ASGI:[-0.51,-0.60,0.23,2.10,1.28,12.17,22.34,22.68],BDJ:[-1.23,-1.51,-1.95,-8.50,-5.72,8.12,10.12,9.15],BME:[-0.38,0.20,0.97,-4.57,-6.38,7.87,41.78,39.94],BST:[-0.77,-1.28,-1.71,-8.78,-6.17,6.52,53.41,46.02],BUI:[0.09,-0.74,-1.09,-1.12,2.52,5.97,27.69,27.32],CSQ:[-1.06,-1.28,-1.44,-10.61,-7.02,7.36,23.10,19.97],DNP:[1.53,0.95,0.97,8.31,5.71,7.27,9.87,10.73],EOI:[-1.25,-1.58,-1.74,-7.06,-1.99,8.24,21.40,19.48],EOS:[-0.78,-1.30,-1.26,-9.51,-4.56,8.26,25.12,22.12],ERH:[1.08,1.36,0.88,-6.75,-7.96,8.81,12.74,11.89],ETG:[-0.67,-1.20,-1.88,-10.04,-6.18,6.89,25.79,22.53],GDV:[-1.48,-1.45,-1.11,-11.50,-10.73,6.30,32.83,28.57],GLU:[-0.90,-1.36,-1.57,-3.87,0.20,6.91,20.16,19.11],HTD:[1.15,1.43,1.02,-5.18,-6.48,7.52,26.62,25.20],NBXG:[0.52,0.01,-0.77,-13.53,-12.30,9.05,19.22,15.91],NXG:[-0.34,-0.94,-1.25,-5.94,-1.37,12.24,64.15,58.81],PCN:[-0.72,-1.25,-1.57,2.87,6.93,11.54,11.49,11.70],PDI:[-1.03,-0.98,-1.16,5.52,9.96,15.76,15.94,16.79],PDO:[0.05,-0.60,-0.93,2.42,3.91,11.75,12.80,13.06],PDX:[0.62,0.66,-0.17,-9.47,-9.15,7.53,23.75,21.25],RFI:[-1.61,-2.14,-2.28,-4.98,0.76,8.43,11.85,11.39],RLTY:[-1.68,-1.95,-1.94,-9.49,-6.45,8.39,17.18,15.73],RNP:[-0.76,-0.98,-1.17,-4.82,-0.02,7.81,21.97,20.90],RQI:[0.50,0.54,1.13,-0.75,-3.05,7.98,13.42,13.53],UTF:[1.97,1.64,-0.09,-4.15,-3.73,7.29,28.17,27.15],UTG:[-1.23,-1.52,-1.17,-1.51,-0.26,5.85,42.39,41.00]},
 '06/08/2026':{AIO:[0.08,-0.44,-0.89,-10.58,-5.34,8.17,29.58,26.45],ASGI:[-0.31,-0.40,0.36,2.62,1.34,12.13,22.17,22.75],BDJ:[-1.60,-1.57,-2.06,-8.70,-5.73,8.14,10.00,9.13],BME:[0.77,1.02,1.61,-3.34,-6.36,7.82,41.59,40.20],BST:[-1.60,-1.96,-2.55,-10.14,-6.21,6.52,51.17,45.98],BUI:[0.96,-0.44,-0.75,0.04,2.52,5.97,27.31,27.32],CSQ:[-1.82,-1.51,-1.57,-10.97,-7.08,7.39,22.34,19.89],DNP:[1.48,1.01,1.03,8.48,5.72,7.34,9.79,10.62],EOI:[-1.46,-1.80,-1.87,-7.54,-2.06,8.28,20.96,19.38],EOS:[-0.63,-1.19,-1.22,-9.41,-4.65,8.25,24.45,22.15],ERH:[0.44,0.57,0.24,-7.61,-7.94,8.99,12.61,11.65],ETG:[-1.39,-1.43,-2.13,-10.67,-6.22,6.89,25.21,22.52],GDV:[-1.61,-1.63,-1.38,-11.67,-10.73,6.29,32.39,28.61],GLU:[-1.26,-1.53,-1.83,-4.64,0.17,6.98,19.84,18.92],HTD:[1.47,1.94,1.47,-4.58,-6.46,7.53,26.40,25.19],NBXG:[1.01,0.57,-0.42,-12.98,-12.31,9.06,18.26,15.89],NXG:[0.51,-0.26,-0.47,-3.12,-1.42,12.34,60.25,58.37],PCN:[-1.29,-1.54,-1.79,2.19,6.88,11.56,11.43,11.68],PDI:[-1.14,-1.11,-1.21,5.23,9.91,15.84,15.87,16.70],PDO:[0.24,-0.46,-0.77,2.67,3.90,11.72,12.75,13.09],PDX:[0.39,0.44,-0.30,-9.72,-9.16,7.53,23.55,21.26],RFI:[-1.20,-1.71,-1.98,-4.33,0.70,8.53,11.77,11.26],RLTY:[0.20,-0.63,-1.11,-8.22,-6.47,8.45,17.03,15.63],RNP:[-1.34,-1.43,-1.32,-5.50,-0.12,7.91,21.82,20.62],RQI:[1.10,0.69,1.29,-0.38,-3.03,8.15,13.30,13.25],UTF:[2.54,2.40,0.19,-2.90,-3.79,7.31,27.90,27.09],UTG:[-0.79,-1.05,-0.81,-1.13,-0.26,5.94,40.87,40.41]},
 '06/09/2026':{AIO:[-0.69,-0.92,-0.99,-11.21,-5.41,8.27,29.43,26.13],ASGI:[-1.55,-1.66,-0.66,-0.94,1.36,12.52,22.26,22.05],BDJ:[-1.15,-1.36,-1.81,-8.35,-5.74,8.06,10.06,9.22],BME:[0.12,0.53,1.23,-4.03,-6.35,7.77,42.18,40.48],BST:[-0.99,-1.48,-1.95,-9.24,-6.23,6.51,50.75,46.06],BUI:[1.46,-0.25,-0.52,0.80,2.53,5.91,27.40,27.62],CSQ:[-1.83,-1.51,-1.58,-11.01,-7.12,7.42,22.25,19.80],DNP:[1.50,1.08,1.11,8.70,5.73,7.26,9.88,10.74],EOI:[-1.51,-1.88,-1.92,-7.73,-2.09,8.30,20.96,19.34],EOS:[-0.74,-1.25,-1.24,-9.52,-4.69,8.29,24.36,22.04],ERH:[-0.66,-0.81,-0.86,-9.11,-7.94,9.05,12.73,11.57],ETG:[-1.16,-1.33,-2.02,-10.50,-6.24,6.84,25.33,22.67],GDV:[-2.52,-2.68,-2.61,-12.51,-10.73,6.31,32.62,28.54],GLU:[-1.82,-1.81,-2.23,-5.76,0.15,7.02,19.96,18.81],HTD:[1.78,2.40,1.92,-3.99,-6.44,7.44,26.54,25.48],NBXG:[0.94,0.53,-0.44,-13.02,-12.32,9.06,18.28,15.90],NXG:[0.91,0.07,-0.07,-1.71,-1.45,12.39,59.11,58.10],PCN:[-1.10,-1.44,-1.71,2.36,6.86,11.52,11.45,11.72],PDI:[-1.24,-1.22,-1.27,4.97,9.89,15.86,15.89,16.68],PDO:[-0.22,-0.85,-1.26,1.88,3.90,11.80,12.77,13.01],PDX:[0.23,0.29,-0.39,-9.89,-9.16,7.58,23.45,21.13],RFI:[-1.37,-1.87,-2.10,-4.71,0.67,8.47,11.90,11.34],RLTY:[-1.02,-1.44,-1.62,-9.04,-6.49,8.41,17.25,15.69],RNP:[-1.11,-1.26,-1.25,-5.27,-0.16,7.82,22.02,20.86],RQI:[-5.68,-2.05,-1.39,-5.91,-3.03,8.48,13.53,12.73],UTF:[2.19,2.10,0.12,-3.27,-3.82,7.35,27.85,26.94],UTG:[-0.66,-0.87,-0.68,-0.99,-0.26,5.98,40.54,40.14]},
@@ -149,13 +145,23 @@ const RAW={
 '06/12/2026':{AIO:[-0.09,-0.54,-0.90,-10.73,-5.56,8.11,29.82,26.99],ASGI:[-1.21,-1.31,-0.44,-0.09,1.43,12.32,22.43,22.52],BDJ:[-0.58,-1.12,-1.50,-7.92,-5.75,7.99,10.10,9.36],BME:[1.09,1.30,1.79,-2.92,-6.31,7.69,42.12,40.94],BST:[-1.29,-1.70,-2.22,-9.73,-6.27,6.44,51.57,47.78],BUI:[2.11,0.08,-0.12,2.14,2.54,5.81,27.52,28.45],CSQ:[-0.54,-1.01,-1.31,-10.40,-7.21,7.32,22.40,20.07],DNP:[1.25,0.94,0.90,8.16,5.74,7.24,9.93,10.77],EOI:[-1.31,-1.77,-1.80,-7.49,-2.16,8.26,20.97,19.44],EOS:[-0.36,-1.01,-1.15,-9.20,-4.78,8.30,24.24,22.06],ERH:[0.43,0.59,0.25,-7.59,-7.93,8.94,12.65,11.71],ETG:[-0.03,-0.92,-1.57,-9.60,-6.28,6.72,25.51,23.10],GDV:[-1.29,-1.32,-1.08,-11.45,-10.73,6.18,32.74,29.13],GLU:[-1.76,-1.75,-2.19,-5.79,0.11,6.90,20.20,19.12],HTD:[2.06,2.86,2.42,-3.28,-6.41,7.36,26.53,25.75],NBXG:[-1.01,-1.21,-1.53,-14.78,-12.33,9.05,18.67,16.18],NXG:[0.40,-0.31,-0.52,-3.35,-1.49,12.52,59.48,57.51],PCN:[-1.45,-1.59,-1.84,1.93,6.81,11.55,11.41,11.69],PDI:[-1.57,-1.55,-1.45,4.19,9.82,16.10,15.77,16.30],PDO:[-1.13,-1.64,-2.24,0.24,3.88,12.04,12.72,12.85],PDX:[-0.40,-0.30,-0.76,-10.61,-9.16,7.66,23.38,20.85],RFI:[-1.54,-2.04,-2.23,-5.20,0.60,8.47,11.92,11.33],RLTY:[-0.67,-1.21,-1.47,-8.86,-6.51,8.39,17.27,15.71],RNP:[-2.44,-2.36,-1.63,-6.94,-0.24,7.96,22.05,20.51],RQI:[-3.86,-1.92,-1.16,-5.46,-3.04,8.32,13.56,12.98],UTF:[2.19,2.18,0.19,-2.99,-3.88,7.23,28.07,27.39],UTG:[-1.02,-1.22,-0.97,-1.31,-0.26,5.89,41.31,40.77]},
 '06/15/2026':{AIO:[0.75,0.00,-0.77,-10.05,-5.70,7.82,30.65,27.57],ASGI:[-1.20,-1.32,-0.50,-0.22,1.45,12.24,22.59,22.54],BDJ:[-1.45,-1.43,-1.93,-8.60,-5.76,7.94,10.23,9.35],BME:[0.89,1.15,1.66,-3.09,-6.28,7.78,41.71,40.42],BST:[-1.55,-1.83,-2.39,-10.07,-6.30,6.22,53.61,48.21],BUI:[1.84,0.04,-0.17,1.98,2.55,5.75,27.84,28.39],CSQ:[-1.70,-1.42,-1.53,-10.98,-7.24,7.20,22.95,20.43],DNP:[0.93,0.70,0.58,7.31,5.75,7.28,9.99,10.72],EOI:[-1.43,-1.84,-1.86,-7.76,-2.23,8.19,21.25,19.60],EOS:[-0.99,-1.38,-1.29,-9.80,-4.86,8.24,24.59,22.18],ERH:[-0.30,-0.29,-0.46,-8.55,-7.92,8.90,12.87,11.77],ETG:[-0.81,-1.16,-1.83,-10.22,-6.32,6.69,25.83,23.19],GDV:[-1.00,-1.06,-0.77,-11.24,-10.72,6.14,33.01,29.30],GLU:[-1.83,-1.77,-2.25,-6.12,0.07,6.94,20.25,19.01],HTD:[1.61,2.31,1.96,-3.81,-6.38,7.37,26.75,25.73],NBXG:[-0.61,-0.79,-1.26,-14.37,-12.35,8.66,19.41,16.62],NXG:[-0.26,-0.85,-1.16,-5.72,-1.56,12.54,60.88,57.40],PCN:[-1.15,-1.42,-1.71,2.18,6.77,11.50,11.49,11.74],PDI:[-1.50,-1.58,-1.46,4.03,9.75,16.03,15.87,16.51],PDO:[-0.37,-0.98,-1.45,1.48,3.86,11.82,12.80,12.99],PDX:[-0.25,-0.08,-0.62,-10.37,-9.20,7.68,23.25,20.84],RFI:[-1.76,-2.26,-2.41,-5.86,0.53,8.54,11.94,11.24],RLTY:[-1.19,-1.55,-1.69,-9.28,-6.54,8.39,17.35,15.74],RNP:[-2.66,-2.67,-1.75,-7.59,-0.33,7.98,22.13,20.45],RQI:[-3.30,-2.13,-1.26,-5.67,-3.05,8.42,13.59,12.82],UTF:[1.98,2.04,0.19,-3.05,-3.93,7.23,28.24,27.38],UTG:[-0.46,-0.64,-0.53,-0.83,-0.26,5.75,42.06,41.71]},
 '06/16/2026':{AIO:[0.75,0.00,-0.77,-10.05,-5.70,7.82,30.65,27.63],ASGI:[-1.55,-1.70,-0.86,-1.42,1.46,12.40,22.58,22.26],BDJ:[-1.45,-1.43,-1.93,-8.11,-5.77,7.90,10.23,9.40],BME:[0.89,1.15,1.66,-3.41,-6.26,7.82,41.71,40.22],BST:[-1.55,-1.83,-2.39,-8.49,-6.31,6.24,53.61,48.05],BUI:[1.84,0.04,-0.17,1.98,2.55,5.67,27.84,28.76],CSQ:[0.16,-0.75,-1.16,-10.09,-7.27,7.17,22.79,20.49],DNP:[0.93,0.70,0.58,7.31,5.75,7.24,9.99,10.78],EOI:[-1.43,-1.84,-1.86,-7.67,-2.27,8.23,21.25,19.51],EOS:[-0.99,-1.38,-1.29,-10.08,-4.91,8.33,24.59,21.95],ERH:[-0.30,-0.29,-0.46,-8.88,-7.92,8.87,12.87,11.80],ETG:[-0.81,-1.16,-1.83,-10.30,-6.34,6.73,25.83,23.07],GDV:[-1.00,-1.06,-0.77,-11.24,-10.72,6.14,33.01,29.30],GLU:[-1.83,-1.77,-2.25,-6.12,0.07,6.95,20.25,19.00],HTD:[1.61,2.31,1.96,-4.63,-6.37,7.43,26.75,25.52],NBXG:[-1.26,-1.36,-1.61,-14.97,-12.36,8.80,19.41,16.36],NXG:[-0.26,-0.85,-1.16,-5.72,-1.56,12.40,60.88,58.06],PCN:[-1.15,-1.42,-1.71,2.18,6.77,11.42,11.49,11.82],PDI:[-1.50,-1.58,-1.46,4.03,9.75,15.97,15.87,16.57],PDO:[-0.37,-0.98,-1.45,1.48,3.86,11.72,12.80,13.09],PDX:[-0.25,-0.08,-0.62,-10.37,-9.20,7.66,23.25,20.90],RFI:[-1.82,-2.31,-2.47,-6.10,0.50,8.55,11.96,11.23],RLTY:[-1.69,-1.88,-1.91,-9.67,-6.55,8.41,17.38,15.70],RNP:[-2.43,-2.53,-1.71,-7.49,-0.37,7.96,22.16,20.50],RQI:[-3.31,-2.43,-1.49,-6.17,-3.06,8.45,13.62,12.78],UTF:[1.95,2.06,0.22,-2.94,-3.95,7.23,28.23,27.40],UTG:[-0.20,-0.36,-0.33,-0.62,-0.26,5.72,42.22,41.96]},
-'06/17/2026':{AIO:[2.52,1.21,-0.49,-8.48,-5.75,7.85,30.19,27.50],ASGI:[-1.84,-2.05,-1.21,-2.56,1.47,12.71,22.58,21.72],BDJ:[-0.75,-1.16,-1.59,-8.42,-5.77,8.04,10.23,9.24],BME:[0.58,0.90,1.48,-3.65,-6.25,7.88,41.64,39.91],BST:[-0.33,-1.02,-1.38,-9.97,-6.33,6.34,52.51,47.32],BUI:[2.23,0.29,0.13,2.97,2.56,5.71,27.93,28.57],CSQ:[-0.68,-1.04,-1.33,-10.51,-7.30,7.28,22.55,20.18],DNP:[1.02,0.83,0.72,7.69,5.75,7.28,10.01,10.72],EOI:[-1.57,-1.91,-1.93,-8.08,-2.30,8.35,21.13,19.23],EOS:[-0.44,-1.05,-1.16,-9.38,-4.95,8.37,24.41,21.84],ERH:[-0.57,-0.60,-0.71,-8.88,-7.92,8.95,12.95,11.70],ETG:[-0.15,-0.94,-1.60,-9.80,-6.36,6.77,25.72,22.92],GDV:[-1.21,-1.34,-1.10,-11.45,-10.72,6.23,33.09,28.88],GLU:[-1.67,-1.67,-2.14,-5.89,0.05,7.18,20.19,18.38],HTD:[1.08,1.67,1.33,-5.19,-6.35,7.58,26.76,25.01],NBXG:[-1.26,-1.36,-1.61,-14.23,-12.36,8.75,19.24,16.46],NXG:[0.15,-0.53,-0.79,-4.41,-1.59,12.35,60.74,58.30],PCN:[-0.46,-1.08,-1.44,2.87,6.75,11.50,11.49,11.74],PDI:[-1.29,-1.44,-1.37,4.35,9.73,16.17,15.88,16.36],PDO:[0.03,-0.62,-1.01,2.19,3.85,11.93,12.81,12.87],PDX:[0.27,0.45,-0.29,-9.76,-9.20,7.70,23.16,20.79],RFI:[-1.72,-2.23,-2.41,-6.05,0.47,8.71,11.96,11.02],RLTY:[-1.06,-1.46,-1.64,-9.25,-6.56,8.57,17.38,15.40],RNP:[-3.01,-3.04,-1.93,-8.50,-0.42,8.19,22.16,19.92],RQI:[-3.03,-2.45,-1.49,-6.18,-3.07,8.68,13.62,12.44],UTF:[2.21,2.40,0.38,-2.27,-3.97,7.31,28.23,27.10],UTG:[-1.32,-1.58,-1.26,-1.62,-0.27,5.83,42.22,41.18]}
+'06/17/2026':{AIO:[2.52,1.21,-0.49,-8.48,-5.75,7.85,30.19,27.50],ASGI:[-1.84,-2.05,-1.21,-2.56,1.47,12.71,22.58,21.72],BDJ:[-0.75,-1.16,-1.59,-8.42,-5.77,8.04,10.23,9.24],BME:[0.58,0.90,1.48,-3.65,-6.25,7.88,41.64,39.91],BST:[-0.33,-1.02,-1.38,-9.97,-6.33,6.34,52.51,47.32],BUI:[2.23,0.29,0.13,2.97,2.56,5.71,27.93,28.57],CSQ:[-0.68,-1.04,-1.33,-10.51,-7.30,7.28,22.55,20.18],DNP:[1.02,0.83,0.72,7.69,5.75,7.28,10.01,10.72],EOI:[-1.57,-1.91,-1.93,-8.08,-2.30,8.35,21.13,19.23],EOS:[-0.44,-1.05,-1.16,-9.38,-4.95,8.37,24.41,21.84],ERH:[-0.57,-0.60,-0.71,-8.88,-7.92,8.95,12.95,11.70],ETG:[-0.15,-0.94,-1.60,-9.80,-6.36,6.77,25.72,22.92],GDV:[-1.21,-1.34,-1.10,-11.45,-10.72,6.23,33.09,28.88],GLU:[-1.67,-1.67,-2.14,-5.89,0.05,7.18,20.19,18.38],HTD:[1.08,1.67,1.33,-5.19,-6.35,7.58,26.76,25.01],NBXG:[-1.26,-1.36,-1.61,-14.23,-12.36,8.75,19.24,16.46],NXG:[0.15,-0.53,-0.79,-4.41,-1.59,12.35,60.74,58.30],PCN:[-0.46,-1.08,-1.44,2.87,6.75,11.50,11.49,11.74],PDI:[-1.29,-1.44,-1.37,4.35,9.73,16.17,15.88,16.36],PDO:[0.03,-0.62,-1.01,2.19,3.85,11.93,12.81,12.87],PDX:[0.27,0.45,-0.29,-9.76,-9.20,7.70,23.16,20.79],RFI:[-1.72,-2.23,-2.41,-6.05,0.47,8.71,11.96,11.02],RLTY:[-1.06,-1.46,-1.64,-9.25,-6.56,8.57,17.38,15.40],RNP:[-3.01,-3.04,-1.93,-8.50,-0.42,8.19,22.16,19.92],RQI:[-3.03,-2.45,-1.49,-6.18,-3.07,8.68,13.62,12.44],UTF:[2.21,2.40,0.38,-2.27,-3.97,7.31,28.23,27.10],UTG:[-1.32,-1.58,-1.26,-1.62,-0.27,5.83,42.22,41.18]},
+'06/18/2026':{AIO:[2.69,1.52,-0.40,-8.06,-5.86,7.63,30.78,28.30],ASGI:[-1.15,-1.35,-0.61,-0.54,1.48,12.44,22.30,22.18],BDJ:[-1.90,-1.54,-2.12,-8.96,-5.78,8.03,10.16,9.25],BME:[0.66,0.97,1.51,-3.30,-6.23,7.90,41.16,39.80],BST:[-2.56,-2.39,-3.13,-11.46,-6.35,6.25,54.21,48.00],BUI:[1.53,0.04,-0.20,1.92,2.57,5.81,27.57,28.10],CSQ:[-0.48,-0.97,-1.29,-10.43,-7.33,7.16,22.91,20.52],DNP:[1.18,1.06,0.98,8.42,5.76,7.30,9.86,10.69],EOI:[-1.60,-1.92,-1.94,-8.18,-2.34,8.27,21.15,19.42],EOS:[-0.61,-1.14,-1.20,-9.54,-5.00,8.27,24.42,22.09],ERH:[-0.67,-0.73,-0.80,-9.01,-7.92,8.93,12.88,11.72],ETG:[-1.51,-1.31,-1.99,-10.69,-6.39,6.73,25.82,23.06],GDV:[-1.39,-1.64,-1.49,-11.70,-10.72,6.21,32.81,28.97],GLU:[-1.51,-1.58,-2.06,-5.86,-0.01,7.02,19.97,18.80],HTD:[0.91,1.46,1.14,-4.86,-6.34,7.56,26.36,25.08],NBXG:[1.19,0.84,-0.22,-12.73,-12.37,8.33,19.80,17.28],NXG:[-0.13,-0.76,-1.07,-5.46,-1.66,12.27,62.07,58.68],PCN:[-0.15,-0.92,-1.31,3.15,6.72,11.45,11.43,11.79],PDI:[-1.66,-1.82,-1.57,3.42,9.67,16.19,15.80,16.34],PDO:[-0.21,-0.82,-1.28,1.73,3.84,11.83,12.75,12.97],PDX:[-0.10,0.14,-0.46,-10.08,-9.21,7.70,23.11,20.78],RFI:[-1.66,-2.17,-2.38,-6.06,0.43,8.73,11.71,11.00],RLTY:[-0.55,-1.12,-1.42,-8.91,-6.57,8.55,16.94,15.43],RNP:[-2.91,-3.00,-1.94,-8.64,-0.47,8.21,21.75,19.87],RQI:[-3.32,-2.98,-1.98,-7.26,-3.08,8.80,13.23,12.27],UTF:[1.85,2.04,0.27,-2.78,-4.00,7.34,27.74,26.97],UTG:[-0.88,-1.13,-0.93,-1.27,-0.27,5.70,42.64,42.10]}
+};
+
+const MOM={
+AIO:{st:15.85,lt:26.71},ASGI:{st:-4.10,lt:12.50},BDJ:{st:2.43,lt:4.59},BME:{st:-0.09,lt:-2.15},BST:{st:11.73,lt:19.40},
+BUI:{st:3.00,lt:20.40},CSQ:{st:7.05,lt:25.18},DNP:{st:1.78,lt:5.74},EOI:{st:0.26,lt:8.40},EOS:{st:2.41,lt:6.90},
+ERH:{st:0.63,lt:0.99},ETG:{st:5.14,lt:21.30},GDV:{st:2.51,lt:22.42},GLU:{st:-2.55,lt:12.05},HTD:{st:-0.12,lt:12.48},
+NBXG:{st:17.45,lt:25.12},NXG:{st:3.80,lt:42.27},PCN:{st:0.63,lt:-16.57},PDI:{st:-1.82,lt:-22.20},PDO:{st:1.44,lt:-13.95},
+PDX:{st:-2.05,lt:28.72},RFI:{st:-1.76,lt:-13.75},RLTY:{st:1.02,lt:null},RNP:{st:-2.51,lt:-8.58},RQI:{st:-3.61,lt:-4.64},
+UTF:{st:1.99,lt:11.62},UTG:{st:4.86,lt:32.14}
 };
 
 const FIELDS=['z3m','z6m','z1y','dp','avg','yld','nav','px'];
 const SS={};
 for(const d of DATES){SS[d]={};for(const t of Object.keys(RAW[d])){const v=RAW[d][t];const o={};FIELDS.forEach((f,i)=>o[f]=v[i]);SS[d][t]=o;}}
-const TICKERS=Object.keys(SS['06/17/2026']);
+const TICKERS=Object.keys(SS['06/18/2026']);
 
 function qk(z,dp){if(z>=0&&dp<0)return'green';if(z>=0&&dp>=0)return'blue';if(z<0&&dp<0)return'orange';return'gray';}
 function qc(z,dp){if(z>=0&&dp<0)return'#1D9E75';if(z>=0&&dp>=0)return'#378ADD';if(z<0&&dp<0)return'#D85A30';return'#888780';}
@@ -163,6 +169,7 @@ function ql(k){return{green:'Discount+Z narrowing',blue:'Premium+Z narrowing',or
 function qbg(k){return{green:'#E1F5EE',blue:'#E6F1FB',orange:'#FAECE7',gray:'#F1EFE8'}[k];}
 function qtx(k){return{green:'#0F6E56',blue:'#185FA5',orange:'#993C1D',gray:'#5F5E5A'}[k];}
 function ei(t){return t<0.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+function momHtml(v){if(v===null||v===undefined)return'<span style="color:var(--txt3)">—</span>';const c=v>=0?'#1D9E75':'#D85A30';return`<span style="color:${c}">${v>=0?'+':''}${v.toFixed(1)}%</span>`;}
 
 let per='z1y',quad='all',terms=[],idx=DATES.length-1,mode='scatter';
 let animating=false,sd=[],aStart=null,chart=null,playing=false,pTimer=null;
@@ -199,7 +206,7 @@ function spark(t){
   const vals=DATES.slice(0,idx+1).map(d=>SS[d][t]?SS[d][t][per]:null).filter(v=>v!==null);
   if(vals.length<2)return'—';
   const mn=Math.min(...vals),mx=Math.max(...vals),rng=mx-mn||0.01;
-  return'<span class="spark">'+vals.map(v=>{const h=Math.max(2,Math.round(((v-mn)/rng)*18));return`<span class="sb" style="height:${h}px;background:${v>=0?'#1D9E75':'#D85A30'};opacity:.75"></span>`;}).join('')+'</span>';
+  return'<span class="spark">'+vals.map(v=>{const h=Math.max(2,Math.round(((v-mn)/rng)*16));return`<span class="sb" style="height:${h}px;background:${v>=0?'#1D9E75':'#D85A30'};opacity:.75"></span>`;}).join('')+'</span>';
 }
 function renderDelta(){
   const d=gd(),pd=gpd(),sn=gs(d),sp=gs(pd);
@@ -215,8 +222,9 @@ function renderDelta(){
     const rc=up?'up':dn2?'dn':bm?'bm':'';
     const dzs=dz!=null?(dz>=0?`<span style="color:#1D9E75">+${dz.toFixed(2)}</span>`:`<span style="color:#D85A30">${dz.toFixed(2)}</span>`):'—';
     const dds=ddp!=null?(ddp>=0?`<span style="color:#D85A30">+${ddp.toFixed(2)}%</span>`:`<span style="color:#1D9E75">${ddp.toFixed(2)}%</span>`):'—';
-    const qs=chg?`<span style="font-size:10px;padding:1px 5px;border-radius:3px;background:${qbg(qn)};color:${qtx(qn)}">${qp}→${qn}</span>`:`<span style="font-size:10px;color:${qtx(qn)}">${qn}</span>`;
-    return`<div class="dr ${rc}"><span style="font-weight:500;color:${qc(zn,f.dp)}">${t}</span><span>${spark(t)}</span><span style="text-align:right;color:var(--txt3);font-size:10px">${zp!=null?zp.toFixed(2):'—'}</span><span style="text-align:right">${zn.toFixed(2)}</span><span style="text-align:right">${dzs}</span><span style="text-align:right">${dds}</span><span style="text-align:right">${qs}</span></div>`;
+    const qs=chg?`<span style="font-size:9.5px;padding:1px 4px;border-radius:3px;background:${qbg(qn)};color:${qtx(qn)}">${qp}→${qn}</span>`:`<span style="font-size:9.5px;color:${qtx(qn)}">${qn}</span>`;
+    const m=MOM[t]||{};
+    return`<div class="dr ${rc}"><span style="font-weight:500;color:${qc(zn,f.dp)}">${t}</span><span>${spark(t)}</span><span style="text-align:right;color:var(--txt3);font-size:10px">${zp!=null?zp.toFixed(2):'—'}</span><span style="text-align:right">${zn.toFixed(2)}</span><span style="text-align:right">${dzs}</span><span style="text-align:right">${dds}</span><span style="text-align:right">${qs}</span><span style="text-align:right">${momHtml(m.st)}</span><span style="text-align:right">${momHtml(m.lt)}</span></div>`;
   }).join('');
 }
 function applyStyles(){
@@ -330,7 +338,9 @@ chart=new Chart(document.getElementById('cvs').getContext('2d'),{
       legend:{display:false},
       tooltip:{enabled:true,filter:()=>!animating&&mode==='scatter',callbacks:{label:c=>{
         const d=c.raw,df=(d.y-d.avg).toFixed(2),sg=df>0?'+':'';
-        return[`${d.label}  |  Yield: ${d.yld.toFixed(2)}%`,`Z ${per}: ${d.x.toFixed(2)}  |  D/P: ${d.y.toFixed(2)}%`,`3M: ${d.z3m.toFixed(2)}  6M: ${d.z6m.toFixed(2)}  1Y: ${d.z1y.toFixed(2)}`,`52wk avg: ${d.avg.toFixed(2)}% (${sg}${df})`];}}},
+        const m=MOM[d.label]||{};
+        const mline=(m.st!=null||m.lt!=null)?[`ST Mom: ${m.st!=null?m.st.toFixed(1)+'%':'—'}  LT Mom: ${m.lt!=null?m.lt.toFixed(1)+'%':'—'}`]:[];
+        return[`${d.label}  |  Yield: ${d.yld.toFixed(2)}%`,`Z ${per}: ${d.x.toFixed(2)}  |  D/P: ${d.y.toFixed(2)}%`,`3M: ${d.z3m.toFixed(2)}  6M: ${d.z6m.toFixed(2)}  1Y: ${d.z1y.toFixed(2)}`,`52wk avg: ${d.avg.toFixed(2)}% (${sg}${df})`,...mline];}}},
       datalabels:{
         formatter:v=>`${v.label}\n${v.yld.toFixed(2)}%`,
         font:c=>{const d=c.dataset.data[c.dataIndex];return{size:terms.includes(d.label)?10:9,weight:!vis(d).dim?'500':'400'};},
@@ -342,11 +352,13 @@ chart=new Chart(document.getElementById('cvs').getContext('2d'),{
       document.getElementById('dpt').textContent=f.t;
       const qb=document.getElementById('dpq');qb.textContent=ql(d.qk);qb.style.background=qbg(d.qk);qb.style.color=qtx(d.qk);
       const df=(f.dp-f.avg).toFixed(2),sg=df>0?'+':'';
+      const m=MOM[f.t]||{};
       document.getElementById('dpg').innerHTML=[
         {l:'Price',v:`$${f.px.toFixed(2)}`},{l:'NAV',v:`$${f.nav.toFixed(2)}`},{l:'D/P',v:`${f.dp.toFixed(2)}%`},
         {l:'52wk avg',v:`${f.avg.toFixed(2)}% (${sg}${df})`},{l:'Yield',v:`${f.yld.toFixed(2)}%`},
         {l:'Z 3M',v:f.z3m.toFixed(2)},{l:'Z 6M',v:f.z6m.toFixed(2)},{l:'Z 1Y',v:f.z1y.toFixed(2)},
-      ].map(m=>`<div class="dpm"><div class="l">${m.l}</div><div class="v">${m.v}</div></div>`).join('');
+        {l:'ST Momentum',v:m.st!=null?`${m.st.toFixed(1)}%`:'—'},{l:'LT Momentum',v:m.lt!=null?`${m.lt.toFixed(1)}%`:'—'}
+      ].map(m2=>`<div class="dpm"><div class="l">${m2.l}</div><div class="v">${m2.v}</div></div>`).join('');
       document.getElementById('dp-panel').style.display='block';
     },
     scales:{
