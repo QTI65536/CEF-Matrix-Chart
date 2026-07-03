@@ -41,21 +41,20 @@ input[type=text]::placeholder{color:var(--txt3);}
 </style>
 
 <div style="padding-top:.6rem">
-
 <div style="margin-bottom:9px">
-<div class="al c"><div class="al-t">💰 UTG — Distribution increase reminder</div><div style="color:var(--txt2)">$0.21/share payable July 31 (record 7/17). UTG Z1Y holding at -3.12. Insider buying confirmed; technical dislocation thesis intact.</div></div>
-<div class="al r"><div class="al-t">⚠ UTG — Z1Y unchanged at -3.12, discount -4.12%</div><div style="color:var(--txt2)">No further deterioration but no recovery either. Still the most dislocated holding in the matrix. UTG price $39.93 vs NAV $42.47 — deepest absolute discount of any holding.</div></div>
-<div class="al g"><div class="al-t">✅ RQI — Z1Y improved to -2.22 from -2.11</div><div style="color:var(--txt2)">Marginal softening session-over-session but three-week trend remains improving. Z3M -1.98, Z6M -2.72.</div></div>
-<div class="al g"><div class="al-t">✅ NXG — Z1Y +0.80, now firmly green quadrant</div><div style="color:var(--txt2)">D/P +0.94% premium. ST momentum +14.02%, LT +54.75% — strongest LT in the universe. Not a holding but notable strength.</div></div>
-<div class="al a"><div class="al-t">⚡ BST momentum — ST +13.58%, Z1Y -0.19</div><div style="color:var(--txt2)">Z1Y dipped slightly from +1.19 to -0.19. Momentum remains strong but z-score softened after yesterday's big rally day. Consistent with prior analysis: add-trigger played out, position running at fair value.</div></div>
-<div class="al p"><div class="al-t">📊 Momentum refreshed — 07/01 upload</div><div style="color:var(--txt2)">ST/LT momentum columns updated. NXG LT +54.75% remains strongest in universe. PDI LT -22.10% remains weakest.</div></div>
+<div class="al g"><div class="al-t">✅ UTG — Z1Y improved sharply to -1.95</div><div style="color:var(--txt2)">From -3.12 yesterday — a 1.17-point single-session improvement, the largest positive move UTG has made in the entire tracked window. Discount narrowed dramatically to -2.76% from -4.12%. July 17 ex-div is 15 days out; the discount reversion thesis is showing early signs of materializing.</div></div>
+<div class="al c"><div class="al-t">💰 UTG — Distribution increase reminder</div><div style="color:var(--txt2)">$0.21/share payable July 31 · record date July 17 (15 days). Forward yield ~6.32% at current price.</div></div>
+<div class="al c"><div class="al-t">💰 CSQ — Distribution increase declared today</div><div style="color:var(--txt2)">$0.135/share (+10.2% vs prior $0.1225), payable July 21 · record date July 14 (12 days). Forward yield 7.85%. Two raises totaling +31.7% in six months.</div></div>
+<div class="al g"><div class="al-t">✅ NXG — Z1Y reached +1.91, strongest green in universe</div><div style="color:var(--txt2)">D/P now +4.86% premium. Not a holding but the standout mover in the universe today.</div></div>
+<div class="al r"><div class="al-t">⚠ RQI — Z1Y -2.15, discount widened slightly to -8.29%</div><div style="color:var(--txt2)">Three-week improvement trend stalling. Z3M -1.86, Z6M -2.62. Worth watching next session.</div></div>
+<div class="al a"><div class="al-t">⚡ BST — Z1Y +0.43, discount narrowed to -5.70%</div><div style="color:var(--txt2)">Continued quiet firming. Discount now inside 52-week average (-6.42%). Position running at a mild premium to historical norm.</div></div>
 </div>
 
 <div id="tmbar">
   <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:7px;margin-bottom:9px">
-    <div style="font-size:11px;color:var(--txt2);font-weight:500">⏱ Time machine — 9 sessions <span style="font-weight:400;color:var(--txt3)">06/24→07/01 · 27 funds · momentum as of 07/01</span></div>
+    <div style="font-size:11px;color:var(--txt2);font-weight:500">⏱ Time machine — 9 sessions <span style="font-weight:400;color:var(--txt3)">06/25→07/02 · 27 funds · momentum as of 07/02</span></div>
     <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
-      <div id="badge">📅 <span id="bdg">07/01/2026</span></div>
+      <div id="badge">📅 <span id="bdg">07/02/2026</span></div>
       <div style="display:flex;gap:5px">
         <button class="nb" id="bprev">◀</button>
         <button id="pbtn">▶ Play</button>
@@ -106,26 +105,25 @@ input[type=text]::placeholder{color:var(--txt3);}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
 <script>
-const DATES=['06/24/2026','06/25/2026','06/26/2026','06/29/2026','06/30/2026','07/01/2026'];
-const NC={'06/24/2026':'-$4.33','06/25/2026':'+$4.35','06/26/2026':'+$0.66','06/29/2026':'+$6.42','06/30/2026':'+$12.53','07/01/2026':'+$4.85'};
+const DATES=['06/25/2026','06/26/2026','06/29/2026','06/30/2026','07/01/2026','07/02/2026'];
+const NC={'06/25/2026':'+$4.35','06/26/2026':'+$0.66','06/29/2026':'+$6.42','06/30/2026':'+$12.53','07/01/2026':'+$4.85','07/02/2026':'-$2.24'};
 const OWNED=new Set(['PDI','PCN','BDJ','EOI','BUI','BME','RQI','RNP','RFI','AIO','BST','DNP','UTF','ERH','UTG']);
-
 const MOM={
-AIO:{st:9.69,lt:19.80},ASGI:{st:1.10,lt:15.91},BDJ:{st:5.24,lt:5.36},BME:{st:8.06,lt:3.88},BST:{st:13.58,lt:20.20},
-BUI:{st:5.05,lt:22.68},CSQ:{st:6.83,lt:21.53},DNP:{st:2.35,lt:5.45},EOI:{st:1.99,lt:7.01},EOS:{st:1.99,lt:3.22},
-ERH:{st:-0.32,lt:2.13},ETG:{st:6.24,lt:21.25},GDV:{st:3.61,lt:20.50},GLU:{st:-0.16,lt:12.17},HTD:{st:0.06,lt:9.88},
-NBXG:{st:9.55,lt:15.52},NXG:{st:14.02,lt:54.75},PCN:{st:0.60,lt:-17.73},PDI:{st:-0.57,lt:-22.10},PDO:{st:1.44,lt:-13.77},
-PDX:{st:-1.45,lt:27.50},RFI:{st:2.21,lt:-12.40},RLTY:{st:2.97,lt:null},RNP:{st:0.78,lt:-8.96},RQI:{st:-1.80,lt:-5.70},
-UTF:{st:1.93,lt:8.04},UTG:{st:-2.20,lt:23.20}
+AIO:{st:5.21,lt:16.00},ASGI:{st:1.69,lt:16.37},BDJ:{st:5.30,lt:6.10},BME:{st:9.45,lt:5.06},BST:{st:9.74,lt:18.04},
+BUI:{st:4.24,lt:22.12},CSQ:{st:5.65,lt:20.77},DNP:{st:2.57,lt:6.22},EOI:{st:1.27,lt:6.52},EOS:{st:1.79,lt:2.81},
+ERH:{st:0.06,lt:2.72},ETG:{st:5.09,lt:20.62},GDV:{st:3.51,lt:20.84},GLU:{st:0.49,lt:12.60},HTD:{st:1.24,lt:11.00},
+NBXG:{st:4.86,lt:11.14},NXG:{st:10.75,lt:51.29},PCN:{st:0.26,lt:-17.94},PDI:{st:-0.87,lt:-22.10},PDO:{st:1.38,lt:-13.41},
+PDX:{st:-1.55,lt:28.07},RFI:{st:2.80,lt:-11.98},RLTY:{st:3.34,lt:null},RNP:{st:1.23,lt:-8.70},RQI:{st:-1.43,lt:-5.42},
+UTF:{st:1.80,lt:8.76},UTG:{st:-3.71,lt:22.71}
 };
 
 const RAW={
-'06/24/2026':{AIO:[2.47,1.58,-0.35,-7.91,-6.01,7.79,30.10,27.67],ASGI:[-0.93,-1.07,-0.45,0.09,1.55,12.47,22.08,22.08],BDJ:[-0.58,-1.07,-1.53,-8.13,-5.80,8.01,10.09,9.32],BME:[-0.30,0.06,0.93,-4.39,-6.19,7.80,42.16,40.72],BST:[1.64,0.19,0.12,-6.20,-6.39,6.19,51.64,47.52],BUI:[1.55,0.16,-0.09,2.28,2.57,5.78,27.62,28.40],CSQ:[0.14,-0.71,-1.15,-10.16,-7.44,7.25,22.35,20.08],DNP:[0.85,0.84,0.69,7.65,5.78,7.21,10.07,10.82],EOI:[-0.94,-1.45,-1.60,-7.35,-2.47,8.40,20.71,19.16],EOS:[-0.61,-1.08,-1.17,-9.53,-5.17,8.51,23.76,21.45],ERH:[-0.94,-0.96,-1.01,-9.29,-7.92,8.86,13.03,11.94],ETG:[-0.61,-1.01,-1.67,-10.15,-6.47,6.84,25.21,22.67],GDV:[-0.84,-0.96,-0.79,-11.22,-10.71,6.23,32.53,28.78],GLU:[-1.49,-1.54,-2.04,-6.02,-0.08,7.04,19.95,18.99],HTD:[0.92,1.50,1.26,-4.67,-6.29,7.51,26.70,25.50],NBXG:[-1.49,-1.53,-1.74,-15.25,-12.39,8.87,18.99,15.95],NXG:[-0.07,-0.74,-1.07,-5.54,-1.76,12.31,61.93,58.68],PCN:[-0.23,-0.92,-1.31,3.07,6.67,11.49,11.40,11.74],PDI:[-1.77,-2.00,-1.67,2.85,9.57,16.31,15.77,16.40],PDO:[-0.57,-1.02,-1.53,1.26,3.82,11.92,12.72,12.95],PDX:[-0.32,0.03,-0.52,-10.20,-9.21,7.67,23.23,20.99],RFI:[-1.48,-2.02,-2.29,-6.20,0.30,8.58,11.93,11.19],RLTY:[-1.13,-1.48,-1.66,-9.42,-6.63,8.42,17.31,15.68],RNP:[-1.95,-2.31,-1.72,-8.01,-0.66,7.99,22.09,20.32],RQI:[-2.23,-2.56,-1.84,-7.15,-3.13,8.74,13.56,12.59],UTF:[1.68,1.96,0.33,-2.64,-4.11,7.30,28.03,27.29],UTG:[-2.99,-3.41,-2.79,-3.32,-0.27,5.94,42.51,41.10]},
 '06/25/2026':{AIO:[1.55,0.99,-0.48,-8.68,-6.10,7.74,30.54,27.89],ASGI:[-0.86,-0.95,-0.36,0.40,1.57,12.36,22.24,22.33],BDJ:[0.44,-0.71,-1.08,-7.47,-5.81,7.89,10.18,9.42],BME:[0.37,0.66,1.29,-3.64,-6.16,7.57,43.12,41.55],BST:[0.77,-0.35,-0.58,-7.37,-6.41,6.14,52.78,48.89],BUI:[1.52,0.21,-0.03,2.47,2.58,5.69,27.99,28.68],CSQ:[0.66,-0.50,-1.03,-9.89,-7.47,7.27,22.44,20.22],DNP:[0.51,0.60,0.36,6.77,5.78,7.17,10.19,10.88],EOI:[-1.16,-1.59,-1.72,-7.76,-2.51,8.44,20.62,19.02],EOS:[-0.24,-0.86,-1.08,-9.22,-5.21,8.59,23.43,21.27],ERH:[-0.71,-0.62,-0.74,-8.92,-7.92,8.69,13.23,12.05],ETG:[-0.59,-1.00,-1.66,-10.15,-6.50,6.77,25.52,22.93],GDV:[-1.16,-1.37,-1.30,-11.55,-10.71,6.20,32.81,29.02],GLU:[-1.08,-1.35,-1.78,-5.35,-0.12,6.94,20.10,19.02],HTD:[0.34,0.84,0.54,-5.59,-6.28,7.48,26.85,25.35],NBXG:[-1.36,-1.43,-1.68,-15.17,-12.40,8.94,18.98,16.10],NXG:[0.12,-0.63,-0.96,-5.20,-1.82,12.12,62.67,59.41],PCN:[-0.44,-0.98,-1.36,2.88,6.64,11.46,11.45,11.78],PDI:[-1.18,-1.49,-1.37,3.98,9.51,16.07,15.84,16.47],PDO:[-0.55,-0.92,-1.42,1.41,3.81,11.84,12.78,12.96],PDX:[0.24,0.47,-0.25,-9.68,-9.21,7.66,23.13,20.89],RFI:[-1.58,-2.11,-2.37,-6.54,0.26,8.61,11.93,11.15],RLTY:[-1.49,-1.71,-1.82,-9.71,-6.64,8.45,17.30,15.62],RNP:[-2.19,-2.52,-1.83,-8.55,-0.72,8.08,22.10,20.21],RQI:[-2.60,-3.09,-2.41,-8.48,-3.15,8.70,13.56,12.41],UTF:[1.63,1.93,0.35,-2.62,-4.14,7.19,28.28,27.54],UTG:[-3.52,-4.11,-3.51,-4.22,-0.29,6.10,43.16,41.34]},
 '06/26/2026':{AIO:[3.25,2.51,-0.08,-6.56,-6.15,7.77,29.74,27.79],ASGI:[-0.46,-0.49,0.06,1.79,1.60,12.12,22.37,22.77],BDJ:[0.04,-0.84,-1.27,-7.75,-5.81,7.90,10.19,9.40],BME:[-0.24,0.06,0.93,-4.33,-6.15,7.42,44.33,42.41],BST:[0.84,-0.30,-0.52,-7.28,-6.41,6.25,51.79,48.02],BUI:[1.46,0.20,-0.05,2.43,2.58,5.69,28.01,28.69],CSQ:[0.49,-0.55,-1.06,-9.97,-7.50,7.34,22.26,20.04],DNP:[0.11,0.28,-0.02,5.72,5.78,7.16,10.31,10.90],EOI:[-0.80,-1.35,-1.53,-7.22,-2.54,8.39,20.63,19.14],EOS:[0.39,-0.48,-0.92,-8.66,-5.25,8.54,23.43,21.40],ERH:[-0.90,-0.77,-0.87,-9.08,-7.92,8.65,13.32,12.11],ETG:[-0.91,-1.08,-1.74,-10.36,-6.52,6.79,25.48,22.84],GDV:[-1.86,-2.24,-2.37,-12.26,-10.71,6.26,32.79,28.77],GLU:[-1.48,-1.51,-1.99,-6.04,-0.14,6.96,20.19,18.97],HTD:[0.43,0.96,0.68,-5.40,-6.27,7.41,27.06,25.60],NBXG:[-2.05,-2.11,-2.13,-15.98,-12.42,9.19,18.65,15.67],NXG:[0.82,-0.23,-0.50,-3.60,-1.83,12.05,62.00,59.77],PCN:[-0.11,-0.81,-1.22,3.23,6.62,11.40,11.47,11.84],PDI:[-1.00,-1.33,-1.26,4.35,9.48,15.97,15.88,16.57],PDO:[0.14,-0.38,-0.77,2.50,3.81,11.70,12.80,13.12],PDX:[-1.12,-0.68,-0.92,-10.97,-9.22,7.76,23.16,20.62],RFI:[-1.15,-1.72,-2.06,-5.71,0.23,8.43,12.08,11.39],RLTY:[-1.43,-1.66,-1.78,-9.69,-6.66,8.33,17.55,15.85],RNP:[-2.15,-2.51,-1.85,-8.68,-0.77,8.00,22.35,20.41],RQI:[-2.87,-3.52,-2.93,-9.78,-3.17,8.67,13.80,12.45],UTF:[1.54,1.84,0.34,-2.70,-4.17,7.14,28.50,27.73],UTG:[-3.70,-4.45,-3.99,-4.92,-0.31,6.18,42.91,40.80]},
 '06/29/2026':{AIO:[1.45,1.03,-0.45,-8.56,-6.21,7.78,30.38,27.78],ASGI:[0.01,0.01,0.52,3.27,1.63,11.98,22.30,23.03],BDJ:[1.83,-0.24,-0.48,-6.56,-5.82,7.78,10.22,9.55],BME:[0.24,0.54,1.21,-3.77,-6.14,7.33,44.59,42.91],BST:[0.63,-0.41,-0.66,-7.52,-6.42,6.11,53.05,49.06],BUI:[1.77,0.41,0.21,3.28,2.58,5.63,28.08,29.00],CSQ:[-0.46,-0.90,-1.24,-10.42,-7.53,7.24,22.65,20.29],DNP:[0.50,0.65,0.40,6.86,5.78,7.16,10.20,10.90],EOI:[-0.78,-1.33,-1.52,-7.23,-2.57,8.28,20.89,19.38],EOS:[0.71,-0.27,-0.84,-8.37,-5.29,8.39,23.77,21.78],ERH:[-0.81,-0.59,-0.73,-8.90,-7.92,8.71,13.26,12.08],ETG:[0.13,-0.77,-1.43,-9.70,-6.54,6.66,25.78,23.28],GDV:[-0.97,-1.06,-0.98,-11.35,-10.71,6.16,32.94,29.20],GLU:[-1.23,-1.40,-1.86,-5.69,-0.16,6.93,20.21,19.06],HTD:[1.20,1.81,1.66,-4.13,-6.26,7.35,26.89,25.78],NBXG:[-0.88,-1.02,-1.40,-14.78,-12.43,8.86,19.08,16.26],NXG:[0.30,-0.56,-0.89,-4.99,-1.86,11.85,63.93,60.74],PCN:[-0.08,-0.76,-1.19,3.31,6.60,11.38,11.48,11.86],PDI:[-0.85,-1.17,-1.16,4.72,9.45,15.89,15.90,16.65],PDO:[0.21,-0.30,-0.68,2.65,3.80,11.67,12.81,13.15],PDX:[-0.72,-0.37,-0.73,-10.61,-9.23,7.72,23.19,20.73],RFI:[-0.83,-1.42,-1.82,-5.08,0.20,8.42,12.01,11.40],RLTY:[-0.44,-0.99,-1.34,-8.94,-6.67,8.31,17.44,15.88],RNP:[-1.42,-1.88,-1.57,-7.55,-0.83,7.93,22.25,20.57],RQI:[-2.32,-2.95,-2.42,-8.70,-3.19,8.65,13.68,12.49],UTF:[1.83,2.17,0.51,-2.01,-4.19,7.12,28.37,27.80],UTG:[-3.34,-4.16,-3.89,-4.95,-0.33,6.16,43.01,40.88]},
 '06/30/2026':{AIO:[2.21,1.71,-0.26,-7.60,-6.26,7.78,30.38,28.07],ASGI:[0.59,0.61,1.06,5.01,1.66,11.98,22.14,23.25],BDJ:[2.00,-0.13,-0.35,-6.36,-5.82,7.78,10.22,9.57],BME:[0.27,0.59,1.25,-3.68,-6.12,7.33,44.59,42.95],BST:[2.80,1.05,1.19,-6.75,-6.41,6.11,53.05,50.71],BUI:[1.73,0.43,0.22,3.31,2.58,5.63,28.08,29.01],CSQ:[0.24,-0.59,-1.08,-10.06,-7.56,7.24,22.65,20.56],DNP:[0.31,0.54,0.25,6.46,5.77,7.16,10.20,10.79],EOI:[-0.52,-1.16,-1.39,-6.87,-2.61,8.28,20.89,19.66],EOS:[0.45,-0.39,-0.89,-8.59,-5.33,8.39,23.77,22.04],ERH:[-0.84,-0.52,-0.68,-7.57,-7.91,8.71,13.26,12.09],ETG:[1.22,-0.42,-1.09,-8.97,-6.56,6.66,25.78,23.54],GDV:[-0.38,-0.28,-0.05,-10.75,-10.71,6.16,32.94,29.40],GLU:[-0.75,-1.19,-1.61,-4.98,-0.18,6.93,20.21,19.20],HTD:[0.47,1.05,0.81,-5.21,-6.25,7.35,26.89,25.49],NBXG:[-1.01,-1.16,-1.50,-14.96,-12.45,8.86,19.08,16.54],NXG:[3.05,1.05,0.88,1.22,-1.86,11.85,63.93,64.71],PCN:[0.82,-0.39,-0.90,4.09,6.59,11.38,11.48,11.95],PDI:[-0.71,-1.05,-1.08,5.03,9.43,15.89,15.90,16.70],PDO:[0.60,-0.03,-0.36,3.20,3.80,11.67,12.81,13.22],PDX:[-0.27,-0.03,-0.52,-10.22,-9.24,7.72,23.19,20.82],RFI:[-0.38,-1.04,-1.51,-4.23,0.16,8.42,11.82,11.32],RLTY:[0.61,-0.28,-0.87,-8.17,-6.68,8.31,17.14,15.74],RNP:[-1.34,-1.82,-1.56,-7.52,-0.89,7.93,21.95,20.30],RQI:[-1.97,-2.65,-2.11,-8.07,-3.21,8.65,13.39,12.31],UTF:[1.98,2.34,0.63,-1.53,-4.22,7.12,28.02,27.59],UTG:[-2.51,-3.24,-3.12,-4.12,-0.34,6.16,42.47,40.72]},
-'07/01/2026':{AIO:[0.92,0.57,-0.57,-9.19,-6.26,7.70,30.91,27.66],ASGI:[0.54,0.59,1.04,4.96,1.70,11.87,22.14,23.08],BDJ:[2.25,-0.04,-0.23,-6.18,-5.82,7.76,10.20,9.57],BME:[1.04,1.30,1.65,-2.87,-6.12,7.32,44.22,43.03],BST:[1.21,-0.04,-0.19,-6.75,-6.42,5.92,54.38,49.96],BUI:[1.95,0.56,0.38,3.83,2.58,5.63,27.94,28.74],CSQ:[3.02,0.58,-0.50,-8.72,-7.58,7.15,22.71,20.73],DNP:[0.92,1.07,0.86,8.12,5.78,7.23,9.98,10.78],EOI:[-0.52,-1.16,-1.39,-5.98,-2.64,8.17,21.11,19.80],EOS:[0.45,-0.39,-0.89,-7.80,-5.38,8.29,24.11,22.10],ERH:[0.32,0.62,0.26,-7.57,-7.91,8.70,13.08,12.02],ETG:[1.22,-0.42,-1.09,-8.39,-6.58,6.59,25.86,23.47],GDV:[-0.52,-0.45,-0.26,-10.88,-10.71,6.12,32.99,29.45],GLU:[-0.52,-1.09,-1.48,-4.61,-0.17,6.87,20.13,19.20],HTD:[1.18,1.79,1.66,-4.10,-6.24,7.44,26.58,25.26],NBXG:[0.72,0.47,-0.41,-13.14,-12.46,8.71,19.45,16.59],NXG:[2.95,0.98,0.80,0.94,-1.86,11.13,64.11,64.56],PCN:[0.60,-0.47,-0.96,3.91,6.59,11.30,11.50,11.91],PDI:[-0.80,-1.13,-1.13,4.83,9.43,15.84,15.93,16.72],PDO:[0.33,-0.19,-0.54,2.88,3.80,11.61,12.85,13.26],PDX:[-0.01,0.18,-0.40,-9.99,-9.24,7.69,23.13,20.96],RFI:[-0.14,-0.84,-1.35,-3.79,0.13,8.48,11.82,11.43],RLTY:[0.78,-0.19,-0.81,-8.08,-6.70,8.39,17.14,15.82],RNP:[-0.83,-1.39,-1.36,-6.72,-0.94,8.04,22.04,20.56],RQI:[-1.98,-2.72,-2.22,-8.39,-3.23,8.77,13.39,12.34],UTF:[1.50,1.87,0.45,-2.37,-4.25,7.18,27.86,27.20],UTG:[-2.51,-3.24,-3.12,-4.12,-0.34,6.19,42.47,39.93]}
+'07/01/2026':{AIO:[0.92,0.57,-0.57,-9.19,-6.26,7.70,30.91,27.66],ASGI:[0.54,0.59,1.04,4.96,1.70,11.87,22.14,23.08],BDJ:[2.25,-0.04,-0.23,-6.18,-5.82,7.76,10.20,9.57],BME:[1.04,1.30,1.65,-2.87,-6.12,7.32,44.22,43.03],BST:[1.21,-0.04,-0.19,-6.75,-6.42,5.92,54.38,49.96],BUI:[1.95,0.56,0.38,3.83,2.58,5.63,27.94,28.74],CSQ:[3.02,0.58,-0.50,-8.72,-7.58,7.15,22.71,20.73],DNP:[0.92,1.07,0.86,8.12,5.78,7.23,9.98,10.78],EOI:[-0.52,-1.16,-1.39,-5.98,-2.64,8.17,21.11,19.80],EOS:[0.45,-0.39,-0.89,-7.80,-5.38,8.29,24.11,22.10],ERH:[0.32,0.62,0.26,-7.57,-7.91,8.70,13.08,12.02],ETG:[1.22,-0.42,-1.09,-8.39,-6.58,6.59,25.86,23.47],GDV:[-0.52,-0.45,-0.26,-10.88,-10.71,6.12,32.99,29.45],GLU:[-0.52,-1.09,-1.48,-4.61,-0.17,6.87,20.13,19.20],HTD:[1.18,1.79,1.66,-4.10,-6.24,7.44,26.58,25.26],NBXG:[0.72,0.47,-0.41,-13.14,-12.46,8.71,19.45,16.59],NXG:[2.95,0.98,0.80,0.94,-1.86,11.13,64.11,64.56],PCN:[0.60,-0.47,-0.96,3.91,6.59,11.30,11.50,11.91],PDI:[-0.80,-1.13,-1.13,4.83,9.43,15.84,15.93,16.72],PDO:[0.33,-0.19,-0.54,2.88,3.80,11.61,12.85,13.26],PDX:[-0.01,0.18,-0.40,-9.99,-9.24,7.69,23.13,20.96],RFI:[-0.14,-0.84,-1.35,-3.79,0.13,8.48,11.82,11.43],RLTY:[0.78,-0.19,-0.81,-8.08,-6.70,8.39,17.14,15.82],RNP:[-0.83,-1.39,-1.36,-6.72,-0.94,8.04,22.04,20.56],RQI:[-1.98,-2.72,-2.22,-8.39,-3.23,8.77,13.39,12.34],UTF:[1.50,1.87,0.45,-2.37,-4.25,7.18,27.86,27.20],UTG:[-2.51,-3.24,-3.12,-4.12,-0.34,6.19,42.47,39.93]},
+'07/02/2026':{AIO:[1.96,1.54,-0.28,-7.81,-6.36,7.99,29.33,27.04],ASGI:[0.34,0.43,0.88,4.49,1.73,11.87,22.26,23.26],BDJ:[1.11,-0.40,-0.73,-6.94,-5.83,7.70,10.37,9.65],BME:[-0.13,0.30,1.08,-3.96,-6.09,7.21,45.45,43.65],BST:[1.88,0.47,0.43,-5.70,-6.42,6.19,51.43,48.50],BUI:[1.23,0.22,-0.04,2.46,2.58,5.68,28.06,28.75],CSQ:[1.99,0.18,-0.70,-9.20,-7.61,7.89,22.60,20.52],DNP:[0.73,0.95,0.72,7.75,5.79,7.20,10.06,10.84],EOI:[0.08,-0.80,-1.11,-6.04,-2.67,8.13,21.02,19.75],EOS:[2.04,0.61,-0.51,-7.24,-5.41,8.29,23.77,22.05],ERH:[0.12,0.44,0.11,-7.75,-7.90,8.66,13.16,12.14],ETG:[1.09,-0.43,-1.10,-9.03,-6.60,6.61,25.79,23.46],GDV:[-0.51,-0.44,-0.26,-10.88,-10.71,6.09,33.18,29.57],GLU:[-0.43,-1.04,-1.43,-4.50,-0.21,6.84,20.21,19.30],HTD:[0.74,1.33,1.19,-4.69,-6.23,7.41,26.84,25.58],NBXG:[0.95,0.68,-0.27,-12.91,-12.47,8.97,18.43,16.05],NXG:[3.60,1.98,1.91,4.86,-1.86,11.42,60.11,63.03],PCN:[-0.22,-0.77,-1.19,3.22,6.56,11.37,11.50,11.87],PDI:[-0.79,-1.15,-1.13,4.77,9.37,15.84,15.94,16.70],PDO:[0.46,-0.11,-0.45,3.03,3.80,11.58,12.86,13.25],PDX:[0.10,0.27,-0.33,-9.87,-9.26,7.66,23.20,20.91],RFI:[-0.31,-0.99,-1.47,-4.17,0.10,8.36,11.98,11.48],RLTY:[0.12,-0.62,-1.10,-8.57,-6.71,8.31,17.38,15.89],RNP:[-0.99,-1.52,-1.42,-7.02,-0.99,7.90,22.21,20.65],RQI:[-1.86,-2.62,-2.15,-8.29,-3.24,8.64,13.63,12.50],UTF:[1.34,1.71,0.40,-2.62,-4.28,7.19,28.29,27.55],UTG:[-1.35,-1.92,-1.95,-2.76,-0.37,6.32,40.98,39.85]}
 };
 
 const FIELDS=['z3m','z6m','z1y','dp','avg','yld','nav','px'];
@@ -158,7 +156,7 @@ function vis(d){
   return{dim:quad!=='all'&&d.qk!==quad};
 }
 function applyStyles(){
-  const ds=chart.data.datasets[0]; ds.data=sd;
+  const ds=chart.data.datasets[0];ds.data=sd;
   ds.backgroundColor=sd.map(d=>vis(d).dim?d.col+'12':terms.includes(d.label)?d.col+'EE':d.col+'CC');
   ds.borderColor=sd.map(d=>vis(d).dim?d.col+'20':d.col);
   ds.borderWidth=sd.map(d=>terms.includes(d.label)||(holdOnly&&d.owned)?3:1.5);
@@ -166,17 +164,17 @@ function applyStyles(){
 }
 function animTo(ni){
   if(animating)return;
-  const oi=idx; idx=ni;
+  const oi=idx;idx=ni;
   const os=gs(DATES[oi]),ns=gs(DATES[ni]);
-  buildSD(); aStart=null; animating=true;
+  buildSD();aStart=null;animating=true;
   const tks=Object.keys(ns);
   function step(ts){
     if(!aStart)aStart=ts;
     const t=ei(Math.min((ts-aStart)/400,1));
     chart.data.datasets[0].data.forEach((d,i)=>{
-      const tk=tks[i]; if(!tk)return;
-      const ov=os[tk],nv=ns[tk]; if(!ov||!nv)return;
-      d.x=ov[per]+(nv[per]-ov[per])*t; d.y=ov.dp+(nv.dp-ov.dp)*t;
+      const tk=tks[i];if(!tk)return;
+      const ov=os[tk],nv=ns[tk];if(!ov||!nv)return;
+      d.x=ov[per]+(nv[per]-ov[per])*t;d.y=ov.dp+(nv.dp-ov.dp)*t;
     });
     chart.update('none');
     if(t<1)requestAnimationFrame(step);
@@ -212,11 +210,11 @@ function updateUI(){
   ${hot.length?`<p style="font-size:11px;color:var(--txt2);margin:0"><strong>Strongest green:</strong> ${hot.map(f=>`<span style="color:#1D9E75;font-weight:600">${f.t}</span> +${f.z.toFixed(2)}`).join(' · ')}</p>`:''}`;
 }
 function play(){
-  playing=true; document.getElementById('pbtn').textContent='⏸ Pause'; document.getElementById('pbtn').classList.add('on');
-  if(idx>=DATES.length-1)animTo(0); sched();
+  playing=true;document.getElementById('pbtn').textContent='⏸ Pause';document.getElementById('pbtn').classList.add('on');
+  if(idx>=DATES.length-1)animTo(0);sched();
 }
 function pause2(){
-  playing=false; clearTimeout(pTimer); document.getElementById('pbtn').textContent='▶ Play'; document.getElementById('pbtn').classList.remove('on');
+  playing=false;clearTimeout(pTimer);document.getElementById('pbtn').textContent='▶ Play';document.getElementById('pbtn').classList.remove('on');
 }
 function sched(){
   if(!playing)return;
@@ -229,23 +227,22 @@ document.getElementById('slider').oninput=e=>{pause2();const ni=+e.target.value;
 document.getElementById('pips').innerHTML=DATES.map((d,i)=>{const p=d.split('/');return`<div class="pip${i===idx?' on':''}" data-i="${i}"><div class="dot"></div><div class="lbl">${p[0]}/${p[1]}<br>${p[2]}</div></div>`;}).join('');
 document.querySelectorAll('.pip').forEach(p=>p.onclick=()=>{pause2();const i=+p.dataset.i;if(i!==idx)animTo(i);});
 document.querySelectorAll('.qb[data-q]').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('.qb[data-q]').forEach(x=>x.classList.remove('on')); b.classList.add('on'); quad=b.dataset.q;
-  buildSD(); applyStyles(); chart.update('none'); updateUI();
+  document.querySelectorAll('.qb[data-q]').forEach(x=>x.classList.remove('on'));b.classList.add('on');quad=b.dataset.q;
+  buildSD();applyStyles();chart.update('none');updateUI();
 });
 document.getElementById('holdBtn').onclick=function(){
-  holdOnly=!holdOnly;
-  this.classList.toggle('hold-on',holdOnly);
-  buildSD(); applyStyles(); chart.update('none'); updateUI();
+  holdOnly=!holdOnly;this.classList.toggle('hold-on',holdOnly);
+  buildSD();applyStyles();chart.update('none');updateUI();
 };
 document.querySelectorAll('.zs button').forEach(b=>b.onclick=()=>{
-  if(animating)return; const p=b.dataset.p; if(p===per)return;
-  document.querySelectorAll('.zs button').forEach(x=>x.classList.remove('on')); b.classList.add('on'); per=p;
-  chart.options.scales.x.title.text=`Z-Score ${p.toUpperCase()}`; buildSD(); applyStyles(); chart.update('none'); updateUI();
+  if(animating)return;const p=b.dataset.p;if(p===per)return;
+  document.querySelectorAll('.zs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');per=p;
+  chart.options.scales.x.title.text=`Z-Score ${p.toUpperCase()}`;buildSD();applyStyles();chart.update('none');updateUI();
 });
 document.getElementById('srch').oninput=e=>{
   terms=e.target.value.trim().toUpperCase().split(/[\s,]+/).filter(Boolean);
   document.getElementById('dp-panel').style.display='none';
-  buildSD(); applyStyles(); chart.update('none');
+  buildSD();applyStyles();chart.update('none');
 };
 const rl={id:'rl',afterDatasetsDraw(c){
   if(animating)return;
@@ -270,13 +267,11 @@ chart=new Chart(document.getElementById('cvs').getContext('2d'),{
       tooltip:{enabled:true,filter:()=>!animating,callbacks:{label:c=>{
         const d=c.raw,df=(d.y-d.avg).toFixed(2),sg=df>0?'+':'';
         const m=MOM[d.label]||{};
-        return[
-          `${d.label}${d.owned?' ★':''}  |  Yield: ${d.yld.toFixed(2)}%`,
-          `Z ${per}: ${d.x.toFixed(2)}  |  D/P: ${d.y.toFixed(2)}%`,
-          `3M: ${d.z3m.toFixed(2)}  6M: ${d.z6m.toFixed(2)}  1Y: ${d.z1y.toFixed(2)}`,
-          `52wk avg: ${d.avg.toFixed(2)}% (${sg}${df})`,
-          `ST Mom: ${momFmt(m.st)}  LT Mom: ${momFmt(m.lt)}`
-        ];}}},
+        return[`${d.label}${d.owned?' ★':''}  |  Yield: ${d.yld.toFixed(2)}%`,
+               `Z ${per}: ${d.x.toFixed(2)}  |  D/P: ${d.y.toFixed(2)}%`,
+               `3M: ${d.z3m.toFixed(2)}  6M: ${d.z6m.toFixed(2)}  1Y: ${d.z1y.toFixed(2)}`,
+               `52wk avg: ${d.avg.toFixed(2)}% (${sg}${df})`,
+               `ST Mom: ${momFmt(m.st)}  LT Mom: ${momFmt(m.lt)}`];}}},
       datalabels:{
         formatter:v=>`${v.label}\n${v.yld.toFixed(2)}%`,
         font:c=>{const d=c.dataset.data[c.dataIndex];return{size:terms.includes(d.label)?10:9,weight:!vis(d).dim?'500':'400'};},
@@ -300,12 +295,12 @@ chart=new Chart(document.getElementById('cvs').getContext('2d'),{
     scales:{
       x:{title:{display:true,text:'Z-Score 1Y',font:{size:11,weight:'500'},color:'#888780'},
          grid:{color:c=>c.tick.value===0?'rgba(100,100,100,.45)':'rgba(150,150,150,.1)',lineWidth:c=>c.tick.value===0?1.5:1},
-         ticks:{color:'#888780',font:{size:10}},min:-4.0,max:4.5},
+         ticks:{color:'#888780',font:{size:10}},min:-4.0,max:5.5},
       y:{title:{display:true,text:'Discount / Premium (%)',font:{size:11,weight:'500'},color:'#888780'},
          grid:{color:c=>c.tick.value===0?'rgba(100,100,100,.45)':'rgba(150,150,150,.1)',lineWidth:c=>c.tick.value===0?1.5:1},
-         ticks:{color:'#888780',font:{size:10},callback:v=>v.toFixed(0)+'%'},min:-16,max:12}}
+         ticks:{color:'#888780',font:{size:10},callback:v=>v.toFixed(0)+'%'},min:-16,max:8}}
   }
 });
-applyStyles(); chart.update('none');
+applyStyles();chart.update('none');
 updateUI();
 </script>
