@@ -3,21 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CEF Time Machine · 07/15/2026</title>
+<title>CEF Time Machine · 07/16/2026</title>
 <style>
   :root{
-    --green:#1D9E75; --blue:#378ADD; --orange:#D85A30; --gray:#888780;
-    --ink:#1E2429; --sub:#5A636B; --line:#DEE3E7; --bg:#F7F8F9; --card:#FFFFFF;
+    --green:#1D9E75;--blue:#378ADD;--orange:#D85A30;--gray:#888780;
+    --ink:#1E2429;--sub:#5A636B;--line:#DEE3E7;--bg:#F7F8F9;--card:#FFFFFF;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);padding:20px;max-width:1100px;margin:0 auto}
   h1{font-size:19px;font-weight:700;letter-spacing:-0.2px}
   .hdr{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:4px}
-  .hdr .meta{font-size:12.5px;color:var(--sub)}
   .badge{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:10px;background:#FAECE7;color:#B4431F}
   .note{font-size:12px;color:var(--sub);margin-bottom:14px}
 
-  /* Alert panel */
   .alerts{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
   .al{background:var(--card);border:1px solid var(--line);border-left-width:4px;border-radius:6px;padding:8px 12px;font-size:13px;line-height:1.45}
   .al b{font-weight:700}
@@ -29,7 +27,6 @@
   .al.dq{border-left-color:#EF8A2B;background:#FFF3E0}
   .al .tag{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-right:6px;opacity:.75}
 
-  /* Controls */
   .panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:16px}
   .controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
   .controls .grp{display:flex;gap:4px}
@@ -42,31 +39,34 @@
   input.search{font-size:12px;padding:5px 9px;border:1px solid var(--line);border-radius:6px;width:120px}
   .legend{font-size:11.5px;color:var(--sub);margin-top:8px}
 
+  /* Time machine nav */
+  .tmnav{display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+  .tmnav button{font-size:12px;padding:4px 10px;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer}
+  .tmnav button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .tmnav .seslabel{font-size:12px;color:var(--sub);min-width:110px}
+
   svg{width:100%;height:auto;display:block}
   .dot{cursor:pointer}
   .dot text{font-size:9.5px;font-weight:600;pointer-events:none}
-  .dimmed{opacity:.13}
-  .tooltip{position:fixed;pointer-events:none;background:#1E2429;color:#fff;font-size:11.5px;line-height:1.5;padding:8px 10px;border-radius:6px;z-index:50;display:none;max-width:250px}
+  .dimmed{opacity:.12}
+  .tooltip{position:fixed;pointer-events:none;background:#1E2429;color:#fff;font-size:11.5px;line-height:1.5;padding:8px 10px;border-radius:6px;z-index:50;display:none;max-width:260px}
   .tooltip b{color:#9FD8C4}
 
-  /* Snapshot */
   .snap{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-top:14px}
   .snapcard{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:12.5px}
   .snapcard h3{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--sub);margin-bottom:6px}
   .qcount{display:inline-block;padding:1px 7px;border-radius:8px;color:#fff;font-weight:700;font-size:12px;margin-right:5px}
 
-  /* Detail panel */
   .detail{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px;margin-top:12px;font-size:13px;display:none}
   .detail table{width:100%;border-collapse:collapse;font-size:12.5px}
   .detail td{padding:3px 8px 3px 0;color:var(--sub)}
   .detail td.v{color:var(--ink);font-weight:600}
 
-  /* Key reads */
   h2{font-size:15px;margin:20px 0 10px}
   .reads{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px}
   .read{background:var(--card);border:1px solid var(--line);border-top-width:4px;border-radius:8px;padding:12px 14px;font-size:12.5px;line-height:1.5}
-  .read.kg{border-top-color:var(--green)} .read.ka{border-top-color:#E3A008}
-  .read.kb{border-top-color:var(--blue)} .read.ko{border-top-color:var(--orange)}
+  .read.kg{border-top-color:var(--green)}.read.ka{border-top-color:#E3A008}
+  .read.kb{border-top-color:var(--blue)}.read.ko{border-top-color:var(--orange)}
   .read.kp{border-top-color:#6366F1}
   .read .rh{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
   .read .rh b{font-size:14px}
@@ -77,25 +77,27 @@
   .bar i{display:block;height:100%;border-radius:3px}
 
   .disc{font-size:11px;color:var(--sub);font-style:italic;margin-top:22px;border-top:1px solid var(--line);padding-top:10px}
+  .δup{color:#1D9E75;font-weight:600}.δdn{color:#D85A30;font-weight:600}
 </style>
 </head>
 <body>
 
 <div class="hdr">
-  <h1>CEF Time Machine · Z-Score vs Discount/Premium</h1>
-  <span class="badge">Net Δ: −$2.61</span>
+  <h1>CEF Time Machine · 07/16/2026</h1>
+  <span class="badge">Net Δ: −$3.68</span>
 </div>
-<div class="note">Session 07/15/2026 · EOD NAV · Z1Y governs quadrant classification. Time machine history restarts with this session (prior session arrays not loaded in this workspace — paste RAW arrays to restore the rolling window).</div>
+<div class="note">Session 2 of rolling window · Z1Y governs quadrant classification · ST/LT momentum from 07/15 upload (prior session — fields noted) · RQI: first clean post-expiry session</div>
 
-<!-- ALERT PANEL -->
+<!-- ALERTS -->
 <div class="alerts">
-  <div class="al r"><span class="tag">Red</span><b>RQI</b> — Z1Y −2.43, deepest in universe (D/P −9.69% vs −3.42% avg). Rights offering expired 07/15; today's print is the last contaminated session. First clean z-score read is 07/16. Per framework, hold entry evaluation for 2–3 clean post-expiry sessions.</div>
-  <div class="al g"><span class="tag">Green</span><b>BUI</b> — Z1Y +0.06: crossed the zero line. 2nd-tranche trigger condition met this session. Two-session confirmation rule applies — needs a second consecutive session at or above zero to validate the window.</div>
-  <div class="al a"><span class="tag">Amber</span><b>PCN</b> — Z1Y −1.50, premium compressed to +2.10% vs +6.39% 52-wk avg. NAV printed $11.45 (recovered from $11.38 low but below the $11.53 July start). Distribution source still unconfirmed by 19(a); NAV-vs-payout watch continues.</div>
-  <div class="al a"><span class="tag">Amber</span><b>DNP</b> — Premium stretched to +10.50% vs +5.87% avg; Z1Y +1.66, Z3M +2.06 (Z3M extreme flagged; Z1Y governs — remains Blue quadrant). Rich vs own history.</div>
-  <div class="al dq"><span class="tag">Dist Qual</span><b>RFI / ERH</b> — Active ROC-primary flags (RFI ~71% ROC, ERH ~57–66% ROC fiscal YTD). Both above the 25% threshold. RFI Z1Y −1.44 with ROC-primary sourcing compounds NAV-erosion risk.</div>
-  <div class="al p"><span class="tag">Info</span><b>UTG</b> — Z1Y +0.60, now a +0.30% premium. Dislocation thesis fully resolved and closed; position moves to normal monitoring. HTD +2.48 and ASGI +2.10 are the universe's positive Z1Y extremes (non-holdings) — both expensive vs own history.</div>
-  <div class="al c"><span class="tag">Corp</span><b>UTG</b> record date 7/17 for the raised $0.21 distribution (first payment at new rate). <b>RQI</b> rights offering expired 07/15 — offering period closed.</div>
+  <div class="al r"><span class="tag">Red</span><b>RQI</b> — First clean session post-expiry: Z1Y deepened to −2.57 (from −2.43), D/P widened to −10.14% vs −3.44% avg. Price slipped to $12.40 despite NAV rising to $13.80 (post-dilution). Discount widening is continuing, not compressing. Session 1 of the 2–3 clean-session observation window — no entry thesis confirmation yet. Flip supply hypothesis active.</div>
+  <div class="al r"><span class="tag">Red</span><b>BUI</b> — Trigger invalidated. Z1Y reversed from +0.06 to −0.57 in a single session. Two-session confirmation rule resets the clock. BUI fell back into Orange quadrant (Z1Y −0.57, D/P +0.61%). Watch for next zero-cross attempt.</div>
+  <div class="al r"><span class="tag">Red</span><b>RFI / RNP</b> — Both deepening. RFI Z1Y −1.59 (from −1.44), D/P −4.88% vs −0.17% avg (−4.71pt deviation). RNP Z1Y −1.42 (from −1.33), D/P −7.30% vs −1.52% avg (−5.78pt deviation). REIT sleeve broadly under pressure.</div>
+  <div class="al a"><span class="tag">Amber</span><b>BDJ</b> — Z1Y moved to −0.93 (from −0.34), a −0.59pt single-session drop — crosses the ≥0.50 amber flag threshold. Still Orange quadrant but momentum weakening. Watch for approach toward −1.50 (tranche-2 trigger proximity).</div>
+  <div class="al a"><span class="tag">Amber</span><b>PCN</b> — Z1Y improved to −1.24 (from −1.50), a +0.26pt session move. NAV held at $11.44. Premium edged up to +2.80%. Mild positive but still Gray quadrant. Not yet a signal.</div>
+  <div class="al g"><span class="tag">Green</span><b>UTG</b> — Z1Y strengthened to +1.43 (from +0.60). Premium +1.31%. Record date today (7/17) for the raised $0.21 distribution. Dislocation thesis fully resolved — now running constructively above its own history.</div>
+  <div class="al p"><span class="tag">Info</span><b>ASGI</b> — Z1Y +2.46, Z3M +2.10. Universe's most extreme positive reading on both axes. Not a holding — expensive vs own history on both z-score dimensions simultaneously.</div>
+  <div class="al c"><span class="tag">Corp</span><b>UTG</b> — Record date 7/17 for $0.21/share distribution (first at raised rate). <b>RQI</b> — preliminary RO results filed 7/16: ~12.6M shares issued at $12.15, ~$154M gross proceeds. New shares settling; NAV reflects dilution at $13.80 (vs $13.52 pre-offer).</div>
 </div>
 
 <!-- SCATTER -->
@@ -117,9 +119,13 @@
     <button class="ctl" id="hold">★ My Holdings</button>
   </div>
   <svg id="chart" viewBox="0 0 980 560" xmlns="http://www.w3.org/2000/svg"></svg>
-  <div class="legend">Dashed tail = distance from 52-wk avg D/P · Ring = current holding (internal view only; toggle off before sharing) · Quadrants classified on Z1Y regardless of axis toggle · ST/LT momentum: awaiting momentum upload for 07/15 — fields blank until refreshed.</div>
+  <div class="legend">Dashed tail = 52-wk avg D/P deviation · Ring = current holding · Ghost dots = 07/15 prior session · ST/LT momentum: 07/15 upload</div>
+  <div class="tmnav">
+    <button class="ctl tmb on" data-s="1">07/16 (current)</button>
+    <button class="ctl tmb" data-s="0">07/15</button>
+    <span class="seslabel" id="seslabel">Showing: 07/16/2026</span>
+  </div>
   <div class="detail" id="detail"></div>
-
   <div class="snap">
     <div class="snapcard"><h3 id="snapTitle">Quadrant counts — universe</h3><div id="snapCounts"></div></div>
     <div class="snapcard"><h3>Deepest 3 by Z1Y</h3><div id="snapDeep"></div></div>
@@ -127,56 +133,61 @@
   </div>
 </div>
 
-<!-- KEY READS -->
-<h2>Key reads — 07/15/2026</h2>
+<h2>Key reads — 07/16/2026</h2>
 <div class="reads">
-  <div class="read ko">
-    <div class="rh"><b>RQI</b><span class="st">Caution / Await clean read</span></div>
-    <div class="mx"><span>Z1Y <b>−2.43</b></span><span>D/P <b>−9.69%</b></span><span>52-wk avg <b>−3.42%</b></span><span>Z6M <b>−2.41</b></span></div>
-    <div class="bar"><i style="width:88%;background:var(--orange)"></i></div>
-    Deepest dislocation in the universe, but 07/15 is expiry day itself — this print still carries the offering overhang. The entry thesis cannot be evaluated until 2–3 clean sessions post-expiry. Deviation from 52-wk avg D/P is −6.27pts, the widest gap on the board.
+  <div class="read kr ko">
+    <div class="rh"><b>RQI</b><span class="st">Session 1 of clean window</span></div>
+    <div class="mx"><span>Z1Y <b>−2.57</b> <span class="δdn">▼0.14</span></span><span>D/P <b>−10.14%</b></span><span>52-wk avg <b>−3.44%</b></span><span>NAV <b>$13.80</b></span></div>
+    <div class="bar"><i style="width:93%;background:var(--orange)"></i></div>
+    First clean session and the discount is widening, not closing. Price $12.40 vs NAV $13.80 — the gap is actually growing. NAV lifted slightly from post-dilution settlement (~$13.52 → $13.80 reflects the offering proceeds and/or REIT tape). One clean session of continued weakness is within normal post-offering behavior (flip supply), but it does not validate the reversion thesis. Two-session confirmation clock is running; no entry signal yet.
   </div>
-  <div class="read kg">
-    <div class="rh"><b>BUI</b><span class="st">Trigger — pending confirm</span></div>
-    <div class="mx"><span>Z1Y <b>+0.06</b></span><span>D/P <b>+2.72%</b></span><span>52-wk avg <b>+2.51%</b></span><span>Z3M <b>+1.21</b></span></div>
-    <div class="bar"><i style="width:52%;background:var(--green)"></i></div>
-    Z1Y crossed zero after oscillating at the line. One session; the two-session confirmation rule holds the window open but unvalidated. A reversal tomorrow resets the clock. Cleanest distribution sourcing in the sleeve (45% NII / 55% ST gains, 0% ROC).
+  <div class="read ko">
+    <div class="rh"><b>BUI</b><span class="st">Trigger reset</span></div>
+    <div class="mx"><span>Z1Y <b>−0.57</b> <span class="δdn">▼0.63</span></span><span>D/P <b>+0.61%</b></span><span>52-wk avg <b>+2.49%</b></span><span>Z3M <b>+0.01</b></span></div>
+    <div class="bar"><i style="width:20%;background:var(--orange)"></i></div>
+    Sharp reversal from yesterday's +0.06. Z1Y back to −0.57, quadrant reverted to Orange. Two-session confirmation rule resets — the 07/15 zero-cross was a false signal. D/P slipped from +2.72% to +0.61%, now well below its +2.49% average. Next zero-cross attempt to watch for; until then the 2nd tranche window is closed.
   </div>
   <div class="read ka">
-    <div class="rh"><b>PCN</b><span class="st">Watch</span></div>
-    <div class="mx"><span>Z1Y <b>−1.50</b></span><span>D/P <b>+2.10%</b></span><span>52-wk avg <b>+6.39%</b></span><span>NAV <b>$11.45</b></span></div>
-    <div class="bar"><i style="width:60%;background:#E3A008"></i></div>
-    Premium compression continues (−4.29pts vs own average) — the market is repricing the fund toward NAV. NAV ticked up to $11.45 from the $11.38 low. Fiscal year ended 06/30: watch for the annual report or any 19(a) notice to finally confirm distribution sourcing.
+    <div class="rh"><b>BDJ</b><span class="st">Watch — Z1Y weakening</span></div>
+    <div class="mx"><span>Z1Y <b>−0.93</b> <span class="δdn">▼0.59</span></span><span>D/P <b>−7.31%</b></span><span>52-wk avg <b>−5.87%</b></span><span>LT Mom <b>+7.56%</b></span></div>
+    <div class="bar"><i style="width:46%;background:#E3A008"></i></div>
+    Single-session Z1Y drop of 0.59pt triggers the amber ≥0.50 flag. Still well above the −2.00 2nd-tranche trigger but the direction is notable. LT momentum +7.56% remains supportive. No action threshold reached — flagged for monitoring.
   </div>
-  <div class="read kb">
-    <div class="rh"><b>UTG</b><span class="st">Catalyst 7/17</span></div>
-    <div class="mx"><span>Z1Y <b>+0.60</b></span><span>D/P <b>+0.30%</b></span><span>Record date <b>7/17</b></span><span>New rate <b>$0.21</b></span></div>
-    <div class="bar"><i style="width:100%;background:var(--blue)"></i></div>
-    Full round trip complete: −3.99 Z1Y at the June trough to +0.60 and a slight premium today. First record date at the raised distribution is Friday. Next filing will show how the +5% raise is sourced — recent composition has been LT-gains-heavy with variable ROC.
+  <div class="read kg">
+    <div class="rh"><b>UTG</b><span class="st">Constructive / Record date 7/17</span></div>
+    <div class="mx"><span>Z1Y <b>+1.43</b> <span class="δup">▲0.83</span></span><span>D/P <b>+1.31%</b></span><span>NAV <b>$39.69</b></span><span>LT Mom <b>+21.64%</b></span></div>
+    <div class="bar"><i style="width:100%;background:var(--green)"></i></div>
+    Strong session. Z1Y +1.43 is the best single-session gain in the holdings universe today (+0.83pt). Dislocation thesis delivered a full round trip — Z1Y from −3.99 to +1.43. NAV softened slightly ($40.57 → $39.69) likely ex-dividend mechanics ahead of tomorrow's record date. LT momentum +21.64% leads the entire sleeve.
   </div>
   <div class="read ko">
-    <div class="rh"><b>RFI</b><span class="st">Dist quality ⚠</span></div>
-    <div class="mx"><span>Z1Y <b>−1.44</b></span><span>D/P <b>−4.37%</b></span><span>52-wk avg <b>−0.14%</b></span><span>ROC <b>~71%</b></span></div>
-    <div class="bar"><i style="width:71%;background:#EF8A2B"></i></div>
-    Structural tension: zero leverage insulates the NAV from rate costs, but ~71% of the distribution is return of capital — principal, not earnings. Z1Y −1.44 with a −4.23pt deviation from average D/P. Cheap vs history, but the sourcing caps how constructive the setup can be.
+    <div class="rh"><b>RFI / RNP</b><span class="st">REIT sleeve pressure</span></div>
+    <div class="mx"><span>RFI Z1Y <b>−1.59</b></span><span>RNP Z1Y <b>−1.42</b></span><span>RFI D/P dev <b>−4.71pt</b></span><span>RNP D/P dev <b>−5.78pt</b></span></div>
+    <div class="bar"><i style="width:65%;background:var(--orange)"></i></div>
+    Both deepening in tandem. RNP's deviation from its 52-wk avg is now −5.78pts — the widest it's been in the current cycle outside of RQI. The entire REIT sleeve (RQI, RNP, RFI) is in Orange quadrant and drifting deeper. Sector-wide bid is soft; monitoring for inflection.
   </div>
   <div class="read kp">
-    <div class="rh"><b>DNP / HTD / ASGI</b><span class="st">Expensive tier</span></div>
-    <div class="mx"><span>DNP Z1Y <b>+1.66</b></span><span>DNP prem <b>+10.5%</b></span><span>HTD Z1Y <b>+2.48</b></span><span>ASGI Z1Y <b>+2.10</b></span></div>
-    <div class="bar"><i style="width:83%;background:#6366F1"></i></div>
-    The positive extremes cluster in utility/hybrid income. DNP (a current holding) is trading nearly double its average premium — no action per framework, but mean-reversion risk on the premium is elevated. HTD and ASGI are the two Z1Y ≥ +2.00 extremes in the universe; neither is held.
+    <div class="rh"><b>PCN</b><span class="st">Mild improvement</span></div>
+    <div class="mx"><span>Z1Y <b>−1.24</b> <span class="δup">▲0.26</span></span><span>D/P <b>+2.80%</b></span><span>52-wk avg <b>+6.38%</b></span><span>NAV <b>$11.44</b></span></div>
+    <div class="bar"><i style="width:45%;background:#6366F1)"></i></div>
+    One session of Z1Y improvement (+0.26pt) after several days of drift. Still Gray quadrant, still well inside its own average premium. NAV stable at $11.44. Not a signal — informational only. LT momentum −17.95% (from 07/15) remains the most concerning print in the holdings universe and hasn't changed.
   </div>
 </div>
 
 <div class="disc">For informational purposes only. Not investment advice. Past performance is no guarantee of future results. Always conduct your own due diligence before making investment decisions.</div>
-
 <div class="tooltip" id="tip"></div>
 
 <script>
-// RAW: [z3m, z6m, z1y, dp, avg52wk, yield, nav, price]
-const SESSIONS = [{
-  date:"07/15/2026",
-  data:{
+// [z3m, z6m, z1y, dp, avg52wk, yield, nav, price]
+// momentum [stmom, ltmom] from 07/15 upload — carried forward
+const MOM = {
+  PCN:[-0.66,-17.95],BDJ:[3.12,7.56],EOI:[0.96,7.41],BME:[3.82,3.64],
+  RQI:[-1.95,-4.24],RNP:[0.35,-7.00],RFI:[0.59,-11.49],AIO:[-1.64,12.31],
+  BST:[-0.48,10.84],DNP:[2.97,9.48],ERH:[0.30,3.46],BUI:[0.20,18.70],
+  UTF:[2.41,12.54],UTG:[-3.98,21.64]
+};
+
+const SESSIONS = [
+  {date:"07/15/2026", data:{
     AIO:[1.21,1.40,-0.35,-8.47,-6.82,8.13,29.04,26.58],
     ASGI:[1.74,1.69,2.10,8.51,2.01,10.90,22.32,24.22],
     BDJ:[1.68,-0.02,-0.34,-6.40,-5.87,7.69,10.32,9.66],
@@ -204,66 +215,99 @@ const SESSIONS = [{
     RQI:[-1.61,-2.41,-2.43,-9.69,-3.42,8.85,13.52,12.21],
     UTF:[1.32,1.76,0.67,-2.02,-4.54,7.15,28.27,27.70],
     UTG:[1.20,0.86,0.60,0.30,-0.45,6.19,40.57,40.69]
-  }
-}];
+  }},
+  {date:"07/16/2026", data:{
+    AIO:[1.64,1.90,-0.22,-7.89,-6.86,8.26,28.39,26.15],
+    ASGI:[2.10,2.06,2.46,9.72,2.06,10.78,22.32,24.49],
+    BDJ:[0.50,-0.51,-0.93,-7.31,-5.87,7.71,10.39,9.63],
+    BME:[0.54,0.83,1.32,-3.27,-5.94,7.38,44.06,42.62],
+    BST:[0.66,-0.24,-0.50,-7.32,-6.47,6.51,49.73,46.09],
+    BUI:[0.01,-0.21,-0.57,0.61,2.49,6.64,27.67,27.84],
+    CSQ:[1.96,0.67,-0.54,-8.98,-7.84,7.91,22.49,20.47],
+    DNP:[1.62,1.54,1.40,9.80,5.88,7.03,10.10,11.09],
+    EOI:[1.30,-0.36,-0.77,-5.25,-2.95,8.02,21.13,20.02],
+    EOS:[1.64,0.58,-0.53,-7.53,-5.81,8.27,23.91,22.11],
+    ERH:[1.17,1.51,1.11,-6.32,-7.81,8.65,12.98,12.16],
+    ETG:[-0.03,-0.63,-1.31,-9.65,-6.82,6.71,25.60,23.13],
+    GDV:[-0.64,-0.63,-0.48,-11.03,-10.72,6.03,33.55,29.85],
+    GLU:[0.21,-0.63,-1.00,-3.46,-0.38,6.75,20.26,19.56],
+    HTD:[0.40,1.08,1.15,-4.61,-6.18,7.39,26.88,25.64],
+    NBXG:[0.59,0.44,-0.47,-13.33,-12.55,9.42,17.63,15.28],
+    NXG:[1.88,1.89,1.75,4.42,-1.83,11.86,58.15,60.72],
+    PCN:[-0.50,-0.82,-1.24,2.80,6.38,11.48,11.44,11.76],
+    PDI:[-0.82,-1.23,-1.18,4.18,9.04,16.09,15.78,16.44],
+    PDO:[0.46,-0.09,-0.47,2.97,3.77,11.65,12.79,13.17],
+    PDX:[-1.40,-0.90,-0.99,-11.17,-9.33,7.66,23.54,20.91],
+    RFI:[-0.52,-1.15,-1.59,-4.88,-0.17,8.36,12.08,11.49],
+    RLTY:[-0.33,-0.85,-1.22,-8.89,-6.82,8.26,17.55,15.99],
+    RNP:[-0.93,-1.42,-1.42,-7.30,-1.52,7.88,22.34,20.71],
+    RQI:[-1.67,-2.48,-2.57,-10.14,-3.44,8.71,13.80,12.40],
+    UTF:[1.09,1.56,0.58,-2.39,-4.57,7.12,28.49,27.81],
+    UTG:[1.95,1.71,1.43,1.31,-0.45,6.27,39.69,40.21]
+  }}
+];
 
 const HOLDINGS = new Set(["PCN","BDJ","EOI","BUI","BME","RQI","RNP","RFI","AIO","BST","DNP","UTF","ERH","UTG"]);
-const QCOLOR = {G:"#1D9E75",B:"#378ADD",O:"#D85A30",X:"#888780"};
-const QNAME = {G:"Green",B:"Blue",O:"Orange",X:"Gray"};
+const QCOLOR={G:"#1D9E75",B:"#378ADD",O:"#D85A30",X:"#888780"};
+const QNAME={G:"Green",B:"Blue",O:"Orange",X:"Gray"};
 
-let zIdx = 2, qFilter = "all", searchTerm = "", holdOnly = false;
-const cur = SESSIONS[SESSIONS.length-1];
+let zIdx=2, qFilter="all", searchTerm="", holdOnly=false, sesIdx=1;
+const W=980,H=560,ML=54,MR=16,MT=14,MB=40;
 
-function quad(d){ return (d[2]>=0 ? (d[3]<0?"G":"B") : (d[3]<0?"O":"X")); } // Z1Y always governs
+function quad(d){return d[2]>=0?(d[3]<0?"G":"B"):(d[3]<0?"O":"X");}
 
-// Scales
-const W=980,H=560,ML=52,MR=16,MT=14,MB=40;
-function extent(){
+function getExtent(){
   let zs=[],ds=[];
-  for(const t in cur.data){zs.push(cur.data[t][zIdx]);ds.push(cur.data[t][3],cur.data[t][4]);}
+  SESSIONS.forEach(s=>{for(const t in s.data){zs.push(s.data[t][zIdx]);ds.push(s.data[t][3],s.data[t][4]);}});
   const zmax=Math.max(3,Math.ceil(Math.max(...zs.map(Math.abs))));
-  const dmin=Math.floor(Math.min(...ds))-1, dmax=Math.ceil(Math.max(...ds))+1;
-  return {zmin:-zmax,zmax,dmin,dmax};
+  const dmin=Math.floor(Math.min(...ds))-1,dmax=Math.ceil(Math.max(...ds))+1;
+  return{zmin:-zmax,zmax,dmin,dmax};
 }
+
 function render(){
-  const ex=extent();
-  const X=z=> ML + (z-ex.zmin)/(ex.zmax-ex.zmin)*(W-ML-MR);
-  const Y=d=> MT + (ex.dmax-d)/(ex.dmax-ex.dmin)*(H-MT-MB);
+  const ex=getExtent();
+  const Xf=z=>ML+(z-ex.zmin)/(ex.zmax-ex.zmin)*(W-ML-MR);
+  const Yf=d=>MT+(ex.dmax-d)/(ex.dmax-ex.dmin)*(H-MT-MB);
+  const cur=SESSIONS[sesIdx];
+  const prev=sesIdx>0?SESSIONS[sesIdx-1]:null;
   let s="";
   // quadrant shading
-  s+=`<rect x="${X(0)}" y="${Y(0)}" width="${X(ex.zmax)-X(0)}" height="${Y(ex.dmin)-Y(0)}" fill="#378ADD" opacity="0.05"/>`;
-  s+=`<rect x="${ML}" y="${Y(0)}" width="${X(0)-ML}" height="${Y(ex.dmin)-Y(0)}" fill="#888780" opacity="0.06"/>`;
-  s+=`<rect x="${X(0)}" y="${MT}" width="${X(ex.zmax)-X(0)}" height="${Y(0)-MT}" fill="#1D9E75" opacity="0.05"/>`;
-  s+=`<rect x="${ML}" y="${MT}" width="${X(0)-ML}" height="${Y(0)-MT}" fill="#D85A30" opacity="0.05"/>`;
-  // wait: y-axis is D/P, negative = discount at BOTTOM? No — discount (<0) plotted below zero line. Green = Z>=0 & D/P<0 → right-bottom.
-  s="";
-  s+=`<rect x="${X(0)}" y="${Y(0)}" width="${W-MR-X(0)}" height="${Y(ex.dmin)-Y(0)}" fill="#1D9E75" opacity="0.055"/>`;   // right-lower: green
-  s+=`<rect x="${X(0)}" y="${MT}" width="${W-MR-X(0)}" height="${Y(0)-MT}" fill="#378ADD" opacity="0.055"/>`;            // right-upper: blue
-  s+=`<rect x="${ML}" y="${Y(0)}" width="${X(0)-ML}" height="${Y(ex.dmin)-Y(0)}" fill="#D85A30" opacity="0.05"/>`;       // left-lower: orange
-  s+=`<rect x="${ML}" y="${MT}" width="${X(0)-ML}" height="${Y(0)-MT}" fill="#888780" opacity="0.07"/>`;                 // left-upper: gray
-  // gridlines + labels
-  for(let z=Math.ceil(ex.zmin); z<=ex.zmax; z++){
-    s+=`<line x1="${X(z)}" y1="${MT}" x2="${X(z)}" y2="${H-MB}" stroke="${z===0?'#B6BDC3':'#EAEDEF'}" stroke-width="${z===0?1.5:1}"/>`;
-    s+=`<text x="${X(z)}" y="${H-MB+16}" font-size="10" fill="#8A929A" text-anchor="middle">${z}</text>`;
+  s+=`<rect x="${Xf(0)}" y="${Yf(0)}" width="${W-MR-Xf(0)}" height="${Yf(ex.dmin)-Yf(0)}" fill="#1D9E75" opacity="0.055"/>`;
+  s+=`<rect x="${Xf(0)}" y="${MT}" width="${W-MR-Xf(0)}" height="${Yf(0)-MT}" fill="#378ADD" opacity="0.055"/>`;
+  s+=`<rect x="${ML}" y="${Yf(0)}" width="${Xf(0)-ML}" height="${Yf(ex.dmin)-Yf(0)}" fill="#D85A30" opacity="0.05"/>`;
+  s+=`<rect x="${ML}" y="${MT}" width="${Xf(0)-ML}" height="${Yf(0)-MT}" fill="#888780" opacity="0.07"/>`;
+  // grid
+  for(let z=Math.ceil(ex.zmin);z<=ex.zmax;z++){
+    s+=`<line x1="${Xf(z)}" y1="${MT}" x2="${Xf(z)}" y2="${H-MB}" stroke="${z===0?'#B6BDC3':'#EAEDEF'}" stroke-width="${z===0?1.5:1}"/>`;
+    s+=`<text x="${Xf(z)}" y="${H-MB+16}" font-size="10" fill="#8A929A" text-anchor="middle">${z}</text>`;
   }
-  const dstep = (ex.dmax-ex.dmin)>20?5:2;
-  for(let d=Math.ceil(ex.dmin/dstep)*dstep; d<=ex.dmax; d+=dstep){
-    s+=`<line x1="${ML}" y1="${Y(d)}" x2="${W-MR}" y2="${Y(d)}" stroke="${d===0?'#B6BDC3':'#EAEDEF'}" stroke-width="${d===0?1.5:1}"/>`;
-    s+=`<text x="${ML-6}" y="${Y(d)+3}" font-size="10" fill="#8A929A" text-anchor="end">${d}%</text>`;
+  const dstep=(ex.dmax-ex.dmin)>20?5:2;
+  for(let d=Math.ceil(ex.dmin/dstep)*dstep;d<=ex.dmax;d+=dstep){
+    s+=`<line x1="${ML}" y1="${Yf(d)}" x2="${W-MR}" y2="${Yf(d)}" stroke="${d===0?'#B6BDC3':'#EAEDEF'}" stroke-width="${d===0?1.5:1}"/>`;
+    s+=`<text x="${ML-6}" y="${Yf(d)+3}" font-size="10" fill="#8A929A" text-anchor="end">${d}%</text>`;
   }
-  s+=`<text x="${(W)/2}" y="${H-6}" font-size="11" fill="#5A636B" text-anchor="middle">Z-Score (${['Z3M','Z6M','Z1Y'][zIdx]})</text>`;
+  s+=`<text x="${W/2}" y="${H-6}" font-size="11" fill="#5A636B" text-anchor="middle">Z-Score (${['Z3M','Z6M','Z1Y'][zIdx]})</text>`;
   s+=`<text x="14" y="${H/2}" font-size="11" fill="#5A636B" text-anchor="middle" transform="rotate(-90 14 ${H/2})">Discount / Premium %</text>`;
-
-  // dots
+  // ghost dots (prior session, current session only)
+  if(prev && sesIdx===SESSIONS.length-1){
+    for(const t of Object.keys(prev.data)){
+      const d=prev.data[t],q=quad(d);
+      const vis=(qFilter==="all"||q===qFilter)&&(!holdOnly||HOLDINGS.has(t));
+      const match=!searchTerm||t.includes(searchTerm);
+      if(!vis||!match) continue;
+      s+=`<circle cx="${Xf(d[zIdx])}" cy="${Yf(d[3])}" r="4.5" fill="${QCOLOR[q]}" opacity="0.18"/>`;
+    }
+  }
+  // current dots
   for(const t of Object.keys(cur.data)){
-    const d=cur.data[t], q=quad(d);
-    const visible = (qFilter==="all"||q===qFilter) && (!holdOnly||HOLDINGS.has(t));
-    const match = !searchTerm || t.includes(searchTerm);
-    const dim = (!visible||!match) ? ' class="dot dimmed"' : ' class="dot"';
-    const cx=X(d[zIdx]), cy=Y(d[3]), ay=Y(d[4]);
+    const d=cur.data[t],q=quad(d);
+    const visible=(qFilter==="all"||q===qFilter)&&(!holdOnly||HOLDINGS.has(t));
+    const match=!searchTerm||t.includes(searchTerm);
+    const dim=(!visible||!match)?' class="dot dimmed"':' class="dot"';
+    const cx=Xf(d[zIdx]),cy=Yf(d[3]),ay=Yf(d[4]);
     s+=`<g${dim} data-t="${t}">`;
-    s+=`<line x1="${cx}" y1="${cy}" x2="${cx}" y2="${ay}" stroke="${QCOLOR[q]}" stroke-width="1" stroke-dasharray="3,3" opacity="0.55"/>`;
-    s+=`<circle cx="${cx}" cy="${ay}" r="2" fill="none" stroke="${QCOLOR[q]}" stroke-width="1" opacity="0.55"/>`;
+    s+=`<line x1="${cx}" y1="${cy}" x2="${cx}" y2="${ay}" stroke="${QCOLOR[q]}" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>`;
+    s+=`<circle cx="${cx}" cy="${ay}" r="2" fill="none" stroke="${QCOLOR[q]}" stroke-width="1" opacity="0.5"/>`;
     if(HOLDINGS.has(t)) s+=`<circle cx="${cx}" cy="${cy}" r="9.5" fill="none" stroke="${QCOLOR[q]}" stroke-width="1.4" opacity="0.6"/>`;
     s+=`<circle cx="${cx}" cy="${cy}" r="6" fill="${QCOLOR[q]}"/>`;
     s+=`<text x="${cx}" y="${cy-11}" text-anchor="middle" fill="#3A4249">${t}</text>`;
@@ -272,55 +316,65 @@ function render(){
   document.getElementById("chart").innerHTML=s;
   bindDots();
   renderSnap();
+  document.getElementById("seslabel").textContent="Showing: "+cur.date;
 }
 
-function fmt(v){return v==null?'—':(typeof v==='number'?v.toFixed(2):v)}
 const tip=document.getElementById("tip");
 function bindDots(){
+  const cur=SESSIONS[sesIdx];
   document.querySelectorAll(".dot").forEach(g=>{
-    const t=g.dataset.t, d=cur.data[t];
+    const t=g.dataset.t,d=cur.data[t];
+    const m=MOM[t]||null;
     g.addEventListener("mousemove",e=>{
       tip.style.display="block";
-      tip.style.left=(e.clientX+14)+"px"; tip.style.top=(e.clientY+10)+"px";
-      tip.innerHTML=`<b>${t}</b> · yield ${d[5].toFixed(2)}%<br>D/P ${d[3].toFixed(2)}% (avg ${d[4].toFixed(2)}%, Δ ${(d[3]-d[4]).toFixed(2)}pt)<br>Z3M ${fmt(d[0])} · Z6M ${fmt(d[1])} · Z1Y ${fmt(d[2])}<br>ST Mom — · LT Mom —`;
+      tip.style.left=(e.clientX+14)+"px";tip.style.top=(e.clientY+10)+"px";
+      tip.innerHTML=`<b>${t}</b> · yield ${d[5].toFixed(2)}%<br>D/P ${d[3].toFixed(2)}% (avg ${d[4].toFixed(2)}%, Δ ${(d[3]-d[4]).toFixed(2)}pt)<br>Z3M ${d[0].toFixed(2)} · Z6M ${d[1].toFixed(2)} · Z1Y ${d[2].toFixed(2)}<br>ST Mom ${m?m[0].toFixed(2)+'%':'—'} · LT Mom ${m?m[1].toFixed(2)+'%':'—'}`;
     });
     g.addEventListener("mouseleave",()=>tip.style.display="none");
     g.addEventListener("click",()=>showDetail(t));
   });
 }
 function showDetail(t){
-  const d=cur.data[t], q=quad(d), el=document.getElementById("detail");
+  const cur=SESSIONS[sesIdx];
+  const d=cur.data[t],q=quad(d),m=MOM[t]||null;
+  const prev=sesIdx>0?SESSIONS[sesIdx-1]:null;
+  const pd=prev?prev.data[t]:null;
+  const dz=pd?(d[2]-pd[2]).toFixed(2):null;
+  const ddp=pd?(d[3]-pd[3]).toFixed(2):null;
+  const el=document.getElementById("detail");
   el.style.display="block";
   el.innerHTML=`<b style="font-size:14px">${t}</b> <span class="qcount" style="background:${QCOLOR[q]}">${QNAME[q]}</span>
-  <table><tr><td>Price</td><td class="v">$${d[7].toFixed(2)}</td><td>NAV</td><td class="v">$${d[6].toFixed(2)}</td><td>Yield</td><td class="v">${d[5].toFixed(2)}%</td></tr>
+  <table>
+  <tr><td>Price</td><td class="v">$${d[7].toFixed(2)}</td><td>NAV</td><td class="v">$${d[6].toFixed(2)}</td><td>Yield</td><td class="v">${d[5].toFixed(2)}%</td></tr>
   <tr><td>D/P</td><td class="v">${d[3].toFixed(2)}%</td><td>52-wk avg</td><td class="v">${d[4].toFixed(2)}%</td><td>Deviation</td><td class="v">${(d[3]-d[4]).toFixed(2)}pt</td></tr>
-  <tr><td>Z3M</td><td class="v">${d[0].toFixed(2)}</td><td>Z6M</td><td class="v">${d[1].toFixed(2)}</td><td>Z1Y</td><td class="v">${d[2].toFixed(2)}</td></tr>
-  <tr><td>ST Mom</td><td class="v">—</td><td>LT Mom</td><td class="v">—</td><td></td><td></td></tr></table>`;
+  <tr><td>Z3M</td><td class="v">${d[0].toFixed(2)}</td><td>Z6M</td><td class="v">${d[1].toFixed(2)}</td><td>Z1Y</td><td class="v">${d[2].toFixed(2)}${dz?` <span style="font-size:11px;color:${+dz>=0?'#1D9E75':'#D85A30'}">(${+dz>=0?'+':''}${dz})</span>`:''}</td></tr>
+  <tr><td>ΔD/P</td><td class="v">${ddp?`${+ddp>=0?'+':''}${ddp}pt`:'—'}</td><td>ST Mom</td><td class="v">${m?m[0].toFixed(2)+'%':'—'}</td><td>LT Mom</td><td class="v">${m?m[1].toFixed(2)+'%':'—'}</td></tr>
+  </table>`;
 }
 function renderSnap(){
-  const pool = holdOnly ? [...HOLDINGS] : Object.keys(cur.data);
+  const cur=SESSIONS[sesIdx];
+  const pool=holdOnly?[...HOLDINGS].filter(t=>cur.data[t]):Object.keys(cur.data);
   const counts={G:0,B:0,O:0,X:0};
   pool.forEach(t=>counts[quad(cur.data[t])]++);
-  document.getElementById("snapTitle").textContent = "Quadrant counts — " + (holdOnly?"holdings":"universe");
-  document.getElementById("snapCounts").innerHTML =
-    Object.keys(counts).map(q=>`<span class="qcount" style="background:${QCOLOR[q]}">${QNAME[q]} ${counts[q]}</span>`).join("");
+  document.getElementById("snapTitle").textContent="Quadrant counts — "+(holdOnly?"holdings":"universe");
+  document.getElementById("snapCounts").innerHTML=Object.keys(counts).map(q=>`<span class="qcount" style="background:${QCOLOR[q]}">${QNAME[q]} ${counts[q]}</span>`).join("");
   const deep=[...pool].sort((a,b)=>cur.data[a][2]-cur.data[b][2]).slice(0,3);
-  document.getElementById("snapDeep").innerHTML = deep.map(t=>`<div><b>${t}</b> Z1Y ${cur.data[t][2].toFixed(2)} · D/P ${cur.data[t][3].toFixed(2)}%</div>`).join("");
+  document.getElementById("snapDeep").innerHTML=deep.map(t=>`<div><b>${t}</b> Z1Y ${cur.data[t][2].toFixed(2)} · D/P ${cur.data[t][3].toFixed(2)}%</div>`).join("");
   const greens=[...pool].filter(t=>quad(cur.data[t])==="G").sort((a,b)=>cur.data[b][2]-cur.data[a][2]).slice(0,3);
-  document.getElementById("snapGreen").innerHTML = greens.length? greens.map(t=>`<div><b>${t}</b> Z1Y +${cur.data[t][2].toFixed(2)} · D/P ${cur.data[t][3].toFixed(2)}%</div>`).join("") : "None";
+  document.getElementById("snapGreen").innerHTML=greens.length?greens.map(t=>`<div><b>${t}</b> Z1Y +${cur.data[t][2].toFixed(2)} · D/P ${cur.data[t][3].toFixed(2)}%</div>`).join(""):"None";
 }
 
-// controls
 document.querySelectorAll(".zt").forEach(b=>b.addEventListener("click",()=>{
-  document.querySelectorAll(".zt").forEach(x=>x.classList.remove("on")); b.classList.add("on");
-  zIdx=+b.dataset.z; render();
+  document.querySelectorAll(".zt").forEach(x=>x.classList.remove("on"));b.classList.add("on");zIdx=+b.dataset.z;render();
 }));
 document.querySelectorAll(".qf").forEach(b=>b.addEventListener("click",()=>{
-  document.querySelectorAll(".qf").forEach(x=>x.classList.remove("on")); b.classList.add("on");
-  qFilter=b.dataset.q; render();
+  document.querySelectorAll(".qf").forEach(x=>x.classList.remove("on"));b.classList.add("on");qFilter=b.dataset.q;render();
 }));
 document.getElementById("search").addEventListener("input",e=>{searchTerm=e.target.value.trim().toUpperCase();render();});
 document.getElementById("hold").addEventListener("click",e=>{holdOnly=!holdOnly;e.target.classList.toggle("on",holdOnly);render();});
+document.querySelectorAll(".tmb").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll(".tmb").forEach(x=>x.classList.remove("on"));b.classList.add("on");sesIdx=+b.dataset.s;render();
+}));
 
 render();
 </script>
