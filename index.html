@@ -3,30 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CEF Time Machine · 07/16/2026</title>
+<title>CEF Time Machine · 07/21/2026</title>
 <style>
   :root{
     --green:#1D9E75;--blue:#378ADD;--orange:#D85A30;--gray:#888780;
     --ink:#1E2429;--sub:#5A636B;--line:#DEE3E7;--bg:#F7F8F9;--card:#FFFFFF;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);padding:20px;max-width:1100px;margin:0 auto}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);padding:20px;max-width:1100px;margin:0 auto}
   h1{font-size:19px;font-weight:700;letter-spacing:-0.2px}
   .hdr{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:4px}
-  .badge{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:10px;background:#FAECE7;color:#B4431F}
+  .badge{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:10px}
+  .badge.pos{background:#E1F5EE;color:#085041}
+  .badge.neg{background:#FAECE7;color:#B4431F}
   .note{font-size:12px;color:var(--sub);margin-bottom:14px}
-
+  .verdict{border-radius:8px;padding:12px 16px;margin-bottom:14px;font-size:13px;line-height:1.5;border:1.5px solid}
+  .verdict.improving{background:#E1F5EE;border-color:#1D9E75;color:#085041}
+  .verdict b{font-weight:700}
+  .verdict .vhead{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px}
   .alerts{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
   .al{background:var(--card);border:1px solid var(--line);border-left-width:4px;border-radius:6px;padding:8px 12px;font-size:13px;line-height:1.45}
-  .al b{font-weight:700}
-  .al.g{border-left-color:#1D9E75;background:#E1F5EE}
-  .al.r{border-left-color:#D85A30;background:#FAECE7}
-  .al.a{border-left-color:#E3A008;background:#FFF8EC}
-  .al.p{border-left-color:#6366F1;background:#EEF2FF}
-  .al.c{border-left-color:#7B9E3E;background:#EFF6E8}
+  .al b{font-weight:700}.al.g{border-left-color:#1D9E75;background:#E1F5EE}
+  .al.r{border-left-color:#D85A30;background:#FAECE7}.al.a{border-left-color:#E3A008;background:#FFF8EC}
+  .al.p{border-left-color:#6366F1;background:#EEF2FF}.al.c{border-left-color:#7B9E3E;background:#EFF6E8}
   .al.dq{border-left-color:#EF8A2B;background:#FFF3E0}
   .al .tag{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-right:6px;opacity:.75}
-
   .panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:16px}
   .controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
   .controls .grp{display:flex;gap:4px}
@@ -38,36 +39,26 @@
   button.ctl.qx.on{background:var(--gray);border-color:var(--gray)}
   input.search{font-size:12px;padding:5px 9px;border:1px solid var(--line);border-radius:6px;width:120px}
   .legend{font-size:11.5px;color:var(--sub);margin-top:8px}
-
-  /* Time machine nav */
-  .tmnav{display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+  .tmnav{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap}
   .tmnav button{font-size:12px;padding:4px 10px;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer}
   .tmnav button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
-  .tmnav .seslabel{font-size:12px;color:var(--sub);min-width:110px}
-
+  .tmnav .seslabel{font-size:12px;color:var(--sub)}
   svg{width:100%;height:auto;display:block}
-  .dot{cursor:pointer}
-  .dot text{font-size:9.5px;font-weight:600;pointer-events:none}
-  .dimmed{opacity:.12}
+  .dot{cursor:pointer}.dimmed{opacity:.10}
   .tooltip{position:fixed;pointer-events:none;background:#1E2429;color:#fff;font-size:11.5px;line-height:1.5;padding:8px 10px;border-radius:6px;z-index:50;display:none;max-width:260px}
   .tooltip b{color:#9FD8C4}
-
   .snap{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-top:14px}
   .snapcard{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:12.5px}
   .snapcard h3{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--sub);margin-bottom:6px}
   .qcount{display:inline-block;padding:1px 7px;border-radius:8px;color:#fff;font-weight:700;font-size:12px;margin-right:5px}
-
   .detail{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px;margin-top:12px;font-size:13px;display:none}
   .detail table{width:100%;border-collapse:collapse;font-size:12.5px}
-  .detail td{padding:3px 8px 3px 0;color:var(--sub)}
-  .detail td.v{color:var(--ink);font-weight:600}
-
+  .detail td{padding:3px 8px 3px 0;color:var(--sub)}.detail td.v{color:var(--ink);font-weight:600}
   h2{font-size:15px;margin:20px 0 10px}
   .reads{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px}
   .read{background:var(--card);border:1px solid var(--line);border-top-width:4px;border-radius:8px;padding:12px 14px;font-size:12.5px;line-height:1.5}
   .read.kg{border-top-color:var(--green)}.read.ka{border-top-color:#E3A008}
-  .read.kb{border-top-color:var(--blue)}.read.ko{border-top-color:var(--orange)}
-  .read.kp{border-top-color:#6366F1}
+  .read.kb{border-top-color:var(--blue)}.read.ko{border-top-color:var(--orange)}.read.kp{border-top-color:#6366F1}
   .read .rh{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
   .read .rh b{font-size:14px}
   .read .st{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:2px 7px;border-radius:8px;background:var(--bg);color:var(--sub)}
@@ -75,7 +66,6 @@
   .read .mx b{color:var(--ink)}
   .bar{height:5px;background:var(--line);border-radius:3px;margin:7px 0;overflow:hidden}
   .bar i{display:block;height:100%;border-radius:3px}
-
   .disc{font-size:11px;color:var(--sub);font-style:italic;margin-top:22px;border-top:1px solid var(--line);padding-top:10px}
   .δup{color:#1D9E75;font-weight:600}.δdn{color:#D85A30;font-weight:600}
 </style>
@@ -83,21 +73,29 @@
 <body>
 
 <div class="hdr">
-  <h1>CEF Time Machine · 07/16/2026</h1>
-  <span class="badge">Net Δ: −$3.68</span>
+  <h1>CEF Time Machine · 07/21/2026</h1>
+  <span class="badge pos">Net Δ: +$3.38</span>
 </div>
-<div class="note">Session 2 of rolling window · Z1Y governs quadrant classification · ST/LT momentum from 07/15 upload (prior session — fields noted) · RQI: first clean post-expiry session</div>
+<div class="note">Session 5 · RQI clean post-expiry session 4 · First positive session in the window · ST/LT momentum from 07/20 closing upload</div>
+
+<!-- RQI VERDICT -->
+<div class="verdict improving">
+  <div class="vhead">RQI post-expiry assessment — session 4 of clean window</div>
+  <b>Compression continuing — thesis gaining credibility.</b> Z1Y improved to −2.15 (from −2.39, +0.24pt). D/P narrowed to −9.31% (from −9.89%, +0.58pt). Two consecutive sessions of improvement following two of widening. NAV stable at $13.75. Price rose to $12.47 (+$0.08). The pattern is now: widen → widen → compress → compress. Two sessions of consistent compression is the first real positive evidence for the reversion thesis. Not confirmed — the discount at −9.31% is still far from the −3.50% average — but the direction and consistency are encouraging. Continue monitoring.
+</div>
 
 <!-- ALERTS -->
 <div class="alerts">
-  <div class="al r"><span class="tag">Red</span><b>RQI</b> — First clean session post-expiry: Z1Y deepened to −2.57 (from −2.43), D/P widened to −10.14% vs −3.44% avg. Price slipped to $12.40 despite NAV rising to $13.80 (post-dilution). Discount widening is continuing, not compressing. Session 1 of the 2–3 clean-session observation window — no entry thesis confirmation yet. Flip supply hypothesis active.</div>
-  <div class="al r"><span class="tag">Red</span><b>BUI</b> — Trigger invalidated. Z1Y reversed from +0.06 to −0.57 in a single session. Two-session confirmation rule resets the clock. BUI fell back into Orange quadrant (Z1Y −0.57, D/P +0.61%). Watch for next zero-cross attempt.</div>
-  <div class="al r"><span class="tag">Red</span><b>RFI / RNP</b> — Both deepening. RFI Z1Y −1.59 (from −1.44), D/P −4.88% vs −0.17% avg (−4.71pt deviation). RNP Z1Y −1.42 (from −1.33), D/P −7.30% vs −1.52% avg (−5.78pt deviation). REIT sleeve broadly under pressure.</div>
-  <div class="al a"><span class="tag">Amber</span><b>BDJ</b> — Z1Y moved to −0.93 (from −0.34), a −0.59pt single-session drop — crosses the ≥0.50 amber flag threshold. Still Orange quadrant but momentum weakening. Watch for approach toward −1.50 (tranche-2 trigger proximity).</div>
-  <div class="al a"><span class="tag">Amber</span><b>PCN</b> — Z1Y improved to −1.24 (from −1.50), a +0.26pt session move. NAV held at $11.44. Premium edged up to +2.80%. Mild positive but still Gray quadrant. Not yet a signal.</div>
-  <div class="al g"><span class="tag">Green</span><b>UTG</b> — Z1Y strengthened to +1.43 (from +0.60). Premium +1.31%. Record date today (7/17) for the raised $0.21 distribution. Dislocation thesis fully resolved — now running constructively above its own history.</div>
-  <div class="al p"><span class="tag">Info</span><b>ASGI</b> — Z1Y +2.46, Z3M +2.10. Universe's most extreme positive reading on both axes. Not a holding — expensive vs own history on both z-score dimensions simultaneously.</div>
-  <div class="al c"><span class="tag">Corp</span><b>UTG</b> — Record date 7/17 for $0.21/share distribution (first at raised rate). <b>RQI</b> — preliminary RO results filed 7/16: ~12.6M shares issued at $12.15, ~$154M gross proceeds. New shares settling; NAV reflects dilution at $13.80 (vs $13.52 pre-offer).</div>
+  <div class="al g"><span class="tag">Green</span><b>RQI</b> — Z1Y −2.15 (from −2.39, Δ +0.24). D/P −9.31% vs −3.50% avg. Second consecutive session of compression. NAV $13.75 unchanged — compression is price-driven. Two clean sessions improving after two widening. Thesis gaining credibility; −5.81pt gap to average remains large.</div>
+  <div class="al g"><span class="tag">Green</span><b>BST</b> — Z1Y −1.30 (from −1.44, Δ +0.14). D/P −10.09% vs −6.50% avg. Improvement for the first time after three sessions at −1.44. Trigger threshold at −2.00 remains 0.70pts away — moved further from danger. NAV $49.31 (from $49.25). Price $45.89 (+$0.87). Tech tape recovering.</div>
+  <div class="al g"><span class="tag">Green</span><b>BME</b> — Z1Y +1.75 (from +1.29, Δ +0.46). Largest single-session Z1Y gain in the holdings universe today. D/P −2.83% vs −5.89% avg — discount narrowing sharply. Z3M +2.24. Healthcare equity running hard.</div>
+  <div class="al g"><span class="tag">Green</span><b>REIT sleeve</b> — RQI +0.24, RNP unchanged at −1.42, RFI +0.04. Partial improvement; RNP stalled but RQI leading. All three still Orange quadrant.</div>
+  <div class="al g"><span class="tag">Green</span><b>PCN</b> — Z1Y −1.04 (from −1.32, Δ +0.28). Best single-session Z1Y improvement for PCN in the current window. Premium +3.33% — edging back toward the +6.33% avg. Still Gray quadrant but showing some recovery traction.</div>
+  <div class="al a"><span class="tag">Amber</span><b>BST D/P widening</b> — Despite Z1Y improvement, D/P widened to −10.09% (from −8.70%). NAV rose $0.06 while price rose $0.87 — but the discount widened because NAV outpaced price. Worth noting: a fund where NAV is rising faster than price is discount-widening even on an up day. Not a red flag at this level but noteworthy.</div>
+  <div class="al a"><span class="tag">Amber</span><b>DNP</b> — Premium +10.72% vs +5.91% avg. Z1Y +1.70, Z3M +2.08. Premium stretched further — richest valuation in the holdings universe. No action per framework but mean-reversion risk elevated.</div>
+  <div class="al a"><span class="tag">Amber</span><b>BUI</b> — Z1Y −0.29 (from −0.40, Δ +0.11). Continuing to inch toward zero. D/P +1.53% vs +2.48% avg. Z3M +0.49 — constructive at short-term horizon. Still needs a sustained zero-cross with two-session confirmation to reopen the trigger window.</div>
+  <div class="al p"><span class="tag">Info</span><b>Net Δ +$3.38</b> — First positive session in five. Broad-based recovery: tech, healthcare, and bond sleeves all contributed. REIT sleeve showed partial improvement. Cumulative 5-session net Δ: approximately −$15.37 (revised from earlier estimates with corrected 07/17 data).</div>
+  <div class="al p"><span class="tag">Info</span><b>UTG</b> — Z1Y +1.12 unchanged. Price $39.73, NAV $39.72 — essentially at NAV (D/P +0.03%). Fully resolved and running at fair value.</div>
 </div>
 
 <!-- SCATTER -->
@@ -119,11 +117,14 @@
     <button class="ctl" id="hold">★ My Holdings</button>
   </div>
   <svg id="chart" viewBox="0 0 980 560" xmlns="http://www.w3.org/2000/svg"></svg>
-  <div class="legend">Dashed tail = 52-wk avg D/P deviation · Ring = current holding · Ghost dots = 07/15 prior session · ST/LT momentum: 07/15 upload</div>
+  <div class="legend">Dashed tail = 52-wk avg D/P · Ring = current holding · Ghost trails = prior sessions · ST/LT momentum from 07/20 closing upload</div>
   <div class="tmnav">
-    <button class="ctl tmb on" data-s="1">07/16 (current)</button>
+    <button class="ctl tmb on" data-s="4">07/21 (current)</button>
+    <button class="ctl tmb" data-s="3">07/20</button>
+    <button class="ctl tmb" data-s="2">07/17 ✓</button>
+    <button class="ctl tmb" data-s="1">07/16</button>
     <button class="ctl tmb" data-s="0">07/15</button>
-    <span class="seslabel" id="seslabel">Showing: 07/16/2026</span>
+    <span class="seslabel" id="seslabel">Showing: 07/21/2026</span>
   </div>
   <div class="detail" id="detail"></div>
   <div class="snap">
@@ -133,43 +134,43 @@
   </div>
 </div>
 
-<h2>Key reads — 07/16/2026</h2>
+<h2>Key reads — 07/21/2026</h2>
 <div class="reads">
-  <div class="read kr ko">
-    <div class="rh"><b>RQI</b><span class="st">Session 1 of clean window</span></div>
-    <div class="mx"><span>Z1Y <b>−2.57</b> <span class="δdn">▼0.14</span></span><span>D/P <b>−10.14%</b></span><span>52-wk avg <b>−3.44%</b></span><span>NAV <b>$13.80</b></span></div>
-    <div class="bar"><i style="width:93%;background:var(--orange)"></i></div>
-    First clean session and the discount is widening, not closing. Price $12.40 vs NAV $13.80 — the gap is actually growing. NAV lifted slightly from post-dilution settlement (~$13.52 → $13.80 reflects the offering proceeds and/or REIT tape). One clean session of continued weakness is within normal post-offering behavior (flip supply), but it does not validate the reversion thesis. Two-session confirmation clock is running; no entry signal yet.
-  </div>
-  <div class="read ko">
-    <div class="rh"><b>BUI</b><span class="st">Trigger reset</span></div>
-    <div class="mx"><span>Z1Y <b>−0.57</b> <span class="δdn">▼0.63</span></span><span>D/P <b>+0.61%</b></span><span>52-wk avg <b>+2.49%</b></span><span>Z3M <b>+0.01</b></span></div>
-    <div class="bar"><i style="width:20%;background:var(--orange)"></i></div>
-    Sharp reversal from yesterday's +0.06. Z1Y back to −0.57, quadrant reverted to Orange. Two-session confirmation rule resets — the 07/15 zero-cross was a false signal. D/P slipped from +2.72% to +0.61%, now well below its +2.49% average. Next zero-cross attempt to watch for; until then the 2nd tranche window is closed.
-  </div>
-  <div class="read ka">
-    <div class="rh"><b>BDJ</b><span class="st">Watch — Z1Y weakening</span></div>
-    <div class="mx"><span>Z1Y <b>−0.93</b> <span class="δdn">▼0.59</span></span><span>D/P <b>−7.31%</b></span><span>52-wk avg <b>−5.87%</b></span><span>LT Mom <b>+7.56%</b></span></div>
-    <div class="bar"><i style="width:46%;background:#E3A008"></i></div>
-    Single-session Z1Y drop of 0.59pt triggers the amber ≥0.50 flag. Still well above the −2.00 2nd-tranche trigger but the direction is notable. LT momentum +7.56% remains supportive. No action threshold reached — flagged for monitoring.
+  <div class="read kg">
+    <div class="rh"><b>RQI</b><span class="st">Session 4 — compressing</span></div>
+    <div class="mx"><span>Z1Y <b>−2.15</b> <span class="δup">▲+0.24</span></span><span>D/P <b>−9.31%</b></span><span>NAV <b>$13.75</b></span><span>Price <b>$12.47</b></span></div>
+    <div class="bar"><i style="width:72%;background:var(--green)"></i></div>
+    Two consecutive sessions of compression following two of widening. NAV unchanged — the improvement is entirely price-driven, which is the correct mechanism for discount compression. The −5.81pt gap to the −3.50% average remains the measure of how far this thesis has to run. Pace of compression (+0.58pt D/P in two sessions) is modest but consistent. The next read will matter: a third consecutive session of compression would be the strongest signal yet.
   </div>
   <div class="read kg">
-    <div class="rh"><b>UTG</b><span class="st">Constructive / Record date 7/17</span></div>
-    <div class="mx"><span>Z1Y <b>+1.43</b> <span class="δup">▲0.83</span></span><span>D/P <b>+1.31%</b></span><span>NAV <b>$39.69</b></span><span>LT Mom <b>+21.64%</b></span></div>
-    <div class="bar"><i style="width:100%;background:var(--green)"></i></div>
-    Strong session. Z1Y +1.43 is the best single-session gain in the holdings universe today (+0.83pt). Dislocation thesis delivered a full round trip — Z1Y from −3.99 to +1.43. NAV softened slightly ($40.57 → $39.69) likely ex-dividend mechanics ahead of tomorrow's record date. LT momentum +21.64% leads the entire sleeve.
+    <div class="rh"><b>BST</b><span class="st">First improvement — trigger receding</span></div>
+    <div class="mx"><span>Z1Y <b>−1.30</b> <span class="δup">▲+0.14</span></span><span>D/P <b>−10.09%</b></span><span>NAV <b>$49.31</b></span><span>Gap to trigger <b>0.70pt</b></span></div>
+    <div class="bar"><i style="width:55%;background:var(--green)"></i></div>
+    Z1Y improvement for the first time since the sharp −0.94pt drop on 07/17. Trigger threshold at −2.00 now 0.70pts away (was 0.56pts). Amber note: D/P widened to −10.09% even as price rose — NAV outpaced price on the day. LT momentum +12.49% (from 07/20 upload) supports the structural thesis. The BST trigger watch de-escalates today but doesn't close.
   </div>
-  <div class="read ko">
-    <div class="rh"><b>RFI / RNP</b><span class="st">REIT sleeve pressure</span></div>
-    <div class="mx"><span>RFI Z1Y <b>−1.59</b></span><span>RNP Z1Y <b>−1.42</b></span><span>RFI D/P dev <b>−4.71pt</b></span><span>RNP D/P dev <b>−5.78pt</b></span></div>
-    <div class="bar"><i style="width:65%;background:var(--orange)"></i></div>
-    Both deepening in tandem. RNP's deviation from its 52-wk avg is now −5.78pts — the widest it's been in the current cycle outside of RQI. The entire REIT sleeve (RQI, RNP, RFI) is in Orange quadrant and drifting deeper. Sector-wide bid is soft; monitoring for inflection.
+  <div class="read kb">
+    <div class="rh"><b>BME</b><span class="st">Strong session — Rich tier</span></div>
+    <div class="mx"><span>Z1Y <b>+1.75</b> <span class="δup">▲+0.46</span></span><span>D/P <b>−2.83%</b></span><span>52-wk avg <b>−5.89%</b></span><span>Z3M <b>+2.24</b></span></div>
+    <div class="bar"><i style="width:88%;background:var(--blue)"></i></div>
+    Largest single-session Z1Y gain in the holdings universe today. Z3M +2.24 is at an extreme — both short and long z-scores now elevated. Healthcare equity distribution is 87% LT gains harvest; the fund is running on appreciation, not income. At these z-score levels the discount narrowing thesis is largely played out — holding per framework but no add case here.
+  </div>
+  <div class="read kg">
+    <div class="rh"><b>PCN</b><span class="st">Best session in current window</span></div>
+    <div class="mx"><span>Z1Y <b>−1.04</b> <span class="δup">▲+0.28</span></span><span>D/P <b>+3.33%</b></span><span>52-wk avg <b>+6.33%</b></span><span>NAV <b>$11.40</b></span></div>
+    <div class="bar"><i style="width:48%;background:var(--green)"></i></div>
+    Best single-session Z1Y improvement for PCN in the five-session window. Premium recovering toward own average (+3.33% vs +6.33%). Still Gray quadrant (D/P positive, Z1Y negative) but momentum is constructive. NAV $11.40 — watching for further erosion. LT momentum −19.02% (from 07/20 upload) remains the concern; one good session doesn't change the structural read.
+  </div>
+  <div class="read ka">
+    <div class="rh"><b>BUI</b><span class="st">Approaching zero-cross again</span></div>
+    <div class="mx"><span>Z1Y <b>−0.29</b> <span class="δup">▲+0.11</span></span><span>D/P <b>+1.53%</b></span><span>Z3M <b>+0.49</b></span><span>Z6M <b>+0.05</b></span></div>
+    <div class="bar"><i style="width:42%;background:#E3A008"></i></div>
+    Third consecutive session of Z1Y improvement. Z3M +0.49 turning constructive at the short end. At −0.29, BUI is 0.29pts from the zero-cross that would restart the 2nd-tranche trigger clock. Z6M nearly at zero (+0.05). If tomorrow holds the trend, the trigger window could reopen. Cleanest distribution in the BlackRock sleeve.
   </div>
   <div class="read kp">
-    <div class="rh"><b>PCN</b><span class="st">Mild improvement</span></div>
-    <div class="mx"><span>Z1Y <b>−1.24</b> <span class="δup">▲0.26</span></span><span>D/P <b>+2.80%</b></span><span>52-wk avg <b>+6.38%</b></span><span>NAV <b>$11.44</b></span></div>
-    <div class="bar"><i style="width:45%;background:#6366F1)"></i></div>
-    One session of Z1Y improvement (+0.26pt) after several days of drift. Still Gray quadrant, still well inside its own average premium. NAV stable at $11.44. Not a signal — informational only. LT momentum −17.95% (from 07/15) remains the most concerning print in the holdings universe and hasn't changed.
+    <div class="rh"><b>Portfolio — first green session</b><span class="st">+$3.38</span></div>
+    <div class="mx"><span>Net Δ <b>+$3.38</b></span><span>5-ses total <b>~−$15.37</b></span><span>REIT <b>improving</b></span><span>Tech <b>recovering</b></span></div>
+    <div class="bar"><i style="width:65%;background:#6366F1"></i></div>
+    Broad-based positive session — the first in five. Healthcare (BME), tech (BST), bonds (PCN), and infrastructure (UTF, UTG) all contributed positively. REIT sleeve partial improvement (RQI +, RNP flat, RFI marginal). The character of the market shifted today: buyers returned across multiple sleeves simultaneously. One session — but the directionality is cleaner than any prior session this week.
   </div>
 </div>
 
@@ -177,106 +178,114 @@
 <div class="tooltip" id="tip"></div>
 
 <script>
-// [z3m, z6m, z1y, dp, avg52wk, yield, nav, price]
-// momentum [stmom, ltmom] from 07/15 upload — carried forward
-const MOM = {
-  PCN:[-0.66,-17.95],BDJ:[3.12,7.56],EOI:[0.96,7.41],BME:[3.82,3.64],
-  RQI:[-1.95,-4.24],RNP:[0.35,-7.00],RFI:[0.59,-11.49],AIO:[-1.64,12.31],
-  BST:[-0.48,10.84],DNP:[2.97,9.48],ERH:[0.30,3.46],BUI:[0.20,18.70],
-  UTF:[2.41,12.54],UTG:[-3.98,21.64]
+const MOM={
+  PCN:[-0.23,-19.02],BDJ:[3.56,7.85],EOI:[0.05,6.50],BME:[5.05,4.03],
+  RQI:[0.47,-4.75],RNP:[1.08,-7.67],RFI:[1.58,-11.99],AIO:[-1.32,13.24],
+  BST:[-0.14,12.56],DNP:[1.45,7.60],ERH:[-1.11,-0.51],BUI:[-0.36,17.82],
+  UTF:[2.36,11.36],UTG:[-4.57,20.28]
 };
 
-const SESSIONS = [
-  {date:"07/15/2026", data:{
-    AIO:[1.21,1.40,-0.35,-8.47,-6.82,8.13,29.04,26.58],
-    ASGI:[1.74,1.69,2.10,8.51,2.01,10.90,22.32,24.22],
-    BDJ:[1.68,-0.02,-0.34,-6.40,-5.87,7.69,10.32,9.66],
-    BME:[1.22,1.20,1.50,-2.92,-5.96,7.44,43.54,42.27],
-    BST:[0.56,-0.31,-0.59,-7.47,-6.47,6.34,51.14,47.32],
-    BUI:[1.21,0.34,0.06,2.72,2.51,6.53,27.57,28.32],
-    CSQ:[1.65,0.42,-0.64,-9.18,-7.82,7.84,22.76,20.67],
-    DNP:[2.06,1.78,1.66,10.50,5.87,7.06,10.00,11.05],
-    EOI:[1.04,-0.45,-0.84,-5.45,-2.93,7.98,21.28,20.12],
-    EOS:[1.06,0.14,-0.69,-8.06,-5.77,8.21,24.20,22.25],
-    ERH:[1.41,1.75,1.31,-6.07,-7.82,8.65,12.94,12.16],
-    ETG:[0.56,-0.44,-1.14,-9.26,-6.80,6.65,25.71,23.33],
-    GDV:[-0.08,0.09,0.38,-10.47,-10.72,6.01,33.44,29.94],
-    GLU:[0.34,-0.59,-0.94,-3.26,-0.36,6.74,20.25,19.59],
-    HTD:[1.74,2.18,2.48,-2.78,-6.18,7.33,26.62,25.88],
-    NBXG:[-0.11,-0.28,-0.91,-14.05,-12.54,9.16,18.29,15.72],
-    NXG:[1.81,1.74,1.56,3.74,-1.83,11.64,59.64,61.87],
-    PCN:[-1.49,-1.16,-1.50,2.10,6.39,11.55,11.45,11.69],
-    PDI:[-1.12,-1.48,-1.32,3.61,9.08,16.17,15.79,16.36],
-    PDO:[-0.08,-0.40,-0.84,2.34,3.77,11.71,12.81,13.11],
-    PDX:[-0.77,-0.34,-0.67,-10.56,-9.31,7.62,23.48,21.00],
-    RFI:[-0.21,-0.96,-1.44,-4.37,-0.14,8.44,11.89,11.37],
-    RLTY:[0.74,-0.27,-0.87,-8.28,-6.81,8.33,17.27,15.84],
-    RNP:[-0.69,-1.26,-1.33,-6.90,-1.47,7.96,22.03,20.51],
-    RQI:[-1.61,-2.41,-2.43,-9.69,-3.42,8.85,13.52,12.21],
-    UTF:[1.32,1.76,0.67,-2.02,-4.54,7.15,28.27,27.70],
-    UTG:[1.20,0.86,0.60,0.30,-0.45,6.19,40.57,40.69]
-  }},
-  {date:"07/16/2026", data:{
-    AIO:[1.64,1.90,-0.22,-7.89,-6.86,8.26,28.39,26.15],
-    ASGI:[2.10,2.06,2.46,9.72,2.06,10.78,22.32,24.49],
-    BDJ:[0.50,-0.51,-0.93,-7.31,-5.87,7.71,10.39,9.63],
-    BME:[0.54,0.83,1.32,-3.27,-5.94,7.38,44.06,42.62],
-    BST:[0.66,-0.24,-0.50,-7.32,-6.47,6.51,49.73,46.09],
-    BUI:[0.01,-0.21,-0.57,0.61,2.49,6.64,27.67,27.84],
-    CSQ:[1.96,0.67,-0.54,-8.98,-7.84,7.91,22.49,20.47],
-    DNP:[1.62,1.54,1.40,9.80,5.88,7.03,10.10,11.09],
-    EOI:[1.30,-0.36,-0.77,-5.25,-2.95,8.02,21.13,20.02],
-    EOS:[1.64,0.58,-0.53,-7.53,-5.81,8.27,23.91,22.11],
-    ERH:[1.17,1.51,1.11,-6.32,-7.81,8.65,12.98,12.16],
-    ETG:[-0.03,-0.63,-1.31,-9.65,-6.82,6.71,25.60,23.13],
-    GDV:[-0.64,-0.63,-0.48,-11.03,-10.72,6.03,33.55,29.85],
-    GLU:[0.21,-0.63,-1.00,-3.46,-0.38,6.75,20.26,19.56],
-    HTD:[0.40,1.08,1.15,-4.61,-6.18,7.39,26.88,25.64],
-    NBXG:[0.59,0.44,-0.47,-13.33,-12.55,9.42,17.63,15.28],
-    NXG:[1.88,1.89,1.75,4.42,-1.83,11.86,58.15,60.72],
-    PCN:[-0.50,-0.82,-1.24,2.80,6.38,11.48,11.44,11.76],
-    PDI:[-0.82,-1.23,-1.18,4.18,9.04,16.09,15.78,16.44],
-    PDO:[0.46,-0.09,-0.47,2.97,3.77,11.65,12.79,13.17],
-    PDX:[-1.40,-0.90,-0.99,-11.17,-9.33,7.66,23.54,20.91],
-    RFI:[-0.52,-1.15,-1.59,-4.88,-0.17,8.36,12.08,11.49],
-    RLTY:[-0.33,-0.85,-1.22,-8.89,-6.82,8.26,17.55,15.99],
-    RNP:[-0.93,-1.42,-1.42,-7.30,-1.52,7.88,22.34,20.71],
-    RQI:[-1.67,-2.48,-2.57,-10.14,-3.44,8.71,13.80,12.40],
-    UTF:[1.09,1.56,0.58,-2.39,-4.57,7.12,28.49,27.81],
-    UTG:[1.95,1.71,1.43,1.31,-0.45,6.27,39.69,40.21]
-  }}
+const SESSIONS=[
+  {date:"07/15/2026",data:{
+    AIO:[1.21,1.40,-0.35,-8.47,-6.82,8.13,29.04,26.58],ASGI:[1.74,1.69,2.10,8.51,2.01,10.90,22.32,24.22],
+    BDJ:[1.68,-0.02,-0.34,-6.40,-5.87,7.69,10.32,9.66],BME:[1.22,1.20,1.50,-2.92,-5.96,7.44,43.54,42.27],
+    BST:[0.56,-0.31,-0.59,-7.47,-6.47,6.34,51.14,47.32],BUI:[1.21,0.34,0.06,2.72,2.51,6.53,27.57,28.32],
+    CSQ:[1.65,0.42,-0.64,-9.18,-7.82,7.84,22.76,20.67],DNP:[2.06,1.78,1.66,10.50,5.87,7.06,10.00,11.05],
+    EOI:[1.04,-0.45,-0.84,-5.45,-2.93,7.98,21.28,20.12],EOS:[1.06,0.14,-0.69,-8.06,-5.77,8.21,24.20,22.25],
+    ERH:[1.41,1.75,1.31,-6.07,-7.82,8.65,12.94,12.16],ETG:[0.56,-0.44,-1.14,-9.26,-6.80,6.65,25.71,23.33],
+    GDV:[-0.08,0.09,0.38,-10.47,-10.72,6.01,33.44,29.94],GLU:[0.34,-0.59,-0.94,-3.26,-0.36,6.74,20.25,19.59],
+    HTD:[1.74,2.18,2.48,-2.78,-6.18,7.33,26.62,25.88],NBXG:[-0.11,-0.28,-0.91,-14.05,-12.54,9.16,18.29,15.72],
+    NXG:[1.81,1.74,1.56,3.74,-1.83,11.64,59.64,61.87],PCN:[-1.49,-1.16,-1.50,2.10,6.39,11.55,11.45,11.69],
+    PDI:[-1.12,-1.48,-1.32,3.61,9.08,16.17,15.79,16.36],PDO:[-0.08,-0.40,-0.84,2.34,3.77,11.71,12.81,13.11],
+    PDX:[-0.77,-0.34,-0.67,-10.56,-9.31,7.62,23.48,21.00],RFI:[-0.21,-0.96,-1.44,-4.37,-0.14,8.44,11.89,11.37],
+    RLTY:[0.74,-0.27,-0.87,-8.28,-6.81,8.33,17.27,15.84],RNP:[-0.69,-1.26,-1.33,-6.90,-1.47,7.96,22.03,20.51],
+    RQI:[-1.61,-2.41,-2.43,-9.69,-3.42,8.85,13.52,12.21],UTF:[1.32,1.76,0.67,-2.02,-4.54,7.15,28.27,27.70],
+    UTG:[1.20,0.86,0.60,0.30,-0.45,6.19,40.57,40.69]}},
+  {date:"07/16/2026",data:{
+    AIO:[1.64,1.90,-0.22,-7.89,-6.86,8.26,28.39,26.15],ASGI:[2.10,2.06,2.46,9.72,2.06,10.78,22.32,24.49],
+    BDJ:[0.50,-0.51,-0.93,-7.31,-5.87,7.71,10.39,9.63],BME:[0.54,0.83,1.32,-3.27,-5.94,7.38,44.06,42.62],
+    BST:[0.66,-0.24,-0.50,-7.32,-6.47,6.51,49.73,46.09],BUI:[0.01,-0.21,-0.57,0.61,2.49,6.64,27.67,27.84],
+    CSQ:[1.96,0.67,-0.54,-8.98,-7.84,7.91,22.49,20.47],DNP:[1.62,1.54,1.40,9.80,5.88,7.03,10.10,11.09],
+    EOI:[1.30,-0.36,-0.77,-5.25,-2.95,8.02,21.13,20.02],EOS:[1.64,0.58,-0.53,-7.53,-5.81,8.27,23.91,22.11],
+    ERH:[1.17,1.51,1.11,-6.32,-7.81,8.65,12.98,12.16],ETG:[-0.03,-0.63,-1.31,-9.65,-6.82,6.71,25.60,23.13],
+    GDV:[-0.64,-0.63,-0.48,-11.03,-10.72,6.03,33.55,29.85],GLU:[0.21,-0.63,-1.00,-3.46,-0.38,6.75,20.26,19.56],
+    HTD:[0.40,1.08,1.15,-4.61,-6.18,7.39,26.88,25.64],NBXG:[0.59,0.44,-0.47,-13.33,-12.55,9.42,17.63,15.28],
+    NXG:[1.88,1.89,1.75,4.42,-1.83,11.86,58.15,60.72],PCN:[-0.50,-0.82,-1.24,2.80,6.38,11.48,11.44,11.76],
+    PDI:[-0.82,-1.23,-1.18,4.18,9.04,16.09,15.78,16.44],PDO:[0.46,-0.09,-0.47,2.97,3.77,11.65,12.79,13.17],
+    PDX:[-1.40,-0.90,-0.99,-11.17,-9.33,7.66,23.54,20.91],RFI:[-0.52,-1.15,-1.59,-4.88,-0.17,8.36,12.08,11.49],
+    RLTY:[-0.33,-0.85,-1.22,-8.89,-6.82,8.26,17.55,15.99],RNP:[-0.93,-1.42,-1.42,-7.30,-1.52,7.88,22.34,20.71],
+    RQI:[-1.67,-2.48,-2.57,-10.14,-3.44,8.71,13.80,12.40],UTF:[1.09,1.56,0.58,-2.39,-4.57,7.12,28.49,27.81],
+    UTG:[1.95,1.71,1.43,1.31,-0.45,6.27,39.69,40.21]}},
+  {date:"07/17/2026 ✓",data:{
+    AIO:[0.16,0.38,-0.59,-9.62,-6.91,8.48,28.18,25.47],ASGI:[2.05,2.05,2.47,9.83,2.11,10.78,22.29,24.48],
+    BDJ:[1.18,-0.22,-0.59,-6.79,-5.88,7.73,10.31,9.61],BME:[0.47,0.79,1.29,-3.29,-5.93,7.39,44.01,42.56],
+    BST:[-0.46,-0.99,-1.44,-8.91,-6.48,6.69,49.25,44.86],BUI:[0.30,-0.06,-0.40,1.16,2.48,6.63,27.55,27.87],
+    CSQ:[1.33,0.31,-0.68,-9.30,-7.87,8.02,22.27,20.20],DNP:[1.72,1.59,1.47,10.04,5.89,7.05,10.06,11.07],
+    EOI:[0.75,-0.60,-0.95,-5.83,-2.98,8.15,20.92,19.70],EOS:[1.20,0.29,-0.63,-7.88,-5.85,8.41,23.60,21.74],
+    ERH:[1.27,1.62,1.22,-6.16,-7.80,8.69,12.90,12.11],ETG:[0.46,-0.44,-1.14,-9.30,-6.84,6.74,25.38,23.02],
+    GDV:[-0.19,-0.10,0.15,-10.62,-10.72,6.07,33.15,29.63],GLU:[0.17,-0.65,-1.02,-3.53,-0.39,6.80,20.11,19.40],
+    HTD:[0.99,1.55,1.75,-3.77,-6.18,7.36,26.77,25.76],NBXG:[-0.64,-0.77,-1.21,-14.57,-12.57,9.67,17.43,14.89],
+    NXG:[1.06,0.98,0.77,0.93,-1.83,12.24,58.27,58.81],PCN:[-0.83,-0.93,-1.32,2.54,6.36,11.53,11.42,11.71],
+    PDI:[-0.97,-1.37,-1.26,3.81,9.01,16.18,15.75,16.35],PDO:[0.74,0.07,-0.28,3.29,3.77,11.64,12.76,13.18],
+    PDX:[-1.23,-0.75,-0.90,-11.02,-9.35,7.60,23.68,21.07],RFI:[-0.66,-1.23,-1.66,-5.12,-0.20,8.36,12.10,11.48],
+    RLTY:[0.10,-0.61,-1.07,-8.65,-6.84,8.22,17.58,16.06],RNP:[-1.27,-1.66,-1.55,-7.87,-1.58,7.92,22.36,20.60],
+    RQI:[-1.69,-2.51,-2.65,-10.49,-3.46,8.73,13.82,12.37],UTF:[1.06,1.54,0.59,-2.39,-4.59,7.13,28.45,27.77],
+    UTG:[1.39,1.10,0.86,0.61,-0.45,6.35,39.44,39.68]}},
+  {date:"07/20/2026",data:{
+    AIO:[0.16,0.38,-0.59,-9.62,-6.91,8.48,28.18,25.51],ASGI:[1.37,1.40,1.85,7.97,2.15,10.78,22.29,23.98],
+    BDJ:[1.18,-0.22,-0.59,-6.91,-5.88,7.73,10.31,9.57],BME:[0.47,0.79,1.29,-2.33,-5.91,7.39,44.01,42.38],
+    BST:[-0.46,-0.99,-1.44,-8.70,-6.49,6.69,49.25,45.02],BUI:[0.30,-0.06,-0.40,1.16,2.48,6.63,27.55,27.79],
+    CSQ:[2.08,0.85,-0.47,-8.87,-7.89,8.02,22.21,20.24],DNP:[1.72,1.59,1.47,10.04,5.89,7.05,10.06,11.05],
+    EOI:[0.75,-0.60,-0.95,-5.92,-3.00,8.15,20.92,19.70],EOS:[1.20,0.29,-0.63,-8.13,-5.88,8.41,23.60,21.70],
+    ERH:[1.27,1.62,1.22,-6.16,-7.80,8.69,12.90,12.09],ETG:[0.46,-0.44,-1.14,-9.36,-6.86,6.74,25.38,22.95],
+    GDV:[-0.19,-0.10,0.15,-10.62,-10.72,6.07,33.15,29.34],GLU:[0.17,-0.65,-1.02,-3.53,-0.39,6.80,20.11,19.50],
+    HTD:[0.99,1.55,1.75,-3.64,-6.17,7.36,26.77,25.65],NBXG:[-0.64,-0.77,-1.21,-13.92,-12.59,9.67,17.43,15.03],
+    NXG:[1.06,0.98,0.77,0.93,-1.83,12.24,58.27,59.11],PCN:[-0.83,-0.93,-1.32,2.54,6.36,11.53,11.42,11.78],
+    PDI:[-0.97,-1.37,-1.26,3.81,9.01,16.18,15.75,16.30],PDO:[0.74,0.07,-0.28,3.29,3.77,11.64,12.76,13.10],
+    PDX:[-1.23,-0.75,-0.90,-11.02,-9.35,7.60,23.68,21.08],RFI:[-0.48,-1.12,-1.57,-4.90,-0.23,8.36,12.05,11.46],
+    RLTY:[0.13,-0.58,-1.05,-8.63,-6.85,8.22,17.50,15.99],RNP:[-1.08,-1.52,-1.48,-7.63,-1.63,7.92,22.27,20.57],
+    RQI:[-1.48,-2.26,-2.39,-9.89,-3.48,8.73,13.75,12.39],UTF:[1.38,1.82,0.79,-1.70,-4.61,7.13,28.25,27.77],
+    UTG:[1.62,1.37,1.12,0.94,-0.44,6.35,39.24,39.61]}},
+  {date:"07/21/2026",data:{
+    AIO:[0.40,0.67,-0.52,-9.31,-6.96,8.47,28.13,25.99],ASGI:[1.82,1.85,2.29,9.43,2.19,11.01,22.16,24.25],
+    BDJ:[1.01,-0.27,-0.67,-6.09,-5.88,7.76,10.28,9.71],BME:[2.24,1.77,1.75,-2.83,-5.89,7.42,43.39,42.60],
+    BST:[-0.30,-0.87,-1.30,-10.09,-6.50,6.66,49.31,45.89],BUI:[0.49,0.05,-0.29,1.53,2.48,6.65,27.37,27.72],
+    CSQ:[1.88,0.79,-0.50,-8.95,-7.91,8.00,22.50,20.49],DNP:[2.08,1.78,1.70,10.72,5.91,7.06,9.98,10.98],
+    EOI:[0.69,-0.61,-0.98,-5.92,-3.03,8.15,20.94,19.75],EOS:[0.89,0.10,-0.70,-8.13,-5.91,8.42,23.62,21.79],
+    ERH:[1.49,1.84,1.45,-5.84,-7.77,8.70,12.84,11.88],ETG:[0.35,-0.46,-1.16,-9.36,-6.88,6.76,25.32,23.19],
+    GDV:[-0.55,-0.57,-0.41,-10.98,-10.71,6.13,32.96,29.61],GLU:[0.62,-0.43,-0.79,-2.84,-0.40,6.77,20.07,19.49],
+    HTD:[1.05,1.59,1.83,-2.94,-6.16,7.39,26.62,25.76],NBXG:[-0.01,-0.10,-0.81,-14.02,-12.60,9.58,17.46,15.45],
+    NXG:[1.13,1.10,0.90,1.37,-1.83,12.18,58.31,59.48],PCN:[0.27,-0.54,-1.04,3.33,6.33,11.46,11.40,11.75],
+    PDI:[-1.03,-1.41,-1.29,3.62,8.94,16.23,15.73,16.29],PDO:[0.37,-0.15,-0.55,2.83,3.77,11.72,12.74,13.13],
+    PDX:[-1.30,-0.80,-0.93,-11.09,-9.37,7.59,23.71,21.15],RFI:[-0.40,-1.07,-1.53,-4.81,-0.26,8.38,12.05,11.47],
+    RLTY:[0.11,-0.57,-1.04,-8.63,-6.86,8.26,17.49,15.98],RNP:[-0.94,-1.42,-1.42,-7.46,-1.68,7.93,22.26,20.60],
+    RQI:[-1.28,-2.03,-2.15,-9.31,-3.50,8.72,13.75,12.47],UTF:[1.28,1.74,0.77,-1.81,-4.63,7.13,28.11,27.60],
+    UTG:[1.62,1.37,1.12,0.03,-0.44,6.36,39.72,39.73]}}
 ];
 
-const HOLDINGS = new Set(["PCN","BDJ","EOI","BUI","BME","RQI","RNP","RFI","AIO","BST","DNP","UTF","ERH","UTG"]);
+const HOLDINGS=new Set(["PCN","BDJ","EOI","BUI","BME","RQI","RNP","RFI","AIO","BST","DNP","UTF","ERH","UTG"]);
 const QCOLOR={G:"#1D9E75",B:"#378ADD",O:"#D85A30",X:"#888780"};
 const QNAME={G:"Green",B:"Blue",O:"Orange",X:"Gray"};
-
-let zIdx=2, qFilter="all", searchTerm="", holdOnly=false, sesIdx=1;
+let zIdx=2,qFilter="all",searchTerm="",holdOnly=false,sesIdx=4;
 const W=980,H=560,ML=54,MR=16,MT=14,MB=40;
-
 function quad(d){return d[2]>=0?(d[3]<0?"G":"B"):(d[3]<0?"O":"X");}
-
 function getExtent(){
   let zs=[],ds=[];
   SESSIONS.forEach(s=>{for(const t in s.data){zs.push(s.data[t][zIdx]);ds.push(s.data[t][3],s.data[t][4]);}});
-  const zmax=Math.max(3,Math.ceil(Math.max(...zs.map(Math.abs))));
+  const zm=Math.max(3,Math.ceil(Math.max(...zs.map(Math.abs))));
   const dmin=Math.floor(Math.min(...ds))-1,dmax=Math.ceil(Math.max(...ds))+1;
-  return{zmin:-zmax,zmax,dmin,dmax};
+  return{zmin:-zm,zmax:zm,dmin,dmax};
 }
-
 function render(){
   const ex=getExtent();
   const Xf=z=>ML+(z-ex.zmin)/(ex.zmax-ex.zmin)*(W-ML-MR);
   const Yf=d=>MT+(ex.dmax-d)/(ex.dmax-ex.dmin)*(H-MT-MB);
   const cur=SESSIONS[sesIdx];
-  const prev=sesIdx>0?SESSIONS[sesIdx-1]:null;
   let s="";
-  // quadrant shading
   s+=`<rect x="${Xf(0)}" y="${Yf(0)}" width="${W-MR-Xf(0)}" height="${Yf(ex.dmin)-Yf(0)}" fill="#1D9E75" opacity="0.055"/>`;
   s+=`<rect x="${Xf(0)}" y="${MT}" width="${W-MR-Xf(0)}" height="${Yf(0)-MT}" fill="#378ADD" opacity="0.055"/>`;
   s+=`<rect x="${ML}" y="${Yf(0)}" width="${Xf(0)-ML}" height="${Yf(ex.dmin)-Yf(0)}" fill="#D85A30" opacity="0.05"/>`;
   s+=`<rect x="${ML}" y="${MT}" width="${Xf(0)-ML}" height="${Yf(0)-MT}" fill="#888780" opacity="0.07"/>`;
-  // grid
   for(let z=Math.ceil(ex.zmin);z<=ex.zmax;z++){
     s+=`<line x1="${Xf(z)}" y1="${MT}" x2="${Xf(z)}" y2="${H-MB}" stroke="${z===0?'#B6BDC3':'#EAEDEF'}" stroke-width="${z===0?1.5:1}"/>`;
     s+=`<text x="${Xf(z)}" y="${H-MB+16}" font-size="10" fill="#8A929A" text-anchor="middle">${z}</text>`;
@@ -288,17 +297,21 @@ function render(){
   }
   s+=`<text x="${W/2}" y="${H-6}" font-size="11" fill="#5A636B" text-anchor="middle">Z-Score (${['Z3M','Z6M','Z1Y'][zIdx]})</text>`;
   s+=`<text x="14" y="${H/2}" font-size="11" fill="#5A636B" text-anchor="middle" transform="rotate(-90 14 ${H/2})">Discount / Premium %</text>`;
-  // ghost dots (prior session, current session only)
-  if(prev && sesIdx===SESSIONS.length-1){
-    for(const t of Object.keys(prev.data)){
-      const d=prev.data[t],q=quad(d);
-      const vis=(qFilter==="all"||q===qFilter)&&(!holdOnly||HOLDINGS.has(t));
-      const match=!searchTerm||t.includes(searchTerm);
-      if(!vis||!match) continue;
-      s+=`<circle cx="${Xf(d[zIdx])}" cy="${Yf(d[3])}" r="4.5" fill="${QCOLOR[q]}" opacity="0.18"/>`;
+  const ghostOps=[0.06,0.10,0.16,0.22];
+  if(sesIdx===SESSIONS.length-1){
+    for(let gi=0;gi<SESSIONS.length-1;gi++){
+      const gs=SESSIONS[gi];
+      const op=ghostOps[gi]||0.06;
+      const r=gi===SESSIONS.length-2?5:gi===SESSIONS.length-3?3.5:2.5;
+      for(const t of Object.keys(gs.data)){
+        const d=gs.data[t],q=quad(d);
+        const vis=(qFilter==="all"||q===qFilter)&&(!holdOnly||HOLDINGS.has(t));
+        const match=!searchTerm||t.includes(searchTerm);
+        if(!vis||!match) continue;
+        s+=`<circle cx="${Xf(d[zIdx])}" cy="${Yf(d[3])}" r="${r}" fill="${QCOLOR[q]}" opacity="${op}"/>`;
+      }
     }
   }
-  // current dots
   for(const t of Object.keys(cur.data)){
     const d=cur.data[t],q=quad(d);
     const visible=(qFilter==="all"||q===qFilter)&&(!holdOnly||HOLDINGS.has(t));
@@ -310,46 +323,37 @@ function render(){
     s+=`<circle cx="${cx}" cy="${ay}" r="2" fill="none" stroke="${QCOLOR[q]}" stroke-width="1" opacity="0.5"/>`;
     if(HOLDINGS.has(t)) s+=`<circle cx="${cx}" cy="${cy}" r="9.5" fill="none" stroke="${QCOLOR[q]}" stroke-width="1.4" opacity="0.6"/>`;
     s+=`<circle cx="${cx}" cy="${cy}" r="6" fill="${QCOLOR[q]}"/>`;
-    s+=`<text x="${cx}" y="${cy-11}" text-anchor="middle" fill="#3A4249">${t}</text>`;
+    s+=`<text x="${cx}" y="${cy-11}" font-size="9.5" font-weight="600" text-anchor="middle" fill="#3A4249">${t}</text>`;
     s+=`</g>`;
   }
   document.getElementById("chart").innerHTML=s;
-  bindDots();
-  renderSnap();
+  bindDots();renderSnap();
   document.getElementById("seslabel").textContent="Showing: "+cur.date;
 }
-
 const tip=document.getElementById("tip");
 function bindDots(){
   const cur=SESSIONS[sesIdx];
   document.querySelectorAll(".dot").forEach(g=>{
-    const t=g.dataset.t,d=cur.data[t];
-    const m=MOM[t]||null;
+    const t=g.dataset.t,d=cur.data[t],m=MOM[t]||null;
+    const prev=sesIdx>0?SESSIONS[sesIdx-1]:null,pd=prev?prev.data[t]:null;
     g.addEventListener("mousemove",e=>{
-      tip.style.display="block";
-      tip.style.left=(e.clientX+14)+"px";tip.style.top=(e.clientY+10)+"px";
-      tip.innerHTML=`<b>${t}</b> · yield ${d[5].toFixed(2)}%<br>D/P ${d[3].toFixed(2)}% (avg ${d[4].toFixed(2)}%, Δ ${(d[3]-d[4]).toFixed(2)}pt)<br>Z3M ${d[0].toFixed(2)} · Z6M ${d[1].toFixed(2)} · Z1Y ${d[2].toFixed(2)}<br>ST Mom ${m?m[0].toFixed(2)+'%':'—'} · LT Mom ${m?m[1].toFixed(2)+'%':'—'}`;
+      tip.style.display="block";tip.style.left=(e.clientX+14)+"px";tip.style.top=(e.clientY+10)+"px";
+      const dz=pd?(d[2]-pd[2]).toFixed(2):null;
+      tip.innerHTML=`<b>${t}</b> · yield ${d[5].toFixed(2)}%<br>D/P ${d[3].toFixed(2)}% (avg ${d[4].toFixed(2)}%, Δ ${(d[3]-d[4]).toFixed(2)}pt)<br>Z3M ${d[0].toFixed(2)} · Z6M ${d[1].toFixed(2)} · Z1Y ${d[2].toFixed(2)}${dz?` (${+dz>=0?'+':''}${dz})`:''}<br>ST Mom ${m?m[0].toFixed(2)+'%':'—'} · LT Mom ${m?m[1].toFixed(2)+'%':'—'}`;
     });
     g.addEventListener("mouseleave",()=>tip.style.display="none");
-    g.addEventListener("click",()=>showDetail(t));
+    g.addEventListener("click",()=>{
+      const prev2=sesIdx>0?SESSIONS[sesIdx-1]:null,pd2=prev2?prev2.data[t]:null;
+      const dz2=pd2?(d[2]-pd2[2]).toFixed(2):null,ddp=pd2?(d[3]-pd2[3]).toFixed(2):null;
+      const q=quad(d),el=document.getElementById("detail");
+      el.style.display="block";
+      el.innerHTML=`<b style="font-size:14px">${t}</b> <span class="qcount" style="background:${QCOLOR[q]}">${QNAME[q]}</span>
+      <table><tr><td>Price</td><td class="v">$${d[7].toFixed(2)}</td><td>NAV</td><td class="v">$${d[6].toFixed(2)}</td><td>Yield</td><td class="v">${d[5].toFixed(2)}%</td></tr>
+      <tr><td>D/P</td><td class="v">${d[3].toFixed(2)}%</td><td>52-wk avg</td><td class="v">${d[4].toFixed(2)}%</td><td>Dev</td><td class="v">${(d[3]-d[4]).toFixed(2)}pt</td></tr>
+      <tr><td>Z3M</td><td class="v">${d[0].toFixed(2)}</td><td>Z6M</td><td class="v">${d[1].toFixed(2)}</td><td>Z1Y${dz2?` <span style="font-size:10px;color:${+dz2>=0?'#1D9E75':'#D85A30'}">(${+dz2>=0?'+':''}${dz2})</span>`:''}</td><td class="v">${d[2].toFixed(2)}</td></tr>
+      <tr><td>ΔD/P</td><td class="v">${ddp?`${+ddp>=0?'+':''}${ddp}pt`:'—'}</td><td>ST Mom</td><td class="v">${m?m[0].toFixed(2)+'%':'—'}</td><td>LT Mom</td><td class="v">${m?m[1].toFixed(2)+'%':'—'}</td></tr></table>`;
+    });
   });
-}
-function showDetail(t){
-  const cur=SESSIONS[sesIdx];
-  const d=cur.data[t],q=quad(d),m=MOM[t]||null;
-  const prev=sesIdx>0?SESSIONS[sesIdx-1]:null;
-  const pd=prev?prev.data[t]:null;
-  const dz=pd?(d[2]-pd[2]).toFixed(2):null;
-  const ddp=pd?(d[3]-pd[3]).toFixed(2):null;
-  const el=document.getElementById("detail");
-  el.style.display="block";
-  el.innerHTML=`<b style="font-size:14px">${t}</b> <span class="qcount" style="background:${QCOLOR[q]}">${QNAME[q]}</span>
-  <table>
-  <tr><td>Price</td><td class="v">$${d[7].toFixed(2)}</td><td>NAV</td><td class="v">$${d[6].toFixed(2)}</td><td>Yield</td><td class="v">${d[5].toFixed(2)}%</td></tr>
-  <tr><td>D/P</td><td class="v">${d[3].toFixed(2)}%</td><td>52-wk avg</td><td class="v">${d[4].toFixed(2)}%</td><td>Deviation</td><td class="v">${(d[3]-d[4]).toFixed(2)}pt</td></tr>
-  <tr><td>Z3M</td><td class="v">${d[0].toFixed(2)}</td><td>Z6M</td><td class="v">${d[1].toFixed(2)}</td><td>Z1Y</td><td class="v">${d[2].toFixed(2)}${dz?` <span style="font-size:11px;color:${+dz>=0?'#1D9E75':'#D85A30'}">(${+dz>=0?'+':''}${dz})</span>`:''}</td></tr>
-  <tr><td>ΔD/P</td><td class="v">${ddp?`${+ddp>=0?'+':''}${ddp}pt`:'—'}</td><td>ST Mom</td><td class="v">${m?m[0].toFixed(2)+'%':'—'}</td><td>LT Mom</td><td class="v">${m?m[1].toFixed(2)+'%':'—'}</td></tr>
-  </table>`;
 }
 function renderSnap(){
   const cur=SESSIONS[sesIdx];
@@ -363,7 +367,6 @@ function renderSnap(){
   const greens=[...pool].filter(t=>quad(cur.data[t])==="G").sort((a,b)=>cur.data[b][2]-cur.data[a][2]).slice(0,3);
   document.getElementById("snapGreen").innerHTML=greens.length?greens.map(t=>`<div><b>${t}</b> Z1Y +${cur.data[t][2].toFixed(2)} · D/P ${cur.data[t][3].toFixed(2)}%</div>`).join(""):"None";
 }
-
 document.querySelectorAll(".zt").forEach(b=>b.addEventListener("click",()=>{
   document.querySelectorAll(".zt").forEach(x=>x.classList.remove("on"));b.classList.add("on");zIdx=+b.dataset.z;render();
 }));
@@ -375,7 +378,6 @@ document.getElementById("hold").addEventListener("click",e=>{holdOnly=!holdOnly;
 document.querySelectorAll(".tmb").forEach(b=>b.addEventListener("click",()=>{
   document.querySelectorAll(".tmb").forEach(x=>x.classList.remove("on"));b.classList.add("on");sesIdx=+b.dataset.s;render();
 }));
-
 render();
 </script>
 </body>
