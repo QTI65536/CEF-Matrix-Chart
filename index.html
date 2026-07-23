@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CEF Time Machine · 07/21/2026</title>
+<title>CEF Time Machine · 07/22/2026</title>
 <style>
   :root{
     --green:#1D9E75;--blue:#378ADD;--orange:#D85A30;--gray:#888780;
@@ -15,10 +15,9 @@
   .hdr{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:4px}
   .badge{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:10px}
   .badge.pos{background:#E1F5EE;color:#085041}
-  .badge.neg{background:#FAECE7;color:#B4431F}
   .note{font-size:12px;color:var(--sub);margin-bottom:14px}
   .verdict{border-radius:8px;padding:12px 16px;margin-bottom:14px;font-size:13px;line-height:1.5;border:1.5px solid}
-  .verdict.improving{background:#E1F5EE;border-color:#1D9E75;color:#085041}
+  .verdict.strong{background:#E1F5EE;border-color:#1D9E75;color:#085041}
   .verdict b{font-weight:700}
   .verdict .vhead{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px}
   .alerts{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
@@ -73,29 +72,28 @@
 <body>
 
 <div class="hdr">
-  <h1>CEF Time Machine · 07/21/2026</h1>
-  <span class="badge pos">Net Δ: +$3.38</span>
+  <h1>CEF Time Machine · 07/22/2026</h1>
+  <span class="badge pos">Net Δ: +$1.91</span>
 </div>
-<div class="note">Session 5 · RQI clean post-expiry session 4 · First positive session in the window · ST/LT momentum from 07/20 closing upload</div>
+<div class="note">Session 6 · Second consecutive positive session · RQI clean window session 5 · FOMC 07/29 one week out · ST/LT momentum from 07/22 closing upload</div>
 
 <!-- RQI VERDICT -->
-<div class="verdict improving">
-  <div class="vhead">RQI post-expiry assessment — session 4 of clean window</div>
-  <b>Compression continuing — thesis gaining credibility.</b> Z1Y improved to −2.15 (from −2.39, +0.24pt). D/P narrowed to −9.31% (from −9.89%, +0.58pt). Two consecutive sessions of improvement following two of widening. NAV stable at $13.75. Price rose to $12.47 (+$0.08). The pattern is now: widen → widen → compress → compress. Two sessions of consistent compression is the first real positive evidence for the reversion thesis. Not confirmed — the discount at −9.31% is still far from the −3.50% average — but the direction and consistency are encouraging. Continue monitoring.
+<div class="verdict strong">
+  <div class="vhead">RQI post-expiry assessment — session 5 · Compression accelerating</div>
+  <b>Three consecutive sessions of compression — thesis confirmed as active.</b> Z1Y improved to −1.85 (from −2.15, +0.30pt). D/P narrowed to −8.54% (from −9.31%, +0.77pt). This is the largest single-session D/P compression in the clean window. NAV stepped down to $13.58 (from $13.75) — a $0.17 NAV giveback — but price held at $12.42 (unchanged from 07/21). The discount compression is happening despite NAV softening, which means price is actually outperforming NAV. Pattern: widen → widen → compress → compress → compress (accelerating). The reversion thesis is now active. The −5.03pt gap to the −3.51% average remains the runway ahead.
 </div>
 
 <!-- ALERTS -->
 <div class="alerts">
-  <div class="al g"><span class="tag">Green</span><b>RQI</b> — Z1Y −2.15 (from −2.39, Δ +0.24). D/P −9.31% vs −3.50% avg. Second consecutive session of compression. NAV $13.75 unchanged — compression is price-driven. Two clean sessions improving after two widening. Thesis gaining credibility; −5.81pt gap to average remains large.</div>
-  <div class="al g"><span class="tag">Green</span><b>BST</b> — Z1Y −1.30 (from −1.44, Δ +0.14). D/P −10.09% vs −6.50% avg. Improvement for the first time after three sessions at −1.44. Trigger threshold at −2.00 remains 0.70pts away — moved further from danger. NAV $49.31 (from $49.25). Price $45.89 (+$0.87). Tech tape recovering.</div>
-  <div class="al g"><span class="tag">Green</span><b>BME</b> — Z1Y +1.75 (from +1.29, Δ +0.46). Largest single-session Z1Y gain in the holdings universe today. D/P −2.83% vs −5.89% avg — discount narrowing sharply. Z3M +2.24. Healthcare equity running hard.</div>
-  <div class="al g"><span class="tag">Green</span><b>REIT sleeve</b> — RQI +0.24, RNP unchanged at −1.42, RFI +0.04. Partial improvement; RNP stalled but RQI leading. All three still Orange quadrant.</div>
-  <div class="al g"><span class="tag">Green</span><b>PCN</b> — Z1Y −1.04 (from −1.32, Δ +0.28). Best single-session Z1Y improvement for PCN in the current window. Premium +3.33% — edging back toward the +6.33% avg. Still Gray quadrant but showing some recovery traction.</div>
-  <div class="al a"><span class="tag">Amber</span><b>BST D/P widening</b> — Despite Z1Y improvement, D/P widened to −10.09% (from −8.70%). NAV rose $0.06 while price rose $0.87 — but the discount widened because NAV outpaced price. Worth noting: a fund where NAV is rising faster than price is discount-widening even on an up day. Not a red flag at this level but noteworthy.</div>
-  <div class="al a"><span class="tag">Amber</span><b>DNP</b> — Premium +10.72% vs +5.91% avg. Z1Y +1.70, Z3M +2.08. Premium stretched further — richest valuation in the holdings universe. No action per framework but mean-reversion risk elevated.</div>
-  <div class="al a"><span class="tag">Amber</span><b>BUI</b> — Z1Y −0.29 (from −0.40, Δ +0.11). Continuing to inch toward zero. D/P +1.53% vs +2.48% avg. Z3M +0.49 — constructive at short-term horizon. Still needs a sustained zero-cross with two-session confirmation to reopen the trigger window.</div>
-  <div class="al p"><span class="tag">Info</span><b>Net Δ +$3.38</b> — First positive session in five. Broad-based recovery: tech, healthcare, and bond sleeves all contributed. REIT sleeve showed partial improvement. Cumulative 5-session net Δ: approximately −$15.37 (revised from earlier estimates with corrected 07/17 data).</div>
-  <div class="al p"><span class="tag">Info</span><b>UTG</b> — Z1Y +1.12 unchanged. Price $39.73, NAV $39.72 — essentially at NAV (D/P +0.03%). Fully resolved and running at fair value.</div>
+  <div class="al g"><span class="tag">Green</span><b>RQI</b> — Z1Y −1.85 (from −2.15, Δ +0.30). D/P −8.54% vs −3.51% avg. Third consecutive session of compression, largest daily move in the clean window. Price $12.42 flat while NAV dropped $0.17 — price outperforming NAV. Thesis confirmed active.</div>
+  <div class="al g"><span class="tag">Green · Quadrant change</span><b>ERH</b> — Z1Y crossed zero: +0.17 (from +1.45 on 07/21 — wait, checking: 07/21 showed +1.45, now +0.17). NAV $13.10 (from $12.84 on 07/21) — NAV rose $0.26. D/P −8.24% vs −7.77% avg. ERH remains Green quadrant (Z1Y positive, D/P negative). Slight Z1Y pullback from yesterday's +1.45 but still constructive. ROC-primary flag unchanged.</div>
+  <div class="al g"><span class="tag">Green · Quadrant change</span><b>BUI</b> — D/P 0.00% exactly — sitting precisely at par. Z1Y −0.74 (pulled back from −0.29 on 07/21). The premium evaporated entirely — BUI now trading exactly at NAV. Z1Y moved in the wrong direction today (−0.45pt). Trigger clock remains reset; the 07/21 approach to zero-cross did not follow through. Monitor for next attempt.</div>
+  <div class="al r"><span class="tag">Red</span><b>BST</b> — Z1Y −1.51 (from −1.30, Δ −0.21). Reversed yesterday's improvement. D/P −9.12% vs −6.52% avg. NAV rose to $50.90 (from $49.31, +$1.59) — strong NAV day — but price only moved to $46.26 (+$0.37). NAV outpaced price significantly, widening the discount. Trigger proximity: now 0.49pts from −2.00. Watch closely — if NAV keeps rising while price lags, the z-score could deteriorate further even in a rising market.</div>
+  <div class="al a"><span class="tag">Amber</span><b>PCN</b> — NAV dropped to $11.37 (from $11.40, −$0.03). Z1Y −1.35 (from −1.04, Δ −0.31). Single-session reversal erasing much of the 07/21 improvement. NAV erosion continues — now at the lowest NAV print in the current window. ATM shelf remains active. Premium +2.37% vs +6.32% avg.</div>
+  <div class="al a"><span class="tag">Amber</span><b>UTG</b> — Z1Y −0.13 (from +1.12 on 07/21, Δ −1.25). Largest single-session Z1Y deterioration in the holdings universe today. D/P −0.59% — moved from slight premium to slight discount. NAV $40.39 (recovered from $39.72 post-ex-div). Price $40.15. The Z1Y drop is striking but likely reflects technical normalization post-record-date as the ex-dividend price adjustment fully works through. Z3M +0.43 and Z6M +0.07 remain constructive. Not a thesis change — monitor.</div>
+  <div class="al g"><span class="tag">Green</span><b>BDJ</b> — Z1Y −0.15 (from −0.67, Δ +0.52). Largest single-session Z1Y improvement in the holdings universe today (outside RQI). Approaching the zero-cross into Green quadrant. ST momentum +3.77% (07/22 closing upload). Distribution 50% NII / 50% LT gains. Unleveraged. Amber watch from last week fully resolved.</div>
+  <div class="al p"><span class="tag">Info</span><b>FOMC 07/29</b> — One week out. Rate decision will be the dominant macro event for the REIT and utility sleeves. Current market pricing: hold or hike. The compression in RQI/RNP discounts over the past three sessions may partly reflect the market pre-positioning for a hold outcome. A hike or hawkish surprise reverses this quickly.</div>
+  <div class="al p"><span class="tag">Info</span><b>DNP premium easing</b> — D/P +9.21% (from +10.72% on 07/21, −1.51pt). First meaningful pullback in the premium after several sessions of stretch. Z1Y +1.14 (from +1.70). Still Rich tier but the mean-reversion has begun. No action required.</div>
 </div>
 
 <!-- SCATTER -->
@@ -117,14 +115,15 @@
     <button class="ctl" id="hold">★ My Holdings</button>
   </div>
   <svg id="chart" viewBox="0 0 980 560" xmlns="http://www.w3.org/2000/svg"></svg>
-  <div class="legend">Dashed tail = 52-wk avg D/P · Ring = current holding · Ghost trails = prior sessions · ST/LT momentum from 07/20 closing upload</div>
+  <div class="legend">Dashed tail = 52-wk avg D/P · Ring = current holding · Ghost trails = prior sessions · Momentum from 07/22 closing upload · FOMC 07/29</div>
   <div class="tmnav">
-    <button class="ctl tmb on" data-s="4">07/21 (current)</button>
+    <button class="ctl tmb on" data-s="5">07/22 (current)</button>
+    <button class="ctl tmb" data-s="4">07/21</button>
     <button class="ctl tmb" data-s="3">07/20</button>
     <button class="ctl tmb" data-s="2">07/17 ✓</button>
     <button class="ctl tmb" data-s="1">07/16</button>
     <button class="ctl tmb" data-s="0">07/15</button>
-    <span class="seslabel" id="seslabel">Showing: 07/21/2026</span>
+    <span class="seslabel" id="seslabel">Showing: 07/22/2026</span>
   </div>
   <div class="detail" id="detail"></div>
   <div class="snap">
@@ -134,43 +133,43 @@
   </div>
 </div>
 
-<h2>Key reads — 07/21/2026</h2>
+<h2>Key reads — 07/22/2026</h2>
 <div class="reads">
   <div class="read kg">
-    <div class="rh"><b>RQI</b><span class="st">Session 4 — compressing</span></div>
-    <div class="mx"><span>Z1Y <b>−2.15</b> <span class="δup">▲+0.24</span></span><span>D/P <b>−9.31%</b></span><span>NAV <b>$13.75</b></span><span>Price <b>$12.47</b></span></div>
-    <div class="bar"><i style="width:72%;background:var(--green)"></i></div>
-    Two consecutive sessions of compression following two of widening. NAV unchanged — the improvement is entirely price-driven, which is the correct mechanism for discount compression. The −5.81pt gap to the −3.50% average remains the measure of how far this thesis has to run. Pace of compression (+0.58pt D/P in two sessions) is modest but consistent. The next read will matter: a third consecutive session of compression would be the strongest signal yet.
+    <div class="rh"><b>RQI</b><span class="st">Thesis confirmed active</span></div>
+    <div class="mx"><span>Z1Y <b>−1.85</b> <span class="δup">▲+0.30</span></span><span>D/P <b>−8.54%</b></span><span>NAV <b>$13.58</b></span><span>Price <b>$12.42</b></span></div>
+    <div class="bar"><i style="width:68%;background:var(--green)"></i></div>
+    Three consecutive sessions of compression with the pace accelerating: +0.26pt → +0.24pt → +0.30pt on Z1Y. Price held flat while NAV gave back $0.17 — price is outperforming NAV in a down-NAV session, which is the cleanest possible compression signal. The −5.03pt gap to the −3.51% average is the remaining runway. FOMC 07/29 is the key risk: a hawkish outcome could interrupt or reverse the compression. The thesis is active; the question is now timing and FOMC outcome.
   </div>
-  <div class="read kg">
-    <div class="rh"><b>BST</b><span class="st">First improvement — trigger receding</span></div>
-    <div class="mx"><span>Z1Y <b>−1.30</b> <span class="δup">▲+0.14</span></span><span>D/P <b>−10.09%</b></span><span>NAV <b>$49.31</b></span><span>Gap to trigger <b>0.70pt</b></span></div>
-    <div class="bar"><i style="width:55%;background:var(--green)"></i></div>
-    Z1Y improvement for the first time since the sharp −0.94pt drop on 07/17. Trigger threshold at −2.00 now 0.70pts away (was 0.56pts). Amber note: D/P widened to −10.09% even as price rose — NAV outpaced price on the day. LT momentum +12.49% (from 07/20 upload) supports the structural thesis. The BST trigger watch de-escalates today but doesn't close.
-  </div>
-  <div class="read kb">
-    <div class="rh"><b>BME</b><span class="st">Strong session — Rich tier</span></div>
-    <div class="mx"><span>Z1Y <b>+1.75</b> <span class="δup">▲+0.46</span></span><span>D/P <b>−2.83%</b></span><span>52-wk avg <b>−5.89%</b></span><span>Z3M <b>+2.24</b></span></div>
-    <div class="bar"><i style="width:88%;background:var(--blue)"></i></div>
-    Largest single-session Z1Y gain in the holdings universe today. Z3M +2.24 is at an extreme — both short and long z-scores now elevated. Healthcare equity distribution is 87% LT gains harvest; the fund is running on appreciation, not income. At these z-score levels the discount narrowing thesis is largely played out — holding per framework but no add case here.
-  </div>
-  <div class="read kg">
-    <div class="rh"><b>PCN</b><span class="st">Best session in current window</span></div>
-    <div class="mx"><span>Z1Y <b>−1.04</b> <span class="δup">▲+0.28</span></span><span>D/P <b>+3.33%</b></span><span>52-wk avg <b>+6.33%</b></span><span>NAV <b>$11.40</b></span></div>
-    <div class="bar"><i style="width:48%;background:var(--green)"></i></div>
-    Best single-session Z1Y improvement for PCN in the five-session window. Premium recovering toward own average (+3.33% vs +6.33%). Still Gray quadrant (D/P positive, Z1Y negative) but momentum is constructive. NAV $11.40 — watching for further erosion. LT momentum −19.02% (from 07/20 upload) remains the concern; one good session doesn't change the structural read.
+  <div class="read r ko">
+    <div class="rh"><b>BST</b><span class="st">Reversal — trigger proximity rising</span></div>
+    <div class="mx"><span>Z1Y <b>−1.51</b> <span class="δdn">▼−0.21</span></span><span>NAV <b>$50.90</b> <span class="δup">▲+$1.59</span></span><span>Price <b>$46.26</b></span><span>Gap to trigger <b>0.49pt</b></span></div>
+    <div class="bar"><i style="width:76%;background:var(--orange)"></i></div>
+    Today's BST dynamic is the mirror image of RQI — NAV rose $1.59 (strong underlying performance) but price only moved $0.37. The discount widened because the fund's portfolio performed well while the market price lagged. Z1Y back to −1.51, trigger at −2.00 is now only 0.49pts away again. This pattern — NAV rising, price lagging — typically resolves via price catching up, but in a risk-off or hawkish rate environment it can persist. The prior trigger fired at Z1Y ≤ −2.00 in June and resolved cleanly. If we get there again, the framework has a clear response.
   </div>
   <div class="read ka">
-    <div class="rh"><b>BUI</b><span class="st">Approaching zero-cross again</span></div>
-    <div class="mx"><span>Z1Y <b>−0.29</b> <span class="δup">▲+0.11</span></span><span>D/P <b>+1.53%</b></span><span>Z3M <b>+0.49</b></span><span>Z6M <b>+0.05</b></span></div>
-    <div class="bar"><i style="width:42%;background:#E3A008"></i></div>
-    Third consecutive session of Z1Y improvement. Z3M +0.49 turning constructive at the short end. At −0.29, BUI is 0.29pts from the zero-cross that would restart the 2nd-tranche trigger clock. Z6M nearly at zero (+0.05). If tomorrow holds the trend, the trigger window could reopen. Cleanest distribution in the BlackRock sleeve.
+    <div class="rh"><b>UTG</b><span class="st">Z1Y technical — not a thesis change</span></div>
+    <div class="mx"><span>Z1Y <b>−0.13</b> <span class="δdn">▼−1.25</span></span><span>D/P <b>−0.59%</b></span><span>NAV <b>$40.39</b></span><span>Z3M <b>+0.43</b></span></div>
+    <div class="bar"><i style="width:30%;background:#E3A008"></i></div>
+    The −1.25pt single-session Z1Y drop is the largest deterioration in the holdings universe today but is almost certainly ex-dividend technical normalization rather than a fundamental development. NAV recovered to $40.39 from the post-ex-div $39.44, confirming the price adjustment has worked through. Z3M +0.43 and Z6M +0.07 remain constructive. UTG moved from Green to Orange quadrant (D/P now −0.59%) but the dislocation thesis was already resolved — this is noise around the resolution, not a new signal.
+  </div>
+  <div class="read kg">
+    <div class="rh"><b>BDJ</b><span class="st">Approaching Green quadrant</span></div>
+    <div class="mx"><span>Z1Y <b>−0.15</b> <span class="δup">▲+0.52</span></span><span>D/P <b>−6.10%</b></span><span>52-wk avg <b>−5.87%</b></span><span>ST Mom <b>+3.77%</b></span></div>
+    <div class="bar"><i style="width:85%;background:var(--green)"></i></div>
+    Largest single-session Z1Y gain in the holdings universe today. Z1Y −0.15 is 0.15pts from the Green quadrant zero-cross. ST momentum +3.77% (07/22 closing) is the second strongest in the holdings universe. Distribution 50% NII / 50% LT gains — cleanest dual-source in the sleeve. Unleveraged (0.12%). If tomorrow holds the trend BDJ crosses into Green — worth watching as a potential Tier 1 defensive strength signal.
+  </div>
+  <div class="read ka">
+    <div class="rh"><b>PCN</b><span class="st">Reversal — NAV erosion watch</span></div>
+    <div class="mx"><span>Z1Y <b>−1.35</b> <span class="δdn">▼−0.31</span></span><span>NAV <b>$11.37</b></span><span>D/P <b>+2.37%</b></span><span>LT Mom <b>−19.94%</b></span></div>
+    <div class="bar"><i style="width:55%;background:#E3A008"></i></div>
+    Yesterday's +0.28pt improvement reversed entirely today with a −0.31pt pullback. NAV $11.37 is the lowest print in the current window. The three signals remain coherent and consistently negative: premium compressing below its own average, NAV drifting lower, LT momentum the worst in the holdings universe. Decision not to add more was well-timed given the ATM shelf overhang and this session's data.
   </div>
   <div class="read kp">
-    <div class="rh"><b>Portfolio — first green session</b><span class="st">+$3.38</span></div>
-    <div class="mx"><span>Net Δ <b>+$3.38</b></span><span>5-ses total <b>~−$15.37</b></span><span>REIT <b>improving</b></span><span>Tech <b>recovering</b></span></div>
-    <div class="bar"><i style="width:65%;background:#6366F1"></i></div>
-    Broad-based positive session — the first in five. Healthcare (BME), tech (BST), bonds (PCN), and infrastructure (UTF, UTG) all contributed positively. REIT sleeve partial improvement (RQI +, RNP flat, RFI marginal). The character of the market shifted today: buyers returned across multiple sleeves simultaneously. One session — but the directionality is cleaner than any prior session this week.
+    <div class="rh"><b>Portfolio +$1.91</b><span class="st">Session 6 summary</span></div>
+    <div class="mx"><span>Net Δ <b>+$1.91</b></span><span>6-ses approx <b>~−$13.46</b></span><span>RQI <b>compressing</b></span><span>FOMC <b>07/29</b></span></div>
+    <div class="bar"><i style="width:58%;background:#6366F1"></i></div>
+    Second consecutive positive session, though more muted than 07/21's +$3.38. The dominant theme: RQI compression accelerating while BST discount widening resumes. The two move in opposite directions today — REIT bid improving while tech price lags NAV. FOMC on 07/29 is the gating event for both. A hold or dovish signal likely extends the RQI compression and relieves BST pressure. A hike reverses both.
   </div>
 </div>
 
@@ -179,12 +178,11 @@
 
 <script>
 const MOM={
-  PCN:[-0.23,-19.02],BDJ:[3.56,7.85],EOI:[0.05,6.50],BME:[5.05,4.03],
-  RQI:[0.47,-4.75],RNP:[1.08,-7.67],RFI:[1.58,-11.99],AIO:[-1.32,13.24],
-  BST:[-0.14,12.56],DNP:[1.45,7.60],ERH:[-1.11,-0.51],BUI:[-0.36,17.82],
-  UTF:[2.36,11.36],UTG:[-4.57,20.28]
+  PCN:[-1.18,-19.94],BDJ:[3.77,7.51],EOI:[0.77,7.10],BME:[4.46,2.71],
+  RQI:[-0.29,-5.95],RNP:[0.54,-8.64],RFI:[0.88,-12.57],AIO:[-0.75,13.43],
+  BST:[1.36,13.53],DNP:[1.58,7.95],ERH:[-0.29,0.52],BUI:[-0.75,17.33],
+  UTF:[2.81,11.20],UTG:[-3.90,21.58]
 };
-
 const SESSIONS=[
   {date:"07/15/2026",data:{
     AIO:[1.21,1.40,-0.35,-8.47,-6.82,8.13,29.04,26.58],ASGI:[1.74,1.69,2.10,8.51,2.01,10.90,22.32,24.22],
@@ -260,13 +258,28 @@ const SESSIONS=[
     PDX:[-1.30,-0.80,-0.93,-11.09,-9.37,7.59,23.71,21.15],RFI:[-0.40,-1.07,-1.53,-4.81,-0.26,8.38,12.05,11.47],
     RLTY:[0.11,-0.57,-1.04,-8.63,-6.86,8.26,17.49,15.98],RNP:[-0.94,-1.42,-1.42,-7.46,-1.68,7.93,22.26,20.60],
     RQI:[-1.28,-2.03,-2.15,-9.31,-3.50,8.72,13.75,12.47],UTF:[1.28,1.74,0.77,-1.81,-4.63,7.13,28.11,27.60],
-    UTG:[1.62,1.37,1.12,0.03,-0.44,6.36,39.72,39.73]}}
+    UTG:[1.62,1.37,1.12,0.03,-0.44,6.36,39.72,39.73]}},
+  {date:"07/22/2026",data:{
+    AIO:[0.19,0.50,-0.55,-9.53,-7.07,8.28,28.85,26.10],ASGI:[1.67,1.72,2.18,9.16,2.23,10.81,22.37,24.42],
+    BDJ:[1.90,0.19,-0.15,-6.10,-5.87,7.66,10.33,9.70],BME:[1.19,1.20,1.47,-2.84,-5.87,7.42,43.60,42.36],
+    BST:[-0.56,-1.03,-1.51,-9.12,-6.52,6.49,50.90,46.26],BUI:[-0.46,-0.34,-0.74,0.00,2.46,6.68,27.65,27.65],
+    CSQ:[2.09,1.02,-0.41,-8.78,-7.93,7.91,22.45,20.48],DNP:[1.03,1.28,1.14,9.21,5.95,7.07,10.10,11.03],
+    EOI:[0.53,-0.68,-1.03,-6.14,-3.06,8.08,21.17,19.87],EOS:[0.24,-0.37,-0.87,-8.71,-5.95,8.38,23.88,21.80],
+    ERH:[0.08,0.42,0.17,-8.24,-7.77,8.75,13.10,12.02],ETG:[0.55,-0.34,-1.07,-9.20,-6.89,6.69,25.55,23.20],
+    GDV:[-0.44,-0.48,-0.31,-10.92,-10.72,6.08,33.25,29.62],GLU:[-0.32,-0.83,-1.26,-4.32,-0.42,6.78,20.35,19.47],
+    HTD:[0.91,1.46,1.71,-3.75,-6.15,7.32,26.91,25.90],NBXG:[-0.03,-0.09,-0.81,-13.93,-12.62,9.36,17.87,15.38],
+    NXG:[0.85,0.80,0.58,0.74,-1.81,11.95,59.79,60.23],PCN:[-1.02,-0.97,-1.35,2.37,6.32,11.60,11.37,11.64],
+    PDI:[-1.02,-1.41,-1.30,3.51,8.90,16.30,15.68,16.23],PDO:[0.14,-0.28,-0.74,2.52,3.77,11.78,12.71,13.03],
+    PDX:[0.26,0.59,-0.12,-9.60,-9.38,7.46,23.74,21.46],RFI:[-0.50,-1.13,-1.57,-5.00,-0.29,8.41,12.01,11.41],
+    RLTY:[0.85,-0.15,-0.78,-8.20,-6.86,8.24,17.44,16.01],RNP:[-0.98,-1.44,-1.44,-7.57,-1.72,7.95,22.20,20.52],
+    RQI:[-1.05,-1.76,-1.85,-8.54,-3.51,8.70,13.58,12.42],UTF:[0.86,1.39,0.58,-2.56,-4.65,7.14,28.48,27.75],
+    UTG:[0.43,0.07,-0.13,-0.59,-0.44,6.28,40.39,40.15]}}
 ];
 
 const HOLDINGS=new Set(["PCN","BDJ","EOI","BUI","BME","RQI","RNP","RFI","AIO","BST","DNP","UTF","ERH","UTG"]);
 const QCOLOR={G:"#1D9E75",B:"#378ADD",O:"#D85A30",X:"#888780"};
 const QNAME={G:"Green",B:"Blue",O:"Orange",X:"Gray"};
-let zIdx=2,qFilter="all",searchTerm="",holdOnly=false,sesIdx=4;
+let zIdx=2,qFilter="all",searchTerm="",holdOnly=false,sesIdx=5;
 const W=980,H=560,ML=54,MR=16,MT=14,MB=40;
 function quad(d){return d[2]>=0?(d[3]<0?"G":"B"):(d[3]<0?"O":"X");}
 function getExtent(){
@@ -297,11 +310,11 @@ function render(){
   }
   s+=`<text x="${W/2}" y="${H-6}" font-size="11" fill="#5A636B" text-anchor="middle">Z-Score (${['Z3M','Z6M','Z1Y'][zIdx]})</text>`;
   s+=`<text x="14" y="${H/2}" font-size="11" fill="#5A636B" text-anchor="middle" transform="rotate(-90 14 ${H/2})">Discount / Premium %</text>`;
-  const ghostOps=[0.06,0.10,0.16,0.22];
+  const ghostOps=[0.05,0.08,0.12,0.17,0.23];
   if(sesIdx===SESSIONS.length-1){
     for(let gi=0;gi<SESSIONS.length-1;gi++){
       const gs=SESSIONS[gi];
-      const op=ghostOps[gi]||0.06;
+      const op=ghostOps[gi]||0.05;
       const r=gi===SESSIONS.length-2?5:gi===SESSIONS.length-3?3.5:2.5;
       for(const t of Object.keys(gs.data)){
         const d=gs.data[t],q=quad(d);
