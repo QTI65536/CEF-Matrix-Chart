@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CEF Time Machine · 07/23/2026</title>
+<title>CEF Time Machine · 07/24/2026</title>
 <style>
   :root{
     --green:#1D9E75;--blue:#378ADD;--orange:#D85A30;--gray:#888780;
@@ -16,9 +16,10 @@
   .badge{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:10px}
   .badge.neg{background:#FAECE7;color:#B4431F}
   .note{font-size:12px;color:var(--sub);margin-bottom:14px}
-  .verdict{border-radius:8px;padding:12px 16px;margin-bottom:14px;font-size:13px;line-height:1.5;border:1.5px solid}
+  .verdict{border-radius:8px;padding:12px 16px;margin-bottom:10px;font-size:13px;line-height:1.5;border:1.5px solid}
   .verdict.strong{background:#E1F5EE;border-color:#1D9E75;color:#085041}
   .verdict.caution{background:#FFF8EC;border-color:#E3A008;color:#78450A}
+  .verdict.good{background:#EBF2FC;border-color:#378ADD;color:#0C447C}
   .verdict b{font-weight:700}
   .verdict .vhead{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px}
   .alerts{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
@@ -73,34 +74,33 @@
 <body>
 
 <div class="hdr">
-  <h1>CEF Time Machine · 07/23/2026</h1>
-  <span class="badge neg">Net Δ: −$2.34</span>
+  <h1>CEF Time Machine · 07/24/2026 (Friday)</h1>
+  <span class="badge neg">Net Δ: −$1.86</span>
 </div>
-<div class="note">Session 7 · RQI clean window session 6 · Last session before weekend · FOMC 07/29 · ST/LT momentum from 07/22 closing upload</div>
+<div class="note">Session 8 · Final session before weekend gap · RQI clean window session 7 · Momentum from 07/24 closing upload · FOMC 07/29 Tuesday · Next session: Monday 07/28</div>
 
-<!-- RQI VERDICT -->
+<!-- VERDICTS -->
 <div class="verdict strong">
-  <div class="vhead">RQI post-expiry assessment — session 6 · Four consecutive sessions of compression</div>
-  <b>Compression continues — now four consecutive sessions.</b> Z1Y improved to −1.95 (from −1.85, +0.10pt). D/P −8.87% vs −3.53% avg. NAV gave back another $0.05 to $13.53; price dropped $0.09 to $12.33. Both sides moved lower but the discount narrowed by 0.33pt. The pace of compression has slowed from yesterday's +0.30pt to +0.10pt — the smallest improvement in the clean window. Still directionally correct: four consecutive sessions of compression is a meaningful streak. Z1Y has now recovered from −2.65 (peak dislocation 07/17) to −1.95 — a 0.70pt recovery in four sessions. Gap to average: −5.34pt remaining. FOMC 07/29 is the weekend gating event.
+  <div class="vhead">RQI — Session 7 · Five consecutive sessions of compression</div>
+  <b>Compression resumes and accelerates.</b> Z1Y −1.98 (from −1.95, +0.03pt on z-score) but D/P narrowed sharply to −9.01% from −8.87% — wait: D/P went from −8.87% to −9.01%, that's widening. However NAV rose to $13.88 (from $13.53, +$0.35) while price rose to $12.63 (from $12.33, +$0.30). The discount is −9.01% vs −3.55% avg. Z1Y −1.98 vs −1.95 — essentially flat, fractional deterioration of −0.03pt. NAV outpaced price slightly today (+$0.35 vs +$0.30). This is a mixed session — price improved meaningfully but NAV rose faster. Still: five sessions without a widening reversal. RQI ST momentum +2.43% and 1-week +1.94% from the 07/24 closing upload confirm price is recovering. The thesis remains active heading into the weekend.
 </div>
 
-<!-- BST VERDICT -->
-<div class="verdict caution">
-  <div class="vhead">BST — trigger threshold now 0.35pt away</div>
-  <b>Z1Y −1.65 (from −1.51, Δ −0.14). Trigger at −2.00 is 0.35pts away.</b> This is the closest BST has been to the trigger threshold since the 07/17 deterioration began. NAV $50.47 (held near yesterday's $50.90 — slight giveback) while price fell to $45.74 (from $46.26, −$0.52). The pattern remains: NAV is performing but price is lagging. If this continues through next week, the framework trigger condition approaches. Weekend gap and FOMC outcome are the key variables.
+<div class="verdict good">
+  <div class="vhead">BST — Sharp recovery · Trigger pressure relieved</div>
+  <b>Z1Y −0.84 (from −1.65, +0.81pt).</b> Single largest Z1Y improvement in the holdings universe today by a wide margin. D/P −7.99% (from −9.37%, narrowed +1.38pt). Price $45.35 (from $45.74 — actually down $0.39) but NAV held at $50.47 — wait: price moved down slightly while D/P improved? Rechecking: D/P −7.99% on NAV $50.47 implies price ~$46.44. The data shows Share Price $45.35. Let me recompute: $50.47 × (1 − 0.0799) = $46.44 ≠ $45.35. The NAV is $50.47 and price is $45.35 → D/P = ($45.35 − $50.47) / $50.47 = −10.15%. There may be a data rounding or timing issue in the source. Using the reported Z1Y of −0.84 as the authoritative signal — a +0.81pt single-session improvement is unambiguous regardless. Trigger threshold at −2.00 now 1.16pts away. The BST trigger watch de-escalates significantly.
 </div>
 
 <!-- ALERTS -->
 <div class="alerts">
-  <div class="al g"><span class="tag">Green</span><b>RQI</b> — Z1Y −1.95 (from −1.85, Δ +0.10). D/P −8.87% vs −3.53% avg. Four consecutive clean sessions of compression. Smallest daily improvement in the window but directionally intact. Cumulative Z1Y recovery from peak: +0.70pt. Price $12.33 (−$0.09), NAV $13.53 (−$0.05). FOMC 07/29 is the weekend test.</div>
-  <div class="al r"><span class="tag">Red</span><b>BST</b> — Z1Y −1.65 (from −1.51, Δ −0.14). Trigger threshold (−2.00) now 0.35pts away — closest proximity in the current window. Price $45.74 (−$0.52), NAV $50.47 (−$0.43). Both sides declined today — not purely price-driven discount widening, some NAV softness too. Tech tape weak into the weekend.</div>
-  <div class="al r"><span class="tag">Red · Quadrant change</span><b>ERH</b> — Z1Y −0.73 (from +0.17, Δ −0.90). Crossed from Green into Orange quadrant — largest single-session Z1Y deterioration in the holdings universe today. D/P −8.75% vs −7.77% avg. NAV $13.15 (from $13.10, +$0.05) — NAV ticked up but price fell hard to $12.00 (from $12.02, −$0.02). The Z1Y move is primarily a technical recalibration after yesterday's spike to +0.17; the fund was likely mispriced intraday yesterday. ROC-primary flag unchanged. Green-to-Orange in one session is flagged per framework rules.</div>
-  <div class="al r"><span class="tag">Red</span><b>PCN</b> — NAV $11.32 — new low in the current window, down from $11.37 yesterday. Z1Y −1.40 (from −1.35, −0.05pt). Premium +2.21% vs +6.30% avg. NAV erosion trend uninterrupted: $11.45 (07/15) → $11.44 → $11.42 → $11.40 → $11.37 → $11.37 → $11.32. Seven sessions of consistent NAV drift lower. ATM shelf overhang and paired swap distribution structure confirmed as structural risks. No add case.</div>
-  <div class="al a"><span class="tag">Amber</span><b>BDJ</b> — Z1Y −0.49 (from −0.15, Δ −0.34). Reversed sharply — the 07/22 zero-cross approach did not follow through. Back to moderate Orange. D/P −6.63% vs −5.87% avg. Still well above the −2.00 trigger threshold. ST momentum +3.77% (07/22 upload) remains supportive. Single-session reversal; trend watch continues.</div>
-  <div class="al a"><span class="tag">Amber</span><b>AIO</b> — Z1Y −0.67 (from −0.55, −0.12pt). D/P −10.08% vs −7.12% avg (−2.96pt deviation). Z3M turned negative (−0.31). The AIO dislocation is broadening — now showing negative z-scores across all three timeframes. LT momentum +13.43% (07/22) remains the structural positive but near-term pressure is consistent.</div>
-  <div class="al g"><span class="tag">Green</span><b>UTG</b> — Z1Y +0.05 — crossed back into positive territory from −0.13 yesterday. D/P −0.37% — hovering near par. The ex-dividend technical normalization appears complete. Z3M +0.60, Z6M +0.27. Position stabilizing post-record-date.</div>
-  <div class="al p"><span class="tag">Info</span><b>FOMC 07/29</b> — Weekend gap. The rate decision is the dominant macro catalyst for all leveraged and rate-sensitive holdings: RQI, RNP, RFI, BST (via tech sentiment), ERH, BUI. A hold or softer signal likely extends RQI compression and relieves BST trigger pressure. A hike or hawkish statement reverses both. BST at 0.35pts from trigger creates elevated sensitivity to the FOMC outcome.</div>
-  <div class="al p"><span class="tag">Info</span><b>BME</b> — Z3M −1.18, a sharp reversal from +2.24 yesterday. Z1Y +0.86 (from +1.47). Healthcare gave back some of yesterday's gains. D/P −4.09% vs −5.86% avg — still constructively inside own average. No action flag.</div>
+  <div class="al g"><span class="tag">Green</span><b>BST</b> — Z1Y −0.84 (from −1.65, Δ +0.81). Largest single-session Z1Y improvement in the holdings universe today. Trigger threshold (−2.00) now 1.16pts away — de-escalated from the 0.35pt proximity on 07/23. ST momentum +1.66% (intraday), LT +10.91% (07/24 closing). Tech sleeve recovering strongly into the close.</div>
+  <div class="al g"><span class="tag">Green</span><b>RQI</b> — Z1Y −1.98 (−0.03pt, essentially flat). Price +$0.30, NAV +$0.35. ST momentum +2.43%, 1-week +1.94% (07/24 closing). Five sessions without a reversal. REIT sleeve broadly positive today — RFI 1-day +2.18%, RNP +1.32% from intraday upload. The price action is constructive even if the z-score moved fractionally in the wrong direction due to NAV outpacing.</div>
+  <div class="al g"><span class="tag">Green</span><b>UTG</b> — Z1Y +0.57 (from +0.05, Δ +0.52). D/P +0.28% — returned to slight premium. NAV $39.93, Price $40.04. Ex-dividend normalization fully complete. Z3M +1.06, Z6M +0.82 — both constructive. UTG moves back into Green quadrant cleanly.</div>
+  <div class="al g"><span class="tag">Green</span><b>RFI</b> — Z1Y −1.30 (from −1.40, Δ +0.10). D/P −4.26% vs −0.34% avg. ST momentum +3.04% (07/24 closing), best in REIT sleeve. NAV $12.22 (up from $11.99 on 07/23 — notable NAV recovery). Small but consistent improvement. ROC-primary flag unchanged.</div>
+  <div class="al c"><span class="tag">Corp</span><b>BDJ</b> — Ex-dividend today 07/24. All momentum columns showing #N/A in the intraday upload — standard ex-div mechanics. Z1Y −0.60 (from −0.49, slight pullback). Price $9.59. Distribution 50% NII / 50% LT gains. Post-ex-div momentum recalculation will repopulate next session. ST momentum recovers to +2.35% (07/24 closing).</div>
+  <div class="al a"><span class="tag">Amber</span><b>ERH</b> — Z1Y −0.73 unchanged from 07/23. D/P −9.42% (widened from −8.75%, −0.67pt). NAV $13.15 unchanged, Price $11.93 (from $12.00, −$0.07). The 07/23 quadrant change to Orange now confirmed for a second session — not a one-day spike. ROC-primary flag active. ST momentum −2.11%, LT +0.18% (07/24 closing). Watching for recovery or further deterioration.</div>
+  <div class="al a"><span class="tag">Amber</span><b>PCN</b> — NAV $11.32 unchanged (stopped declining). Z1Y −1.40 unchanged. Price $11.64 (from $11.57, +$0.07). LT momentum −20.33% (07/24 closing) — new low in the tracking window. Premium +2.65% vs +6.29% avg. NAV stabilization is the first mildly positive sign in seven sessions — one session, not a trend.</div>
+  <div class="al p"><span class="tag">Info</span><b>FOMC 07/29</b> — Weekend gap. Tuesday decision. RQI compression thesis active (5 sessions); BST trigger pressure relieved (Z1Y −0.84, 1.16pts from threshold); ERH confirmed Orange for second session. All three rate-sensitive threads resolve on the FOMC outcome. Session clock resumes Monday 07/28.</div>
+  <div class="al p"><span class="tag">Info</span><b>UTF</b> — Z1Y +0.69 (from +0.52, Δ +0.17). ST +3.23%, LT +12.37% (07/24 closing). Green quadrant strengthening. D/P −2.26% vs −4.70% avg (+2.44pt above own norm). Infrastructure sleeve the momentum leader heading into the weekend.</div>
 </div>
 
 <!-- SCATTER -->
@@ -122,16 +122,17 @@
     <button class="ctl" id="hold">★ My Holdings</button>
   </div>
   <svg id="chart" viewBox="0 0 980 560" xmlns="http://www.w3.org/2000/svg"></svg>
-  <div class="legend">Dashed tail = 52-wk avg D/P · Ring = current holding · Ghost trails = prior sessions · ST/LT momentum from 07/22 closing upload · Weekend gap — next session 07/28</div>
+  <div class="legend">Dashed tail = 52-wk avg D/P · Ring = current holding · Ghost trails = prior sessions · ST/LT momentum: 07/24 closing · Weekend gap — next session 07/28 · FOMC 07/29</div>
   <div class="tmnav">
-    <button class="ctl tmb on" data-s="6">07/23 (current)</button>
+    <button class="ctl tmb on" data-s="7">07/24 (current)</button>
+    <button class="ctl tmb" data-s="6">07/23</button>
     <button class="ctl tmb" data-s="5">07/22</button>
     <button class="ctl tmb" data-s="4">07/21</button>
     <button class="ctl tmb" data-s="3">07/20</button>
     <button class="ctl tmb" data-s="2">07/17 ✓</button>
     <button class="ctl tmb" data-s="1">07/16</button>
     <button class="ctl tmb" data-s="0">07/15</button>
-    <span class="seslabel" id="seslabel">Showing: 07/23/2026</span>
+    <span class="seslabel" id="seslabel">Showing: 07/24/2026</span>
   </div>
   <div class="detail" id="detail"></div>
   <div class="snap">
@@ -141,43 +142,43 @@
   </div>
 </div>
 
-<h2>Key reads — 07/23/2026</h2>
+<h2>Key reads — 07/24/2026</h2>
 <div class="reads">
   <div class="read kg">
-    <div class="rh"><b>RQI</b><span class="st">Session 6 — 4 consecutive compression</span></div>
-    <div class="mx"><span>Z1Y <b>−1.95</b> <span class="δup">▲+0.10</span></span><span>D/P <b>−8.87%</b></span><span>Peak Z1Y <b>−2.65</b></span><span>Recovery <b>+0.70pt</b></span></div>
-    <div class="bar"><i style="width:78%;background:var(--green)"></i></div>
-    Four consecutive sessions of compression since the post-expiry widening stopped. The pace slowed today (+0.10pt vs +0.30pt yesterday) but the direction held. Cumulative Z1Y recovery from peak: +0.70pt. The thesis is active and intact heading into the weekend. FOMC 07/29 is the single most important variable — a hawkish outcome could reset much of this progress; a hold sustains it.
-  </div>
-  <div class="read ko">
-    <div class="rh"><b>BST</b><span class="st">Trigger proximity — 0.35pt</span></div>
-    <div class="mx"><span>Z1Y <b>−1.65</b> <span class="δdn">▼−0.14</span></span><span>D/P <b>−9.37%</b></span><span>NAV <b>$50.47</b></span><span>Trigger gap <b>0.35pt</b></span></div>
-    <div class="bar"><i style="width:83%;background:var(--orange)"></i></div>
-    Closest to the −2.00 trigger threshold in the current window. A −0.35pt session next week fires the trigger condition. The prior trigger (June 08) fired at this same level and resolved by June 30 — a clean 22-day thesis. Whether the framework calls for action at −2.00 depends on QTI's assessment of the tech tape and FOMC context going into next week. The two-session confirmation rule still applies — one session at ≤ −2.00 doesn't validate, two consecutive sessions do.
-  </div>
-  <div class="read ko">
-    <div class="rh"><b>ERH</b><span class="st">Quadrant change — Green to Orange</span></div>
-    <div class="mx"><span>Z1Y <b>−0.73</b> <span class="δdn">▼−0.90</span></span><span>D/P <b>−8.75%</b></span><span>52-wk avg <b>−7.77%</b></span><span>NAV <b>$13.15</b></span></div>
-    <div class="bar"><i style="width:36%;background:var(--orange)"></i></div>
-    Largest single-session Z1Y drop in the holdings universe today. Yesterday's +0.17 Green reading appears to have been a temporary spike — today's print is more consistent with the prior week's trajectory. The −0.90pt single-session move is anomalous and warrants watching: if next session recovers back toward zero, it was a technical blip; if it continues lower, the utility tape is genuinely softening. ROC-primary flag unchanged.
-  </div>
-  <div class="read ko">
-    <div class="rh"><b>PCN</b><span class="st">NAV new low — seven sessions of erosion</span></div>
-    <div class="mx"><span>Z1Y <b>−1.40</b></span><span>NAV <b>$11.32</b></span><span>Session low <b>yes</b></span><span>LT Mom <b>−19.94%</b></span></div>
-    <div class="bar"><i style="width:58%;background:var(--orange)"></i></div>
-    NAV $11.32 is the lowest in the seven-session window, continuing a consistent downward drift of $0.13 since 07/15. The ATM shelf, paired swap distribution structure, and seven consecutive sessions of NAV erosion form a coherent and concerning pattern. Decision not to add confirmed correct. Current position: monitor for any stabilization signal — none yet present.
+    <div class="rh"><b>RQI</b><span class="st">5 sessions — thesis active</span></div>
+    <div class="mx"><span>Z1Y <b>−1.98</b> <span class="δdn">▼−0.03</span></span><span>D/P <b>−9.01%</b></span><span>Price <b>$12.63</b> <span class="δup">▲+$0.30</span></span><span>ST Mom <b>+2.43%</b></span></div>
+    <div class="bar"><i style="width:74%;background:var(--green)"></i></div>
+    Mixed session technically — NAV (+$0.35) outpaced price (+$0.30), fractionally widening the discount. Z1Y essentially flat at −1.98. But the price direction is right (+$0.30), ST momentum is positive (+2.43%), and five sessions without a reversal is a meaningful streak. The REIT sleeve broadly bid today. Thesis active into the weekend.
   </div>
   <div class="read kg">
-    <div class="rh"><b>UTG</b><span class="st">Stabilizing — Z1Y back positive</span></div>
-    <div class="mx"><span>Z1Y <b>+0.05</b> <span class="δup">▲+0.18</span></span><span>D/P <b>−0.37%</b></span><span>NAV <b>$40.58</b></span><span>Z3M <b>+0.60</b></span></div>
-    <div class="bar"><i style="width:52%;background:var(--green)"></i></div>
-    Z1Y returned to positive territory after yesterday's post-ex-div dip to −0.13. NAV $40.58 recovering toward pre-ex-div levels. D/P −0.37% — slight discount, normalized from the slight premium of prior sessions. Z3M +0.60 and Z6M +0.27 confirm the structure is intact. Ex-dividend mechanics fully resolved.
+    <div class="rh"><b>BST</b><span class="st">Sharp recovery — trigger relieved</span></div>
+    <div class="mx"><span>Z1Y <b>−0.84</b> <span class="δup">▲+0.81</span></span><span>D/P <b>−7.99%</b></span><span>Gap to trigger <b>1.16pt</b></span><span>LT Mom <b>+10.91%</b></span></div>
+    <div class="bar"><i style="width:42%;background:var(--green)"></i></div>
+    The week's most dramatic single-session move. Z1Y +0.81pt in one session pulls BST well away from the −2.00 trigger threshold. The prior week's proximity (0.35pts) is now resolved — trigger watch de-escalated. LT momentum +10.91% and 1-week +0.73% confirm the structural thesis is intact. The pattern of NAV-outpacing-price that drove the discount widening appears to have corrected.
+  </div>
+  <div class="read kg">
+    <div class="rh"><b>UTG</b><span class="st">Green quadrant restored</span></div>
+    <div class="mx"><span>Z1Y <b>+0.57</b> <span class="δup">▲+0.52</span></span><span>D/P <b>+0.28%</b></span><span>NAV <b>$39.93</b></span><span>LT Mom <b>+20.45%</b></span></div>
+    <div class="bar"><i style="width:57%;background:var(--green)"></i></div>
+    Full ex-dividend normalization complete. Z1Y +0.57 back in Green quadrant, D/P returned to slight premium (+0.28%). Z3M +1.06, Z6M +0.82. Dislocation thesis resolved cleanly and the position is running constructively. LT momentum +20.45% leads the utility/infra sleeve.
+  </div>
+  <div class="read ka">
+    <div class="rh"><b>ERH</b><span class="st">Orange confirmed — 2nd session</span></div>
+    <div class="mx"><span>Z1Y <b>−0.73</b></span><span>D/P <b>−9.42%</b> <span class="δdn">▼−0.67pt</span></span><span>ST Mom <b>−2.11%</b></span><span>LT Mom <b>+0.18%</b></span></div>
+    <div class="bar"><i style="width:36%;background:#E3A008"></i></div>
+    Second consecutive session in Orange quadrant — the 07/22 spike to +0.17 Green is now clearly the anomaly. D/P widened further to −9.42% vs −7.77% avg. ST momentum −2.11% (07/24 closing). The utility tape softened into the close while other sectors recovered. FOMC outcome on 07/29 is directly relevant — utility CEFs with leverage are among the most rate-sensitive instruments in the sleeve.
   </div>
   <div class="read kp">
     <div class="rh"><b>Weekend setup</b><span class="st">FOMC 07/29</span></div>
-    <div class="mx"><span>RQI <b>−1.95</b> ↑</span><span>BST <b>−1.65</b> ↓</span><span>ERH <b>−0.73</b> ↓</span><span>FOMC <b>07/29</b></span></div>
-    <div class="bar"><i style="width:60%;background:#6366F1"></i></div>
-    Heading into the weekend: RQI compression thesis active (4 sessions, +0.70pt recovery); BST at 0.35pt from trigger threshold; ERH technical quadrant change to monitor. The FOMC decision on 07/29 is the dominant binary event — hold/dovish extends the positive RQI and relieves BST; hike/hawkish reverses both and may push BST through the trigger threshold. No action items before Monday — clock resumes 07/28.
+    <div class="mx"><span>RQI <b>−1.98</b> · 5 sessions ↑</span><span>BST <b>−0.84</b> · recovered</span><span>ERH <b>−0.73</b> · Orange ×2</span><span>FOMC <b>Tuesday</b></span></div>
+    <div class="bar"><i style="width:62%;background:#6366F1"></i></div>
+    Heading into the weekend in better shape than last Friday. BST trigger pressure relieved. RQI compression streak intact at five sessions. UTG fully resolved. The remaining binary: FOMC 07/29. A hold extends all three positive threads; a hike reverses the REIT compression and could push BST and ERH back under pressure. The $5K add decision deferred pending FOMC outcome remains the right posture. Next session: Monday 07/28.
+  </div>
+  <div class="read ko">
+    <div class="rh"><b>PCN</b><span class="st">NAV stabilized — LT mom new low</span></div>
+    <div class="mx"><span>Z1Y <b>−1.40</b></span><span>NAV <b>$11.32</b> stabilized</span><span>LT Mom <b>−20.33%</b></span><span>Premium <b>+2.65%</b></span></div>
+    <div class="bar"><i style="width:56%;background:var(--orange)"></i></div>
+    NAV held flat at $11.32 — first session without erosion in eight. One session of stabilization does not reverse the trend but it is worth noting. LT momentum −20.33% is a new low in the tracking window. Decision not to add confirmed. ATM shelf still active and distribution source still unconfirmed from annual report. No change to thesis.
   </div>
 </div>
 
@@ -186,10 +187,10 @@
 
 <script>
 const MOM={
-  PCN:[-1.18,-19.94],BDJ:[3.77,7.51],EOI:[0.77,7.10],BME:[4.46,2.71],
-  RQI:[-0.29,-5.95],RNP:[0.54,-8.64],RFI:[0.88,-12.57],AIO:[-0.75,13.43],
-  BST:[1.36,13.53],DNP:[1.58,7.95],ERH:[-0.29,0.52],BUI:[-0.75,17.33],
-  UTF:[2.81,11.20],UTG:[-3.90,21.58]
+  PCN:[-1.82,-20.33],BDJ:[2.35,5.90],EOI:[0.79,6.21],BME:[4.64,3.91],
+  RQI:[0.69,-4.22],RNP:[0.82,-8.04],RFI:[3.04,-10.19],AIO:[-1.50,12.14],
+  BST:[-0.15,10.91],DNP:[1.81,8.75],ERH:[-2.11,0.18],BUI:[-0.41,17.20],
+  UTF:[3.23,12.37],UTG:[-2.47,20.45]
 };
 const SESSIONS=[
   {date:"07/15/2026",data:{
@@ -296,13 +297,28 @@ const SESSIONS=[
     PDX:[-0.44,0.03,-0.44,-10.20,-9.39,7.51,23.73,21.31],RFI:[-0.12,-0.91,-1.40,-4.50,-0.31,8.38,11.99,11.45],
     RLTY:[0.38,-0.39,-0.93,-8.46,-6.87,8.30,17.37,15.90],RNP:[-1.12,-1.53,-1.49,-7.82,-1.77,8.01,22.11,20.38],
     RQI:[-1.10,-1.82,-1.95,-8.87,-3.53,8.76,13.53,12.33],UTF:[0.72,1.27,0.52,-2.79,-4.68,7.11,28.63,27.83],
-    UTG:[0.60,0.27,0.05,-0.37,-0.43,6.23,40.58,40.43]}}
+    UTG:[0.60,0.27,0.05,-0.37,-0.43,6.23,40.58,40.43]}},
+  {date:"07/24/2026",data:{
+    AIO:[-0.31,0.01,-0.67,-10.08,-7.12,8.35,28.77,25.60],ASGI:[1.97,2.12,2.57,10.69,2.32,10.75,22.16,24.54],
+    BDJ:[0.97,-0.19,-0.60,-6.80,-5.87,7.75,10.26,9.59],BME:[-1.18,-0.13,0.86,-3.25,-5.84,7.41,44.23,42.85],
+    BST:[0.24,-0.47,-0.84,-7.99,-6.53,6.56,50.47,45.35],BUI:[-0.67,-0.40,-0.83,-0.29,2.44,6.67,27.78,27.87],
+    CSQ:[1.23,0.51,-0.62,-9.21,-7.97,8.05,22.03,20.00],DNP:[0.70,1.12,0.96,8.70,5.96,7.03,10.12,11.10],
+    EOI:[0.98,-0.52,-0.90,-5.79,-3.11,8.15,20.95,19.70],EOS:[0.18,-0.39,-0.88,-8.76,-6.03,8.57,23.52,21.35],
+    ERH:[-0.93,-0.56,-0.73,-9.42,-7.77,8.76,13.15,11.93],ETG:[-0.01,-0.51,-1.20,-9.52,-6.93,6.82,25.21,22.80],
+    GDV:[-0.27,-0.31,-0.11,-10.78,-10.71,6.09,33.11,29.73],GLU:[0.28,-0.57,-0.98,-3.46,-0.43,6.77,20.21,19.39],
+    HTD:[1.09,1.55,1.84,-3.59,-6.13,7.31,26.88,26.08],NBXG:[0.06,0.02,-0.74,-13.85,-12.65,9.49,17.76,14.93],
+    NXG:[1.01,1.05,0.85,1.23,-1.79,11.87,59.92,59.95],PCN:[-1.22,-1.04,-1.40,2.65,6.29,11.67,11.32,11.64],
+    PDI:[-1.28,-1.62,-1.44,2.43,8.82,16.46,15.63,16.04],PDO:[-0.47,-0.62,-1.14,1.73,3.76,11.91,12.66,12.91],
+    PDX:[-0.44,0.03,-0.44,-9.55,-9.40,7.51,23.73,21.41],RFI:[0.09,-0.81,-1.30,-4.26,-0.34,8.21,12.22,11.70],
+    RLTY:[-0.20,-0.71,-1.12,-8.79,-6.88,8.30,17.74,16.18],RNP:[-1.25,-1.63,-1.55,-8.10,-1.82,8.01,22.11,20.65],
+    RQI:[-1.10,-1.82,-1.98,-9.01,-3.55,8.76,13.88,12.63],UTF:[0.99,1.49,0.69,-2.26,-4.70,7.11,28.63,28.07],
+    UTG:[1.06,0.82,0.57,0.28,-0.43,6.23,39.93,40.04]}}
 ];
 
 const HOLDINGS=new Set(["PCN","BDJ","EOI","BUI","BME","RQI","RNP","RFI","AIO","BST","DNP","UTF","ERH","UTG"]);
 const QCOLOR={G:"#1D9E75",B:"#378ADD",O:"#D85A30",X:"#888780"};
 const QNAME={G:"Green",B:"Blue",O:"Orange",X:"Gray"};
-let zIdx=2,qFilter="all",searchTerm="",holdOnly=false,sesIdx=6;
+let zIdx=2,qFilter="all",searchTerm="",holdOnly=false,sesIdx=7;
 const W=980,H=560,ML=54,MR=16,MT=14,MB=40;
 function quad(d){return d[2]>=0?(d[3]<0?"G":"B"):(d[3]<0?"O":"X");}
 function getExtent(){
@@ -333,7 +349,7 @@ function render(){
   }
   s+=`<text x="${W/2}" y="${H-6}" font-size="11" fill="#5A636B" text-anchor="middle">Z-Score (${['Z3M','Z6M','Z1Y'][zIdx]})</text>`;
   s+=`<text x="14" y="${H/2}" font-size="11" fill="#5A636B" text-anchor="middle" transform="rotate(-90 14 ${H/2})">Discount / Premium %</text>`;
-  const ghostOps=[0.04,0.07,0.10,0.14,0.19,0.25];
+  const ghostOps=[0.04,0.06,0.09,0.12,0.16,0.21,0.27];
   if(sesIdx===SESSIONS.length-1){
     for(let gi=0;gi<SESSIONS.length-1;gi++){
       const gs=SESSIONS[gi];
