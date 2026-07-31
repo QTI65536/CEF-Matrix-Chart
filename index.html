@@ -3,321 +3,669 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CEF Time Machine · 07/28/2026</title>
+<title>DSM Time Machine · 07/30/2026</title>
 <style>
-  :root{--green:#1D9E75;--blue:#378ADD;--orange:#D85A30;--gray:#888780;--ink:#1E2429;--sub:#5A636B;--line:#DEE3E7;--bg:#F7F8F9;--card:#FFFFFF;}
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);padding:20px;max-width:1100px;margin:0 auto}
-  h1{font-size:19px;font-weight:700}
-  .hdr{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:4px}
-  .badge{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:10px}
-  .badge.neg{background:#FAECE7;color:#B4431F}
-  .note{font-size:12px;color:var(--sub);margin-bottom:14px}
-  .verdict{border-radius:8px;padding:12px 16px;margin-bottom:10px;font-size:13px;line-height:1.5;border:1.5px solid}
-  .verdict.strong{background:#E1F5EE;border-color:#1D9E75;color:#085041}
-  .verdict.info{background:#EEF2FF;border-color:#6366F1;color:#3730A3}
-  .verdict b{font-weight:700}.verdict .vhead{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px}
-  .alerts{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
-  .al{background:var(--card);border:1px solid var(--line);border-left-width:4px;border-radius:6px;padding:8px 12px;font-size:13px;line-height:1.45}
-  .al b{font-weight:700}
-  .al.g{border-left-color:#1D9E75;background:#E1F5EE}
-  .al.r{border-left-color:#D85A30;background:#FAECE7}
-  .al.a{border-left-color:#E3A008;background:#FFF8EC}
-  .al.p{border-left-color:#6366F1;background:#EEF2FF}
-  .al.c{border-left-color:#7B9E3E;background:#EFF6E8}
-  .al .tag{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-right:6px;opacity:.75}
-  .panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:16px}
-  .controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
-  .controls .grp{display:flex;gap:4px}
-  button.ctl{font-size:12px;padding:5px 10px;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;color:var(--ink)}
-  button.ctl.on{background:var(--ink);color:#fff;border-color:var(--ink)}
-  button.ctl.qg.on{background:var(--green);border-color:var(--green)}
-  button.ctl.qb.on{background:var(--blue);border-color:var(--blue)}
-  button.ctl.qo.on{background:var(--orange);border-color:var(--orange)}
-  button.ctl.qx.on{background:var(--gray);border-color:var(--gray)}
-  input.search{font-size:12px;padding:5px 9px;border:1px solid var(--line);border-radius:6px;width:120px}
-  .legend{font-size:11.5px;color:var(--sub);margin-top:8px}
-  .tmnav{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap}
-  .tmnav button{font-size:12px;padding:4px 10px;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer}
-  .tmnav button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
-  .tmnav .seslabel{font-size:12px;color:var(--sub)}
-  svg{width:100%;height:auto;display:block}
-  .dot{cursor:pointer}.dimmed{opacity:.10}
-  .tooltip{position:fixed;pointer-events:none;background:#1E2429;color:#fff;font-size:11.5px;line-height:1.5;padding:8px 10px;border-radius:6px;z-index:50;display:none;max-width:260px}
-  .tooltip b{color:#9FD8C4}
-  .snap{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-top:14px}
-  .snapcard{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:12.5px}
-  .snapcard h3{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--sub);margin-bottom:6px}
-  .qcount{display:inline-block;padding:1px 7px;border-radius:8px;color:#fff;font-weight:700;font-size:12px;margin-right:5px}
-  .detail{display:none;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px;margin-top:12px;font-size:13px}
-  .detail table{width:100%;border-collapse:collapse;font-size:12.5px}
-  .detail td{padding:3px 8px 3px 0;color:var(--sub)}.detail td.v{color:var(--ink);font-weight:600}
-  h2{font-size:15px;margin:20px 0 10px}
-  .reads{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px}
-  .read{background:var(--card);border:1px solid var(--line);border-top-width:4px;border-radius:8px;padding:12px 14px;font-size:12.5px;line-height:1.5}
-  .read.kg{border-top-color:var(--green)}.read.ka{border-top-color:#E3A008}
-  .read.kb{border-top-color:var(--blue)}.read.ko{border-top-color:var(--orange)}.read.kp{border-top-color:#6366F1}
-  .read.kx{border-top-color:var(--gray)}
-  .read .rh{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-  .read .rh b{font-size:14px}
-  .read .st{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:2px 7px;border-radius:8px;background:var(--bg);color:var(--sub)}
-  .read .mx{display:grid;grid-template-columns:1fr 1fr;gap:2px 12px;margin:6px 0;color:var(--sub)}
-  .read .mx b{color:var(--ink)}
-  .bar{height:5px;background:var(--line);border-radius:3px;margin:7px 0;overflow:hidden}
-  .bar i{display:block;height:100%;border-radius:3px}
-  .disc{font-size:11px;color:var(--sub);font-style:italic;margin-top:22px;border-top:1px solid var(--line);padding-top:10px}
-  .δup{color:#1D9E75;font-weight:600}.δdn{color:#D85A30;font-weight:600}
+  :root {
+    --bg: #0f1117; --surface: #1a1d27; --surface2: #21253a; --border: #2e3248;
+    --text: #e2e6f0; --text-dim: #8892a8; --text-faint: #4a5270;
+    --green: #1D9E75; --green-bg: #0d2a1e;
+    --blue: #378ADD; --blue-bg: #0d1e35;
+    --orange: #D85A30; --orange-bg: #2a1508;
+    --gray-q: #888780; --gray-bg: #1e1e1e;
+    --amber: #d4a017; --accent: #5b6af0;
+    --font-mono: 'SF Mono','Fira Code','Consolas',monospace;
+    --font-ui: -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-ui); font-size: 13px; min-height: 100vh; display: flex; flex-direction: column; }
+
+  .header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 10px 18px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+  .logo { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; color: var(--text-dim); text-transform: uppercase; }
+  .session-badge { background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 3px 10px; font-size: 11px; font-family: var(--font-mono); margin-left: 12px; }
+  .net-change { font-size: 12px; font-weight: 600; color: #4ade80; font-family: var(--font-mono); }
+
+  .alert-panel { padding: 8px 18px; display: flex; flex-direction: column; gap: 4px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+  .al { padding: 5px 9px; border-radius: 4px; font-size: 11.5px; line-height: 1.45; border-left: 3px solid; }
+  .al strong { font-weight: 700; }
+  .al-g { background: #0d2a1e; border-color: #1D9E75; color: #a8eecf; }
+  .al-r { background: #2a1508; border-color: #D85A30; color: #f4b89a; }
+  .al-a { background: #2a2210; border-color: #d4a017; color: #f0d88a; }
+  .al-p { background: #0d1e35; border-color: #378ADD; color: #9ec5f4; }
+  .al-c { background: #1a2410; border-color: #6a8f3c; color: #b8d88a; }
+  .al-dq { background: #2a1e08; border-color: #d4830a; color: #f4c87a; }
+
+  .main { display: flex; flex: 1; overflow: hidden; min-height: 0; }
+
+  .sidebar { width: 195px; flex-shrink: 0; background: var(--surface); border-right: 1px solid var(--border); padding: 10px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; }
+  .ctrl-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 4px; }
+  .btn-group { display: flex; gap: 3px; }
+  .btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim); padding: 4px 9px; border-radius: 4px; font-size: 11px; cursor: pointer; transition: all 0.12s; }
+  .btn:hover { border-color: var(--accent); color: var(--text); }
+  .btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .qbtn { background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim); padding: 5px 8px; border-radius: 4px; font-size: 11px; cursor: pointer; width: 100%; text-align: left; display: flex; align-items: center; gap: 6px; margin-bottom: 3px; transition: all 0.12s; }
+  .qdot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .qbtn.q-all.active { border-color: var(--accent); color: var(--text); background: #1e2035; }
+  .qbtn.q-green.active { border-color: #1D9E75; color: #a8eecf; background: #0d2a1e; }
+  .qbtn.q-blue.active { border-color: #378ADD; color: #9ec5f4; background: #0d1e35; }
+  .qbtn.q-orange.active { border-color: #D85A30; color: #f4b89a; background: #2a1508; }
+  .qbtn.q-gray.active { border-color: #888780; color: #c8c8c4; background: #1e1e1e; }
+
+  .search-input { width: 100%; background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 5px 8px; border-radius: 4px; font-size: 12px; outline: none; }
+  .search-input:focus { border-color: var(--accent); }
+  .search-input::placeholder { color: var(--text-faint); }
+
+  .toggle-row { display: flex; align-items: center; justify-content: space-between; }
+  .toggle-label { font-size: 11px; color: var(--text-dim); }
+  .toggle { width: 32px; height: 16px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; position: relative; transition: background 0.2s; flex-shrink: 0; }
+  .toggle.on { background: var(--accent); border-color: var(--accent); }
+  .toggle::after { content: ''; position: absolute; width: 10px; height: 10px; background: var(--text-faint); border-radius: 50%; top: 2px; left: 2px; transition: left 0.2s, background 0.2s; }
+  .toggle.on::after { left: 18px; background: #fff; }
+
+  .trail-toggle-row { display: flex; align-items: center; justify-content: space-between; }
+
+  .session-list { display: flex; flex-direction: column; gap: 2px; max-height: 200px; overflow-y: auto; }
+  .sess-item { padding: 3px 6px; border-radius: 3px; font-size: 10px; font-family: var(--font-mono); color: var(--text-faint); cursor: pointer; border-left: 2px solid transparent; transition: all 0.1s; }
+  .sess-item:hover { background: var(--surface2); color: var(--text-dim); }
+  .sess-item.current { color: var(--text); border-left-color: var(--accent); background: var(--surface2); }
+  .sess-item.no-data { color: var(--text-faint); font-style: italic; cursor: default; }
+  .sess-item.no-data:hover { background: none; }
+
+  .data-notice { font-size: 10px; color: var(--text-faint); line-height: 1.4; padding: 4px 2px; border-top: 1px solid var(--border); margin-top: 2px; }
+
+  .chart-area { flex: 1; position: relative; overflow: hidden; }
+  #scatter { display: block; }
+
+  .detail-panel { width: 215px; flex-shrink: 0; background: var(--surface); border-left: 1px solid var(--border); padding: 14px; overflow-y: auto; display: none; }
+  .detail-panel.open { display: block; }
+  .detail-ticker { font-size: 22px; font-weight: 800; margin-bottom: 3px; }
+  .detail-quad { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; padding: 2px 8px; border-radius: 3px; display: inline-block; }
+  .dq-g { background: #0d2a1e; color: #1D9E75; }
+  .dq-b { background: #0d1e35; color: #378ADD; }
+  .dq-o { background: #2a1508; color: #D85A30; }
+  .dq-x { background: #1e1e1e; color: #888780; }
+  .detail-rows { display: flex; flex-direction: column; gap: 6px; }
+  .detail-row { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border); padding-bottom: 5px; }
+  .detail-row:last-child { border-bottom: none; }
+  .dr-label { font-size: 10px; color: var(--text-dim); }
+  .dr-val { font-size: 12px; font-family: var(--font-mono); font-weight: 600; }
+  .dr-val.pos { color: #4ade80; } .dr-val.neg { color: #f87171; } .dr-val.neutral { color: var(--text); }
+  .close-btn { float: right; background: none; border: none; color: var(--text-faint); cursor: pointer; font-size: 18px; line-height: 1; }
+  .close-btn:hover { color: var(--text); }
+
+  #tooltip { position: fixed; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; font-size: 11px; pointer-events: none; display: none; z-index: 1000; min-width: 165px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+  .tt-ticker { font-size: 14px; font-weight: 800; margin-bottom: 5px; }
+  .tt-row { display: flex; justify-content: space-between; gap: 12px; color: var(--text-dim); margin-bottom: 2px; }
+  .tt-row span:last-child { color: var(--text); font-family: var(--font-mono); }
+  .tt-sep { border-top: 1px solid var(--border); margin: 4px 0; }
+  .tt-trail-note { font-size: 10px; color: var(--text-faint); margin-top: 3px; }
+
+  .disclaimer { padding: 6px 18px; font-size: 10px; color: var(--text-faint); border-top: 1px solid var(--border); background: var(--surface); flex-shrink: 0; }
 </style>
 </head>
 <body>
 
-<div class="hdr">
-  <h1>CEF Time Machine · 07/28/2026 (Tuesday)</h1>
-  <span class="badge neg">Net Δ: −$4.20</span>
-</div>
-<div class="note">Session 10 · Final pre-FOMC session · FOMC Wed 07/29 2:00pm ET · RQI session 9 of clean window · Momentum from 07/24 closing upload · Next session post-FOMC: Thu 07/30</div>
-
-<!-- VERDICTS -->
-<div class="verdict strong">
-  <div class="vhead">RQI — Session 9 · Seven consecutive sessions of compression</div>
-  <b>Seven consecutive sessions — the streak continues into FOMC eve.</b> Z1Y −1.57 (from −1.67, Δ +0.10). D/P −7.96% from −8.19% (Δ +0.23pt). Price +$0.06, NAV +$0.03 — both sides ticked up slightly, price marginally outpacing NAV. Cumulative Z1Y recovery from −2.65 peak: +1.08pt. The market has now priced in a meaningful degree of REIT re-rating across seven sessions. Gap to −3.57% average: −4.39pts remaining. The FOMC decision in approximately 18 hours resolves the thesis direction.
+<div class="header">
+  <div style="display:flex;align-items:center">
+    <span class="logo">QTI Capital · DSM Framework</span>
+    <span class="session-badge">07/30/2026 Thu · Session 9 of 15-window</span>
+  </div>
+  <span class="net-change">Portfolio +$8.43</span>
 </div>
 
-<div class="verdict strong">
-  <div class="vhead">ERH — Quadrant change: Orange → Green · Thesis Working</div>
-  <b>ERH crossed into Green quadrant.</b> Z1Y +0.09 (from −0.11, Δ +0.20). D/P −7.65% vs −7.77% avg — the discount is now inside its own average. This is a genuine quadrant cross confirmed by the data, not the 07/22 anomalous spike (+0.17 that reversed immediately). The difference: today D/P also improved (+0.27pt) whereas on 07/22 D/P was unchanged while the z-score spiked alone. ROC-primary flag remains active — the distribution quality classification does not change on a quadrant cross. Monitor for two-session confirmation of the Green status.
+<div class="alert-panel">
+  <div class="al al-g"><strong>BST ↑ Quadrant change: Orange → Green (Thesis Working)</strong> — Z1Y +0.32 (from -0.84 at 07/24). Sharp two-session recovery from -1.65 peak on 07/23. Trigger de-escalated. Special dividend $2.3041/share ex-div 09/15/2026 — suppress trigger readings within ±3 sessions of that date.</div>
+  <div class="al al-g"><strong>ERH ↑ Quadrant change: Orange → Green (Thesis Working)</strong> — Z1Y +0.33, crossed zero. ROC-primary DQ alert remains active (57–66% ROC &gt;25% threshold). Yellow-flag classification unchanged.</div>
+  <div class="al al-p"><strong>UTG → Blue (Premium Territory)</strong> — D/P +0.42%; Z1Y +0.66. Quadrant shift: Green → Blue. Dislocation thesis fully resolved. Z1Y trajectory: -3.99 peak (06/26) → +0.66 today. Fair value — now at slight premium.</div>
+  <div class="al al-r"><strong>BUI ⚠ Quadrant change: Orange → Gray (Worst Setup)</strong> — D/P +1.90% premium; Z1Y -0.15. Trigger watch suspended — zero-cross requires D/P &lt; 0 before second-tranche clock restarts. Monitor for discount return.</div>
+  <div class="al al-r"><strong>RQI · Buy Zone</strong> — Z1Y -1.53. First post-FOMC (07/29) clean read. Post-rights-offering compression thesis active; watching for continuation.</div>
+  <div class="al al-r"><strong>RNP · Buy Zone</strong> — Z1Y -1.34, D/P -7.38%. Discount wide vs. 52-wk avg (-2.02%). NII-primary (57% NII). $5K add candidate — FOMC gate now cleared.</div>
+  <div class="al al-r"><strong>PCN · Worst Setup</strong> — Z1Y -1.24, D/P +2.55% premium. No-add confirmed. NAV $11.39. Monitoring for FY2026 N-CSR (~Sep 2026).</div>
+  <div class="al al-a"><strong>HTD · Thesis Working · Z1Y +2.54</strong> — Extreme positive reading, non-holding. D/P -2.34%. Flagged for awareness only.</div>
+  <div class="al al-p"><strong>FOMC 07/29 (Wed, yesterday)</strong> — Rate decision on record. Post-FOMC first clean read for rate-sensitive sleeve (RQI, RNP, RFI, DNP, UTF, UTG). $5K add decision gate cleared.</div>
+  <div class="al al-c"><strong>BDJ — Ex-div 07/24 (Fri)</strong> — Momentum columns restoring this session. Distribution: 50% NII / 50% LT gains.</div>
+  <div class="al al-dq"><strong>DQ Alert: RFI (~71% ROC) · ERH (57–66% ROC)</strong> — Both exceed 25% ROC threshold. Yellow-flag status maintained. AIO · UTF: distribution source unconfirmed — pending sponsor filing.</div>
 </div>
 
-<div class="verdict info">
-  <div class="vhead">FOMC 07/29 · Wednesday 2:00pm ET · Final pre-decision state</div>
-  The portfolio enters the FOMC decision in its strongest collective z-score configuration since the session window opened. RQI at seven sessions of compression, ERH crossed into Green, BST at −0.19 (one session from Green), BUI still in Gray but improving. The broad-based compression across rate-sensitive holdings suggests the market is pricing a hold with high confidence. A hold or dovish outcome validates all active theses simultaneously. A hike or hawkish surprise reverses everything — and does so from a position where the portfolio has already recovered meaningful ground.
-</div>
-
-<!-- ALERTS -->
-<div class="alerts">
-  <div class="al r"><span class="tag">Orange · Buy Zone</span><b>RQI</b> — Z1Y −1.57 (Δ +0.10). D/P −7.96% vs −3.57% avg. Seven consecutive sessions of compression. Cumulative Z1Y recovery: +1.08pt from −2.65 peak. Both price and NAV ticked up today with price (+$0.06) marginally outpacing NAV (+$0.03). Compression pace steady at approximately +0.10–0.30pt per session. FOMC tomorrow is the resolution event.</div>
-  <div class="al g"><span class="tag">Green · Thesis Working</span><b>ERH</b> — Quadrant change Orange → Green. Z1Y +0.09 (Δ +0.20). D/P −7.65% vs −7.77% avg — discount inside own average for the first time in the current window. This cross is supported by both z-score and D/P improvement simultaneously — materially more convincing than the 07/22 one-session spike. ROC-primary distribution flag unchanged. FOMC will be the first test of whether this Green reading holds.</div>
-  <div class="al r"><span class="tag">Orange · Buy Zone</span><b>BST</b> — Z1Y −0.19 (from −0.24, Δ +0.05). D/P −6.86% vs −6.54% avg. Continuing gradual recovery — now only 0.19pts from Green quadrant zero-cross. NAV fell another $0.95 today ($48.77→$47.82) while price fell $0.84 — the discount narrowed slightly. NAV has now dropped from $50.47 (07/23) to $47.82 — a $2.65 decline over five sessions that is separate from and precedes the special dividend event. Worth monitoring as a potential fundamental signal rather than purely technical.</div>
-  <div class="al r"><span class="tag">Red · Warning</span><b>PCN</b> — Gray quadrant (Z1Y −1.31, D/P +2.37% — premium, z-score negative). Essentially unchanged from 07/27 — Z1Y Δ +0.01, D/P Δ −0.01. NAV $11.37 (+$0.01). The marginal stabilization continues but two sessions of flat/fractional improvement do not constitute a trend reversal. No change to no-add decision.</div>
-  <div class="al r"><span class="tag">Red · Warning</span><b>BUI</b> — Gray quadrant (Z1Y −0.29, D/P +1.47%). Second consecutive session in Gray. D/P premium widened slightly (+0.12pt) as NAV fell $0.23 while price fell $0.20. Trigger clock remains reset. FOMC tomorrow directly relevant — a hold outcome is likely to push utility pricing back toward discount and return BUI to Orange. A hike could deepen the Gray positioning.</div>
-  <div class="al p"><span class="tag">Blue · Premium Territory</span><b>UTG</b> — Z1Y +1.73 (from +1.15, Δ +0.58). D/P +1.73% (from +1.00%). The z-score improvement is being driven by NAV declining faster than price — NAV fell $1.09 while price fell $0.82, mechanically expanding the premium. Z3M +2.00, Z6M +2.01 — UTG is printing some of the highest z-scores in the universe. This is the Worst Setup territory adjacent — Blue quadrant but premium expanding without fundamental support. Normal monitoring; no action.</div>
-  <div class="al r"><span class="tag">Red · DQ flag</span><b>RFI</b> — Z1Y −1.18, D/P −3.94% vs −0.39% avg. Essentially unchanged. ROC-primary flag active (~71% ROC). ST momentum +3.04% (07/24 closing) remains the best in the REIT sleeve. The structural ROC concern and chronic price underperformance remain the key limitations on this position.</div>
-  <div class="al p"><span class="tag">Info · FOMC</span><b>FOMC 07/29 · Wednesday 2:00pm ET</b> — Final pre-decision session complete. Seven sessions of RQI compression, ERH in Green, BST near zero-cross, BUI in Gray watching for reversal. All leveraged and rate-sensitive holdings now in their FOMC-eve positions. The $5K add decision — deferred since 07/15 — resolves tomorrow. Candidates: BUI (if FOMC triggers return to Orange and trigger watch resumes), RNP (deepest REIT dislocation relative to own average), BST (near Green, LT momentum intact).</div>
-  <div class="al c"><span class="tag">Corp · BST</span><b>BST special dividend reminder</b> — $2.3041/share, ex-div 09/15/2026, payable 09/30/2026. Trigger suppression window ±3 sessions of 09/15 per spec v1.4 Section 16 items 27–29. Not currently active.</div>
-</div>
-
-<!-- SCATTER -->
-<div class="panel">
-  <div class="controls">
-    <div class="grp">
-      <button class="ctl zt on" data-z="2">Z1Y</button>
-      <button class="ctl zt" data-z="1">Z6M</button>
-      <button class="ctl zt" data-z="0">Z3M</button>
+<div class="main">
+  <div class="sidebar">
+    <div>
+      <div class="ctrl-label">Z-Period (axis)</div>
+      <div class="btn-group">
+        <button class="btn" id="btn3m" onclick="setZPeriod('z3m',this)">3M</button>
+        <button class="btn" id="btn6m" onclick="setZPeriod('z6m',this)">6M</button>
+        <button class="btn active" id="btn1y" onclick="setZPeriod('z1y',this)">1Y</button>
+      </div>
+      <div style="font-size:10px;color:var(--text-faint);margin-top:4px;">Quadrant always Z1Y</div>
     </div>
-    <div class="grp">
-      <button class="ctl qf on" data-q="all">All</button>
-      <button class="ctl qf qg" data-q="G">Green · Thesis Working</button>
-      <button class="ctl qf qb" data-q="B">Blue · Premium Territory</button>
-      <button class="ctl qf qo" data-q="O">Orange · Buy Zone</button>
-      <button class="ctl qf qx" data-q="X">Gray · Worst Setup</button>
+
+    <div>
+      <div class="ctrl-label">Quadrant Filter</div>
+      <button class="qbtn q-all active" onclick="setQ('all',this)"><span class="qdot" style="background:var(--accent)"></span>All</button>
+      <button class="qbtn q-green" onclick="setQ('green',this)"><span class="qdot" style="background:#1D9E75"></span>Green · Thesis Working</button>
+      <button class="qbtn q-blue" onclick="setQ('blue',this)"><span class="qdot" style="background:#378ADD"></span>Blue · Premium Territory</button>
+      <button class="qbtn q-orange" onclick="setQ('orange',this)"><span class="qdot" style="background:#D85A30"></span>Orange · Buy Zone</button>
+      <button class="qbtn q-gray" onclick="setQ('gray',this)"><span class="qdot" style="background:#888780"></span>Gray · Worst Setup</button>
     </div>
-    <input class="search" id="search" placeholder="Search ticker…">
-    <button class="ctl" id="hold">★ My Holdings</button>
+
+    <div>
+      <div class="ctrl-label">Search</div>
+      <input class="search-input" type="text" placeholder="Ticker…" oninput="doSearch(this.value)">
+    </div>
+
+    <div>
+      <div class="toggle-row">
+        <span class="toggle-label">Holdings only</span>
+        <div class="toggle" id="hToggle" onclick="toggleHoldings(this)"></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="toggle-row">
+        <span class="toggle-label">Show trail</span>
+        <div class="toggle on" id="trailToggle" onclick="toggleTrail(this)"></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="ctrl-label">Session Log</div>
+      <div class="session-list">
+        <div class="sess-item current">07/30 Thu ● [current]</div>
+        <div class="sess-item no-data">07/29 Wed · FOMC day · no upload</div>
+        <div class="sess-item no-data">07/28 Tue · pending upload</div>
+        <div class="sess-item no-data">07/24 Fri · partial trail data</div>
+        <div class="sess-item no-data">07/23 Thu · pending upload</div>
+        <div class="sess-item no-data">07/22 Wed · pending upload</div>
+        <div class="sess-item no-data">07/21 Tue · pending upload</div>
+        <div class="sess-item no-data">07/20 Mon · pending upload</div>
+        <div class="sess-item no-data">07/17✓ Fri · corrected · pending upload</div>
+        <div class="sess-item no-data">07/16 Thu · pending upload</div>
+        <div class="sess-item no-data">07/15 Wed · pending upload</div>
+      </div>
+      <div class="data-notice">Trail = spec-sourced spot readings only (partial). Upload prior session data to populate full 15-session window.</div>
+    </div>
   </div>
-  <svg id="chart" viewBox="0 0 980 560" xmlns="http://www.w3.org/2000/svg"></svg>
-  <div class="legend">Dashed tail = 52-wk avg D/P · Ring = current holding · Ghost trails = prior sessions · ST/LT momentum from 07/24 closing · FOMC Wed 07/29 · Next session Thu 07/30</div>
-  <div class="tmnav">
-    <button class="ctl tmb on" data-s="9">07/28 (current)</button>
-    <button class="ctl tmb" data-s="8">07/27</button>
-    <button class="ctl tmb" data-s="7">07/24</button>
-    <button class="ctl tmb" data-s="6">07/23</button>
-    <button class="ctl tmb" data-s="5">07/22</button>
-    <button class="ctl tmb" data-s="4">07/21</button>
-    <button class="ctl tmb" data-s="3">07/20</button>
-    <button class="ctl tmb" data-s="2">07/17 ✓</button>
-    <button class="ctl tmb" data-s="1">07/16</button>
-    <button class="ctl tmb" data-s="0">07/15</button>
-    <span class="seslabel" id="seslabel">Showing: 07/28/2026</span>
+
+  <div class="chart-area" id="chartArea">
+    <canvas id="scatter"></canvas>
   </div>
-  <div class="detail" id="detail"></div>
-  <div class="snap">
-    <div class="snapcard"><h3 id="snapTitle">Quadrant counts — universe</h3><div id="snapCounts"></div></div>
-    <div class="snapcard"><h3>Deepest 3 by Z1Y</h3><div id="snapDeep"></div></div>
-    <div class="snapcard"><h3>Strongest Green quadrant</h3><div id="snapGreen"></div></div>
+
+  <div class="detail-panel" id="detailPanel">
+    <div style="margin-bottom:10px">
+      <button class="close-btn" onclick="closeDetail()">×</button>
+      <div class="detail-ticker" id="dTicker">—</div>
+      <span class="detail-quad" id="dQuad">—</span>
+    </div>
+    <div class="detail-rows" id="dRows"></div>
   </div>
 </div>
 
-<h2>Key reads — 07/28/2026</h2>
-<div class="reads">
-  <div class="read ko">
-    <div class="rh"><b>RQI</b><span class="st">Session 9 — 7 consecutive</span></div>
-    <div class="mx"><span>Z1Y <b>−1.57</b> <span class="δup">▲+0.10</span></span><span>D/P <b>−7.96%</b> <span class="δup">▲+0.23pt</span></span><span>Cumul. recovery <b>+1.08pt</b></span><span>Gap to avg <b>−4.39pt</b></span></div>
-    <div class="bar"><i style="width:76%;background:var(--green)"></i></div>
-    Seven sessions without a reversal. The cumulative Z1Y recovery from the −2.65 peak now exceeds 1.00pt for the first time. The pace has been consistent: the clean window has produced steady, uninterrupted compression across nine trading days. Tomorrow's FOMC is the binary event that either validates the full thesis or resets it.
-  </div>
-  <div class="read kg">
-    <div class="rh"><b>ERH</b><span class="st">Green quadrant — confirmed cross</span></div>
-    <div class="mx"><span>Z1Y <b>+0.09</b> <span class="δup">▲+0.20</span></span><span>D/P <b>−7.65%</b> <span class="δup">▲+0.27pt</span></span><span>52-wk avg <b>−7.77%</b></span><span>DQ flag <b>active ⚠</b></span></div>
-    <div class="bar"><i style="width:52%;background:var(--green)"></i></div>
-    The Green cross is supported by both z-score and D/P improvement simultaneously — the key distinction from the 07/22 anomalous spike that reversed in a single session. Discount is now inside its own average. ROC-primary classification unchanged — distribution quality flag remains. Watch for two-session confirmation. FOMC is the first test.
-  </div>
-  <div class="read ko">
-    <div class="rh"><b>BST</b><span class="st">0.19pt from Green — NAV watch</span></div>
-    <div class="mx"><span>Z1Y <b>−0.19</b> <span class="δup">▲+0.05</span></span><span>D/P <b>−6.86%</b></span><span>NAV <b>$47.82</b> <span class="δdn">▼−$0.95</span></span><span>Ex-div <b>09/15/2026</b></span></div>
-    <div class="bar"><i style="width:91%;background:var(--orange)"></i></div>
-    BST is 0.19pts from a Green quadrant zero-cross and approaching a potential trigger level consideration in the other direction. The NAV has now fallen $2.65 over five sessions ($50.47→$47.82) — distinct from and preceding the 09/15 special dividend. This NAV softening is worth tracking. LT momentum +10.91% (07/24) remains intact. Trigger 1.81pts away.
-  </div>
-  <div class="read kx">
-    <div class="rh"><b>BUI</b><span class="st">Gray · second session</span></div>
-    <div class="mx"><span>Z1Y <b>−0.29</b> <span class="δup">▲+0.03</span></span><span>D/P <b>+1.47%</b> <span class="δdn">▼premium widening</span></span><span>NAV <b>$27.14</b></span><span>Trigger <b>reset</b></span></div>
-    <div class="bar"><i style="width:30%;background:var(--gray)"></i></div>
-    Second consecutive Gray session. Premium continued to widen slightly as NAV fell $0.23 while price fell $0.20. FOMC tomorrow is the key — a hold outcome should push utility pricing back toward discount and return BUI to Orange quadrant. If that happens and Z1Y recovers toward zero, the trigger watch could resume. The unleveraged structure and NII-primary distribution make BUI the cleanest $5K add candidate if the setup re-establishes.
-  </div>
-  <div class="read kb">
-    <div class="rh"><b>UTG</b><span class="st">Blue · Z1Y +1.73 · premium expanding</span></div>
-    <div class="mx"><span>Z1Y <b>+1.73</b> <span class="δup">▲+0.58</span></span><span>D/P <b>+1.73%</b></span><span>Z3M <b>+2.00</b></span><span>LT Mom <b>+20.45%</b></span></div>
-    <div class="bar"><i style="width:70%;background:var(--blue)"></i></div>
-    Z3M and Z6M both at 2.00 and 2.01 respectively — UTG is printing among the most elevated z-scores in the universe. The premium expansion is mechanically driven by NAV falling faster than price. No action — normal monitoring. The dislocation thesis that drove the original entry fully resolved weeks ago.
-  </div>
-  <div class="read kp">
-    <div class="rh"><b>FOMC decision</b><span class="st">Wed 07/29 · 2:00pm ET</span></div>
-    <div class="mx"><span>RQI <b>−1.57</b> · 7 sessions</span><span>ERH <b>+0.09</b> · Green</span><span>BST <b>−0.19</b> · near Green</span><span>BUI <b>Gray</b> · FOMC key</span></div>
-    <div class="bar"><i style="width:75%;background:#6366F1"></i></div>
-    The final pre-FOMC session is in the books. The portfolio has its strongest collective z-score profile since the window opened. Seven sessions of RQI compression, ERH in Green, BST approaching zero-cross, BUI in Gray watching for reversal. Tomorrow's decision at 2:00pm ET resolves the $5K add question, the BUI trigger watch, the RQI thesis continuation, and the ERH Green confirmation simultaneously. Next session: Thursday 07/30 post-FOMC.
-  </div>
-</div>
+<div id="tooltip"></div>
 
-<div class="disc">For informational purposes only. Not investment advice. Past performance is no guarantee of future results. Always conduct your own due diligence before making investment decisions.</div>
-<div class="tooltip" id="tip"></div>
+<div class="disclaimer">All analytical output is for informational purposes only. Not investment advice. Past performance is no guarantee of future results. Conduct your own due diligence before making investment decisions.</div>
 
 <script>
-const MOM={
-  PCN:[-1.82,-20.33],BDJ:[2.35,5.90],EOI:[0.79,6.21],BME:[4.64,3.91],
-  RQI:[0.69,-4.22],RNP:[0.82,-8.04],RFI:[3.04,-10.19],AIO:[-1.50,12.14],
-  BST:[-0.15,10.91],DNP:[1.81,8.75],ERH:[-2.11,0.18],BUI:[-0.41,17.20],
-  UTF:[3.23,12.37],UTG:[-2.47,20.45]
+// ─── UNIVERSE DATA 07/30/2026 ────────────────────────────────────────────────
+// [z3m, z6m, z1y, dp, avg52wk, yield, nav, price, lev]
+const D = {
+  AIO:  [0.05, 0.45,-0.53,-9.60,-7.36,8.62,27.72,25.06,11.99],
+  ASGI: [1.02,1.18,1.67,7.98,2.44,11.08,22.06,23.82,0.98],
+  BDJ:  [0.78,-0.19,-0.67,-6.92,-5.88,7.67,10.41,9.69,0.12],
+  BME:  [1.83,1.56,1.61,-2.40,-5.75,7.23,44.60,43.53,0.15],
+  BST:  [1.49,0.53,0.32,-5.97,-6.53,6.57,48.57,45.67,0.11],
+  BUI:  [0.61,0.23,-0.15,1.90,2.40,6.75,26.88,27.39,0.11],
+  CSQ:  [0.69,0.21,-0.74,-9.50,-8.05,8.10,22.10,20.00,28.49],
+  DNP:  [1.91,1.73,1.73,11.07,6.04,7.13,9.85,10.94,22.85],
+  EOI:  [0.66,-0.60,-0.98,-6.12,-3.20,8.18,20.92,19.64,0],
+  EOS:  [-0.96,-1.23,-1.20,-9.82,-6.17,8.69,23.33,21.04,0],
+  ERH:  [0.27,0.60,0.33,-7.32,-7.75,8.93,12.71,11.78,21.09],
+  ETG:  [1.63,0.05,-0.78,-8.69,-7.00,6.57,25.88,23.63,15.78],
+  GDV:  [-0.36,-0.51,-0.38,-10.96,-10.71,6.05,33.40,29.74,14.13],
+  GLU:  [-1.07,-1.12,-1.59,-5.56,-0.51,6.94,20.15,19.03,17.69],
+  HTD:  [2.11,2.03,2.54,-2.34,-6.09,7.34,26.45,25.83,31.35],
+  NBXG: [0.95,1.07,-0.11,-12.86,-12.69,9.84,16.79,14.63,0],
+  NXG:  [0.32,0.40,0.18,-1.07,-1.74,12.81,56.83,56.22,22.80],
+  PCN:  [-0.60,-0.80,-1.24,2.55,6.22,11.56,11.39,11.68,5.86],
+  PDI:  [-1.20,-1.56,-1.44,2.55,8.65,16.42,15.71,16.11,31.85],
+  PDO:  [0.65,-0.07,-0.53,2.82,3.74,11.69,12.77,13.13,34.52],
+  PDX:  [-0.60,0.00,-0.44,-10.23,-9.43,7.57,23.55,21.14,22.60],
+  RFI:  [0.67,-0.55,-1.09,-3.73,-0.44,8.27,12.06,11.61,0.04],
+  RLTY: [0.14,-0.47,-0.97,-8.59,-6.93,8.27,17.46,15.96,32.57],
+  RNP:  [-0.67,-1.22,-1.34,-7.38,-2.02,7.93,22.23,20.59,29.67],
+  RQI:  [-0.71,-1.39,-1.53,-7.91,-3.61,8.59,13.65,12.57,27.90],
+  UTF:  [1.36,1.72,0.97,-1.49,-4.78,7.12,28.24,27.82,27.70],
+  UTG:  [0.97,0.88,0.66,0.42,-0.41,6.60,38.05,38.21,21.33],
 };
-const SESSIONS=[
-  {date:"07/15/2026",data:{AIO:[1.21,1.40,-0.35,-8.47,-6.82,8.13,29.04,26.58],ASGI:[1.74,1.69,2.10,8.51,2.01,10.90,22.32,24.22],BDJ:[1.68,-0.02,-0.34,-6.40,-5.87,7.69,10.32,9.66],BME:[1.22,1.20,1.50,-2.92,-5.96,7.44,43.54,42.27],BST:[0.56,-0.31,-0.59,-7.47,-6.47,6.34,51.14,47.32],BUI:[1.21,0.34,0.06,2.72,2.51,6.53,27.57,28.32],CSQ:[1.65,0.42,-0.64,-9.18,-7.82,7.84,22.76,20.67],DNP:[2.06,1.78,1.66,10.50,5.87,7.06,10.00,11.05],EOI:[1.04,-0.45,-0.84,-5.45,-2.93,7.98,21.28,20.12],EOS:[1.06,0.14,-0.69,-8.06,-5.77,8.21,24.20,22.25],ERH:[1.41,1.75,1.31,-6.07,-7.82,8.65,12.94,12.16],ETG:[0.56,-0.44,-1.14,-9.26,-6.80,6.65,25.71,23.33],GDV:[-0.08,0.09,0.38,-10.47,-10.72,6.01,33.44,29.94],GLU:[0.34,-0.59,-0.94,-3.26,-0.36,6.74,20.25,19.59],HTD:[1.74,2.18,2.48,-2.78,-6.18,7.33,26.62,25.88],NBXG:[-0.11,-0.28,-0.91,-14.05,-12.54,9.16,18.29,15.72],NXG:[1.81,1.74,1.56,3.74,-1.83,11.64,59.64,61.87],PCN:[-1.49,-1.16,-1.50,2.10,6.39,11.55,11.45,11.69],PDI:[-1.12,-1.48,-1.32,3.61,9.08,16.17,15.79,16.36],PDO:[-0.08,-0.40,-0.84,2.34,3.77,11.71,12.81,13.11],PDX:[-0.77,-0.34,-0.67,-10.56,-9.31,7.62,23.48,21.00],RFI:[-0.21,-0.96,-1.44,-4.37,-0.14,8.44,11.89,11.37],RLTY:[0.74,-0.27,-0.87,-8.28,-6.81,8.33,17.27,15.84],RNP:[-0.69,-1.26,-1.33,-6.90,-1.47,7.96,22.03,20.51],RQI:[-1.61,-2.41,-2.43,-9.69,-3.42,8.85,13.52,12.21],UTF:[1.32,1.76,0.67,-2.02,-4.54,7.15,28.27,27.70],UTG:[1.20,0.86,0.60,0.30,-0.45,6.19,40.57,40.69]}},
-  {date:"07/16/2026",data:{AIO:[1.64,1.90,-0.22,-7.89,-6.86,8.26,28.39,26.15],ASGI:[2.10,2.06,2.46,9.72,2.06,10.78,22.32,24.49],BDJ:[0.50,-0.51,-0.93,-7.31,-5.87,7.71,10.39,9.63],BME:[0.54,0.83,1.32,-3.27,-5.94,7.38,44.06,42.62],BST:[0.66,-0.24,-0.50,-7.32,-6.47,6.51,49.73,46.09],BUI:[0.01,-0.21,-0.57,0.61,2.49,6.64,27.67,27.84],CSQ:[1.96,0.67,-0.54,-8.98,-7.84,7.91,22.49,20.47],DNP:[1.62,1.54,1.40,9.80,5.88,7.03,10.10,11.09],EOI:[1.30,-0.36,-0.77,-5.25,-2.95,8.02,21.13,20.02],EOS:[1.64,0.58,-0.53,-7.53,-5.81,8.27,23.91,22.11],ERH:[1.17,1.51,1.11,-6.32,-7.81,8.65,12.98,12.16],ETG:[-0.03,-0.63,-1.31,-9.65,-6.82,6.71,25.60,23.13],GDV:[-0.64,-0.63,-0.48,-11.03,-10.72,6.03,33.55,29.85],GLU:[0.21,-0.63,-1.00,-3.46,-0.38,6.75,20.26,19.56],HTD:[0.40,1.08,1.15,-4.61,-6.18,7.39,26.88,25.64],NBXG:[0.59,0.44,-0.47,-13.33,-12.55,9.42,17.63,15.28],NXG:[1.88,1.89,1.75,4.42,-1.83,11.86,58.15,60.72],PCN:[-0.50,-0.82,-1.24,2.80,6.38,11.48,11.44,11.76],PDI:[-0.82,-1.23,-1.18,4.18,9.04,16.09,15.78,16.44],PDO:[0.46,-0.09,-0.47,2.97,3.77,11.65,12.79,13.17],PDX:[-1.40,-0.90,-0.99,-11.17,-9.33,7.66,23.54,20.91],RFI:[-0.52,-1.15,-1.59,-4.88,-0.17,8.36,12.08,11.49],RLTY:[-0.33,-0.85,-1.22,-8.89,-6.82,8.26,17.55,15.99],RNP:[-0.93,-1.42,-1.42,-7.30,-1.52,7.88,22.34,20.71],RQI:[-1.67,-2.48,-2.57,-10.14,-3.44,8.71,13.80,12.40],UTF:[1.09,1.56,0.58,-2.39,-4.57,7.12,28.49,27.81],UTG:[1.95,1.71,1.43,1.31,-0.45,6.27,39.69,40.21]}},
-  {date:"07/17/2026 ✓",data:{AIO:[0.16,0.38,-0.59,-9.62,-6.91,8.48,28.18,25.47],ASGI:[2.05,2.05,2.47,9.83,2.11,10.78,22.29,24.48],BDJ:[1.18,-0.22,-0.59,-6.79,-5.88,7.73,10.31,9.61],BME:[0.47,0.79,1.29,-3.29,-5.93,7.39,44.01,42.56],BST:[-0.46,-0.99,-1.44,-8.91,-6.48,6.69,49.25,44.86],BUI:[0.30,-0.06,-0.40,1.16,2.48,6.63,27.55,27.87],CSQ:[1.33,0.31,-0.68,-9.30,-7.87,8.02,22.27,20.20],DNP:[1.72,1.59,1.47,10.04,5.89,7.05,10.06,11.07],EOI:[0.75,-0.60,-0.95,-5.83,-2.98,8.15,20.92,19.70],EOS:[1.20,0.29,-0.63,-7.88,-5.85,8.41,23.60,21.74],ERH:[1.27,1.62,1.22,-6.16,-7.80,8.69,12.90,12.11],ETG:[0.46,-0.44,-1.14,-9.30,-6.84,6.74,25.38,23.02],GDV:[-0.19,-0.10,0.15,-10.62,-10.72,6.07,33.15,29.63],GLU:[0.17,-0.65,-1.02,-3.53,-0.39,6.80,20.11,19.40],HTD:[0.99,1.55,1.75,-3.77,-6.18,7.36,26.77,25.76],NBXG:[-0.64,-0.77,-1.21,-14.57,-12.57,9.67,17.43,14.89],NXG:[1.06,0.98,0.77,0.93,-1.83,12.24,58.27,58.81],PCN:[-0.83,-0.93,-1.32,2.54,6.36,11.53,11.42,11.71],PDI:[-0.97,-1.37,-1.26,3.81,9.01,16.18,15.75,16.35],PDO:[0.74,0.07,-0.28,3.29,3.77,11.64,12.76,13.18],PDX:[-1.23,-0.75,-0.90,-11.02,-9.35,7.60,23.68,21.07],RFI:[-0.66,-1.23,-1.66,-5.12,-0.20,8.36,12.10,11.48],RLTY:[0.10,-0.61,-1.07,-8.65,-6.84,8.22,17.58,16.06],RNP:[-1.27,-1.66,-1.55,-7.87,-1.58,7.92,22.36,20.60],RQI:[-1.69,-2.51,-2.65,-10.49,-3.46,8.73,13.82,12.37],UTF:[1.06,1.54,0.59,-2.39,-4.59,7.13,28.45,27.77],UTG:[1.39,1.10,0.86,0.61,-0.45,6.35,39.44,39.68]}},
-  {date:"07/20/2026",data:{AIO:[0.16,0.38,-0.59,-9.62,-6.91,8.48,28.18,25.51],ASGI:[1.37,1.40,1.85,7.97,2.15,10.78,22.29,23.98],BDJ:[1.18,-0.22,-0.59,-6.91,-5.88,7.73,10.31,9.57],BME:[0.47,0.79,1.29,-2.33,-5.91,7.39,44.01,42.38],BST:[-0.46,-0.99,-1.44,-8.70,-6.49,6.69,49.25,45.02],BUI:[0.30,-0.06,-0.40,1.16,2.48,6.63,27.55,27.79],CSQ:[2.08,0.85,-0.47,-8.87,-7.89,8.02,22.21,20.24],DNP:[1.72,1.59,1.47,10.04,5.89,7.05,10.06,11.05],EOI:[0.75,-0.60,-0.95,-5.92,-3.00,8.15,20.92,19.70],EOS:[1.20,0.29,-0.63,-8.13,-5.88,8.41,23.60,21.70],ERH:[1.27,1.62,1.22,-6.16,-7.80,8.69,12.90,12.09],ETG:[0.46,-0.44,-1.14,-9.36,-6.86,6.74,25.38,22.95],GDV:[-0.19,-0.10,0.15,-10.62,-10.72,6.07,33.15,29.34],GLU:[0.17,-0.65,-1.02,-3.53,-0.39,6.80,20.11,19.50],HTD:[0.99,1.55,1.75,-3.64,-6.17,7.36,26.77,25.65],NBXG:[-0.64,-0.77,-1.21,-13.92,-12.59,9.67,17.43,15.03],NXG:[1.06,0.98,0.77,0.93,-1.83,12.24,58.27,59.11],PCN:[-0.83,-0.93,-1.32,2.54,6.36,11.53,11.42,11.78],PDI:[-0.97,-1.37,-1.26,3.81,9.01,16.18,15.75,16.30],PDO:[0.74,0.07,-0.28,3.29,3.77,11.64,12.76,13.10],PDX:[-1.23,-0.75,-0.90,-11.02,-9.35,7.60,23.68,21.08],RFI:[-0.48,-1.12,-1.57,-4.90,-0.23,8.36,12.05,11.46],RLTY:[0.13,-0.58,-1.05,-8.63,-6.85,8.22,17.50,15.99],RNP:[-1.08,-1.52,-1.48,-7.63,-1.63,7.92,22.27,20.57],RQI:[-1.48,-2.26,-2.39,-9.89,-3.48,8.73,13.75,12.39],UTF:[1.38,1.82,0.79,-1.70,-4.61,7.13,28.25,27.77],UTG:[1.62,1.37,1.12,0.94,-0.44,6.35,39.24,39.61]}},
-  {date:"07/21/2026",data:{AIO:[0.40,0.67,-0.52,-9.31,-6.96,8.47,28.13,25.99],ASGI:[1.82,1.85,2.29,9.43,2.19,11.01,22.16,24.25],BDJ:[1.01,-0.27,-0.67,-6.09,-5.88,7.76,10.28,9.71],BME:[2.24,1.77,1.75,-2.83,-5.89,7.42,43.39,42.60],BST:[-0.30,-0.87,-1.30,-10.09,-6.50,6.66,49.31,45.89],BUI:[0.49,0.05,-0.29,1.53,2.48,6.65,27.37,27.72],CSQ:[1.88,0.79,-0.50,-8.95,-7.91,8.00,22.50,20.49],DNP:[2.08,1.78,1.70,10.72,5.91,7.06,9.98,10.98],EOI:[0.69,-0.61,-0.98,-5.92,-3.03,8.15,20.94,19.75],EOS:[0.89,0.10,-0.70,-8.13,-5.91,8.42,23.62,21.79],ERH:[1.49,1.84,1.45,-5.84,-7.77,8.70,12.84,11.88],ETG:[0.35,-0.46,-1.16,-9.36,-6.88,6.76,25.32,23.19],GDV:[-0.55,-0.57,-0.41,-10.98,-10.71,6.13,32.96,29.61],GLU:[0.62,-0.43,-0.79,-2.84,-0.40,6.77,20.07,19.49],HTD:[1.05,1.59,1.83,-2.94,-6.16,7.39,26.62,25.76],NBXG:[-0.01,-0.10,-0.81,-14.02,-12.60,9.58,17.46,15.45],NXG:[1.13,1.10,0.90,1.37,-1.83,12.18,58.31,59.48],PCN:[0.27,-0.54,-1.04,3.33,6.33,11.46,11.40,11.75],PDI:[-1.03,-1.41,-1.29,3.62,8.94,16.23,15.73,16.29],PDO:[0.37,-0.15,-0.55,2.83,3.77,11.72,12.74,13.13],PDX:[-1.30,-0.80,-0.93,-11.09,-9.37,7.59,23.71,21.15],RFI:[-0.40,-1.07,-1.53,-4.81,-0.26,8.38,12.05,11.47],RLTY:[0.11,-0.57,-1.04,-8.63,-6.86,8.26,17.49,15.98],RNP:[-0.94,-1.42,-1.42,-7.46,-1.68,7.93,22.26,20.60],RQI:[-1.28,-2.03,-2.15,-9.31,-3.50,8.72,13.75,12.47],UTF:[1.28,1.74,0.77,-1.81,-4.63,7.13,28.11,27.60],UTG:[1.62,1.37,1.12,0.03,-0.44,6.36,39.72,39.73]}},
-  {date:"07/22/2026",data:{AIO:[0.19,0.50,-0.55,-9.53,-7.07,8.28,28.85,26.10],ASGI:[1.67,1.72,2.18,9.16,2.23,10.81,22.37,24.42],BDJ:[1.90,0.19,-0.15,-6.10,-5.87,7.66,10.33,9.70],BME:[1.19,1.20,1.47,-2.84,-5.87,7.42,43.60,42.36],BST:[-0.56,-1.03,-1.51,-9.12,-6.52,6.49,50.90,46.26],BUI:[-0.46,-0.34,-0.74,0.00,2.46,6.68,27.65,27.65],CSQ:[2.09,1.02,-0.41,-8.78,-7.93,7.91,22.45,20.48],DNP:[1.03,1.28,1.14,9.21,5.95,7.07,10.10,11.03],EOI:[0.53,-0.68,-1.03,-6.14,-3.06,8.08,21.17,19.87],EOS:[0.24,-0.37,-0.87,-8.71,-5.95,8.38,23.88,21.80],ERH:[0.08,0.42,0.17,-8.24,-7.77,8.75,13.10,12.02],ETG:[0.55,-0.34,-1.07,-9.20,-6.89,6.69,25.55,23.20],GDV:[-0.44,-0.48,-0.31,-10.92,-10.72,6.08,33.25,29.62],GLU:[-0.32,-0.83,-1.26,-4.32,-0.42,6.78,20.35,19.47],HTD:[0.91,1.46,1.71,-3.75,-6.15,7.32,26.91,25.90],NBXG:[-0.03,-0.09,-0.81,-13.93,-12.62,9.36,17.87,15.38],NXG:[0.85,0.80,0.58,0.74,-1.81,11.95,59.79,60.23],PCN:[-1.02,-0.97,-1.35,2.37,6.32,11.60,11.37,11.64],PDI:[-1.02,-1.41,-1.30,3.51,8.90,16.30,15.68,16.23],PDO:[0.14,-0.28,-0.74,2.52,3.77,11.78,12.71,13.03],PDX:[0.26,0.59,-0.12,-9.60,-9.38,7.46,23.74,21.46],RFI:[-0.50,-1.13,-1.57,-5.00,-0.29,8.41,12.01,11.41],RLTY:[0.85,-0.15,-0.78,-8.20,-6.86,8.24,17.44,16.01],RNP:[-0.98,-1.44,-1.44,-7.57,-1.72,7.95,22.20,20.52],RQI:[-1.05,-1.76,-1.85,-8.54,-3.51,8.70,13.58,12.42],UTF:[0.86,1.39,0.58,-2.56,-4.65,7.14,28.48,27.75],UTG:[0.43,0.07,-0.13,-0.59,-0.44,6.28,40.39,40.15]}},
-  {date:"07/23/2026",data:{AIO:[-0.31,0.01,-0.67,-10.08,-7.12,8.35,28.77,25.87],ASGI:[2.10,2.19,2.64,10.79,2.28,10.75,22.16,24.55],BDJ:[1.21,-0.09,-0.49,-6.63,-5.87,7.75,10.26,9.58],BME:[-1.18,-0.13,0.86,-4.09,-5.86,7.41,44.23,42.42],BST:[-0.73,-1.13,-1.65,-9.37,-6.53,6.56,50.47,45.74],BUI:[-0.67,-0.40,-0.83,-0.29,2.44,6.67,27.78,27.70],CSQ:[1.64,0.78,-0.52,-9.00,-7.95,8.05,22.12,20.13],DNP:[0.70,1.12,0.96,8.70,5.96,7.09,10.12,11.00],EOI:[0.74,-0.59,-0.97,-5.97,-3.08,8.15,20.95,19.70],EOS:[-0.44,-0.86,-1.06,-9.31,-5.99,8.57,23.52,21.33],ERH:[-0.93,-0.56,-0.73,-8.75,-7.77,8.76,13.15,12.00],ETG:[-0.30,-0.62,-1.30,-9.72,-6.91,6.82,25.21,22.76],GDV:[-0.27,-0.31,-0.11,-10.78,-10.71,6.09,33.11,29.54],GLU:[0.28,-0.57,-0.98,-3.46,-0.43,6.77,20.21,19.51],HTD:[1.09,1.55,1.84,-3.53,-6.14,7.31,26.88,25.93],NBXG:[-0.62,-0.70,-1.16,-14.53,-12.64,9.49,17.76,15.18],NXG:[1.01,1.05,0.85,1.23,-1.79,11.87,59.92,60.66],PCN:[-1.22,-1.04,-1.40,2.21,6.30,11.67,11.32,11.57],PDI:[-1.28,-1.62,-1.44,2.88,8.86,16.46,15.63,16.08],PDO:[-0.47,-0.62,-1.14,1.82,3.76,11.91,12.66,12.89],PDX:[-0.44,0.03,-0.44,-10.20,-9.39,7.51,23.73,21.31],RFI:[-0.12,-0.91,-1.40,-4.50,-0.31,8.38,11.99,11.45],RLTY:[0.38,-0.39,-0.93,-8.46,-6.87,8.30,17.37,15.90],RNP:[-1.12,-1.53,-1.49,-7.82,-1.77,8.01,22.11,20.38],RQI:[-1.10,-1.82,-1.95,-8.87,-3.53,8.76,13.53,12.33],UTF:[0.72,1.27,0.52,-2.79,-4.68,7.11,28.63,27.83],UTG:[0.60,0.27,0.05,-0.37,-0.43,6.23,40.58,40.43]}},
-  {date:"07/24/2026",data:{AIO:[-0.31,0.01,-0.67,-10.08,-7.12,8.35,28.77,25.60],ASGI:[1.97,2.12,2.57,10.69,2.32,10.75,22.16,24.54],BDJ:[0.97,-0.19,-0.60,-6.80,-5.87,7.75,10.26,9.59],BME:[-1.18,-0.13,0.86,-3.25,-5.84,7.41,44.23,42.85],BST:[0.24,-0.47,-0.84,-7.99,-6.53,6.56,50.47,45.35],BUI:[-0.67,-0.40,-0.83,-0.29,2.44,6.67,27.78,27.87],CSQ:[1.23,0.51,-0.62,-9.21,-7.97,8.05,22.03,20.00],DNP:[0.70,1.12,0.96,8.70,5.96,7.03,10.12,11.10],EOI:[0.98,-0.52,-0.90,-5.79,-3.11,8.15,20.95,19.70],EOS:[0.18,-0.39,-0.88,-8.76,-6.03,8.57,23.52,21.35],ERH:[-0.93,-0.56,-0.73,-9.42,-7.77,8.76,13.15,11.93],ETG:[-0.01,-0.51,-1.20,-9.52,-6.93,6.82,25.21,22.80],GDV:[-0.27,-0.31,-0.11,-10.78,-10.71,6.09,33.11,29.73],GLU:[0.28,-0.57,-0.98,-3.46,-0.43,6.77,20.21,19.39],HTD:[1.09,1.55,1.84,-3.59,-6.13,7.31,26.88,26.08],NBXG:[0.06,0.02,-0.74,-13.85,-12.65,9.49,17.76,14.93],NXG:[1.01,1.05,0.85,1.23,-1.79,11.87,59.92,59.95],PCN:[-1.22,-1.04,-1.40,2.65,6.29,11.67,11.32,11.64],PDI:[-1.28,-1.62,-1.44,2.43,8.82,16.46,15.63,16.04],PDO:[-0.47,-0.62,-1.14,1.73,3.76,11.91,12.66,12.91],PDX:[-0.44,0.03,-0.44,-9.55,-9.40,7.51,23.73,21.41],RFI:[0.09,-0.81,-1.30,-4.26,-0.34,8.21,12.22,11.70],RLTY:[-0.20,-0.71,-1.12,-8.79,-6.88,8.30,17.74,16.18],RNP:[-1.25,-1.63,-1.55,-8.10,-1.82,8.01,22.11,20.65],RQI:[-1.10,-1.82,-1.98,-9.01,-3.55,8.76,13.88,12.63],UTF:[0.99,1.49,0.69,-2.26,-4.70,7.11,28.63,28.07],UTG:[1.06,0.82,0.57,0.28,-0.43,6.23,39.93,40.04]}},
-  {date:"07/27/2026",data:{AIO:[-0.01,0.35,-0.58,-9.71,-7.22,8.54,28.01,25.29],ASGI:[1.52,1.67,2.15,9.40,2.36,10.96,22.01,24.08],BDJ:[0.88,-0.20,-0.64,-6.87,-5.87,7.71,10.34,9.63],BME:[1.44,1.30,1.50,-2.73,-5.82,7.29,44.35,43.14],BST:[0.96,0.04,-0.24,-6.95,-6.53,6.61,48.77,45.38],BUI:[0.31,0.05,-0.32,1.35,2.43,6.66,27.37,27.74],CSQ:[1.64,0.87,-0.48,-8.95,-7.99,8.08,22.01,20.04],DNP:[1.29,1.42,1.32,9.78,5.99,7.09,10.02,11.00],EOI:[1.00,-0.50,-0.90,-5.80,-3.13,8.17,20.86,19.65],EOS:[0.19,-0.38,-0.87,-8.76,-6.06,8.60,23.29,21.25],ERH:[-0.22,0.12,-0.11,-7.92,-7.77,8.78,13.01,11.98],ETG:[-0.43,-0.62,-1.29,-9.76,-6.95,6.79,25.32,22.85],GDV:[-0.30,-0.38,-0.22,-10.85,-10.71,6.04,33.45,29.82],GLU:[-0.33,-0.83,-1.27,-4.41,-0.45,6.85,20.17,19.28],HTD:[1.28,1.61,1.95,-3.32,-6.12,7.32,26.80,25.91],NBXG:[0.38,0.38,-0.53,-13.52,-12.66,9.70,17.16,14.84],NXG:[1.23,1.37,1.21,2.59,-1.75,12.38,56.70,58.17],PCN:[-0.94,-0.93,-1.32,2.38,6.27,11.61,11.36,11.63],PDI:[-1.96,-2.16,-1.80,1.21,8.78,16.66,15.69,15.88],PDO:[-1.28,-1.07,-1.68,0.86,3.75,11.96,12.72,12.83],PDX:[0.64,0.94,0.10,-9.22,-9.40,7.52,23.44,21.28],RFI:[0.36,-0.67,-1.19,-3.95,-0.36,8.22,12.16,11.68],RLTY:[0.99,-0.03,-0.71,-8.11,-6.89,8.14,17.64,16.21],RNP:[-0.73,-1.26,-1.35,-7.32,-1.87,7.87,22.39,20.75],RQI:[-0.86,-1.55,-1.67,-8.19,-3.56,8.53,13.79,12.66],UTF:[1.01,1.50,0.72,-2.19,-4.72,7.14,28.35,27.73],UTG:[1.54,1.43,1.15,1.00,-0.42,6.37,39.14,39.53]}},
-  {date:"07/28/2026",data:{AIO:[0.33,0.69,-0.48,-9.34,-7.27,8.66,27.51,24.94],ASGI:[0.76,0.90,1.40,7.00,2.39,11.22,21.99,23.53],BDJ:[1.01,-0.12,-0.56,-6.74,-5.88,7.67,10.39,9.69],BME:[1.34,1.23,1.46,-2.77,-5.80,7.17,45.12,43.87],BST:[1.02,0.09,-0.19,-6.86,-6.54,6.74,47.82,44.54],BUI:[0.37,0.10,-0.29,1.47,2.42,6.71,27.14,27.54],CSQ:[1.14,0.51,-0.63,-9.25,-8.01,8.13,21.95,19.92],DNP:[1.07,1.32,1.21,9.47,6.01,7.10,10.03,10.98],EOI:[0.97,-0.50,-0.89,-5.81,-3.15,8.19,20.81,19.60],EOS:[-0.25,-0.72,-1.00,-9.17,-6.10,8.66,23.23,21.10],ERH:[-0.01,0.34,0.09,-7.65,-7.77,8.80,12.94,11.95],ETG:[-0.60,-0.66,-1.32,-9.85,-6.97,6.78,25.39,22.89],GDV:[-0.16,-0.27,-0.09,-10.77,-10.71,6.00,33.62,30.00],GLU:[-0.69,-0.97,-1.43,-4.95,-0.47,6.87,20.21,19.21],HTD:[1.29,1.59,1.94,-3.31,-6.11,7.30,26.85,25.96],NBXG:[1.68,1.80,0.33,-12.15,-12.67,9.90,16.55,14.54],NXG:[1.34,1.52,1.40,3.30,-1.74,12.78,54.52,56.32],PCN:[-0.91,-0.92,-1.31,2.37,6.25,11.60,11.37,11.64],PDI:[-1.37,-1.70,-1.52,2.36,8.74,16.47,15.70,16.07],PDO:[-0.82,-0.82,-1.40,1.34,3.74,11.90,12.73,12.90],PDX:[-0.97,-0.31,-0.62,-10.56,-9.41,7.62,23.49,21.01],RFI:[0.40,-0.65,-1.18,-3.94,-0.39,8.21,12.18,11.70],RLTY:[0.49,-0.29,-0.87,-8.39,-6.90,8.16,17.65,16.17],RNP:[-0.81,-1.31,-1.39,-7.49,-1.92,7.87,22.42,20.74],RQI:[-0.78,-1.46,-1.57,-7.96,-3.57,8.49,13.82,12.72],UTF:[1.18,1.61,0.82,-1.87,-4.74,7.12,28.32,27.79],UTG:[2.00,2.01,1.73,1.73,-0.42,6.51,38.05,38.71]}}
-];
 
-const HOLDINGS=new Set(["PCN","BDJ","EOI","BUI","BME","RQI","RNP","RFI","AIO","BST","DNP","UTF","ERH","UTG"]);
-const QCOLOR={G:"#1D9E75",B:"#378ADD",O:"#D85A30",X:"#888780"};
-const QNAME={G:"Green · Thesis Working",B:"Blue · Premium Territory",O:"Orange · Buy Zone",X:"Gray · Worst Setup"};
-let zIdx=2,qFilter="all",searchTerm="",holdOnly=false,sesIdx=9;
-const W=980,H=560,ML=54,MR=16,MT=14,MB=40;
-function quad(d){return d[2]>=0?(d[3]<0?"G":"B"):(d[3]<0?"O":"X");}
-function getExtent(){
-  let zs=[],ds=[];
-  SESSIONS.forEach(s=>{for(const t in s.data){zs.push(s.data[t][zIdx]);ds.push(s.data[t][3],s.data[t][4]);}});
-  const zm=Math.max(3,Math.ceil(Math.max(...zs.map(Math.abs))));
-  const dmin=Math.floor(Math.min(...ds))-1,dmax=Math.ceil(Math.max(...ds))+1;
-  return{zmin:-zm,zmax:zm,dmin,dmax};
+// Partial trail data (spec-sourced spot readings — Z1Y + D/P where available)
+// Format: { ticker: { session_label: [z1y, dp] } }
+// D/P from 07/24 not in spec for most funds; using null → trail shows Z1Y movement only
+// For visual trail we estimate D/P from 07/30 current + partial data
+const TRAIL_07_24 = {
+  BST:  [-0.84, -6.80],   // Z1Y from spec; D/P estimated near current
+  BUI:  [-0.83, -0.90],   // Z1Y from spec; D/P was negative (Orange) → estimated
+  ERH:  [-0.06, -7.60],   // Z1Y from spec; D/P estimated near current
+  RQI:  [-1.76, -8.50],   // Z1Y from spec; D/P estimated
+  RNP:  [-1.52, -7.80],   // Z1Y from spec; D/P estimated
+  UTG:  [0.57,   0.28],   // both from spec (confirmed)
+  BME:  [1.40,  -3.10],   // Z1Y from spec; D/P estimated
+  BDJ:  [-0.82, -7.20],   // Z1Y from spec; D/P estimated
+  EOI:  [-1.15, -6.40],   // Z1Y from spec; D/P estimated
+  RFI:  [-1.20, -4.00],   // Z1Y from spec; D/P estimated
+  UTF:  [0.78,  -2.10],   // Z1Y from spec; D/P estimated
+  PCN:  [-1.08,  2.80],   // Z1Y from spec; D/P estimated (was premium)
+};
+
+const TRAIL_07_23 = {
+  BST: [-1.65, -7.30],    // from spec: "peaked -1.65 (07/23)"
+};
+
+const HOLDINGS = new Set(['PCN','BDJ','EOI','BUI','BME','RQI','RNP','RFI','AIO','BST','DNP','UTF','ERH','UTG']);
+const TICKERS = Object.keys(D);
+
+const Q_COLOR = { green:'#1D9E75', blue:'#378ADD', orange:'#D85A30', gray:'#888780' };
+const Q_LABEL = { green:'Thesis Working', blue:'Premium Territory', orange:'Buy Zone', gray:'Worst Setup' };
+const Q_CLASS = { green:'dq-g', blue:'dq-b', orange:'dq-o', gray:'dq-x' };
+
+let zPeriod = 'z1y';
+let quadFilter = 'all';
+let holdingsOnly = false;
+let searchTerm = '';
+let selectedTicker = null;
+let showTrail = true;
+
+const ZI = { z3m:0, z6m:1, z1y:2 };
+
+function getZ(t) { return D[t][ZI[zPeriod]]; }
+function getDP(t) { return D[t][3]; }
+function getQ(t) {
+  const z = D[t][2], dp = D[t][3];
+  if (z >= 0 && dp < 0) return 'green';
+  if (z >= 0 && dp >= 0) return 'blue';
+  if (z < 0 && dp < 0) return 'orange';
+  return 'gray';
 }
-function render(){
-  const ex=getExtent();
-  const Xf=z=>ML+(z-ex.zmin)/(ex.zmax-ex.zmin)*(W-ML-MR);
-  const Yf=d=>MT+(ex.dmax-d)/(ex.dmax-ex.dmin)*(H-MT-MB);
-  const cur=SESSIONS[sesIdx];
-  let s="";
-  s+=`<rect x="${Xf(0)}" y="${Yf(0)}" width="${W-MR-Xf(0)}" height="${Yf(ex.dmin)-Yf(0)}" fill="#1D9E75" opacity="0.055"/>`;
-  s+=`<rect x="${Xf(0)}" y="${MT}" width="${W-MR-Xf(0)}" height="${Yf(0)-MT}" fill="#378ADD" opacity="0.055"/>`;
-  s+=`<rect x="${ML}" y="${Yf(0)}" width="${Xf(0)-ML}" height="${Yf(ex.dmin)-Yf(0)}" fill="#D85A30" opacity="0.05"/>`;
-  s+=`<rect x="${ML}" y="${MT}" width="${Xf(0)-ML}" height="${Yf(0)-MT}" fill="#888780" opacity="0.07"/>`;
-  for(let z=Math.ceil(ex.zmin);z<=ex.zmax;z++){
-    s+=`<line x1="${Xf(z)}" y1="${MT}" x2="${Xf(z)}" y2="${H-MB}" stroke="${z===0?'#B6BDC3':'#EAEDEF'}" stroke-width="${z===0?1.5:1}"/>`;
-    s+=`<text x="${Xf(z)}" y="${H-MB+16}" font-size="10" fill="#8A929A" text-anchor="middle">${z}</text>`;
+function isVisible(t) {
+  if (quadFilter !== 'all' && getQ(t) !== quadFilter) return false;
+  if (holdingsOnly && !HOLDINGS.has(t)) return false;
+  if (searchTerm && !t.includes(searchTerm.toUpperCase())) return false;
+  return true;
+}
+
+// ─── CANVAS RENDER ────────────────────────────────────────────────────────────
+const canvas = document.getElementById('scatter');
+const ctx = canvas.getContext('2d');
+let PAD, CW, CH, W, H;
+let xScale, yScale, xInv, yInv;
+
+function resize() {
+  const area = document.getElementById('chartArea');
+  W = area.clientWidth; H = area.clientHeight;
+  canvas.width = W; canvas.height = H;
+  PAD = { top: 32, right: 28, bottom: 48, left: 58 };
+  CW = W - PAD.left - PAD.right;
+  CH = H - PAD.top - PAD.bottom;
+
+  const allZ = TICKERS.map(t => getZ(t));
+  const allDP = TICKERS.map(t => getDP(t));
+  const zMin = Math.min(-2.8, ...allZ) - 0.2;
+  const zMax = Math.max(2.8, ...allZ) + 0.2;
+  const dpMin = Math.min(-14, ...allDP) - 1;
+  const dpMax = Math.max(12, ...allDP) + 1;
+
+  xScale = z => PAD.left + (z - zMin) / (zMax - zMin) * CW;
+  yScale = dp => PAD.top + (1 - (dp - dpMin) / (dpMax - dpMin)) * CH;
+  xInv = px => zMin + (px - PAD.left) / CW * (zMax - zMin);
+  yInv = py => dpMin + (1 - (py - PAD.top) / CH) * (dpMax - dpMin);
+}
+
+function draw() {
+  if (!W || !H) return;
+  ctx.clearRect(0, 0, W, H);
+
+  const x0 = xScale(0), y0 = yScale(0);
+
+  // Quadrant backgrounds
+  ctx.save();
+  ctx.fillStyle = 'rgba(13,30,53,0.18)';   // Blue top-right
+  ctx.fillRect(x0, PAD.top, PAD.left+CW-x0, y0-PAD.top);
+  ctx.fillStyle = 'rgba(42,21,8,0.18)';    // Orange bottom-left
+  ctx.fillRect(PAD.left, y0, x0-PAD.left, PAD.top+CH-y0);
+  ctx.fillStyle = 'rgba(13,42,30,0.15)';   // Green bottom-right
+  ctx.fillRect(x0, y0, PAD.left+CW-x0, PAD.top+CH-y0);
+  ctx.fillStyle = 'rgba(42,21,8,0.10)';    // Gray top-left
+  ctx.fillRect(PAD.left, PAD.top, x0-PAD.left, y0-PAD.top);
+  ctx.restore();
+
+  // Grid
+  ctx.save();
+  ctx.strokeStyle = '#2e3248'; ctx.lineWidth = 0.5;
+  [-2,-1,0,1,2].forEach(z => {
+    ctx.beginPath(); ctx.moveTo(xScale(z), PAD.top); ctx.lineTo(xScale(z), PAD.top+CH); ctx.stroke();
+  });
+  [-12,-10,-8,-6,-4,-2,0,2,4,6,8,10].forEach(dp => {
+    ctx.beginPath(); ctx.moveTo(PAD.left, yScale(dp)); ctx.lineTo(PAD.left+CW, yScale(dp)); ctx.stroke();
+  });
+  ctx.restore();
+
+  // Zero axes
+  ctx.save();
+  ctx.strokeStyle = '#4a5270'; ctx.lineWidth = 1.5;
+  ctx.setLineDash([5,3]);
+  ctx.beginPath(); ctx.moveTo(x0, PAD.top); ctx.lineTo(x0, PAD.top+CH); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(PAD.left, y0); ctx.lineTo(PAD.left+CW, y0); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.restore();
+
+  // Trigger line Z1Y = -2.00
+  const xt2 = xScale(-2.0);
+  if (xt2 >= PAD.left) {
+    ctx.save();
+    ctx.strokeStyle = 'rgba(216,90,48,0.5)'; ctx.lineWidth = 1;
+    ctx.setLineDash([6,3]);
+    ctx.beginPath(); ctx.moveTo(xt2, PAD.top); ctx.lineTo(xt2, PAD.top+CH); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = 'rgba(216,90,48,0.6)'; ctx.font = '9px sans-serif'; ctx.textAlign = 'right';
+    ctx.fillText('Trigger −2.00', xt2-4, PAD.top+18);
+    ctx.restore();
   }
-  const dstep=(ex.dmax-ex.dmin)>20?5:2;
-  for(let d=Math.ceil(ex.dmin/dstep)*dstep;d<=ex.dmax;d+=dstep){
-    s+=`<line x1="${ML}" y1="${Yf(d)}" x2="${W-MR}" y2="${Yf(d)}" stroke="${d===0?'#B6BDC3':'#EAEDEF'}" stroke-width="${d===0?1.5:1}"/>`;
-    s+=`<text x="${ML-6}" y="${Yf(d)+3}" font-size="10" fill="#8A929A" text-anchor="end">${d}%</text>`;
-  }
-  s+=`<text x="${W/2}" y="${H-6}" font-size="11" fill="#5A636B" text-anchor="middle">Z-Score (${['Z3M','Z6M','Z1Y'][zIdx]})</text>`;
-  s+=`<text x="14" y="${H/2}" font-size="11" fill="#5A636B" text-anchor="middle" transform="rotate(-90 14 ${H/2})">Discount / Premium %</text>`;
-  const ghostOps=[0.03,0.05,0.07,0.10,0.13,0.17,0.21,0.26,0.32];
-  if(sesIdx===SESSIONS.length-1){
-    for(let gi=0;gi<SESSIONS.length-1;gi++){
-      const gs=SESSIONS[gi];const op=ghostOps[gi]||0.03;const r=gi===SESSIONS.length-2?5:gi===SESSIONS.length-3?3.5:2.5;
-      for(const t of Object.keys(gs.data)){
-        const d=gs.data[t],q=quad(d);
-        const vis=(qFilter==="all"||q===qFilter)&&(!holdOnly||HOLDINGS.has(t));
-        const match=!searchTerm||t.includes(searchTerm);
-        if(!vis||!match) continue;
-        s+=`<circle cx="${Xf(d[zIdx])}" cy="${Yf(d[3])}" r="${r}" fill="${QCOLOR[q]}" opacity="${op}"/>`;
+
+  // Quadrant labels
+  ctx.save();
+  ctx.font = '9px sans-serif';
+  ctx.fillStyle = 'rgba(136,135,128,0.4)'; ctx.textAlign = 'left';
+  ctx.fillText('Gray · Worst Setup', PAD.left+6, PAD.top+14);
+  ctx.fillStyle = 'rgba(55,138,221,0.4)';
+  ctx.fillText('Blue · Premium Territory', x0+6, PAD.top+14);
+  ctx.fillStyle = 'rgba(216,90,48,0.4)';
+  ctx.fillText('Orange · Buy Zone', PAD.left+6, PAD.top+CH-8);
+  ctx.fillStyle = 'rgba(29,158,117,0.4)';
+  ctx.fillText('Green · Thesis Working', x0+6, PAD.top+CH-8);
+  ctx.restore();
+
+  // Axis ticks + labels
+  ctx.save();
+  ctx.fillStyle = '#4a5270'; ctx.font = '9px sans-serif';
+  [-2,-1,0,1,2].forEach(z => {
+    ctx.textAlign = 'center';
+    ctx.fillText(z.toString(), xScale(z), PAD.top+CH+14);
+  });
+  [-12,-8,-4,0,4,8].forEach(dp => {
+    ctx.textAlign = 'right';
+    ctx.fillText(dp+'%', PAD.left-5, yScale(dp)+3);
+  });
+  ctx.restore();
+
+  // Axis labels
+  ctx.save();
+  ctx.fillStyle = '#8892a8'; ctx.font = '11px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(`Z-Score (${zPeriod.toUpperCase()})`, PAD.left+CW/2, H-6);
+  ctx.save();
+  ctx.translate(14, PAD.top+CH/2);
+  ctx.rotate(-Math.PI/2);
+  ctx.fillText('Discount / Premium %', 0, 0);
+  ctx.restore();
+  ctx.restore();
+
+  // ─── TRAIL DOTS (prior sessions — spec-sourced, holdings only) ──────────────
+  if (showTrail) {
+    // 07/23 trail (BST only confirmed)
+    Object.entries(TRAIL_07_23).forEach(([ticker, [z1y, dp]]) => {
+      if (!isVisible(ticker)) return;
+      const xp = xScale(zPeriod === 'z1y' ? z1y : getZ(ticker));
+      const yp = yScale(dp);
+      const col = Q_COLOR[getQ(ticker)];
+      ctx.save();
+      ctx.globalAlpha = 0.22;
+      ctx.fillStyle = col;
+      ctx.beginPath(); ctx.arc(xp, yp, 5, 0, Math.PI*2); ctx.fill();
+      ctx.restore();
+      // connector to 07/24 pos if available
+      if (TRAIL_07_24[ticker]) {
+        const [z24, dp24] = TRAIL_07_24[ticker];
+        const x24 = xScale(zPeriod === 'z1y' ? z24 : getZ(ticker));
+        const y24 = yScale(dp24);
+        ctx.save();
+        ctx.globalAlpha = 0.18;
+        ctx.strokeStyle = col; ctx.lineWidth = 1; ctx.setLineDash([3,3]);
+        ctx.beginPath(); ctx.moveTo(xp, yp); ctx.lineTo(x24, y24); ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.restore();
       }
+    });
+
+    // 07/24 trail
+    Object.entries(TRAIL_07_24).forEach(([ticker, [z1y, dp]]) => {
+      if (!isVisible(ticker)) return;
+      const xp = xScale(zPeriod === 'z1y' ? z1y : getZ(ticker));
+      const yp = yScale(dp);
+      const xc = xScale(getZ(ticker));
+      const yc = yScale(getDP(ticker));
+      const col = Q_COLOR[getQ(ticker)];
+      // ghost dot
+      ctx.save();
+      ctx.globalAlpha = 0.30;
+      ctx.fillStyle = col;
+      ctx.beginPath(); ctx.arc(xp, yp, 6, 0, Math.PI*2); ctx.fill();
+      // ghost label
+      ctx.fillStyle = col;
+      ctx.font = '8px sans-serif'; ctx.textAlign = 'center'; ctx.globalAlpha = 0.30;
+      ctx.fillText(ticker, xp, yp-8);
+      ctx.restore();
+      // connector to current
+      ctx.save();
+      ctx.globalAlpha = 0.25;
+      ctx.strokeStyle = col; ctx.lineWidth = 1.5; ctx.setLineDash([4,3]);
+      ctx.beginPath(); ctx.moveTo(xp, yp); ctx.lineTo(xc, yc); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.restore();
+    });
+  }
+
+  // ─── 52-wk avg tails ──────────────────────────────────────────────────────
+  TICKERS.filter(isVisible).forEach(ticker => {
+    const xc = xScale(getZ(ticker));
+    const yc = yScale(getDP(ticker));
+    const yAvg = yScale(D[ticker][4]);
+    const col = Q_COLOR[getQ(ticker)];
+    ctx.save();
+    ctx.globalAlpha = 0.35;
+    ctx.strokeStyle = col; ctx.lineWidth = 1;
+    ctx.setLineDash([3,2]);
+    ctx.beginPath(); ctx.moveTo(xc, yc); ctx.lineTo(xc, yAvg); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.beginPath(); ctx.arc(xc, yAvg, 2.5, 0, Math.PI*2);
+    ctx.strokeStyle = col; ctx.lineWidth = 1; ctx.stroke();
+    ctx.restore();
+  });
+
+  // ─── MAIN DOTS ─────────────────────────────────────────────────────────────
+  // Dimmed (not visible)
+  TICKERS.filter(t => !isVisible(t)).forEach(ticker => {
+    const xc = xScale(getZ(ticker));
+    const yc = yScale(getDP(ticker));
+    ctx.save();
+    ctx.globalAlpha = 0.12;
+    ctx.fillStyle = '#4a5270';
+    ctx.beginPath(); ctx.arc(xc, yc, 5, 0, Math.PI*2); ctx.fill();
+    ctx.restore();
+  });
+
+  // Visible dots
+  TICKERS.filter(isVisible).forEach(ticker => {
+    const xc = xScale(getZ(ticker));
+    const yc = yScale(getDP(ticker));
+    const q = getQ(ticker);
+    const col = Q_COLOR[q];
+    const isH = HOLDINGS.has(ticker);
+    const isSel = ticker === selectedTicker;
+    const r = isH ? 8 : 5.5;
+
+    ctx.save();
+    if (isSel) {
+      ctx.globalAlpha = 0.2;
+      ctx.fillStyle = col;
+      ctx.beginPath(); ctx.arc(xc, yc, r+6, 0, Math.PI*2); ctx.fill();
     }
-  }
-  for(const t of Object.keys(cur.data)){
-    const d=cur.data[t],q=quad(d);
-    const visible=(qFilter==="all"||q===qFilter)&&(!holdOnly||HOLDINGS.has(t));
-    const match=!searchTerm||t.includes(searchTerm);
-    const dim=(!visible||!match)?' class="dot dimmed"':' class="dot"';
-    const cx=Xf(d[zIdx]),cy=Yf(d[3]),ay=Yf(d[4]);
-    s+=`<g${dim} data-t="${t}">`;
-    s+=`<line x1="${cx}" y1="${cy}" x2="${cx}" y2="${ay}" stroke="${QCOLOR[q]}" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>`;
-    s+=`<circle cx="${cx}" cy="${ay}" r="2" fill="none" stroke="${QCOLOR[q]}" stroke-width="1" opacity="0.5"/>`;
-    if(HOLDINGS.has(t)) s+=`<circle cx="${cx}" cy="${cy}" r="9.5" fill="none" stroke="${QCOLOR[q]}" stroke-width="1.4" opacity="0.6"/>`;
-    s+=`<circle cx="${cx}" cy="${cy}" r="6" fill="${QCOLOR[q]}"/>`;
-    s+=`<text x="${cx}" y="${cy-11}" font-size="9.5" font-weight="600" text-anchor="middle" fill="#3A4249">${t}</text>`;
-    s+=`</g>`;
-  }
-  document.getElementById("chart").innerHTML=s;
-  bindDots();renderSnap();
-  document.getElementById("seslabel").textContent="Showing: "+cur.date;
-}
-const tip=document.getElementById("tip");
-function bindDots(){
-  const cur=SESSIONS[sesIdx];
-  document.querySelectorAll(".dot").forEach(g=>{
-    const t=g.dataset.t,d=cur.data[t],m=MOM[t]||null;
-    const prev=sesIdx>0?SESSIONS[sesIdx-1]:null,pd=prev?prev.data[t]:null;
-    g.addEventListener("mousemove",e=>{
-      tip.style.display="block";tip.style.left=(e.clientX+14)+"px";tip.style.top=(e.clientY+10)+"px";
-      const dz=pd?(d[2]-pd[2]).toFixed(2):null;
-      tip.innerHTML=`<b>${t}</b> · yield ${d[5].toFixed(2)}%<br>D/P ${d[3].toFixed(2)}% (avg ${d[4].toFixed(2)}%, Δ${(d[3]-d[4]).toFixed(2)}pt)<br>Z3M ${d[0].toFixed(2)} · Z6M ${d[1].toFixed(2)} · Z1Y ${d[2].toFixed(2)}${dz?` (${+dz>=0?'+':''}${dz})`:''}<br>ST Mom ${m?m[0].toFixed(2)+'%':'—'} · LT Mom ${m?m[1].toFixed(2)+'%':'—'}`;
-    });
-    g.addEventListener("mouseleave",()=>tip.style.display="none");
-    g.addEventListener("click",()=>{
-      const prev2=sesIdx>0?SESSIONS[sesIdx-1]:null,pd2=prev2?prev2.data[t]:null;
-      const dz2=pd2?(d[2]-pd2[2]).toFixed(2):null,ddp=pd2?(d[3]-pd2[3]).toFixed(2):null;
-      const q=quad(d),el=document.getElementById("detail");
-      el.style.display="block";
-      el.innerHTML=`<b style="font-size:14px">${t}</b> <span class="qcount" style="background:${QCOLOR[q]}">${QNAME[q]}</span>
-      <table><tr><td>Price</td><td class="v">$${d[7].toFixed(2)}</td><td>NAV</td><td class="v">$${d[6].toFixed(2)}</td><td>Yield</td><td class="v">${d[5].toFixed(2)}%</td></tr>
-      <tr><td>D/P</td><td class="v">${d[3].toFixed(2)}%</td><td>52-wk avg</td><td class="v">${d[4].toFixed(2)}%</td><td>Dev</td><td class="v">${(d[3]-d[4]).toFixed(2)}pt</td></tr>
-      <tr><td>Z3M</td><td class="v">${d[0].toFixed(2)}</td><td>Z6M</td><td class="v">${d[1].toFixed(2)}</td><td>Z1Y${dz2?` <span style="font-size:10px;color:${+dz2>=0?'#1D9E75':'#D85A30'}">(${+dz2>=0?'+':''}${dz2})</span>`:''}</td><td class="v">${d[2].toFixed(2)}</td></tr>
-      <tr><td>ΔD/P</td><td class="v">${ddp?`${+ddp>=0?'+':''}${ddp}pt`:'—'}</td><td>ST Mom</td><td class="v">${m?m[0].toFixed(2)+'%':'—'}</td><td>LT Mom</td><td class="v">${m?m[1].toFixed(2)+'%':'—'}</td></tr></table>`;
-    });
+    ctx.globalAlpha = isH ? 0.9 : 0.55;
+    ctx.fillStyle = col;
+    ctx.beginPath(); ctx.arc(xc, yc, r, 0, Math.PI*2); ctx.fill();
+    if (isH) {
+      ctx.globalAlpha = 0.6;
+      ctx.fillStyle = '#fff';
+      ctx.beginPath(); ctx.arc(xc, yc, 3, 0, Math.PI*2); ctx.fill();
+    }
+    if (isSel) {
+      ctx.globalAlpha = 1;
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.arc(xc, yc, r, 0, Math.PI*2); ctx.stroke();
+    }
+    // Label
+    ctx.globalAlpha = isH ? 0.95 : 0.65;
+    ctx.fillStyle = col;
+    ctx.font = `${isH ? '700' : '400'} ${isH ? 10 : 9}px sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.fillText(ticker, xc, yc - r - 3);
+    ctx.restore();
   });
 }
-function renderSnap(){
-  const cur=SESSIONS[sesIdx];
-  const pool=holdOnly?[...HOLDINGS].filter(t=>cur.data[t]):Object.keys(cur.data);
-  const counts={G:0,B:0,O:0,X:0};
-  pool.forEach(t=>counts[quad(cur.data[t])]++);
-  document.getElementById("snapTitle").textContent="Quadrant counts — "+(holdOnly?"holdings":"universe");
-  document.getElementById("snapCounts").innerHTML=Object.keys(counts).map(q=>`<span class="qcount" style="background:${QCOLOR[q]}">${QNAME[q].split('·')[0].trim()} ${counts[q]}</span>`).join("");
-  const deep=[...pool].sort((a,b)=>cur.data[a][2]-cur.data[b][2]).slice(0,3);
-  document.getElementById("snapDeep").innerHTML=deep.map(t=>`<div><b>${t}</b> Z1Y ${cur.data[t][2].toFixed(2)} · D/P ${cur.data[t][3].toFixed(2)}%</div>`).join("");
-  const greens=[...pool].filter(t=>quad(cur.data[t])==="G").sort((a,b)=>cur.data[b][2]-cur.data[a][2]).slice(0,3);
-  document.getElementById("snapGreen").innerHTML=greens.length?greens.map(t=>`<div><b>${t}</b> Z1Y +${cur.data[t][2].toFixed(2)} · D/P ${cur.data[t][3].toFixed(2)}%</div>`).join(""):"None";
+
+// ─── INTERACTION ──────────────────────────────────────────────────────────────
+let hitRadius = 12;
+function findTicker(px, py) {
+  let best = null, bestDist = hitRadius;
+  TICKERS.filter(isVisible).forEach(ticker => {
+    const xc = xScale(getZ(ticker));
+    const yc = yScale(getDP(ticker));
+    const dist = Math.hypot(px - xc, py - yc);
+    if (dist < bestDist) { bestDist = dist; best = ticker; }
+  });
+  return best;
 }
-document.querySelectorAll(".zt").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".zt").forEach(x=>x.classList.remove("on"));b.classList.add("on");zIdx=+b.dataset.z;render();}));
-document.querySelectorAll(".qf").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".qf").forEach(x=>x.classList.remove("on"));b.classList.add("on");qFilter=b.dataset.q;render();}));
-document.getElementById("search").addEventListener("input",e=>{searchTerm=e.target.value.trim().toUpperCase();render();});
-document.getElementById("hold").addEventListener("click",e=>{holdOnly=!holdOnly;e.target.classList.toggle("on",holdOnly);render();});
-document.querySelectorAll(".tmb").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".tmb").forEach(x=>x.classList.remove("on"));b.classList.add("on");sesIdx=+b.dataset.s;render();}));
-render();
+
+canvas.addEventListener('mousemove', e => {
+  const rect = canvas.getBoundingClientRect();
+  const px = e.clientX - rect.left, py = e.clientY - rect.top;
+  const t = findTicker(px, py);
+  if (t) { showTT(e, t); canvas.style.cursor = 'pointer'; }
+  else { hideTT(); canvas.style.cursor = 'default'; }
+});
+canvas.addEventListener('mouseleave', hideTT);
+canvas.addEventListener('click', e => {
+  const rect = canvas.getBoundingClientRect();
+  const px = e.clientX - rect.left, py = e.clientY - rect.top;
+  const t = findTicker(px, py);
+  if (t) openDetail(t);
+  else { selectedTicker = null; closeDetail(); draw(); }
+});
+
+function showTT(e, ticker) {
+  const d = D[ticker];
+  const q = getQ(ticker);
+  const col = Q_COLOR[q];
+  const trail24 = TRAIL_07_24[ticker];
+  const deltaZ = trail24 ? (d[2] - trail24[0]).toFixed(2) : null;
+  const deltaSign = deltaZ > 0 ? '+' : '';
+  const tt = document.getElementById('tooltip');
+  tt.innerHTML = `
+    <div class="tt-ticker" style="color:${col}">${ticker}${HOLDINGS.has(ticker)?' ●':''}</div>
+    <div class="tt-row"><span>Z1Y</span><span>${d[2].toFixed(2)}</span></div>
+    <div class="tt-row"><span>Z3M</span><span>${d[0].toFixed(2)}</span></div>
+    <div class="tt-row"><span>Z6M</span><span>${d[1].toFixed(2)}</span></div>
+    <div class="tt-row"><span>D/P</span><span>${d[3].toFixed(2)}%</span></div>
+    <div class="tt-row"><span>52wk avg</span><span>${d[4].toFixed(2)}%</span></div>
+    <div class="tt-row"><span>vs avg</span><span>${(d[3]-d[4]).toFixed(2)}%</span></div>
+    <div class="tt-row"><span>Yield</span><span>${d[5].toFixed(2)}%</span></div>
+    <div class="tt-row"><span>Price / NAV</span><span>$${d[7].toFixed(2)} / $${d[6].toFixed(2)}</span></div>
+    ${trail24 ? `<div class="tt-sep"></div><div class="tt-row"><span>Z1Y chg vs 07/24</span><span>${deltaSign}${deltaZ}</span></div>` : ''}
+    <div class="tt-sep"></div>
+    <div class="tt-row"><span>Quadrant</span><span style="color:${col}">${Q_LABEL[q]}</span></div>
+  `;
+  tt.style.display = 'block';
+  moveTT(e);
+}
+function moveTT(e) {
+  const tt = document.getElementById('tooltip');
+  let x = e.clientX+14, y = e.clientY+14;
+  if (x+185 > window.innerWidth) x = e.clientX-195;
+  if (y+230 > window.innerHeight) y = e.clientY-240;
+  tt.style.left=x+'px'; tt.style.top=y+'px';
+}
+function hideTT() { document.getElementById('tooltip').style.display='none'; }
+
+function openDetail(ticker) {
+  selectedTicker = ticker;
+  const d = D[ticker];
+  const q = getQ(ticker);
+  const col = Q_COLOR[q];
+  document.getElementById('dTicker').textContent = ticker;
+  document.getElementById('dTicker').style.color = col;
+  const qEl = document.getElementById('dQuad');
+  qEl.textContent = Q_LABEL[q]; qEl.className = 'detail-quad '+Q_CLASS[q];
+
+  const trail24 = TRAIL_07_24[ticker];
+  const dz = trail24 ? (d[2] - trail24[0]).toFixed(2) : null;
+
+  const rows = [
+    {l:'Price', v:`$${d[7].toFixed(2)}`},
+    {l:'NAV', v:`$${d[6].toFixed(2)}`},
+    {l:'D/P', v:`${d[3].toFixed(2)}%`, c: d[3]<0?'neg':'pos'},
+    {l:'52-wk Avg D/P', v:`${d[4].toFixed(2)}%`},
+    {l:'vs 52-wk avg', v:`${(d[3]-d[4]).toFixed(2)}%`, c:(d[3]-d[4])<0?'neg':'pos'},
+    {l:'Yield', v:`${d[5].toFixed(2)}%`},
+    {l:'Eff. Leverage', v:`${d[8]}%`},
+    {l:'Z3M', v:d[0].toFixed(2), c:d[0]>=0?'pos':'neg'},
+    {l:'Z6M', v:d[1].toFixed(2), c:d[1]>=0?'pos':'neg'},
+    {l:'Z1Y', v:d[2].toFixed(2), c:d[2]>=0?'pos':'neg'},
+    dz ? {l:'ΔZ1Y vs 07/24', v:`${dz>0?'+':''}${dz}`, c:dz>0?'pos':'neg'} : null,
+    {l:'Holding', v:HOLDINGS.has(ticker)?'Yes ●':'No', c:'neutral'},
+  ].filter(Boolean);
+
+  document.getElementById('dRows').innerHTML = rows.map(r =>
+    `<div class="detail-row"><span class="dr-label">${r.l}</span><span class="dr-val ${r.c||'neutral'}">${r.v}</span></div>`
+  ).join('');
+  document.getElementById('detailPanel').classList.add('open');
+  resize(); draw();
+}
+function closeDetail() {
+  document.getElementById('detailPanel').classList.remove('open');
+  selectedTicker = null;
+  resize(); draw();
+}
+
+// ─── CONTROLS ─────────────────────────────────────────────────────────────────
+function setZPeriod(p, btn) {
+  zPeriod = p;
+  document.querySelectorAll('#btn3m,#btn6m,#btn1y').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  resize(); draw();
+}
+function setQ(q, btn) {
+  quadFilter = q;
+  document.querySelectorAll('.qbtn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  draw();
+}
+function toggleHoldings(el) {
+  holdingsOnly = !holdingsOnly;
+  el.classList.toggle('on');
+  draw();
+}
+function toggleTrail(el) {
+  showTrail = !showTrail;
+  el.classList.toggle('on', showTrail);
+  draw();
+}
+function doSearch(val) {
+  searchTerm = val.trim();
+  draw();
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+window.addEventListener('resize', () => { resize(); draw(); });
+resize(); draw();
+setTimeout(() => { resize(); draw(); }, 150);
 </script>
 </body>
 </html>
