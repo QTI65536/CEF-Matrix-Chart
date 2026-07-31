@@ -3,669 +3,331 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DSM Time Machine · 07/30/2026</title>
+<title>CEF Time Machine · 07/30/2026</title>
 <style>
-  :root {
-    --bg: #0f1117; --surface: #1a1d27; --surface2: #21253a; --border: #2e3248;
-    --text: #e2e6f0; --text-dim: #8892a8; --text-faint: #4a5270;
-    --green: #1D9E75; --green-bg: #0d2a1e;
-    --blue: #378ADD; --blue-bg: #0d1e35;
-    --orange: #D85A30; --orange-bg: #2a1508;
-    --gray-q: #888780; --gray-bg: #1e1e1e;
-    --amber: #d4a017; --accent: #5b6af0;
-    --font-mono: 'SF Mono','Fira Code','Consolas',monospace;
-    --font-ui: -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font-family: var(--font-ui); font-size: 13px; min-height: 100vh; display: flex; flex-direction: column; }
-
-  .header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 10px 18px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
-  .logo { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; color: var(--text-dim); text-transform: uppercase; }
-  .session-badge { background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 3px 10px; font-size: 11px; font-family: var(--font-mono); margin-left: 12px; }
-  .net-change { font-size: 12px; font-weight: 600; color: #4ade80; font-family: var(--font-mono); }
-
-  .alert-panel { padding: 8px 18px; display: flex; flex-direction: column; gap: 4px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
-  .al { padding: 5px 9px; border-radius: 4px; font-size: 11.5px; line-height: 1.45; border-left: 3px solid; }
-  .al strong { font-weight: 700; }
-  .al-g { background: #0d2a1e; border-color: #1D9E75; color: #a8eecf; }
-  .al-r { background: #2a1508; border-color: #D85A30; color: #f4b89a; }
-  .al-a { background: #2a2210; border-color: #d4a017; color: #f0d88a; }
-  .al-p { background: #0d1e35; border-color: #378ADD; color: #9ec5f4; }
-  .al-c { background: #1a2410; border-color: #6a8f3c; color: #b8d88a; }
-  .al-dq { background: #2a1e08; border-color: #d4830a; color: #f4c87a; }
-
-  .main { display: flex; flex: 1; overflow: hidden; min-height: 0; }
-
-  .sidebar { width: 195px; flex-shrink: 0; background: var(--surface); border-right: 1px solid var(--border); padding: 10px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; }
-  .ctrl-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 4px; }
-  .btn-group { display: flex; gap: 3px; }
-  .btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim); padding: 4px 9px; border-radius: 4px; font-size: 11px; cursor: pointer; transition: all 0.12s; }
-  .btn:hover { border-color: var(--accent); color: var(--text); }
-  .btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
-
-  .qbtn { background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim); padding: 5px 8px; border-radius: 4px; font-size: 11px; cursor: pointer; width: 100%; text-align: left; display: flex; align-items: center; gap: 6px; margin-bottom: 3px; transition: all 0.12s; }
-  .qdot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-  .qbtn.q-all.active { border-color: var(--accent); color: var(--text); background: #1e2035; }
-  .qbtn.q-green.active { border-color: #1D9E75; color: #a8eecf; background: #0d2a1e; }
-  .qbtn.q-blue.active { border-color: #378ADD; color: #9ec5f4; background: #0d1e35; }
-  .qbtn.q-orange.active { border-color: #D85A30; color: #f4b89a; background: #2a1508; }
-  .qbtn.q-gray.active { border-color: #888780; color: #c8c8c4; background: #1e1e1e; }
-
-  .search-input { width: 100%; background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 5px 8px; border-radius: 4px; font-size: 12px; outline: none; }
-  .search-input:focus { border-color: var(--accent); }
-  .search-input::placeholder { color: var(--text-faint); }
-
-  .toggle-row { display: flex; align-items: center; justify-content: space-between; }
-  .toggle-label { font-size: 11px; color: var(--text-dim); }
-  .toggle { width: 32px; height: 16px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; position: relative; transition: background 0.2s; flex-shrink: 0; }
-  .toggle.on { background: var(--accent); border-color: var(--accent); }
-  .toggle::after { content: ''; position: absolute; width: 10px; height: 10px; background: var(--text-faint); border-radius: 50%; top: 2px; left: 2px; transition: left 0.2s, background 0.2s; }
-  .toggle.on::after { left: 18px; background: #fff; }
-
-  .trail-toggle-row { display: flex; align-items: center; justify-content: space-between; }
-
-  .session-list { display: flex; flex-direction: column; gap: 2px; max-height: 200px; overflow-y: auto; }
-  .sess-item { padding: 3px 6px; border-radius: 3px; font-size: 10px; font-family: var(--font-mono); color: var(--text-faint); cursor: pointer; border-left: 2px solid transparent; transition: all 0.1s; }
-  .sess-item:hover { background: var(--surface2); color: var(--text-dim); }
-  .sess-item.current { color: var(--text); border-left-color: var(--accent); background: var(--surface2); }
-  .sess-item.no-data { color: var(--text-faint); font-style: italic; cursor: default; }
-  .sess-item.no-data:hover { background: none; }
-
-  .data-notice { font-size: 10px; color: var(--text-faint); line-height: 1.4; padding: 4px 2px; border-top: 1px solid var(--border); margin-top: 2px; }
-
-  .chart-area { flex: 1; position: relative; overflow: hidden; }
-  #scatter { display: block; }
-
-  .detail-panel { width: 215px; flex-shrink: 0; background: var(--surface); border-left: 1px solid var(--border); padding: 14px; overflow-y: auto; display: none; }
-  .detail-panel.open { display: block; }
-  .detail-ticker { font-size: 22px; font-weight: 800; margin-bottom: 3px; }
-  .detail-quad { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; padding: 2px 8px; border-radius: 3px; display: inline-block; }
-  .dq-g { background: #0d2a1e; color: #1D9E75; }
-  .dq-b { background: #0d1e35; color: #378ADD; }
-  .dq-o { background: #2a1508; color: #D85A30; }
-  .dq-x { background: #1e1e1e; color: #888780; }
-  .detail-rows { display: flex; flex-direction: column; gap: 6px; }
-  .detail-row { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border); padding-bottom: 5px; }
-  .detail-row:last-child { border-bottom: none; }
-  .dr-label { font-size: 10px; color: var(--text-dim); }
-  .dr-val { font-size: 12px; font-family: var(--font-mono); font-weight: 600; }
-  .dr-val.pos { color: #4ade80; } .dr-val.neg { color: #f87171; } .dr-val.neutral { color: var(--text); }
-  .close-btn { float: right; background: none; border: none; color: var(--text-faint); cursor: pointer; font-size: 18px; line-height: 1; }
-  .close-btn:hover { color: var(--text); }
-
-  #tooltip { position: fixed; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; font-size: 11px; pointer-events: none; display: none; z-index: 1000; min-width: 165px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
-  .tt-ticker { font-size: 14px; font-weight: 800; margin-bottom: 5px; }
-  .tt-row { display: flex; justify-content: space-between; gap: 12px; color: var(--text-dim); margin-bottom: 2px; }
-  .tt-row span:last-child { color: var(--text); font-family: var(--font-mono); }
-  .tt-sep { border-top: 1px solid var(--border); margin: 4px 0; }
-  .tt-trail-note { font-size: 10px; color: var(--text-faint); margin-top: 3px; }
-
-  .disclaimer { padding: 6px 18px; font-size: 10px; color: var(--text-faint); border-top: 1px solid var(--border); background: var(--surface); flex-shrink: 0; }
+  :root{--green:#1D9E75;--blue:#378ADD;--orange:#D85A30;--gray:#888780;--ink:#1E2429;--sub:#5A636B;--line:#DEE3E7;--bg:#F7F8F9;--card:#FFFFFF;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);padding:20px;max-width:1100px;margin:0 auto}
+  h1{font-size:19px;font-weight:700}
+  .hdr{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+  .badge{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:10px}
+  .badge.pos{background:#E1F5EE;color:#085041}.badge.neg{background:#FAECE7;color:#B4431F}
+  .note{font-size:12px;color:var(--sub);margin-bottom:14px}
+  .verdict{border-radius:8px;padding:12px 16px;margin-bottom:10px;font-size:13px;line-height:1.5;border:1.5px solid}
+  .verdict.good{background:#E1F5EE;border-color:#1D9E75;color:#085041}
+  .verdict.mixed{background:#FFF8EC;border-color:#E3A008;color:#78450A}
+  .verdict.info{background:#EEF2FF;border-color:#6366F1;color:#3730A3}
+  .verdict b{font-weight:700}.verdict .vhead{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px}
+  .alerts{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+  .al{background:var(--card);border:1px solid var(--line);border-left-width:4px;border-radius:6px;padding:8px 12px;font-size:13px;line-height:1.45}
+  .al b{font-weight:700}
+  .al.g{border-left-color:#1D9E75;background:#E1F5EE}
+  .al.r{border-left-color:#D85A30;background:#FAECE7}
+  .al.a{border-left-color:#E3A008;background:#FFF8EC}
+  .al.p{border-left-color:#6366F1;background:#EEF2FF}
+  .al.c{border-left-color:#7B9E3E;background:#EFF6E8}
+  .al .tag{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-right:6px;opacity:.75}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:16px}
+  .controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+  .controls .grp{display:flex;gap:4px}
+  button.ctl{font-size:12px;padding:5px 10px;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;color:var(--ink)}
+  button.ctl.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  button.ctl.qg.on{background:var(--green);border-color:var(--green)}
+  button.ctl.qb.on{background:var(--blue);border-color:var(--blue)}
+  button.ctl.qo.on{background:var(--orange);border-color:var(--orange)}
+  button.ctl.qx.on{background:var(--gray);border-color:var(--gray)}
+  input.search{font-size:12px;padding:5px 9px;border:1px solid var(--line);border-radius:6px;width:120px}
+  .legend{font-size:11.5px;color:var(--sub);margin-top:8px}
+  .tmnav{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap}
+  .tmnav button{font-size:12px;padding:4px 10px;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer}
+  .tmnav button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .tmnav .seslabel{font-size:12px;color:var(--sub)}
+  svg{width:100%;height:auto;display:block}
+  .dot{cursor:pointer}.dimmed{opacity:.10}
+  .tooltip{position:fixed;pointer-events:none;background:#1E2429;color:#fff;font-size:11.5px;line-height:1.5;padding:8px 10px;border-radius:6px;z-index:50;display:none;max-width:260px}
+  .tooltip b{color:#9FD8C4}
+  .snap{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-top:14px}
+  .snapcard{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:12.5px}
+  .snapcard h3{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--sub);margin-bottom:6px}
+  .qcount{display:inline-block;padding:1px 7px;border-radius:8px;color:#fff;font-weight:700;font-size:12px;margin-right:5px}
+  .detail{display:none;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px;margin-top:12px;font-size:13px}
+  .detail table{width:100%;border-collapse:collapse;font-size:12.5px}
+  .detail td{padding:3px 8px 3px 0;color:var(--sub)}.detail td.v{color:var(--ink);font-weight:600}
+  h2{font-size:15px;margin:20px 0 10px}
+  .reads{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px}
+  .read{background:var(--card);border:1px solid var(--line);border-top-width:4px;border-radius:8px;padding:12px 14px;font-size:12.5px;line-height:1.5}
+  .read.kg{border-top-color:var(--green)}.read.ka{border-top-color:#E3A008}
+  .read.kb{border-top-color:var(--blue)}.read.ko{border-top-color:var(--orange)}.read.kp{border-top-color:#6366F1}
+  .read.kx{border-top-color:var(--gray)}
+  .read .rh{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+  .read .rh b{font-size:14px}
+  .read .st{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:2px 7px;border-radius:8px;background:var(--bg);color:var(--sub)}
+  .read .mx{display:grid;grid-template-columns:1fr 1fr;gap:2px 12px;margin:6px 0;color:var(--sub)}
+  .read .mx b{color:var(--ink)}
+  .bar{height:5px;background:var(--line);border-radius:3px;margin:7px 0;overflow:hidden}
+  .bar i{display:block;height:100%;border-radius:3px}
+  .disc{font-size:11px;color:var(--sub);font-style:italic;margin-top:22px;border-top:1px solid var(--line);padding-top:10px}
+  .up{color:#1D9E75;font-weight:600}.dn{color:#D85A30;font-weight:600}
 </style>
 </head>
 <body>
+<div class="hdr">
+  <h1>CEF Time Machine · 07/30/2026 (Thursday · Post-FOMC)</h1>
+  <span class="badge pos">Net Δ: +$8.43</span>
+</div>
+<div class="note">Session 12 · First clean post-FOMC read · FOMC reaction fully reversed · Strongest single-session gain in tracking window · RQI compression resumes · ERH third Green attempt · ST/LT momentum from 07/24 closing</div>
 
-<div class="header">
-  <div style="display:flex;align-items:center">
-    <span class="logo">QTI Capital · DSM Framework</span>
-    <span class="session-badge">07/30/2026 Thu · Session 9 of 15-window</span>
-  </div>
-  <span class="net-change">Portfolio +$8.43</span>
+<div class="verdict good">
+  <div class="vhead">Post-FOMC reversal — market reconsidered</div>
+  <b>The +$8.43 session completely reverses yesterday's −$8.00 FOMC reaction.</b> Net of the two sessions the portfolio is essentially flat — but the character of today's reversal is important. The broad-based recovery across REIT, utility, infrastructure, and tech sleeves simultaneously suggests the market's initial hawkish read of the 9-3 hold was an overreaction. REIT sleeve broadly compressing again. ERH back in Green for the third time. RQI compression resumes on the first post-FOMC session. The $5K add decision is now undeferred — all three candidates (BUI, RNP, BST) are visible and actionable.
+</div>
+<div class="verdict mixed">
+  <div class="vhead">RQI — Compression resumes, thesis active</div>
+  <b>One-session FOMC reversal confirmed.</b> Z1Y −1.53 (from −1.71, Δ +0.18). D/P −7.91% from −8.38% (Δ +0.47pt). The single reversal on 07/29 was an FOMC reaction artifact, not a trend change. Compression is now at session 9 of the clean window (eight compression sessions, one reversal, resumption). The thesis remains active. The question shifts to: with the FOMC behind us, how many more sessions does the compression run?
+</div>
+<div class="verdict mixed">
+  <div class="vhead">ERH — Green quadrant, third attempt · two-session confirmation required</div>
+  <b>ERH crossed into Green for the third time.</b> Z1Y +0.33 (from −0.06, Δ +0.39). D/P −7.32% vs −7.75% avg — discount inside own average. The prior two attempts (07/22: +0.17 reversed, 07/28: +0.09 reversed) both failed to sustain Green for two consecutive sessions. This is the strongest Green reading of the three (+0.33). Two consecutive Green sessions required for confirmation. Tomorrow's session is the test.
 </div>
 
-<div class="alert-panel">
-  <div class="al al-g"><strong>BST ↑ Quadrant change: Orange → Green (Thesis Working)</strong> — Z1Y +0.32 (from -0.84 at 07/24). Sharp two-session recovery from -1.65 peak on 07/23. Trigger de-escalated. Special dividend $2.3041/share ex-div 09/15/2026 — suppress trigger readings within ±3 sessions of that date.</div>
-  <div class="al al-g"><strong>ERH ↑ Quadrant change: Orange → Green (Thesis Working)</strong> — Z1Y +0.33, crossed zero. ROC-primary DQ alert remains active (57–66% ROC &gt;25% threshold). Yellow-flag classification unchanged.</div>
-  <div class="al al-p"><strong>UTG → Blue (Premium Territory)</strong> — D/P +0.42%; Z1Y +0.66. Quadrant shift: Green → Blue. Dislocation thesis fully resolved. Z1Y trajectory: -3.99 peak (06/26) → +0.66 today. Fair value — now at slight premium.</div>
-  <div class="al al-r"><strong>BUI ⚠ Quadrant change: Orange → Gray (Worst Setup)</strong> — D/P +1.90% premium; Z1Y -0.15. Trigger watch suspended — zero-cross requires D/P &lt; 0 before second-tranche clock restarts. Monitor for discount return.</div>
-  <div class="al al-r"><strong>RQI · Buy Zone</strong> — Z1Y -1.53. First post-FOMC (07/29) clean read. Post-rights-offering compression thesis active; watching for continuation.</div>
-  <div class="al al-r"><strong>RNP · Buy Zone</strong> — Z1Y -1.34, D/P -7.38%. Discount wide vs. 52-wk avg (-2.02%). NII-primary (57% NII). $5K add candidate — FOMC gate now cleared.</div>
-  <div class="al al-r"><strong>PCN · Worst Setup</strong> — Z1Y -1.24, D/P +2.55% premium. No-add confirmed. NAV $11.39. Monitoring for FY2026 N-CSR (~Sep 2026).</div>
-  <div class="al al-a"><strong>HTD · Thesis Working · Z1Y +2.54</strong> — Extreme positive reading, non-holding. D/P -2.34%. Flagged for awareness only.</div>
-  <div class="al al-p"><strong>FOMC 07/29 (Wed, yesterday)</strong> — Rate decision on record. Post-FOMC first clean read for rate-sensitive sleeve (RQI, RNP, RFI, DNP, UTF, UTG). $5K add decision gate cleared.</div>
-  <div class="al al-c"><strong>BDJ — Ex-div 07/24 (Fri)</strong> — Momentum columns restoring this session. Distribution: 50% NII / 50% LT gains.</div>
-  <div class="al al-dq"><strong>DQ Alert: RFI (~71% ROC) · ERH (57–66% ROC)</strong> — Both exceed 25% ROC threshold. Yellow-flag status maintained. AIO · UTF: distribution source unconfirmed — pending sponsor filing.</div>
+<div class="alerts">
+  <div class="al r"><span class="tag">Orange · Buy Zone</span><b>RQI</b> — Z1Y −1.53 (Δ +0.18). D/P −7.91% vs −3.61% avg. Compression resumes on first post-FOMC session — one-session 07/29 reversal confirmed as FOMC artifact. Eight compression sessions, one reversal, resumption. Thesis active. Cumulative Z1Y recovery from −2.65 peak: +1.12pt. Gap to own average: −4.30pt remaining.</div>
+  <div class="al g"><span class="tag">Green · Thesis Working</span><b>ERH</b> — Z1Y +0.33 (Δ +0.39). D/P −7.32% vs −7.75% avg. Third Green attempt — strongest of the three. Both z-score and D/P improved simultaneously. Two consecutive sessions required for confirmation — 07/31 is the test. ROC-primary flag unchanged.</div>
+  <div class="al g"><span class="tag">Green · Thesis Working</span><b>BST</b> — Z1Y +0.32 (from +0.86, Δ −0.54). Still Green quadrant despite the pullback from yesterday's NAV-driven spike. NAV recovered sharply: $46.37→$48.57 (+$2.20) while price rose $1.64. The NAV recovery is constructive — the prior six-session NAV decline is partially unwinding. D/P −5.97% vs −6.53% avg. Special dividend ex-div 09/15 not yet active.</div>
+  <div class="al r"><span class="tag">Orange · Buy Zone</span><b>RNP</b> — Z1Y −1.34 (Δ +0.19). D/P −7.38% vs −2.02% avg. Compressing with the REIT sleeve on the post-FOMC reversal. NAV slipped −$0.20 while price slipped only −$0.02 — discount narrowed despite both moving lower. The −5.36pt deviation from own norm is the widest holding-level deviation in the sleeve. 57% NII-primary. $5K add candidate now fully in view.</div>
+  <div class="al r"><span class="tag">Red · Warning</span><b>BUI</b> — Gray quadrant fourth session (Z1Y −0.15, D/P +1.90%). Z1Y improved +0.20pt but premium widened slightly. Fourth consecutive Gray session — trigger clock remains reset. Z1Y approaching zero (0.15pt away) but D/P moving in wrong direction (+1.90% vs +2.40% avg). BUI needs both a positive Z1Y AND D/P compression back to discount to reach Orange and restart the trigger watch.</div>
+  <div class="al r"><span class="tag">Red · Warning</span><b>PCN</b> — Gray quadrant (Z1Y −1.24, D/P +2.55%). Improved slightly (Δ +0.27pt) but premium widened (+0.79pt) — the D/P move is in the wrong direction. NAV +$0.03, price +$0.12 — price rose faster than NAV, expanding the premium further. No change to no-add decision.</div>
+  <div class="al p"><span class="tag">Blue · Premium</span><b>UTG</b> — Z1Y +0.66 (from +2.00, Δ −1.34) — largest single-session Z1Y move in the holdings universe today. D/P +0.42% (from +2.09%). NAV recovered $1.18 while price only recovered $0.57 — NAV outpaced price, sharply compressing the premium and pulling Z1Y back toward fair value from historically elevated levels. Still Blue quadrant (Z1Y positive, D/P positive slight premium). Meaningful normalization from extreme readings.</div>
+  <div class="al a"><span class="tag">Amber</span><b>$5K add decision — now active</b> — FOMC behind us, post-FOMC reversal confirmed, RQI compression resuming, ERH approaching confirmation. The three candidates: BUI (Gray→Orange transition if premium resolves, trigger watch potential), RNP (deepest REIT dislocation, 57% NII, post-FOMC compression), BST (Green quadrant, LT momentum intact, NAV recovering). QTI's call.</div>
+  <div class="al c"><span class="tag">Corp · BST</span><b>BST special dividend</b> — $2.3041/share ex-div 09/15/2026. BST in Green. Trigger suppression window ±3 sessions of 09/15 not yet active. NAV recovered $2.20 today — partially unwinding the prior six-session decline.</div>
 </div>
 
-<div class="main">
-  <div class="sidebar">
-    <div>
-      <div class="ctrl-label">Z-Period (axis)</div>
-      <div class="btn-group">
-        <button class="btn" id="btn3m" onclick="setZPeriod('z3m',this)">3M</button>
-        <button class="btn" id="btn6m" onclick="setZPeriod('z6m',this)">6M</button>
-        <button class="btn active" id="btn1y" onclick="setZPeriod('z1y',this)">1Y</button>
-      </div>
-      <div style="font-size:10px;color:var(--text-faint);margin-top:4px;">Quadrant always Z1Y</div>
+<div class="panel">
+  <div class="controls">
+    <div class="grp">
+      <button class="ctl zt on" data-z="2">Z1Y</button>
+      <button class="ctl zt" data-z="1">Z6M</button>
+      <button class="ctl zt" data-z="0">Z3M</button>
     </div>
-
-    <div>
-      <div class="ctrl-label">Quadrant Filter</div>
-      <button class="qbtn q-all active" onclick="setQ('all',this)"><span class="qdot" style="background:var(--accent)"></span>All</button>
-      <button class="qbtn q-green" onclick="setQ('green',this)"><span class="qdot" style="background:#1D9E75"></span>Green · Thesis Working</button>
-      <button class="qbtn q-blue" onclick="setQ('blue',this)"><span class="qdot" style="background:#378ADD"></span>Blue · Premium Territory</button>
-      <button class="qbtn q-orange" onclick="setQ('orange',this)"><span class="qdot" style="background:#D85A30"></span>Orange · Buy Zone</button>
-      <button class="qbtn q-gray" onclick="setQ('gray',this)"><span class="qdot" style="background:#888780"></span>Gray · Worst Setup</button>
+    <div class="grp">
+      <button class="ctl qf on" data-q="all">All</button>
+      <button class="ctl qf qg" data-q="G">Green · Thesis Working</button>
+      <button class="ctl qf qb" data-q="B">Blue · Premium Territory</button>
+      <button class="ctl qf qo" data-q="O">Orange · Buy Zone</button>
+      <button class="ctl qf qx" data-q="X">Gray · Worst Setup</button>
     </div>
-
-    <div>
-      <div class="ctrl-label">Search</div>
-      <input class="search-input" type="text" placeholder="Ticker…" oninput="doSearch(this.value)">
-    </div>
-
-    <div>
-      <div class="toggle-row">
-        <span class="toggle-label">Holdings only</span>
-        <div class="toggle" id="hToggle" onclick="toggleHoldings(this)"></div>
-      </div>
-    </div>
-
-    <div>
-      <div class="toggle-row">
-        <span class="toggle-label">Show trail</span>
-        <div class="toggle on" id="trailToggle" onclick="toggleTrail(this)"></div>
-      </div>
-    </div>
-
-    <div>
-      <div class="ctrl-label">Session Log</div>
-      <div class="session-list">
-        <div class="sess-item current">07/30 Thu ● [current]</div>
-        <div class="sess-item no-data">07/29 Wed · FOMC day · no upload</div>
-        <div class="sess-item no-data">07/28 Tue · pending upload</div>
-        <div class="sess-item no-data">07/24 Fri · partial trail data</div>
-        <div class="sess-item no-data">07/23 Thu · pending upload</div>
-        <div class="sess-item no-data">07/22 Wed · pending upload</div>
-        <div class="sess-item no-data">07/21 Tue · pending upload</div>
-        <div class="sess-item no-data">07/20 Mon · pending upload</div>
-        <div class="sess-item no-data">07/17✓ Fri · corrected · pending upload</div>
-        <div class="sess-item no-data">07/16 Thu · pending upload</div>
-        <div class="sess-item no-data">07/15 Wed · pending upload</div>
-      </div>
-      <div class="data-notice">Trail = spec-sourced spot readings only (partial). Upload prior session data to populate full 15-session window.</div>
-    </div>
+    <input class="search" id="search" placeholder="Search ticker…">
+    <button class="ctl" id="hold">★ My Holdings</button>
   </div>
-
-  <div class="chart-area" id="chartArea">
-    <canvas id="scatter"></canvas>
+  <svg id="chart" viewBox="0 0 980 560" xmlns="http://www.w3.org/2000/svg"></svg>
+  <div class="legend">Dashed tail = 52-wk avg D/P · Ring = holding · Ghost trails = prior sessions · Momentum 07/24 closing · Post-FOMC reversal +$8.43</div>
+  <div class="tmnav">
+    <button class="ctl tmb on" data-s="11">07/30 (current)</button>
+    <button class="ctl tmb" data-s="10">07/29 FOMC</button>
+    <button class="ctl tmb" data-s="9">07/28</button>
+    <button class="ctl tmb" data-s="8">07/27</button>
+    <button class="ctl tmb" data-s="7">07/24</button>
+    <button class="ctl tmb" data-s="6">07/23</button>
+    <button class="ctl tmb" data-s="5">07/22</button>
+    <button class="ctl tmb" data-s="4">07/21</button>
+    <button class="ctl tmb" data-s="3">07/20</button>
+    <button class="ctl tmb" data-s="2">07/17 ✓</button>
+    <button class="ctl tmb" data-s="1">07/16</button>
+    <button class="ctl tmb" data-s="0">07/15</button>
+    <span class="seslabel" id="seslabel">Showing: 07/30/2026</span>
   </div>
-
-  <div class="detail-panel" id="detailPanel">
-    <div style="margin-bottom:10px">
-      <button class="close-btn" onclick="closeDetail()">×</button>
-      <div class="detail-ticker" id="dTicker">—</div>
-      <span class="detail-quad" id="dQuad">—</span>
-    </div>
-    <div class="detail-rows" id="dRows"></div>
+  <div class="detail" id="detail"></div>
+  <div class="snap">
+    <div class="snapcard"><h3 id="snapTitle">Quadrant counts</h3><div id="snapCounts"></div></div>
+    <div class="snapcard"><h3>Deepest 3 by Z1Y</h3><div id="snapDeep"></div></div>
+    <div class="snapcard"><h3>Strongest Green</h3><div id="snapGreen"></div></div>
   </div>
 </div>
 
-<div id="tooltip"></div>
+<h2>Key reads — 07/30/2026</h2>
+<div class="reads">
+  <div class="read ko">
+    <div class="rh"><b>RQI</b><span class="st">Compression resumes · thesis active</span></div>
+    <div class="mx"><span>Z1Y <b>−1.53</b> <span class="up">▲+0.18</span></span><span>D/P <b>−7.91%</b> <span class="up">▲+0.47pt</span></span><span>Cumul. recovery <b>+1.12pt</b></span><span>Gap to avg <b>−4.30pt</b></span></div>
+    <div class="bar"><i style="width:74%;background:var(--green)"></i></div>
+    The 07/29 reversal was an FOMC reaction artifact — compression resumed on the first post-FOMC session exactly as the thesis predicted. Eight compression sessions, one reversal, one resumption. The clean window now has a confirmed one-session exception on an extreme macro event day. The thesis is active and the $5K add decision is now undeferred.
+  </div>
+  <div class="read kg">
+    <div class="rh"><b>ERH</b><span class="st">Green · third attempt · +0.33</span></div>
+    <div class="mx"><span>Z1Y <b>+0.33</b> <span class="up">▲+0.39</span></span><span>D/P <b>−7.32%</b> <span class="up">▲+0.52pt</span></span><span>vs avg <b>−7.75%</b></span><span>DQ flag <b>⚠</b></span></div>
+    <div class="bar"><i style="width:58%;background:var(--green)"></i></div>
+    Third Green attempt — and the strongest Z1Y reading of the three (+0.33 vs +0.17 and +0.09). D/P also compressed inside own average for the second time. The two-session confirmation rule requires a Green reading tomorrow to validate. If confirmed, this would be the first sustained Green cross for ERH in the tracking window. ROC-primary flag unchanged regardless.
+  </div>
+  <div class="read kg">
+    <div class="rh"><b>BST</b><span class="st">Green · NAV recovering</span></div>
+    <div class="mx"><span>Z1Y <b>+0.32</b> <span class="dn">▼−0.54</span></span><span>D/P <b>−5.97%</b></span><span>NAV <b>$48.57</b> <span class="up">▲+$2.20</span></span><span>Ex-div <b>09/15</b></span></div>
+    <div class="bar"><i style="width:48%;background:var(--green)"></i></div>
+    BST remains in Green despite the Z1Y pullback from yesterday's NAV-compression spike (+0.86→+0.32). Today's session is cleaner: NAV recovered $2.20 while price recovered $1.64 — NAV-led recovery after a NAV-driven Green cross. The six-session NAV decline trend is partially unwinding. LT momentum +10.91% (07/24) intact. D/P −5.97% vs −6.53% avg — discount slightly above own norm.
+  </div>
+  <div class="read kx">
+    <div class="rh"><b>BUI</b><span class="st">Gray · fourth session · 0.15pt from zero</span></div>
+    <div class="mx"><span>Z1Y <b>−0.15</b> <span class="up">▲+0.20</span></span><span>D/P <b>+1.90%</b> <span class="dn">▼widening</span></span><span>Sessions in Gray <b>4</b></span><span>Trigger <b>reset</b></span></div>
+    <div class="bar"><i style="width:22%;background:var(--gray)"></i></div>
+    Z1Y is 0.15pt from zero — the closest BUI has been to an Orange return since entering Gray on 07/27. But the D/P premium widened to +1.90%, moving further from the discount needed for Orange quadrant. BUI needs Z1Y positive (near) AND D/P negative (further away) to reach Green, or just Z1Y negative with D/P negative to return to Orange. The premium widening is the key obstacle.
+  </div>
+  <div class="read ko">
+    <div class="rh"><b>RNP</b><span class="st">Post-FOMC compression · $5K candidate</span></div>
+    <div class="mx"><span>Z1Y <b>−1.34</b> <span class="up">▲+0.19</span></span><span>D/P <b>−7.38%</b></span><span>Dev from avg <b>−5.36pt</b></span><span>NII-primary <b>57%</b></span></div>
+    <div class="bar"><i style="width:68%;background:var(--orange)"></i></div>
+    Compressing with the REIT sleeve on the post-FOMC reversal. −5.36pt deviation from own −2.02% average. NAV gave back −$0.20 but price held flat (−$0.02) — discount narrowed mechanically. The best-sourced REIT fund in the sleeve (57% NII). With FOMC behind us and compression resuming, RNP is the most statistically compelling $5K add candidate alongside RQI.
+  </div>
+  <div class="read kp">
+    <div class="rh"><b>$5K add — now undeferred</b><span class="st">QTI decision</span></div>
+    <div class="mx"><span>RQI <b>−1.53</b> resuming</span><span>ERH <b>+0.33</b> Green×3</span><span>BST <b>+0.32</b> Green</span><span>RNP <b>−1.34</b> disloc.</span></div>
+    <div class="bar"><i style="width:72%;background:#6366F1"></i></div>
+    FOMC confirmed as a hold. Post-FOMC reversal confirms the reaction was an overreaction. RQI compression resuming, ERH approaching two-session Green confirmation, BST in Green with NAV recovering. The $5K add decision is now QTI's to make. Framework surfaces: RNP (deepest REIT dislocation, 57% NII, clean sourcing), RQI (thesis active, 9 sessions with one artifact reversal), BST (Green, strong LT momentum). BUI remains in Gray — premium obstacle not yet resolved.
+  </div>
+</div>
 
-<div class="disclaimer">All analytical output is for informational purposes only. Not investment advice. Past performance is no guarantee of future results. Conduct your own due diligence before making investment decisions.</div>
+<div class="disc">For informational purposes only. Not investment advice. Past performance is no guarantee of future results. Always conduct your own due diligence before making investment decisions.</div>
+<div class="tooltip" id="tip"></div>
 
 <script>
-// ─── UNIVERSE DATA 07/30/2026 ────────────────────────────────────────────────
-// [z3m, z6m, z1y, dp, avg52wk, yield, nav, price, lev]
-const D = {
-  AIO:  [0.05, 0.45,-0.53,-9.60,-7.36,8.62,27.72,25.06,11.99],
-  ASGI: [1.02,1.18,1.67,7.98,2.44,11.08,22.06,23.82,0.98],
-  BDJ:  [0.78,-0.19,-0.67,-6.92,-5.88,7.67,10.41,9.69,0.12],
-  BME:  [1.83,1.56,1.61,-2.40,-5.75,7.23,44.60,43.53,0.15],
-  BST:  [1.49,0.53,0.32,-5.97,-6.53,6.57,48.57,45.67,0.11],
-  BUI:  [0.61,0.23,-0.15,1.90,2.40,6.75,26.88,27.39,0.11],
-  CSQ:  [0.69,0.21,-0.74,-9.50,-8.05,8.10,22.10,20.00,28.49],
-  DNP:  [1.91,1.73,1.73,11.07,6.04,7.13,9.85,10.94,22.85],
-  EOI:  [0.66,-0.60,-0.98,-6.12,-3.20,8.18,20.92,19.64,0],
-  EOS:  [-0.96,-1.23,-1.20,-9.82,-6.17,8.69,23.33,21.04,0],
-  ERH:  [0.27,0.60,0.33,-7.32,-7.75,8.93,12.71,11.78,21.09],
-  ETG:  [1.63,0.05,-0.78,-8.69,-7.00,6.57,25.88,23.63,15.78],
-  GDV:  [-0.36,-0.51,-0.38,-10.96,-10.71,6.05,33.40,29.74,14.13],
-  GLU:  [-1.07,-1.12,-1.59,-5.56,-0.51,6.94,20.15,19.03,17.69],
-  HTD:  [2.11,2.03,2.54,-2.34,-6.09,7.34,26.45,25.83,31.35],
-  NBXG: [0.95,1.07,-0.11,-12.86,-12.69,9.84,16.79,14.63,0],
-  NXG:  [0.32,0.40,0.18,-1.07,-1.74,12.81,56.83,56.22,22.80],
-  PCN:  [-0.60,-0.80,-1.24,2.55,6.22,11.56,11.39,11.68,5.86],
-  PDI:  [-1.20,-1.56,-1.44,2.55,8.65,16.42,15.71,16.11,31.85],
-  PDO:  [0.65,-0.07,-0.53,2.82,3.74,11.69,12.77,13.13,34.52],
-  PDX:  [-0.60,0.00,-0.44,-10.23,-9.43,7.57,23.55,21.14,22.60],
-  RFI:  [0.67,-0.55,-1.09,-3.73,-0.44,8.27,12.06,11.61,0.04],
-  RLTY: [0.14,-0.47,-0.97,-8.59,-6.93,8.27,17.46,15.96,32.57],
-  RNP:  [-0.67,-1.22,-1.34,-7.38,-2.02,7.93,22.23,20.59,29.67],
-  RQI:  [-0.71,-1.39,-1.53,-7.91,-3.61,8.59,13.65,12.57,27.90],
-  UTF:  [1.36,1.72,0.97,-1.49,-4.78,7.12,28.24,27.82,27.70],
-  UTG:  [0.97,0.88,0.66,0.42,-0.41,6.60,38.05,38.21,21.33],
-};
+const MOM={PCN:[-1.82,-20.33],BDJ:[2.35,5.90],EOI:[0.79,6.21],BME:[4.64,3.91],RQI:[0.69,-4.22],RNP:[0.82,-8.04],RFI:[3.04,-10.19],AIO:[-1.50,12.14],BST:[-0.15,10.91],DNP:[1.81,8.75],ERH:[-2.11,0.18],BUI:[-0.41,17.20],UTF:[3.23,12.37],UTG:[-2.47,20.45]};
+const HOLDINGS=new Set(["PCN","BDJ","EOI","BUI","BME","RQI","RNP","RFI","AIO","BST","DNP","UTF","ERH","UTG"]);
+const QCOLOR={G:"#1D9E75",B:"#378ADD",O:"#D85A30",X:"#888780"};
+const QNAME={G:"Green · Thesis Working",B:"Blue · Premium Territory",O:"Orange · Buy Zone",X:"Gray · Worst Setup"};
+const PRIOR=[
+  {date:"07/15/2026",d:{AIO:[-0.35,-8.47],ASGI:[2.10,8.51],BDJ:[-0.34,-6.40],BME:[1.50,-2.92],BST:[-0.59,-7.47],BUI:[0.06,2.72],CSQ:[-0.64,-9.18],DNP:[1.66,10.50],EOI:[-0.84,-5.45],EOS:[-0.69,-8.06],ERH:[1.31,-6.07],ETG:[-1.14,-9.26],GDV:[0.38,-10.47],GLU:[-0.94,-3.26],HTD:[2.48,-2.78],NBXG:[-0.91,-14.05],NXG:[1.56,3.74],PCN:[-1.50,2.10],PDI:[-1.32,3.61],PDO:[-0.84,2.34],PDX:[-0.67,-10.56],RFI:[-1.44,-4.37],RLTY:[-0.87,-8.28],RNP:[-1.33,-6.90],RQI:[-2.43,-9.69],UTF:[0.67,-2.02],UTG:[0.60,0.30]}},
+  {date:"07/16/2026",d:{AIO:[-0.22,-7.89],ASGI:[2.46,9.72],BDJ:[-0.93,-7.31],BME:[1.32,-3.27],BST:[-0.50,-7.32],BUI:[-0.57,0.61],CSQ:[-0.54,-8.98],DNP:[1.40,9.80],EOI:[-0.77,-5.25],EOS:[-0.53,-7.53],ERH:[1.11,-6.32],ETG:[-1.31,-9.65],GDV:[-0.48,-11.03],GLU:[-1.00,-3.46],HTD:[1.15,-4.61],NBXG:[-0.47,-13.33],NXG:[1.75,4.42],PCN:[-1.24,2.80],PDI:[-1.18,4.18],PDO:[-0.47,2.97],PDX:[-0.99,-11.17],RFI:[-1.59,-4.88],RLTY:[-1.22,-8.89],RNP:[-1.42,-7.30],RQI:[-2.57,-10.14],UTF:[0.58,-2.39],UTG:[1.43,1.31]}},
+  {date:"07/17/2026 ✓",d:{AIO:[-0.59,-9.62],ASGI:[2.47,9.83],BDJ:[-0.59,-6.79],BME:[1.29,-3.29],BST:[-1.44,-8.91],BUI:[-0.40,1.16],CSQ:[-0.68,-9.30],DNP:[1.47,10.04],EOI:[-0.95,-5.83],EOS:[-0.63,-7.88],ERH:[1.22,-6.16],ETG:[-1.14,-9.30],GDV:[0.15,-10.62],GLU:[-1.02,-3.53],HTD:[1.75,-3.77],NBXG:[-1.21,-14.57],NXG:[0.77,0.93],PCN:[-1.32,2.54],PDI:[-1.26,3.81],PDO:[-0.28,3.29],PDX:[-0.90,-11.02],RFI:[-1.66,-5.12],RLTY:[-1.07,-8.65],RNP:[-1.55,-7.87],RQI:[-2.65,-10.49],UTF:[0.59,-2.39],UTG:[0.86,0.61]}},
+  {date:"07/20/2026",d:{AIO:[-0.59,-9.62],ASGI:[1.85,7.97],BDJ:[-0.59,-6.91],BME:[1.29,-2.33],BST:[-1.44,-8.70],BUI:[-0.40,1.16],CSQ:[-0.47,-8.87],DNP:[1.47,10.04],EOI:[-0.95,-5.92],EOS:[-0.63,-8.13],ERH:[1.22,-6.16],ETG:[-1.14,-9.36],GDV:[0.15,-10.62],GLU:[-1.02,-3.53],HTD:[1.75,-3.64],NBXG:[-1.21,-13.92],NXG:[0.77,0.93],PCN:[-1.32,2.54],PDI:[-1.26,3.81],PDO:[-0.28,3.29],PDX:[-0.90,-11.02],RFI:[-1.57,-4.90],RLTY:[-1.05,-8.63],RNP:[-1.48,-7.63],RQI:[-2.39,-9.89],UTF:[0.79,-1.70],UTG:[1.12,0.94]}},
+  {date:"07/21/2026",d:{AIO:[-0.52,-9.31],ASGI:[2.29,9.43],BDJ:[-0.67,-6.09],BME:[1.75,-2.83],BST:[-1.30,-10.09],BUI:[-0.29,1.53],CSQ:[-0.50,-8.95],DNP:[1.70,10.72],EOI:[-0.98,-5.92],EOS:[-0.70,-8.13],ERH:[1.45,-5.84],ETG:[-1.16,-9.36],GDV:[-0.41,-10.98],GLU:[-0.79,-2.84],HTD:[1.83,-2.94],NBXG:[-0.81,-14.02],NXG:[0.90,1.37],PCN:[-1.04,3.33],PDI:[-1.29,3.62],PDO:[-0.55,2.83],PDX:[-0.93,-11.09],RFI:[-1.53,-4.81],RLTY:[-1.04,-8.63],RNP:[-1.42,-7.46],RQI:[-2.15,-9.31],UTF:[0.77,-1.81],UTG:[1.12,0.03]}},
+  {date:"07/22/2026",d:{AIO:[-0.55,-9.53],ASGI:[2.18,9.16],BDJ:[-0.15,-6.10],BME:[1.47,-2.84],BST:[-1.51,-9.12],BUI:[-0.74,0.00],CSQ:[-0.41,-8.78],DNP:[1.14,9.21],EOI:[-1.03,-6.14],EOS:[-0.87,-8.71],ERH:[0.17,-8.24],ETG:[-1.07,-9.20],GDV:[-0.31,-10.92],GLU:[-1.26,-4.32],HTD:[1.71,-3.75],NBXG:[-0.81,-13.93],NXG:[0.58,0.74],PCN:[-1.35,2.37],PDI:[-1.30,3.51],PDO:[-0.74,2.52],PDX:[-0.12,-9.60],RFI:[-1.57,-5.00],RLTY:[-0.78,-8.20],RNP:[-1.44,-7.57],RQI:[-1.85,-8.54],UTF:[0.58,-2.56],UTG:[-0.13,-0.59]}},
+  {date:"07/23/2026",d:{AIO:[-0.67,-10.08],ASGI:[2.64,10.79],BDJ:[-0.49,-6.63],BME:[0.86,-4.09],BST:[-1.65,-9.37],BUI:[-0.83,-0.29],CSQ:[-0.52,-9.00],DNP:[0.96,8.70],EOI:[-0.97,-5.97],EOS:[-1.06,-9.31],ERH:[-0.73,-8.75],ETG:[-1.30,-9.72],GDV:[-0.11,-10.78],GLU:[-0.98,-3.46],HTD:[1.84,-3.53],NBXG:[-1.16,-14.53],NXG:[0.85,1.23],PCN:[-1.40,2.21],PDI:[-1.44,2.88],PDO:[-1.14,1.82],PDX:[-0.44,-10.20],RFI:[-1.40,-4.50],RLTY:[-0.93,-8.46],RNP:[-1.49,-7.82],RQI:[-1.95,-8.87],UTF:[0.52,-2.79],UTG:[0.05,-0.37]}},
+  {date:"07/24/2026",d:{AIO:[-0.67,-10.08],ASGI:[2.57,10.69],BDJ:[-0.60,-6.80],BME:[0.86,-3.25],BST:[-0.84,-7.99],BUI:[-0.83,-0.29],CSQ:[-0.62,-9.21],DNP:[0.96,8.70],EOI:[-0.90,-5.79],EOS:[-0.88,-8.76],ERH:[-0.73,-9.42],ETG:[-1.20,-9.52],GDV:[-0.11,-10.78],GLU:[-0.98,-3.46],HTD:[1.84,-3.59],NBXG:[-0.74,-13.85],NXG:[0.85,1.23],PCN:[-1.40,2.65],PDI:[-1.44,2.43],PDO:[-1.14,1.73],PDX:[-0.44,-9.55],RFI:[-1.30,-4.26],RLTY:[-1.12,-8.79],RNP:[-1.55,-8.10],RQI:[-1.98,-9.01],UTF:[0.69,-2.26],UTG:[0.57,0.28]}},
+  {date:"07/27/2026",d:{AIO:[-0.58,-9.71],ASGI:[2.15,9.40],BDJ:[-0.64,-6.87],BME:[1.50,-2.73],BST:[-0.24,-6.95],BUI:[-0.32,1.35],CSQ:[-0.48,-8.95],DNP:[1.32,9.78],EOI:[-0.90,-5.80],EOS:[-0.87,-8.76],ERH:[-0.11,-7.92],ETG:[-1.29,-9.76],GDV:[-0.22,-10.85],GLU:[-1.27,-4.41],HTD:[1.95,-3.32],NBXG:[-0.53,-13.52],NXG:[1.21,2.59],PCN:[-1.32,2.38],PDI:[-1.80,1.21],PDO:[-1.68,0.86],PDX:[0.10,-9.22],RFI:[-1.19,-3.95],RLTY:[-0.71,-8.11],RNP:[-1.35,-7.32],RQI:[-1.67,-8.19],UTF:[0.72,-2.19],UTG:[1.15,1.00]}},
+  {date:"07/28/2026",d:{AIO:[-0.48,-9.34],ASGI:[1.40,7.00],BDJ:[-0.56,-6.74],BME:[1.46,-2.77],BST:[-0.19,-6.86],BUI:[-0.29,1.47],CSQ:[-0.63,-9.25],DNP:[1.21,9.47],EOI:[-0.89,-5.81],EOS:[-1.00,-9.17],ERH:[0.09,-7.65],ETG:[-1.32,-9.85],GDV:[-0.09,-10.77],GLU:[-1.43,-4.95],HTD:[1.94,-3.31],NBXG:[0.33,-12.15],NXG:[1.40,3.30],PCN:[-1.31,2.37],PDI:[-1.52,2.36],PDO:[-1.40,1.34],PDX:[-0.62,-10.56],RFI:[-1.18,-3.94],RLTY:[-0.87,-8.39],RNP:[-1.39,-7.49],RQI:[-1.57,-7.96],UTF:[0.82,-1.87],UTG:[1.73,1.73]}},
+  {date:"07/29/2026 FOMC",d:{AIO:[-0.30,-8.59],ASGI:[1.36,6.89],BDJ:[-0.36,-6.43],BME:[1.85,-1.94],BST:[0.86,-5.05],BUI:[-0.35,1.27],CSQ:[-0.66,-9.34],DNP:[1.65,10.80],EOI:[-1.01,-6.19],EOS:[-1.03,-9.28],ERH:[-0.06,-7.84],ETG:[-1.06,-9.30],GDV:[-0.05,-10.74],GLU:[-1.64,-5.65],HTD:[2.07,-3.09],NBXG:[-0.08,-12.82],NXG:[1.05,2.07],PCN:[-1.51,1.76],PDI:[-1.70,1.53],PDO:[-1.12,1.81],PDX:[-0.50,-10.34],RFI:[-1.28,-4.27],RLTY:[-1.02,-8.66],RNP:[-1.53,-8.11],RQI:[-1.71,-8.38],UTF:[0.84,-1.85],UTG:[2.00,2.09]}},
+];
+const CUR={date:"07/30/2026",data:{AIO:[0.05,0.45,-0.53,-9.60,-7.36,8.62,27.72,25.06],ASGI:[1.02,1.18,1.67,7.98,2.44,11.08,22.06,23.82],BDJ:[0.78,-0.19,-0.67,-6.92,-5.88,7.67,10.41,9.69],BME:[1.83,1.56,1.61,-2.40,-5.75,7.23,44.60,43.53],BST:[1.49,0.53,0.32,-5.97,-6.53,6.57,48.57,45.67],BUI:[0.61,0.23,-0.15,1.90,2.40,6.75,26.88,27.39],CSQ:[0.69,0.21,-0.74,-9.50,-8.05,8.10,22.10,20.00],DNP:[1.91,1.73,1.73,11.07,6.04,7.13,9.85,10.94],EOI:[0.66,-0.60,-0.98,-6.12,-3.20,8.18,20.92,19.64],EOS:[-0.96,-1.23,-1.20,-9.82,-6.17,8.69,23.33,21.04],ERH:[0.27,0.60,0.33,-7.32,-7.75,8.93,12.71,11.78],ETG:[1.63,0.05,-0.78,-8.69,-7.00,6.57,25.88,23.63],GDV:[-0.36,-0.51,-0.38,-10.96,-10.71,6.05,33.40,29.74],GLU:[-1.07,-1.12,-1.59,-5.56,-0.51,6.94,20.15,19.03],HTD:[2.11,2.03,2.54,-2.34,-6.09,7.34,26.45,25.83],NBXG:[0.95,1.07,-0.11,-12.86,-12.69,9.84,16.79,14.63],NXG:[0.32,0.40,0.18,-1.07,-1.74,12.81,56.83,56.22],PCN:[-0.60,-0.80,-1.24,2.55,6.22,11.56,11.39,11.68],PDI:[-1.20,-1.56,-1.44,2.55,8.65,16.42,15.71,16.11],PDO:[0.65,-0.07,-0.53,2.82,3.74,11.69,12.77,13.13],PDX:[-0.60,0.00,-0.44,-10.23,-9.43,7.57,23.55,21.14],RFI:[0.67,-0.55,-1.09,-3.73,-0.44,8.27,12.06,11.61],RLTY:[0.14,-0.47,-0.97,-8.59,-6.93,8.27,17.46,15.96],RNP:[-0.67,-1.22,-1.34,-7.38,-2.02,7.93,22.23,20.59],RQI:[-0.71,-1.39,-1.53,-7.91,-3.61,8.59,13.65,12.57],UTF:[1.36,1.72,0.97,-1.49,-4.78,7.12,28.24,27.82],UTG:[0.97,0.88,0.66,0.42,-0.41,6.60,38.05,38.21]}};
 
-// Partial trail data (spec-sourced spot readings — Z1Y + D/P where available)
-// Format: { ticker: { session_label: [z1y, dp] } }
-// D/P from 07/24 not in spec for most funds; using null → trail shows Z1Y movement only
-// For visual trail we estimate D/P from 07/30 current + partial data
-const TRAIL_07_24 = {
-  BST:  [-0.84, -6.80],   // Z1Y from spec; D/P estimated near current
-  BUI:  [-0.83, -0.90],   // Z1Y from spec; D/P was negative (Orange) → estimated
-  ERH:  [-0.06, -7.60],   // Z1Y from spec; D/P estimated near current
-  RQI:  [-1.76, -8.50],   // Z1Y from spec; D/P estimated
-  RNP:  [-1.52, -7.80],   // Z1Y from spec; D/P estimated
-  UTG:  [0.57,   0.28],   // both from spec (confirmed)
-  BME:  [1.40,  -3.10],   // Z1Y from spec; D/P estimated
-  BDJ:  [-0.82, -7.20],   // Z1Y from spec; D/P estimated
-  EOI:  [-1.15, -6.40],   // Z1Y from spec; D/P estimated
-  RFI:  [-1.20, -4.00],   // Z1Y from spec; D/P estimated
-  UTF:  [0.78,  -2.10],   // Z1Y from spec; D/P estimated
-  PCN:  [-1.08,  2.80],   // Z1Y from spec; D/P estimated (was premium)
-};
-
-const TRAIL_07_23 = {
-  BST: [-1.65, -7.30],    // from spec: "peaked -1.65 (07/23)"
-};
-
-const HOLDINGS = new Set(['PCN','BDJ','EOI','BUI','BME','RQI','RNP','RFI','AIO','BST','DNP','UTF','ERH','UTG']);
-const TICKERS = Object.keys(D);
-
-const Q_COLOR = { green:'#1D9E75', blue:'#378ADD', orange:'#D85A30', gray:'#888780' };
-const Q_LABEL = { green:'Thesis Working', blue:'Premium Territory', orange:'Buy Zone', gray:'Worst Setup' };
-const Q_CLASS = { green:'dq-g', blue:'dq-b', orange:'dq-o', gray:'dq-x' };
-
-let zPeriod = 'z1y';
-let quadFilter = 'all';
-let holdingsOnly = false;
-let searchTerm = '';
-let selectedTicker = null;
-let showTrail = true;
-
-const ZI = { z3m:0, z6m:1, z1y:2 };
-
-function getZ(t) { return D[t][ZI[zPeriod]]; }
-function getDP(t) { return D[t][3]; }
-function getQ(t) {
-  const z = D[t][2], dp = D[t][3];
-  if (z >= 0 && dp < 0) return 'green';
-  if (z >= 0 && dp >= 0) return 'blue';
-  if (z < 0 && dp < 0) return 'orange';
-  return 'gray';
+const DATES=PRIOR.map(s=>s.date).concat([CUR.date]);
+let zIdx=2,qFilter="all",searchTerm="",holdOnly=false,sesIdx=11;
+const W=980,H=560,ML=54,MR=16,MT=14,MB=40;
+function qFromZD(z,dp){return z>=0?(dp<0?"G":"B"):(dp<0?"O":"X");}
+function getExtent(){
+  let zs=[],ds=[];
+  Object.keys(CUR.data).forEach(t=>{zs.push(CUR.data[t][zIdx]);ds.push(CUR.data[t][3],CUR.data[t][4]);});
+  PRIOR.forEach(s=>Object.keys(s.d).forEach(t=>{zs.push(s.d[t][0]);ds.push(s.d[t][1]);}));
+  const zm=Math.max(3,Math.ceil(Math.max(...zs.map(Math.abs))));
+  const dmin=Math.floor(Math.min(...ds))-1,dmax=Math.ceil(Math.max(...ds))+1;
+  return{zmin:-zm,zmax:zm,dmin,dmax};
 }
-function isVisible(t) {
-  if (quadFilter !== 'all' && getQ(t) !== quadFilter) return false;
-  if (holdingsOnly && !HOLDINGS.has(t)) return false;
-  if (searchTerm && !t.includes(searchTerm.toUpperCase())) return false;
-  return true;
-}
-
-// ─── CANVAS RENDER ────────────────────────────────────────────────────────────
-const canvas = document.getElementById('scatter');
-const ctx = canvas.getContext('2d');
-let PAD, CW, CH, W, H;
-let xScale, yScale, xInv, yInv;
-
-function resize() {
-  const area = document.getElementById('chartArea');
-  W = area.clientWidth; H = area.clientHeight;
-  canvas.width = W; canvas.height = H;
-  PAD = { top: 32, right: 28, bottom: 48, left: 58 };
-  CW = W - PAD.left - PAD.right;
-  CH = H - PAD.top - PAD.bottom;
-
-  const allZ = TICKERS.map(t => getZ(t));
-  const allDP = TICKERS.map(t => getDP(t));
-  const zMin = Math.min(-2.8, ...allZ) - 0.2;
-  const zMax = Math.max(2.8, ...allZ) + 0.2;
-  const dpMin = Math.min(-14, ...allDP) - 1;
-  const dpMax = Math.max(12, ...allDP) + 1;
-
-  xScale = z => PAD.left + (z - zMin) / (zMax - zMin) * CW;
-  yScale = dp => PAD.top + (1 - (dp - dpMin) / (dpMax - dpMin)) * CH;
-  xInv = px => zMin + (px - PAD.left) / CW * (zMax - zMin);
-  yInv = py => dpMin + (1 - (py - PAD.top) / CH) * (dpMax - dpMin);
-}
-
-function draw() {
-  if (!W || !H) return;
-  ctx.clearRect(0, 0, W, H);
-
-  const x0 = xScale(0), y0 = yScale(0);
-
-  // Quadrant backgrounds
-  ctx.save();
-  ctx.fillStyle = 'rgba(13,30,53,0.18)';   // Blue top-right
-  ctx.fillRect(x0, PAD.top, PAD.left+CW-x0, y0-PAD.top);
-  ctx.fillStyle = 'rgba(42,21,8,0.18)';    // Orange bottom-left
-  ctx.fillRect(PAD.left, y0, x0-PAD.left, PAD.top+CH-y0);
-  ctx.fillStyle = 'rgba(13,42,30,0.15)';   // Green bottom-right
-  ctx.fillRect(x0, y0, PAD.left+CW-x0, PAD.top+CH-y0);
-  ctx.fillStyle = 'rgba(42,21,8,0.10)';    // Gray top-left
-  ctx.fillRect(PAD.left, PAD.top, x0-PAD.left, y0-PAD.top);
-  ctx.restore();
-
-  // Grid
-  ctx.save();
-  ctx.strokeStyle = '#2e3248'; ctx.lineWidth = 0.5;
-  [-2,-1,0,1,2].forEach(z => {
-    ctx.beginPath(); ctx.moveTo(xScale(z), PAD.top); ctx.lineTo(xScale(z), PAD.top+CH); ctx.stroke();
-  });
-  [-12,-10,-8,-6,-4,-2,0,2,4,6,8,10].forEach(dp => {
-    ctx.beginPath(); ctx.moveTo(PAD.left, yScale(dp)); ctx.lineTo(PAD.left+CW, yScale(dp)); ctx.stroke();
-  });
-  ctx.restore();
-
-  // Zero axes
-  ctx.save();
-  ctx.strokeStyle = '#4a5270'; ctx.lineWidth = 1.5;
-  ctx.setLineDash([5,3]);
-  ctx.beginPath(); ctx.moveTo(x0, PAD.top); ctx.lineTo(x0, PAD.top+CH); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(PAD.left, y0); ctx.lineTo(PAD.left+CW, y0); ctx.stroke();
-  ctx.setLineDash([]);
-  ctx.restore();
-
-  // Trigger line Z1Y = -2.00
-  const xt2 = xScale(-2.0);
-  if (xt2 >= PAD.left) {
-    ctx.save();
-    ctx.strokeStyle = 'rgba(216,90,48,0.5)'; ctx.lineWidth = 1;
-    ctx.setLineDash([6,3]);
-    ctx.beginPath(); ctx.moveTo(xt2, PAD.top); ctx.lineTo(xt2, PAD.top+CH); ctx.stroke();
-    ctx.setLineDash([]);
-    ctx.fillStyle = 'rgba(216,90,48,0.6)'; ctx.font = '9px sans-serif'; ctx.textAlign = 'right';
-    ctx.fillText('Trigger −2.00', xt2-4, PAD.top+18);
-    ctx.restore();
+function render(){
+  const ex=getExtent();
+  const Xf=z=>ML+(z-ex.zmin)/(ex.zmax-ex.zmin)*(W-ML-MR);
+  const Yf=d=>MT+(ex.dmax-d)/(ex.dmax-ex.dmin)*(H-MT-MB);
+  let s="";
+  s+=`<rect x="${Xf(0)}" y="${Yf(0)}" width="${W-MR-Xf(0)}" height="${Yf(ex.dmin)-Yf(0)}" fill="#1D9E75" opacity="0.055"/>`;
+  s+=`<rect x="${Xf(0)}" y="${MT}" width="${W-MR-Xf(0)}" height="${Yf(0)-MT}" fill="#378ADD" opacity="0.055"/>`;
+  s+=`<rect x="${ML}" y="${Yf(0)}" width="${Xf(0)-ML}" height="${Yf(ex.dmin)-Yf(0)}" fill="#D85A30" opacity="0.05"/>`;
+  s+=`<rect x="${ML}" y="${MT}" width="${Xf(0)-ML}" height="${Yf(0)-MT}" fill="#888780" opacity="0.07"/>`;
+  for(let z=Math.ceil(ex.zmin);z<=ex.zmax;z++){
+    s+=`<line x1="${Xf(z)}" y1="${MT}" x2="${Xf(z)}" y2="${H-MB}" stroke="${z===0?'#B6BDC3':'#EAEDEF'}" stroke-width="${z===0?1.5:1}"/>`;
+    s+=`<text x="${Xf(z)}" y="${H-MB+16}" font-size="10" fill="#8A929A" text-anchor="middle">${z}</text>`;
   }
-
-  // Quadrant labels
-  ctx.save();
-  ctx.font = '9px sans-serif';
-  ctx.fillStyle = 'rgba(136,135,128,0.4)'; ctx.textAlign = 'left';
-  ctx.fillText('Gray · Worst Setup', PAD.left+6, PAD.top+14);
-  ctx.fillStyle = 'rgba(55,138,221,0.4)';
-  ctx.fillText('Blue · Premium Territory', x0+6, PAD.top+14);
-  ctx.fillStyle = 'rgba(216,90,48,0.4)';
-  ctx.fillText('Orange · Buy Zone', PAD.left+6, PAD.top+CH-8);
-  ctx.fillStyle = 'rgba(29,158,117,0.4)';
-  ctx.fillText('Green · Thesis Working', x0+6, PAD.top+CH-8);
-  ctx.restore();
-
-  // Axis ticks + labels
-  ctx.save();
-  ctx.fillStyle = '#4a5270'; ctx.font = '9px sans-serif';
-  [-2,-1,0,1,2].forEach(z => {
-    ctx.textAlign = 'center';
-    ctx.fillText(z.toString(), xScale(z), PAD.top+CH+14);
-  });
-  [-12,-8,-4,0,4,8].forEach(dp => {
-    ctx.textAlign = 'right';
-    ctx.fillText(dp+'%', PAD.left-5, yScale(dp)+3);
-  });
-  ctx.restore();
-
-  // Axis labels
-  ctx.save();
-  ctx.fillStyle = '#8892a8'; ctx.font = '11px sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText(`Z-Score (${zPeriod.toUpperCase()})`, PAD.left+CW/2, H-6);
-  ctx.save();
-  ctx.translate(14, PAD.top+CH/2);
-  ctx.rotate(-Math.PI/2);
-  ctx.fillText('Discount / Premium %', 0, 0);
-  ctx.restore();
-  ctx.restore();
-
-  // ─── TRAIL DOTS (prior sessions — spec-sourced, holdings only) ──────────────
-  if (showTrail) {
-    // 07/23 trail (BST only confirmed)
-    Object.entries(TRAIL_07_23).forEach(([ticker, [z1y, dp]]) => {
-      if (!isVisible(ticker)) return;
-      const xp = xScale(zPeriod === 'z1y' ? z1y : getZ(ticker));
-      const yp = yScale(dp);
-      const col = Q_COLOR[getQ(ticker)];
-      ctx.save();
-      ctx.globalAlpha = 0.22;
-      ctx.fillStyle = col;
-      ctx.beginPath(); ctx.arc(xp, yp, 5, 0, Math.PI*2); ctx.fill();
-      ctx.restore();
-      // connector to 07/24 pos if available
-      if (TRAIL_07_24[ticker]) {
-        const [z24, dp24] = TRAIL_07_24[ticker];
-        const x24 = xScale(zPeriod === 'z1y' ? z24 : getZ(ticker));
-        const y24 = yScale(dp24);
-        ctx.save();
-        ctx.globalAlpha = 0.18;
-        ctx.strokeStyle = col; ctx.lineWidth = 1; ctx.setLineDash([3,3]);
-        ctx.beginPath(); ctx.moveTo(xp, yp); ctx.lineTo(x24, y24); ctx.stroke();
-        ctx.setLineDash([]);
-        ctx.restore();
-      }
+  const dstep=(ex.dmax-ex.dmin)>20?5:2;
+  for(let d=Math.ceil(ex.dmin/dstep)*dstep;d<=ex.dmax;d+=dstep){
+    s+=`<line x1="${ML}" y1="${Yf(d)}" x2="${W-MR}" y2="${Yf(d)}" stroke="${d===0?'#B6BDC3':'#EAEDEF'}" stroke-width="${d===0?1.5:1}"/>`;
+    s+=`<text x="${ML-6}" y="${Yf(d)+3}" font-size="10" fill="#8A929A" text-anchor="end">${d}%</text>`;
+  }
+  s+=`<text x="${W/2}" y="${H-6}" font-size="11" fill="#5A636B" text-anchor="middle">Z-Score (${['Z3M','Z6M','Z1Y'][zIdx]})</text>`;
+  s+=`<text x="14" y="${H/2}" font-size="11" fill="#5A636B" text-anchor="middle" transform="rotate(-90 14 ${H/2})">Discount / Premium %</text>`;
+  if(sesIdx===11){
+    const ops=[0.03,0.04,0.05,0.07,0.09,0.11,0.14,0.17,0.21,0.26,0.32];
+    PRIOR.forEach((ps,gi)=>{
+      const op=ops[gi]||0.03;const r=gi===10?5:gi===9?3.5:2.5;
+      Object.keys(ps.d).forEach(t=>{
+        const [z1y,dp]=ps.d[t];const q=qFromZD(z1y,dp);
+        const vis=(qFilter==="all"||q===qFilter)&&(!holdOnly||HOLDINGS.has(t));
+        if(vis&&(!searchTerm||t.includes(searchTerm)))
+          s+=`<circle cx="${Xf(z1y)}" cy="${Yf(dp)}" r="${r}" fill="${QCOLOR[q]}" opacity="${op}"/>`;
+      });
     });
-
-    // 07/24 trail
-    Object.entries(TRAIL_07_24).forEach(([ticker, [z1y, dp]]) => {
-      if (!isVisible(ticker)) return;
-      const xp = xScale(zPeriod === 'z1y' ? z1y : getZ(ticker));
-      const yp = yScale(dp);
-      const xc = xScale(getZ(ticker));
-      const yc = yScale(getDP(ticker));
-      const col = Q_COLOR[getQ(ticker)];
-      // ghost dot
-      ctx.save();
-      ctx.globalAlpha = 0.30;
-      ctx.fillStyle = col;
-      ctx.beginPath(); ctx.arc(xp, yp, 6, 0, Math.PI*2); ctx.fill();
-      // ghost label
-      ctx.fillStyle = col;
-      ctx.font = '8px sans-serif'; ctx.textAlign = 'center'; ctx.globalAlpha = 0.30;
-      ctx.fillText(ticker, xp, yp-8);
-      ctx.restore();
-      // connector to current
-      ctx.save();
-      ctx.globalAlpha = 0.25;
-      ctx.strokeStyle = col; ctx.lineWidth = 1.5; ctx.setLineDash([4,3]);
-      ctx.beginPath(); ctx.moveTo(xp, yp); ctx.lineTo(xc, yc); ctx.stroke();
-      ctx.setLineDash([]);
-      ctx.restore();
+    Object.keys(CUR.data).forEach(t=>{
+      const d=CUR.data[t];const zVal=d[zIdx],dpVal=d[3],avg52=d[4];
+      const q=qFromZD(d[2],dpVal);
+      const vis=(qFilter==="all"||q===qFilter)&&(!holdOnly||HOLDINGS.has(t));
+      const match=!searchTerm||t.includes(searchTerm);
+      const dim=(!vis||!match)?' class="dot dimmed"':' class="dot"';
+      const cx=Xf(zVal),cy=Yf(dpVal),ay=Yf(avg52);
+      s+=`<g${dim} data-t="${t}">`;
+      s+=`<line x1="${cx}" y1="${cy}" x2="${cx}" y2="${ay}" stroke="${QCOLOR[q]}" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>`;
+      s+=`<circle cx="${cx}" cy="${ay}" r="2" fill="none" stroke="${QCOLOR[q]}" stroke-width="1" opacity="0.5"/>`;
+      if(HOLDINGS.has(t)) s+=`<circle cx="${cx}" cy="${cy}" r="9.5" fill="none" stroke="${QCOLOR[q]}" stroke-width="1.4" opacity="0.6"/>`;
+      s+=`<circle cx="${cx}" cy="${cy}" r="6" fill="${QCOLOR[q]}"/>`;
+      s+=`<text x="${cx}" y="${cy-11}" font-size="9.5" font-weight="600" text-anchor="middle" fill="#3A4249">${t}</text>`;
+      s+=`</g>`;
+    });
+  } else {
+    const ps=PRIOR[sesIdx];
+    Object.keys(ps.d).forEach(t=>{
+      const [z1y,dp]=ps.d[t];const q=qFromZD(z1y,dp);
+      const vis=(qFilter==="all"||q===qFilter)&&(!holdOnly||HOLDINGS.has(t));
+      const match=!searchTerm||t.includes(searchTerm);
+      const dim=(!vis||!match)?' class="dot dimmed"':' class="dot"';
+      s+=`<g${dim} data-t="${t}">`;
+      if(HOLDINGS.has(t)) s+=`<circle cx="${Xf(z1y)}" cy="${Yf(dp)}" r="9.5" fill="none" stroke="${QCOLOR[q]}" stroke-width="1.4" opacity="0.6"/>`;
+      s+=`<circle cx="${Xf(z1y)}" cy="${Yf(dp)}" r="6" fill="${QCOLOR[q]}"/>`;
+      s+=`<text x="${Xf(z1y)}" y="${Yf(dp)-11}" font-size="9.5" font-weight="600" text-anchor="middle" fill="#3A4249">${t}</text>`;
+      s+=`</g>`;
     });
   }
-
-  // ─── 52-wk avg tails ──────────────────────────────────────────────────────
-  TICKERS.filter(isVisible).forEach(ticker => {
-    const xc = xScale(getZ(ticker));
-    const yc = yScale(getDP(ticker));
-    const yAvg = yScale(D[ticker][4]);
-    const col = Q_COLOR[getQ(ticker)];
-    ctx.save();
-    ctx.globalAlpha = 0.35;
-    ctx.strokeStyle = col; ctx.lineWidth = 1;
-    ctx.setLineDash([3,2]);
-    ctx.beginPath(); ctx.moveTo(xc, yc); ctx.lineTo(xc, yAvg); ctx.stroke();
-    ctx.setLineDash([]);
-    ctx.beginPath(); ctx.arc(xc, yAvg, 2.5, 0, Math.PI*2);
-    ctx.strokeStyle = col; ctx.lineWidth = 1; ctx.stroke();
-    ctx.restore();
-  });
-
-  // ─── MAIN DOTS ─────────────────────────────────────────────────────────────
-  // Dimmed (not visible)
-  TICKERS.filter(t => !isVisible(t)).forEach(ticker => {
-    const xc = xScale(getZ(ticker));
-    const yc = yScale(getDP(ticker));
-    ctx.save();
-    ctx.globalAlpha = 0.12;
-    ctx.fillStyle = '#4a5270';
-    ctx.beginPath(); ctx.arc(xc, yc, 5, 0, Math.PI*2); ctx.fill();
-    ctx.restore();
-  });
-
-  // Visible dots
-  TICKERS.filter(isVisible).forEach(ticker => {
-    const xc = xScale(getZ(ticker));
-    const yc = yScale(getDP(ticker));
-    const q = getQ(ticker);
-    const col = Q_COLOR[q];
-    const isH = HOLDINGS.has(ticker);
-    const isSel = ticker === selectedTicker;
-    const r = isH ? 8 : 5.5;
-
-    ctx.save();
-    if (isSel) {
-      ctx.globalAlpha = 0.2;
-      ctx.fillStyle = col;
-      ctx.beginPath(); ctx.arc(xc, yc, r+6, 0, Math.PI*2); ctx.fill();
-    }
-    ctx.globalAlpha = isH ? 0.9 : 0.55;
-    ctx.fillStyle = col;
-    ctx.beginPath(); ctx.arc(xc, yc, r, 0, Math.PI*2); ctx.fill();
-    if (isH) {
-      ctx.globalAlpha = 0.6;
-      ctx.fillStyle = '#fff';
-      ctx.beginPath(); ctx.arc(xc, yc, 3, 0, Math.PI*2); ctx.fill();
-    }
-    if (isSel) {
-      ctx.globalAlpha = 1;
-      ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.arc(xc, yc, r, 0, Math.PI*2); ctx.stroke();
-    }
-    // Label
-    ctx.globalAlpha = isH ? 0.95 : 0.65;
-    ctx.fillStyle = col;
-    ctx.font = `${isH ? '700' : '400'} ${isH ? 10 : 9}px sans-serif`;
-    ctx.textAlign = 'center';
-    ctx.fillText(ticker, xc, yc - r - 3);
-    ctx.restore();
+  document.getElementById("chart").innerHTML=s;bindDots();renderSnap();
+  document.getElementById("seslabel").textContent="Showing: "+DATES[sesIdx];
+}
+const tip=document.getElementById("tip");
+function bindDots(){
+  document.querySelectorAll(".dot").forEach(g=>{
+    const t=g.dataset.t;if(!t) return;
+    const isCur=sesIdx===11;const d=isCur?CUR.data[t]:null;const m=MOM[t]||null;
+    g.addEventListener("mousemove",e=>{
+      tip.style.display="block";tip.style.left=(e.clientX+14)+"px";tip.style.top=(e.clientY+10)+"px";
+      if(isCur&&d){tip.innerHTML=`<b>${t}</b> · yield ${d[5].toFixed(2)}%<br>D/P ${d[3].toFixed(2)}% (avg ${d[4].toFixed(2)}%, Δ${(d[3]-d[4]).toFixed(2)}pt)<br>Z3M ${d[0].toFixed(2)} · Z6M ${d[1].toFixed(2)} · Z1Y ${d[2].toFixed(2)}<br>ST ${m?m[0].toFixed(2)+'%':'—'} · LT ${m?m[1].toFixed(2)+'%':'—'}`;}
+      else{const pd=PRIOR[sesIdx].d[t];if(pd)tip.innerHTML=`<b>${t}</b> · Z1Y ${pd[0].toFixed(2)} · D/P ${pd[1].toFixed(2)}%`;}
+    });
+    g.addEventListener("mouseleave",()=>tip.style.display="none");
+    g.addEventListener("click",()=>{
+      if(!isCur||!d) return;
+      const q=qFromZD(d[2],d[3]);const el=document.getElementById("detail");el.style.display="block";
+      const prev=PRIOR[10].d[t];const dz=prev?(d[2]-prev[0]).toFixed(2):null;const ddp=prev?(d[3]-prev[1]).toFixed(2):null;
+      el.innerHTML=`<b style="font-size:14px">${t}</b> <span class="qcount" style="background:${QCOLOR[q]}">${QNAME[q]}</span>
+      <table><tr><td>Price</td><td class="v">$${d[7].toFixed(2)}</td><td>NAV</td><td class="v">$${d[6].toFixed(2)}</td><td>Yield</td><td class="v">${d[5].toFixed(2)}%</td></tr>
+      <tr><td>D/P</td><td class="v">${d[3].toFixed(2)}%</td><td>52-wk avg</td><td class="v">${d[4].toFixed(2)}%</td><td>Dev</td><td class="v">${(d[3]-d[4]).toFixed(2)}pt</td></tr>
+      <tr><td>Z3M</td><td class="v">${d[0].toFixed(2)}</td><td>Z6M</td><td class="v">${d[1].toFixed(2)}</td><td>Z1Y${dz?` <span style="font-size:10px;color:${+dz>=0?'#1D9E75':'#D85A30'}">(${+dz>=0?'+':''}${dz})</span>`:''}</td><td class="v">${d[2].toFixed(2)}</td></tr>
+      <tr><td>ΔD/P</td><td class="v">${ddp?`${+ddp>=0?'+':''}${ddp}pt`:'—'}</td><td>ST Mom</td><td class="v">${m?m[0].toFixed(2)+'%':'—'}</td><td>LT Mom</td><td class="v">${m?m[1].toFixed(2)+'%':'—'}</td></tr></table>`;
+    });
   });
 }
-
-// ─── INTERACTION ──────────────────────────────────────────────────────────────
-let hitRadius = 12;
-function findTicker(px, py) {
-  let best = null, bestDist = hitRadius;
-  TICKERS.filter(isVisible).forEach(ticker => {
-    const xc = xScale(getZ(ticker));
-    const yc = yScale(getDP(ticker));
-    const dist = Math.hypot(px - xc, py - yc);
-    if (dist < bestDist) { bestDist = dist; best = ticker; }
+function renderSnap(){
+  const isC=sesIdx===11;const pool=isC?Object.keys(CUR.data):Object.keys(PRIOR[sesIdx].d);
+  const counts={G:0,B:0,O:0,X:0};
+  pool.forEach(t=>{
+    const z=isC?CUR.data[t][2]:PRIOR[sesIdx].d[t][0];const dp=isC?CUR.data[t][3]:PRIOR[sesIdx].d[t][1];
+    if(holdOnly&&!HOLDINGS.has(t)) return;counts[qFromZD(z,dp)]++;
   });
-  return best;
+  document.getElementById("snapTitle").textContent="Quadrant counts — "+(holdOnly?"holdings":"universe");
+  document.getElementById("snapCounts").innerHTML=Object.keys(counts).map(q=>`<span class="qcount" style="background:${QCOLOR[q]}">${QNAME[q].split('·')[0].trim()} ${counts[q]}</span>`).join("");
+  const sortable=pool.filter(t=>!holdOnly||HOLDINGS.has(t));
+  const getZ1Y=t=>isC?CUR.data[t][2]:PRIOR[sesIdx].d[t][0];
+  const getDP=t=>isC?CUR.data[t][3]:PRIOR[sesIdx].d[t][1];
+  const deep=[...sortable].sort((a,b)=>getZ1Y(a)-getZ1Y(b)).slice(0,3);
+  document.getElementById("snapDeep").innerHTML=deep.map(t=>`<div><b>${t}</b> Z1Y ${getZ1Y(t).toFixed(2)} · D/P ${getDP(t).toFixed(2)}%</div>`).join("");
+  const greens=sortable.filter(t=>qFromZD(getZ1Y(t),getDP(t))==="G").sort((a,b)=>getZ1Y(b)-getZ1Y(a)).slice(0,3);
+  document.getElementById("snapGreen").innerHTML=greens.length?greens.map(t=>`<div><b>${t}</b> Z1Y +${getZ1Y(t).toFixed(2)}</div>`).join(""):"None";
 }
-
-canvas.addEventListener('mousemove', e => {
-  const rect = canvas.getBoundingClientRect();
-  const px = e.clientX - rect.left, py = e.clientY - rect.top;
-  const t = findTicker(px, py);
-  if (t) { showTT(e, t); canvas.style.cursor = 'pointer'; }
-  else { hideTT(); canvas.style.cursor = 'default'; }
-});
-canvas.addEventListener('mouseleave', hideTT);
-canvas.addEventListener('click', e => {
-  const rect = canvas.getBoundingClientRect();
-  const px = e.clientX - rect.left, py = e.clientY - rect.top;
-  const t = findTicker(px, py);
-  if (t) openDetail(t);
-  else { selectedTicker = null; closeDetail(); draw(); }
-});
-
-function showTT(e, ticker) {
-  const d = D[ticker];
-  const q = getQ(ticker);
-  const col = Q_COLOR[q];
-  const trail24 = TRAIL_07_24[ticker];
-  const deltaZ = trail24 ? (d[2] - trail24[0]).toFixed(2) : null;
-  const deltaSign = deltaZ > 0 ? '+' : '';
-  const tt = document.getElementById('tooltip');
-  tt.innerHTML = `
-    <div class="tt-ticker" style="color:${col}">${ticker}${HOLDINGS.has(ticker)?' ●':''}</div>
-    <div class="tt-row"><span>Z1Y</span><span>${d[2].toFixed(2)}</span></div>
-    <div class="tt-row"><span>Z3M</span><span>${d[0].toFixed(2)}</span></div>
-    <div class="tt-row"><span>Z6M</span><span>${d[1].toFixed(2)}</span></div>
-    <div class="tt-row"><span>D/P</span><span>${d[3].toFixed(2)}%</span></div>
-    <div class="tt-row"><span>52wk avg</span><span>${d[4].toFixed(2)}%</span></div>
-    <div class="tt-row"><span>vs avg</span><span>${(d[3]-d[4]).toFixed(2)}%</span></div>
-    <div class="tt-row"><span>Yield</span><span>${d[5].toFixed(2)}%</span></div>
-    <div class="tt-row"><span>Price / NAV</span><span>$${d[7].toFixed(2)} / $${d[6].toFixed(2)}</span></div>
-    ${trail24 ? `<div class="tt-sep"></div><div class="tt-row"><span>Z1Y chg vs 07/24</span><span>${deltaSign}${deltaZ}</span></div>` : ''}
-    <div class="tt-sep"></div>
-    <div class="tt-row"><span>Quadrant</span><span style="color:${col}">${Q_LABEL[q]}</span></div>
-  `;
-  tt.style.display = 'block';
-  moveTT(e);
-}
-function moveTT(e) {
-  const tt = document.getElementById('tooltip');
-  let x = e.clientX+14, y = e.clientY+14;
-  if (x+185 > window.innerWidth) x = e.clientX-195;
-  if (y+230 > window.innerHeight) y = e.clientY-240;
-  tt.style.left=x+'px'; tt.style.top=y+'px';
-}
-function hideTT() { document.getElementById('tooltip').style.display='none'; }
-
-function openDetail(ticker) {
-  selectedTicker = ticker;
-  const d = D[ticker];
-  const q = getQ(ticker);
-  const col = Q_COLOR[q];
-  document.getElementById('dTicker').textContent = ticker;
-  document.getElementById('dTicker').style.color = col;
-  const qEl = document.getElementById('dQuad');
-  qEl.textContent = Q_LABEL[q]; qEl.className = 'detail-quad '+Q_CLASS[q];
-
-  const trail24 = TRAIL_07_24[ticker];
-  const dz = trail24 ? (d[2] - trail24[0]).toFixed(2) : null;
-
-  const rows = [
-    {l:'Price', v:`$${d[7].toFixed(2)}`},
-    {l:'NAV', v:`$${d[6].toFixed(2)}`},
-    {l:'D/P', v:`${d[3].toFixed(2)}%`, c: d[3]<0?'neg':'pos'},
-    {l:'52-wk Avg D/P', v:`${d[4].toFixed(2)}%`},
-    {l:'vs 52-wk avg', v:`${(d[3]-d[4]).toFixed(2)}%`, c:(d[3]-d[4])<0?'neg':'pos'},
-    {l:'Yield', v:`${d[5].toFixed(2)}%`},
-    {l:'Eff. Leverage', v:`${d[8]}%`},
-    {l:'Z3M', v:d[0].toFixed(2), c:d[0]>=0?'pos':'neg'},
-    {l:'Z6M', v:d[1].toFixed(2), c:d[1]>=0?'pos':'neg'},
-    {l:'Z1Y', v:d[2].toFixed(2), c:d[2]>=0?'pos':'neg'},
-    dz ? {l:'ΔZ1Y vs 07/24', v:`${dz>0?'+':''}${dz}`, c:dz>0?'pos':'neg'} : null,
-    {l:'Holding', v:HOLDINGS.has(ticker)?'Yes ●':'No', c:'neutral'},
-  ].filter(Boolean);
-
-  document.getElementById('dRows').innerHTML = rows.map(r =>
-    `<div class="detail-row"><span class="dr-label">${r.l}</span><span class="dr-val ${r.c||'neutral'}">${r.v}</span></div>`
-  ).join('');
-  document.getElementById('detailPanel').classList.add('open');
-  resize(); draw();
-}
-function closeDetail() {
-  document.getElementById('detailPanel').classList.remove('open');
-  selectedTicker = null;
-  resize(); draw();
-}
-
-// ─── CONTROLS ─────────────────────────────────────────────────────────────────
-function setZPeriod(p, btn) {
-  zPeriod = p;
-  document.querySelectorAll('#btn3m,#btn6m,#btn1y').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  resize(); draw();
-}
-function setQ(q, btn) {
-  quadFilter = q;
-  document.querySelectorAll('.qbtn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  draw();
-}
-function toggleHoldings(el) {
-  holdingsOnly = !holdingsOnly;
-  el.classList.toggle('on');
-  draw();
-}
-function toggleTrail(el) {
-  showTrail = !showTrail;
-  el.classList.toggle('on', showTrail);
-  draw();
-}
-function doSearch(val) {
-  searchTerm = val.trim();
-  draw();
-}
-
-// ─── INIT ─────────────────────────────────────────────────────────────────────
-window.addEventListener('resize', () => { resize(); draw(); });
-resize(); draw();
-setTimeout(() => { resize(); draw(); }, 150);
+document.querySelectorAll(".zt").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".zt").forEach(x=>x.classList.remove("on"));b.classList.add("on");zIdx=+b.dataset.z;render();}));
+document.querySelectorAll(".qf").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".qf").forEach(x=>x.classList.remove("on"));b.classList.add("on");qFilter=b.dataset.q;render();}));
+document.getElementById("search").addEventListener("input",e=>{searchTerm=e.target.value.trim().toUpperCase();render();});
+document.getElementById("hold").addEventListener("click",e=>{holdOnly=!holdOnly;e.target.classList.toggle("on",holdOnly);render();});
+document.querySelectorAll(".tmb").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".tmb").forEach(x=>x.classList.remove("on"));b.classList.add("on");sesIdx=+b.dataset.s;render();}));
+render();
 </script>
 </body>
 </html>
