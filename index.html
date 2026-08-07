@@ -121,7 +121,7 @@
     <button class="ctl" id="hold">★ My Holdings</button>
   </div>
   <svg id="chart" viewBox="0 0 980 560" xmlns="http://www.w3.org/2000/svg"></svg>
-  <div class="legend">Dashed tail = 52-wk avg D/P · Ring = holding · Ghost trails = prior 14 sessions (07/20–08/05) · ERH suppression opens 08/10 · Last clean session 08/07 · Next session Fri 08/07</div>
+  <div class="legend">Dashed tail = 52-wk avg D/P · Ring = holding · Ghost trails = prior 14 sessions (07/20–08/05) · Momentum updated 08/07/2026 · ERH suppression opens 08/10 · CEF price data for 08/07 pending</div>
   <div class="tmnav">
     <button class="ctl tmb on" data-s="14">08/06 (current)</button>
     <button class="ctl tmb" data-s="13">08/05</button>
@@ -191,7 +191,7 @@
 <div class="tooltip" id="tip"></div>
 
 <script>
-const MOM={PCN:[-1.82,-20.33],BDJ:[2.35,5.90],EOI:[0.79,6.21],BME:[4.64,3.91],RQI:[0.69,-4.22],RNP:[0.82,-8.04],RFI:[3.04,-10.19],AIO:[-1.50,12.14],BST:[-0.15,10.91],DNP:[1.81,8.75],ERH:[-2.11,0.18],BUI:[-0.41,17.20],UTF:[3.23,12.37],UTG:[-2.47,20.45]};
+const MOM={PCN:[0.35,-20.59],BDJ:[2.67,8.53],EOI:[1.80,7.92],BME:[5.52,8.45],RQI:[-1.19,-3.69],RNP:[-0.42,-7.80],RFI:[0.59,-9.93],AIO:[1.49,15.38],BST:[5.38,18.27],DNP:[0.41,6.65],ERH:[-3.30,-1.78],BUI:[-2.62,13.90],UTF:[-1.07,8.10],UTG:[-2.79,19.10]}; // Updated 08/07/2026
 const HOLDINGS=new Set(["PCN","BDJ","EOI","BUI","BME","RQI","RNP","RFI","AIO","BST","DNP","UTF","ERH","UTG"]);
 const QCOLOR={G:"#1D9E75",B:"#378ADD",O:"#D85A30",X:"#888780"};
 const QNAME={G:"Green · Thesis Working",B:"Blue · Premium Territory",O:"Orange · Buy Zone",X:"Gray · Worst Setup"};
