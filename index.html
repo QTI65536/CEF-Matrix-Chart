@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CEF Time Machine · 08/07/2026</title>
+<title>CEF Time Machine · 08/10/2026</title>
 <style>
   :root{--green:#1D9E75;--blue:#378ADD;--orange:#D85A30;--gray:#888780;--ink:#1E2429;--sub:#5A636B;--line:#DEE3E7;--bg:#F7F8F9;--card:#FFFFFF;}
   *{box-sizing:border-box;margin:0;padding:0}
@@ -12,7 +12,9 @@
   .hdr{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:4px}
   .badge{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:10px}
   .badge.pos{background:#E1F5EE;color:#085041}.badge.neg{background:#FAECE7;color:#B4431F}
-  .note{font-size:12px;color:var(--sub);margin-bottom:14px}
+  .note{font-size:12px;color:var(--sub);margin-bottom:10px}
+  .supp{background:#FFF3E0;border:1.5px solid #E3A008;border-radius:8px;padding:10px 14px;margin-bottom:10px;font-size:13px;color:#78450A;line-height:1.5}
+  .supp b{font-weight:700}
   .verdict{border-radius:8px;padding:12px 16px;margin-bottom:10px;font-size:13px;line-height:1.5;border:1.5px solid}
   .verdict.good{background:#E1F5EE;border-color:#1D9E75;color:#085041}
   .verdict.mixed{background:#FFF8EC;border-color:#E3A008;color:#78450A}
@@ -68,48 +70,44 @@
   .bar i{display:block;height:100%;border-radius:3px}
   .disc{font-size:11px;color:var(--sub);font-style:italic;margin-top:22px;border-top:1px solid var(--line);padding-top:10px}
   .up{color:#1D9E75;font-weight:600}.dn{color:#D85A30;font-weight:600}
-  .suppression-banner{background:#FFF3E0;border:1.5px solid #E3A008;border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:12.5px;color:#78450A}
-  .suppression-banner b{font-weight:700}
 </style>
 </head>
 <body>
 <div class="hdr">
-  <h1>CEF Time Machine · 08/07/2026 (Friday · Week close)</h1>
-  <span class="badge pos">Net Δ: +$2.90</span>
+  <h1>CEF Time Machine · 08/10/2026 (Monday)</h1>
+  <span class="badge pos">Net Δ: +$1.39</span>
 </div>
-<div class="note">Session 18 · Final pre-suppression ERH session · ERH four consecutive Green · UTG crosses into Green · RQI Z1Y −1.22 · Momentum updated 08/07 · Weekend gap next · ERH suppression window opens Mon 08/10</div>
+<div class="note">Session 19 · 07/21 rolled off (weekend gap 08/08–08/09 noted) · Window 07/22–08/10 · ERH suppression ACTIVE · RQI −0.94 crosses −1.00 again · BST +1.50 · BUI premium compressing</div>
 
-<div class="suppression-banner">
-  <b>⚠ ERH suppression window opens Monday 08/10.</b> From 08/10 through approximately 08/18 (±3 sessions of 08/13 ex-div), all ERH z-score readings and NAV moves must be annotated as potential corporate action artifacts per spec v1.5 Section 16 item 28. The yield field (data provider error: 0.02%) has been patched to 8.93% in this session. Today's reading is the last clean ERH session before the ex-dividend event.
-</div>
-
-<div class="verdict good">
-  <div class="vhead">ERH — Four consecutive Green · last clean session · Z1Y +1.08</div>
-  <b>ERH has now held Green for four consecutive sessions: 08/04 (+1.10), 08/05 (+1.35), 08/06 (+1.08), 08/07 (+1.08).</b> This is the longest sustained Green streak in the 18-session tracking window. D/P −6.27% inside −7.69% average. The yield field from the data provider returned 0.02% again today — patched to 8.93% per the ERH suppression window protocol in spec v1.5. From Monday 08/10, z-score readings enter the suppression window and will be annotated as potential corporate action artifacts. The ex-div step-down ($0.08784/share) occurs on 08/13. Clean reads resume approximately 08/18.
+<div class="supp">
+  <b>⚠ ERH SUPPRESSION WINDOW ACTIVE — 08/10 through 08/13.</b> All ERH z-score readings and NAV moves in this window are potential corporate action artifacts ahead of the 08/13 ex-dividend ($0.08784/share). ERH Z1Y shown as +1.16 but this reading is <b>not analytically actionable</b> — it reflects pre-ex-div pricing dynamics. Yield data provider error (0.02%) patched to 8.93%. Clean reads resume approximately 08/18.
 </div>
 
 <div class="verdict good">
-  <div class="vhead">RQI — Z1Y −1.22 · Cumulative recovery +1.43pt</div>
-  <b>RQI continues its compression thesis with fourteen sessions of the clean window.</b> Z1Y −1.22 (Δ −0.24 from yesterday's −0.98 — slight regression after crossing through −1.00). D/P −7.19% vs −3.69% avg. The slight regression today does not change the thesis — the trajectory over 14 sessions is clear and cumulative recovery from −2.65 peak is +1.43pt. A Green quadrant zero-cross remains within striking distance.
+  <div class="vhead">RQI — Z1Y −0.94 · crosses −1.00 again · session 15</div>
+  <b>RQI crossed back through the −1.00 threshold for the second time.</b> Z1Y −0.94 (Δ +0.28 from −1.22). D/P −6.40% vs −3.70% avg. Cumulative recovery from −2.65 peak (07/17): +1.71pt. Fifteen sessions in the clean window. The slight regression on 08/07 has fully reversed. At this trajectory, a Green quadrant zero-cross is a matter of sessions rather than weeks. The $5K add window is narrowing — adding after the zero-cross captures materially less of the mean-reversion.
 </div>
 
-<div class="verdict info">
-  <div class="vhead">UTG — Back in Green · Z1Y +0.02 · D/P −0.38%</div>
-  <b>UTG crossed back into Green quadrant today</b> — Z1Y +0.02 (barely positive), D/P −0.38% (barely negative). The quadrant assignment is technically Green but this is a marginal reading. UTG has now cycled Blue → Orange (08/04) → Blue (08/05–06) → Green (08/07). The dislocation thesis fully resolved in July — current Green reading reflects normalization at a very slight discount vs the −0.41% average. No trigger active; normal monitoring.
+<div class="verdict good">
+  <div class="vhead">BST — Z1Y +1.50 · Green strengthening</div>
+  <b>BST advanced to Z1Y +1.50 — the highest reading for BST in the 15-session tracking window.</b> NAV +$0.41 to $51.03. D/P −3.84% vs −6.48% avg — discount inside average. ST momentum +5.38%, LT +18.27%. Green quadrant firmly established and strengthening. Special dividend ex-div 09/15 — suppression window opens ~09/10.
+</div>
+
+<div class="verdict mixed">
+  <div class="vhead">BUI — Gray · premium compressing toward zero · Z1Y −0.51</div>
+  <b>BUI premium compressed further to +0.64%</b> (from +1.16% on 08/07) — the lowest premium reading since BUI entered Gray on 07/27. Z1Y −0.51. If the premium turns negative while Z1Y remains negative, BUI enters Orange and the mechanism for trigger restart begins. If Z1Y turns positive while premium is still positive, BUI enters Blue again without trigger restart. The narrow path to Green (Z1Y+ and D/P− simultaneously) remains the target.
 </div>
 
 <div class="alerts">
-  <div class="al g"><span class="tag">Green · Thesis Working</span><b>ERH — Four consecutive Green · last clean session · ⚠ yield patched</b> — Z1Y +1.08, D/P −6.27% inside −7.69% avg. Fourth consecutive Green session — longest streak in 18-session window. Yield data provider error (0.02%) patched to 8.93%. Suppression window opens 08/10. Ex-div 08/13 ($0.08784/share). Clean reads resume ~08/18. ROC-primary classification unchanged.</div>
-  <div class="al r"><span class="tag">Orange · Buy Zone</span><b>RQI — Z1Y −1.22 · slight regression · thesis active</b> — Δ −0.24 from yesterday's −0.98 cross. D/P −7.19% vs −3.69% avg. Fourteen sessions in the clean window. Cumulative recovery +1.43pt from −2.65 peak. One regression session does not change the thesis. ST momentum −1.19%, LT −3.69% (08/07 data) — momentum lagging z-score recovery, consistent with a mean-reversion add thesis rather than momentum thesis.</div>
-  <div class="al g"><span class="tag">Green · Thesis Working</span><b>BST — Z1Y +1.10 · Green maintained · week close</b> — Unchanged from 08/06. D/P −4.90% vs −6.49% avg. NAV $50.62, price $48.75. ST momentum +5.38%, LT +18.27% — strongest momentum profile in the sleeve. Special dividend $2.3041 ex-div 09/15 — suppression window not yet active.</div>
-  <div class="al g"><span class="tag">Green · Thesis Working</span><b>UTG — Marginal Green · Z1Y +0.02</b> — D/P −0.38% (barely negative). Crossed from Blue to Green on the final session of the week. UTG has oscillated around fair value since the dislocation thesis resolved. No trigger active. ST momentum −2.79%, LT +19.10% — strong LT, weak ST.</div>
-  <div class="al r"><span class="tag">Orange · Buy Zone</span><b>RNP — Compressing · Z1Y −1.15</b> — Δ +0.15. D/P −6.83% vs −2.30% avg. −4.53pt deviation from own norm. NAV flat, price +$0.20 — price-driven improvement. 57% NII-primary. ST momentum −0.42%, LT −7.80%. $5K add candidate.</div>
-  <div class="al r"><span class="tag">Red · Warning</span><b>BUI — Gray · unchanged</b> — Z1Y −0.36, D/P +1.16%. Unchanged from 08/06. ST momentum −2.62%, LT +13.90%. Premium obstacle persists. Trigger watch remains reset.</div>
-  <div class="al r"><span class="tag">Red · Warning</span><b>PCN — Gray · premium widening</b> — Z1Y −1.05, D/P +3.13% (widened from +2.97%). Price +$0.05 while NAV flat — premium expanded slightly. LT momentum −20.59% — worst in the holdings sleeve. No change to no-add decision.</div>
-  <div class="al a"><span class="tag">Amber · $5K add</span><b>Decision still live</b> — RQI Z1Y −1.22 (approaching zero-cross), RNP −1.15 (57% NII), BST Green (+1.10, strongest momentum). BUI still Gray. ERH entering suppression window Monday — not the moment to add ERH specifically. QTI decision.</div>
-  <div class="al c"><span class="tag">Corp · ERH</span><b>ERH suppression window opens 08/10</b> — ex-div 08/13 ($0.08784). ±3 sessions: 08/10 (Mon), 08/11 (Tue), 08/12 (Wed), 08/13 (Thu). Readings in this window annotated as potential corporate action artifacts. Price and NAV step-down ~$0.088 on 08/13. Clean reads resume ~08/18 (Mon). Yield field will continue to return 0.02% from data provider — patch to 8.93% per protocol.</div>
-  <div class="al c"><span class="tag">Corp · BST</span><b>BST special dividend reminder</b> — $2.3041 ex-div 09/15/2026. Suppression window opens ~09/10. Not yet active.</div>
-  <div class="al a"><span class="tag">Amber · Window</span><b>07/20 rolled off</b> — Window now 07/21 through 08/07 (15 sessions full).</div>
+  <div class="al a"><span class="tag">⚠ Suppression · ERH</span><b>ERH — Z1Y +1.16 · SUPPRESSION ACTIVE · artifact possible</b> — This reading is within the ±3 session suppression window of the 08/13 ex-dividend and must be treated as a potential corporate action artifact per spec v1.5 Section 16 item 28. Yield patched from 0.02% to 8.93%. NAV −$0.06, price −$0.08. The z-score movement today (+0.08pt) is modest. Do not record as a clean compression or expansion signal. Next clean read: approximately 08/18.</div>
+  <div class="al r"><span class="tag">Orange · RQI</span><b>RQI — Z1Y −0.94 · crosses −1.00 again · session 15</b> — Δ +0.28. D/P −6.40% vs −3.70% avg. Cumulative recovery +1.71pt from −2.65 peak. The 08/07 regression (−1.22) has fully reversed. The $5K add decision: at −0.94 Z1Y, a meaningful statistical discount remains but the window is visibly narrowing. QTI decision.</div>
+  <div class="al g"><span class="tag">Green · BST</span><b>BST — Z1Y +1.50 · highest reading in window · NAV $51.03</b> — Δ +0.40. NAV +$0.41. D/P −3.84% inside −6.48% avg. BST at its strongest Z1Y in the tracking window. ST +5.38%, LT +18.27%.</div>
+  <div class="al r"><span class="tag">Gray · BUI</span><b>BUI — premium compressing · +0.64% · Z1Y −0.51</b> — Premium now at its lowest since entering Gray on 07/27. Both axes moving in the right direction — Z1Y improving over the multi-session trend, premium compressing. The Green quadrant entry condition (Z1Y+ AND D/P−) has not been met but the gap is narrowing on both axes.</div>
+  <div class="al r"><span class="tag">Orange · RNP</span><b>RNP — Z1Y −1.11 · compression continues</b> — Δ +0.04. D/P −6.72% vs −2.34% avg. NAV −$0.15, price −$0.19 — slight regression in price terms but z-score improved marginally. −4.38pt deviation from own norm. 57% NII-primary. $5K candidate.</div>
+  <div class="al p"><span class="tag">Blue · DNP</span><b>DNP — Z1Y +2.43 · premium +13.60% · large move</b> — Δ +0.66pt (largest in universe this session). Premium widened from +11.41% to +13.60%. Blue quadrant, deeply in premium territory. Not a valuation opportunity — this is a warning about premium elevation. Distribution: 51% LT / 31% NII / 18% ROC (approaching DQ threshold on ROC).</div>
+  <div class="al r"><span class="tag">Gray · PCN</span><b>PCN — Z1Y −0.75 · premium widening · +3.84%</b> — Z1Y improved +0.30pt but premium expanded. LT momentum −20.59%. No change to no-add decision.</div>
+  <div class="al c"><span class="tag">Corp · ERH</span><b>ERH ex-div Thursday 08/13 · suppression 08/10–08/13</b> — $0.08784/share, pay 09/01. Today is session 1 of 4 in the suppression window. NAV step-down ~$0.088 on 08/13. Yield error 0.02% → 8.93% patched. Clean reads resume ~08/18.</div>
+  <div class="al a"><span class="tag">Amber · Window</span><b>07/21 rolled off · weekend gap noted</b> — Sat 08/08 and Sun 08/09 are not sessions — noted in header, no slot consumed. Window now 07/22 through 08/10.</div>
 </div>
 
 <div class="panel">
@@ -130,23 +128,23 @@
     <button class="ctl" id="hold">★ My Holdings</button>
   </div>
   <svg id="chart" viewBox="0 0 980 560" xmlns="http://www.w3.org/2000/svg"></svg>
-  <div class="legend">Dashed tail = 52-wk avg D/P · Ring = holding · Ghost trails = prior 14 sessions · Momentum 08/07/2026 · ERH yield patched 8.93% · Suppression opens 08/10 · Weekend gap next</div>
+  <div class="legend">Dashed tail = 52-wk avg D/P · Ring = holding · Ghost trails = prior 14 sessions (07/22–08/07) · ⚠ ERH suppression active (08/10–08/13) · ERH reading annotated as potential artifact · Yield patched 8.93% · Next session Tue 08/11</div>
   <div class="tmnav">
-    <button class="ctl tmb on" data-s="14">08/07 (current)</button>
-    <button class="ctl tmb" data-s="13">08/06</button>
-    <button class="ctl tmb" data-s="12">08/05</button>
-    <button class="ctl tmb" data-s="11">08/04</button>
-    <button class="ctl tmb" data-s="10">08/03</button>
-    <button class="ctl tmb" data-s="9">07/31</button>
-    <button class="ctl tmb" data-s="8">07/30</button>
-    <button class="ctl tmb" data-s="7">07/29 FOMC</button>
-    <button class="ctl tmb" data-s="6">07/28</button>
-    <button class="ctl tmb" data-s="5">07/27</button>
-    <button class="ctl tmb" data-s="4">07/24</button>
-    <button class="ctl tmb" data-s="3">07/23</button>
-    <button class="ctl tmb" data-s="2">07/22</button>
-    <button class="ctl tmb" data-s="1">07/21</button>
-    <span class="seslabel" id="seslabel">Showing: 08/07/2026</span>
+    <button class="ctl tmb on" data-s="13">08/10 (current)</button>
+    <button class="ctl tmb" data-s="12">08/07</button>
+    <button class="ctl tmb" data-s="11">08/06</button>
+    <button class="ctl tmb" data-s="10">08/05</button>
+    <button class="ctl tmb" data-s="9">08/04</button>
+    <button class="ctl tmb" data-s="8">08/03</button>
+    <button class="ctl tmb" data-s="7">07/31</button>
+    <button class="ctl tmb" data-s="6">07/30</button>
+    <button class="ctl tmb" data-s="5">07/29 FOMC</button>
+    <button class="ctl tmb" data-s="4">07/28</button>
+    <button class="ctl tmb" data-s="3">07/27</button>
+    <button class="ctl tmb" data-s="2">07/24</button>
+    <button class="ctl tmb" data-s="1">07/23</button>
+    <button class="ctl tmb" data-s="0">07/22</button>
+    <span class="seslabel" id="seslabel">Showing: 08/10/2026</span>
   </div>
   <div class="detail" id="detail"></div>
   <div class="snap">
@@ -156,43 +154,43 @@
   </div>
 </div>
 
-<h2>Key reads — 08/07/2026</h2>
+<h2>Key reads — 08/10/2026</h2>
 <div class="reads">
-  <div class="read kg">
-    <div class="rh"><b>ERH</b><span class="st">Green ×4 · last clean · yield patched</span></div>
-    <div class="mx"><span>Z1Y <b>+1.08</b></span><span>D/P <b>−6.27%</b></span><span>Streak <b>4 consecutive</b></span><span>Suppression <b>08/10–08/18</b></span></div>
-    <div class="bar"><i style="width:70%;background:var(--green)"></i></div>
-    Four consecutive Green sessions — the longest ERH streak in the window. Heading into the ex-dividend event with the strongest z-score position ERH has held since the tracking window opened. The data provider yield error (0.02%) is expected to persist through the suppression window and will be patched to 8.93% in each affected session per the established protocol. Clean reads resume approximately 08/18.
+  <div class="read ka">
+    <div class="rh"><b>ERH</b><span class="st">⚠ Suppression active · artifact possible</span></div>
+    <div class="mx"><span>Z1Y <b>+1.16</b> ⚠</span><span>D/P <b>−6.13%</b></span><span>Yield <b>8.93%*</b></span><span>Ex-div <b>08/13 (Thu)</b></span></div>
+    <div class="bar"><i style="width:60%;background:#E3A008"></i></div>
+    ERH suppression window is active. The Z1Y reading of +1.16 is a potential corporate action artifact — pre-ex-div pricing dynamics are influencing the discount/z-score behavior. This reading is not analytically actionable for thesis confirmation or trigger purposes. Yield 0.02% patched to 8.93%. Ex-dividend on Thursday 08/13 — NAV and price step-down ~$0.088. Clean reads resume approximately Monday 08/18.
   </div>
   <div class="read ko">
-    <div class="rh"><b>RQI</b><span class="st">Session 14 · slight regression</span></div>
-    <div class="mx"><span>Z1Y <b>−1.22</b> <span class="dn">▼−0.24</span></span><span>D/P <b>−7.19%</b></span><span>Cumul. <b>+1.43pt</b></span><span>ST Mom <b>−1.19%</b></span></div>
-    <div class="bar"><i style="width:84%;background:var(--green)"></i></div>
-    Slight pullback after crossing −1.00 yesterday. Price +$0.08 while NAV flat (+$0.00) — a small gap that widened the discount slightly. Fourteen clean window sessions. The ST and LT momentum divergence from z-score recovery (both negative while z-score compresses) is a characteristic pattern of a statistical mean-reversion setup rather than a momentum-driven entry. The thesis is intact.
+    <div class="rh"><b>RQI</b><span class="st">Session 15 · Z1Y −0.94 · zero-cross close</span></div>
+    <div class="mx"><span>Z1Y <b>−0.94</b> <span class="up">▲+0.28</span></span><span>D/P <b>−6.40%</b></span><span>Cumul. <b>+1.71pt</b></span><span>Gap to zero <b>0.94pt</b></span></div>
+    <div class="bar"><i style="width:92%;background:var(--green)"></i></div>
+    Fifteen sessions of the clean window. The 08/07 regression fully reversed. At +1.71pt cumulative recovery from the −2.65 peak, less than 1pt separates RQI from a Green quadrant zero-cross. The statistical discount is real but compressing. The add window narrows with each session of improvement. QTI's call on the $5K decision.
   </div>
   <div class="read kg">
-    <div class="rh"><b>BST</b><span class="st">Green · week close · strong momentum</span></div>
-    <div class="mx"><span>Z1Y <b>+1.10</b></span><span>D/P <b>−4.90%</b></span><span>ST Mom <b>+5.38%</b></span><span>LT Mom <b>+18.27%</b></span></div>
-    <div class="bar"><i style="width:65%;background:var(--green)"></i></div>
-    BST closes the week in Green with the strongest combined ST/LT momentum in the holdings sleeve. The NAV surge from 08/04 ($47.22→$51.51) has stabilized. D/P −4.90% is inside own average — Green quadrant firmly established. Special dividend ex-div 09/15 — suppression window opens ~09/10.
+    <div class="rh"><b>BST</b><span class="st">Green · Z1Y +1.50 · highest in window</span></div>
+    <div class="mx"><span>Z1Y <b>+1.50</b> <span class="up">▲+0.40</span></span><span>D/P <b>−3.84%</b></span><span>NAV <b>$51.03</b></span><span>Ex-div <b>09/15</b></span></div>
+    <div class="bar"><i style="width:78%;background:var(--green)"></i></div>
+    BST's highest Z1Y in the tracking window. NAV climbed back above $51 after the post-surge consolidation. The discount has narrowed to −3.84% from −6.49% average — BST is approaching fair value on its own D/P history. Green quadrant firmly established. Special dividend ex-div 09/15 — suppression window not yet active.
   </div>
-  <div class="read kg">
-    <div class="rh"><b>UTG</b><span class="st">Green · marginal · Z1Y +0.02</span></div>
-    <div class="mx"><span>Z1Y <b>+0.02</b></span><span>D/P <b>−0.38%</b></span><span>LT Mom <b>+19.10%</b></span><span>Trigger <b>n/a</b></span></div>
-    <div class="bar"><i style="width:30%;background:var(--green)"></i></div>
-    Marginal Green — barely positive Z1Y, barely negative D/P. UTG has cycled through multiple quadrants this week. Strong LT momentum (+19.10%) reflects the full dislocation thesis resolution and subsequent run. No trigger active. The reading is technically Green but analytically thin — one session's move puts it back in Blue or Orange.
+  <div class="read kx">
+    <div class="rh"><b>BUI</b><span class="st">Gray · premium at lowest · +0.64%</span></div>
+    <div class="mx"><span>Z1Y <b>−0.51</b> <span class="dn">▼−0.15</span></span><span>D/P <b>+0.64%</b> <span class="up">▲compressing</span></span><span>Sessions in Gray <b>11</b></span><span>Trigger <b>reset</b></span></div>
+    <div class="bar"><i style="width:22%;background:var(--gray)"></i></div>
+    Eleven consecutive Gray sessions but the premium has compressed from +2.51% (peak, 08/05) to +0.64% — the lowest reading since BUI entered Gray. The mechanism: price fell −$0.08 while NAV rose +$0.02. If the premium turns to a discount in the next 1–2 sessions while Z1Y remains negative, BUI enters Orange. If Z1Y turns positive first, BUI returns to Blue. The simultaneous condition for Green requires both.
   </div>
   <div class="read ko">
-    <div class="rh"><b>RNP</b><span class="st">Compressing · $5K candidate</span></div>
-    <div class="mx"><span>Z1Y <b>−1.15</b> <span class="up">▲+0.15</span></span><span>D/P <b>−6.83%</b></span><span>Dev from avg <b>−4.53pt</b></span><span>NII-primary <b>57%</b></span></div>
-    <div class="bar"><i style="width:68%;background:var(--orange)"></i></div>
-    Price-driven compression session — price +$0.20, NAV flat. The −4.53pt deviation from own −2.30% average remains the widest dislocation by own-norm in the REIT sleeve. 57% NII-primary distribution. ST momentum −0.42%, LT −7.80% — momentum negative but z-score compressing. $5K add candidate alongside RQI.
+    <div class="rh"><b>RNP</b><span class="st">$5K candidate · compression slow</span></div>
+    <div class="mx"><span>Z1Y <b>−1.11</b> <span class="up">▲+0.04</span></span><span>D/P <b>−6.72%</b></span><span>Dev from avg <b>−4.38pt</b></span><span>NII-primary <b>57%</b></span></div>
+    <div class="bar"><i style="width:64%;background:var(--orange)"></i></div>
+    Slow but directionally consistent compression. The −4.38pt deviation from own −2.34% average is still the widest own-norm dislocation in the REIT sleeve. 57% NII-primary — the cleanest distribution sourcing of the three REIT add candidates. If RQI reaches zero-cross in the next few sessions, RNP may become the more actionable candidate for a fresh add given it still offers Z1Y < −1.00.
   </div>
   <div class="read kp">
-    <div class="rh"><b>Week close · ERH suppression pending</b><span class="st">08/10 opens</span></div>
-    <div class="mx"><span>ERH <b>+1.08</b> ×4 clean</span><span>RQI <b>−1.22</b> ×14</span><span>BST <b>+1.10</b> Green</span><span>$5K add <b>QTI call</b></span></div>
-    <div class="bar"><i style="width:74%;background:#6366F1"></i></div>
-    The portfolio enters the weekend with ERH at its longest clean Green streak (4 sessions), RQI 14 sessions into compression (+1.43pt recovery), and BST firmly in Green with strong momentum. The ERH suppression window opens Monday — analytical focus shifts to RQI compression progress and the $5K add decision during the suppression period. Next clean ERH read: approximately 08/18.
+    <div class="rh"><b>Session summary</b><span class="st">Constructive ex-ERH</span></div>
+    <div class="mx"><span>RQI <b>−0.94</b> ×15</span><span>BST <b>+1.50</b> Green</span><span>BUI <b>+0.64%</b> prem</span><span>ERH <b>⚠ artifact</b></span></div>
+    <div class="bar"><i style="width:70%;background:#6366F1"></i></div>
+    A broadly constructive Monday session with the ERH suppression window caveat front and center. The analytical focus shifts to RQI's compression trajectory and the $5K add decision — with the zero-cross approaching and momentum lagging z-score recovery, the mean-reversion window is measured in sessions now. Next clean ERH read: ~08/18. Next session: Tuesday 08/11.
   </div>
 </div>
 
@@ -200,13 +198,11 @@
 <div class="tooltip" id="tip"></div>
 
 <script>
-// Momentum 08/07/2026
 const MOM={PCN:[0.35,-20.59],BDJ:[2.67,8.53],EOI:[1.80,7.92],BME:[5.52,8.45],RQI:[-1.19,-3.69],RNP:[-0.42,-7.80],RFI:[0.59,-9.93],AIO:[1.49,15.38],BST:[5.38,18.27],DNP:[0.41,6.65],ERH:[-3.30,-1.78],BUI:[-2.62,13.90],UTF:[-1.07,8.10],UTG:[-2.79,19.10]};
 const HOLDINGS=new Set(["PCN","BDJ","EOI","BUI","BME","RQI","RNP","RFI","AIO","BST","DNP","UTF","ERH","UTG"]);
 const QCOLOR={G:"#1D9E75",B:"#378ADD",O:"#D85A30",X:"#888780"};
 const QNAME={G:"Green · Thesis Working",B:"Blue · Premium Territory",O:"Orange · Buy Zone",X:"Gray · Worst Setup"};
 const PRIOR=[
-  {date:"07/21/2026",d:{AIO:[-0.52,-9.31],ASGI:[2.29,9.43],BDJ:[-0.67,-6.09],BME:[1.75,-2.83],BST:[-1.30,-10.09],BUI:[-0.29,1.53],CSQ:[-0.50,-8.95],DNP:[1.70,10.72],EOI:[-0.98,-5.92],EOS:[-0.70,-8.13],ERH:[1.45,-5.84],ETG:[-1.16,-9.36],GDV:[-0.41,-10.98],GLU:[-0.79,-2.84],HTD:[1.83,-2.94],NBXG:[-0.81,-14.02],NXG:[0.90,1.37],PCN:[-1.04,3.33],PDI:[-1.29,3.62],PDO:[-0.55,2.83],PDX:[-0.93,-11.09],RFI:[-1.53,-4.81],RLTY:[-1.04,-8.63],RNP:[-1.42,-7.46],RQI:[-2.15,-9.31],UTF:[0.77,-1.81],UTG:[1.12,0.03]}},
   {date:"07/22/2026",d:{AIO:[-0.55,-9.53],ASGI:[2.18,9.16],BDJ:[-0.15,-6.10],BME:[1.47,-2.84],BST:[-1.51,-9.12],BUI:[-0.74,0.00],CSQ:[-0.41,-8.78],DNP:[1.14,9.21],EOI:[-1.03,-6.14],EOS:[-0.87,-8.71],ERH:[0.17,-8.24],ETG:[-1.07,-9.20],GDV:[-0.31,-10.92],GLU:[-1.26,-4.32],HTD:[1.71,-3.75],NBXG:[-0.81,-13.93],NXG:[0.58,0.74],PCN:[-1.35,2.37],PDI:[-1.30,3.51],PDO:[-0.74,2.52],PDX:[-0.12,-9.60],RFI:[-1.57,-5.00],RLTY:[-0.78,-8.20],RNP:[-1.44,-7.57],RQI:[-1.85,-8.54],UTF:[0.58,-2.56],UTG:[-0.13,-0.59]}},
   {date:"07/23/2026",d:{AIO:[-0.67,-10.08],ASGI:[2.64,10.79],BDJ:[-0.49,-6.63],BME:[0.86,-4.09],BST:[-1.65,-9.37],BUI:[-0.83,-0.29],CSQ:[-0.52,-9.00],DNP:[0.96,8.70],EOI:[-0.97,-5.97],EOS:[-1.06,-9.31],ERH:[-0.73,-8.75],ETG:[-1.30,-9.72],GDV:[-0.11,-10.78],GLU:[-0.98,-3.46],HTD:[1.84,-3.53],NBXG:[-1.16,-14.53],NXG:[0.85,1.23],PCN:[-1.40,2.21],PDI:[-1.44,2.88],PDO:[-1.14,1.82],PDX:[-0.44,-10.20],RFI:[-1.40,-4.50],RLTY:[-0.93,-8.46],RNP:[-1.49,-7.82],RQI:[-1.95,-8.87],UTF:[0.52,-2.79],UTG:[0.05,-0.37]}},
   {date:"07/24/2026",d:{AIO:[-0.67,-10.08],ASGI:[2.57,10.69],BDJ:[-0.60,-6.80],BME:[0.86,-3.25],BST:[-0.84,-7.99],BUI:[-0.83,-0.29],CSQ:[-0.62,-9.21],DNP:[0.96,8.70],EOI:[-0.90,-5.79],EOS:[-0.88,-8.76],ERH:[-0.73,-9.42],ETG:[-1.20,-9.52],GDV:[-0.11,-10.78],GLU:[-0.98,-3.46],HTD:[1.84,-3.59],NBXG:[-0.74,-13.85],NXG:[0.85,1.23],PCN:[-1.40,2.65],PDI:[-1.44,2.43],PDO:[-1.14,1.73],PDX:[-0.44,-9.55],RFI:[-1.30,-4.26],RLTY:[-1.12,-8.79],RNP:[-1.55,-8.10],RQI:[-1.98,-9.01],UTF:[0.69,-2.26],UTG:[0.57,0.28]}},
@@ -219,11 +215,12 @@ const PRIOR=[
   {date:"08/04/2026",d:{AIO:[-0.66,-10.15],ASGI:[1.64,8.02],BDJ:[-1.17,-7.71],BME:[1.62,-2.24],BST:[0.45,-5.73],BUI:[-0.53,0.63],CSQ:[-1.09,-10.21],DNP:[1.52,10.59],EOI:[-1.29,-7.09],EOS:[-1.25,-10.05],ERH:[1.10,-6.25],ETG:[-1.26,-9.79],GDV:[-1.74,-11.85],GLU:[-1.68,-5.97],HTD:[2.10,-2.87],NBXG:[-0.25,-13.11],NXG:[0.66,0.62],PCN:[-1.47,1.74],PDI:[-1.51,2.09],PDO:[-1.29,1.48],PDX:[0.39,-8.75],RFI:[-1.07,-3.75],RLTY:[-1.14,-8.91],RNP:[-1.36,-7.57],RQI:[-1.31,-7.37],UTF:[0.87,-1.96],UTG:[-0.25,-0.71]}},
   {date:"08/05/2026",d:{AIO:[-0.53,-9.68],ASGI:[1.99,9.31],BDJ:[-1.00,-7.45],BME:[1.37,-2.75],BST:[1.28,-4.27],BUI:[0.04,2.51],CSQ:[-1.03,-10.11],DNP:[1.69,11.12],EOI:[-1.31,-7.19],EOS:[-1.23,-10.00],ERH:[1.35,-5.91],ETG:[-1.27,-9.83],GDV:[-1.57,-11.75],GLU:[-1.25,-4.60],HTD:[1.93,-3.09],NBXG:[0.01,-12.73],NXG:[1.13,2.36],PCN:[-1.23,2.44],PDI:[-1.70,1.20],PDO:[-1.37,1.32],PDX:[0.34,-8.84],RFI:[-1.09,-3.84],RLTY:[-1.14,-8.92],RNP:[-1.23,-7.08],RQI:[-1.23,-7.16],UTF:[1.00,-1.59],UTG:[0.80,0.60]}},
   {date:"08/06/2026",d:{AIO:[-0.47,-9.45],ASGI:[1.81,8.75],BDJ:[-0.90,-7.31],BME:[1.21,-3.07],BST:[1.10,-4.56],BUI:[-0.36,1.16],CSQ:[-0.76,-9.59],DNP:[1.77,11.41],EOI:[-1.34,-7.31],EOS:[-1.37,-10.45],ERH:[1.08,-6.27],ETG:[-1.27,-9.84],GDV:[-1.54,-11.74],GLU:[-1.56,-5.65],HTD:[1.91,-3.10],NBXG:[0.09,-12.61],NXG:[1.39,3.33],PCN:[-1.05,2.97],PDI:[-1.58,1.65],PDO:[-0.96,2.03],PDX:[0.44,-8.67],RFI:[-1.09,-3.86],RLTY:[-0.87,-8.48],RNP:[-1.30,-7.40],RQI:[-0.98,-6.48],UTF:[0.98,-1.70],UTG:[0.51,0.23]}},
+  {date:"08/07/2026",d:{AIO:[-0.47,-9.45],ASGI:[2.20,10.20],BDJ:[-0.90,-7.75],BME:[1.21,-2.67],BST:[1.10,-4.90],BUI:[-0.36,1.16],CSQ:[-0.69,-9.48],DNP:[1.77,11.41],EOI:[-1.34,-7.06],EOS:[-1.37,-10.07],ERH:[1.08,-6.27],ETG:[-1.27,-9.80],GDV:[-1.54,-11.74],GLU:[-1.56,-5.65],HTD:[1.91,-3.20],NBXG:[0.09,-12.75],NXG:[1.39,3.33],PCN:[-1.05,3.13],PDI:[-1.58,1.45],PDO:[-0.96,1.71],PDX:[0.44,-8.56],RFI:[-0.80,-3.01],RLTY:[-0.84,-8.44],RNP:[-1.15,-6.83],RQI:[-1.22,-7.19],UTF:[1.04,-1.55],UTG:[0.02,-0.38]}},
 ];
-const CUR={date:"08/07/2026",data:{AIO:[0.14,0.58,-0.47,-9.45,-7.62,8.29,28.79,26.23],ASGI:[1.51,1.73,2.2,10.2,2.62,11.06,21.94,24.21],BDJ:[0.3,-0.36,-0.9,-7.75,-5.91,7.6,10.54,9.76],BME:[0.37,0.7,1.21,-2.67,-5.62,7.23,44.88,44.11],BST:[1.98,1.25,1.1,-4.9,-6.49,6.21,50.62,48.75],BUI:[-0.01,0.08,-0.36,1.16,2.35,6.85,26.68,26.95],CSQ:[0.65,0.3,-0.69,-9.48,-8.17,7.81,23.1,20.91],DNP:[1.99,1.69,1.77,11.41,6.15,7.19,9.64,10.85],EOI:[-0.77,-1.06,-1.34,-7.06,-3.37,8.02,21.6,20.15],EOS:[-1.53,-1.64,-1.37,-10.07,-6.4,8.36,24.41,22.05],ERH:[1.12,1.38,1.08,-6.27,-7.69,8.93,12.45,11.71],ETG:[-0.56,-0.6,-1.27,-9.8,-7.12,6.44,26.73,24.29],GDV:[-1.33,-1.42,-1.54,-11.74,-10.73,5.97,34.16,30.39],GLU:[-1.03,-1.08,-1.56,-5.65,-0.59,6.87,20.37,19.32],HTD:[1.15,1.47,1.91,-3.2,-6.02,7.49,26.14,25.41],NBXG:[1.06,1.3,0.09,-12.75,-12.76,9.57,17.21,15.26],NXG:[1.2,1.5,1.39,3.33,-1.7,12.15,57.33,59.57],PCN:[0.19,-0.51,-1.05,3.13,6.13,11.44,11.46,11.85],PDI:[-1.47,-1.7,-1.58,1.45,8.39,16.48,15.8,16.08],PDO:[-0.01,-0.41,-0.96,1.71,3.7,11.74,12.81,13.08],PDX:[1.22,1.43,0.44,-8.56,-9.47,7.41,23.65,21.59],RFI:[1.66,-0.2,-0.8,-3.01,-0.6,8.28,11.92,11.6],RLTY:[0.46,-0.23,-0.84,-8.44,-7.03,8.38,17.22,15.84],RNP:[-0.16,-0.88,-1.15,-6.83,-2.3,8.0,22.04,20.61],RQI:[-0.42,-1.09,-1.22,-7.19,-3.69,8.6,13.43,12.52],UTF:[1.14,1.54,1.04,-1.55,-4.9,7.27,27.72,27.23],UTG:[0.33,0.22,0.02,-0.38,-0.41,6.49,39.39,39.24]}};
+const CUR={date:"08/10/2026",data:{AIO:[0.79,1.21,-0.27,-8.73,-7.72,8.20,28.86,26.34],ASGI:[1.28,1.51,1.98,9.52,2.65,11.03,21.85,23.93],BDJ:[0.98,0.05,-0.51,-6.70,-5.91,7.52,10.59,9.88],BME:[-0.20,0.31,1.01,-3.46,-5.60,7.09,45.97,44.38],BST:[2.19,1.61,1.50,-3.84,-6.48,6.11,51.03,49.07],BUI:[-0.41,-0.05,-0.51,0.64,2.32,6.88,26.70,26.87],CSQ:[1.57,1.12,-0.37,-8.89,-8.18,7.71,23.07,21.02],DNP:[2.94,2.18,2.43,13.60,6.22,7.18,9.56,10.86],EOI:[-0.20,-0.85,-1.19,-6.92,-3.41,7.95,21.69,20.19],EOS:[-0.75,-1.08,-1.15,-9.81,-6.43,8.28,24.46,22.06],ERH:[1.29,1.44,1.16,-6.13,-7.68,8.93,12.39,11.63],ETG:[0.35,-0.27,-1.04,-9.39,-7.13,6.35,26.95,24.42],GDV:[-0.43,-0.68,-0.64,-11.16,-10.74,5.90,34.33,30.50],GLU:[-0.12,-0.71,-1.20,-4.55,-0.63,6.84,20.23,19.31],HTD:[1.48,1.64,2.16,-2.64,-6.01,7.46,26.09,25.40],NBXG:[2.05,2.46,0.90,-11.40,-12.77,9.31,17.45,15.46],NXG:[1.31,1.67,1.60,4.19,-1.62,11.85,58.30,60.74],PCN:[1.79,-0.01,-0.75,3.84,6.12,11.34,11.46,11.90],PDI:[-1.26,-1.50,-1.45,2.09,8.34,16.38,15.82,16.15],PDO:[0.13,-0.35,-0.91,2.10,3.69,11.71,12.84,13.11],PDX:[0.35,0.76,0.07,-9.36,-9.49,7.45,23.71,21.49],RFI:[2.80,0.30,-0.41,-1.86,-0.63,8.28,11.82,11.60],RLTY:[1.17,0.28,-0.59,-8.03,-7.05,8.41,17.06,15.69],RNP:[-0.05,-0.81,-1.11,-6.72,-2.34,7.99,21.89,20.42],RQI:[-0.18,-0.85,-0.94,-6.40,-3.70,8.69,13.28,12.43],UTF:[1.36,1.66,1.18,-1.16,-4.92,7.29,27.48,27.16],UTG:[0.56,0.52,0.31,-0.03,-0.41,6.47,38.96,38.95]}};
 
 const DATES=PRIOR.map(s=>s.date).concat([CUR.date]);
-let zIdx=2,qFilter="all",searchTerms=[],holdOnly=false,sesIdx=14;
+let zIdx=2,qFilter="all",searchTerms=[],holdOnly=false,sesIdx=13;
 function tickerMatch(t){return searchTerms.length===0||searchTerms.some(s=>t.includes(s));}
 const W=980,H=560,ML=54,MR=16,MT=14,MB=40;
 function qFromZD(z,dp){return z>=0?(dp<0?"G":"B"):(dp<0?"O":"X");}
@@ -255,7 +252,7 @@ function render(){
   }
   s+=`<text x="${W/2}" y="${H-6}" font-size="11" fill="#5A636B" text-anchor="middle">Z-Score (${['Z3M','Z6M','Z1Y'][zIdx]})</text>`;
   s+=`<text x="14" y="${H/2}" font-size="11" fill="#5A636B" text-anchor="middle" transform="rotate(-90 14 ${H/2})">Discount / Premium %</text>`;
-  if(sesIdx===14){
+  if(sesIdx===13){
     const ops=[0.03,0.05,0.07,0.09,0.11,0.13,0.16,0.19,0.22,0.26,0.30,0.35,0.41];
     PRIOR.forEach((ps,gi)=>{
       const op=ops[gi]||0.03;const r=gi===12?5:gi===11?3.5:2.5;
@@ -273,12 +270,13 @@ function render(){
       const match=tickerMatch(t);
       const dim=(!vis||!match)?' class="dot dimmed"':' class="dot"';
       const cx=Xf(zVal),cy=Yf(dpVal),ay=Yf(avg52);
+      const isERH=t==="ERH";
       s+=`<g${dim} data-t="${t}">`;
       s+=`<line x1="${cx}" y1="${cy}" x2="${cx}" y2="${ay}" stroke="${QCOLOR[q]}" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>`;
       s+=`<circle cx="${cx}" cy="${ay}" r="2" fill="none" stroke="${QCOLOR[q]}" stroke-width="1" opacity="0.5"/>`;
-      if(HOLDINGS.has(t)) s+=`<circle cx="${cx}" cy="${cy}" r="9.5" fill="none" stroke="${QCOLOR[q]}" stroke-width="1.4" opacity="0.6"/>`;
-      s+=`<circle cx="${cx}" cy="${cy}" r="6" fill="${QCOLOR[q]}"/>`;
-      s+=`<text x="${cx}" y="${cy-11}" font-size="9.5" font-weight="600" text-anchor="middle" fill="#3A4249">${t}</text>`;
+      if(HOLDINGS.has(t)) s+=`<circle cx="${cx}" cy="${cy}" r="9.5" fill="none" stroke="${isERH?'#E3A008':QCOLOR[q]}" stroke-width="${isERH?2:1.4}" opacity="0.8" stroke-dasharray="${isERH?'4,2':'none'}"/>`;
+      s+=`<circle cx="${cx}" cy="${cy}" r="6" fill="${isERH?'#E3A008':QCOLOR[q]}"/>`;
+      s+=`<text x="${cx}" y="${cy-11}" font-size="9.5" font-weight="600" text-anchor="middle" fill="#3A4249">${t}${isERH?'⚠':''}</text>`;
       s+=`</g>`;
     });
   } else {
@@ -302,18 +300,21 @@ const tip=document.getElementById("tip");
 function bindDots(){
   document.querySelectorAll(".dot").forEach(g=>{
     const t=g.dataset.t;if(!t) return;
-    const isCur=sesIdx===14;const d=isCur?CUR.data[t]:null;const m=MOM[t]||null;
+    const isCur=sesIdx===13;const d=isCur?CUR.data[t]:null;const m=MOM[t]||null;
     g.addEventListener("mousemove",e=>{
       tip.style.display="block";tip.style.left=(e.clientX+14)+"px";tip.style.top=(e.clientY+10)+"px";
-      if(isCur&&d){tip.innerHTML=`<b>${t}</b> · yield ${d[5].toFixed(2)}%<br>D/P ${d[3].toFixed(2)}% (avg ${d[4].toFixed(2)}%, Δ${(d[3]-d[4]).toFixed(2)}pt)<br>Z3M ${d[0].toFixed(2)} · Z6M ${d[1].toFixed(2)} · Z1Y ${d[2].toFixed(2)}<br>ST ${m?m[0].toFixed(2)+'%':'—'} · LT ${m?m[1].toFixed(2)+'%':'—'}`;}
-      else{const pd=PRIOR[sesIdx].d[t];if(pd)tip.innerHTML=`<b>${t}</b> · Z1Y ${pd[0].toFixed(2)} · D/P ${pd[1].toFixed(2)}%`;}
+      if(isCur&&d){
+        const supp=t==="ERH"?" ⚠ SUPPRESSION":"";
+        tip.innerHTML=`<b>${t}</b>${supp} · yield ${d[5].toFixed(2)}%<br>D/P ${d[3].toFixed(2)}% (avg ${d[4].toFixed(2)}%, Δ${(d[3]-d[4]).toFixed(2)}pt)<br>Z3M ${d[0].toFixed(2)} · Z6M ${d[1].toFixed(2)} · Z1Y ${d[2].toFixed(2)}<br>ST ${m?m[0].toFixed(2)+'%':'—'} · LT ${m?m[1].toFixed(2)+'%':'—'}`;
+      } else{const pd=PRIOR[sesIdx].d[t];if(pd)tip.innerHTML=`<b>${t}</b> · Z1Y ${pd[0].toFixed(2)} · D/P ${pd[1].toFixed(2)}%`;}
     });
     g.addEventListener("mouseleave",()=>tip.style.display="none");
     g.addEventListener("click",()=>{
       if(!isCur||!d) return;
       const q=qFromZD(d[2],d[3]);const el=document.getElementById("detail");el.style.display="block";
       const prev=PRIOR[12].d[t];const dz=prev?(d[2]-prev[0]).toFixed(2):null;const ddp=prev?(d[3]-prev[1]).toFixed(2):null;
-      el.innerHTML=`<b style="font-size:14px">${t}</b> <span class="qcount" style="background:${QCOLOR[q]}">${QNAME[q]}</span>
+      const suppNote=t==="ERH"?`<div style="background:#FFF3E0;border:1px solid #E3A008;border-radius:4px;padding:4px 8px;font-size:11px;color:#78450A;margin-bottom:6px">⚠ Suppression window active — reading is potential corporate action artifact</div>`:'';
+      el.innerHTML=`${suppNote}<b style="font-size:14px">${t}</b> <span class="qcount" style="background:${QCOLOR[q]}">${QNAME[q]}</span>
       <table><tr><td>Price</td><td class="v">$${d[7].toFixed(2)}</td><td>NAV</td><td class="v">$${d[6].toFixed(2)}</td><td>Yield</td><td class="v">${d[5].toFixed(2)}%</td></tr>
       <tr><td>D/P</td><td class="v">${d[3].toFixed(2)}%</td><td>52-wk avg</td><td class="v">${d[4].toFixed(2)}%</td><td>Dev</td><td class="v">${(d[3]-d[4]).toFixed(2)}pt</td></tr>
       <tr><td>Z3M</td><td class="v">${d[0].toFixed(2)}</td><td>Z6M</td><td class="v">${d[1].toFixed(2)}</td><td>Z1Y${dz?` <span style="font-size:10px;color:${+dz>=0?'#1D9E75':'#D85A30'}">(${+dz>=0?'+':''}${dz})</span>`:''}</td><td class="v">${d[2].toFixed(2)}</td></tr>
@@ -322,7 +323,7 @@ function bindDots(){
   });
 }
 function renderSnap(){
-  const isC=sesIdx===14;const pool=isC?Object.keys(CUR.data):Object.keys(PRIOR[sesIdx].d);
+  const isC=sesIdx===13;const pool=isC?Object.keys(CUR.data):Object.keys(PRIOR[sesIdx].d);
   const counts={G:0,B:0,O:0,X:0};
   pool.forEach(t=>{
     const z=isC?CUR.data[t][2]:PRIOR[sesIdx].d[t][0];const dp=isC?CUR.data[t][3]:PRIOR[sesIdx].d[t][1];
