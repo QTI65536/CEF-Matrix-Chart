@@ -3,107 +3,107 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CEF Time Machine · 08/24/2026</title>
+<title>CEF Time Machine · 08/25/2026</title>
 <style>
-  :root{--green:#1D9E75;--blue:#378ADD;--orange:#D85A30;--gray:#888780;--ink:#1E2429;--sub:#5A636B;--line:#DEE3E7;--bg:#F7F8F9;--card:#FFFFFF;}
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);padding:20px;max-width:1100px;margin:0 auto}
-  h1{font-size:19px;font-weight:700}
-  .hdr{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:4px}
-  .badge{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:10px}
-  .badge.pos{background:#E1F5EE;color:#085041}.badge.neg{background:#FAECE7;color:#B4431F}
-  .note{font-size:12px;color:var(--sub);margin-bottom:10px}
-  .verdict{border-radius:8px;padding:12px 16px;margin-bottom:10px;font-size:13px;line-height:1.5;border:1.5px solid}
-  .verdict.good{background:#E1F5EE;border-color:#1D9E75;color:#085041}
-  .verdict.warn{background:#FAECE7;border-color:#D85A30;color:#7A2E0E}
-  .verdict.mixed{background:#FFF8EC;border-color:#E3A008;color:#78450A}
-  .verdict b{font-weight:700}.verdict .vhead{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px}
-  .alerts{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
-  .al{border:1px solid var(--line);border-left-width:4px;border-radius:6px;padding:8px 12px;font-size:13px;line-height:1.45}
-  .al b{font-weight:700}
-  .al.g{border-left-color:#1D9E75;background:#E1F5EE}
-  .al.r{border-left-color:#D85A30;background:#FAECE7}
-  .al.a{border-left-color:#E3A008;background:#FFF8EC}
-  .al.p{border-left-color:#6366F1;background:#EEF2FF}
-  .al.c{border-left-color:#7B9E3E;background:#EFF6E8}
-  .al .tag{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-right:6px;opacity:.75}
-  .panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:16px}
-  .controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
-  .controls .grp{display:flex;gap:4px}
-  button.ctl{font-size:12px;padding:5px 10px;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;color:var(--ink)}
-  button.ctl.on{background:var(--ink);color:#fff;border-color:var(--ink)}
-  button.ctl.qg.on{background:var(--green);border-color:var(--green)}
-  button.ctl.qb.on{background:var(--blue);border-color:var(--blue)}
-  button.ctl.qo.on{background:var(--orange);border-color:var(--orange)}
-  button.ctl.qx.on{background:var(--gray);border-color:var(--gray)}
-  input.search{font-size:12px;padding:5px 9px;border:1px solid var(--line);border-radius:6px;width:140px}
-  .legend{font-size:11.5px;color:var(--sub);margin-top:8px}
-  .tmnav{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap}
-  .tmnav button{font-size:12px;padding:4px 10px;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer}
-  .tmnav button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
-  .tmnav .seslabel{font-size:12px;color:var(--sub)}
-  svg{width:100%;height:auto;display:block}
-  .dot{cursor:pointer}.dimmed{opacity:.10}
-  .tooltip{position:fixed;pointer-events:none;background:#1E2429;color:#fff;font-size:11.5px;line-height:1.5;padding:8px 10px;border-radius:6px;z-index:50;display:none;max-width:260px}
-  .tooltip b{color:#9FD8C4}
-  .snap{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-top:14px}
-  .snapcard{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:12.5px}
-  .snapcard h3{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--sub);margin-bottom:6px}
-  .qcount{display:inline-block;padding:1px 7px;border-radius:8px;color:#fff;font-weight:700;font-size:12px;margin-right:5px}
-  .detail{display:none;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px;margin-top:12px;font-size:13px}
-  .detail table{width:100%;border-collapse:collapse;font-size:12.5px}
-  .detail td{padding:3px 8px 3px 0;color:var(--sub)}.detail td.v{color:var(--ink);font-weight:600}
-  h2{font-size:15px;margin:20px 0 10px}
-  .reads{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px}
-  .read{background:var(--card);border:1px solid var(--line);border-top-width:4px;border-radius:8px;padding:12px 14px;font-size:12.5px;line-height:1.5}
-  .read.kg{border-top-color:var(--green)}.read.ka{border-top-color:#E3A008}
-  .read.kb{border-top-color:var(--blue)}.read.ko{border-top-color:var(--orange)}.read.kp{border-top-color:#6366F1}
-  .read.kx{border-top-color:var(--gray)}
-  .read .rh{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-  .read .rh b{font-size:14px}
-  .read .st{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:2px 7px;border-radius:8px;background:var(--bg);color:var(--sub)}
-  .read .mx{display:grid;grid-template-columns:1fr 1fr;gap:2px 12px;margin:6px 0;color:var(--sub)}
-  .read .mx b{color:var(--ink)}
-  .bar{height:5px;background:var(--line);border-radius:3px;margin:7px 0;overflow:hidden}
-  .bar i{display:block;height:100%;border-radius:3px}
-  .disc{font-size:11px;color:var(--sub);font-style:italic;margin-top:22px;border-top:1px solid var(--line);padding-top:10px}
-  .up{color:#1D9E75;font-weight:600}.dn{color:#D85A30;font-weight:600}
-  .compare-banner{background:#EEF2FF;border:1.5px solid #6366F1;border-radius:6px;padding:6px 12px;font-size:12px;color:#3730A3;margin-bottom:8px;display:none}
+:root{--green:#1D9E75;--blue:#378ADD;--orange:#D85A30;--gray:#888780;--ink:#1E2429;--sub:#5A636B;--line:#DEE3E7;--bg:#F7F8F9;--card:#FFFFFF;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);padding:20px;max-width:1100px;margin:0 auto}
+h1{font-size:19px;font-weight:700}
+.hdr{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+.badge{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:10px}
+.badge.pos{background:#E1F5EE;color:#085041}.badge.neg{background:#FAECE7;color:#B4431F}
+.note{font-size:12px;color:var(--sub);margin-bottom:10px}
+.verdict{border-radius:8px;padding:12px 16px;margin-bottom:10px;font-size:13px;line-height:1.5;border:1.5px solid}
+.verdict.good{background:#E1F5EE;border-color:#1D9E75;color:#085041}
+.verdict.info{background:#EEF2FF;border-color:#6366F1;color:#3730A3}
+.verdict.mixed{background:#FFF8EC;border-color:#E3A008;color:#78450A}
+.verdict b{font-weight:700}
+.verdict .vhead{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px}
+.alerts{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.al{border:1px solid var(--line);border-left-width:4px;border-radius:6px;padding:8px 12px;font-size:13px;line-height:1.45}
+.al b{font-weight:700}
+.al.g{border-left-color:#1D9E75;background:#E1F5EE}
+.al.r{border-left-color:#D85A30;background:#FAECE7}
+.al.a{border-left-color:#E3A008;background:#FFF8EC}
+.al.p{border-left-color:#6366F1;background:#EEF2FF}
+.al.c{border-left-color:#7B9E3E;background:#EFF6E8}
+.al .tag{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-right:6px;opacity:.75}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:16px}
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.controls .grp{display:flex;gap:4px}
+button.ctl{font-size:12px;padding:5px 10px;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;color:var(--ink)}
+button.ctl.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+button.ctl.qg.on{background:var(--green);border-color:var(--green)}
+button.ctl.qb.on{background:var(--blue);border-color:var(--blue)}
+button.ctl.qo.on{background:var(--orange);border-color:var(--orange)}
+button.ctl.qx.on{background:var(--gray);border-color:var(--gray)}
+input.search{font-size:12px;padding:5px 9px;border:1px solid var(--line);border-radius:6px;width:140px}
+.legend{font-size:11.5px;color:var(--sub);margin-top:8px}
+.tmnav{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap}
+.tmnav button{font-size:12px;padding:4px 10px;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer}
+.tmnav button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tmnav .seslabel{font-size:12px;color:var(--sub)}
+svg{width:100%;height:auto;display:block}
+.dot{cursor:pointer}.dimmed{opacity:.10}
+.tooltip{position:fixed;pointer-events:none;background:#1E2429;color:#fff;font-size:11.5px;line-height:1.5;padding:8px 10px;border-radius:6px;z-index:50;display:none;max-width:260px}
+.tooltip b{color:#9FD8C4}
+.snap{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-top:14px}
+.snapcard{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:12.5px}
+.snapcard h3{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--sub);margin-bottom:6px}
+.qcount{display:inline-block;padding:1px 7px;border-radius:8px;color:#fff;font-weight:700;font-size:12px;margin-right:5px}
+.detail{display:none;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px;margin-top:12px;font-size:13px}
+.detail table{width:100%;border-collapse:collapse;font-size:12.5px}
+.detail td{padding:3px 8px 3px 0;color:var(--sub)}.detail td.v{color:var(--ink);font-weight:600}
+h2{font-size:15px;margin:20px 0 10px}
+.reads{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px}
+.read{background:var(--card);border:1px solid var(--line);border-top-width:4px;border-radius:8px;padding:12px 14px;font-size:12.5px;line-height:1.5}
+.read.kg{border-top-color:var(--green)}.read.ka{border-top-color:#E3A008}
+.read.kb{border-top-color:var(--blue)}.read.ko{border-top-color:var(--orange)}.read.kp{border-top-color:#6366F1}
+.read.kx{border-top-color:var(--gray)}
+.read .rh{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.read .rh b{font-size:14px}
+.read .st{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:2px 7px;border-radius:8px;background:var(--bg);color:var(--sub)}
+.read .mx{display:grid;grid-template-columns:1fr 1fr;gap:2px 12px;margin:6px 0;color:var(--sub)}
+.read .mx b{color:var(--ink)}
+.bar{height:5px;background:var(--line);border-radius:3px;margin:7px 0;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:3px}
+.disc{font-size:11px;color:var(--sub);font-style:italic;margin-top:22px;border-top:1px solid var(--line);padding-top:10px}
+.up{color:#1D9E75;font-weight:600}.dn{color:#D85A30;font-weight:600}
+.compare-banner{background:#EEF2FF;border:1.5px solid #6366F1;border-radius:6px;padding:6px 12px;font-size:12px;color:#3730A3;margin-bottom:8px;display:none}
 </style>
 </head>
 <body>
 <div class="hdr">
-  <h1>CEF Time Machine · 08/24/2026 (Monday)</h1>
-  <span class="badge neg">Net Δ: −$2.12</span>
+  <h1>CEF Time Machine · 08/25/2026 (Tuesday)</h1>
+  <span class="badge pos">Net Δ: +$2.25</span>
 </div>
-<div class="note">Session 29 · 08/04 rolled off · Window 08/05–08/24 · 25-fund universe · ERH Green sess 5 (Z1Y +0.83) · AIO → Green (+0.29) · BDJ large regression −0.52pt · RQI/RNP widened · Momentum updated 08/25 · Next session Tue 08/26</div>
+<div class="note">Session 30 · 08/05 rolled off · Window 08/06–08/25 · 25-fund universe · ERH Green sess 6 (Z1Y +1.15, Δ+0.32) · BST +1.74 · RNP best REIT (+0.19pt) · Broad recovery · Annual report FYE 08/31 in 6 days · Next session Wed 08/26</div>
 
 <div class="verdict good">
-  <div class="vhead">ERH — Green session 5 · Z1Y +0.83 · Streak deepening · Annual report ~7 days</div>
-  <b>ERH's fifth consecutive Green session: Z1Y +0.83, Δ+0.08 from +0.75.</b> Discount at −6.51% is now 1.11pt inside the 52-week average (−7.62%) — the most favorable own-norm position in the streak. Session trajectory: +0.47 → +0.53 → +0.75 → +0.75 (lag) → +0.83. The streak is analytically confirmed across four clean sessions (08/18, 08/19, 08/20, 08/24; 08/21 was carry-forward). The FY2026 annual report (FYE Aug 31) is approximately seven days away — the definitive DQ sourcing event. ⚠ ROC-primary DQ active (~57–66% ROC).
+  <div class="vhead">ERH — Green session 6 · Z1Y +1.15 · Largest single-session gain of streak · Annual report 6 days</div>
+  <b>ERH's sixth consecutive Green session and the strongest single-session improvement of the current streak: +0.32pt to +1.15.</b> Discount at −6.08% is now 1.53pt inside the 52-week average (−7.61%) — the most favorable discount position since the pre-suppression streak. Trajectory: +0.47 → +0.53 → +0.75 → +0.75(lag) → +0.83 → +1.15. The FY2026 annual report (FYE August 31) arrives in approximately six days and will disclose actual FY2026 ROC composition. ⚠ ROC-primary DQ active. ERH yield now showing 9.10% from the data provider (updated from prior sessions).
 </div>
 
-<div class="verdict warn">
-  <div class="vhead">BDJ — Large regression · Z1Y −1.01 · Δ−0.52pt · New Orange low</div>
-  <b>BDJ dropped −0.52pt to Z1Y −1.01 — its most negative reading since late July.</b> D/P widened from −6.70% to −7.51%. NAV and price both pulled back over the weekend, but the discount widened disproportionately, compressing the z-score. BDJ has been a relatively stable Orange holding; this is the first large-delta regression in the tracking window. At −1.01 Z1Y with D/P −7.51% vs −5.93% average (−1.58pt own-norm deviation), BDJ is approaching its own historical extremes. Distribution: 50% NII / 50% LT gains (mixed, confirmed BYE June 2026).
+<div class="verdict info">
+  <div class="vhead">Broad recovery · 13 of 14 holdings improved · RNP best REIT session</div>
+  <b>A broad-based up session — all holdings positive or flat except UTG (−0.17pt, still Blue).</b> RNP posted the strongest REIT improvement (+0.19pt to −1.14). BST surged to Z1Y +1.74. UTF +0.22pt, BDJ recovered +0.26pt from yesterday's regression. The $5K add decision enters session 25 with RNP improving and the REIT sleeve recovering from its 08/24 lows.
 </div>
 
 <div class="verdict mixed">
-  <div class="vhead">RQI + RNP — Both widened · Z1Y −1.34 / −1.33 · Converging at lows</div>
-  <b>RQI −0.26pt to −1.34; RNP −0.15pt to −1.33 — the two candidates are now essentially at the same z-score.</b> Both D/P readings widened: RQI −7.77%, RNP −7.74%. With identical z-scores, the distribution quality distinction is the sole differentiator: RNP 57% NII-primary vs RQI ~100% LT gains. Own-norm deviation: RNP −4.96pt (from −2.78% avg), RQI −3.94pt (from −3.83% avg) — RNP remains more dislocated relative to its own history. $5K add decision: session 24 open.
+  <div class="vhead">BST suppression window · ~09/10 opening · 16 days</div>
+  <b>BST's Z1Y reached +1.74 today — its highest reading in the current tracking window.</b> The suppression window opens approximately September 10, now 16 days away. Z-score readings within ±3 sessions of the 09/15 ex-div date should be treated as corporate action artifacts. NAV $51.20, special dividend $2.3041.
 </div>
 
 <div class="alerts">
-  <div class="al g"><span class="tag">Green · ERH</span><b>ERH — Z1Y +0.83 · Green session 5 · annual report ~7 days</b> — Discount 1.11pt inside own average. Streak: +0.47→+0.53→+0.75→+0.75(lag)→+0.83. FY2026 annual report (FYE Aug 31) ~7 days away. Momentum: ST −3.15%, LT −2.80% — both negative but z-score recovery is price-led. ⚠ ROC-primary DQ active.</div>
-  <div class="al g"><span class="tag">Green · AIO</span><b>AIO — Z1Y +0.29 · back to Green · D/P −7.22%</b> — Returned to Green after the 08/20 dip to −0.03. D/P −7.22% vs −8.14% avg — discount now 0.92pt inside own norm. LT momentum +14.55% (from 08/25 update). Distribution source still unconfirmed (pending BlackRock filing).</div>
-  <div class="al g"><span class="tag">Green · BST</span><b>BST — Z1Y +1.55 (+0.40pt) · Green strengthening · ex-div 09/15</b> — Z1Y improved +0.40pt. NAV $50.83, price $49.01. D/P −3.58% vs −6.41% avg. Suppression window opens ~09/10 (~17 days). ST +2.99%, LT +22.61% (from 08/25 momentum update).</div>
-  <div class="al r"><span class="tag">Orange · BDJ</span><b>BDJ — Z1Y −1.01 · large regression −0.52pt · new Orange low</b> — Largest single-session BDJ regression in tracking window. D/P −7.51% vs −5.93% avg (−1.58pt own-norm deviation). Distribution: 50% NII / 50% LT gains. Not at trigger levels but the dislocation is building. ST +2.15%, LT +9.26% (from 08/25 update) — momentum still positive.</div>
-  <div class="al r"><span class="tag">Orange · RQI</span><b>RQI — Z1Y −1.34 · both candidates at session low · session 24</b> — Δ−0.26. D/P −7.77% vs −3.83% avg. Cumulative recovery +1.31pt from −2.65 peak. ST −2.76%, LT −3.17% (from 08/25 momentum — both deteriorating).</div>
-  <div class="al r"><span class="tag">Orange · RNP</span><b>RNP — Z1Y −1.33 · $5K preferred · own-norm −4.96pt</b> — Δ−0.15. D/P −7.74% vs −2.78% avg. 57% NII-primary. Own-norm deviation now −4.96pt — widest since tracking began. ST −1.85%, LT −8.77% (from 08/25 momentum).</div>
-  <div class="al r"><span class="tag">Gray · BUI</span><b>BUI — D/P +0.04% · barely Gray · Z1Y −0.64</b> — Premium at +0.04% — essentially flat. D/P oscillating. Z1Y −0.64. Trigger requires Green (Z1Y+ AND D/P−). ST −3.08%, LT +13.61% (from 08/25 momentum).</div>
-  <div class="al c"><span class="tag">Corp · BST</span><b>BST special dividend $2.3041 · ex-div 09/15 · suppression opens ~09/10 (~17 days)</b></div>
-  <div class="al c"><span class="tag">Corp · ERH</span><b>ERH FY2026 annual report · FYE Aug 31 · ~7 days · definitive ROC sourcing</b> — Will confirm whether the ~57–66% ROC estimate is accurate and whether the DQ flag is elevated, maintained, or cleared.</div>
-  <div class="al a"><span class="tag">Amber · Window</span><b>08/04 rolled off · Window 08/05–08/24 · Momentum updated 08/25 · Next session Tue 08/26</b></div>
+  <div class="al g"><span class="tag">Green · ERH</span><b>ERH — Z1Y +1.15 · Green session 6 · Δ+0.32 · annual report 6 days</b> — Largest single-session gain of the streak. Discount 1.53pt inside own average. Yield 9.10% (from data provider). FY2026 annual report (FYE Aug 31) ~6 days — definitive ROC disclosure. ⚠ ROC-primary DQ active.</div>
+  <div class="al g"><span class="tag">Green · BST</span><b>BST — Z1Y +1.74 (+0.19pt) · Green · suppression ~09/10 (~16 days)</b> — Highest Z1Y in tracking window. NAV $51.20, D/P −3.22% vs −6.40% avg. Ex-div 09/15 ($2.3041).</div>
+  <div class="al g"><span class="tag">Green · AIO</span><b>AIO — Z1Y +0.39 (+0.10pt) · Green · second consecutive session</b> — D/P −6.97% vs −8.17% avg (1.20pt inside). Two consecutive Green sessions (08/24, 08/25). DQ unconfirmed.</div>
+  <div class="al r"><span class="tag">Orange · RNP</span><b>RNP — Z1Y −1.14 (+0.19pt) · best REIT session · $5K preferred</b> — D/P −7.08% vs −2.83% avg (−4.25pt own-norm). 57% NII-primary. Session 25 open.</div>
+  <div class="al r"><span class="tag">Orange · RQI</span><b>RQI — Z1Y −1.30 (+0.04pt) · session 25 · cumul +1.35pt</b> — D/P −7.66% vs −3.85% avg. RNP now 0.16pt inside RQI with superior sourcing.</div>
+  <div class="al g"><span class="tag">Green · UTF</span><b>UTF — Z1Y +1.37 (+0.22pt) · best reading in tracking window</b> — D/P −1.30% vs −5.12% avg.</div>
+  <div class="al c"><span class="tag">Corp · ERH</span><b>ERH FY2026 annual report · FYE Aug 31 · ~6 days · definitive ROC sourcing</b></div>
+  <div class="al c"><span class="tag">Corp · BST</span><b>BST suppression window opens ~09/10 · 16 days · ex-div 09/15 ($2.3041)</b></div>
+  <div class="al a"><span class="tag">Amber · Window</span><b>08/05 rolled off · Window 08/06–08/25 · Next session Wed 08/26</b></div>
 </div>
 
 <div class="panel">
@@ -124,10 +124,10 @@
     <button class="ctl" id="hold">★ My Holdings</button>
     <button class="ctl" id="compareBtn">⊕ Compare</button>
   </div>
-  <div class="compare-banner" id="compareBanner"><b>Compare mode ON</b> — Current (08/24) as large white-outlined dots · Selected date as smaller dots · Press ⊕ Compare to exit</div>
+  <div class="compare-banner" id="compareBanner"><b>Compare mode ON</b> — Current (08/25) as large white-outlined dots · Prior date as smaller dots · Press ⊕ Compare to exit</div>
   <svg id="chart" viewBox="0 0 980 560" xmlns="http://www.w3.org/2000/svg"></svg>
-  <div class="legend">Dashed tail = 52-wk avg D/P · Ring = holding · Ghost trails = prior sessions · ERH Green sess 5 · AIO Green · BDJ large regression · 25-fund universe · Momentum updated 08/25 · Next Tue 08/26</div>
-  <div class="tmnav" id="tmnav"><span class="seslabel" id="seslabel">Showing: 08/24/2026</span></div>
+  <div class="legend">Dashed tail = 52-wk avg D/P · Ring = holding · Ghost trails = prior sessions · ERH Green sess 6 · BST suppression ~09/10 · ERH yield 9.10% (live) · Next Wed 08/26</div>
+  <div class="tmnav" id="tmnav"></div>
   <div class="detail" id="detail"></div>
   <div class="snap">
     <div class="snapcard"><h3 id="snapTitle">Quadrant counts</h3><div id="snapCounts"></div></div>
@@ -136,43 +136,43 @@
   </div>
 </div>
 
-<h2>Key reads — 08/24/2026</h2>
+<h2>Key reads — 08/25/2026</h2>
 <div class="reads">
   <div class="read kg">
-    <div class="rh"><b>ERH</b><span class="st">Green session 5 · Z1Y +0.83 · annual report ~7 days</span></div>
-    <div class="mx"><span>Z1Y <b>+0.83</b> <span class="up">▲+0.08</span></span><span>D/P <b>−6.51%</b></span><span>vs avg <b>−7.62%</b> (−1.11pt inside)</span><span>⚠ ROC-primary DQ</span></div>
-    <div class="bar"><i style="width:68%;background:var(--green)"></i></div>
-    Five consecutive Green sessions since the ex-dividend normalization. The discount is now 1.11pt inside its 52-week average — progressively improving each clean session. The FY2026 annual report (FYE Aug 31) arrives in approximately seven days and will be the single most important data point for ERH: it will disclose the actual FY2026 ROC composition and determine whether the current ~57–66% ROC estimate holds, is reduced (bullish for DQ flag removal), or is elevated (bearish).
+    <div class="rh"><b>ERH</b><span class="st">Green session 6 · Z1Y +1.15 · streak accelerating</span></div>
+    <div class="mx"><span>Z1Y <b>+1.15</b> <span class="up">▲+0.32</span></span><span>D/P <b>−6.08%</b></span><span>vs avg <b>−7.61%</b> (−1.53pt inside)</span><span>⚠ ROC-primary DQ · report ~6d</span></div>
+    <div class="bar"><i style="width:75%;background:var(--green)"></i></div>
+    Six consecutive Green sessions since the August 18 normalization baseline, with today's +0.32pt the largest single-session gain of the streak. The discount is now 1.53pt inside its 52-week average — matching the depth of the pre-suppression Green streak. Yield updated to 9.10% (live from data provider). The FY2026 annual report (FYE Aug 31) is approximately six days away and will provide the definitive ROC composition for DQ flag resolution.
   </div>
   <div class="read ko">
-    <div class="rh"><b>RQI + RNP</b><span class="st">Both at session lows · essentially tied · −$5K</span></div>
-    <div class="mx"><span>RQI Z1Y <b>−1.34</b> <span class="dn">▼−0.26</span></span><span>RNP Z1Y <b>−1.33</b> <span class="dn">▼−0.15</span></span><span>RNP own-norm <b>−4.96pt</b></span><span>RNP NII-primary <b>57%</b></span></div>
-    <div class="bar"><i style="width:55%;background:var(--orange)"></i></div>
-    RQI and RNP are at their lowest z-scores since early August — both at −1.33/−1.34. The own-norm deviation distinction has widened: RNP is now −4.96pt from its own average (−2.78%), vs RQI at −3.94pt from −3.83%. RNP is statistically more dislocated relative to its own history even though z-scores are nearly identical. Sourcing quality remains the decisive differentiator for a fresh add: 57% NII-primary (RNP) vs ~100% LT gains (RQI). The $5K decision is session 24 open with the REIT sleeve at its most dislocated point of the tracking window.
+    <div class="rh"><b>RNP</b><span class="st">$5K preferred · Z1Y −1.14 · best REIT session</span></div>
+    <div class="mx"><span>Z1Y <b>−1.14</b> <span class="up">▲+0.19</span></span><span>D/P <b>−7.08%</b></span><span>vs avg <b>−2.83%</b> (−4.25pt)</span><span>NII-primary <b>57%</b></span></div>
+    <div class="bar"><i style="width:64%;background:var(--orange)"></i></div>
+    RNP's strongest single-session improvement in the sleeve. Z1Y −1.14, now 0.16pt inside RQI (−1.30). Own-norm deviation −4.25pt remains the most extreme in the REIT sleeve. 57% NII-primary — the only REIT holding where distributions are predominantly earned income. The $5K add decision is 25 sessions open; RNP remains the preferred entry on both sourcing quality and own-norm dislocation.
+  </div>
+  <div class="read kg">
+    <div class="rh"><b>BST</b><span class="st">Z1Y +1.74 · Green · suppression approaching</span></div>
+    <div class="mx"><span>Z1Y <b>+1.74</b> <span class="up">▲+0.19</span></span><span>D/P <b>−3.22%</b></span><span>NAV <b>$51.20</b></span><span>Supp. opens <b>~09/10</b> (16d)</span></div>
+    <div class="bar"><i style="width:80%;background:var(--green)"></i></div>
+    Z1Y +1.74 — highest reading in the current tracking window. Green firmly established. The suppression window (~09/10) is now the primary forward-looking calendar item: 16 days until z-score readings near the 09/15 ex-div date should be treated as corporate action artifacts. Special dividend $2.3041 (58% ST / 42% LT / 0% NII).
   </div>
   <div class="read ko">
-    <div class="rh"><b>BDJ</b><span class="st">Large regression · Z1Y −1.01 · Δ−0.52pt</span></div>
-    <div class="mx"><span>Z1Y <b>−1.01</b> <span class="dn">▼−0.52</span></span><span>D/P <b>−7.51%</b></span><span>vs avg <b>−5.93%</b> (−1.58pt)</span><span>ST <b>+2.15%</b> · LT <b>+9.26%</b></span></div>
-    <div class="bar"><i style="width:58%;background:var(--orange)"></i></div>
-    BDJ's largest single-session regression in the tracking window. D/P at −7.51% is now 1.58pt wider than its own 52-week average — a meaningful own-norm dislocation for a fund that typically trades near its average. Distribution quality is confirmed mixed (50% NII / 50% LT gains per BlackRock FY2026). Momentum remains positive (ST +2.15%, LT +9.26%), suggesting the z-score dislocation is price-driven not momentum-driven. Worth monitoring for further compression opportunity.
+    <div class="rh"><b>RQI</b><span class="st">Session 25 · Z1Y −1.30 · cumul +1.35pt</span></div>
+    <div class="mx"><span>Z1Y <b>−1.30</b> <span class="up">▲+0.04</span></span><span>D/P <b>−7.66%</b></span><span>Cumul. <b>+1.35pt from −2.65</b></span><span>Gap to RNP <b>0.16pt</b></span></div>
+    <div class="bar"><i style="width:57%;background:var(--orange)"></i></div>
+    Marginal improvement. Twenty-five sessions in the clean window. RNP now sits 0.16pt inside RQI on Z1Y while carrying superior distribution sourcing (57% NII vs ~100% LT gains). For a fresh add, RNP is the stronger entry on both metrics.
   </div>
   <div class="read kg">
-    <div class="rh"><b>BST</b><span class="st">Green · Z1Y +1.55 · approaching suppression</span></div>
-    <div class="mx"><span>Z1Y <b>+1.55</b> <span class="up">▲+0.40</span></span><span>D/P <b>−3.58%</b></span><span>NAV <b>$50.83</b></span><span>Supp. opens <b>~09/10</b></span></div>
-    <div class="bar"><i style="width:76%;background:var(--green)"></i></div>
-    Z1Y improved +0.40pt on the session. Green quadrant firmly held. The BST suppression window calendar is now a live concern — approximately 17 days until ~09/10 when z-score readings within ±3 sessions of the 09/15 ex-div date should be treated with caution. NAV $50.83, price $49.01. Special dividend $2.3041.
-  </div>
-  <div class="read kg">
-    <div class="rh"><b>AIO</b><span class="st">Green · Z1Y +0.29 · D/P inside avg</span></div>
-    <div class="mx"><span>Z1Y <b>+0.29</b> <span class="up">▲+0.32</span></span><span>D/P <b>−7.22%</b></span><span>vs avg <b>−8.14%</b> (−0.92pt inside)</span><span>DQ <b>unconfirmed</b></span></div>
-    <div class="bar"><i style="width:40%;background:var(--green)"></i></div>
-    AIO returned to Green after the 08/20 dip. Z1Y +0.29 with discount 0.92pt inside own average. AIO has been oscillating around the Green/Orange boundary (Orange 08/17, Green 08/18–19, Orange 08/20, Green 08/24) — the zero-cross is not yet stable. LT momentum +14.55% (08/25 update). Distribution source still unconfirmed.
+    <div class="rh"><b>AIO</b><span class="st">Green sess 2 consecutive · Z1Y +0.39</span></div>
+    <div class="mx"><span>Z1Y <b>+0.39</b> <span class="up">▲+0.10</span></span><span>D/P <b>−6.97%</b></span><span>vs avg <b>−8.17%</b> (−1.20pt inside)</span><span>DQ <b>unconfirmed</b></span></div>
+    <div class="bar"><i style="width:42%;background:var(--green)"></i></div>
+    Two consecutive Green sessions (08/24 and 08/25) — a more stable position than prior single-session Green entries. Discount 1.20pt inside own average. The oscillation around the boundary may be settling. LT momentum +14.55% (from 08/25 update). Distribution source still unconfirmed pending BlackRock filing.
   </div>
   <div class="read kp">
-    <div class="rh"><b>Session summary</b><span class="st">REIT at lows · ERH strengthening · −$2.12</span></div>
-    <div class="mx"><span>RQI/RNP <b>both −1.33/−1.34</b></span><span>ERH <b>Green sess 5</b></span><span>BDJ <b>−0.52pt</b> regression</span><span>$5K decision <b>sess 24</b></span></div>
-    <div class="bar"><i style="width:44%;background:#6366F1"></i></div>
-    The REIT sleeve (RQI, RNP) is at its most dislocated point of the tracking window — both at −1.33/−1.34 with RNP's own-norm deviation at −4.96pt. ERH continues to strengthen in Green. BDJ posted a large regression. The $5K add decision, open for 24 sessions, is now at the most statistically compelling entry point for RNP of the entire tracking window. Next session: Tuesday 08/26.
+    <div class="rh"><b>Session summary</b><span class="st">Broad recovery · ERH accelerating · +$2.25</span></div>
+    <div class="mx"><span>ERH <b>Green sess 6 (+0.32)</b></span><span>BST <b>+1.74</b></span><span>RNP <b>+0.19pt</b></span><span>$5K decision <b>sess 25 open</b></span></div>
+    <div class="bar"><i style="width:68%;background:#6366F1"></i></div>
+    A strong broad-based recovery session. ERH is the standout — six consecutive Green sessions with accelerating gains heading into the FY2026 annual report (FYE Aug 31, ~6 days). Key upcoming events: ERH annual report (~08/31), BST suppression window (~09/10), AIO Green streak continuation watch. Next session: Wednesday 08/26.
   </div>
 </div>
 
@@ -185,7 +185,6 @@ const HOLDINGS=new Set(["PCN","BDJ","EOI","BUI","BME","RQI","RNP","RFI","AIO","B
 const QCOLOR={G:"#1D9E75",B:"#378ADD",O:"#D85A30",X:"#888780"};
 const QNAME={G:"Green · Thesis Working",B:"Blue · Premium Territory",O:"Orange · Buy Zone",X:"Gray · Worst Setup"};
 const PRIOR=[
-  {date:"08/05/2026",d:{AIO:[-0.53,-9.68],ASGI:[1.99,9.31],BDJ:[-1.00,-7.45],BME:[1.37,-2.75],BST:[1.28,-4.27],BUI:[0.04,2.51],CSQ:[-1.03,-10.11],DNP:[1.69,11.12],EOI:[-1.31,-7.19],EOS:[-1.23,-10.00],ERH:[1.35,-5.91],ETG:[-1.27,-9.83],GDV:[-1.57,-11.75],GLU:[-1.25,-4.60],HTD:[1.93,-3.09],NBXG:[0.01,-12.73],NXG:[1.13,2.36],PCN:[-1.23,2.44],PDX:[0.34,-8.84],RFI:[-1.09,-3.84],RLTY:[-1.14,-8.92],RNP:[-1.23,-7.08],RQI:[-1.23,-7.16],UTF:[1.00,-1.59],UTG:[0.80,0.60]}},
   {date:"08/06/2026",d:{AIO:[-0.47,-9.45],ASGI:[1.81,8.75],BDJ:[-0.90,-7.31],BME:[1.21,-3.07],BST:[1.10,-4.56],BUI:[-0.36,1.16],CSQ:[-0.76,-9.59],DNP:[1.77,11.41],EOI:[-1.34,-7.31],EOS:[-1.37,-10.45],ERH:[1.08,-6.27],ETG:[-1.27,-9.84],GDV:[-1.54,-11.74],GLU:[-1.56,-5.65],HTD:[1.91,-3.10],NBXG:[0.09,-12.61],NXG:[1.39,3.33],PCN:[-1.05,2.97],PDX:[0.44,-8.67],RFI:[-1.09,-3.86],RLTY:[-0.87,-8.48],RNP:[-1.30,-7.40],RQI:[-0.98,-6.48],UTF:[0.98,-1.70],UTG:[0.51,0.23]}},
   {date:"08/07/2026",d:{AIO:[-0.47,-9.45],ASGI:[2.20,10.20],BDJ:[-0.90,-7.75],BME:[1.21,-2.67],BST:[1.10,-4.90],BUI:[-0.36,1.16],CSQ:[-0.69,-9.48],DNP:[1.77,11.41],EOI:[-1.34,-7.06],EOS:[-1.37,-10.07],ERH:[1.08,-6.27],ETG:[-1.27,-9.80],GDV:[-1.54,-11.74],GLU:[-1.56,-5.65],HTD:[1.91,-3.20],NBXG:[0.09,-12.75],NXG:[1.39,3.33],PCN:[-1.05,3.13],PDX:[0.44,-8.56],RFI:[-0.80,-3.01],RLTY:[-0.84,-8.44],RNP:[-1.15,-6.83],RQI:[-1.22,-7.19],UTF:[1.04,-1.55],UTG:[0.02,-0.38]}},
   {date:"08/10/2026",d:{AIO:[-0.27,-8.73],ASGI:[1.98,9.52],BDJ:[-0.51,-6.70],BME:[1.01,-3.46],BST:[1.50,-3.84],BUI:[-0.51,0.64],CSQ:[-0.37,-8.89],DNP:[2.43,13.60],EOI:[-1.19,-6.92],EOS:[-1.15,-9.81],ERH:[1.16,-6.13],ETG:[-1.04,-9.39],GDV:[-0.64,-11.16],GLU:[-1.20,-4.55],HTD:[2.16,-2.64],NBXG:[0.90,-11.40],NXG:[1.60,4.19],PCN:[-0.75,3.84],PDX:[0.07,-9.36],RFI:[-0.41,-1.86],RLTY:[-0.59,-8.03],RNP:[-1.11,-6.72],RQI:[-0.94,-6.40],UTF:[1.18,-1.16],UTG:[0.31,-0.03]}},
@@ -198,33 +197,34 @@ const PRIOR=[
   {date:"08/19/2026",d:{AIO:[0.40,-6.69],ASGI:[2.94,14.05],BDJ:[-0.65,-6.95],BME:[0.22,-5.00],BST:[0.89,-4.83],BUI:[-0.26,1.33],CSQ:[-0.15,-8.56],DNP:[1.75,11.94],EOI:[-0.91,-6.24],EOS:[-1.17,-9.95],ERH:[0.53,-6.95],ETG:[-1.12,-9.67],GDV:[-0.27,-10.92],GLU:[-0.74,-3.17],HTD:[1.48,-3.55],NBXG:[0.28,-12.44],NXG:[0.86,1.75],PCN:[-1.02,2.89],PDX:[0.86,-8.12],RFI:[-0.65,-2.70],RLTY:[-0.81,-8.43],RNP:[-0.93,-6.17],RQI:[-1.05,-6.83],UTF:[1.16,-1.67],UTG:[0.64,0.33]}},
   {date:"08/20/2026",d:{AIO:[-0.03,-8.16],ASGI:[2.36,11.99],BDJ:[-0.49,-6.70],BME:[1.32,-2.64],BST:[1.15,-4.36],BUI:[-0.30,1.19],CSQ:[0.06,-8.21],DNP:[1.90,12.47],EOI:[-1.01,-6.56],EOS:[-1.16,-9.95],ERH:[0.75,-6.64],ETG:[-1.08,-9.61],GDV:[-0.50,-11.07],GLU:[-1.06,-4.22],HTD:[1.44,-3.60],NBXG:[-0.34,-13.33],NXG:[0.77,1.43],PCN:[-1.19,2.37],PDX:[0.69,-8.42],RFI:[-0.67,-2.78],RLTY:[-1.05,-8.83],RNP:[-1.15,-7.04],RQI:[-1.27,-7.50],UTF:[1.09,-1.92],UTG:[0.61,0.29]}},
   {date:"08/21/2026",d:{AIO:[-0.03,-8.16],ASGI:[2.36,14.76],BDJ:[-0.49,-6.70],BME:[1.32,-2.64],BST:[1.15,-4.36],BUI:[-0.30,1.19],CSQ:[-0.13,-8.56],DNP:[1.90,12.47],EOI:[-1.01,-6.56],EOS:[-1.16,-9.95],ERH:[0.75,-6.64],ETG:[-1.08,-9.61],GDV:[-0.50,-11.07],GLU:[-1.06,-4.22],HTD:[1.44,-3.60],NBXG:[-0.34,-13.33],NXG:[0.77,1.43],PCN:[-1.19,2.37],PDX:[0.69,-8.42],RFI:[-0.93,-3.55],RLTY:[-1.02,-8.78],RNP:[-1.18,-7.19],RQI:[-1.08,-6.99],UTF:[1.14,-1.82],UTG:[0.91,0.65]}},
+  {date:"08/24/2026",d:{AIO:[0.29,-7.22],ASGI:[2.89,14.48],BDJ:[-1.01,-7.51],BME:[0.83,-3.66],BST:[1.55,-3.58],BUI:[-0.64,0.04],CSQ:[-0.12,-8.55],DNP:[1.99,12.94],EOI:[-0.93,-6.36],EOS:[-1.02,-9.59],ERH:[0.83,-6.51],ETG:[-1.07,-9.63],GDV:[-0.30,-10.93],GLU:[-0.85,-3.54],HTD:[1.23,-3.90],NBXG:[0.20,-12.59],NXG:[1.18,3.01],PCN:[-1.03,2.81],PDX:[0.57,-8.65],RFI:[-1.15,-4.21],RLTY:[-1.06,-8.85],RNP:[-1.33,-7.74],RQI:[-1.34,-7.77],UTF:[1.15,-1.85],UTG:[0.91,0.66]}},
 ];
-const CUR={date:"08/24/2026",data:{
-  AIO:[1.87,2.23,0.29,-7.22,-8.14,8.44,27.58,25.59],
-  ASGI:[1.85,2.39,2.89,14.48,3.11,10.6,21.75,24.9],
-  BDJ:[-0.24,-0.39,-1.01,-7.51,-5.93,7.63,10.52,9.73],
-  BME:[-0.61,0.04,0.83,-3.66,-5.41,6.87,47.55,45.81],
-  BST:[1.63,1.69,1.55,-3.58,-6.41,6.12,50.83,49.01],
-  BUI:[-1.1,-0.11,-0.64,0.04,2.11,6.9,26.76,26.77],
-  CSQ:[1.61,1.65,-0.12,-8.55,-8.34,7.85,22.56,20.63],
-  DNP:[1.83,1.66,1.99,12.94,6.5,7.15,9.66,10.91],
-  EOI:[0.49,-0.47,-0.93,-6.36,-3.72,8.08,21.21,19.86],
-  EOS:[-0.6,-0.77,-1.02,-9.59,-6.79,8.54,23.67,21.4],
-  ERH:[0.82,1.04,0.83,-6.51,-7.62,8.93,12.29,11.49],
-  ETG:[-0.12,-0.31,-1.07,-9.63,-7.28,6.46,26.59,24.03],
-  GDV:[0.15,-0.34,-0.3,-10.93,-10.73,5.92,34.13,30.4],
-  GLU:[0.98,-0.23,-0.85,-3.54,-0.72,6.81,20.08,19.37],
-  HTD:[0.04,0.84,1.23,-3.9,-5.92,7.54,26.17,25.15],
-  NBXG:[0.7,1.06,0.2,-12.59,-12.87,9.6,17.16,15.0],
-  NXG:[0.78,1.22,1.18,3.01,-1.38,12.83,54.47,56.11],
-  PCN:[0.04,-0.5,-1.03,2.81,5.96,11.52,11.4,11.72],
-  PDX:[0.9,1.19,0.57,-8.65,-9.59,7.4,23.69,21.64],
-  RFI:[0.26,-0.6,-1.15,-4.21,-0.91,8.43,11.89,11.39],
-  RLTY:[-0.41,-0.63,-1.06,-8.85,-7.22,8.43,17.17,15.65],
-  RNP:[-0.73,-1.16,-1.33,-7.74,-2.78,8.06,21.95,20.25],
-  RQI:[-0.38,-1.09,-1.34,-7.77,-3.83,8.74,13.39,12.35],
-  UTF:[0.72,1.18,1.15,-1.85,-5.1,7.3,27.63,27.12],
-  UTG:[1.0,1.02,0.91,0.66,-0.45,6.62,37.81,38.06]}};
+const CUR={date:"08/25/2026",data:{
+  AIO:[2.02,2.37,0.39,-6.97,-8.17,8.34,27.83,25.89],
+  ASGI:[1.45,1.95,2.44,12.87,3.16,10.71,21.84,24.65],
+  BDJ:[0.23,-0.05,-0.75,-7.11,-5.94,7.58,10.55,9.8],
+  BME:[-0.53,0.1,0.85,-3.59,-5.4,6.81,47.91,46.19],
+  BST:[1.72,1.84,1.74,-3.22,-6.4,6.05,51.2,49.55],
+  BUI:[-0.94,-0.03,-0.58,0.22,2.08,6.88,26.82,26.88],
+  CSQ:[2.05,2.18,0.11,-8.16,-8.36,7.78,22.68,20.83],
+  DNP:[2.13,1.8,2.18,13.66,6.53,7.1,9.66,10.98],
+  EOI:[0.79,-0.35,-0.85,-6.16,-3.75,8.04,21.28,19.97],
+  EOS:[-0.91,-0.99,-1.11,-9.84,-6.83,8.52,23.78,21.44],
+  ERH:[1.17,1.35,1.15,-6.08,-7.61,9.1,12.33,11.58],
+  ETG:[1.09,0.27,-0.8,-9.04,-7.29,6.4,26.66,24.25],
+  GDV:[1.09,0.32,0.51,-10.4,-10.73,5.88,34.14,30.59],
+  GLU:[-0.01,-0.64,-1.15,-4.58,-0.74,6.85,20.19,19.27],
+  HTD:[0.63,1.1,1.55,-3.36,-5.91,7.48,26.22,25.34],
+  NBXG:[0.27,0.61,-0.12,-13.05,-12.88,9.52,17.4,15.13],
+  NXG:[0.48,0.94,0.85,1.81,-1.37,13.07,54.12,55.1],
+  PCN:[0.19,-0.43,-0.99,2.89,5.94,11.48,11.43,11.76],
+  PDX:[0.98,1.24,0.63,-8.57,-9.6,7.39,23.7,21.67],
+  RFI:[0.65,-0.38,-1.0,-3.78,-0.93,8.37,11.92,11.47],
+  RLTY:[0.45,0.03,-0.73,-8.35,-7.24,8.35,17.24,15.8],
+  RNP:[-0.13,-0.84,-1.14,-7.08,-2.83,7.98,22.02,20.46],
+  RQI:[-0.32,-1.04,-1.3,-7.66,-3.85,8.7,13.44,12.41],
+  UTF:[1.27,1.36,1.37,-1.3,-5.12,7.24,27.69,27.33],
+  UTG:[0.83,0.84,0.74,0.45,-0.45,6.59,38.09,38.26]}};
 
 const DATES=PRIOR.map(s=>s.date).concat([CUR.date]);
 let zIdx=2,qFilter="all",searchTerms=[],holdOnly=false,sesIdx=PRIOR.length,compareMode=false;
@@ -262,14 +262,14 @@ function buildTmnav(){
   const nav=document.getElementById("tmnav"); nav.innerHTML='';
   const b0=document.createElement("button");
   b0.className="ctl tmb on"; b0.dataset.s=N;
-  b0.textContent="08/24 (current)"; nav.appendChild(b0);
+  b0.textContent="08/25 (current)"; nav.appendChild(b0);
   for(let i=N-1;i>=0;i--){
     const b=document.createElement("button");
     b.className="ctl tmb"; b.dataset.s=i;
     b.textContent=PRIOR[i].date.replace("/2026",""); nav.appendChild(b);
   }
   const lbl=document.createElement("span"); lbl.className="seslabel"; lbl.id="seslabel";
-  lbl.textContent="Showing: 08/24/2026"; nav.appendChild(lbl);
+  lbl.textContent="Showing: 08/25/2026"; nav.appendChild(lbl);
   nav.querySelectorAll(".tmb").forEach(b=>b.addEventListener("click",()=>{
     nav.querySelectorAll(".tmb").forEach(x=>x.classList.remove("on"));
     b.classList.add("on"); sesIdx=+b.dataset.s; render();
@@ -280,7 +280,7 @@ function render(){
   const Xf=z=>ML+(z-ex.zmin)/(ex.zmax-ex.zmin)*(W-ML-MR);
   const Yf=d=>MT+(ex.dmax-d)/(ex.dmax-ex.dmin)*(H-MT-MB);
   let s=""; s=drawGrid(s,ex,Xf,Yf);
-  if(compareMode&&sesIdx!==N&&sesIdx<N){
+  if(compareMode&&sesIdx<N){
     const ps=PRIOR[sesIdx]; const compDate=ps.date;
     Object.keys(CUR.data).forEach(t=>{
       if(!ps.d[t])return;
@@ -310,7 +310,7 @@ function render(){
       s+=`<text x="${cx}" y="${cy-13}" font-size="10" font-weight="800" text-anchor="middle" fill="${fc}" stroke="white" stroke-width="3" paint-order="stroke">${t}</text></g>`;
     });
     document.getElementById("chart").innerHTML=s; bindDotsCompare(compDate); renderSnap();
-    document.getElementById("seslabel").textContent="Current: 08/24 vs "+compDate;
+    document.getElementById("seslabel").textContent="Current: 08/25 vs "+compDate;
   } else {
     if(sesIdx===N){
       const ops=[0.03,0.05,0.07,0.09,0.11,0.13,0.16,0.19,0.22,0.26,0.31,0.37,0.44];
@@ -336,7 +336,7 @@ function render(){
         s+=`<circle cx="${cx}" cy="${cy}" r="6" fill="${fc}"/>`;
         s+=`<text x="${cx}" y="${cy-11}" font-size="9.5" font-weight="700" text-anchor="middle" fill="#1E2429" stroke="white" stroke-width="2.5" paint-order="stroke">${t}</text></g>`;
       });
-    } else if(sesIdx<N){
+    } else {
       const ps=PRIOR[sesIdx];
       Object.keys(ps.d).forEach(t=>{
         const [z1y,dp]=ps.d[t]; const q=qFromZD(z1y,dp);
@@ -362,13 +362,13 @@ function bindDots(){
       tip.style.display="block"; tip.style.left=(e.clientX+14)+"px"; tip.style.top=(e.clientY+10)+"px";
       if(isCur&&d){
         tip.innerHTML=`<b>${t}</b> · yield ${d[5].toFixed(2)}%<br>D/P ${d[3].toFixed(2)}% (avg ${d[4].toFixed(2)}%, Δ${(d[3]-d[4]).toFixed(2)}pt)<br>Z3M ${d[0].toFixed(2)} · Z6M ${d[1].toFixed(2)} · Z1Y ${d[2].toFixed(2)}<br>ST ${m?m[0].toFixed(2)+'%':'—'} · LT ${m?m[1].toFixed(2)+'%':'—'}`;
-      } else if(sesIdx<PRIOR.length){const pd=PRIOR[sesIdx].d[t];if(pd)tip.innerHTML=`<b>${t}</b> · Z1Y ${pd[0].toFixed(2)} · D/P ${pd[1].toFixed(2)}%`;}
+      } else if(sesIdx<N){const pd=PRIOR[sesIdx].d[t];if(pd)tip.innerHTML=`<b>${t}</b> · Z1Y ${pd[0].toFixed(2)} · D/P ${pd[1].toFixed(2)}%`;}
     });
     g.addEventListener("mouseleave",()=>tip.style.display="none");
     g.addEventListener("click",()=>{
       if(!isCur||!d)return;
       const q=qFromZD(d[2],d[3]); const el=document.getElementById("detail"); el.style.display="block";
-      const prev=PRIOR[PRIOR.length-1].d[t];
+      const prev=PRIOR[N-1].d[t];
       const dz=prev?(d[2]-prev[0]).toFixed(2):null; const ddp=prev?(d[3]-prev[1]).toFixed(2):null;
       el.innerHTML=`<b style="font-size:14px">${t}</b> <span class="qcount" style="background:${QCOLOR[q]}">${QNAME[q]}</span>
       <table><tr><td>Price</td><td class="v">$${d[7].toFixed(2)}</td><td>NAV</td><td class="v">$${d[6].toFixed(2)}</td><td>Yield</td><td class="v">${d[5].toFixed(2)}%</td></tr>
@@ -387,7 +387,7 @@ function bindDotsCompare(compDate){
     g.addEventListener("mousemove",e=>{
       tip.style.display="block"; tip.style.left=(e.clientX+14)+"px"; tip.style.top=(e.clientY+10)+"px";
       if(mode==="current"&&d){
-        tip.innerHTML=`<b>${t}</b> <span style="color:#6366F1;font-size:10px">▲ 08/24</span><br>D/P ${d[3].toFixed(2)}% · Z1Y ${d[2].toFixed(2)}<br>ST ${m?m[0].toFixed(2)+'%':'—'} · LT ${m?m[1].toFixed(2)+'%':'—'}`;
+        tip.innerHTML=`<b>${t}</b> <span style="color:#6366F1;font-size:10px">▲ 08/25</span><br>D/P ${d[3].toFixed(2)}% · Z1Y ${d[2].toFixed(2)}<br>ST ${m?m[0].toFixed(2)+'%':'—'} · LT ${m?m[1].toFixed(2)+'%':'—'}`;
       } else if(mode==="prior"&&pd){
         const dz=d?+(d[2]-pd[0]).toFixed(2):null;
         const arrow=dz===null?'':dz>=0?` <span style="color:#1D9E75">▲+${dz}</span>`:`<span style="color:#D85A30">▼${dz}</span>`;
