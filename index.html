@@ -107,7 +107,7 @@ svg{width:100%;height:auto;display:block}
 <div class="tooltip" id="tip"></div>
 
 <script>
-const MOM={PCN:[-0.34,-20.67],BDJ:[3.05,11.58],EOI:[-0.05,6.00],BME:[6.51,11.19],RQI:[-4.84,-6.74],RNP:[-2.66,-10.43],RFI:[-1.25,-13.25],AIO:[-1.93,13.10],BST:[3.65,23.15],DNP:[0.08,6.67],ERH:[-4.24,-3.57],BUI:[-2.86,12.30],UTF:[-1.77,10.10],UTG:[-5.21,15.77]};
+const MOM={PCN:[-0.34,-20.67],BDJ:[3.05,11.58],EOI:[-0.05,6.00],BME:[6.51,11.19],RQI:[-4.84,-6.74],RNP:[-2.66,-10.43],RFI:[-1.25,-13.25],AIO:[-1.93,13.10],BST:[3.65,23.15],DNP:[0.08,6.67],ERH:[-4.24,-3.57],BUI:[-2.86,12.30],UTF:[-1.77,10.10],UTG:[-5.21,15.77],ETG:[0.99,22.45],GDV:[0.31,21.97],CSQ:[0.79,21.12],PDX:[2.17,33.94],ASGI:[-3.82,16.96],RLTY:[-2.62,null],HTD:[-0.79,12.58],NXG:[-5.27,32.65],NBXG:[-3.27,5.04],EOS:[-2.16,-1.62],GLU:[-1.00,9.80]};
 const HOLDINGS=new Set(["PCN","BDJ","EOI","BUI","BME","RQI","RNP","RFI","AIO","BST","DNP","UTF","ERH","UTG"]);
 const QCOLOR={G:"#1D9E75",B:"#378ADD",O:"#D85A30",X:"#888780"};
 const QNAME={G:"Green · Thesis Working",B:"Blue · Premium Territory",O:"Orange · Buy Zone",X:"Gray · Worst Setup"};
@@ -298,7 +298,7 @@ function bindDots(){
     g.addEventListener("mousemove",e=>{
       tip.style.display="block"; tip.style.left=(e.clientX+14)+"px"; tip.style.top=(e.clientY+10)+"px";
       if(isCur&&d){
-        tip.innerHTML=`<b>${t}</b> · yield ${d[5].toFixed(2)}%<br>D/P ${d[3].toFixed(2)}% (avg ${d[4].toFixed(2)}%, Δ${(d[3]-d[4]).toFixed(2)}pt)<br>Z3M ${d[0].toFixed(2)} · Z6M ${d[1].toFixed(2)} · Z1Y ${d[2].toFixed(2)}<br>ST ${m?m[0].toFixed(2)+'%':'—'} · LT ${m?m[1].toFixed(2)+'%':'—'}`;
+        tip.innerHTML=`<b>${t}</b> · yield ${d[5].toFixed(2)}%<br>D/P ${d[3].toFixed(2)}% (avg ${d[4].toFixed(2)}%, Δ${(d[3]-d[4]).toFixed(2)}pt)<br>Z3M ${d[0].toFixed(2)} · Z6M ${d[1].toFixed(2)} · Z1Y ${d[2].toFixed(2)}<br>ST ${m&&m[0]!=null?m[0].toFixed(2)+'%':'—'} · LT ${m&&m[1]!=null?m[1].toFixed(2)+'%':'—'}`;
       } else if(sesIdx<N){const pd=PRIOR[sesIdx].d[t];if(pd)tip.innerHTML=`<b>${t}</b>${isPriorFY?' †prior FY':''} · Z1Y ${pd[0].toFixed(2)} · D/P ${pd[1].toFixed(2)}%`;}
     });
     g.addEventListener("mouseleave",()=>tip.style.display="none");
@@ -311,7 +311,7 @@ function bindDots(){
       <table><tr><td>Price</td><td class="v">$${d[7].toFixed(2)}</td><td>NAV</td><td class="v">$${d[6].toFixed(2)}</td><td>Yield</td><td class="v">${d[5].toFixed(2)}%</td></tr>
       <tr><td>D/P</td><td class="v">${d[3].toFixed(2)}%</td><td>52-wk avg</td><td class="v">${d[4].toFixed(2)}%</td><td>Dev</td><td class="v">${(d[3]-d[4]).toFixed(2)}pt</td></tr>
       <tr><td>Z3M</td><td class="v">${d[0].toFixed(2)}</td><td>Z6M</td><td class="v">${d[1].toFixed(2)}</td><td>Z1Y${dz?` <span style="font-size:10px;color:${+dz>=0?'#1D9E75':'#D85A30'}">(${+dz>=0?'+':''}${dz})</span>`:''}</td><td class="v">${d[2].toFixed(2)}</td></tr>
-      <tr><td>ΔD/P</td><td class="v">${ddp?`${+ddp>=0?'+':''}${ddp}pt`:'—'}</td><td>ST Mom</td><td class="v">${m?m[0].toFixed(2)+'%':'—'}</td><td>LT Mom</td><td class="v">${m?m[1].toFixed(2)+'%':'—'}</td></tr></table>`;
+      <tr><td>ΔD/P</td><td class="v">${ddp?`${+ddp>=0?'+':''}${ddp}pt`:'—'}</td><td>ST Mom</td><td class="v">${m&&m[0]!=null?m[0].toFixed(2)+'%':'—'}</td><td>LT Mom</td><td class="v">${m&&m[1]!=null?m[1].toFixed(2)+'%':'—'}</td></tr></table>`;
     });
   });
 }
