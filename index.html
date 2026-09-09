@@ -241,16 +241,7 @@ function render(){
     document.getElementById("seslabel").textContent=`Current: 09/08 vs ${compDate}${priorFY?' (†prior FY)':''}`;
   } else {
     if(sesIdx===N){
-      const ops=[0.02,0.02,0.03,0.04,0.05,0.06,0.08,0.10,0.15,0.22,0.30,0.38,0.46,0.54];
-      PRIOR.forEach((ps,gi)=>{
-        const op=ops[gi]||0.02; const isPFY=gi<FYE_IDX;
-        const r=gi===N-1?5:gi===N-2?3.5:2.5;
-        Object.keys(ps.d).forEach(t=>{
-          const [z1y,dp]=ps.d[t]; const q=qFromZD(z1y,dp);
-          const vis=(qFilter==="all"||q===qFilter)&&(!holdOnly||HOLDINGS.has(t));
-          if(vis&&tickerMatch(t)) s+=`<circle cx="${Xf(z1y)}" cy="${Yf(dp)}" r="${r}" fill="${isPFY?'#E3A008':QCOLOR[q]}" opacity="${op}"/>`;
-        });
-      });
+      // Ghost trails removed per QTI request 09/08/2026
       Object.keys(CUR.data).forEach(t=>{
         const d=CUR.data[t]; const zVal=d[zIdx],dpVal=d[3],avg52=d[4];
         const q=qFromZD(d[2],dpVal); const fc=QCOLOR[q];
