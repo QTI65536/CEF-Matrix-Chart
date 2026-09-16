@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CEF Time Machine · 09/14/2026</title>
+<title>CEF Time Machine · 09/15/2026</title>
 <style>
 :root{--green:#1D9E75;--blue:#378ADD;--orange:#D85A30;--gray:#888780;--ink:#1E2429;--sub:#5A636B;--line:#DEE3E7;--bg:#F7F8F9;--card:#FFFFFF;}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -54,10 +54,10 @@ svg{width:100%;height:auto;display:block}
 </head>
 <body>
 <div class="hdr">
-  <h1>CEF Time Machine · 09/14/2026</h1>
-  <span class="badge neg">Net Δ: −$8.61</span>
+  <h1>CEF Time Machine · 09/15/2026</h1>
+  <span class="badge neg">Net Δ: −$8.44</span>
 </div>
-<div class="note">Latest supplied CEFConnect snapshot · Fund data as of 09/14/2026 · 25 funds · Raw numerical fields preserved from supplied data</div>
+<div class="note">Session update · Current data 09/15/2026 · Net Price Change −$8.44 · 09/14 appended to Time Machine · BST/BDJ ex-div suppression window active · AIO corporate-action window active · ERH DQ flag active · PCN leverage discrepancy remains flagged.</div>
 
 <div class="alerts">
   <div class="al r"><span class="tag">Orange · Deep Value</span><b>ASGI Z1Y −2.37 · GDV −1.85 · PCN −1.64 · ETG −1.44 · GLU −1.37</b> — deepest negative 1-year Z-scores in the supplied snapshot.</div>
@@ -84,7 +84,7 @@ svg{width:100%;height:auto;display:block}
     <button class="ctl" id="hold">★ My Holdings</button>
     <button class="ctl" id="compareBtn">⊕ Compare</button>
   </div>
-  <div class="compare-banner" id="compareBanner"><b>Compare mode ON</b> — Current (09/14) as large dots · Prior as smaller dots · † = prior FY baseline</div>
+  <div class="compare-banner" id="compareBanner"><b>Compare mode ON</b> — Current (09/15) as large dots · Prior as smaller dots · † = prior FY baseline</div>
   <svg id="chart" viewBox="0 0 980 560" xmlns="http://www.w3.org/2000/svg"></svg>
   <div class="legend">09/14 snapshot · Z-score / discount matrix · dashed vertical segment = current D/P to 52-week average · † = prior FY</div>
   <div class="tmnav" id="tmnav"></div>
@@ -124,33 +124,35 @@ const PRIOR=[
   {date:"09/09/2026",d:{AIO:[0.17,-8.06],ASGI:[-0.31,2.22],BDJ:[-1.21,-7.9],BME:[1.34,-2.25],BST:[0.88,-4.63],BUI:[-0.30,0.87],CSQ:[0.59,-7.54],DNP:[1.39,11.62],EOI:[-0.87,-6.34],EOS:[-1.14,-9.98],ERH:[0.14,-7.46],ETG:[-1.09,-9.83],GDV:[-1.34,-11.63],GLU:[-1.16,-4.85],HTD:[1.18,-3.84],NBXG:[0.53,-12.3],NXG:[0.76,1.67],PCN:[-1.06,2.46],PDX:[0.87,-8.5],RFI:[-0.80,-3.4],RLTY:[-1.23,-9.08],RNP:[-0.93,-6.5],RQI:[-0.98,-6.97],UTF:[0.64,-3.82],UTG:[0.94,0.68]}},
   {date:"09/10/2026",d:{AIO:[-0.23,-9.06],ASGI:[-0.31,2.22],BDJ:[-1.60,-8.54],BME:[0.78,-3.44],BST:[0.0,-6.31],BUI:[-0.36,0.68],CSQ:[-0.04,-8.56],DNP:[1.23,11.1],EOI:[-1.33,-7.53],EOS:[-1.83,-11.65],ERH:[-0.17,-7.87],ETG:[-2.03,-11.93],GDV:[-2.67,-12.55],GLU:[-1.22,-5.1],HTD:[0.39,-5.18],NBXG:[-0.66,-13.82],NXG:[0.10,-0.8],PCN:[-1.51,1.05],PDX:[0.85,-8.55],RFI:[-1.43,-5.11],RLTY:[-2.61,-10.94],RNP:[-1.47,-8.36],RQI:[-1.71,-9.21],UTF:[-0.05,-5.47],UTG:[1.16,0.96]}},
   {date:"09/11/2026",d:{AIO:[0.44,-7.44],ASGI:[-0.12,3.01],BDJ:[-1.16,-7.84],BME:[1.33,-2.24],BST:[0.8,-4.77],BUI:[-0.09,1.49],CSQ:[0.56,-7.63],DNP:[1.57,12.28],EOI:[-0.94,-7.12],EOS:[-1.46,-10.62],ERH:[0.58,-6.89],ETG:[-1.34,-10.38],GDV:[-1.68,-11.87],GLU:[-1.04,-4.48],HTD:[1.42,-3.41],NBXG:[0.07,-12.88],NXG:[0.62,1.16],PCN:[-1.22,1.95],PDX:[1.18,-8.09],RFI:[-0.84,-3.59],RLTY:[-1.15,-9.51],RNP:[-0.99,-6.87],RQI:[-1.03,-7.23],UTF:[0.54,-3.93],UTG:[0.72,0.42]}},
+  {date:"09/14/2026",d:{AIO:[0.19,-8.12],ASGI:[-2.37,-5.99],BDJ:[-0.87,-7.4],BME:[1.36,-2.13],BST:[2.29,-1.79],BUI:[-0.05,1.59],CSQ:[0.32,-8.01],DNP:[0.86,9.85],EOI:[-0.87,-6.37],EOS:[-1.21,-10.16],ERH:[-0.5,-8.31],ETG:[-1.44,-10.67],GDV:[-1.85,-12],GLU:[-1.37,-5.67],HTD:[0.48,-5.02],NBXG:[0.89,-11.86],NXG:[0.77,1.73],PCN:[-1.64,0.63],PDX:[-0.13,-9.93],RFI:[-1.03,-4.05],RLTY:[-1.17,-8.99],RNP:[-1.04,-6.92],RQI:[-1.07,-7.3],UTF:[-0.25,-5.94],UTG:[1.45,1.33]}},
 ];
-const CUR={date:"09/14/2026",data:{
-  AIO:[0.25,0.92,0.19,-8.12,-8.57,8.76,26.84,24.66],
-  ASGI:[-2.57,-2.56,-2.37,-5.99,3.45,13.14,21.37,20.09],
-  BDJ:[-0.5,-0.15,-0.87,-7.4,-6.02,7.61,10.54,9.76],
-  BME:[0.94,1.19,1.36,-2.13,-5.08,7.07,45.46,44.49],
-  BST:[1.68,2.32,2.29,-1.79,-6.29,5.96,51.27,50.35],
-  BUI:[0.15,0.78,-0.05,1.59,1.72,7.04,25.84,26.25],
-  CSQ:[1.14,1.74,0.32,-8.01,-8.51,7.93,22.21,20.43],
-  DNP:[-0.29,0.6,0.86,9.85,6.82,7.6,9.34,10.26],
-  EOI:[0.2,-0.32,-0.87,-6.37,-4.19,8.15,21.05,19.71],
-  EOS:[-1.05,-1.21,-1.21,-10.16,-7.34,8.61,23.63,21.23],
-  ERH:[-0.9,-0.44,-0.5,-8.31,-7.65,9.65,11.91,10.92],
-  ETG:[-2.24,-1.77,-1.44,-10.67,-7.51,6.69,25.97,23.2],
-  GDV:[-1.75,-1.53,-1.85,-12.0,-10.75,6.12,33.41,29.4],
-  GLU:[-1.1,-1.17,-1.37,-5.67,-0.96,7.09,19.75,18.63],
-  HTD:[-1.72,0.05,0.48,-5.02,-5.83,7.82,25.52,24.24],
-  NBXG:[1.23,1.57,0.89,-11.86,-12.98,9.41,17.37,15.31],
-  NXG:[0.18,0.8,0.77,1.73,-1.15,12.9,54.85,55.8],
-  PCN:[-3.64,-2.78,-1.64,0.63,5.55,12.03,11.15,11.22],
-  PDX:[-0.68,-0.22,-0.13,-9.93,-9.75,7.58,23.46,21.13],
-  RFI:[0.05,-0.42,-1.03,-4.05,-1.31,8.82,11.35,10.89],
-  RLTY:[-0.77,-0.77,-1.17,-8.99,-7.5,8.93,16.24,14.78],
-  RNP:[0.45,-0.66,-1.04,-6.92,-3.45,8.36,20.96,19.51],
-  RQI:[0.43,-0.79,-1.07,-7.3,-4.07,9.24,12.61,11.69],
-  UTF:[-4.53,-0.64,-0.25,-5.94,-5.38,7.86,26.79,25.2],
-  UTG:[1.15,1.41,1.45,1.33,-0.45,6.88,36.15,36.63]}};
+const CUR={date:"09/15/2026",data:{
+  AIO:[-1.08,-0.17,-0.52,-9.8,-8.6,8.96,26.74,24.12],
+  ASGI:[-2.02,-1.96,-1.75,-3.57,3.44,12.88,21.26,20.5],
+  BDJ:[0.15,0.5,-0.56,-6.91,-6.03,7.66,10.42,9.7],
+  BME:[0.38,0.79,1.14,-2.59,-5.06,7.15,45.15,43.98],
+  BST:[1.39,2,1.96,-2.41,-6.27,6.33,48.57,47.4],
+  BUI:[-0.61,0.4,-0.31,0.78,1.7,7.19,25.52,25.72],
+  CSQ:[0.97,1.57,0.24,-8.15,-8.52,7.99,22.08,20.28],
+  DNP:[-0.28,0.62,0.88,9.94,6.83,7.66,9.26,10.18],
+  EOI:[-0.13,-0.47,-0.95,-6.58,-4.22,8.25,20.83,19.46],
+  EOS:[-1,-1.16,-1.2,-10.12,-7.38,8.72,23.31,20.95],
+  ERH:[-0.99,-0.51,-0.57,-8.4,-7.66,9.77,11.78,10.79],
+  ETG:[-2.1,-1.67,-1.41,-10.62,-7.53,6.75,25.71,22.98],
+  GDV:[-2.34,-1.94,-2.36,-12.37,-10.75,6.17,33.3,29.18],
+  GLU:[-1.24,-1.24,-1.4,-5.8,-0.98,7.13,19.66,18.52],
+  HTD:[-1.1,0.29,0.73,-4.57,-5.83,7.83,25.39,24.23],
+  NBXG:[0.23,0.57,0.07,-12.9,-12.99,9.65,17.13,14.92],
+  NXG:[0.22,0.84,0.81,1.93,-1.13,13.14,53.75,54.79],
+  PCN:[-3.42,-2.78,-1.66,0.54,5.51,12.05,11.14,11.2],
+  PDX:[-1.47,-0.89,-0.67,-10.68,-9.76,7.66,23.41,20.91],
+  RFI:[0.18,-0.32,-0.96,-3.88,-1.34,8.82,11.33,10.89],
+  RLTY:[-1.58,-1.49,-1.53,-9.44,-7.53,9,16.2,14.67],
+  RNP:[0.56,-0.61,-1.02,-6.84,-3.5,8.37,20.92,19.49],
+  RQI:[-0.45,-1.08,-1.41,-8.35,-4.1,9.37,12.58,11.53],
+  UTF:[-4.14,-0.74,-0.36,-6.2,-5.39,7.94,26.6,24.95],
+  UTG:[0.59,0.73,0.75,0.47,-0.45,7,35.83,36],
+}};
 
 const DATES=PRIOR.map(s=>s.date).concat([CUR.date]);
 let zIdx=2,qFilter="all",searchTerms=[],holdOnly=false,sesIdx=PRIOR.length,compareMode=false;
@@ -188,7 +190,7 @@ function buildTmnav(){
   const nav=document.getElementById("tmnav"); nav.innerHTML='';
   const b0=document.createElement("button");
   b0.className="ctl tmb on"; b0.dataset.s=N;
-  b0.textContent="09/14 (current)"; nav.appendChild(b0);
+  b0.textContent="09/15 (current)"; nav.appendChild(b0);
   for(let i=N-1;i>=0;i--){
     const b=document.createElement("button");
     b.className="ctl tmb"; b.dataset.s=i;
@@ -196,7 +198,7 @@ function buildTmnav(){
     b.textContent=i<FYE_IDX?lbl+"†":(PRIOR[i].date.includes("✓")?lbl+"✓":lbl); nav.appendChild(b);
   }
   const lbl=document.createElement("span"); lbl.className="seslabel"; lbl.id="seslabel";
-  lbl.textContent="Showing: 09/14/2026"; nav.appendChild(lbl);
+  lbl.textContent="Showing: 09/15/2026"; nav.appendChild(lbl);
   const note=document.createElement("span");
   note.style.cssText="font-size:11px;color:#E3A008;margin-left:4px";
   note.textContent="† = prior FY · ✓ = corrected date"; nav.appendChild(note);
@@ -240,7 +242,7 @@ function render(){
       s+=`<text x="${cx}" y="${cy-13}" font-size="10" font-weight="800" text-anchor="middle" fill="${fc}" stroke="white" stroke-width="3" paint-order="stroke">${t}</text></g>`;
     });
     document.getElementById("chart").innerHTML=s; bindDotsCompare(compDate,priorFY); renderSnap();
-    document.getElementById("seslabel").textContent=`Current: 09/14 vs ${compDate}${priorFY?' (†prior FY)':''}`;
+    document.getElementById("seslabel").textContent=`Current: 09/15 vs ${compDate}${priorFY?' (†prior FY)':''}`;
   } else {
     if(sesIdx===N){
       // Ghost trails removed per QTI request 09/14/2026
@@ -314,7 +316,7 @@ function bindDotsCompare(compDate,priorFY){
     g.addEventListener("mousemove",e=>{
       tip.style.display="block"; tip.style.left=(e.clientX+14)+"px"; tip.style.top=(e.clientY+10)+"px";
       if(mode==="current"&&d){
-        tip.innerHTML=`<b>${t}</b> <span style="color:#6366F1;font-size:10px">▲ 09/14</span><br>D/P ${d[3].toFixed(2)}% · Z1Y ${d[2].toFixed(2)}<br>ST ${m&&m[0]!=null?m[0].toFixed(2)+'%':'—'} · LT ${m&&m[1]!=null?m[1].toFixed(2)+'%':'—'}`;
+        tip.innerHTML=`<b>${t}</b> <span style="color:#6366F1;font-size:10px">▲ 09/15</span><br>D/P ${d[3].toFixed(2)}% · Z1Y ${d[2].toFixed(2)}<br>ST ${m&&m[0]!=null?m[0].toFixed(2)+'%':'—'} · LT ${m&&m[1]!=null?m[1].toFixed(2)+'%':'—'}`;
       } else if(mode==="prior"&&pd){
         const dz=(!priorFY&&d)?+(d[2]-pd[0]).toFixed(2):null;
         const arrow=dz===null?'':dz>=0?` <span style="color:#1D9E75">▲+${dz}</span>`:`<span style="color:#D85A30">▼${dz}</span>`;
