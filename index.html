@@ -57,13 +57,13 @@ svg{width:100%;height:auto;display:block}
   <h1>CEF Time Machine · 09/15/2026</h1>
   <span class="badge neg">Net Δ: −$8.44</span>
 </div>
-<div class="note">Session update · Current data 09/15/2026 · Net Price Change −$8.44 · 09/14 appended to Time Machine · BST/BDJ ex-div suppression window active · AIO corporate-action window active · ERH DQ flag active · PCN leverage discrepancy remains flagged.</div>
+<div class="note">Session update · Current data 09/15/2026 · Net Price Change −$8.44 · 09/14 appended to Time Machine · ASGI rights-offering suppression active (announced 09/11; record date 09/21; expiration 10/15) · BST/BDJ ex-div suppression active · AIO corporate-action window active · ERH DQ flag active.</div>
 
 <div class="alerts">
-  <div class="al r"><span class="tag">Orange · Deep Value</span><b>ASGI Z1Y −2.37 · GDV −1.85 · PCN −1.64 · ETG −1.44 · GLU −1.37</b> — deepest negative 1-year Z-scores in the supplied snapshot.</div>
-  <div class="al r"><span class="tag">Own-Norm</span><b>ASGI D/P −5.99% vs +3.45% 52-week average (−9.44pt)</b> — largest discount deviation from its own 52-week norm in the supplied data.</div>
-  <div class="al a"><span class="tag">Holdings</span><b>RNP −6.92% vs −3.45% avg · RQI −7.30% vs −4.07% · EOI −6.37% vs −4.19% · RFI −4.05% vs −1.31%</b> — all four remain below their own 52-week discount norms.</div>
-  <div class="al c"><span class="tag">Suppression</span><b>AIO / BST / BDJ remain marked as corporate-action-sensitive funds</b> — suppression flags are carried forward from the prior Matrix format; interpret near-ex-div Z-scores cautiously.</div>
+  <div class="al r"><span class="tag">Orange · Deep Value</span><b>GDV Z1Y −2.36 · ASGI −1.75 · PCN −1.66 · RLTY −1.53 · ETG/RQI −1.41</b> — deepest negative 1-year Z-scores in the 09/15 snapshot; ASGI is RO-suppressed and should not be interpreted as a normal Add signal.</div>
+  <div class="al r"><span class="tag">ASGI · RO</span><b>ASGI D/P −3.57% vs +3.44% 52-week average (−7.01pt)</b> — large apparent dislocation, but the 09/11 rights-offering announcement contaminates the normal discount/Z-score signal through the offering period.</div>
+  <div class="al a"><span class="tag">Holdings</span><b>RNP −6.84% vs −3.50% avg · RQI −8.35% vs −4.10% · EOI −6.58% vs −4.22% · RFI −3.88% vs −1.34%</b> — all four remain below their own 52-week discount norms.</div>
+  <div class="al c"><span class="tag">Suppression</span><b>ASGI / AIO / BST / BDJ are corporate-action-sensitive</b> — ASGI receives a dedicated RO suppression from 09/11 through the 10/15 expiration; its Z-scores and discount are excluded from normal Add-signal interpretation.</div>
   <div class="al dq"><span class="tag">Raw Feed</span><b>PCN effective leverage supplied as 22.41%</b> — displayed data preserve the latest raw input; no external corrections have been substituted.</div>
 </div>
 <div class="panel">
@@ -86,7 +86,7 @@ svg{width:100%;height:auto;display:block}
   </div>
   <div class="compare-banner" id="compareBanner"><b>Compare mode ON</b> — Current (09/15) as large dots · Prior as smaller dots · † = prior FY baseline</div>
   <svg id="chart" viewBox="0 0 980 560" xmlns="http://www.w3.org/2000/svg"></svg>
-  <div class="legend">09/14 snapshot · Z-score / discount matrix · dashed vertical segment = current D/P to 52-week average · † = prior FY</div>
+  <div class="legend">09/15 snapshot · Z-score / discount matrix · dashed vertical segment = current D/P to 52-week average · † = prior FY</div>
   <div class="tmnav" id="tmnav"></div>
   <div class="detail" id="detail"></div>
   <div class="snap">
@@ -105,7 +105,8 @@ const HOLDINGS=new Set(["PCN","BDJ","EOI","BUI","BME","RQI","RNP","RFI","AIO","B
 const QCOLOR={G:"#1D9E75",B:"#378ADD",O:"#D85A30",X:"#888780"};
 const QNAME={G:"Green · Thesis Working",B:"Blue · Premium Territory",O:"Orange · Buy Zone",X:"Gray · Worst Setup"};
 const FYE_IDX=6;
-const SUPP_FUNDS=new Set(["BST","BDJ","AIO"]); // Corporate-action-sensitive set carried forward from prior Matrix format
+const SUPP_FUNDS=new Set(["BST","BDJ","AIO","ASGI"]); // Corporate-action-sensitive funds
+const SUPP_LABEL={ASGI:"⚠ RO SUPP · rights offering announced 09/11 · record 09/21 · expires 10/15",BST:"⚠ SUPP",BDJ:"⚠ SUPP",AIO:"⚠ SUPP"};
 const PRIOR=[
 
 
@@ -287,7 +288,7 @@ function bindDots(){
     g.addEventListener("mousemove",e=>{
       tip.style.display="block"; tip.style.left=(e.clientX+14)+"px"; tip.style.top=(e.clientY+10)+"px";
       if(isCur&&d){
-        const suppNote=SUPP_FUNDS.has(t)?" ⚠SUPP":"";
+        const suppNote=SUPP_FUNDS.has(t)?` ${SUPP_LABEL[t]||"⚠ SUPP"}`:"";
         tip.innerHTML=`<b>${t}</b>${suppNote} · yield ${d[5].toFixed(2)}%<br>D/P ${d[3].toFixed(2)}% (avg ${d[4].toFixed(2)}%, Δ${(d[3]-d[4]).toFixed(2)}pt)<br>Z3M ${d[0].toFixed(2)} · Z6M ${d[1].toFixed(2)} · Z1Y ${d[2].toFixed(2)}<br>ST ${m&&m[0]!=null?m[0].toFixed(2)+'%':'—'} · LT ${m&&m[1]!=null?m[1].toFixed(2)+'%':'—'}`;
       } else if(sesIdx<N){const pd=PRIOR[sesIdx].d[t];if(pd)tip.innerHTML=`<b>${t}</b>${isPFY?' †prior FY':''} · Z1Y ${pd[0].toFixed(2)} · D/P ${pd[1].toFixed(2)}%`;}
     });
@@ -298,8 +299,9 @@ function bindDots(){
       const prev=PRIOR[N-1].d[t];
       const dz=prev?(d[2]-prev[0]).toFixed(2):null; const ddp=prev?(d[3]-prev[1]).toFixed(2):null;
       const isERH=false;
+      const asgiBanner=t==="ASGI"?`<div style="background:#FFF4E5;border:1px solid #D97706;border-radius:4px;padding:6px 8px;font-size:11px;color:#7C2D12;margin-bottom:6px"><b>⚠ RO SUPPRESSED</b> · Rights offering announced 09/11/2026 · record date 09/21 · expiration 10/15. Treat current Z-scores and discount as corporate-action contaminated, not a normal Add signal.</div>`:"";
       const erhBanner=isERH?`<div style="background:#E1F5EE;border:1px solid #1D9E75;border-radius:4px;padding:4px 8px;font-size:11px;color:#085041;margin-bottom:6px">✅ Green sess 2 confirmed — two-session rule satisfied. DQ flag active (64.9% ROC YTD).</div>`:'';
-      el.innerHTML=`${erhBanner}<b style="font-size:14px">${t}</b> <span class="qcount" style="background:${QCOLOR[q]}">${QNAME[q]}</span>
+      el.innerHTML=`${asgiBanner}${erhBanner}<b style="font-size:14px">${t}</b> <span class="qcount" style="background:${QCOLOR[q]}">${QNAME[q]}</span>
       <table><tr><td>Price</td><td class="v">$${d[7].toFixed(2)}</td><td>NAV</td><td class="v">$${d[6].toFixed(2)}</td><td>Yield</td><td class="v">${d[5].toFixed(2)}%</td></tr>
       <tr><td>D/P</td><td class="v">${d[3].toFixed(2)}%</td><td>52-wk avg</td><td class="v">${d[4].toFixed(2)}%</td><td>Dev</td><td class="v">${(d[3]-d[4]).toFixed(2)}pt</td></tr>
       <tr><td>Z3M</td><td class="v">${d[0].toFixed(2)}</td><td>Z6M</td><td class="v">${d[1].toFixed(2)}</td><td>Z1Y${dz?` <span style="font-size:10px;color:${+dz>=0?'#1D9E75':'#D85A30'}">(${+dz>=0?'+':''}${dz})</span>`:''}</td><td class="v">${d[2].toFixed(2)}</td></tr>
@@ -328,7 +330,8 @@ function bindDotsCompare(compDate,priorFY){
       if(mode==="current"&&d){
         const q=qFromZD(d[2],d[3]); const el=document.getElementById("detail"); el.style.display="block";
         const prev=ps&&pd?`<tr><td style="color:#6366F1;font-weight:600">${compDate}${priorFY?' †':''}</td><td class="v">${pd[0].toFixed(2)}</td><td>D/P</td><td class="v">${pd[1].toFixed(2)}%</td><td></td><td></td></tr>`:'';
-        el.innerHTML=`<b style="font-size:14px">${t}</b> <span class="qcount" style="background:${QCOLOR[q]}">${QNAME[q]}</span>
+        const asgiBanner=t==="ASGI"?`<div style="background:#FFF4E5;border:1px solid #D97706;border-radius:4px;padding:6px 8px;font-size:11px;color:#7C2D12;margin-bottom:6px"><b>⚠ RO SUPPRESSED</b> · Rights offering announced 09/11/2026 · record date 09/21 · expiration 10/15. Treat current Z-scores and discount as corporate-action contaminated.</div>`:"";
+        el.innerHTML=`${asgiBanner}<b style="font-size:14px">${t}</b> <span class="qcount" style="background:${QCOLOR[q]}">${QNAME[q]}</span>
         <table><tr><td>Price</td><td class="v">$${d[7].toFixed(2)}</td><td>NAV</td><td class="v">$${d[6].toFixed(2)}</td><td>Z1Y</td><td class="v">${d[2].toFixed(2)}</td></tr>
         <tr><td>D/P</td><td class="v">${d[3].toFixed(2)}%</td><td>52-wk avg</td><td class="v">${d[4].toFixed(2)}%</td><td></td><td></td></tr>
         ${prev}
