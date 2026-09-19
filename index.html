@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>CEF Time Machine · 09/17/2026</title>
+<title>CEF Time Machine · 09/18/2026</title>
 <style>
 :root{
   --green:#1D9E75;--blue:#378ADD;--orange:#D85A30;--gray:#888780;
@@ -71,7 +71,7 @@ svg{width:100%;height:auto;display:block}
 .tooltip{
   position:fixed;pointer-events:none;background:#1E2429;color:#fff;
   font-size:11.5px;line-height:1.5;padding:8px 10px;border-radius:6px;
-  z-index:50;display:none;max-width:300px;box-shadow:0 3px 14px #0003
+  z-index:50;display:none;max-width:310px;box-shadow:0 3px 14px #0003
 }
 .snap{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
@@ -127,15 +127,16 @@ svg{width:100%;height:auto;display:block}
 <body>
 
 <div class="hdr">
-  <h1>CEF Time Machine · 09/17/2026</h1>
-  <span class="badge pos">Net Δ: +$2.23</span>
+  <h1>CEF Time Machine · 09/18/2026</h1>
+  <span class="badge pos">Net Δ: +$2.06</span>
 </div>
 
 <div class="note">
-Session update · Current data 09/17/2026 · Net Price Change +$2.23 ·
-09/16 appended to Time Machine · ASGI rights-offering suppression remains active
+Session update · Current data 09/18/2026 · Net Price Change +$2.06 ·
+09/17 appended to Time Machine · oldest sessions rolled under the 15-session history cap ·
+ASGI rights-offering suppression remains active
 (announced 09/11; record date 09/21; expiration 10/15) ·
-BST remains inside its special-distribution event window ·
+BST remains corporate-action qualified following the 09/15 special-distribution event window ·
 AIO / BDJ corporate-action qualification retained ·
 ERH / RFI distribution-quality cautions retained ·
 raw provider leverage is preserved where supplied.
@@ -144,21 +145,22 @@ raw provider leverage is preserved where supplied.
 <div class="alerts">
   <div class="al r">
     <span class="tag">Orange · Deep Value</span>
-    <b>ASGI Z1Y −2.13 · RLTY −1.91 · RQI −1.58 · GDV −1.51 · ERH −1.46 · ETG −1.39</b>
-    — ASGI is the mechanically deepest reading, but is RO-suppressed and is not treated as a clean valuation signal.
+    <b>ASGI Z1Y −2.15 · GDV −1.74 · RLTY −1.72 · EOS −1.65 · ERH / ETG / RQI near −1.52 · PCN −1.50</b>
+    — ASGI remains mechanically deepest, but is RO-suppressed and is not treated as a clean valuation signal.
   </div>
 
   <div class="al r">
     <span class="tag">ASGI · RO</span>
-    <b>ASGI D/P −5.23% vs +3.40% 52-week average (−8.63 pt)</b>
+    <b>ASGI D/P −5.40% vs +3.37% 52-week average (−8.77 pt)</b>
     — the apparent own-normal dislocation is unusually large, but the active rights offering contaminates normal discount/Z-score interpretation.
   </div>
 
   <div class="al a">
     <span class="tag">Clean Dislocations</span>
-    <b>RQI −8.97% vs −4.14% avg (−4.83 pt) · GLU −5.66% vs −1.00% (−4.66 pt) ·
-    RNP −6.86% vs −3.59% (−3.27 pt) · ETG −10.61% vs −7.55% (−3.06 pt)</b>
-    — notable discounts relative to each fund's own 52-week norm.
+    <b>PCN 0.00% vs +5.38% avg (−5.38 pt) · GLU −5.85% vs −1.02% (−4.83 pt) ·
+    RQI −8.82% vs −4.16% (−4.66 pt) · RNP −7.43% vs −3.64% (−3.79 pt) ·
+    EOS −11.14% vs −7.49% (−3.65 pt) · ETG −10.95% vs −7.59% (−3.36 pt)</b>
+    — notable compression versus each fund's own 52-week norm. PCN is a par/normal-premium compression rather than a discount.
   </div>
 
   <div class="al c">
@@ -175,7 +177,7 @@ raw provider leverage is preserved where supplied.
 
   <div class="al p">
     <span class="tag">Raw Feed</span>
-    <b>PCN effective leverage: 22.34%.</b>
+    <b>PCN effective leverage: 22.30%.</b>
     The current provider-supplied value is displayed without substituting an external leverage estimate.
   </div>
 </div>
@@ -202,13 +204,13 @@ raw provider leverage is preserved where supplied.
   </div>
 
   <div class="compare-banner" id="compareBanner">
-    <b>Compare mode ON</b> — 09/17 current values are large dots; selected historical values are smaller dots; movement is connected by a dashed line.
+    <b>Compare mode ON</b> — 09/18 current values are large dots; selected historical values are smaller dots; movement is connected by a dashed line.
   </div>
 
   <svg id="chart" viewBox="0 0 980 560" xmlns="http://www.w3.org/2000/svg"></svg>
 
   <div class="legend">
-    09/17 snapshot · Z-score / discount matrix · dashed vertical segment = current D/P to 52-week average ·
+    09/18 snapshot · selected Z-score / discount matrix · dashed vertical segment = current D/P to 52-week average ·
     outer ring = My Holdings · historical sessions display Z1Y / D/P.
   </div>
 
@@ -232,21 +234,21 @@ raw provider leverage is preserved where supplied.
 </div>
 
 <div class="highlights">
-  <h2>09/17 Matrix Highlights</h2>
+  <h2>09/18 Matrix Highlights</h2>
   <div>
-    <b>Broad tape:</b> Net Price Change turned positive at <b>+$2.23</b>. The matrix nevertheless continues to show a large Orange cohort, with 16 of 25 funds carrying negative Z1Y readings while trading at discounts.<br>
+    <b>Broad tape:</b> Net Price Change remained positive at <b>+$2.06</b>. The matrix still skews heavily Orange, with <b>17 of 25</b> funds showing negative Z1Y while trading at discounts.<br>
 
-    <b>Quadrants:</b> Green <b>5</b> · Blue <b>2</b> · Orange <b>16</b> · Gray <b>2</b>.<br>
+    <b>Quadrants:</b> Green <b>4</b> · Blue <b>2</b> · Orange <b>17</b> · Gray <b>2</b>.<br>
 
-    <b>Deepest mechanical Z1Y:</b> ASGI <b>−2.13</b>, RLTY <b>−1.91</b>, RQI <b>−1.58</b>, GDV <b>−1.51</b>, ERH <b>−1.46</b>, ETG <b>−1.39</b>, PCN <b>−1.38</b>, EOS <b>−1.37</b>, and GLU <b>−1.35</b>. ASGI is excluded from clean-signal interpretation because of its active rights offering.<br>
+    <b>Deepest mechanical Z1Y:</b> ASGI <b>−2.15</b>, GDV <b>−1.74</b>, RLTY <b>−1.72</b>, EOS <b>−1.65</b>, ERH <b>−1.52</b>, ETG <b>−1.52</b>, RQI <b>−1.52</b>, and PCN <b>−1.50</b>. ASGI is excluded from clean-signal interpretation because of its active rights offering.<br>
 
-    <b>Deep clean valuation readings:</b> RLTY is Z1Y <b>−1.91</b> at a <b>−9.91%</b> discount versus a <b>−7.57%</b> 52-week average. RQI is Z1Y <b>−1.58</b> with a <b>−8.97%</b> discount versus <b>−4.14%</b> average. ETG is Z1Y <b>−1.39</b> at <b>−10.61%</b> versus <b>−7.55%</b> average.<br>
+    <b>Deep clean valuation readings:</b> GDV is Z1Y <b>−1.74</b> at a <b>−11.96%</b> discount versus a <b>−10.76%</b> 52-week average. RLTY is Z1Y <b>−1.72</b> at <b>−9.68%</b> versus <b>−7.59%</b>. EOS is Z1Y <b>−1.65</b> at <b>−11.14%</b> versus <b>−7.49%</b>. RQI is Z1Y <b>−1.52</b> at <b>−8.82%</b> versus <b>−4.16%</b>.<br>
 
-    <b>Own-normal discount gaps:</b> RQI <b>−4.83 pt</b>, GLU <b>−4.66 pt</b>, RNP <b>−3.27 pt</b>, ETG <b>−3.06 pt</b>, EOS <b>−3.10 pt</b>, and AIO <b>−2.22 pt</b> are below their respective 52-week norms. ASGI's <b>−8.63 pt</b> gap is larger mechanically but remains corporate-action contaminated.<br>
+    <b>Own-normal discount gaps:</b> PCN <b>−5.38 pt</b>, GLU <b>−4.83 pt</b>, RQI <b>−4.66 pt</b>, RNP <b>−3.79 pt</b>, EOS <b>−3.65 pt</b>, ETG <b>−3.36 pt</b>, EOI <b>−2.70 pt</b>, and RFI <b>−2.48 pt</b> are below their respective 52-week norms. ASGI's <b>−8.77 pt</b> gap is larger mechanically but remains corporate-action contaminated.<br>
 
-    <b>Green quadrant:</b> BST <b>+1.58</b>, BME <b>+1.40</b>, HTD <b>+0.57</b>, NXG <b>+0.13</b>, and CSQ <b>+0.12</b>. BST remains event-qualified because of the 09/15 special distribution, making BME the highest-Z1Y Green observation without that specific event flag.<br>
+    <b>Green quadrant:</b> BST <b>+1.40</b>, BME <b>+1.03</b>, CSQ <b>+0.22</b>, and NXG <b>+0.13</b>. BST remains event-qualified because of the 09/15 special distribution; BME is the highest-Z1Y Green observation without that specific event flag.<br>
 
-    <b>09/16 → 09/17:</b> ASGI deteriorated from Z1Y <b>−1.67</b> to <b>−2.13</b> and its discount widened from <b>−3.30%</b> to <b>−5.23%</b>. RQI moved from <b>−1.56 / −8.86%</b> to <b>−1.58 / −8.97%</b>. RLTY moved from <b>−1.89 / −9.89%</b> to <b>−1.91 / −9.91%</b>. UTF improved from Z1Y <b>−0.40</b> to <b>−0.22</b> while its discount narrowed from <b>−6.29%</b> to <b>−5.91%</b>.<br>
+    <b>09/17 → 09/18:</b> ASGI moved from Z1Y <b>−2.13 / −5.23%</b> to <b>−2.15 / −5.40%</b>. GDV deteriorated from <b>−1.51 / −11.80%</b> to <b>−1.74 / −11.96%</b>. EOS deteriorated from <b>−1.37 / −10.51%</b> to <b>−1.65 / −11.14%</b>. RLTY improved from <b>−1.91 / −9.91%</b> to <b>−1.72 / −9.68%</b>. PCN compressed from <b>−1.38 / +1.35%</b> to <b>−1.50 / 0.00%</b>. UTF weakened from <b>−0.22 / −5.91%</b> to <b>−0.56 / −6.68%</b> with an extreme Z3M reading of <b>−3.34</b>.<br>
 
     <b>Event/data filters:</b> <span style="color:#fbbf24;font-weight:800">ASGI remains RO SUPPRESSED</span>. BST remains corporate-action qualified. ERH and RFI retain distribution-quality cautions. These flags qualify interpretation rather than replacing the supplied raw data.
   </div>
@@ -261,13 +263,16 @@ For informational purposes only. The matrix ranks current entry opportunity and 
 <script>
 /*
   CEF TIME MACHINE
-  Current session: 09/17/2026
+  Current session: 09/18/2026
 
   CUR array format:
   [Z3M,Z6M,Z1Y,D/P,52wkAvg,Yield,NAV,Price]
 
   Historical array format:
   [Z1Y,D/P]
+
+  Current-session quadrant uses selected Z horizon.
+  Historical sessions display Z1Y / D/P.
 */
 
 const HOLDINGS=new Set([
@@ -289,19 +294,19 @@ const QNAME={
   X:"Gray · Worst Setup"
 };
 
-/* Effective leverage from the supplied 09/17 feed. null = provider displayed -- */
+/* Effective leverage from the supplied 09/18 feed. null = provider displayed -- */
 const LEV={
-  AIO:12.30,ASGI:1.02,BDJ:0.12,BME:0.15,BST:0.10,
-  BUI:0.11,CSQ:28.59,DNP:23.97,EOI:null,EOS:null,
-  ERH:22.38,ETG:15.95,GDV:15.84,GLU:18.15,HTD:32.28,
-  NBXG:null,NXG:34.47,PCN:22.34,PDX:22.12,RFI:0.04,
-  RLTY:34.18,RNP:30.96,RQI:27.82,UTF:28.97,UTG:22.34
+  AIO:12.16,ASGI:1.02,BDJ:0.12,BME:0.15,BST:0.10,
+  BUI:0.11,CSQ:28.27,DNP:23.84,EOI:null,EOS:null,
+  ERH:22.23,ETG:15.78,GDV:15.79,GLU:18.03,HTD:32.28,
+  NBXG:null,NXG:34.12,PCN:22.30,PDX:22.06,RFI:0.04,
+  RLTY:34.36,RNP:31.02,RQI:27.91,UTF:29.00,UTG:22.37
 };
 
 /*
   Momentum values are retained from the 09/16 reference file for historical
   continuity only. They are explicitly marked stale because no refreshed
-  momentum feed was supplied with the 09/17 dataset.
+  momentum feed was supplied with the 09/18 dataset.
 */
 const MOM={
   PCN:[-3.06,-22.30],BDJ:[-0.10,9.95],EOI:[-1.30,5.02],
@@ -349,22 +354,6 @@ const EVENT={
 };
 
 const PRIOR=[
-  {date:"08/24/2026",d:{
-    AIO:[0.29,-7.22],ASGI:[2.89,14.48],BDJ:[-1.01,-7.51],BME:[0.83,-3.66],
-    BST:[1.55,-3.58],BUI:[-0.64,0.04],CSQ:[-0.12,-8.55],DNP:[1.99,12.94],
-    EOI:[-0.93,-6.36],EOS:[-1.02,-9.59],ERH:[0.83,-6.51],ETG:[-1.07,-9.63],
-    GDV:[-0.30,-10.93],GLU:[-0.85,-3.54],HTD:[1.23,-3.90],NBXG:[0.20,-12.59],
-    NXG:[1.18,3.01],PCN:[-1.03,2.81],PDX:[0.57,-8.65],RFI:[-1.15,-4.21],
-    RLTY:[-1.06,-8.85],RNP:[-1.33,-7.74],RQI:[-1.34,-7.77],UTF:[1.15,-1.85],UTG:[0.91,0.66]
-  }},
-  {date:"08/25/2026",d:{
-    AIO:[0.39,-6.97],ASGI:[2.44,12.87],BDJ:[-0.75,-7.11],BME:[0.85,-3.59],
-    BST:[1.74,-3.22],BUI:[-0.58,0.22],CSQ:[0.11,-8.16],DNP:[2.18,13.66],
-    EOI:[-0.85,-6.16],EOS:[-1.11,-9.84],ERH:[1.15,-6.08],ETG:[-0.80,-9.04],
-    GDV:[0.51,-10.40],GLU:[-1.15,-4.58],HTD:[1.55,-3.36],NBXG:[-0.12,-13.05],
-    NXG:[0.85,1.81],PCN:[-0.99,2.89],PDX:[0.63,-8.57],RFI:[-1.00,-3.78],
-    RLTY:[-0.73,-8.35],RNP:[-1.14,-7.08],RQI:[-1.30,-7.66],UTF:[1.37,-1.30],UTG:[0.74,0.45]
-  }},
   {date:"08/26/2026",d:{
     AIO:[0.35,-7.14],ASGI:[2.23,12.14],BDJ:[-0.85,-7.28],BME:[1.29,-2.63],
     BST:[1.46,-3.70],BUI:[-0.49,0.48],CSQ:[0.15,-8.11],DNP:[1.93,12.92],
@@ -469,8 +458,6 @@ const PRIOR=[
     NXG:[0.81,1.93],PCN:[-1.66,0.54],PDX:[-0.67,-10.68],RFI:[-0.96,-3.88],
     RLTY:[-1.53,-9.44],RNP:[-1.02,-6.84],RQI:[-1.41,-8.35],UTF:[-0.36,-6.20],UTG:[0.75,0.47]
   }},
-
-  /* 09/16 rolled from the previous CUR into Time Machine history */
   {date:"09/16/2026",d:{
     AIO:[-0.98,-10.85],ASGI:[-1.67,-3.30],BDJ:[-0.71,-7.16],BME:[1.40,-2.01],
     BST:[1.58,-3.13],BUI:[-0.52,0.16],CSQ:[0.14,-8.32],DNP:[0.97,10.27],
@@ -478,44 +465,50 @@ const PRIOR=[
     GDV:[-1.51,-11.80],GLU:[-1.35,-5.66],HTD:[0.57,-4.85],NBXG:[-0.10,-13.12],
     NXG:[0.13,-0.65],PCN:[-1.38,1.35],PDX:[-1.23,-11.44],RFI:[-1.16,-4.43],
     RLTY:[-1.89,-9.89],RNP:[-1.13,-7.22],RQI:[-1.56,-8.86],UTF:[-0.40,-6.29],UTG:[1.12,0.92]
+  }},
+  {date:"09/17/2026",d:{
+    AIO:[-0.98,-10.85],ASGI:[-2.13,-5.23],BDJ:[-0.71,-7.16],BME:[1.40,-2.01],
+    BST:[1.58,-3.13],BUI:[-0.52,0.16],CSQ:[0.12,-8.36],DNP:[0.97,10.27],
+    EOI:[-0.95,-6.60],EOS:[-1.37,-10.51],ERH:[-1.46,-9.59],ETG:[-1.39,-10.61],
+    GDV:[-1.51,-11.80],GLU:[-1.35,-5.66],HTD:[0.57,-4.85],NBXG:[-0.10,-13.12],
+    NXG:[0.13,-0.65],PCN:[-1.38,1.35],PDX:[-1.23,-11.44],RFI:[-0.95,-3.88],
+    RLTY:[-1.91,-9.91],RNP:[-1.02,-6.86],RQI:[-1.58,-8.97],UTF:[-0.22,-5.91],UTG:[0.71,0.42]
   }}
 ];
 
-/* 09/17/2026 CURRENT DATA */
+/* 09/18/2026 CURRENT DATA */
 const CUR={
-  date:"09/17/2026",
+  date:"09/18/2026",
   data:{
-    AIO:[-1.84,-0.85,-0.98,-10.85,-8.63,9.00,26.92,24.59],
-    ASGI:[-2.28,-2.24,-2.13,-5.23,3.40,12.86,21.23,20.28],
-    BDJ:[-0.24,0.17,-0.71,-7.16,-6.03,7.75,10.33,9.59],
-    BME:[1.05,1.28,1.40,-2.01,-5.04,7.09,45.25,44.50],
-    BST:[1.06,1.66,1.58,-3.13,-6.26,6.34,48.88,47.97],
-    BUI:[-1.19,0.10,-0.52,0.16,1.68,7.24,25.49,25.70],
-    CSQ:[0.69,1.30,0.12,-8.36,-8.55,8.04,22.30,20.43],
-    DNP:[-0.13,0.69,0.97,10.27,6.84,7.63,9.25,10.22],
-    EOI:[-0.18,-0.47,-0.95,-6.60,-4.25,8.28,20.77,19.62],
-    EOS:[-1.43,-1.58,-1.37,-10.51,-7.41,8.76,23.31,21.09],
-    ERH:[-2.07,-1.46,-1.46,-9.59,-7.67,9.90,11.78,10.73],
-    ETG:[-2.05,-1.63,-1.39,-10.61,-7.55,6.80,25.54,23.07],
-    GDV:[-1.23,-1.24,-1.51,-11.80,-10.76,6.20,32.89,29.07],
-    GLU:[-1.12,-1.16,-1.35,-5.66,-1.00,7.17,19.51,18.52],
-    HTD:[-1.46,0.13,0.57,-4.85,-5.83,7.86,25.34,24.00],
-    NBXG:[-0.01,0.34,-0.10,-13.12,-12.99,9.63,17.22,15.12],
-    NXG:[-0.67,0.26,0.13,-0.65,-1.12,13.38,54.15,54.63],
-    PCN:[-2.08,-1.86,-1.38,1.35,5.47,11.98,11.12,11.26],
-    PDX:[-2.18,-1.63,-1.23,-11.44,-9.78,7.75,23.33,20.80],
-    RFI:[0.13,-0.30,-0.95,-3.88,-1.40,8.82,11.33,10.89],
-    RLTY:[-2.29,-2.13,-1.91,-9.91,-7.57,9.06,16.24,14.63],
-    RNP:[0.49,-0.60,-1.02,-6.86,-3.59,8.41,20.99,19.55],
-    RQI:[-0.94,-1.22,-1.58,-8.97,-4.14,9.42,12.60,11.47],
-    UTF:[-3.06,-0.65,-0.22,-5.91,-5.41,7.96,26.73,25.15],
-    UTG:[0.52,0.68,0.71,0.42,-0.45,6.96,36.11,36.26]
+    AIO:[-1.03,-0.19,-0.52,-9.83,-8.66,8.78,27.27,24.65],
+    ASGI:[-2.24,-2.21,-2.15,-5.40,3.37,13.02,21.28,20.13],
+    BDJ:[-1.07,-0.53,-1.04,-7.25,-6.05,7.75,10.39,9.59],
+    BME:[0.09,0.58,1.03,-2.37,-5.00,7.07,45.78,44.49],
+    BST:[0.90,1.50,1.40,-3.67,-6.24,6.25,49.69,48.35],
+    BUI:[-0.51,0.40,-0.29,0.82,1.67,7.19,25.49,25.61],
+    CSQ:[0.81,1.41,0.22,-8.24,-8.56,7.90,22.34,20.50],
+    DNP:[-0.45,0.52,0.79,9.66,6.85,7.73,9.32,10.09],
+    EOI:[-0.93,-0.77,-1.11,-7.01,-4.31,8.18,21.01,19.64],
+    EOS:[-1.99,-2.21,-1.65,-11.14,-7.49,8.65,23.62,21.13],
+    ERH:[-2.09,-1.52,-1.52,-9.68,-7.70,9.89,11.88,10.66],
+    ETG:[-2.47,-2.15,-1.52,-10.95,-7.59,6.74,25.88,23.02],
+    GDV:[-1.52,-1.41,-1.74,-11.96,-10.76,6.22,33.02,28.95],
+    GLU:[-1.45,-1.26,-1.39,-5.85,-1.02,7.20,19.67,18.33],
+    HTD:[-2.70,-0.43,-0.03,-5.88,-5.83,8.02,25.50,23.65],
+    NBXG:[-0.98,-0.66,-0.90,-14.14,-13.01,9.52,17.47,15.18],
+    NXG:[-0.70,0.26,0.13,-0.64,-1.12,13.18,54.98,55.44],
+    PCN:[-2.45,-2.21,-1.50,0.00,5.38,12.15,11.15,11.11],
+    PDX:[-1.77,-1.34,-0.98,-11.47,-9.81,7.70,23.40,20.69],
+    RFI:[0.07,-0.30,-0.95,-3.91,-1.43,8.88,11.25,10.81],
+    RLTY:[-1.83,-1.75,-1.72,-9.68,-7.59,9.02,16.11,14.55],
+    RNP:[-0.48,-0.94,-1.19,-7.43,-3.64,8.46,20.85,19.30],
+    RQI:[-0.79,-1.16,-1.52,-8.82,-4.16,9.50,12.47,11.37],
+    UTF:[-3.34,-0.97,-0.56,-6.68,-5.42,8.01,26.49,24.72],
+    UTG:[0.50,0.68,0.71,0.42,-0.45,7.01,35.80,35.95]
   }
 };
 
 const W=980,H=560,ML=54,MR=16,MT=14,MB=40;
-const DATES=PRIOR.map(s=>s.date).concat([CUR.date]);
-
 let zIdx=2;
 let qFilter="all";
 let searchTerms=[];
@@ -525,6 +518,10 @@ let compareMode=false;
 
 function qFromZD(z,dp){
   return z>=0 ? (dp<0?"G":"B") : (dp<0?"O":"X");
+}
+
+function shortDate(d){
+  return d.replace("/2026","");
 }
 
 function tickerMatch(t){
@@ -553,7 +550,7 @@ function eventMarkup(t){
 function getExtent(){
   let zs=[],ds=[];
   Object.keys(CUR.data).forEach(t=>{
-    zs.push(CUR.data[t][zIdx]);
+    zs.push(CUR.data[t][0],CUR.data[t][1],CUR.data[t][2]);
     ds.push(CUR.data[t][3],CUR.data[t][4]);
   });
   PRIOR.forEach(s=>{
@@ -627,21 +624,21 @@ function buildTmnav(){
   const current=document.createElement("button");
   current.className="ctl tmb on";
   current.dataset.s=N;
-  current.textContent="09/17 (current)";
+  current.textContent=shortDate(CUR.date)+" (current)";
   nav.appendChild(current);
 
   for(let i=N-1;i>=0;i--){
     const b=document.createElement("button");
     b.className="ctl tmb";
     b.dataset.s=i;
-    b.textContent=PRIOR[i].date.replace("/2026","");
+    b.textContent=shortDate(PRIOR[i].date);
     nav.appendChild(b);
   }
 
   const lbl=document.createElement("span");
   lbl.className="seslabel";
   lbl.id="seslabel";
-  lbl.textContent="Showing: 09/17/2026";
+  lbl.textContent="Showing: "+CUR.date;
   nav.appendChild(lbl);
 
   nav.querySelectorAll(".tmb").forEach(b=>{
@@ -655,7 +652,7 @@ function buildTmnav(){
 }
 
 function currentVisible(t,d){
-  const q=qFromZD(d[2],d[3]);
+  const q=qFromZD(d[zIdx],d[3]);
   return (qFilter==="all"||q===qFilter) &&
          (!holdOnly||HOLDINGS.has(t)) &&
          tickerMatch(t);
@@ -716,7 +713,7 @@ function render(){
     Object.keys(CUR.data).forEach(t=>{
       const d=CUR.data[t];
       const z=d[zIdx],dp=d[3],avg=d[4];
-      const q=qFromZD(d[2],dp);
+      const q=qFromZD(z,dp);
       const fc=QCOLOR[q];
       const dim=currentVisible(t,d)?"":" dimmed";
 
@@ -741,14 +738,14 @@ function render(){
     document.getElementById("chart").innerHTML=s;
     bindDotsCompare();
     document.getElementById("seslabel").textContent=
-      `Current: 09/17/2026 vs ${ps.date}`;
+      `Current: ${CUR.date} vs ${ps.date}`;
 
   }else{
     if(sesIdx===N){
       Object.keys(CUR.data).forEach(t=>{
         const d=CUR.data[t];
         const z=d[zIdx],dp=d[3],avg=d[4];
-        const q=qFromZD(d[2],dp);
+        const q=qFromZD(z,dp);
         const fc=QCOLOR[q];
         const dim=currentVisible(t,d)?"":" dimmed";
 
@@ -794,7 +791,7 @@ function render(){
     bindDots();
 
     document.getElementById("seslabel").textContent=
-      sesIdx===N ? "Showing: 09/17/2026" : `Showing: ${PRIOR[sesIdx].date}`;
+      sesIdx===N ? `Showing: ${CUR.date}` : `Showing: ${PRIOR[sesIdx].date}`;
   }
 
   renderSnap();
@@ -805,15 +802,17 @@ const tip=document.getElementById("tip");
 function currentTooltip(t,d){
   const m=MOM[t]||null;
   const ev=EVENT[t] ? `<br><span style="color:#fbbf24">${EVENT[t].label}</span>` : "";
+  const q=qFromZD(d[zIdx],d[3]);
 
   return `<b>${t}</b>${ev}<br>
+    ${QNAME[q]} using ${["Z3M","Z6M","Z1Y"][zIdx]}<br>
     Price $${d[7].toFixed(2)} · NAV $${d[6].toFixed(2)} · Yield ${d[5].toFixed(2)}%<br>
     D/P ${d[3].toFixed(2)}% · avg ${d[4].toFixed(2)}% · gap ${fmtSigned(d[3]-d[4])}pt<br>
     Z3M ${d[0].toFixed(2)} · Z6M ${d[1].toFixed(2)} · Z1Y ${d[2].toFixed(2)}<br>
     Eff. leverage ${fmtLev(t)} · ${HOLDINGS.has(t)?"★ Holding":"Not holding"}<br>
     ST ${m&&m[0]!=null?m[0].toFixed(2)+"%":"—"} ·
     LT ${m&&m[1]!=null?m[1].toFixed(2)+"%":"—"}
-    <span style="color:#cbd5e1">(momentum not refreshed in 09/17 feed)</span>`;
+    <span style="color:#cbd5e1">(momentum not refreshed in 09/18 feed)</span>`;
 }
 
 function showCurrentDetail(t){
@@ -821,7 +820,7 @@ function showCurrentDetail(t){
   const d=CUR.data[t];
   if(!d)return;
 
-  const q=qFromZD(d[2],d[3]);
+  const q=qFromZD(d[zIdx],d[3]);
   const prev=PRIOR[N-1].d[t];
   const m=MOM[t]||null;
 
@@ -854,11 +853,11 @@ function showCurrentDetail(t){
         <td>Z1Y</td><td class="v">${d[2].toFixed(2)}</td>
       </tr>
       <tr>
-        <td>Δ Z1Y vs 09/16</td>
+        <td>Δ Z1Y vs 09/17</td>
         <td class="v" style="color:${dz!=null&&dz>=0?'#1D9E75':'#D85A30'}">
           ${dz==null?"—":fmtSigned(dz)}
         </td>
-        <td>Δ D/P vs 09/16</td>
+        <td>Δ D/P vs 09/17</td>
         <td class="v">${ddp==null?"—":fmtSigned(ddp)+" pt"}</td>
         <td>Effective leverage</td><td class="v">${fmtLev(t)}</td>
       </tr>
@@ -878,7 +877,7 @@ function showCurrentDetail(t){
       </tr>
     </table>
     <div style="font-size:10.5px;color:#6b7280;margin-top:7px">
-      * Momentum values are carried from the 09/16 reference and were not refreshed by the supplied 09/17 feed.
+      * Momentum values are carried from the 09/16 reference and were not refreshed by the supplied 09/18 feed.
     </div>
   `;
 }
@@ -933,8 +932,8 @@ function bindDotsCompare(){
       tip.style.top=(e.clientY+10)+"px";
 
       if(mode==="current" && d){
-        tip.innerHTML=`<b>${t}</b> <span style="color:#a5b4fc">▲ 09/17</span><br>
-          D/P ${d[3].toFixed(2)}% · Z1Y ${d[2].toFixed(2)}<br>
+        tip.innerHTML=`<b>${t}</b> <span style="color:#a5b4fc">▲ ${shortDate(CUR.date)}</span><br>
+          D/P ${d[3].toFixed(2)}% · ${["Z3M","Z6M","Z1Y"][zIdx]} ${d[zIdx].toFixed(2)} · Z1Y ${d[2].toFixed(2)}<br>
           ${EVENT[t]?`<span style="color:#fbbf24">${EVENT[t].label}</span><br>`:""}
           Eff. leverage ${fmtLev(t)}`;
       }else if(mode==="prior" && pd){
@@ -943,7 +942,7 @@ function bindDotsCompare(){
 
         tip.innerHTML=`<b>${t}</b> <span style="color:#cbd5e1">◉ ${ps.date}</span><br>
           D/P ${pd[1].toFixed(2)}% · Z1Y ${pd[0].toFixed(2)}<br>
-          To 09/17: ΔZ ${dz==null?"—":fmtSigned(dz)} ·
+          To ${shortDate(CUR.date)}: ΔZ1Y ${dz==null?"—":fmtSigned(dz)} ·
           ΔD/P ${ddp==null?"—":fmtSigned(ddp)+"pt"}`;
       }
     });
@@ -980,7 +979,7 @@ function renderSnap(){
   pool.forEach(t=>{
     if(holdOnly&&!HOLDINGS.has(t))return;
 
-    const z=isCur?CUR.data[t][2]:PRIOR[sesIdx].d[t][0];
+    const z=isCur?CUR.data[t][zIdx]:PRIOR[sesIdx].d[t][0];
     const dp=isCur?CUR.data[t][3]:PRIOR[sesIdx].d[t][1];
 
     counts[qFromZD(z,dp)]++;
@@ -998,11 +997,12 @@ function renderSnap(){
 
   const sortable=pool.filter(t=>!holdOnly||HOLDINGS.has(t));
 
-  const getZ=t=>isCur?CUR.data[t][2]:PRIOR[sesIdx].d[t][0];
+  const getZ1Y=t=>isCur?CUR.data[t][2]:PRIOR[sesIdx].d[t][0];
+  const getZSel=t=>isCur?CUR.data[t][zIdx]:PRIOR[sesIdx].d[t][0];
   const getDP=t=>isCur?CUR.data[t][3]:PRIOR[sesIdx].d[t][1];
 
   const deep=[...sortable]
-    .sort((a,b)=>getZ(a)-getZ(b))
+    .sort((a,b)=>getZ1Y(a)-getZ1Y(b))
     .slice(0,3);
 
   document.getElementById("snapDeep").innerHTML=
@@ -1010,13 +1010,13 @@ function renderSnap(){
       const flag=isCur&&EVENT[t]?
         ` <span style="color:#D97706;font-size:10px">⚠ ${EVENT[t].label}</span>`:"";
 
-      return `<div><b>${t}</b> Z1Y ${getZ(t).toFixed(2)} ·
+      return `<div><b>${t}</b> Z1Y ${getZ1Y(t).toFixed(2)} ·
         D/P ${getDP(t).toFixed(2)}%${flag}</div>`;
     }).join("");
 
   const greens=sortable
-    .filter(t=>qFromZD(getZ(t),getDP(t))==="G")
-    .sort((a,b)=>getZ(b)-getZ(a))
+    .filter(t=>qFromZD(getZSel(t),getDP(t))==="G")
+    .sort((a,b)=>getZSel(b)-getZSel(a))
     .slice(0,3);
 
   document.getElementById("snapGreen").innerHTML=
@@ -1024,7 +1024,7 @@ function renderSnap(){
       ? greens.map(t=>{
           const flag=isCur&&EVENT[t]?
             ` <span style="color:#D97706;font-size:10px">⚠</span>`:"";
-          return `<div><b>${t}</b> Z1Y ${fmtSigned(getZ(t))}${flag}</div>`;
+          return `<div><b>${t}</b> ${["Z3M","Z6M","Z1Y"][zIdx]} ${fmtSigned(getZSel(t))}${flag}</div>`;
         }).join("")
       : "None";
 }
@@ -1088,7 +1088,7 @@ buildTmnav();
 render();
 
 console.info(
-  "CEF Time Machine 09/17/2026 loaded. " +
+  "CEF Time Machine 09/18/2026 loaded. " +
   "ASGI RO SUPPRESSED: rights offering announced 09/11; " +
   "record date 09/21; expiration 10/15. " +
   "Do not interpret the mechanically extreme ASGI valuation as a normal clean Add signal."
