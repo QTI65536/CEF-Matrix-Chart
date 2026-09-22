@@ -4,127 +4,417 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>CEF Time Machine · 09/21/2026</title>
+
 <style>
 :root{
-  --green:#1D9E75;--blue:#378ADD;--orange:#D85A30;--gray:#888780;
-  --ink:#1E2429;--sub:#5A636B;--line:#DEE3E7;--bg:#F7F8F9;
-  --card:#FFF;--amber:#E3A008;--purple:#6366F1
+  --green:#1D9E75;
+  --blue:#378ADD;
+  --orange:#D85A30;
+  --gray:#888780;
+  --ink:#1E2429;
+  --sub:#5A636B;
+  --line:#DEE3E7;
+  --bg:#F7F8F9;
+  --card:#FFF;
+  --amber:#E3A008;
+  --purple:#6366F1
 }
-*{box-sizing:border-box;margin:0;padding:0}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0
+}
+
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-  background:var(--bg);color:var(--ink);padding:20px;max-width:1100px;margin:0 auto
+  background:var(--bg);
+  color:var(--ink);
+  padding:20px;
+  max-width:1100px;
+  margin:0 auto
 }
-h1{font-size:19px;font-weight:700}
-.hdr{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:4px}
-.badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:10px}
-.badge.pos{background:#E1F5EE;color:#085041}
-.badge.neg{background:#FAECE7;color:#B4431F}
-.note{font-size:12px;color:var(--sub);margin-bottom:10px;line-height:1.45}
-.alerts{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+
+h1{
+  font-size:19px;
+  font-weight:700
+}
+
+.hdr{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:4px
+}
+
+.badge{
+  display:inline-block;
+  font-size:12px;
+  font-weight:700;
+  padding:3px 9px;
+  border-radius:10px
+}
+
+.badge.pos{
+  background:#E1F5EE;
+  color:#085041
+}
+
+.badge.neg{
+  background:#FAECE7;
+  color:#B4431F
+}
+
+.note{
+  font-size:12px;
+  color:var(--sub);
+  margin-bottom:10px;
+  line-height:1.45
+}
+
+.alerts{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  margin-bottom:16px
+}
+
 .al{
-  border:1px solid var(--line);border-left-width:4px;border-radius:6px;
-  padding:8px 12px;font-size:13px;line-height:1.45
+  border:1px solid var(--line);
+  border-left-width:4px;
+  border-radius:6px;
+  padding:8px 12px;
+  font-size:13px;
+  line-height:1.45
 }
-.al b{font-weight:700}
-.al.g{border-left-color:var(--green);background:#E1F5EE}
-.al.r{border-left-color:var(--orange);background:#FAECE7}
-.al.a{border-left-color:var(--amber);background:#FFF8EC}
-.al.p{border-left-color:var(--blue);background:#EEF2FF}
-.al.c{border-left-color:#7B9E3E;background:#EFF6E8}
-.al.dq{border-left-color:#F59E0B;background:#FFF3E0}
+
+.al b{
+  font-weight:700
+}
+
+.al.g{
+  border-left-color:var(--green);
+  background:#E1F5EE
+}
+
+.al.r{
+  border-left-color:var(--orange);
+  background:#FAECE7
+}
+
+.al.a{
+  border-left-color:var(--amber);
+  background:#FFF8EC
+}
+
+.al.p{
+  border-left-color:var(--blue);
+  background:#EEF2FF
+}
+
+.al.c{
+  border-left-color:#7B9E3E;
+  background:#EFF6E8
+}
+
+.al.dq{
+  border-left-color:#F59E0B;
+  background:#FFF3E0
+}
+
 .al .tag{
-  font-size:10.5px;font-weight:700;text-transform:uppercase;
-  letter-spacing:.5px;margin-right:6px;opacity:.75
+  font-size:10.5px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  margin-right:6px;
+  opacity:.75
 }
+
 .panel{
-  background:var(--card);border:1px solid var(--line);
-  border-radius:10px;padding:14px;margin-bottom:16px
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:14px;
+  margin-bottom:16px
 }
-.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
-.controls .grp{display:flex;gap:4px;flex-wrap:wrap}
+
+.controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:center;
+  margin-bottom:10px
+}
+
+.controls .grp{
+  display:flex;
+  gap:4px;
+  flex-wrap:wrap
+}
+
 button.ctl{
-  font-size:12px;padding:5px 10px;border:1px solid var(--line);
-  background:#fff;border-radius:6px;cursor:pointer;color:var(--ink)
+  font-size:12px;
+  padding:5px 10px;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:6px;
+  cursor:pointer;
+  color:var(--ink)
 }
-button.ctl:hover{background:#F3F4F6}
-button.ctl.on{background:var(--ink);color:#fff;border-color:var(--ink)}
-button.ctl.qg.on{background:var(--green);border-color:var(--green)}
-button.ctl.qb.on{background:var(--blue);border-color:var(--blue)}
-button.ctl.qo.on{background:var(--orange);border-color:var(--orange)}
-button.ctl.qx.on{background:var(--gray);border-color:var(--gray)}
+
+button.ctl:hover{
+  background:#F3F4F6
+}
+
+button.ctl.on{
+  background:var(--ink);
+  color:#fff;
+  border-color:var(--ink)
+}
+
+button.ctl.qg.on{
+  background:var(--green);
+  border-color:var(--green)
+}
+
+button.ctl.qb.on{
+  background:var(--blue);
+  border-color:var(--blue)
+}
+
+button.ctl.qo.on{
+  background:var(--orange);
+  border-color:var(--orange)
+}
+
+button.ctl.qx.on{
+  background:var(--gray);
+  border-color:var(--gray)
+}
+
 input.search{
-  font-size:12px;padding:5px 9px;border:1px solid var(--line);
-  border-radius:6px;width:155px
+  font-size:12px;
+  padding:5px 9px;
+  border:1px solid var(--line);
+  border-radius:6px;
+  width:155px
 }
-.legend{font-size:11.5px;color:var(--sub);margin-top:8px;line-height:1.4}
-.tmnav{display:flex;align-items:center;gap:6px;margin-top:10px;flex-wrap:wrap}
+
+.legend{
+  font-size:11.5px;
+  color:var(--sub);
+  margin-top:8px;
+  line-height:1.4
+}
+
+.tmnav{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-top:10px;
+  flex-wrap:wrap
+}
+
 .tmnav button{
-  font-size:11.5px;padding:4px 9px;border:1px solid var(--line);
-  background:#fff;border-radius:6px;cursor:pointer
+  font-size:11.5px;
+  padding:4px 9px;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:6px;
+  cursor:pointer
 }
-.tmnav button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
-.tmnav .seslabel{font-size:12px;color:var(--sub)}
-svg{width:100%;height:auto;display:block}
-.dot{cursor:pointer}
-.dimmed{opacity:.10}
+
+.tmnav button.on{
+  background:var(--ink);
+  color:#fff;
+  border-color:var(--ink)
+}
+
+.tmnav .seslabel{
+  font-size:12px;
+  color:var(--sub)
+}
+
+svg{
+  width:100%;
+  height:auto;
+  display:block
+}
+
+.dot{
+  cursor:pointer
+}
+
+.dimmed{
+  opacity:.10
+}
+
 .tooltip{
-  position:fixed;pointer-events:none;background:#1E2429;color:#fff;
-  font-size:11.5px;line-height:1.5;padding:8px 10px;border-radius:6px;
-  z-index:50;display:none;max-width:320px;box-shadow:0 3px 14px #0003
+  position:fixed;
+  pointer-events:none;
+  background:#1E2429;
+  color:#fff;
+  font-size:11.5px;
+  line-height:1.5;
+  padding:8px 10px;
+  border-radius:6px;
+  z-index:50;
+  display:none;
+  max-width:320px;
+  box-shadow:0 3px 14px #0003
 }
+
 .snap{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
-  gap:10px;margin-top:14px
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:10px;
+  margin-top:14px
 }
+
 .snapcard{
-  background:var(--bg);border:1px solid var(--line);
-  border-radius:8px;padding:10px 12px;font-size:12.5px
+  background:var(--bg);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:10px 12px;
+  font-size:12.5px
 }
+
 .snapcard h3{
-  font-size:11px;text-transform:uppercase;letter-spacing:.6px;
-  color:var(--sub);margin-bottom:6px
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  color:var(--sub);
+  margin-bottom:6px
 }
+
 .qcount{
-  display:inline-block;padding:1px 7px;border-radius:8px;color:#fff;
-  font-weight:700;font-size:12px;margin:2px 5px 2px 0
+  display:inline-block;
+  padding:1px 7px;
+  border-radius:8px;
+  color:#fff;
+  font-weight:700;
+  font-size:12px;
+  margin:2px 5px 2px 0
 }
+
 .detail{
-  display:none;background:var(--bg);border:1px solid var(--line);
-  border-radius:8px;padding:12px;margin-top:12px;font-size:13px
+  display:none;
+  background:var(--bg);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:12px;
+  margin-top:12px;
+  font-size:13px
 }
-.detail table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}
-.detail td{padding:4px 8px 4px 0;color:var(--sub);vertical-align:top}
-.detail td.v{color:var(--ink);font-weight:600}
+
+.detail table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:12.5px;
+  margin-top:6px
+}
+
+.detail td{
+  padding:4px 8px 4px 0;
+  color:var(--sub);
+  vertical-align:top
+}
+
+.detail td.v{
+  color:var(--ink);
+  font-weight:600
+}
+
 .event{
-  border-radius:5px;padding:6px 8px;font-size:11px;
-  margin-bottom:7px;line-height:1.45
+  border-radius:5px;
+  padding:6px 8px;
+  font-size:11px;
+  margin-bottom:7px;
+  line-height:1.45
 }
-.event.ro{background:#FFF4E5;border:1px solid #D97706;color:#7C2D12}
-.event.ca{background:#FFF8EC;border:1px solid #E3A008;color:#713F12}
-.event.dq{background:#FFF3E0;border:1px solid #F59E0B;color:#7C2D12}
+
+.event.ro{
+  background:#FFF4E5;
+  border:1px solid #D97706;
+  color:#7C2D12
+}
+
+.event.ca{
+  background:#FFF8EC;
+  border:1px solid #E3A008;
+  color:#713F12
+}
+
+.event.dq{
+  background:#FFF3E0;
+  border:1px solid #F59E0B;
+  color:#7C2D12
+}
+
 .compare-banner{
-  background:#EEF2FF;border:1.5px solid var(--purple);border-radius:6px;
-  padding:6px 12px;font-size:12px;color:#3730A3;margin-bottom:8px;display:none
+  background:#EEF2FF;
+  border:1.5px solid var(--purple);
+  border-radius:6px;
+  padding:6px 12px;
+  font-size:12px;
+  color:#3730A3;
+  margin-bottom:8px;
+  display:none
 }
+
 .highlights{
-  margin:16px 0 6px;padding:14px 16px;border:1px solid #334155;
-  border-radius:10px;background:#0f172a;color:#e2e8f0
+  margin:16px 0 6px;
+  padding:14px 16px;
+  border:1px solid #334155;
+  border-radius:10px;
+  background:#0f172a;
+  color:#e2e8f0
 }
-.highlights h2{font-weight:800;font-size:16px;margin-bottom:8px}
-.highlights div{line-height:1.55;font-size:13px}
+
+.highlights h2{
+  font-weight:800;
+  font-size:16px;
+  margin-bottom:8px
+}
+
+.highlights div{
+  line-height:1.55;
+  font-size:13px
+}
+
 .disc{
-  font-size:11px;color:var(--sub);font-style:italic;margin-top:22px;
-  border-top:1px solid var(--line);padding-top:10px
+  font-size:11px;
+  color:var(--sub);
+  font-style:italic;
+  margin-top:22px;
+  border-top:1px solid var(--line);
+  padding-top:10px
 }
-.missing{color:#92400E;font-weight:700}
+
+.missing{
+  color:#92400E;
+  font-weight:700
+}
+
 @media(max-width:650px){
-  body{padding:10px}
-  .controls{align-items:stretch}
-  input.search{width:100%}
+  body{
+    padding:10px
+  }
+
+  .controls{
+    align-items:stretch
+  }
+
+  input.search{
+    width:100%
+  }
 }
 </style>
 </head>
+
 <body>
 
 <div class="hdr">
@@ -135,7 +425,7 @@ svg{width:100%;height:auto;display:block}
 <div class="note">
 Session update · Current data Monday 09/21/2026 · Net Price Change +$3.95 ·
 09/18 appended to Time Machine · 08/26 rolled off under the 15-session cap ·
-weekend gap 09/19–09/20 noted and does not consume session slots ·
+weekend gap 09/19–09/20 does not consume session slots ·
 ASGI rights-offering suppression remains active on its 09/21 record date and
 through the offering window ending 10/15 unless extended ·
 BST's 09/15 special-distribution event remains recent provenance but is now
@@ -239,6 +529,7 @@ raw provider leverage is preserved where supplied ·
     </div>
 
     <input class="search" id="search" placeholder="Tickers (comma/space)…">
+
     <button class="ctl" id="hold">★ My Holdings</button>
     <button class="ctl" id="compareBtn">⊕ Compare</button>
 
@@ -256,9 +547,11 @@ raw provider leverage is preserved where supplied ·
   </div>
 
   <div class="tmnav" id="tmnav"></div>
+
   <div class="detail" id="detail"></div>
 
   <div class="snap">
+
     <div class="snapcard">
       <h3 id="snapTitle">Quadrant counts</h3>
       <div id="snapCounts"></div>
@@ -273,6 +566,7 @@ raw provider leverage is preserved where supplied ·
       <h3>Strongest Green</h3>
       <div id="snapGreen"></div>
     </div>
+
   </div>
 
 </div>
@@ -296,15 +590,9 @@ raw provider leverage is preserved where supplied ·
     ASGI <b>−2.31</b>, RLTY <b>−2.11</b>, PCN <b>−1.96</b>, GDV <b>−1.80</b>, EOS <b>−1.68</b>, PDX <b>−1.51</b>, RQI <b>−1.30</b>, ETG <b>−1.26</b>, BDJ <b>−1.25</b>, and GLU <b>−1.24</b>.
     ASGI is excluded from normal clean-candidate interpretation because of the active rights offering.<br>
 
-    <b>Extreme-signal investigation:</b>
-    ASGI is a <b>corporate-action-contaminated extreme</b>.
-    RLTY is a mechanically deep non-suppressed reading, but its term structure
-    (<b>Z3M −2.46 / Z6M −2.39 / Z1Y −2.11</b>) shows shorter-term deterioration and therefore weak entry confirmation.
-    No comparable current rights/tender/merger event was identified for RLTY in the primary-source check; the reading remains a normal valuation signal subject to continued confirmation.<br>
-
     <b>PCN timing:</b>
     PCN's own-normal gap is the largest non-ASGI reading at <b>−5.78 pt</b>, but its
-    <b>Z3M −3.51 / Z6M −3.44 / Z1Y −1.96</b> term structure is a pronounced falling-knife / continued-price-discovery pattern rather than a stabilization pattern.
+    <b>Z3M −3.51 / Z6M −3.44 / Z1Y −1.96</b> term structure is a pronounced continued-price-discovery pattern rather than a stabilization pattern.
     PCN also crossed from Gray to Orange because its D/P moved from <b>0.00%</b> to <b>−0.45%</b>.<br>
 
     <b>Own-normal valuation gaps:</b>
@@ -316,7 +604,7 @@ raw provider leverage is preserved where supplied ·
     <b>Green quadrant:</b>
     BST <b>+1.51</b>, BME <b>+0.96</b>, CSQ <b>+0.39</b>, and UTG <b>+0.02</b>.
     UTG newly crossed into Green because D/P moved below zero.
-    BST's 09/15 special-distribution ex-date remains recent provenance, but the strict ±3-session suppression window has elapsed.<br>
+    BST's 09/15 special-distribution event remains recent provenance.<br>
 
     <b>09/18 → 09/21:</b>
     ERH rebounded from <b>−1.52 / −9.68%</b> to <b>−0.19 / −7.96%</b>.
@@ -349,6 +637,7 @@ Always conduct your own due diligence before making investment decisions.
 <div class="tooltip" id="tip"></div>
 
 <script>
+
 /*
   CEF TIME MACHINE
   Current session: 09/21/2026
@@ -375,12 +664,15 @@ Always conduct your own due diligence before making investment decisions.
 */
 
 const STANDARD_UNIVERSE=[
-  "AIO","ASGI","BDJ","BME","BST","BUI","CSQ","DNP","EOI","EOS","ERH","ETG",
-  "GDV","GLU","HTD","NBXG","NXG","PCN","PDI","PDO","PDX","RFI","RLTY","RNP",
-  "RQI","UTF","UTG"
+  "AIO","ASGI","BDJ","BME","BST","BUI","CSQ","DNP","EOI","EOS",
+  "ERH","ETG","GDV","GLU","HTD","NBXG","NXG","PCN","PDI","PDO",
+  "PDX","RFI","RLTY","RNP","RQI","UTF","UTG"
 ];
 
-const MISSING_CURRENT=["PDI","PDO"];
+const MISSING_CURRENT=[
+  "PDI",
+  "PDO"
+];
 
 const HOLDINGS=new Set([
   "PCN","BDJ","EOI","BUI","BME","RQI","RNP",
@@ -401,7 +693,9 @@ const QNAME={
   X:"Gray · Worst Setup"
 };
 
-/* Effective leverage from the supplied 09/21 feed. null = provider displayed -- */
+
+/* Effective leverage from supplied 09/21 feed */
+
 const LEV={
   AIO:11.92,
   ASGI:1.01,
@@ -430,11 +724,12 @@ const LEV={
   UTG:22.21
 };
 
+
 /*
-  Momentum values are retained from the 09/16 reference snapshot for
-  historical continuity only. No refreshed momentum dataset was supplied
-  with the 09/21 valuation feed.
+  Momentum values retained from 09/16 reference only.
+  They are stale and must not be interpreted as 09/21 observations.
 */
+
 const MOM={
   PCN:[-3.06,-22.30],
   BDJ:[-0.10,9.95],
@@ -463,178 +758,433 @@ const MOM={
   GLU:[-1.26,10.57]
 };
 
-/*
-  Active / current interpretive flags.
 
-  AIO ex-date 09/14 and BDJ ex-date 09/15 have aged beyond the
-  prior temporary event window and are no longer carried as active flags.
+/* Active current interpretive flags */
 
-  BST special distribution ex-date 09/15 is now beyond the strict
-  +/-3-session window, but recent-event provenance is retained because
-  the distribution was unusually large.
-*/
 const EVENT={
+
   ASGI:{
     type:"ro",
     label:"RO SUPPRESSED",
     text:"Transferable rights offering. Record date and subscription-period start: 09/21/2026. Expiration: 10/15/2026 unless extended. Normal discount/Z-score interpretation remains corporate-action contaminated."
   },
+
   BST:{
     type:"ca",
     label:"RECENT SPECIAL DISTRIBUTION",
-    text:"Special distribution ex-date 09/15/2026. The strict +/-3-session suppression window has elapsed, but recent event provenance remains relevant to historical Z-score interpretation."
+    text:"Special distribution event dated 09/15/2026. Recent event provenance remains relevant to historical Z-score interpretation."
   },
+
   ERH:{
     type:"dq",
     label:"DQ WARNING",
     text:"Distribution-quality caution retained. Interpret the valuation signal with the DQ flag visible."
   },
+
   RFI:{
     type:"dq",
     label:"DQ WARNING",
     text:"Distribution-quality caution retained. Interpret the valuation signal with the DQ flag visible."
   }
+
 };
+
+
+/*
+  15-session rolling history.
+*/
 
 const PRIOR=[
 
   {date:"08/27/2026",d:{
-    AIO:[0.47,-6.85],ASGI:[2.74,14.37],BDJ:[-0.69,-7.03],BME:[1.51,-2.14],
-    BST:[1.37,-3.87],BUI:[-0.37,0.86],CSQ:[0.11,-8.19],DNP:[1.95,13.04],
-    EOI:[-0.78,-5.97],EOS:[-1.17,-10.04],ERH:[0.71,-6.66],ETG:[-0.77,-9.01],
-    GDV:[-0.18,-10.85],GLU:[-0.81,-3.49],HTD:[1.39,-3.59],NBXG:[-0.31,-13.32],
-    NXG:[0.51,0.55],PCN:[-0.89,3.15],PDX:[0.19,-9.32],RFI:[-0.88,-3.48],
-    RLTY:[-0.67,-8.28],RNP:[-1.10,-6.97],RQI:[-1.01,-6.87],UTF:[1.43,-1.27],
+    AIO:[0.47,-6.85],
+    ASGI:[2.74,14.37],
+    BDJ:[-0.69,-7.03],
+    BME:[1.51,-2.14],
+    BST:[1.37,-3.87],
+    BUI:[-0.37,0.86],
+    CSQ:[0.11,-8.19],
+    DNP:[1.95,13.04],
+    EOI:[-0.78,-5.97],
+    EOS:[-1.17,-10.04],
+    ERH:[0.71,-6.66],
+    ETG:[-0.77,-9.01],
+    GDV:[-0.18,-10.85],
+    GLU:[-0.81,-3.49],
+    HTD:[1.39,-3.59],
+    NBXG:[-0.31,-13.32],
+    NXG:[0.51,0.55],
+    PCN:[-0.89,3.15],
+    PDX:[0.19,-9.32],
+    RFI:[-0.88,-3.48],
+    RLTY:[-0.67,-8.28],
+    RNP:[-1.10,-6.97],
+    RQI:[-1.01,-6.87],
+    UTF:[1.43,-1.27],
     UTG:[0.18,-0.24]
   }},
 
   {date:"08/28/2026",d:{
-    AIO:[0.47,-6.85],ASGI:[1.55,9.62],BDJ:[-0.69,-6.62],BME:[1.51,-1.48],
-    BST:[1.37,-2.36],BUI:[-0.37,0.86],CSQ:[0.25,-7.96],DNP:[1.95,13.04],
-    EOI:[-0.78,-5.97],EOS:[-1.17,-10.04],ERH:[0.71,-6.66],ETG:[-0.77,-9.01],
-    GDV:[-0.18,-10.85],GLU:[-0.81,-3.49],HTD:[1.39,-3.59],NBXG:[-0.31,-13.32],
-    NXG:[0.51,0.55],PCN:[-0.89,3.15],PDX:[0.19,-9.32],RFI:[-0.55,-2.56],
-    RLTY:[-0.43,-7.92],RNP:[-0.91,-6.26],RQI:[-0.87,-6.46],UTF:[1.53,-1.06],
+    AIO:[0.47,-6.85],
+    ASGI:[1.55,9.62],
+    BDJ:[-0.69,-6.62],
+    BME:[1.51,-1.48],
+    BST:[1.37,-2.36],
+    BUI:[-0.37,0.86],
+    CSQ:[0.25,-7.96],
+    DNP:[1.95,13.04],
+    EOI:[-0.78,-5.97],
+    EOS:[-1.17,-10.04],
+    ERH:[0.71,-6.66],
+    ETG:[-0.77,-9.01],
+    GDV:[-0.18,-10.85],
+    GLU:[-0.81,-3.49],
+    HTD:[1.39,-3.59],
+    NBXG:[-0.31,-13.32],
+    NXG:[0.51,0.55],
+    PCN:[-0.89,3.15],
+    PDX:[0.19,-9.32],
+    RFI:[-0.55,-2.56],
+    RLTY:[-0.43,-7.92],
+    RNP:[-0.91,-6.26],
+    RQI:[-0.87,-6.46],
+    UTF:[1.53,-1.06],
     UTG:[1.15,0.94]
   }},
 
   {date:"08/31/2026",d:{
-    AIO:[1.10,-5.16],ASGI:[-0.02,3.26],BDJ:[0.04,-5.89],BME:[1.69,-1.68],
-    BST:[2.13,-2.38],BUI:[-0.46,0.53],CSQ:[0.53,-7.51],DNP:[1.98,13.31],
-    EOI:[-0.48,-5.17],EOS:[-0.99,-9.57],ERH:[0.34,-7.16],ETG:[-0.57,-8.59],
-    GDV:[-0.07,-10.77],GLU:[-1.09,-4.45],HTD:[1.59,-3.22],NBXG:[0.25,-12.59],
-    NXG:[1.01,2.49],PCN:[-0.76,3.53],PDX:[0.90,-8.24],RFI:[-0.67,-2.91],
-    RLTY:[-0.37,-7.85],RNP:[-1.06,-6.85],RQI:[-1.03,-6.97],UTF:[1.58,-1.02],
+    AIO:[1.10,-5.16],
+    ASGI:[-0.02,3.26],
+    BDJ:[0.04,-5.89],
+    BME:[1.69,-1.68],
+    BST:[2.13,-2.38],
+    BUI:[-0.46,0.53],
+    CSQ:[0.53,-7.51],
+    DNP:[1.98,13.31],
+    EOI:[-0.48,-5.17],
+    EOS:[-0.99,-9.57],
+    ERH:[0.34,-7.16],
+    ETG:[-0.57,-8.59],
+    GDV:[-0.07,-10.77],
+    GLU:[-1.09,-4.45],
+    HTD:[1.59,-3.22],
+    NBXG:[0.25,-12.59],
+    NXG:[1.01,2.49],
+    PCN:[-0.76,3.53],
+    PDX:[0.90,-8.24],
+    RFI:[-0.67,-2.91],
+    RLTY:[-0.37,-7.85],
+    RNP:[-1.06,-6.85],
+    RQI:[-1.03,-6.97],
+    UTF:[1.58,-1.02],
     UTG:[1.17,0.96]
   }},
 
   {date:"09/01/2026",d:{
-    AIO:[0.97,-5.63],ASGI:[-0.14,2.77],BDJ:[-0.09,-6.10],BME:[1.49,-2.08],
-    BST:[2.19,-2.23],BUI:[-0.64,-0.04],CSQ:[0.48,-7.62],DNP:[1.86,12.97],
-    EOI:[-0.62,-5.59],EOS:[-1.01,-9.62],ERH:[0.13,-7.45],ETG:[-0.52,-8.50],
-    GDV:[-0.06,-10.77],GLU:[-0.98,-4.12],HTD:[1.60,-3.18],NBXG:[0.79,-11.89],
-    NXG:[1.14,3.01],PCN:[-0.81,3.35],PDX:[0.87,-8.31],RFI:[-0.78,-3.26],
-    RLTY:[-0.69,-8.33],RNP:[-1.01,-6.67],RQI:[-1.00,-6.89],UTF:[1.45,-1.43],
+    AIO:[0.97,-5.63],
+    ASGI:[-0.14,2.77],
+    BDJ:[-0.09,-6.10],
+    BME:[1.49,-2.08],
+    BST:[2.19,-2.23],
+    BUI:[-0.64,-0.04],
+    CSQ:[0.48,-7.62],
+    DNP:[1.86,12.97],
+    EOI:[-0.62,-5.59],
+    EOS:[-1.01,-9.62],
+    ERH:[0.13,-7.45],
+    ETG:[-0.52,-8.50],
+    GDV:[-0.06,-10.77],
+    GLU:[-0.98,-4.12],
+    HTD:[1.60,-3.18],
+    NBXG:[0.79,-11.89],
+    NXG:[1.14,3.01],
+    PCN:[-0.81,3.35],
+    PDX:[0.87,-8.31],
+    RFI:[-0.78,-3.26],
+    RLTY:[-0.69,-8.33],
+    RNP:[-1.01,-6.67],
+    RQI:[-1.00,-6.89],
+    UTF:[1.45,-1.43],
     UTG:[1.08,0.86]
   }},
 
   {date:"09/02/2026",d:{
-    AIO:[0.97,-5.70],ASGI:[0.30,4.58],BDJ:[-0.19,-6.26],BME:[1.28,-2.51],
-    BST:[2.15,-2.28],BUI:[-0.42,0.61],CSQ:[0.62,-7.40],DNP:[1.97,13.43],
-    EOI:[-0.80,-6.09],EOS:[-1.00,-9.60],ERH:[-0.34,-8.07],ETG:[-0.75,-9.00],
-    GDV:[-1.20,-11.52],GLU:[-0.89,-3.83],HTD:[1.54,-3.26],NBXG:[0.05,-12.88],
-    NXG:[0.83,1.86],PCN:[-0.95,2.91],PDX:[1.24,-7.77],RFI:[-0.66,-2.93],
-    RLTY:[-0.68,-8.32],RNP:[-0.95,-6.47],RQI:[-0.91,-6.63],UTF:[1.56,-1.21],
+    AIO:[0.97,-5.70],
+    ASGI:[0.30,4.58],
+    BDJ:[-0.19,-6.26],
+    BME:[1.28,-2.51],
+    BST:[2.15,-2.28],
+    BUI:[-0.42,0.61],
+    CSQ:[0.62,-7.40],
+    DNP:[1.97,13.43],
+    EOI:[-0.80,-6.09],
+    EOS:[-1.00,-9.60],
+    ERH:[-0.34,-8.07],
+    ETG:[-0.75,-9.00],
+    GDV:[-1.20,-11.52],
+    GLU:[-0.89,-3.83],
+    HTD:[1.54,-3.26],
+    NBXG:[0.05,-12.88],
+    NXG:[0.83,1.86],
+    PCN:[-0.95,2.91],
+    PDX:[1.24,-7.77],
+    RFI:[-0.66,-2.93],
+    RLTY:[-0.68,-8.32],
+    RNP:[-0.95,-6.47],
+    RQI:[-0.91,-6.63],
+    UTF:[1.56,-1.21],
     UTG:[0.86,0.59]
   }},
 
   {date:"09/03/2026",d:{
-    AIO:[0.87,-5.70],ASGI:[-0.24,2.39],BDJ:[-0.57,-6.26],BME:[1.37,-2.51],
-    BST:[1.32,-2.28],BUI:[-0.58,0.61],CSQ:[0.39,-7.79],DNP:[1.50,13.43],
-    EOI:[-0.85,-6.09],EOS:[-1.09,-9.60],ERH:[-0.60,-8.07],ETG:[-0.99,-9.00],
-    GDV:[-1.21,-11.52],GLU:[-1.26,-3.83],HTD:[1.06,-3.26],NBXG:[0.65,-12.88],
-    NXG:[0.26,1.86],PCN:[-1.05,2.91],PDX:[1.40,-7.77],RFI:[-0.74,-3.16],
-    RLTY:[-0.90,-8.65],RNP:[-0.98,-6.60],RQI:[-1.08,-7.17],UTF:[1.21,-2.18],
+    AIO:[0.87,-5.70],
+    ASGI:[-0.24,2.39],
+    BDJ:[-0.57,-6.26],
+    BME:[1.37,-2.51],
+    BST:[1.32,-2.28],
+    BUI:[-0.58,0.61],
+    CSQ:[0.39,-7.79],
+    DNP:[1.50,13.43],
+    EOI:[-0.85,-6.09],
+    EOS:[-1.09,-9.60],
+    ERH:[-0.60,-8.07],
+    ETG:[-0.99,-9.00],
+    GDV:[-1.21,-11.52],
+    GLU:[-1.26,-3.83],
+    HTD:[1.06,-3.26],
+    NBXG:[0.65,-12.88],
+    NXG:[0.26,1.86],
+    PCN:[-1.05,2.91],
+    PDX:[1.40,-7.77],
+    RFI:[-0.74,-3.16],
+    RLTY:[-0.90,-8.65],
+    RNP:[-0.98,-6.60],
+    RQI:[-1.08,-7.17],
+    UTF:[1.21,-2.18],
     UTG:[0.79,0.50]
   }},
 
   {date:"09/04/2026",d:{
-    AIO:[0.58,-6.92],ASGI:[-0.36,1.98],BDJ:[-0.57,-6.87],BME:[1.59,-1.78],
-    BST:[1.72,-3.02],BUI:[-0.42,0.57],CSQ:[0.70,-7.34],DNP:[1.58,12.23],
-    EOI:[-0.91,-6.40],EOS:[-1.09,-9.84],ERH:[0.15,-7.44],ETG:[-0.83,-9.23],
-    GDV:[-1.72,-11.88],GLU:[-0.95,-4.10],HTD:[1.22,-3.79],NBXG:[0.15,-12.77],
-    NXG:[0.50,0.67],PCN:[-0.90,2.99],PDX:[1.10,-8.10],RFI:[-0.67,-3.01],
-    RLTY:[-0.40,-7.94],RNP:[-0.97,-6.59],RQI:[-0.96,-6.85],UTF:[1.21,-2.30],
+    AIO:[0.58,-6.92],
+    ASGI:[-0.36,1.98],
+    BDJ:[-0.57,-6.87],
+    BME:[1.59,-1.78],
+    BST:[1.72,-3.02],
+    BUI:[-0.42,0.57],
+    CSQ:[0.70,-7.34],
+    DNP:[1.58,12.23],
+    EOI:[-0.91,-6.40],
+    EOS:[-1.09,-9.84],
+    ERH:[0.15,-7.44],
+    ETG:[-0.83,-9.23],
+    GDV:[-1.72,-11.88],
+    GLU:[-0.95,-4.10],
+    HTD:[1.22,-3.79],
+    NBXG:[0.15,-12.77],
+    NXG:[0.50,0.67],
+    PCN:[-0.90,2.99],
+    PDX:[1.10,-8.10],
+    RFI:[-0.67,-3.01],
+    RLTY:[-0.40,-7.94],
+    RNP:[-0.97,-6.59],
+    RQI:[-0.96,-6.85],
+    UTF:[1.21,-2.30],
     UTG:[0.72,0.42]
   }},
 
   {date:"09/09/2026",d:{
-    AIO:[0.17,-8.06],ASGI:[-0.31,2.22],BDJ:[-1.21,-7.90],BME:[1.34,-2.25],
-    BST:[0.88,-4.63],BUI:[-0.30,0.87],CSQ:[0.59,-7.54],DNP:[1.39,11.62],
-    EOI:[-0.87,-6.34],EOS:[-1.14,-9.98],ERH:[0.14,-7.46],ETG:[-1.09,-9.83],
-    GDV:[-1.34,-11.63],GLU:[-1.16,-4.85],HTD:[1.18,-3.84],NBXG:[0.53,-12.30],
-    NXG:[0.76,1.67],PCN:[-1.06,2.46],PDX:[0.87,-8.50],RFI:[-0.80,-3.40],
-    RLTY:[-1.23,-9.08],RNP:[-0.93,-6.50],RQI:[-0.98,-6.97],UTF:[0.64,-3.82],
+    AIO:[0.17,-8.06],
+    ASGI:[-0.31,2.22],
+    BDJ:[-1.21,-7.90],
+    BME:[1.34,-2.25],
+    BST:[0.88,-4.63],
+    BUI:[-0.30,0.87],
+    CSQ:[0.59,-7.54],
+    DNP:[1.39,11.62],
+    EOI:[-0.87,-6.34],
+    EOS:[-1.14,-9.98],
+    ERH:[0.14,-7.46],
+    ETG:[-1.09,-9.83],
+    GDV:[-1.34,-11.63],
+    GLU:[-1.16,-4.85],
+    HTD:[1.18,-3.84],
+    NBXG:[0.53,-12.30],
+    NXG:[0.76,1.67],
+    PCN:[-1.06,2.46],
+    PDX:[0.87,-8.50],
+    RFI:[-0.80,-3.40],
+    RLTY:[-1.23,-9.08],
+    RNP:[-0.93,-6.50],
+    RQI:[-0.98,-6.97],
+    UTF:[0.64,-3.82],
     UTG:[0.94,0.68]
   }},
 
   {date:"09/10/2026",d:{
-    AIO:[-0.23,-9.06],ASGI:[-0.31,2.22],BDJ:[-1.60,-8.54],BME:[0.78,-3.44],
-    BST:[0.00,-6.31],BUI:[-0.36,0.68],CSQ:[-0.04,-8.56],DNP:[1.23,11.10],
-    EOI:[-1.33,-7.53],EOS:[-1.83,-11.65],ERH:[-0.17,-7.87],ETG:[-2.03,-11.93],
-    GDV:[-2.67,-12.55],GLU:[-1.22,-5.10],HTD:[0.39,-5.18],NBXG:[-0.66,-13.82],
-    NXG:[0.10,-0.80],PCN:[-1.51,1.05],PDX:[0.85,-8.55],RFI:[-1.43,-5.11],
-    RLTY:[-2.61,-10.94],RNP:[-1.47,-8.36],RQI:[-1.71,-9.21],UTF:[-0.05,-5.47],
+    AIO:[-0.23,-9.06],
+    ASGI:[-0.31,2.22],
+    BDJ:[-1.60,-8.54],
+    BME:[0.78,-3.44],
+    BST:[0.00,-6.31],
+    BUI:[-0.36,0.68],
+    CSQ:[-0.04,-8.56],
+    DNP:[1.23,11.10],
+    EOI:[-1.33,-7.53],
+    EOS:[-1.83,-11.65],
+    ERH:[-0.17,-7.87],
+    ETG:[-2.03,-11.93],
+    GDV:[-2.67,-12.55],
+    GLU:[-1.22,-5.10],
+    HTD:[0.39,-5.18],
+    NBXG:[-0.66,-13.82],
+    NXG:[0.10,-0.80],
+    PCN:[-1.51,1.05],
+    PDX:[0.85,-8.55],
+    RFI:[-1.43,-5.11],
+    RLTY:[-2.61,-10.94],
+    RNP:[-1.47,-8.36],
+    RQI:[-1.71,-9.21],
+    UTF:[-0.05,-5.47],
     UTG:[1.16,0.96]
   }},
 
   {date:"09/11/2026",d:{
-    AIO:[0.44,-7.44],ASGI:[-0.12,3.01],BDJ:[-1.16,-7.84],BME:[1.33,-2.24],
-    BST:[0.80,-4.77],BUI:[-0.09,1.49],CSQ:[0.56,-7.63],DNP:[1.57,12.28],
-    EOI:[-0.94,-7.12],EOS:[-1.46,-10.62],ERH:[0.58,-6.89],ETG:[-1.34,-10.38],
-    GDV:[-1.68,-11.87],GLU:[-1.04,-4.48],HTD:[1.42,-3.41],NBXG:[0.07,-12.88],
-    NXG:[0.62,1.16],PCN:[-1.22,1.95],PDX:[1.18,-8.09],RFI:[-0.84,-3.59],
-    RLTY:[-1.15,-9.51],RNP:[-0.99,-6.87],RQI:[-1.03,-7.23],UTF:[0.54,-3.93],
+    AIO:[0.44,-7.44],
+    ASGI:[-0.12,3.01],
+    BDJ:[-1.16,-7.84],
+    BME:[1.33,-2.24],
+    BST:[0.80,-4.77],
+    BUI:[-0.09,1.49],
+    CSQ:[0.56,-7.63],
+    DNP:[1.57,12.28],
+    EOI:[-0.94,-7.12],
+    EOS:[-1.46,-10.62],
+    ERH:[0.58,-6.89],
+    ETG:[-1.34,-10.38],
+    GDV:[-1.68,-11.87],
+    GLU:[-1.04,-4.48],
+    HTD:[1.42,-3.41],
+    NBXG:[0.07,-12.88],
+    NXG:[0.62,1.16],
+    PCN:[-1.22,1.95],
+    PDX:[1.18,-8.09],
+    RFI:[-0.84,-3.59],
+    RLTY:[-1.15,-9.51],
+    RNP:[-0.99,-6.87],
+    RQI:[-1.03,-7.23],
+    UTF:[0.54,-3.93],
     UTG:[0.72,0.42]
   }},
 
   {date:"09/14/2026",d:{
-    AIO:[0.19,-8.12],ASGI:[-2.37,-5.99],BDJ:[-0.87,-7.40],BME:[1.36,-2.13],
-    BST:[2.29,-1.79],BUI:[-0.05,1.59],CSQ:[0.32,-8.01],DNP:[0.86,9.85],
-    EOI:[-0.87,-6.37],EOS:[-1.21,-10.16],ERH:[-0.50,-8.31],ETG:[-1.44,-10.67],
-    GDV:[-1.85,-12.00],GLU:[-1.37,-5.67],HTD:[0.48,-5.02],NBXG:[0.89,-11.86],
-    NXG:[0.77,1.73],PCN:[-1.64,0.63],PDX:[-0.13,-9.93],RFI:[-1.03,-4.05],
-    RLTY:[-1.17,-8.99],RNP:[-1.04,-6.92],RQI:[-1.07,-7.30],UTF:[-0.25,-5.94],
+    AIO:[0.19,-8.12],
+    ASGI:[-2.37,-5.99],
+    BDJ:[-0.87,-7.40],
+    BME:[1.36,-2.13],
+    BST:[2.29,-1.79],
+    BUI:[-0.05,1.59],
+    CSQ:[0.32,-8.01],
+    DNP:[0.86,9.85],
+    EOI:[-0.87,-6.37],
+    EOS:[-1.21,-10.16],
+    ERH:[-0.50,-8.31],
+    ETG:[-1.44,-10.67],
+    GDV:[-1.85,-12.00],
+    GLU:[-1.37,-5.67],
+    HTD:[0.48,-5.02],
+    NBXG:[0.89,-11.86],
+    NXG:[0.77,1.73],
+    PCN:[-1.64,0.63],
+    PDX:[-0.13,-9.93],
+    RFI:[-1.03,-4.05],
+    RLTY:[-1.17,-8.99],
+    RNP:[-1.04,-6.92],
+    RQI:[-1.07,-7.30],
+    UTF:[-0.25,-5.94],
     UTG:[1.45,1.33]
   }},
 
   {date:"09/15/2026",d:{
-    AIO:[-0.52,-9.80],ASGI:[-1.75,-3.57],BDJ:[-0.56,-6.91],BME:[1.14,-2.59],
-    BST:[1.96,-2.41],BUI:[-0.31,0.78],CSQ:[0.24,-8.15],DNP:[0.88,9.94],
-    EOI:[-0.95,-6.58],EOS:[-1.20,-10.12],ERH:[-0.57,-8.40],ETG:[-1.41,-10.62],
-    GDV:[-2.36,-12.37],GLU:[-1.40,-5.80],HTD:[0.73,-4.57],NBXG:[0.07,-12.90],
-    NXG:[0.81,1.93],PCN:[-1.66,0.54],PDX:[-0.67,-10.68],RFI:[-0.96,-3.88],
-    RLTY:[-1.53,-9.44],RNP:[-1.02,-6.84],RQI:[-1.41,-8.35],UTF:[-0.36,-6.20],
+    AIO:[-0.52,-9.80],
+    ASGI:[-1.75,-3.57],
+    BDJ:[-0.56,-6.91],
+    BME:[1.14,-2.59],
+    BST:[1.96,-2.41],
+    BUI:[-0.31,0.78],
+    CSQ:[0.24,-8.15],
+    DNP:[0.88,9.94],
+    EOI:[-0.95,-6.58],
+    EOS:[-1.20,-10.12],
+    ERH:[-0.57,-8.40],
+    ETG:[-1.41,-10.62],
+    GDV:[-2.36,-12.37],
+    GLU:[-1.40,-5.80],
+    HTD:[0.73,-4.57],
+    NBXG:[0.07,-12.90],
+    NXG:[0.81,1.93],
+    PCN:[-1.66,0.54],
+    PDX:[-0.67,-10.68],
+    RFI:[-0.96,-3.88],
+    RLTY:[-1.53,-9.44],
+    RNP:[-1.02,-6.84],
+    RQI:[-1.41,-8.35],
+    UTF:[-0.36,-6.20],
     UTG:[0.75,0.47]
   }},
 
   {date:"09/16/2026",d:{
-    AIO:[-0.98,-10.85],ASGI:[-1.67,-3.30],BDJ:[-0.71,-7.16],BME:[1.40,-2.01],
-    BST:[1.58,-3.13],BUI:[-0.52,0.16],CSQ:[0.14,-8.32],DNP:[0.97,10.27],
-    EOI:[-0.95,-6.60],EOS:[-1.37,-10.51],ERH:[-1.46,-9.59],ETG:[-1.39,-10.61],
-    GDV:[-1.51,-11.80],GLU:[-1.35,-5.66],HTD:[0.57,-4.85],NBXG:[-0.10,-13.12],
-    NXG:[0.13,-0.65],PCN:[-1.38,1.35],PDX:[-1.23,-11.44],RFI:[-1.16,-4.43],
-    RLTY:[-1.89,-9.89],RNP:[-1.13,-7.22],RQI:[-1.56,-8.86],UTF:[-0.40,-6.29],
+    AIO:[-0.98,-10.85],
+    ASGI:[-1.67,-3.30],
+    BDJ:[-0.71,-7.16],
+    BME:[1.40,-2.01],
+    BST:[1.58,-3.13],
+    BUI:[-0.52,0.16],
+    CSQ:[0.14,-8.32],
+    DNP:[0.97,10.27],
+    EOI:[-0.95,-6.60],
+    EOS:[-1.37,-10.51],
+    ERH:[-1.46,-9.59],
+    ETG:[-1.39,-10.61],
+    GDV:[-1.51,-11.80],
+    GLU:[-1.35,-5.66],
+    HTD:[0.57,-4.85],
+    NBXG:[-0.10,-13.12],
+    NXG:[0.13,-0.65],
+    PCN:[-1.38,1.35],
+    PDX:[-1.23,-11.44],
+    RFI:[-1.16,-4.43],
+    RLTY:[-1.89,-9.89],
+    RNP:[-1.13,-7.22],
+    RQI:[-1.56,-8.86],
+    UTF:[-0.40,-6.29],
     UTG:[1.12,0.92]
   }},
 
   {date:"09/17/2026",d:{
-    AIO:[-0.98,-10.85],ASGI:[-2.13,-5.23],BDJ:[-0.71,-7.16],BME:[1.40,-2.01],
-    BST:[1.58,-3.13],BUI:[-0.52,0.16],CSQ:[0.12,-8.36],DNP:[0.97,10.27],
-    EOI:[-0.95,-6.60],EOS:[-1.37,-10.51],ERH:[-1.46,-9.59],ETG:[-1.39,-10.61],
-    GDV:[-1.51,-11.80],GLU:[-1.35,-5.66],HTD:[0.57,-4.85],NBXG:[-0.10,-13.12],
-    NXG:[0.13,-0.65],PCN:[-1.38,1.35],PDX:[-1.23,-11.44],RFI:[-0.95,-3.88],
-    RLTY:[-1.91,-9.91],RNP:[-1.02,-6.86],RQI:[-1.58,-8.97],UTF:[-0.22,-5.91],
+    AIO:[-0.98,-10.85],
+    ASGI:[-2.13,-5.23],
+    BDJ:[-0.71,-7.16],
+    BME:[1.40,-2.01],
+    BST:[1.58,-3.13],
+    BUI:[-0.52,0.16],
+    CSQ:[0.12,-8.36],
+    DNP:[0.97,10.27],
+    EOI:[-0.95,-6.60],
+    EOS:[-1.37,-10.51],
+    ERH:[-1.46,-9.59],
+    ETG:[-1.39,-10.61],
+    GDV:[-1.51,-11.80],
+    GLU:[-1.35,-5.66],
+    HTD:[0.57,-4.85],
+    NBXG:[-0.10,-13.12],
+    NXG:[0.13,-0.65],
+    PCN:[-1.38,1.35],
+    PDX:[-1.23,-11.44],
+    RFI:[-0.95,-3.88],
+    RLTY:[-1.91,-9.91],
+    RNP:[-1.02,-6.86],
+    RQI:[-1.58,-8.97],
+    UTF:[-0.22,-5.91],
     UTG:[0.71,0.42]
   }},
 
@@ -668,9 +1218,12 @@ const PRIOR=[
 
 ];
 
-/* 09/21/2026 CURRENT DATA */
+
+/* 09/21 CURRENT DATA */
+
 const CUR={
   date:"09/21/2026",
+
   data:{
 
     AIO:[-1.02,-0.26,-0.54,-9.90,-8.72,8.60,27.89,25.13],
@@ -700,9 +1253,16 @@ const CUR={
     UTG:[-0.04,0.03,0.02,-0.42,-0.45,7.00,36.13,35.98]
 
   }
+
 };
 
-const W=980,H=560,ML=54,MR=16,MT=14,MB=40;
+
+const W=980;
+const H=560;
+const ML=54;
+const MR=16;
+const MT=14;
+const MB=40;
 
 let zIdx=2;
 let qFilter="all";
@@ -711,117 +1271,274 @@ let holdOnly=false;
 let sesIdx=PRIOR.length;
 let compareMode=false;
 
+
 function qFromZD(z,dp){
-  return z>=0 ? (dp<0 ? "G" : "B") : (dp<0 ? "O" : "X");
+
+  return z>=0
+    ? (dp<0 ? "G" : "B")
+    : (dp<0 ? "O" : "X");
+
 }
+
 
 function shortDate(d){
+
   return d.replace("/2026","");
+
 }
+
 
 function tickerMatch(t){
-  return searchTerms.length===0 || searchTerms.some(s=>t.includes(s));
+
+  return (
+    searchTerms.length===0 ||
+    searchTerms.some(s=>t.includes(s))
+  );
+
 }
+
 
 function fmtSigned(v,d=2){
-  if(v==null || !Number.isFinite(v))return "—";
+
+  if(v==null || !Number.isFinite(v)){
+    return "—";
+  }
+
   return `${v>0?"+":""}${v.toFixed(d)}`;
+
 }
+
 
 function fmtLev(t){
+
   const v=LEV[t];
-  return v==null ? "—" : `${v.toFixed(2)}%`;
+
+  return v==null
+    ? "—"
+    : `${v.toFixed(2)}%`;
+
 }
+
 
 function eventMarkup(t){
+
   const e=EVENT[t];
-  if(!e)return "";
+
+  if(!e){
+    return "";
+  }
 
   const icon=
-    e.type==="ro" ? "⚠" :
-    e.type==="dq" ? "⚑" :
-    "⚠";
+    e.type==="ro"
+      ? "⚠"
+      : e.type==="dq"
+        ? "⚑"
+        : "⚠";
 
-  return `<div class="event ${e.type}">
-    <b>${icon} ${e.label}</b> · ${e.text}
-  </div>`;
+  return `
+    <div class="event ${e.type}">
+      <b>${icon} ${e.label}</b> · ${e.text}
+    </div>
+  `;
+
 }
+
 
 function getExtent(){
 
-  let zs=[],ds=[];
+  let zs=[];
+  let ds=[];
 
   Object.keys(CUR.data).forEach(t=>{
-    zs.push(CUR.data[t][0],CUR.data[t][1],CUR.data[t][2]);
-    ds.push(CUR.data[t][3],CUR.data[t][4]);
+
+    zs.push(
+      CUR.data[t][0],
+      CUR.data[t][1],
+      CUR.data[t][2]
+    );
+
+    ds.push(
+      CUR.data[t][3],
+      CUR.data[t][4]
+    );
+
   });
 
   PRIOR.forEach(s=>{
+
     Object.keys(s.d).forEach(t=>{
+
       zs.push(s.d[t][0]);
       ds.push(s.d[t][1]);
+
     });
+
   });
 
-  const zm=Math.max(4,Math.ceil(Math.max(...zs.map(Math.abs))));
-  const dmin=Math.floor(Math.min(...ds))-1;
-  const dmax=Math.ceil(Math.max(...ds))+1;
+  const zm=
+    Math.max(
+      4,
+      Math.ceil(
+        Math.max(...zs.map(Math.abs))
+      )
+    );
 
-  return {zmin:-zm,zmax:zm,dmin,dmax};
+  const dmin=
+    Math.floor(
+      Math.min(...ds)
+    )-1;
+
+  const dmax=
+    Math.ceil(
+      Math.max(...ds)
+    )+1;
+
+  return {
+    zmin:-zm,
+    zmax:zm,
+    dmin,
+    dmax
+  };
+
 }
+
 
 function drawGrid(s,ex,Xf,Yf){
 
-  s+=`<rect x="${Xf(0)}" y="${Yf(0)}"
-    width="${W-MR-Xf(0)}" height="${Yf(ex.dmin)-Yf(0)}"
-    fill="#1D9E75" opacity=".055"/>`;
+  s+=`
+    <rect
+      x="${Xf(0)}"
+      y="${Yf(0)}"
+      width="${W-MR-Xf(0)}"
+      height="${Yf(ex.dmin)-Yf(0)}"
+      fill="#1D9E75"
+      opacity=".055"
+    />
+  `;
 
-  s+=`<rect x="${Xf(0)}" y="${MT}"
-    width="${W-MR-Xf(0)}" height="${Yf(0)-MT}"
-    fill="#378ADD" opacity=".055"/>`;
+  s+=`
+    <rect
+      x="${Xf(0)}"
+      y="${MT}"
+      width="${W-MR-Xf(0)}"
+      height="${Yf(0)-MT}"
+      fill="#378ADD"
+      opacity=".055"
+    />
+  `;
 
-  s+=`<rect x="${ML}" y="${Yf(0)}"
-    width="${Xf(0)-ML}" height="${Yf(ex.dmin)-Yf(0)}"
-    fill="#D85A30" opacity=".05"/>`;
+  s+=`
+    <rect
+      x="${ML}"
+      y="${Yf(0)}"
+      width="${Xf(0)-ML}"
+      height="${Yf(ex.dmin)-Yf(0)}"
+      fill="#D85A30"
+      opacity=".05"
+    />
+  `;
 
-  s+=`<rect x="${ML}" y="${MT}"
-    width="${Xf(0)-ML}" height="${Yf(0)-MT}"
-    fill="#888780" opacity=".07"/>`;
+  s+=`
+    <rect
+      x="${ML}"
+      y="${MT}"
+      width="${Xf(0)-ML}"
+      height="${Yf(0)-MT}"
+      fill="#888780"
+      opacity=".07"
+    />
+  `;
 
-  for(let z=Math.ceil(ex.zmin);z<=ex.zmax;z++){
+  for(
+    let z=Math.ceil(ex.zmin);
+    z<=ex.zmax;
+    z++
+  ){
 
-    s+=`<line x1="${Xf(z)}" y1="${MT}" x2="${Xf(z)}" y2="${H-MB}"
-      stroke="${z===0?'#B6BDC3':'#EAEDEF'}"
-      stroke-width="${z===0?1.5:1}"/>`;
+    s+=`
+      <line
+        x1="${Xf(z)}"
+        y1="${MT}"
+        x2="${Xf(z)}"
+        y2="${H-MB}"
+        stroke="${z===0?'#B6BDC3':'#EAEDEF'}"
+        stroke-width="${z===0?1.5:1}"
+      />
+    `;
 
-    s+=`<text x="${Xf(z)}" y="${H-MB+16}" font-size="10"
-      fill="#8A929A" text-anchor="middle">${z}</text>`;
+    s+=`
+      <text
+        x="${Xf(z)}"
+        y="${H-MB+16}"
+        font-size="10"
+        fill="#8A929A"
+        text-anchor="middle"
+      >${z}</text>
+    `;
   }
 
-  const dstep=(ex.dmax-ex.dmin)>20 ? 5 : 2;
+  const dstep=
+    (ex.dmax-ex.dmin)>20
+      ? 5
+      : 2;
 
-  for(let d=Math.ceil(ex.dmin/dstep)*dstep;d<=ex.dmax;d+=dstep){
+  for(
+    let d=Math.ceil(ex.dmin/dstep)*dstep;
+    d<=ex.dmax;
+    d+=dstep
+  ){
 
-    s+=`<line x1="${ML}" y1="${Yf(d)}" x2="${W-MR}" y2="${Yf(d)}"
-      stroke="${d===0?'#B6BDC3':'#EAEDEF'}"
-      stroke-width="${d===0?1.5:1}"/>`;
+    s+=`
+      <line
+        x1="${ML}"
+        y1="${Yf(d)}"
+        x2="${W-MR}"
+        y2="${Yf(d)}"
+        stroke="${d===0?'#B6BDC3':'#EAEDEF'}"
+        stroke-width="${d===0?1.5:1}"
+      />
+    `;
 
-    s+=`<text x="${ML-6}" y="${Yf(d)+3}" font-size="10"
-      fill="#8A929A" text-anchor="end">${d}%</text>`;
+    s+=`
+      <text
+        x="${ML-6}"
+        y="${Yf(d)+3}"
+        font-size="10"
+        fill="#8A929A"
+        text-anchor="end"
+      >${d}%</text>
+    `;
   }
 
-  s+=`<text x="${W/2}" y="${H-6}" font-size="11"
-    fill="#5A636B" text-anchor="middle">
-    Z-Score (${["Z3M","Z6M","Z1Y"][zIdx]})
-  </text>`;
+  s+=`
+    <text
+      x="${W/2}"
+      y="${H-6}"
+      font-size="11"
+      fill="#5A636B"
+      text-anchor="middle"
+    >
+      Z-Score (${["Z3M","Z6M","Z1Y"][zIdx]})
+    </text>
+  `;
 
-  s+=`<text x="14" y="${H/2}" font-size="11" fill="#5A636B"
-    text-anchor="middle" transform="rotate(-90 14 ${H/2})">
-    Discount / Premium %
-  </text>`;
+  s+=`
+    <text
+      x="14"
+      y="${H/2}"
+      font-size="11"
+      fill="#5A636B"
+      text-anchor="middle"
+      transform="rotate(-90 14 ${H/2})"
+    >
+      Discount / Premium %
+    </text>
+  `;
 
   return s;
+
 }
+
 
 function buildTmnav(){
 
@@ -831,403 +1548,688 @@ function buildTmnav(){
   nav.innerHTML="";
 
   const current=document.createElement("button");
+
   current.className="ctl tmb on";
   current.dataset.s=N;
-  current.textContent=shortDate(CUR.date)+" (current)";
+  current.textContent=
+    shortDate(CUR.date)+" (current)";
+
   nav.appendChild(current);
 
   for(let i=N-1;i>=0;i--){
 
     const b=document.createElement("button");
+
     b.className="ctl tmb";
     b.dataset.s=i;
     b.textContent=shortDate(PRIOR[i].date);
 
     nav.appendChild(b);
+
   }
 
   const lbl=document.createElement("span");
+
   lbl.className="seslabel";
   lbl.id="seslabel";
-  lbl.textContent="Showing: "+CUR.date;
+  lbl.textContent=
+    "Showing: "+CUR.date;
 
   nav.appendChild(lbl);
 
-  nav.querySelectorAll(".tmb").forEach(b=>{
+  nav.querySelectorAll(".tmb")
+    .forEach(b=>{
 
-    b.addEventListener("click",()=>{
+      b.addEventListener("click",()=>{
 
-      nav.querySelectorAll(".tmb").forEach(x=>x.classList.remove("on"));
+        nav
+          .querySelectorAll(".tmb")
+          .forEach(x=>x.classList.remove("on"));
 
-      b.classList.add("on");
-      sesIdx=+b.dataset.s;
+        b.classList.add("on");
 
-      render();
+        sesIdx=+b.dataset.s;
+
+        render();
+
+      });
+
     });
 
-  });
 }
+
+
+/*
+  IMPORTANT:
+  Keep return expression on same statement.
+  A newline immediately after bare `return`
+  would cause JavaScript automatic semicolon insertion.
+*/
 
 function currentVisible(t,d){
 
-  const q=qFromZD(d[zIdx],d[3]);
+  const q=
+    qFromZD(
+      d[zIdx],
+      d[3]
+    );
 
-  return
+  return (
     (qFilter==="all" || q===qFilter) &&
     (!holdOnly || HOLDINGS.has(t)) &&
-    tickerMatch(t);
+    tickerMatch(t)
+  );
+
 }
+
 
 function historicalVisible(t,z,dp){
 
-  const q=qFromZD(z,dp);
+  const q=
+    qFromZD(
+      z,
+      dp
+    );
 
-  return
+  return (
     (qFilter==="all" || q===qFilter) &&
     (!holdOnly || HOLDINGS.has(t)) &&
-    tickerMatch(t);
+    tickerMatch(t)
+  );
+
 }
+
 
 function render(){
 
   const N=PRIOR.length;
   const ex=getExtent();
 
-  const Xf=z=>ML+(z-ex.zmin)/(ex.zmax-ex.zmin)*(W-ML-MR);
-  const Yf=d=>MT+(ex.dmax-d)/(ex.dmax-ex.dmin)*(H-MT-MB);
+  const Xf=z=>
+    ML+
+    (z-ex.zmin)/
+    (ex.zmax-ex.zmin)*
+    (W-ML-MR);
+
+  const Yf=d=>
+    MT+
+    (ex.dmax-d)/
+    (ex.dmax-ex.dmin)*
+    (H-MT-MB);
 
   let s="";
 
-  s=drawGrid(s,ex,Xf,Yf);
+  s=
+    drawGrid(
+      s,
+      ex,
+      Xf,
+      Yf
+    );
+
 
   if(compareMode && sesIdx<N){
 
-    const ps=PRIOR[sesIdx];
+    const ps=
+      PRIOR[sesIdx];
 
-    Object.keys(CUR.data).forEach(t=>{
 
-      if(!ps.d[t])return;
+    Object.keys(CUR.data)
+      .forEach(t=>{
 
-      const cd=CUR.data[t];
-      const pd=ps.d[t];
+        if(!ps.d[t]){
+          return;
+        }
 
-      if(
-        !currentVisible(t,cd) &&
-        !historicalVisible(t,pd[0],pd[1])
-      )return;
+        const cd=
+          CUR.data[t];
 
-      const cx=Xf(cd[zIdx]);
-      const cy=Yf(cd[3]);
+        const pd=
+          ps.d[t];
 
-      const px=Xf(pd[0]);
-      const py=Yf(pd[1]);
+        if(
+          !currentVisible(t,cd) &&
+          !historicalVisible(
+            t,
+            pd[0],
+            pd[1]
+          )
+        ){
+          return;
+        }
 
-      if(Math.hypot(cx-px,cy-py)>5){
+        const cx=
+          Xf(cd[zIdx]);
 
-        s+=`<line
-          x1="${cx}" y1="${cy}"
-          x2="${px}" y2="${py}"
-          stroke="#6366F1"
-          stroke-width="1.2"
-          stroke-dasharray="4,3"
-          opacity=".38"
-        />`;
-      }
-    });
+        const cy=
+          Yf(cd[3]);
 
-    Object.keys(ps.d).forEach(t=>{
+        const px=
+          Xf(pd[0]);
 
-      const [z1y,dp]=ps.d[t];
+        const py=
+          Yf(pd[1]);
 
-      if(!historicalVisible(t,z1y,dp))return;
+        if(
+          Math.hypot(
+            cx-px,
+            cy-py
+          )>5
+        ){
 
-      const q=qFromZD(z1y,dp);
+          s+=`
+            <line
+              x1="${cx}"
+              y1="${cy}"
+              x2="${px}"
+              y2="${py}"
+              stroke="#6366F1"
+              stroke-width="1.2"
+              stroke-dasharray="4,3"
+              opacity=".38"
+            />
+          `;
 
-      s+=`<g class="dot" data-t="${t}" data-mode="prior">
-        <circle
-          cx="${Xf(z1y)}"
-          cy="${Yf(dp)}"
-          r="5"
-          fill="${QCOLOR[q]}"
-          opacity=".48"
-        />
-        <text
-          x="${Xf(z1y)}"
-          y="${Yf(dp)-9}"
-          font-size="8.5"
-          text-anchor="middle"
-          fill="#6A7280"
-        >${t}</text>
-      </g>`;
-    });
+        }
 
-    Object.keys(CUR.data).forEach(t=>{
+      });
 
-      const d=CUR.data[t];
 
-      const z=d[zIdx];
-      const dp=d[3];
-      const avg=d[4];
+    Object.keys(ps.d)
+      .forEach(t=>{
 
-      const q=qFromZD(z,dp);
-      const fc=QCOLOR[q];
+        const [z1y,dp]=
+          ps.d[t];
 
-      const dim=currentVisible(t,d) ? "" : " dimmed";
+        if(
+          !historicalVisible(
+            t,
+            z1y,
+            dp
+          )
+        ){
+          return;
+        }
 
-      const cx=Xf(z);
-      const cy=Yf(dp);
-      const ay=Yf(avg);
+        const q=
+          qFromZD(
+            z1y,
+            dp
+          );
 
-      s+=`<g class="dot${dim}" data-t="${t}" data-mode="current">
+        s+=`
+          <g
+            class="dot"
+            data-t="${t}"
+            data-mode="prior"
+          >
 
-        <line
-          x1="${cx}" y1="${cy}"
-          x2="${cx}" y2="${ay}"
-          stroke="${fc}"
-          stroke-width="1"
-          stroke-dasharray="3,3"
-          opacity=".4"
-        />
+            <circle
+              cx="${Xf(z1y)}"
+              cy="${Yf(dp)}"
+              r="5"
+              fill="${QCOLOR[q]}"
+              opacity=".48"
+            />
 
-        <circle
-          cx="${cx}"
-          cy="${ay}"
-          r="2"
-          fill="none"
-          stroke="${fc}"
-          stroke-width="1"
-          opacity=".4"
-        />
+            <text
+              x="${Xf(z1y)}"
+              y="${Yf(dp)-9}"
+              font-size="8.5"
+              text-anchor="middle"
+              fill="#6A7280"
+            >${t}</text>
 
-        ${HOLDINGS.has(t)?
-          `<circle
-             cx="${cx}"
-             cy="${cy}"
-             r="11"
-             fill="none"
-             stroke="${fc}"
-             stroke-width="1.5"
-             opacity=".8"
-           />`:""}
+          </g>
+        `;
 
-        <circle cx="${cx}" cy="${cy}" r="9" fill="white" opacity=".9"/>
-        <circle cx="${cx}" cy="${cy}" r="6" fill="${fc}"/>
+      });
 
-        <text
-          x="${cx}"
-          y="${cy-13}"
-          font-size="10"
-          font-weight="800"
-          text-anchor="middle"
-          fill="${fc}"
-          stroke="white"
-          stroke-width="3"
-          paint-order="stroke"
-        >${t}</text>
 
-      </g>`;
-    });
+    Object.keys(CUR.data)
+      .forEach(t=>{
 
-    document.getElementById("chart").innerHTML=s;
+        const d=
+          CUR.data[t];
+
+        const z=
+          d[zIdx];
+
+        const dp=
+          d[3];
+
+        const avg=
+          d[4];
+
+        const q=
+          qFromZD(
+            z,
+            dp
+          );
+
+        const fc=
+          QCOLOR[q];
+
+        const dim=
+          currentVisible(t,d)
+            ? ""
+            : " dimmed";
+
+        const cx=
+          Xf(z);
+
+        const cy=
+          Yf(dp);
+
+        const ay=
+          Yf(avg);
+
+        s+=`
+          <g
+            class="dot${dim}"
+            data-t="${t}"
+            data-mode="current"
+          >
+
+            <line
+              x1="${cx}"
+              y1="${cy}"
+              x2="${cx}"
+              y2="${ay}"
+              stroke="${fc}"
+              stroke-width="1"
+              stroke-dasharray="3,3"
+              opacity=".4"
+            />
+
+            <circle
+              cx="${cx}"
+              cy="${ay}"
+              r="2"
+              fill="none"
+              stroke="${fc}"
+              stroke-width="1"
+              opacity=".4"
+            />
+
+            ${
+              HOLDINGS.has(t)
+                ? `
+                  <circle
+                    cx="${cx}"
+                    cy="${cy}"
+                    r="11"
+                    fill="none"
+                    stroke="${fc}"
+                    stroke-width="1.5"
+                    opacity=".8"
+                  />
+                `
+                : ""
+            }
+
+            <circle
+              cx="${cx}"
+              cy="${cy}"
+              r="9"
+              fill="white"
+              opacity=".9"
+            />
+
+            <circle
+              cx="${cx}"
+              cy="${cy}"
+              r="6"
+              fill="${fc}"
+            />
+
+            <text
+              x="${cx}"
+              y="${cy-13}"
+              font-size="10"
+              font-weight="800"
+              text-anchor="middle"
+              fill="${fc}"
+              stroke="white"
+              stroke-width="3"
+              paint-order="stroke"
+            >${t}</text>
+
+          </g>
+        `;
+
+      });
+
+
+    document
+      .getElementById("chart")
+      .innerHTML=s;
 
     bindDotsCompare();
 
-    document.getElementById("seslabel").textContent=
-      `Current: ${CUR.date} vs ${ps.date}`;
+    document
+      .getElementById("seslabel")
+      .textContent=
+        `Current: ${CUR.date} vs ${ps.date}`;
+
 
   }else{
 
+
     if(sesIdx===N){
 
-      Object.keys(CUR.data).forEach(t=>{
 
-        const d=CUR.data[t];
+      Object.keys(CUR.data)
+        .forEach(t=>{
 
-        const z=d[zIdx];
-        const dp=d[3];
-        const avg=d[4];
+          const d=
+            CUR.data[t];
 
-        const q=qFromZD(z,dp);
-        const fc=QCOLOR[q];
+          const z=
+            d[zIdx];
 
-        const dim=currentVisible(t,d) ? "" : " dimmed";
+          const dp=
+            d[3];
 
-        const cx=Xf(z);
-        const cy=Yf(dp);
-        const ay=Yf(avg);
+          const avg=
+            d[4];
 
-        s+=`<g class="dot${dim}" data-t="${t}" data-mode="current">
+          const q=
+            qFromZD(
+              z,
+              dp
+            );
 
-          <line
-            x1="${cx}" y1="${cy}"
-            x2="${cx}" y2="${ay}"
-            stroke="${fc}"
-            stroke-width="1"
-            stroke-dasharray="3,3"
-            opacity=".5"
-          />
+          const fc=
+            QCOLOR[q];
 
-          <circle
-            cx="${cx}"
-            cy="${ay}"
-            r="2"
-            fill="none"
-            stroke="${fc}"
-            stroke-width="1"
-            opacity=".5"
-          />
+          const dim=
+            currentVisible(t,d)
+              ? ""
+              : " dimmed";
 
-          <circle
-            cx="${cx}"
-            cy="${cy}"
-            r="8"
-            fill="white"
-            opacity=".85"
-          />
+          const cx=
+            Xf(z);
 
-          ${HOLDINGS.has(t)?
-            `<circle
-               cx="${cx}"
-               cy="${cy}"
-               r="9.5"
-               fill="none"
-               stroke="${fc}"
-               stroke-width="1.4"
-               opacity=".85"
-             />`:""}
+          const cy=
+            Yf(dp);
 
-          <circle
-            cx="${cx}"
-            cy="${cy}"
-            r="6"
-            fill="${fc}"
-          />
+          const ay=
+            Yf(avg);
 
-          <text
-            x="${cx}"
-            y="${cy-11}"
-            font-size="9.5"
-            font-weight="700"
-            text-anchor="middle"
-            fill="#1E2429"
-            stroke="white"
-            stroke-width="2.5"
-            paint-order="stroke"
-          >${t}</text>
+          s+=`
+            <g
+              class="dot${dim}"
+              data-t="${t}"
+              data-mode="current"
+            >
 
-        </g>`;
-      });
+              <line
+                x1="${cx}"
+                y1="${cy}"
+                x2="${cx}"
+                y2="${ay}"
+                stroke="${fc}"
+                stroke-width="1"
+                stroke-dasharray="3,3"
+                opacity=".5"
+              />
+
+              <circle
+                cx="${cx}"
+                cy="${ay}"
+                r="2"
+                fill="none"
+                stroke="${fc}"
+                stroke-width="1"
+                opacity=".5"
+              />
+
+              <circle
+                cx="${cx}"
+                cy="${cy}"
+                r="8"
+                fill="white"
+                opacity=".85"
+              />
+
+              ${
+                HOLDINGS.has(t)
+                  ? `
+                    <circle
+                      cx="${cx}"
+                      cy="${cy}"
+                      r="9.5"
+                      fill="none"
+                      stroke="${fc}"
+                      stroke-width="1.4"
+                      opacity=".85"
+                    />
+                  `
+                  : ""
+              }
+
+              <circle
+                cx="${cx}"
+                cy="${cy}"
+                r="6"
+                fill="${fc}"
+              />
+
+              <text
+                x="${cx}"
+                y="${cy-11}"
+                font-size="9.5"
+                font-weight="700"
+                text-anchor="middle"
+                fill="#1E2429"
+                stroke="white"
+                stroke-width="2.5"
+                paint-order="stroke"
+              >${t}</text>
+
+            </g>
+          `;
+
+        });
+
 
     }else{
 
-      const ps=PRIOR[sesIdx];
 
-      Object.keys(ps.d).forEach(t=>{
+      const ps=
+        PRIOR[sesIdx];
 
-        const [z,dp]=ps.d[t];
+      Object.keys(ps.d)
+        .forEach(t=>{
 
-        const q=qFromZD(z,dp);
+          const [z,dp]=
+            ps.d[t];
 
-        const dim=
-          historicalVisible(t,z,dp) ?
-          "" :
-          " dimmed";
+          const q=
+            qFromZD(
+              z,
+              dp
+            );
 
-        s+=`<g class="dot${dim}" data-t="${t}" data-mode="prior">
+          const dim=
+            historicalVisible(
+              t,
+              z,
+              dp
+            )
+              ? ""
+              : " dimmed";
 
-          ${HOLDINGS.has(t)?
-            `<circle
-               cx="${Xf(z)}"
-               cy="${Yf(dp)}"
-               r="9.5"
-               fill="none"
-               stroke="${QCOLOR[q]}"
-               stroke-width="1.4"
-               opacity=".65"
-             />`:""}
+          s+=`
+            <g
+              class="dot${dim}"
+              data-t="${t}"
+              data-mode="prior"
+            >
 
-          <circle
-            cx="${Xf(z)}"
-            cy="${Yf(dp)}"
-            r="6"
-            fill="${QCOLOR[q]}"
-          />
+              ${
+                HOLDINGS.has(t)
+                  ? `
+                    <circle
+                      cx="${Xf(z)}"
+                      cy="${Yf(dp)}"
+                      r="9.5"
+                      fill="none"
+                      stroke="${QCOLOR[q]}"
+                      stroke-width="1.4"
+                      opacity=".65"
+                    />
+                  `
+                  : ""
+              }
 
-          <text
-            x="${Xf(z)}"
-            y="${Yf(dp)-11}"
-            font-size="9.5"
-            font-weight="600"
-            text-anchor="middle"
-            fill="#3A4249"
-          >${t}</text>
+              <circle
+                cx="${Xf(z)}"
+                cy="${Yf(dp)}"
+                r="6"
+                fill="${QCOLOR[q]}"
+              />
 
-        </g>`;
-      });
+              <text
+                x="${Xf(z)}"
+                y="${Yf(dp)-11}"
+                font-size="9.5"
+                font-weight="600"
+                text-anchor="middle"
+                fill="#3A4249"
+              >${t}</text>
+
+            </g>
+          `;
+
+        });
+
     }
 
-    document.getElementById("chart").innerHTML=s;
+
+    document
+      .getElementById("chart")
+      .innerHTML=s;
 
     bindDots();
 
-    document.getElementById("seslabel").textContent=
-      sesIdx===N ?
-      `Showing: ${CUR.date}` :
-      `Showing: ${PRIOR[sesIdx].date}`;
+    document
+      .getElementById("seslabel")
+      .textContent=
+        sesIdx===N
+          ? `Showing: ${CUR.date}`
+          : `Showing: ${PRIOR[sesIdx].date}`;
+
   }
 
   renderSnap();
+
 }
 
-const tip=document.getElementById("tip");
+
+const tip=
+  document.getElementById("tip");
+
 
 function currentTooltip(t,d){
 
-  const m=MOM[t]||null;
-  const ev=EVENT[t] ?
-    `<br><span style="color:#fbbf24">${EVENT[t].label}</span>` :
-    "";
+  const m=
+    MOM[t] || null;
 
-  const q=qFromZD(d[zIdx],d[3]);
+  const ev=
+    EVENT[t]
+      ? `<br><span style="color:#fbbf24">${EVENT[t].label}</span>`
+      : "";
 
-  return `<b>${t}</b>${ev}<br>
+  const q=
+    qFromZD(
+      d[zIdx],
+      d[3]
+    );
+
+  return `
+    <b>${t}</b>${ev}<br>
     ${QNAME[q]} using ${["Z3M","Z6M","Z1Y"][zIdx]}<br>
-    Price $${d[7].toFixed(2)} · NAV $${d[6].toFixed(2)} · Yield ${d[5].toFixed(2)}%<br>
-    D/P ${d[3].toFixed(2)}% · avg ${d[4].toFixed(2)}% · gap ${fmtSigned(d[3]-d[4])}pt<br>
-    Z3M ${d[0].toFixed(2)} · Z6M ${d[1].toFixed(2)} · Z1Y ${d[2].toFixed(2)}<br>
-    Eff. leverage ${fmtLev(t)} · ${HOLDINGS.has(t)?"★ Holding":"Not holding"}<br>
-    ST ${m&&m[0]!=null?m[0].toFixed(2)+"%":"—"} ·
-    LT ${m&&m[1]!=null?m[1].toFixed(2)+"%":"—"}
-    <span style="color:#cbd5e1">(momentum stale: 09/16 reference)</span>`;
+    Price $${d[7].toFixed(2)} ·
+    NAV $${d[6].toFixed(2)} ·
+    Yield ${d[5].toFixed(2)}%<br>
+
+    D/P ${d[3].toFixed(2)}% ·
+    avg ${d[4].toFixed(2)}% ·
+    gap ${fmtSigned(d[3]-d[4])}pt<br>
+
+    Z3M ${d[0].toFixed(2)} ·
+    Z6M ${d[1].toFixed(2)} ·
+    Z1Y ${d[2].toFixed(2)}<br>
+
+    Eff. leverage ${fmtLev(t)} ·
+    ${HOLDINGS.has(t)?"★ Holding":"Not holding"}<br>
+
+    ST ${
+      m&&m[0]!=null
+        ? m[0].toFixed(2)+"%"
+        : "—"
+    } ·
+
+    LT ${
+      m&&m[1]!=null
+        ? m[1].toFixed(2)+"%"
+        : "—"
+    }
+
+    <span style="color:#cbd5e1">
+      (momentum stale: 09/16 reference)
+    </span>
+  `;
+
 }
+
 
 function showCurrentDetail(t){
 
-  const N=PRIOR.length;
-  const d=CUR.data[t];
+  const N=
+    PRIOR.length;
 
-  if(!d)return;
+  const d=
+    CUR.data[t];
 
-  const q=qFromZD(d[zIdx],d[3]);
-  const prev=PRIOR[N-1].d[t];
-  const m=MOM[t]||null;
+  if(!d){
+    return;
+  }
+
+  const q=
+    qFromZD(
+      d[zIdx],
+      d[3]
+    );
+
+  const prev=
+    PRIOR[N-1].d[t];
+
+  const m=
+    MOM[t] || null;
 
   const dz=
-    prev ?
-    d[2]-prev[0] :
-    null;
+    prev
+      ? d[2]-prev[0]
+      : null;
 
   const ddp=
-    prev ?
-    d[3]-prev[1] :
-    null;
+    prev
+      ? d[3]-prev[1]
+      : null;
 
   const prevQ=
-    prev ?
-    qFromZD(prev[0],prev[1]) :
-    null;
+    prev
+      ? qFromZD(
+          prev[0],
+          prev[1]
+        )
+      : null;
 
-  const el=document.getElementById("detail");
+  const el=
+    document.getElementById("detail");
 
   el.style.display="block";
 
@@ -1240,272 +2242,473 @@ function showCurrentDetail(t){
     <span
       class="qcount"
       style="background:${QCOLOR[q]}"
-    >${QNAME[q]}</span>
+    >
+      ${QNAME[q]}
+    </span>
 
-    ${HOLDINGS.has(t)?
-      '<span style="font-size:12px;font-weight:700">★ My Holding</span>' :
-      ""}
+    ${
+      HOLDINGS.has(t)
+        ? '<span style="font-size:12px;font-weight:700">★ My Holding</span>'
+        : ""
+    }
 
     <table>
 
       <tr>
+
         <td>Price</td>
-        <td class="v">$${d[7].toFixed(2)}</td>
+        <td class="v">
+          $${d[7].toFixed(2)}
+        </td>
 
         <td>NAV</td>
-        <td class="v">$${d[6].toFixed(2)}</td>
+        <td class="v">
+          $${d[6].toFixed(2)}
+        </td>
 
         <td>Yield</td>
-        <td class="v">${d[5].toFixed(2)}%</td>
+        <td class="v">
+          ${d[5].toFixed(2)}%
+        </td>
+
       </tr>
 
       <tr>
+
         <td>D/P</td>
-        <td class="v">${d[3].toFixed(2)}%</td>
+        <td class="v">
+          ${d[3].toFixed(2)}%
+        </td>
 
         <td>52-wk avg</td>
-        <td class="v">${d[4].toFixed(2)}%</td>
+        <td class="v">
+          ${d[4].toFixed(2)}%
+        </td>
 
         <td>Own-Normal Gap</td>
-        <td class="v">${fmtSigned(d[3]-d[4])} pt</td>
+        <td class="v">
+          ${fmtSigned(d[3]-d[4])} pt
+        </td>
+
       </tr>
 
       <tr>
+
         <td>Z3M</td>
-        <td class="v">${d[0].toFixed(2)}</td>
+        <td class="v">
+          ${d[0].toFixed(2)}
+        </td>
 
         <td>Z6M</td>
-        <td class="v">${d[1].toFixed(2)}</td>
+        <td class="v">
+          ${d[1].toFixed(2)}
+        </td>
 
         <td>Z1Y</td>
-        <td class="v">${d[2].toFixed(2)}</td>
+        <td class="v">
+          ${d[2].toFixed(2)}
+        </td>
+
       </tr>
 
       <tr>
+
         <td>Δ Z1Y vs 09/18</td>
 
         <td
           class="v"
           style="color:${dz!=null&&dz>=0?'#1D9E75':'#D85A30'}"
         >
-          ${dz==null?"—":fmtSigned(dz)}
+          ${dz==null ? "—" : fmtSigned(dz)}
         </td>
 
         <td>Δ D/P vs 09/18</td>
+
         <td class="v">
-          ${ddp==null?"—":fmtSigned(ddp)+" pt"}
+          ${
+            ddp==null
+              ? "—"
+              : fmtSigned(ddp)+" pt"
+          }
         </td>
 
         <td>Effective leverage</td>
-        <td class="v">${fmtLev(t)}</td>
+
+        <td class="v">
+          ${fmtLev(t)}
+        </td>
+
       </tr>
 
       <tr>
+
         <td>Prior quadrant</td>
+
         <td class="v">
-          ${prevQ ? QNAME[prevQ] : "—"}
+          ${
+            prevQ
+              ? QNAME[prevQ]
+              : "—"
+          }
         </td>
 
         <td>Quadrant change</td>
+
         <td class="v">
-          ${prevQ && prevQ!==q ? `${QNAME[prevQ]} → ${QNAME[q]}` : "No"}
+          ${
+            prevQ && prevQ!==q
+              ? `${QNAME[prevQ]} → ${QNAME[q]}`
+              : "No"
+          }
         </td>
 
         <td>Holding</td>
-        <td class="v">${HOLDINGS.has(t)?"Yes":"No"}</td>
+
+        <td class="v">
+          ${HOLDINGS.has(t)?"Yes":"No"}
+        </td>
+
       </tr>
 
       <tr>
+
         <td>ST Momentum*</td>
+
         <td class="v">
-          ${m&&m[0]!=null?m[0].toFixed(2)+"%":"—"}
+          ${
+            m&&m[0]!=null
+              ? m[0].toFixed(2)+"%"
+              : "—"
+          }
         </td>
 
         <td>LT Momentum*</td>
+
         <td class="v">
-          ${m&&m[1]!=null?m[1].toFixed(2)+"%":"—"}
+          ${
+            m&&m[1]!=null
+              ? m[1].toFixed(2)+"%"
+              : "—"
+          }
         </td>
 
         <td>Data quality</td>
+
         <td class="v">
-          ${EVENT[t]&&EVENT[t].type==="dq" ? "⚑ DQ warning" : "No special DQ flag"}
+          ${
+            EVENT[t] &&
+            EVENT[t].type==="dq"
+              ? "⚑ DQ warning"
+              : "No special DQ flag"
+          }
         </td>
+
       </tr>
 
       <tr>
+
         <td>Corporate action</td>
 
-        <td class="v" colspan="3">
-          ${EVENT[t]&&EVENT[t].type!=="dq" ?
-            EVENT[t].label :
-            "No active corporate-action suppression"}
+        <td
+          class="v"
+          colspan="3"
+        >
+          ${
+            EVENT[t] &&
+            EVENT[t].type!=="dq"
+              ? EVENT[t].label
+              : "No active corporate-action suppression"
+          }
         </td>
 
         <td>Momentum date</td>
+
         <td class="v">
           ${m ? "09/16 reference" : "—"}
         </td>
+
       </tr>
 
     </table>
 
-    <div style="font-size:10.5px;color:#6b7280;margin-top:7px">
+    <div
+      style="
+        font-size:10.5px;
+        color:#6b7280;
+        margin-top:7px
+      "
+    >
       * Momentum values were not refreshed by the supplied 09/21 feed.
       Where displayed, they are explicitly stale 09/16 reference values.
     </div>
   `;
+
 }
+
 
 function bindDots(){
 
-  const N=PRIOR.length;
+  const N=
+    PRIOR.length;
 
-  document.querySelectorAll(".dot").forEach(g=>{
+  document
+    .querySelectorAll(".dot")
+    .forEach(g=>{
 
-    const t=g.dataset.t;
+      const t=
+        g.dataset.t;
 
-    if(!t)return;
+      if(!t){
+        return;
+      }
 
-    const isCur=sesIdx===N;
+      const isCur=
+        sesIdx===N;
 
-    g.addEventListener("mousemove",e=>{
+      g.addEventListener(
+        "mousemove",
+        e=>{
 
-      tip.style.display="block";
-      tip.style.left=(e.clientX+14)+"px";
-      tip.style.top=(e.clientY+10)+"px";
+          tip.style.display="block";
 
-      if(isCur){
+          tip.style.left=
+            (e.clientX+14)+"px";
 
-        tip.innerHTML=currentTooltip(t,CUR.data[t]);
+          tip.style.top=
+            (e.clientY+10)+"px";
 
-      }else{
+          if(isCur){
 
-        const pd=PRIOR[sesIdx].d[t];
+            tip.innerHTML=
+              currentTooltip(
+                t,
+                CUR.data[t]
+              );
 
-        if(pd){
+          }else{
 
-          tip.innerHTML=
-            `<b>${t}</b> · ${PRIOR[sesIdx].date}<br>
-             Z1Y ${pd[0].toFixed(2)} · D/P ${pd[1].toFixed(2)}%`;
+            const pd=
+              PRIOR[sesIdx].d[t];
+
+            if(pd){
+
+              tip.innerHTML=`
+                <b>${t}</b> · ${PRIOR[sesIdx].date}<br>
+                Z1Y ${pd[0].toFixed(2)} ·
+                D/P ${pd[1].toFixed(2)}%
+              `;
+
+            }
+
+          }
+
         }
-      }
+      );
+
+      g.addEventListener(
+        "mouseleave",
+        ()=>{
+          tip.style.display="none";
+        }
+      );
+
+      g.addEventListener(
+        "click",
+        ()=>{
+
+          if(isCur){
+            showCurrentDetail(t);
+          }
+
+        }
+      );
+
     });
 
-    g.addEventListener(
-      "mouseleave",
-      ()=>tip.style.display="none"
-    );
-
-    g.addEventListener("click",()=>{
-
-      if(isCur){
-        showCurrentDetail(t);
-      }
-    });
-
-  });
 }
+
 
 function bindDotsCompare(){
 
-  const ps=PRIOR[sesIdx];
+  const ps=
+    PRIOR[sesIdx];
 
-  document.querySelectorAll(".dot").forEach(g=>{
+  document
+    .querySelectorAll(".dot")
+    .forEach(g=>{
 
-    const t=g.dataset.t;
-    const mode=g.dataset.mode;
+      const t=
+        g.dataset.t;
 
-    if(!t)return;
+      const mode=
+        g.dataset.mode;
 
-    const d=CUR.data[t];
-    const pd=ps.d[t];
-
-    g.addEventListener("mousemove",e=>{
-
-      tip.style.display="block";
-      tip.style.left=(e.clientX+14)+"px";
-      tip.style.top=(e.clientY+10)+"px";
-
-      if(mode==="current" && d){
-
-        tip.innerHTML=
-          `<b>${t}</b>
-           <span style="color:#a5b4fc">▲ ${shortDate(CUR.date)}</span><br>
-           D/P ${d[3].toFixed(2)}% ·
-           ${["Z3M","Z6M","Z1Y"][zIdx]} ${d[zIdx].toFixed(2)} ·
-           Z1Y ${d[2].toFixed(2)}<br>
-           ${EVENT[t]?
-             `<span style="color:#fbbf24">${EVENT[t].label}</span><br>` :
-             ""}
-           Eff. leverage ${fmtLev(t)}`;
-
-      }else if(mode==="prior" && pd){
-
-        const dz=
-          d ?
-          d[2]-pd[0] :
-          null;
-
-        const ddp=
-          d ?
-          d[3]-pd[1] :
-          null;
-
-        tip.innerHTML=
-          `<b>${t}</b>
-           <span style="color:#cbd5e1">◉ ${ps.date}</span><br>
-           D/P ${pd[1].toFixed(2)}% ·
-           Z1Y ${pd[0].toFixed(2)}<br>
-           To ${shortDate(CUR.date)}:
-           ΔZ1Y ${dz==null?"—":fmtSigned(dz)} ·
-           ΔD/P ${ddp==null?"—":fmtSigned(ddp)+"pt"}`;
+      if(!t){
+        return;
       }
-    });
 
-    g.addEventListener(
-      "mouseleave",
-      ()=>tip.style.display="none"
-    );
+      const d=
+        CUR.data[t];
 
-    g.addEventListener("click",()=>{
+      const pd=
+        ps.d[t];
 
-      if(mode==="current" && d){
 
-        showCurrentDetail(t);
+      g.addEventListener(
+        "mousemove",
+        e=>{
 
-        const el=document.getElementById("detail");
+          tip.style.display="block";
 
-        if(pd){
+          tip.style.left=
+            (e.clientX+14)+"px";
 
-          el.innerHTML+=`
-            <div
-              style="
-                margin-top:8px;
-                padding-top:7px;
-                border-top:1px solid #DEE3E7;
-                font-size:12px
-              "
-            >
-              <b>Compare baseline · ${ps.date}</b> —
-              Z1Y ${pd[0].toFixed(2)} ·
-              D/P ${pd[1].toFixed(2)}%
-            </div>`;
+          tip.style.top=
+            (e.clientY+10)+"px";
+
+
+          if(
+            mode==="current" &&
+            d
+          ){
+
+            tip.innerHTML=`
+              <b>${t}</b>
+              <span style="color:#a5b4fc">
+                ▲ ${shortDate(CUR.date)}
+              </span>
+              <br>
+
+              D/P ${d[3].toFixed(2)}% ·
+              ${["Z3M","Z6M","Z1Y"][zIdx]}
+              ${d[zIdx].toFixed(2)} ·
+              Z1Y ${d[2].toFixed(2)}
+              <br>
+
+              ${
+                EVENT[t]
+                  ? `
+                    <span style="color:#fbbf24">
+                      ${EVENT[t].label}
+                    </span>
+                    <br>
+                  `
+                  : ""
+              }
+
+              Eff. leverage ${fmtLev(t)}
+            `;
+
+
+          }else if(
+            mode==="prior" &&
+            pd
+          ){
+
+            const dz=
+              d
+                ? d[2]-pd[0]
+                : null;
+
+            const ddp=
+              d
+                ? d[3]-pd[1]
+                : null;
+
+            tip.innerHTML=`
+              <b>${t}</b>
+              <span style="color:#cbd5e1">
+                ◉ ${ps.date}
+              </span>
+              <br>
+
+              D/P ${pd[1].toFixed(2)}% ·
+              Z1Y ${pd[0].toFixed(2)}
+              <br>
+
+              To ${shortDate(CUR.date)}:
+              ΔZ1Y ${
+                dz==null
+                  ? "—"
+                  : fmtSigned(dz)
+              } ·
+
+              ΔD/P ${
+                ddp==null
+                  ? "—"
+                  : fmtSigned(ddp)+"pt"
+              }
+            `;
+
+          }
+
         }
-      }
+      );
+
+
+      g.addEventListener(
+        "mouseleave",
+        ()=>{
+          tip.style.display="none";
+        }
+      );
+
+
+      g.addEventListener(
+        "click",
+        ()=>{
+
+          if(
+            mode==="current" &&
+            d
+          ){
+
+            showCurrentDetail(t);
+
+            const el=
+              document.getElementById("detail");
+
+            if(pd){
+
+              el.innerHTML+=`
+                <div
+                  style="
+                    margin-top:8px;
+                    padding-top:7px;
+                    border-top:1px solid #DEE3E7;
+                    font-size:12px
+                  "
+                >
+                  <b>Compare baseline · ${ps.date}</b> —
+                  Z1Y ${pd[0].toFixed(2)} ·
+                  D/P ${pd[1].toFixed(2)}%
+                </div>
+              `;
+
+            }
+
+          }
+
+        }
+      );
+
     });
 
-  });
 }
+
 
 function renderSnap(){
 
-  const N=PRIOR.length;
-  const isCur=sesIdx===N;
+  const N=
+    PRIOR.length;
+
+  const isCur=
+    sesIdx===N;
 
   const pool=
-    isCur ?
-    Object.keys(CUR.data) :
-    Object.keys(PRIOR[sesIdx].d);
+    isCur
+      ? Object.keys(CUR.data)
+      : Object.keys(PRIOR[sesIdx].d);
 
   const counts={
     G:0,
@@ -1514,282 +2717,513 @@ function renderSnap(){
     X:0
   };
 
+
   pool.forEach(t=>{
 
-    if(holdOnly && !HOLDINGS.has(t))return;
+    if(
+      holdOnly &&
+      !HOLDINGS.has(t)
+    ){
+      return;
+    }
 
     const z=
-      isCur ?
-      CUR.data[t][zIdx] :
-      PRIOR[sesIdx].d[t][0];
+      isCur
+        ? CUR.data[t][zIdx]
+        : PRIOR[sesIdx].d[t][0];
 
     const dp=
-      isCur ?
-      CUR.data[t][3] :
-      PRIOR[sesIdx].d[t][1];
+      isCur
+        ? CUR.data[t][3]
+        : PRIOR[sesIdx].d[t][1];
 
-    counts[qFromZD(z,dp)]++;
+    counts[
+      qFromZD(z,dp)
+    ]++;
+
   });
 
-  document.getElementById("snapTitle").textContent=
-    "Quadrant counts — "+(holdOnly?"holdings":"supplied universe");
 
-  document.getElementById("snapCounts").innerHTML=
-    Object.keys(counts).map(q=>
-      `<span class="qcount" style="background:${QCOLOR[q]}">
-        ${QNAME[q].split("·")[0].trim()} ${counts[q]}
-      </span>`
-    ).join("");
+  document
+    .getElementById("snapTitle")
+    .textContent=
+      "Quadrant counts — "+
+      (
+        holdOnly
+          ? "holdings"
+          : "supplied universe"
+      );
+
+
+  document
+    .getElementById("snapCounts")
+    .innerHTML=
+      Object.keys(counts)
+        .map(q=>`
+          <span
+            class="qcount"
+            style="background:${QCOLOR[q]}"
+          >
+            ${QNAME[q].split("·")[0].trim()}
+            ${counts[q]}
+          </span>
+        `)
+        .join("");
+
 
   const sortable=
-    pool.filter(t=>!holdOnly || HOLDINGS.has(t));
+    pool.filter(
+      t=>
+        !holdOnly ||
+        HOLDINGS.has(t)
+    );
+
 
   const getZ1Y=t=>
-    isCur ?
-    CUR.data[t][2] :
-    PRIOR[sesIdx].d[t][0];
+    isCur
+      ? CUR.data[t][2]
+      : PRIOR[sesIdx].d[t][0];
+
 
   const getZSel=t=>
-    isCur ?
-    CUR.data[t][zIdx] :
-    PRIOR[sesIdx].d[t][0];
+    isCur
+      ? CUR.data[t][zIdx]
+      : PRIOR[sesIdx].d[t][0];
+
 
   const getDP=t=>
-    isCur ?
-    CUR.data[t][3] :
-    PRIOR[sesIdx].d[t][1];
+    isCur
+      ? CUR.data[t][3]
+      : PRIOR[sesIdx].d[t][1];
 
-  const deep=[...sortable]
-    .sort((a,b)=>getZ1Y(a)-getZ1Y(b))
-    .slice(0,3);
 
-  document.getElementById("snapDeep").innerHTML=
-    deep.map(t=>{
+  const deep=
+    [...sortable]
+      .sort(
+        (a,b)=>
+          getZ1Y(a)-
+          getZ1Y(b)
+      )
+      .slice(0,3);
 
-      const flag=
-        isCur && EVENT[t] ?
-        ` <span style="color:#D97706;font-size:10px">⚠ ${EVENT[t].label}</span>` :
-        "";
 
-      return `<div>
-        <b>${t}</b>
-        Z1Y ${getZ1Y(t).toFixed(2)} ·
-        D/P ${getDP(t).toFixed(2)}%
-        ${flag}
-      </div>`;
+  document
+    .getElementById("snapDeep")
+    .innerHTML=
+      deep.map(t=>{
 
-    }).join("");
+        const flag=
+          isCur &&
+          EVENT[t]
+            ? `
+              <span
+                style="
+                  color:#D97706;
+                  font-size:10px
+                "
+              >
+                ⚠ ${EVENT[t].label}
+              </span>
+            `
+            : "";
+
+        return `
+          <div>
+            <b>${t}</b>
+            Z1Y ${getZ1Y(t).toFixed(2)} ·
+            D/P ${getDP(t).toFixed(2)}%
+            ${flag}
+          </div>
+        `;
+
+      }).join("");
+
 
   const greens=
     sortable
-      .filter(t=>qFromZD(getZSel(t),getDP(t))==="G")
-      .sort((a,b)=>getZSel(b)-getZSel(a))
+      .filter(
+        t=>
+          qFromZD(
+            getZSel(t),
+            getDP(t)
+          )==="G"
+      )
+      .sort(
+        (a,b)=>
+          getZSel(b)-
+          getZSel(a)
+      )
       .slice(0,3);
 
-  document.getElementById("snapGreen").innerHTML=
-    greens.length ?
-    greens.map(t=>{
 
-      const flag=
-        isCur && EVENT[t] ?
-        ` <span style="color:#D97706;font-size:10px">⚠</span>` :
-        "";
+  document
+    .getElementById("snapGreen")
+    .innerHTML=
+      greens.length
+        ? greens.map(t=>{
 
-      return `<div>
-        <b>${t}</b>
-        ${["Z3M","Z6M","Z1Y"][zIdx]}
-        ${fmtSigned(getZSel(t))}
-        ${flag}
-      </div>`;
+            const flag=
+              isCur &&
+              EVENT[t]
+                ? `
+                  <span
+                    style="
+                      color:#D97706;
+                      font-size:10px
+                    "
+                  >
+                    ⚠
+                  </span>
+                `
+                : "";
 
-    }).join("") :
-    "None";
+            return `
+              <div>
+                <b>${t}</b>
+                ${["Z3M","Z6M","Z1Y"][zIdx]}
+                ${fmtSigned(getZSel(t))}
+                ${flag}
+              </div>
+            `;
+
+          }).join("")
+        : "None";
+
 }
 
-/* Controls */
 
-document.querySelectorAll(".zt").forEach(b=>{
+/* Z horizon controls */
 
-  b.addEventListener("click",()=>{
+document
+  .querySelectorAll(".zt")
+  .forEach(b=>{
 
-    document
-      .querySelectorAll(".zt")
-      .forEach(x=>x.classList.remove("on"));
+    b.addEventListener(
+      "click",
+      ()=>{
 
-    b.classList.add("on");
+        document
+          .querySelectorAll(".zt")
+          .forEach(
+            x=>x.classList.remove("on")
+          );
 
-    zIdx=+b.dataset.z;
+        b.classList.add("on");
 
-    render();
+        zIdx=
+          +b.dataset.z;
+
+        render();
+
+      }
+    );
+
   });
 
-});
 
-document.querySelectorAll(".qf").forEach(b=>{
+/* Quadrant filter controls */
 
-  b.addEventListener("click",()=>{
+document
+  .querySelectorAll(".qf")
+  .forEach(b=>{
 
-    document
-      .querySelectorAll(".qf")
-      .forEach(x=>x.classList.remove("on"));
+    b.addEventListener(
+      "click",
+      ()=>{
 
-    b.classList.add("on");
+        document
+          .querySelectorAll(".qf")
+          .forEach(
+            x=>x.classList.remove("on")
+          );
 
-    qFilter=b.dataset.q;
+        b.classList.add("on");
 
-    render();
+        qFilter=
+          b.dataset.q;
+
+        render();
+
+      }
+    );
+
   });
 
-});
+
+/* Ticker search */
 
 document
   .getElementById("search")
-  .addEventListener("input",e=>{
+  .addEventListener(
+    "input",
+    e=>{
 
-    searchTerms=e.target.value
-      .toUpperCase()
-      .split(/[\s,;]+/)
-      .map(s=>s.trim())
-      .filter(Boolean);
+      searchTerms=
+        e.target.value
+          .toUpperCase()
+          .split(/[\s,;]+/)
+          .map(s=>s.trim())
+          .filter(Boolean);
 
-    render();
-  });
+      render();
+
+    }
+  );
+
+
+/* Holdings filter */
 
 document
   .getElementById("hold")
-  .addEventListener("click",e=>{
+  .addEventListener(
+    "click",
+    e=>{
 
-    holdOnly=!holdOnly;
+      holdOnly=
+        !holdOnly;
 
-    e.target.classList.toggle("on",holdOnly);
+      e.target
+        .classList
+        .toggle(
+          "on",
+          holdOnly
+        );
 
-    render();
-  });
+      render();
+
+    }
+  );
+
+
+/* Compare mode */
 
 document
   .getElementById("compareBtn")
-  .addEventListener("click",e=>{
+  .addEventListener(
+    "click",
+    e=>{
 
-    const N=PRIOR.length;
+      const N=
+        PRIOR.length;
 
-    compareMode=!compareMode;
+      compareMode=
+        !compareMode;
 
-    e.target.classList.toggle("on",compareMode);
-
-    document
-      .getElementById("compareBanner")
-      .style.display=
-        compareMode ?
-        "block" :
-        "none";
-
-    if(compareMode && sesIdx===N){
-
-      sesIdx=N-1;
-
-      document
-        .querySelectorAll(".tmb")
-        .forEach(x=>x.classList.remove("on"));
-
-      const target=
-        document.querySelector(
-          `.tmb[data-s="${N-1}"]`
+      e.target
+        .classList
+        .toggle(
+          "on",
+          compareMode
         );
 
-      if(target){
-        target.classList.add("on");
-      }
-    }
+      document
+        .getElementById("compareBanner")
+        .style.display=
+          compareMode
+            ? "block"
+            : "none";
 
-    render();
-  });
+
+      if(
+        compareMode &&
+        sesIdx===N
+      ){
+
+        sesIdx=
+          N-1;
+
+        document
+          .querySelectorAll(".tmb")
+          .forEach(
+            x=>x.classList.remove("on")
+          );
+
+        const target=
+          document.querySelector(
+            `.tmb[data-s="${N-1}"]`
+          );
+
+        if(target){
+          target.classList.add("on");
+        }
+
+      }
+
+      render();
+
+    }
+  );
+
 
 /*
-  Runtime validation.
-  These checks do not alter the raw dataset.
+  Runtime/spec validation.
+  Does not alter raw data.
 */
+
 function runAudit(){
 
   const issues=[];
 
-  const tickers=Object.keys(CUR.data);
+  const tickers=
+    Object.keys(CUR.data);
+
 
   if(tickers.length!==25){
+
     issues.push(
       `Expected 25 supplied current tickers, found ${tickers.length}.`
     );
+
   }
+
 
   const dupes=
     tickers.filter(
-      (t,i,a)=>a.indexOf(t)!==i
+      (t,i,a)=>
+        a.indexOf(t)!==i
     );
 
+
   if(dupes.length){
+
     issues.push(
-      "Duplicate tickers: "+dupes.join(", ")
+      "Duplicate tickers: "+
+      dupes.join(", ")
     );
+
   }
+
 
   tickers.forEach(t=>{
 
-    const d=CUR.data[t];
+    const d=
+      CUR.data[t];
 
-    if(!Array.isArray(d) || d.length!==8){
-      issues.push(`${t}: current data array is not length 8.`);
+    if(
+      !Array.isArray(d) ||
+      d.length!==8
+    ){
+
+      issues.push(
+        `${t}: current data array is not length 8.`
+      );
+
       return;
+
     }
 
-    const q=qFromZD(d[2],d[3]);
 
-    if(d[3]>0 && !["B","X"].includes(q)){
-      issues.push(`${t}: positive D/P sign-rule failure.`);
+    const q=
+      qFromZD(
+        d[2],
+        d[3]
+      );
+
+
+    if(
+      d[3]>0 &&
+      !["B","X"].includes(q)
+    ){
+
+      issues.push(
+        `${t}: positive D/P sign-rule failure.`
+      );
+
     }
 
-    if(d[3]<0 && !["G","O"].includes(q)){
-      issues.push(`${t}: negative D/P sign-rule failure.`);
+
+    if(
+      d[3]<0 &&
+      !["G","O"].includes(q)
+    ){
+
+      issues.push(
+        `${t}: negative D/P sign-rule failure.`
+      );
+
     }
 
-    if(d[3]===0 && !["B","X"].includes(q)){
-      issues.push(`${t}: zero D/P must map to Blue/Gray side.`);
+
+    if(
+      d[3]===0 &&
+      !["B","X"].includes(q)
+    ){
+
+      issues.push(
+        `${t}: zero D/P must map to Blue/Gray side.`
+      );
+
     }
+
   });
 
+
   if(PRIOR.length!==15){
+
     issues.push(
       `Rolling history contains ${PRIOR.length} sessions instead of 15.`
     );
+
   }
+
 
   const holdingsPresent=
     [...HOLDINGS]
-      .filter(t=>CUR.data[t]);
+      .filter(
+        t=>CUR.data[t]
+      );
+
 
   if(holdingsPresent.length!==14){
+
     issues.push(
       `Expected 14 holdings in current supplied feed, found ${holdingsPresent.length}.`
     );
+
   }
+
 
   const missingExpected=
     STANDARD_UNIVERSE
-      .filter(t=>!CUR.data[t]);
+      .filter(
+        t=>!CUR.data[t]
+      );
+
 
   if(
     missingExpected.join(",") !==
     MISSING_CURRENT.join(",")
   ){
+
     issues.push(
       "Standard-universe missing list does not reconcile."
     );
+
   }
 
-  const counts={G:0,B:0,O:0,X:0};
+
+  const counts={
+    G:0,
+    B:0,
+    O:0,
+    X:0
+  };
+
 
   tickers.forEach(t=>{
-    const d=CUR.data[t];
-    counts[qFromZD(d[2],d[3])]++;
+
+    const d=
+      CUR.data[t];
+
+    counts[
+      qFromZD(
+        d[2],
+        d[3]
+      )
+    ]++;
+
   });
+
 
   const expected={
     G:4,
@@ -1798,13 +3232,73 @@ function runAudit(){
     X:1
   };
 
-  for(const k of Object.keys(expected)){
-    if(counts[k]!==expected[k]){
+
+  for(
+    const k of Object.keys(expected)
+  ){
+
+    if(
+      counts[k]!==expected[k]
+    ){
+
       issues.push(
         `Quadrant count ${k}: expected ${expected[k]}, found ${counts[k]}.`
       );
+
     }
+
   }
+
+
+  /*
+    Runtime visibility checks.
+    These explicitly guard against the ASI bug
+    that caused all dots to render dimmed.
+  */
+
+  const originalQFilter=
+    qFilter;
+
+  const originalHoldOnly=
+    holdOnly;
+
+  const originalSearchTerms=
+    [...searchTerms];
+
+
+  qFilter="all";
+  holdOnly=false;
+  searchTerms=[];
+
+
+  tickers.forEach(t=>{
+
+    const visible=
+      currentVisible(
+        t,
+        CUR.data[t]
+      );
+
+    if(visible!==true){
+
+      issues.push(
+        `${t}: default current visibility should be true but returned ${String(visible)}.`
+      );
+
+    }
+
+  });
+
+
+  qFilter=
+    originalQFilter;
+
+  holdOnly=
+    originalHoldOnly;
+
+  searchTerms=
+    originalSearchTerms;
+
 
   console.info(
     "CEF Time Machine 09/21/2026 audit",
@@ -1818,10 +3312,15 @@ function runAudit(){
     }
   );
 
+
   return issues;
+
 }
 
-const auditIssues=runAudit();
+
+const auditIssues=
+  runAudit();
+
 
 if(auditIssues.length){
 
@@ -1838,9 +3337,12 @@ if(auditIssues.length){
     "PDI and PDO absent from supplied feed; " +
     "quadrant counts G4 B2 O18 X1 verified; " +
     "15-session prior window verified; " +
+    "default dot visibility verified; " +
     "ASGI remains RO SUPPRESSED."
   );
+
 }
+
 
 buildTmnav();
 render();
