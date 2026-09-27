@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>CEF Time Machine · 09/24/2026</title>
+<title>CEF Time Machine · 09/25/2026</title>
 
 <style>
 :root{
@@ -100,7 +100,7 @@ svg{width:100%;height:auto;display:block}
 .tooltip{
   position:fixed;pointer-events:none;background:#1E2429;color:#fff;
   font-size:11.5px;line-height:1.5;padding:8px 10px;border-radius:6px;
-  z-index:50;display:none;max-width:340px;box-shadow:0 3px 14px #0003;
+  z-index:50;display:none;max-width:350px;box-shadow:0 3px 14px #0003;
 }
 .snap{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
@@ -137,6 +137,11 @@ svg{width:100%;height:auto;display:block}
   border-radius:5px;padding:6px 8px;font-size:11px;
   margin-bottom:7px;line-height:1.45;
 }
+.datawarn{
+  background:#FFF8EC;border:1px solid #E3A008;color:#713F12;
+  border-radius:5px;padding:6px 8px;font-size:11px;
+  margin-bottom:7px;line-height:1.45;
+}
 .compare-banner{
   background:#EEF2FF;border:1.5px solid var(--purple);border-radius:6px;
   padding:6px 12px;font-size:12px;color:#3730A3;margin-bottom:8px;display:none;
@@ -162,84 +167,94 @@ svg{width:100%;height:auto;display:block}
 <body>
 
 <div class="hdr">
-  <h1>CEF Time Machine · 09/24/2026</h1>
-  <span class="badge neg">Net Δ: −$3.64</span>
+  <h1>CEF Time Machine · 09/25/2026</h1>
+  <span class="badge neg">Net Δ: −$3.27</span>
 </div>
 
 <div class="note">
-Session update · Current data Thursday 09/24/2026 · Net Price Change −$3.64 ·
-09/21 appended to Time Machine · 08/27 rolled off under the 15-dataset history cap ·
-<span class="missing">09/22 and 09/23 are valid market dates but no valuation datasets were supplied, so they are not fabricated or rendered</span> ·
-fresh momentum snapshot supplied with this build ·
-ASGI rights-offering suppression remains active through the subscription window ·
+Session update · Current data Friday 09/25/2026 · Net Price Change −$3.27 ·
+09/24 appended to Time Machine · 08/28 rolled off under the 15-session cap ·
+09/22 and 09/23 remain absent because no valuation datasets were supplied ·
+ASGI rights-offering suppression remains active through the subscription window ending 10/15 unless extended ·
+09/24 momentum retained only as the last available snapshot and is explicitly stale for 09/25 ·
 ERH / RFI distribution-quality cautions retained ·
-raw provider leverage preserved ·
-<span class="missing">25 of 27 standard-universe funds have current valuation data; PDI and PDO have momentum data only.</span>
+raw provider values are preserved ·
+<span class="missing">PDI and PDO still lack current valuation arrays.</span>
 </div>
 
 <div class="alerts">
 
+  <div class="al a">
+    <span class="tag">Data Quality · Provider Reconciliation</span>
+    <b>All 25 supplied Market Price fields are unchanged from 09/24 while Net Price Change is −$3.27.</b>
+    Eight raw D/P fields also differ by at least 0.15 pt from the D/P implied by the supplied Price/NAV pair:
+    PDX, BME, BDJ, UTG, CSQ, BST, PCN, and NBXG.
+    The Matrix preserves the supplied D/P values and annotates the discrepancy rather than silently recalculating them.
+  </div>
+
   <div class="al r">
     <span class="tag">Orange · Deep Value</span>
     <b>PCN Z1Y −2.63 · ASGI −2.30 · EOS −1.86 · GDV / PDX −1.73 · RLTY −1.72 · RQI −1.57</b>
-    — PCN is the deepest unsuppressed Z1Y reading. ASGI remains mechanically extreme but RO-suppressed.
+    — PCN remains the deepest unsuppressed Z1Y reading. ASGI remains mechanically extreme but corporate-action suppressed.
   </div>
 
   <div class="al c">
     <span class="tag">ASGI · Corporate Action</span>
-    <b>RO SUPPRESSED · D/P −6.45% vs +3.29% average · own-normal gap −9.74 pt.</b>
-    Rights-offering economics and share-supply dynamics continue to contaminate normal discount and Z-score interpretation.
+    <b>RO SUPPRESSED · Z1Y −2.30 · D/P −6.45% vs +3.29% average · gap −9.74 pt.</b>
+    The transferable rights offering remains inside its active subscription period, so ordinary discount/Z interpretation remains contaminated.
   </div>
 
   <div class="al r">
     <span class="tag">PCN · Value vs Timing</span>
-    <b>Z3M −3.65 · Z6M −4.30 · Z1Y −2.63 · D/P −2.64% vs +5.16% average · ST momentum −7.59% · LT momentum −26.81%.</b>
-    Raw valuation is extreme, but fresh momentum remains weak. PDI and PDO also show sharply negative ST/LT momentum, supporting broader CEF-bond peer weakness rather than a clean isolated reversal signal.
+    <b>Z3M −3.65 · Z6M −4.30 · Z1Y −2.63 · raw D/P −2.36% vs +5.10% average.</b>
+    The raw own-normal gap is −7.46 pt, but the supplied Price/NAV pair implies approximately −2.64% D/P.
+    The 09/24 momentum snapshot was ST −7.59% / LT −26.81%, so the last available momentum confirmation remained weak.
   </div>
 
   <div class="al r">
-    <span class="tag">Orange · Momentum Divergence</span>
-    <b>RQI own-normal gap −4.88 pt with ST / LT momentum −7.36% / −7.59% ·
-    RNP gap −3.72 pt with momentum −5.60% / −10.64%.</b>
-    Both remain statistically cheap relative to their own regimes, but fresh external momentum does not yet confirm stabilization.
+    <span class="tag">Orange · Own-Normal</span>
+    <b>RQI −4.88 pt · EOS −3.96 pt · RNP −3.72 pt · RFI −3.38 pt ·
+    EOI −3.07 pt · ETG −2.89 pt · GLU −2.55 pt · HTD −2.16 pt.</b>
+    These are below their own 52-week valuation regimes using the raw supplied D/P feed.
+    ASGI's larger −9.74 pt reading remains RO-contaminated.
   </div>
 
   <div class="al r">
-    <span class="tag">Orange · Short-End Stress</span>
-    <b>HTD Z3M −3.53 vs Z1Y −1.25 · ST momentum −9.93% ·
-    ERH Z3M −1.43 vs Z1Y −0.84 · ST momentum −9.77%.</b>
-    Short-horizon valuation and fresh momentum are deteriorating faster than the longer-horizon Z readings.
+    <span class="tag">Orange · Term Structure</span>
+    <b>HTD Z3M −3.53 / Z6M −1.64 / Z1Y −1.25 ·
+    ETG −1.61 / −1.40 / −1.29 · ERH −1.43 / −0.92 / −0.84.</b>
+    Short-horizon readings remain worse than the long end, consistent with continued short-end valuation pressure rather than confirmed stabilization.
+  </div>
+
+  <div class="al r">
+    <span class="tag">Orange · Early Mean-Reversion Structure</span>
+    <b>GLU +0.93 / +0.21 / −0.73 · RNP −0.82 / −0.95 / −1.22 · RQI −1.05 / −1.18 / −1.57.</b>
+    Their Z term structures improve toward the short end, but the last available 09/24 momentum snapshot was still negative for GLU, RNP, and RQI.
   </div>
 
   <div class="al g">
-    <span class="tag">Green · Crossing</span>
-    <b>UTF moved Orange → Green:</b>
-    Z1Y improved from −0.31 to +0.03 while D/P narrowed from −6.12% to −5.35%.
-    Fresh ST momentum remains −9.91%, so the valuation crossing is not yet supported by price momentum.
-  </div>
-
-  <div class="al r">
-    <span class="tag">Orange · Potential Early Mean Reversion</span>
-    <b>GLU Z3M +0.93 / Z6M +0.21 / Z1Y −0.73.</b>
-    The term structure has improved materially, but ST momentum remains −3.71%. Because 09/22–09/23 valuation sessions are missing, the two-session confirmation principle cannot be established from the supplied valuation history.
+    <span class="tag">Green · Thesis Working</span>
+    <b>BME +1.18 · BST +0.82 · CSQ +0.17 · UTF +0.03 · UTG +0.03.</b>
+    No fund crossed into or out of Green on Z1Y between the supplied 09/24 and 09/25 datasets.
   </div>
 
   <div class="al p">
     <span class="tag">Blue · Premium Territory</span>
     <b>DNP Z1Y +1.03 at +10.55% premium · NXG +0.42 at +0.55% premium.</b>
-    DNP is +3.66 pt above its 52-week average premium and carries negative ST/LT momentum of −8.55% / −4.64%.
+    Both remain on the premium side of the Matrix.
   </div>
 
   <div class="al dq">
     <span class="tag">Distribution Quality</span>
     <b>ERH and RFI retain DQ cautions.</b>
-    These flags remain analytically separate from the raw valuation and momentum data.
+    Distribution-quality treatment remains separate from valuation and data-quality reconciliation.
   </div>
 
   <div class="al p">
-    <span class="tag">Data Integrity</span>
-    <b>PDI and PDO have fresh momentum but no supplied 09/24 valuation array.</b>
-    Their momentum is retained as peer context but they are not plotted or assigned a current Matrix quadrant.
+    <span class="tag">Momentum Freshness</span>
+    <b>No new momentum dataset was supplied with 09/25.</b>
+    The 09/24 momentum snapshot is retained for continuity but is labeled stale everywhere it appears.
+    PDI and PDO remain momentum-only peer observations because current valuation data were not supplied.
   </div>
 
 </div>
@@ -269,14 +284,15 @@ raw provider leverage preserved ·
   </div>
 
   <div class="compare-banner" id="compareBanner">
-    <b>Compare mode ON</b> — current 09/24 values are large dots; the selected historical session is shown with smaller dots and dashed movement lines.
+    <b>Compare mode ON</b> — current 09/25 values are large dots; selected historical values are smaller dots; movement is connected by a dashed line.
   </div>
 
   <svg id="chart" viewBox="0 0 980 560" xmlns="http://www.w3.org/2000/svg"></svg>
 
   <div class="legend">
-    09/24 snapshot · selected Z-score / D/P matrix · dashed vertical segment = current D/P to 52-week average ·
-    outer ring = My Holdings · historical sessions display Z1Y / D/P · PDI/PDO momentum retained but not plotted without current valuation data.
+    09/25 snapshot · selected Z-score / D/P matrix · dashed vertical segment = raw current D/P to 52-week average ·
+    outer ring = My Holdings · historical sessions display Z1Y / D/P ·
+    raw provider D/P is preserved even where it does not reconcile to supplied Price/NAV.
   </div>
 
   <div class="tmnav" id="tmnav"></div>
@@ -312,67 +328,73 @@ raw provider leverage preserved ·
 </div>
 
 <div class="highlights">
-  <h2>09/24 Matrix Highlights</h2>
+  <h2>09/25 Matrix Highlights</h2>
 
   <div>
 
     <b>Broad tape:</b>
-    Net Price Change reversed to <b>−$3.64</b>. At default Z1Y, the 25 supplied valuation funds divide into
-    Green <b>5</b> · Blue <b>2</b> · Orange <b>17</b> · Gray <b>1</b>.<br>
+    Supplied Net Price Change is <b>−$3.27</b>. Default Z1Y quadrant counts remain
+    Green <b>5</b> · Blue <b>2</b> · Orange <b>17</b> · Gray <b>1</b>.
+    No fund changed Z1Y quadrant from the supplied 09/24 session.<br>
 
-    <b>Data continuity:</b>
-    The last supplied valuation session is <b>09/21</b>. No 09/22 or 09/23 valuation datasets were supplied, so changes below are
-    <b>09/21 → 09/24</b>, not one-session changes. The two-session confirmation rule cannot be proven across the missing observations.<br>
+    <b>Data-quality reconciliation:</b>
+    Every displayed 09/25 Market Price is identical to the corresponding 09/24 Market Price,
+    even though the supplied portfolio Net Price Change is negative.
+    In addition, eight raw D/P values do not reconcile within 0.15 pt to the supplied Price/NAV pair:
+    PDX raw <b>−10.76%</b> vs implied about <b>−12.21%</b>;
+    BME <b>−2.96%</b> vs <b>−2.39%</b>;
+    BDJ <b>−7.86%</b> vs <b>−7.44%</b>;
+    UTG <b>−0.40%</b> vs about <b>−0.03%</b>;
+    CSQ <b>−8.39%</b> vs about <b>−8.74%</b>;
+    BST <b>−4.83%</b> vs <b>−4.54%</b>;
+    PCN <b>−2.36%</b> vs <b>−2.64%</b>;
+    NBXG <b>−13.95%</b> vs <b>−14.17%</b>.
+    The dashboard therefore treats those D/P moves as raw-provider observations with a visible DQ annotation rather than silently correcting them.<br>
 
-    <b>Deepest clean Z1Y:</b>
-    PCN <b>−2.63</b>, EOS <b>−1.86</b>, GDV <b>−1.73</b>, PDX <b>−1.73</b>,
-    RLTY <b>−1.72</b>, RQI <b>−1.57</b>, RFI <b>−1.32</b>, and EOI / ETG <b>−1.29</b>.
-    ASGI is mechanically <b>−2.30</b> but remains excluded from clean ranking because of its active rights offering.<br>
+    <b>Deepest mechanical Z1Y:</b>
+    PCN <b>−2.63</b>, ASGI <b>−2.30</b>, EOS <b>−1.86</b>,
+    GDV <b>−1.73</b>, PDX <b>−1.73</b>, RLTY <b>−1.72</b>,
+    RQI <b>−1.57</b>, RFI <b>−1.32</b>, EOI / ETG <b>−1.29</b>.
+    ASGI remains excluded from clean-signal interpretation because of the active rights offering.<br>
 
     <b>PCN:</b>
-    Z1Y deteriorated from <b>−1.96</b> to <b>−2.63</b>, while D/P widened from <b>−0.45%</b> to <b>−2.64%</b>.
-    Its own-normal gap expanded to <b>−7.80 pt</b>.
-    Fresh ST / LT momentum is <b>−7.59% / −26.81%</b>.
-    PDI (<b>−9.63% / −31.53%</b>) and PDO (<b>−6.57% / −20.09%</b>) show similarly weak momentum, indicating broader CEF-bond peer pressure.
-    PDI/PDO cannot be assigned valuation quadrants because current D/P/Z arrays were not supplied.<br>
+    Z3M <b>−3.65</b>, Z6M <b>−4.30</b>, and Z1Y <b>−2.63</b> remain unchanged from 09/24.
+    Raw D/P moved from <b>−2.64%</b> to <b>−2.36%</b>, but the supplied 09/25 Price/NAV pair still implies approximately <b>−2.64%</b>.
+    That raw D/P improvement is therefore data-quality qualified.
+    The last available momentum snapshot, dated 09/24, was <b>−7.59% ST / −26.81% LT</b>.<br>
 
     <b>Own-normal gaps:</b>
-    PCN <b>−7.80 pt</b>, RQI <b>−4.88 pt</b>, EOS <b>−3.96 pt</b>,
+    PCN raw <b>−7.46 pt</b>, RQI <b>−4.88 pt</b>, EOS <b>−3.96 pt</b>,
     RNP <b>−3.72 pt</b>, RFI <b>−3.38 pt</b>, EOI <b>−3.07 pt</b>,
-    ETG <b>−2.89 pt</b>, GLU <b>−2.55 pt</b>, and PDX <b>−2.33 pt</b>.
-    ASGI's <b>−9.74 pt</b> gap remains corporate-action contaminated.<br>
+    ETG <b>−2.89 pt</b>, GLU <b>−2.55 pt</b>, and HTD <b>−2.16 pt</b>.
+    ASGI is mechanically wider at <b>−9.74 pt</b> but remains rights-offering contaminated.<br>
 
     <b>Term structure:</b>
-    GLU shows the clearest unsuppressed early-mean-reversion configuration at
-    <b>Z3M +0.93 / Z6M +0.21 / Z1Y −0.73</b>, but ST momentum remains <b>−3.71%</b>.
-    RNP and RQI also show improving short-horizon Z structure relative to Z1Y, while fresh momentum remains negative.
-    HTD's <b>−3.53 / −1.64 / −1.25</b> term structure points the opposite direction: short-end stress is materially worse than the long end.<br>
+    GLU, RNP, and RQI retain improving short-end structures relative to Z1Y.
+    HTD, ETG, and ERH retain the opposite configuration, with Z3M more negative than Z6M and Z1Y.
+    No new momentum feed was supplied to confirm whether those structures improved on 09/25.<br>
 
     <b>Green quadrant:</b>
-    BME <b>+1.18</b>, BST <b>+0.82</b>, UTG <b>+0.29</b>, CSQ <b>+0.25</b>, and UTF <b>+0.03</b>.
-    UTF is the only Z1Y quadrant migration since the last supplied valuation session, moving <b>Orange → Green</b>.
-    Its fresh ST momentum of <b>−9.91%</b> argues against treating that single crossing as confirmed stabilization.<br>
+    BME <b>+1.18</b>, BST <b>+0.82</b>, CSQ <b>+0.17</b>,
+    UTF <b>+0.03</b>, and UTG <b>+0.03</b>.
+    UTG's Z1Y declined from +0.29 to +0.03 but remained above zero; it is therefore an intra-Green deterioration rather than a quadrant change.<br>
 
-    <b>09/21 → 09/24:</b>
-    PCN moved <b>−0.67 Z1Y / −2.19 pt D/P</b>.
-    DNP moved <b>+0.60 / +2.17 pt</b>.
-    GLU improved <b>+0.51 / +1.76 pt</b>.
-    BST weakened <b>−0.69 / −1.34 pt</b>.
-    HTD weakened <b>−0.65 / −1.13 pt</b>.
-    ERH weakened <b>−0.65 / −0.86 pt</b>.
-    UTF improved <b>+0.34 / +0.77 pt</b> and crossed the Z1Y zero line.<br>
+    <b>09/24 → 09/25:</b>
+    Z1Y was unchanged for most funds. CSQ eased from <b>+0.25</b> to <b>+0.17</b>
+    and UTG from <b>+0.29</b> to <b>+0.03</b>.
+    The largest raw D/P changes were PDX <b>+1.45 pt</b>, BME <b>−0.57 pt</b>,
+    BDJ <b>−0.42 pt</b>, UTG <b>−0.31 pt</b>, BST <b>−0.29 pt</b>,
+    and PCN <b>+0.28 pt</b>; each of these is provider-reconciliation qualified where flagged above.<br>
 
-    <b>Fresh momentum:</b>
-    Positive ST momentum is limited to NBXG <b>+1.30%</b>, EOI <b>+0.73%</b>,
-    BME <b>+0.54%</b>, and CSQ <b>+0.52%</b>.
-    The weakest ST readings include ASGI <b>−13.71%</b>, UTF <b>−9.91%</b>,
-    HTD <b>−9.93%</b>, ERH <b>−9.77%</b>, PDI <b>−9.63%</b>, UTG <b>−8.96%</b>,
-    and DNP <b>−8.55%</b>.<br>
+    <b>Momentum:</b>
+    The 09/24 momentum snapshot remains the last available auxiliary dataset.
+    It is intentionally shown as <b>stale</b>, not as a 09/25 observation.
+    PDI and PDO retain momentum-only peer context but have no current Matrix coordinates.<br>
 
     <b>Event / DQ filters:</b>
     <span style="color:#fbbf24;font-weight:800">ASGI remains RO SUPPRESSED</span>.
-    PCN's active ATM program is retained as corporate-action context but is not used to suppress the 09/24 valuation signal absent evidence that it explains the move.
-    ERH and RFI retain DQ cautions.
+    ERH and RFI retain distribution-quality cautions.
+    PCN's ATM program remains corporate-action context but does not receive normal-signal suppression based on the supplied evidence.
 
   </div>
 </div>
@@ -391,23 +413,26 @@ Always conduct your own due diligence before making investment decisions.
 
 /*
   CEF TIME MACHINE
-  Current session: 09/24/2026
+  Current session: 09/25/2026
 
-  CUR:
+  CUR array:
   [Z3M,Z6M,Z1Y,D/P,52wkAvg,Yield,NAV,Price]
 
-  Historical:
+  Historical array:
   [Z1Y,D/P]
 
-  Current valuation feed: 25 / 27 standard funds.
-  PDI + PDO: momentum available, valuation unavailable.
+  Current valuation feed:
+  25 / 27 standard funds.
 
-  Missing intervening valuation sessions:
-  09/22/2026
-  09/23/2026
+  PDI / PDO:
+  valuation unavailable; last momentum snapshot available.
 
-  Historical rolling window:
-  15 stored valuation-session datasets.
+  Momentum:
+  09/24/2026 snapshot retained as stale.
+
+  Provider reconciliation:
+  Raw D/P is always preserved.
+  Price/NAV-implied D/P is diagnostic only.
 */
 
 const STANDARD_UNIVERSE=[
@@ -442,17 +467,18 @@ const QNAME={
   X:"Gray · Worst Setup"
 };
 
-const MOM_DATE="supplied with 09/24/2026 build";
+const MOM_DATE="09/24/2026";
+const MOM_STATUS="last available snapshot — stale for 09/25";
 
-/* Effective leverage — raw 09/24 provider values */
+/* Raw 09/25 effective leverage */
 const LEV={
   AIO:11.98,
-  ASGI:1.04,
+  ASGI:1.03,
   BDJ:0.12,
   BME:0.15,
   BST:0.10,
   BUI:0.11,
-  CSQ:28.10,
+  CSQ:27.99,
   DNP:24.66,
   EOI:null,
   EOS:null,
@@ -466,18 +492,17 @@ const LEV={
   PCN:22.53,
   PDX:22.41,
   RFI:0.04,
-  RLTY:34.71,
+  RLTY:34.57,
   RNP:31.33,
-  RQI:28.22,
+  RQI:28.12,
   UTF:29.72,
-  UTG:22.77
+  UTG:22.78
 };
 
 /*
-  Fresh supplied momentum.
+  LAST AVAILABLE MOMENTUM SNAPSHOT — 09/24/2026
+  ST/LT are stale for the 09/25 current session.
   [ST,LT]
-
-  RLTY LT was #N/A in source and is therefore null, never zero.
 */
 const MOM={
   ETG:[-1.96,22.21],
@@ -540,7 +565,8 @@ const SECTOR={
 };
 
 /*
-  Return-period data retained from supplied momentum sheet.
+  09/24 momentum-sheet return data.
+  STALE FOR 09/25.
   [1D,1W,1M,3M,6M,YTD,1Y,3Y,5Y]
 */
 const MOMPERF={
@@ -577,7 +603,7 @@ const EVENT={
   ASGI:{
     type:"ro",
     label:"RO SUPPRESSED / CORPORATE ACTION",
-    text:"Transferable rights offering remains active. Subscription period runs through 10/15/2026 unless extended. Current valuation behavior remains contaminated by rights economics and share-supply dynamics."
+    text:"Transferable rights offering remains active. Subscription period expires 10/15/2026 unless extended. Current valuation behavior remains contaminated by rights economics and potential share-supply effects."
   },
   ERH:{
     type:"dq",
@@ -593,25 +619,25 @@ const EVENT={
 
 const CONTEXT={
   PCN:{
-    label:"ATM PROGRAM — NOT SUPPRESSED",
-    text:"Corporate-action check identified an active common-share at-the-market issuance program. No current-session event was identified that clearly explains the 09/24 valuation move, so the signal remains unsuppressed."
+    label:"ATM PROGRAM — CONTEXT ONLY",
+    text:"A common-share at-the-market program remains on file. No supplied evidence identifies a new 09/25 issuance event as the cause of the current valuation reading, so normal signal suppression is not applied."
   }
 };
 
 /*
+  Raw provider D/P is preserved.
+  These tickers fail the >=0.15 pt Price/NAV reconciliation threshold.
+*/
+const EXPECTED_DP_MISMATCH=new Set([
+  "BDJ","BME","BST","CSQ","NBXG","PCN","PDX","UTG"
+]);
+
+/*
   15 stored historical valuation datasets.
+  09/24 appended.
+  08/28 rolled off.
 */
 const PRIOR=[
-
-  {date:"08/28/2026",d:{
-    AIO:[0.47,-6.85],ASGI:[1.55,9.62],BDJ:[-0.69,-6.62],BME:[1.51,-1.48],
-    BST:[1.37,-2.36],BUI:[-0.37,0.86],CSQ:[0.25,-7.96],DNP:[1.95,13.04],
-    EOI:[-0.78,-5.97],EOS:[-1.17,-10.04],ERH:[0.71,-6.66],ETG:[-0.77,-9.01],
-    GDV:[-0.18,-10.85],GLU:[-0.81,-3.49],HTD:[1.39,-3.59],NBXG:[-0.31,-13.32],
-    NXG:[0.51,0.55],PCN:[-0.89,3.15],PDX:[0.19,-9.32],RFI:[-0.55,-2.56],
-    RLTY:[-0.43,-7.92],RNP:[-0.91,-6.26],RQI:[-0.87,-6.46],UTF:[1.53,-1.06],
-    UTG:[1.15,0.94]
-  }},
 
   {date:"08/31/2026",d:{
     AIO:[1.10,-5.16],ASGI:[-0.02,3.26],BDJ:[0.04,-5.89],BME:[1.69,-1.68],
@@ -751,40 +777,79 @@ const PRIOR=[
     NXG:[0.29,0.02],PCN:[-1.96,-0.45],PDX:[-1.51,-11.86],RFI:[-1.17,-4.50],
     RLTY:[-2.11,-10.15],RNP:[-1.19,-7.43],RQI:[-1.30,-8.17],UTF:[-0.31,-6.12],
     UTG:[0.02,-0.42]
+  }},
+
+  {date:"09/24/2026",d:{
+    AIO:[-0.89,-10.67],ASGI:[-2.30,-6.45],BDJ:[-0.85,-7.44],BME:[1.18,-2.39],
+    BST:[0.82,-4.54],BUI:[-0.37,0.56],CSQ:[0.25,-8.26],DNP:[1.03,10.55],
+    EOI:[-1.29,-7.50],EOS:[-1.86,-11.60],ERH:[-0.84,-8.82],ETG:[-1.29,-10.54],
+    GDV:[-1.73,-12.01],GLU:[-0.73,-3.64],HTD:[-1.25,-8.00],NBXG:[-0.89,-14.17],
+    NXG:[0.42,0.55],PCN:[-2.63,-2.64],PDX:[-1.73,-12.21],RFI:[-1.32,-4.94],
+    RLTY:[-1.72,-9.71],RNP:[-1.22,-7.54],RQI:[-1.57,-9.12],UTF:[0.03,-5.35],
+    UTG:[0.29,-0.09]
   }}
 
 ];
 
-/* Current 09/24/2026 valuation data */
+/* Raw 09/25 current data */
 const CUR={
-  date:"09/24/2026",
+  date:"09/25/2026",
   data:{
     AIO:[-1.49,-0.80,-0.89,-10.67,-8.80,10.17,27.74,24.78],
-    ASGI:[-2.08,-2.22,-2.30,-6.45,3.29,13.58,20.78,19.44],
-    BDJ:[-0.94,-0.14,-0.85,-7.44,-6.08,7.75,10.35,9.58],
-    BME:[0.50,0.89,1.18,-2.39,-4.92,6.99,46.08,44.98],
-    BST:[0.29,0.94,0.82,-4.54,-6.20,6.16,51.05,48.73],
-    BUI:[-0.62,0.23,-0.37,0.56,1.65,7.37,24.95,25.09],
-    CSQ:[0.64,1.27,0.25,-8.26,-8.61,7.84,22.53,20.67],
-    DNP:[-0.08,0.70,1.03,10.55,6.89,7.92,8.91,9.85],
-    EOI:[-1.94,-1.12,-1.29,-7.50,-4.43,8.14,21.33,19.73],
-    EOS:[-2.11,-2.47,-1.86,-11.60,-7.64,8.57,24.13,21.33],
-    ERH:[-1.43,-0.92,-0.84,-8.82,-7.72,10.19,11.34,10.34],
-    ETG:[-1.61,-1.40,-1.29,-10.54,-7.65,6.72,25.81,23.09],
-    GDV:[-1.47,-1.38,-1.73,-12.01,-10.79,6.25,32.71,28.78],
-    GLU:[0.93,0.21,-0.73,-3.64,-1.09,7.22,18.96,18.27],
-    HTD:[-3.53,-1.64,-1.25,-8.00,-5.84,8.41,24.51,22.55],
-    NBXG:[-1.10,-0.71,-0.89,-14.17,-13.06,9.28,18.07,15.51],
-    NXG:[-0.63,0.53,0.42,0.55,-1.02,13.10,54.65,54.95],
-    PCN:[-3.65,-4.30,-2.63,-2.64,5.16,12.61,11.00,10.71],
-    PDX:[-2.24,-2.30,-1.73,-12.21,-9.88,7.95,22.94,20.14],
-    RFI:[-1.31,-0.89,-1.32,-4.94,-1.56,9.07,11.13,10.58],
-    RLTY:[-1.77,-1.65,-1.72,-9.71,-7.67,9.22,15.86,14.32],
-    RNP:[-0.82,-0.95,-1.22,-7.54,-3.82,8.59,20.55,19.00],
-    RQI:[-1.05,-1.18,-1.57,-9.12,-4.24,9.68,12.28,11.16],
-    UTF:[-1.88,-0.49,0.03,-5.35,-5.41,8.18,25.59,24.22],
-    UTG:[0.12,0.28,0.29,-0.09,-0.44,7.21,34.98,34.95]
+    ASGI:[-2.08,-2.22,-2.30,-6.45,3.29,13.71,20.78,19.44],
+    BDJ:[-0.94,-0.14,-0.85,-7.86,-6.10,7.73,10.35,9.58],
+    BME:[0.50,0.89,1.18,-2.96,-4.90,7.01,46.08,44.98],
+    BST:[0.29,0.94,0.82,-4.83,-6.20,6.13,51.05,48.73],
+    BUI:[-0.62,0.23,-0.37,0.56,1.65,7.41,24.95,25.09],
+    CSQ:[0.46,1.12,0.17,-8.39,-8.62,7.81,22.65,20.67],
+    DNP:[-0.08,0.70,1.03,10.55,6.89,7.96,8.91,9.85],
+    EOI:[-1.94,-1.12,-1.29,-7.50,-4.43,8.05,21.33,19.73],
+    EOS:[-2.11,-2.47,-1.86,-11.60,-7.64,8.52,24.13,21.33],
+    ERH:[-1.43,-0.92,-0.84,-8.82,-7.73,10.29,11.34,10.34],
+    ETG:[-1.61,-1.40,-1.29,-10.54,-7.65,6.66,25.81,23.09],
+    GDV:[-1.47,-1.38,-1.73,-12.01,-10.79,6.22,32.71,28.78],
+    GLU:[0.93,0.21,-0.73,-3.64,-1.09,7.41,18.96,18.27],
+    HTD:[-3.53,-1.64,-1.25,-8.00,-5.84,8.43,24.51,22.55],
+    NBXG:[-1.10,-0.71,-0.89,-13.95,-13.07,9.22,18.07,15.51],
+    NXG:[-0.63,0.53,0.42,0.55,-1.02,13.21,54.65,54.95],
+    PCN:[-3.65,-4.30,-2.63,-2.36,5.10,12.52,11.00,10.71],
+    PDX:[-2.24,-2.30,-1.73,-10.76,-9.89,7.85,22.94,20.14],
+    RFI:[-1.31,-0.89,-1.32,-4.94,-1.56,9.09,11.13,10.58],
+    RLTY:[-1.77,-1.65,-1.72,-9.71,-7.67,9.36,15.86,14.32],
+    RNP:[-0.82,-0.95,-1.22,-7.54,-3.82,8.62,20.55,19.00],
+    RQI:[-1.05,-1.18,-1.57,-9.12,-4.24,9.67,12.28,11.16],
+    UTF:[-1.88,-0.49,0.03,-5.35,-5.41,8.19,25.59,24.22],
+    UTG:[-0.13,0.03,0.03,-0.40,-0.44,7.24,34.96,34.95]
   }
+};
+
+/* Full 09/24 current arrays for one-session decomposition */
+const PREV_FULL={
+  AIO:[-1.49,-0.80,-0.89,-10.67,-8.80,10.17,27.74,24.78],
+  ASGI:[-2.08,-2.22,-2.30,-6.45,3.29,13.58,20.78,19.44],
+  BDJ:[-0.94,-0.14,-0.85,-7.44,-6.08,7.75,10.35,9.58],
+  BME:[0.50,0.89,1.18,-2.39,-4.92,6.99,46.08,44.98],
+  BST:[0.29,0.94,0.82,-4.54,-6.20,6.16,51.05,48.73],
+  BUI:[-0.62,0.23,-0.37,0.56,1.65,7.37,24.95,25.09],
+  CSQ:[0.64,1.27,0.25,-8.26,-8.61,7.84,22.53,20.67],
+  DNP:[-0.08,0.70,1.03,10.55,6.89,7.92,8.91,9.85],
+  EOI:[-1.94,-1.12,-1.29,-7.50,-4.43,8.14,21.33,19.73],
+  EOS:[-2.11,-2.47,-1.86,-11.60,-7.64,8.57,24.13,21.33],
+  ERH:[-1.43,-0.92,-0.84,-8.82,-7.72,10.19,11.34,10.34],
+  ETG:[-1.61,-1.40,-1.29,-10.54,-7.65,6.72,25.81,23.09],
+  GDV:[-1.47,-1.38,-1.73,-12.01,-10.79,6.25,32.71,28.78],
+  GLU:[0.93,0.21,-0.73,-3.64,-1.09,7.22,18.96,18.27],
+  HTD:[-3.53,-1.64,-1.25,-8.00,-5.84,8.41,24.51,22.55],
+  NBXG:[-1.10,-0.71,-0.89,-14.17,-13.06,9.28,18.07,15.51],
+  NXG:[-0.63,0.53,0.42,0.55,-1.02,13.10,54.65,54.95],
+  PCN:[-3.65,-4.30,-2.63,-2.64,5.16,12.61,11.00,10.71],
+  PDX:[-2.24,-2.30,-1.73,-12.21,-9.88,7.95,22.94,20.14],
+  RFI:[-1.31,-0.89,-1.32,-4.94,-1.56,9.07,11.13,10.58],
+  RLTY:[-1.77,-1.65,-1.72,-9.71,-7.67,9.22,15.86,14.32],
+  RNP:[-0.82,-0.95,-1.22,-7.54,-3.82,8.59,20.55,19.00],
+  RQI:[-1.05,-1.18,-1.57,-9.12,-4.24,9.68,12.28,11.16],
+  UTF:[-1.88,-0.49,0.03,-5.35,-5.41,8.18,25.59,24.22],
+  UTG:[0.12,0.28,0.29,-0.09,-0.44,7.21,34.98,34.95]
 };
 
 const W=980,H=560,ML=54,MR=16,MT=14,MB=40;
@@ -824,10 +889,28 @@ function fmtLev(t){
   return v==null ? "—" : `${v.toFixed(2)}%`;
 }
 
+function impliedDP(d){
+  if(!d || !Number.isFinite(d[6]) || !Number.isFinite(d[7]) || d[6]===0){
+    return null;
+  }
+  return (d[7]/d[6]-1)*100;
+}
+
+function dpDifference(d){
+  const implied=impliedDP(d);
+  return implied==null ? null : d[3]-implied;
+}
+
+function hasDPMismatch(t){
+  return EXPECTED_DP_MISMATCH.has(t);
+}
+
 function eventMarkup(t){
   const e=EVENT[t];
   if(!e) return "";
+
   const icon=e.type==="dq" ? "⚑" : "⚠";
+
   return `<div class="event ${e.type}">
     <b>${icon} ${e.label}</b> · ${e.text}
   </div>`;
@@ -836,12 +919,31 @@ function eventMarkup(t){
 function contextMarkup(t){
   const c=CONTEXT[t];
   if(!c) return "";
+
   return `<div class="context">
     <b>${c.label}</b> · ${c.text}
   </div>`;
 }
 
+function dataQualityMarkup(t){
+
+  if(!hasDPMismatch(t)) return "";
+
+  const d=CUR.data[t];
+  const implied=impliedDP(d);
+  const diff=dpDifference(d);
+
+  return `<div class="datawarn">
+    <b>⚠ PROVIDER D/P RECONCILIATION</b> ·
+    raw D/P ${d[3].toFixed(2)}% ·
+    Price/NAV-implied ${implied.toFixed(2)}% ·
+    difference ${fmtSigned(diff)} pt.
+    Raw provider D/P is preserved in the Matrix.
+  </div>`;
+}
+
 function getExtent(){
+
   const zs=[];
   const ds=[];
 
@@ -883,6 +985,7 @@ function drawGrid(s,ex,Xf,Yf){
     fill="#888780" opacity=".07"/>`;
 
   for(let z=Math.ceil(ex.zmin);z<=ex.zmax;z++){
+
     s+=`<line x1="${Xf(z)}" y1="${MT}" x2="${Xf(z)}" y2="${H-MB}"
       stroke="${z===0?'#B6BDC3':'#EAEDEF'}"
       stroke-width="${z===0?1.5:1}"/>`;
@@ -894,6 +997,7 @@ function drawGrid(s,ex,Xf,Yf){
   const dstep=(ex.dmax-ex.dmin)>20 ? 5 : 2;
 
   for(let d=Math.ceil(ex.dmin/dstep)*dstep;d<=ex.dmax;d+=dstep){
+
     s+=`<line x1="${ML}" y1="${Yf(d)}" x2="${W-MR}" y2="${Yf(d)}"
       stroke="${d===0?'#B6BDC3':'#EAEDEF'}"
       stroke-width="${d===0?1.5:1}"/>`;
@@ -916,6 +1020,7 @@ function drawGrid(s,ex,Xf,Yf){
 }
 
 function currentVisible(t,d){
+
   const q=qFromZD(d[zIdx],d[3]);
 
   return (
@@ -926,6 +1031,7 @@ function currentVisible(t,d){
 }
 
 function historicalVisible(t,z,dp){
+
   const q=qFromZD(z,dp);
 
   return (
@@ -940,6 +1046,7 @@ function syncSessionControls(){
   document.querySelectorAll(".tmb").forEach(x=>x.classList.remove("on"));
 
   const target=document.querySelector(`.tmb[data-s="${sesIdx}"]`);
+
   if(target) target.classList.add("on");
 
   document.getElementById("sessionSlider").value=sesIdx;
@@ -963,32 +1070,42 @@ function buildTmnav(){
   nav.innerHTML="";
 
   const current=document.createElement("button");
+
   current.className="ctl tmb on";
   current.dataset.s=N;
   current.textContent=shortDate(CUR.date)+" (current)";
+
   nav.appendChild(current);
 
   for(let i=N-1;i>=0;i--){
+
     const b=document.createElement("button");
+
     b.className="ctl tmb";
     b.dataset.s=i;
     b.textContent=shortDate(PRIOR[i].date);
+
     nav.appendChild(b);
   }
 
   const lbl=document.createElement("span");
+
   lbl.className="seslabel";
   lbl.id="seslabel";
   lbl.textContent="Showing: "+CUR.date;
+
   nav.appendChild(lbl);
 
   nav.querySelectorAll(".tmb").forEach(b=>{
+
     b.addEventListener("click",()=>{
       setSession(+b.dataset.s);
     });
+
   });
 
   const slider=document.getElementById("sessionSlider");
+
   slider.max=N;
   slider.value=N;
 }
@@ -1002,6 +1119,7 @@ function render(){
   const Yf=d=>MT+(ex.dmax-d)/(ex.dmax-ex.dmin)*(H-MT-MB);
 
   let s="";
+
   s=drawGrid(s,ex,Xf,Yf);
 
   if(compareMode && sesIdx<N){
@@ -1022,14 +1140,17 @@ function render(){
 
       const cx=Xf(cd[zIdx]);
       const cy=Yf(cd[3]);
+
       const px=Xf(pd[0]);
       const py=Yf(pd[1]);
 
       if(Math.hypot(cx-px,cy-py)>5){
+
         s+=`<line x1="${cx}" y1="${cy}" x2="${px}" y2="${py}"
           stroke="#6366F1" stroke-width="1.2"
           stroke-dasharray="4,3" opacity=".38"/>`;
       }
+
     });
 
     Object.keys(ps.d).forEach(t=>{
@@ -1041,22 +1162,27 @@ function render(){
       const q=qFromZD(z1y,dp);
 
       s+=`<g class="dot" data-t="${t}" data-mode="prior">
+
         <circle cx="${Xf(z1y)}" cy="${Yf(dp)}" r="5"
           fill="${QCOLOR[q]}" opacity=".48"/>
+
         <text x="${Xf(z1y)}" y="${Yf(dp)-9}" font-size="8.5"
           text-anchor="middle" fill="#6A7280">${t}</text>
+
       </g>`;
     });
 
     Object.keys(CUR.data).forEach(t=>{
 
       const d=CUR.data[t];
+
       const z=d[zIdx];
       const dp=d[3];
       const avg=d[4];
 
       const q=qFromZD(z,dp);
       const fc=QCOLOR[q];
+
       const dim=currentVisible(t,d) ? "" : " dimmed";
 
       const cx=Xf(z);
@@ -1076,6 +1202,7 @@ function render(){
              stroke="${fc}" stroke-width="1.5" opacity=".8"/>`:""}
 
         <circle cx="${cx}" cy="${cy}" r="9" fill="white" opacity=".9"/>
+
         <circle cx="${cx}" cy="${cy}" r="6" fill="${fc}"/>
 
         <text x="${cx}" y="${cy-13}" font-size="10" font-weight="800"
@@ -1086,6 +1213,7 @@ function render(){
     });
 
     document.getElementById("chart").innerHTML=s;
+
     bindDotsCompare();
 
     document.getElementById("seslabel").textContent=
@@ -1098,12 +1226,14 @@ function render(){
       Object.keys(CUR.data).forEach(t=>{
 
         const d=CUR.data[t];
+
         const z=d[zIdx];
         const dp=d[3];
         const avg=d[4];
 
         const q=qFromZD(z,dp);
         const fc=QCOLOR[q];
+
         const dim=currentVisible(t,d) ? "" : " dimmed";
 
         const cx=Xf(z);
@@ -1113,7 +1243,8 @@ function render(){
         s+=`<g class="dot${dim}" data-t="${t}" data-mode="current">
 
           <line x1="${cx}" y1="${cy}" x2="${cx}" y2="${ay}"
-            stroke="${fc}" stroke-width="1" stroke-dasharray="3,3" opacity=".5"/>
+            stroke="${fc}" stroke-width="1"
+            stroke-dasharray="3,3" opacity=".5"/>
 
           <circle cx="${cx}" cy="${ay}" r="2" fill="none"
             stroke="${fc}" stroke-width="1" opacity=".5"/>
@@ -1140,7 +1271,9 @@ function render(){
       Object.keys(ps.d).forEach(t=>{
 
         const [z,dp]=ps.d[t];
+
         const q=qFromZD(z,dp);
+
         const dim=historicalVisible(t,z,dp) ? "" : " dimmed";
 
         s+=`<g class="dot${dim}" data-t="${t}" data-mode="prior">
@@ -1150,20 +1283,25 @@ function render(){
                fill="none" stroke="${QCOLOR[q]}"
                stroke-width="1.4" opacity=".65"/>`:""}
 
-          <circle cx="${Xf(z)}" cy="${Yf(dp)}" r="6" fill="${QCOLOR[q]}"/>
+          <circle cx="${Xf(z)}" cy="${Yf(dp)}"
+            r="6" fill="${QCOLOR[q]}"/>
 
           <text x="${Xf(z)}" y="${Yf(dp)-11}" font-size="9.5"
-            font-weight="600" text-anchor="middle" fill="#3A4249">${t}</text>
+            font-weight="600" text-anchor="middle"
+            fill="#3A4249">${t}</text>
 
         </g>`;
       });
     }
 
     document.getElementById("chart").innerHTML=s;
+
     bindDots();
 
     document.getElementById("seslabel").textContent=
-      sesIdx===N ? `Showing: ${CUR.date}` : `Showing: ${PRIOR[sesIdx].date}`;
+      sesIdx===N ?
+      `Showing: ${CUR.date}` :
+      `Showing: ${PRIOR[sesIdx].date}`;
   }
 
   renderSnap();
@@ -1174,36 +1312,50 @@ const tip=document.getElementById("tip");
 function currentTooltip(t,d){
 
   const m=MOM[t]||null;
+
   const ev=EVENT[t] ?
     `<br><span style="color:#fbbf24">${EVENT[t].label}</span>` : "";
 
   const ctx=CONTEXT[t] ?
     `<br><span style="color:#cbd5e1">${CONTEXT[t].label}</span>` : "";
 
+  const dq=hasDPMismatch(t) ?
+    `<br><span style="color:#fde68a">⚠ raw D/P ≠ Price/NAV-implied D/P</span>` : "";
+
   const q=qFromZD(d[zIdx],d[3]);
 
-  return `<b>${t}</b>${ev}${ctx}<br>
+  return `<b>${t}</b>${ev}${ctx}${dq}<br>
     ${QNAME[q]} using ${["Z3M","Z6M","Z1Y"][zIdx]}<br>
     Price $${d[7].toFixed(2)} · NAV $${d[6].toFixed(2)} · Yield ${d[5].toFixed(2)}%<br>
-    D/P ${d[3].toFixed(2)}% · avg ${d[4].toFixed(2)}% · gap ${fmtSigned(d[3]-d[4])}pt<br>
+    Raw D/P ${d[3].toFixed(2)}% · avg ${d[4].toFixed(2)}% · gap ${fmtSigned(d[3]-d[4])}pt<br>
+    ${hasDPMismatch(t)?`Implied D/P ${impliedDP(d).toFixed(2)}%<br>`:""}
     Z3M ${d[0].toFixed(2)} · Z6M ${d[1].toFixed(2)} · Z1Y ${d[2].toFixed(2)}<br>
     Eff. leverage ${fmtLev(t)} · ${HOLDINGS.has(t)?"★ Holding":"Not holding"}<br>
-    Sector ${SECTOR[t]||"—"} · ST ${m?fmtPct(m[0]):"—"} · LT ${m?fmtPct(m[1]):"—"}<br>
-    <span style="color:#cbd5e1">Momentum: ${MOM_DATE}</span>`;
+    Sector ${SECTOR[t]||"—"} ·
+    ST ${m?fmtPct(m[0]):"—"} · LT ${m?fmtPct(m[1]):"—"}<br>
+    <span style="color:#cbd5e1">Momentum ${MOM_DATE}: ${MOM_STATUS}</span>`;
 }
 
 function momentumPerfMarkup(t){
 
   const p=MOMPERF[t];
+
   if(!p) return "";
 
   const labels=["1D","1W","1M","3M","6M","YTD","1Y","3Y","5Y"];
 
   return `<div style="margin-top:9px;padding-top:8px;border-top:1px solid #DEE3E7">
-    <b style="font-size:11px">Momentum / return-period snapshot</b>
+
+    <b style="font-size:11px">
+      Momentum / return snapshot — ${MOM_DATE} · stale for 09/25
+    </b>
+
     <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:5px;font-size:11px">
+
       ${p.map((v,i)=>`<span><b>${labels[i]}</b> ${fmtPct(v)}</span>`).join("")}
+
     </div>
+
   </div>`;
 }
 
@@ -1215,30 +1367,29 @@ function showCurrentDetail(t){
   if(!d) return;
 
   const q=qFromZD(d[zIdx],d[3]);
+
   const prev=PRIOR[N-1].d[t];
+  const pd=PREV_FULL[t];
+
   const m=MOM[t]||null;
 
   const dz=prev ? d[2]-prev[0] : null;
   const ddp=prev ? d[3]-prev[1] : null;
-  const prevQ=prev ? qFromZD(prev[0],prev[1]) : null;
 
-  /*
-    Prior historical array contains only Z1Y + D/P.
-    Previous NAV/Price are from the immediately preceding CUR build,
-    stored separately below for change decomposition.
-  */
-  const pd=PREV_FULL[t];
+  const prevQ=prev ? qFromZD(prev[0],prev[1]) : null;
 
   const dnav=pd ? d[6]-pd[6] : null;
   const dprice=pd ? d[7]-pd[7] : null;
 
   const el=document.getElementById("detail");
+
   el.style.display="block";
 
   el.innerHTML=`
 
     ${eventMarkup(t)}
     ${contextMarkup(t)}
+    ${dataQualityMarkup(t)}
 
     <b style="font-size:14px">${t}</b>
 
@@ -1258,9 +1409,18 @@ function showCurrentDetail(t){
       </tr>
 
       <tr>
-        <td>D/P</td><td class="v">${d[3].toFixed(2)}%</td>
+        <td>Raw D/P</td><td class="v">${d[3].toFixed(2)}%</td>
         <td>52-wk avg</td><td class="v">${d[4].toFixed(2)}%</td>
         <td>Own-Normal Gap</td><td class="v">${fmtSigned(d[3]-d[4])} pt</td>
+      </tr>
+
+      <tr>
+        <td>Price/NAV implied D/P</td>
+        <td class="v">${fmtPct(impliedDP(d))}</td>
+        <td>D/P reconciliation</td>
+        <td class="v">${hasDPMismatch(t)?`⚠ ${fmtSigned(dpDifference(d))} pt`:"Within tolerance"}</td>
+        <td>Provider D/P used</td>
+        <td class="v">Yes</td>
       </tr>
 
       <tr>
@@ -1270,38 +1430,52 @@ function showCurrentDetail(t){
       </tr>
 
       <tr>
-        <td>Δ Z1Y vs 09/21*</td><td class="v">${dz==null?"—":fmtSigned(dz)}</td>
-        <td>Δ D/P vs 09/21*</td><td class="v">${ddp==null?"—":fmtSigned(ddp)+" pt"}</td>
-        <td>Effective leverage</td><td class="v">${fmtLev(t)}</td>
+        <td>Δ Z1Y vs 09/24</td>
+        <td class="v">${dz==null?"—":fmtSigned(dz)}</td>
+        <td>Δ raw D/P vs 09/24</td>
+        <td class="v">${ddp==null?"—":fmtSigned(ddp)+" pt"}</td>
+        <td>Effective leverage</td>
+        <td class="v">${fmtLev(t)}</td>
       </tr>
 
       <tr>
-        <td>Δ NAV vs 09/21*</td><td class="v">${dnav==null?"—":"$"+fmtSigned(dnav)}</td>
-        <td>Δ Price vs 09/21*</td><td class="v">${dprice==null?"—":"$"+fmtSigned(dprice)}</td>
-        <td>Sector</td><td class="v">${SECTOR[t]||"—"}</td>
+        <td>Δ NAV vs 09/24</td>
+        <td class="v">${dnav==null?"—":"$"+fmtSigned(dnav)}</td>
+        <td>Δ Price vs 09/24</td>
+        <td class="v">${dprice==null?"—":"$"+fmtSigned(dprice)}</td>
+        <td>Sector</td>
+        <td class="v">${SECTOR[t]||"—"}</td>
       </tr>
 
       <tr>
-        <td>ST Momentum</td><td class="v">${m?fmtPct(m[0]):"—"}</td>
-        <td>LT Momentum</td><td class="v">${m?fmtPct(m[1]):"—"}</td>
-        <td>Momentum status</td><td class="v">Fresh supplied snapshot</td>
+        <td>ST Momentum*</td>
+        <td class="v">${m?fmtPct(m[0]):"—"}</td>
+        <td>LT Momentum*</td>
+        <td class="v">${m?fmtPct(m[1]):"—"}</td>
+        <td>Momentum date</td>
+        <td class="v">${m?MOM_DATE:"—"}</td>
       </tr>
 
       <tr>
-        <td>Prior quadrant</td><td class="v">${prevQ?QNAME[prevQ]:"—"}</td>
+        <td>Prior quadrant</td>
+        <td class="v">${prevQ?QNAME[prevQ]:"—"}</td>
         <td>Quadrant change</td>
         <td class="v">${prevQ&&prevQ!==q?`${QNAME[prevQ]} → ${QNAME[q]}`:"No"}</td>
-        <td>Holding</td><td class="v">${HOLDINGS.has(t)?"Yes":"No"}</td>
+        <td>Holding</td>
+        <td class="v">${HOLDINGS.has(t)?"Yes":"No"}</td>
       </tr>
 
       <tr>
         <td>Corporate action</td>
         <td class="v" colspan="3">
-          ${EVENT[t]&&EVENT[t].type!=="dq" ? EVENT[t].label :
-            CONTEXT[t] ? CONTEXT[t].label : "No active suppression"}
+          ${EVENT[t]&&EVENT[t].type!=="dq" ?
+            EVENT[t].label :
+            CONTEXT[t] ?
+            CONTEXT[t].label :
+            "No active suppression"}
         </td>
         <td>DQ</td>
-        <td class="v">${EVENT[t]&&EVENT[t].type==="dq"?"⚑ DQ warning":"No special DQ flag"}</td>
+        <td class="v">${EVENT[t]&&EVENT[t].type==="dq"?"⚑ DQ warning":"No special distribution DQ flag"}</td>
       </tr>
 
     </table>
@@ -1309,8 +1483,8 @@ function showCurrentDetail(t){
     ${momentumPerfMarkup(t)}
 
     <div style="font-size:10.5px;color:#6b7280;margin-top:7px">
-      * 09/22 and 09/23 valuation datasets were not supplied. These deltas compare
-      the current 09/24 observation with the last supplied valuation session, 09/21.
+      * Momentum is the last available 09/24 snapshot and is stale for the 09/25 valuation session.
+      Raw provider D/P is intentionally preserved even when it does not reconcile to displayed Price/NAV.
     </div>
   `;
 }
@@ -1322,6 +1496,7 @@ function bindDots(){
   document.querySelectorAll(".dot").forEach(g=>{
 
     const t=g.dataset.t;
+
     if(!t) return;
 
     const isCur=sesIdx===N;
@@ -1333,10 +1508,15 @@ function bindDots(){
       tip.style.top=(e.clientY+10)+"px";
 
       if(isCur){
+
         tip.innerHTML=currentTooltip(t,CUR.data[t]);
+
       }else{
+
         const pd=PRIOR[sesIdx].d[t];
+
         if(pd){
+
           tip.innerHTML=`<b>${t}</b> · ${PRIOR[sesIdx].date}<br>
             Z1Y ${pd[0].toFixed(2)} · D/P ${pd[1].toFixed(2)}%`;
         }
@@ -1348,8 +1528,11 @@ function bindDots(){
     });
 
     g.addEventListener("click",()=>{
+
       if(isCur) showCurrentDetail(t);
+
     });
+
   });
 }
 
@@ -1377,12 +1560,14 @@ function bindDotsCompare(){
 
         tip.innerHTML=`<b>${t}</b>
           <span style="color:#a5b4fc">▲ ${shortDate(CUR.date)}</span><br>
-          D/P ${d[3].toFixed(2)}% ·
+          Raw D/P ${d[3].toFixed(2)}% ·
           ${["Z3M","Z6M","Z1Y"][zIdx]} ${d[zIdx].toFixed(2)} ·
           Z1Y ${d[2].toFixed(2)}<br>
           ${EVENT[t]?`<span style="color:#fbbf24">${EVENT[t].label}</span><br>`:""}
+          ${hasDPMismatch(t)?`<span style="color:#fde68a">⚠ D/P reconciliation flag</span><br>`:""}
           ST ${MOM[t]?fmtPct(MOM[t][0]):"—"} ·
-          LT ${MOM[t]?fmtPct(MOM[t][1]):"—"}`;
+          LT ${MOM[t]?fmtPct(MOM[t][1]):"—"} ·
+          <span style="color:#cbd5e1">09/24 stale</span>`;
 
       }else if(mode==="prior" && pd){
 
@@ -1403,12 +1588,15 @@ function bindDotsCompare(){
     });
 
     g.addEventListener("click",()=>{
+
       if(mode==="current" && d){
+
         showCurrentDetail(t);
 
         const el=document.getElementById("detail");
 
         if(pd){
+
           el.innerHTML+=`
             <div style="margin-top:8px;padding-top:7px;border-top:1px solid #DEE3E7;font-size:12px">
               <b>Compare baseline · ${ps.date}</b> —
@@ -1417,6 +1605,7 @@ function bindDotsCompare(){
         }
       }
     });
+
   });
 }
 
@@ -1425,7 +1614,9 @@ function renderSnap(){
   const N=PRIOR.length;
   const isCur=sesIdx===N;
 
-  const pool=isCur ? Object.keys(CUR.data) : Object.keys(PRIOR[sesIdx].d);
+  const pool=isCur ?
+    Object.keys(CUR.data) :
+    Object.keys(PRIOR[sesIdx].d);
 
   const counts={G:0,B:0,O:0,X:0};
 
@@ -1433,8 +1624,13 @@ function renderSnap(){
 
     if(holdOnly && !HOLDINGS.has(t)) return;
 
-    const z=isCur ? CUR.data[t][zIdx] : PRIOR[sesIdx].d[t][0];
-    const dp=isCur ? CUR.data[t][3] : PRIOR[sesIdx].d[t][1];
+    const z=isCur ?
+      CUR.data[t][zIdx] :
+      PRIOR[sesIdx].d[t][0];
+
+    const dp=isCur ?
+      CUR.data[t][3] :
+      PRIOR[sesIdx].d[t][1];
 
     counts[qFromZD(z,dp)]++;
   });
@@ -1451,9 +1647,17 @@ function renderSnap(){
 
   const sortable=pool.filter(t=>!holdOnly || HOLDINGS.has(t));
 
-  const getZ1Y=t=>isCur ? CUR.data[t][2] : PRIOR[sesIdx].d[t][0];
-  const getZSel=t=>isCur ? CUR.data[t][zIdx] : PRIOR[sesIdx].d[t][0];
-  const getDP=t=>isCur ? CUR.data[t][3] : PRIOR[sesIdx].d[t][1];
+  const getZ1Y=t=>isCur ?
+    CUR.data[t][2] :
+    PRIOR[sesIdx].d[t][0];
+
+  const getZSel=t=>isCur ?
+    CUR.data[t][zIdx] :
+    PRIOR[sesIdx].d[t][0];
+
+  const getDP=t=>isCur ?
+    CUR.data[t][3] :
+    PRIOR[sesIdx].d[t][1];
 
   const deep=[...sortable]
     .sort((a,b)=>getZ1Y(a)-getZ1Y(b))
@@ -1465,8 +1669,12 @@ function renderSnap(){
       const flag=isCur&&EVENT[t] ?
         ` <span style="color:#D97706;font-size:10px">⚠ ${EVENT[t].label}</span>`:"";
 
-      return `<div><b>${t}</b> Z1Y ${getZ1Y(t).toFixed(2)} ·
-        D/P ${getDP(t).toFixed(2)}%${flag}</div>`;
+      const dq=isCur&&hasDPMismatch(t) ?
+        ` <span style="color:#E3A008;font-size:10px">⚠ D/P</span>`:"";
+
+      return `<div><b>${t}</b>
+        Z1Y ${getZ1Y(t).toFixed(2)} ·
+        D/P ${getDP(t).toFixed(2)}%${flag}${dq}</div>`;
     }).join("");
 
   const greens=sortable
@@ -1477,70 +1685,50 @@ function renderSnap(){
   document.getElementById("snapGreen").innerHTML=
     greens.length
       ? greens.map(t=>{
+
+          const dq=isCur&&hasDPMismatch(t) ?
+            ` <span style="color:#E3A008;font-size:10px">⚠ D/P</span>`:"";
+
           return `<div><b>${t}</b>
-            ${["Z3M","Z6M","Z1Y"][zIdx]} ${fmtSigned(getZSel(t))}</div>`;
+            ${["Z3M","Z6M","Z1Y"][zIdx]}
+            ${fmtSigned(getZSel(t))}${dq}</div>`;
         }).join("")
       : "None";
 }
 
-/*
-  Full previous current array retained for NAV/price decomposition.
-*/
-const PREV_FULL={
-  AIO:[-1.02,-0.26,-0.54,-9.90,-8.72,8.60,27.89,25.13],
-  ASGI:[-2.30,-2.31,-2.31,-6.15,3.35,13.20,21.31,20.00],
-  BDJ:[-1.89,-0.98,-1.25,-8.05,-6.06,7.75,10.43,9.59],
-  BME:[-0.06,0.46,0.96,-2.90,-4.98,7.06,45.86,44.53],
-  BST:[1.00,1.57,1.51,-3.20,-6.22,6.05,51.25,49.61],
-  BUI:[-1.24,-0.02,-0.57,0.00,1.66,7.25,25.50,25.50],
-  CSQ:[1.05,1.62,0.39,-8.00,-8.57,7.74,22.74,20.92],
-  DNP:[-1.11,0.16,0.43,8.38,6.85,7.83,9.19,9.96],
-  EOI:[-1.15,-0.86,-1.16,-7.14,-4.34,8.07,21.42,19.89],
-  EOS:[-1.99,-2.23,-1.68,-11.23,-7.53,8.50,24.22,21.50],
-  ERH:[-0.53,-0.18,-0.19,-7.96,-7.71,9.80,11.69,10.76],
-  ETG:[-1.47,-1.23,-1.26,-10.39,-7.60,6.62,26.17,23.45],
-  GDV:[-1.59,-1.44,-1.80,-12.03,-10.77,6.18,33.09,29.11],
-  GLU:[-0.98,-0.97,-1.24,-5.40,-1.06,7.17,19.46,18.41],
-  HTD:[-3.33,-0.99,-0.60,-6.87,-5.83,8.08,25.20,23.47],
-  NBXG:[-0.74,-0.44,-0.69,-13.89,-13.02,9.22,18.14,15.62],
-  NXG:[-0.60,0.41,0.29,0.02,-1.08,12.92,55.70,55.71],
-  PCN:[-3.51,-3.44,-1.96,-0.45,5.33,12.18,11.13,11.08],
-  PDX:[-2.31,-2.09,-1.51,-11.86,-9.83,7.80,23.28,20.52],
-  RFI:[-0.58,-0.64,-1.17,-4.50,-1.46,8.86,11.34,10.83],
-  RLTY:[-2.46,-2.39,-2.11,-10.15,-7.62,9.03,16.26,14.61],
-  RNP:[-0.53,-0.92,-1.19,-7.43,-3.68,8.40,20.99,19.43],
-  RQI:[-0.19,-0.95,-1.30,-8.17,-4.18,9.33,12.60,11.57],
-  UTF:[-2.69,-0.77,-0.31,-6.12,-5.43,8.02,26.30,24.69],
-  UTG:[-0.04,0.03,0.02,-0.42,-0.45,7.00,36.13,35.98]
-};
-
-/* Z controls */
+/* Z horizon controls */
 document.querySelectorAll(".zt").forEach(b=>{
+
   b.addEventListener("click",()=>{
 
     document.querySelectorAll(".zt").forEach(x=>x.classList.remove("on"));
 
     b.classList.add("on");
+
     zIdx=+b.dataset.z;
 
     render();
   });
+
 });
 
 /* Quadrant filters */
 document.querySelectorAll(".qf").forEach(b=>{
+
   b.addEventListener("click",()=>{
 
     document.querySelectorAll(".qf").forEach(x=>x.classList.remove("on"));
 
     b.classList.add("on");
+
     qFilter=b.dataset.q;
 
     render();
   });
+
 });
 
-/* Search */
+/* Ticker search */
 document.getElementById("search").addEventListener("input",e=>{
 
   searchTerms=e.target.value
@@ -1556,6 +1744,7 @@ document.getElementById("search").addEventListener("input",e=>{
 document.getElementById("hold").addEventListener("click",e=>{
 
   holdOnly=!holdOnly;
+
   e.target.classList.toggle("on",holdOnly);
 
   render();
@@ -1567,14 +1756,18 @@ document.getElementById("compareBtn").addEventListener("click",e=>{
   const N=PRIOR.length;
 
   compareMode=!compareMode;
+
   e.target.classList.toggle("on",compareMode);
 
   document.getElementById("compareBanner").style.display=
     compareMode ? "block" : "none";
 
   if(compareMode && sesIdx===N){
+
     setSession(N-1);
+
   }else{
+
     render();
   }
 });
@@ -1598,14 +1791,20 @@ document.getElementById("playBtn").addEventListener("click",e=>{
   const N=PRIOR.length;
 
   if(playTimer){
+
     clearInterval(playTimer);
+
     playTimer=null;
+
     e.target.textContent="▶ Play";
     e.target.classList.remove("on");
+
     return;
   }
 
-  if(sesIdx===N) setSession(0);
+  if(sesIdx===N){
+    setSession(0);
+  }
 
   e.target.textContent="❚❚ Pause";
   e.target.classList.add("on");
@@ -1613,10 +1812,14 @@ document.getElementById("playBtn").addEventListener("click",e=>{
   playTimer=setInterval(()=>{
 
     if(sesIdx>=N){
+
       clearInterval(playTimer);
+
       playTimer=null;
+
       e.target.textContent="▶ Play";
       e.target.classList.remove("on");
+
       return;
     }
 
@@ -1627,22 +1830,22 @@ document.getElementById("playBtn").addEventListener("click",e=>{
 
 
 /*
-  Runtime + spec audit.
-  Does not change raw supplied data.
+  Runtime + v2.0 consistency audit.
+  Does not alter raw supplied data.
 */
 function runAudit(){
 
   const issues=[];
   const tickers=Object.keys(CUR.data);
 
-  if(CUR.date!=="09/24/2026"){
-    issues.push("Current date mismatch.");
+  if(CUR.date!=="09/25/2026"){
+    issues.push("Current session date mismatch.");
   }
 
-  const day=new Date("2026-09-24T12:00:00Z").getUTCDay();
+  const day=new Date("2026-09-25T12:00:00Z").getUTCDay();
 
-  if(day!==4){
-    issues.push("09/24/2026 weekday validation failed.");
+  if(day!==5){
+    issues.push("09/25/2026 weekday validation failed.");
   }
 
   if(tickers.length!==25){
@@ -1658,7 +1861,9 @@ function runAudit(){
     const d=CUR.data[t];
 
     if(!Array.isArray(d) || d.length!==8){
+
       issues.push(`${t}: current data array must contain 8 fields.`);
+
       return;
     }
 
@@ -1685,6 +1890,10 @@ function runAudit(){
     issues.push(`Historical window has ${PRIOR.length} datasets instead of 15.`);
   }
 
+  if(PRIOR[PRIOR.length-1].date!=="09/24/2026"){
+    issues.push("Immediately preceding stored session is not 09/24/2026.");
+  }
+
   const missing=STANDARD_UNIVERSE.filter(t=>!CUR.data[t]);
 
   if(missing.join(",")!==MISSING_CURRENT.join(",")){
@@ -1698,7 +1907,7 @@ function runAudit(){
   }
 
   if(Object.keys(MOM).length!==27){
-    issues.push(`Expected 27 momentum rows, found ${Object.keys(MOM).length}.`);
+    issues.push(`Expected 27 rows in retained momentum snapshot, found ${Object.keys(MOM).length}.`);
   }
 
   if(MOM.RLTY[1]!==null){
@@ -1712,47 +1921,29 @@ function runAudit(){
   const counts={G:0,B:0,O:0,X:0};
 
   tickers.forEach(t=>{
+
     const d=CUR.data[t];
+
     counts[qFromZD(d[2],d[3])]++;
   });
 
-  const expected={G:5,B:2,O:17,X:1};
+  const expectedCounts={G:5,B:2,O:17,X:1};
 
-  Object.keys(expected).forEach(k=>{
-    if(counts[k]!==expected[k]){
+  Object.keys(expectedCounts).forEach(k=>{
+
+    if(counts[k]!==expectedCounts[k]){
+
       issues.push(
-        `Quadrant count ${k}: expected ${expected[k]}, found ${counts[k]}.`
+        `Quadrant count ${k}: expected ${expectedCounts[k]}, found ${counts[k]}.`
       );
     }
   });
 
-  const originalQ=qFilter;
-  const originalHold=holdOnly;
-  const originalSearch=[...searchTerms];
-
-  qFilter="all";
-  holdOnly=false;
-  searchTerms=[];
-
-  tickers.forEach(t=>{
-    if(currentVisible(t,CUR.data[t])!==true){
-      issues.push(`${t}: default dot visibility failure.`);
-    }
-  });
-
-  qFilter=originalQ;
-  holdOnly=originalHold;
-  searchTerms=originalSearch;
-
   const prev=PRIOR[PRIOR.length-1];
-
-  if(prev.date!=="09/21/2026"){
-    issues.push("Immediately preceding stored valuation dataset is not 09/21/2026.");
-  }
-
   const crossings=[];
 
   tickers.forEach(t=>{
+
     if(!prev.d[t]) return;
 
     const oldQ=qFromZD(prev.d[t][0],prev.d[t][1]);
@@ -1763,19 +1954,84 @@ function runAudit(){
     }
   });
 
-  if(crossings.join(",")!=="UTF:O->G"){
-    issues.push(`Unexpected Z1Y crossings: ${crossings.join(",")||"none"}.`);
+  if(crossings.length!==0){
+    issues.push(`Unexpected Z1Y quadrant crossings: ${crossings.join(",")}.`);
   }
 
-  console.info("CEF Time Machine 09/24/2026 audit",{
+  /*
+    Validate default visibility.
+    Guards against bare-return / ASI regression.
+  */
+  const originalQ=qFilter;
+  const originalHold=holdOnly;
+  const originalSearch=[...searchTerms];
+
+  qFilter="all";
+  holdOnly=false;
+  searchTerms=[];
+
+  tickers.forEach(t=>{
+
+    if(currentVisible(t,CUR.data[t])!==true){
+      issues.push(`${t}: default dot visibility failure.`);
+    }
+  });
+
+  qFilter=originalQ;
+  holdOnly=originalHold;
+  searchTerms=originalSearch;
+
+  /*
+    Price/NAV reconciliation audit.
+    Raw D/P is not changed.
+  */
+  const mismatch=[];
+
+  tickers.forEach(t=>{
+
+    const d=CUR.data[t];
+    const diff=Math.abs(dpDifference(d));
+
+    if(Number.isFinite(diff) && diff>=0.15){
+      mismatch.push(t);
+    }
+  });
+
+  mismatch.sort();
+
+  const expectedMismatch=[...EXPECTED_DP_MISMATCH].sort();
+
+  if(mismatch.join(",")!==expectedMismatch.join(",")){
+    issues.push(
+      `D/P mismatch set differs from annotation. Found: ${mismatch.join(",")}.`
+    );
+  }
+
+  /*
+    Verify all current market prices match prior session,
+    as explicitly annotated in current feed.
+  */
+  const unchangedPrices=tickers.filter(t=>
+    PREV_FULL[t] &&
+    CUR.data[t][7]===PREV_FULL[t][7]
+  );
+
+  if(unchangedPrices.length!==25){
+    issues.push(
+      `Expected 25 unchanged displayed Market Price fields, found ${unchangedPrices.length}.`
+    );
+  }
+
+  console.info("CEF Time Machine 09/25/2026 audit",{
     tickersChecked:tickers.length,
     holdingsChecked:holdingsPresent.length,
-    momentumRows:Object.keys(MOM).length,
     storedHistoricalDatasets:PRIOR.length,
     missingCurrentValuation:MISSING_CURRENT,
-    missingInterveningValuationSessions:MISSING_VALUATION_SESSIONS,
+    staleMomentumDate:MOM_DATE,
     quadrantCounts:counts,
     z1yCrossings:crossings,
+    dpReconciliationFlags:mismatch,
+    unchangedDisplayedPriceFields:unchangedPrices.length,
     issues
   });
 
@@ -1786,19 +2042,24 @@ const auditIssues=runAudit();
 
 if(auditIssues.length){
 
-  console.warn("CEF Time Machine audit issues:",auditIssues);
+  console.warn(
+    "CEF Time Machine audit issues:",
+    auditIssues
+  );
 
 }else{
 
   console.info(
-    "CEF Time Machine 09/24/2026 audit passed. " +
-    "25 valuation tickers / 27 momentum rows / 14 holdings checked; " +
-    "PDI and PDO valuation unavailable but momentum retained; " +
+    "CEF Time Machine 09/25/2026 audit passed. " +
+    "25 valuation tickers / 14 holdings checked; " +
+    "PDI and PDO current valuation unavailable; " +
     "quadrants G5 B2 O17 X1 verified; " +
+    "no Z1Y quadrant crossings; " +
     "15 historical datasets verified; " +
-    "UTF O->G crossing verified; " +
-    "RLTY #N/A fields preserved as null; " +
-    "default visibility verified; " +
+    "09/24 momentum explicitly stale; " +
+    "8 raw D/P reconciliation flags annotated; " +
+    "25 unchanged displayed Market Price fields annotated; " +
+    "default dot visibility verified; " +
     "ASGI remains RO SUPPRESSED."
   );
 }
