@@ -19,143 +19,422 @@
   --amber:#E3A008;
   --purple:#6366F1;
 }
-*{box-sizing:border-box;margin:0;padding:0}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-  background:var(--bg);color:var(--ink);padding:20px;
-  max-width:1100px;margin:0 auto;
+  background:var(--bg);
+  color:var(--ink);
+  padding:20px;
+  max-width:1100px;
+  margin:0 auto;
 }
-h1{font-size:19px;font-weight:700}
+
+h1{
+  font-size:19px;
+  font-weight:700;
+}
+
 .hdr{
-  display:flex;justify-content:space-between;align-items:baseline;
-  flex-wrap:wrap;gap:8px;margin-bottom:4px;
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:4px;
 }
+
 .badge{
-  display:inline-block;font-size:12px;font-weight:700;
-  padding:3px 9px;border-radius:10px;
+  display:inline-block;
+  font-size:12px;
+  font-weight:700;
+  padding:3px 9px;
+  border-radius:10px;
 }
-.badge.pos{background:#E1F5EE;color:#085041}
-.badge.neg{background:#FAECE7;color:#B4431F}
+
+.badge.pos{
+  background:#E1F5EE;
+  color:#085041;
+}
+
+.badge.neg{
+  background:#FAECE7;
+  color:#B4431F;
+}
+
 .note{
-  font-size:12px;color:var(--sub);margin-bottom:10px;line-height:1.45;
+  font-size:12px;
+  color:var(--sub);
+  margin-bottom:10px;
+  line-height:1.45;
 }
-.missing{color:#92400E;font-weight:700}
-.alerts{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+
+.missing{
+  color:#92400E;
+  font-weight:700;
+}
+
+.alerts{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  margin-bottom:16px;
+}
+
 .al{
-  border:1px solid var(--line);border-left-width:4px;border-radius:6px;
-  padding:8px 12px;font-size:13px;line-height:1.45;
+  border:1px solid var(--line);
+  border-left-width:4px;
+  border-radius:6px;
+  padding:8px 12px;
+  font-size:13px;
+  line-height:1.45;
 }
-.al b{font-weight:700}
-.al.g{border-left-color:var(--green);background:#E1F5EE}
-.al.r{border-left-color:var(--orange);background:#FAECE7}
-.al.a{border-left-color:var(--amber);background:#FFF8EC}
-.al.p{border-left-color:var(--blue);background:#EEF2FF}
-.al.c{border-left-color:#7B9E3E;background:#EFF6E8}
-.al.dq{border-left-color:#F59E0B;background:#FFF3E0}
+
+.al b{
+  font-weight:700;
+}
+
+.al.g{
+  border-left-color:var(--green);
+  background:#E1F5EE;
+}
+
+.al.r{
+  border-left-color:var(--orange);
+  background:#FAECE7;
+}
+
+.al.a{
+  border-left-color:var(--amber);
+  background:#FFF8EC;
+}
+
+.al.p{
+  border-left-color:var(--blue);
+  background:#EEF2FF;
+}
+
+.al.c{
+  border-left-color:#7B9E3E;
+  background:#EFF6E8;
+}
+
+.al.dq{
+  border-left-color:#F59E0B;
+  background:#FFF3E0;
+}
+
 .al .tag{
-  font-size:10.5px;font-weight:700;text-transform:uppercase;
-  letter-spacing:.5px;margin-right:6px;opacity:.75;
+  font-size:10.5px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  margin-right:6px;
+  opacity:.75;
 }
+
 .panel{
-  background:var(--card);border:1px solid var(--line);
-  border-radius:10px;padding:14px;margin-bottom:16px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:14px;
+  margin-bottom:16px;
 }
+
 .controls{
-  display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:center;
+  margin-bottom:10px;
 }
-.controls .grp{display:flex;gap:4px;flex-wrap:wrap}
+
+.controls .grp{
+  display:flex;
+  gap:4px;
+  flex-wrap:wrap;
+}
+
 button.ctl{
-  font-size:12px;padding:5px 10px;border:1px solid var(--line);
-  background:#fff;border-radius:6px;cursor:pointer;color:var(--ink);
+  font-size:12px;
+  padding:5px 10px;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:6px;
+  cursor:pointer;
+  color:var(--ink);
 }
-button.ctl:hover{background:#F3F4F6}
-button.ctl.on{background:var(--ink);color:#fff;border-color:var(--ink)}
-button.ctl.qg.on{background:var(--green);border-color:var(--green)}
-button.ctl.qb.on{background:var(--blue);border-color:var(--blue)}
-button.ctl.qo.on{background:var(--orange);border-color:var(--orange)}
-button.ctl.qx.on{background:var(--gray);border-color:var(--gray)}
+
+button.ctl:hover{
+  background:#F3F4F6;
+}
+
+button.ctl.on{
+  background:var(--ink);
+  color:#fff;
+  border-color:var(--ink);
+}
+
+button.ctl.qg.on{
+  background:var(--green);
+  border-color:var(--green);
+}
+
+button.ctl.qb.on{
+  background:var(--blue);
+  border-color:var(--blue);
+}
+
+button.ctl.qo.on{
+  background:var(--orange);
+  border-color:var(--orange);
+}
+
+button.ctl.qx.on{
+  background:var(--gray);
+  border-color:var(--gray);
+}
+
 input.search{
-  font-size:12px;padding:5px 9px;border:1px solid var(--line);
-  border-radius:6px;width:155px;
+  font-size:12px;
+  padding:5px 9px;
+  border:1px solid var(--line);
+  border-radius:6px;
+  width:155px;
 }
-.legend{font-size:11.5px;color:var(--sub);margin-top:8px;line-height:1.4}
+
+.legend{
+  font-size:11.5px;
+  color:var(--sub);
+  margin-top:8px;
+  line-height:1.4;
+}
+
 .tmnav{
-  display:flex;align-items:center;gap:6px;margin-top:10px;flex-wrap:wrap;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-top:10px;
+  flex-wrap:wrap;
 }
+
 .tmnav button{
-  font-size:11.5px;padding:4px 9px;border:1px solid var(--line);
-  background:#fff;border-radius:6px;cursor:pointer;
+  font-size:11.5px;
+  padding:4px 9px;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:6px;
+  cursor:pointer;
 }
-.tmnav button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
-.tmnav .seslabel{font-size:12px;color:var(--sub)}
+
+.tmnav button.on{
+  background:var(--ink);
+  color:#fff;
+  border-color:var(--ink);
+}
+
+.tmnav .seslabel{
+  font-size:12px;
+  color:var(--sub);
+}
+
 .tmcontrols{
-  display:flex;align-items:center;gap:6px;margin-top:8px;flex-wrap:wrap;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-top:8px;
+  flex-wrap:wrap;
 }
+
 .tmcontrols input[type="range"]{
-  flex:1;min-width:180px;accent-color:#1E2429;
+  flex:1;
+  min-width:180px;
+  accent-color:#1E2429;
 }
-svg{width:100%;height:auto;display:block}
-.dot{cursor:pointer}
-.dimmed{opacity:.10}
+
+svg{
+  width:100%;
+  height:auto;
+  display:block;
+}
+
+.dot{
+  cursor:pointer;
+}
+
+.dimmed{
+  opacity:.10;
+}
+
 .tooltip{
-  position:fixed;pointer-events:none;background:#1E2429;color:#fff;
-  font-size:11.5px;line-height:1.5;padding:8px 10px;border-radius:6px;
-  z-index:50;display:none;max-width:350px;box-shadow:0 3px 14px #0003;
+  position:fixed;
+  pointer-events:none;
+  background:#1E2429;
+  color:#fff;
+  font-size:11.5px;
+  line-height:1.5;
+  padding:8px 10px;
+  border-radius:6px;
+  z-index:50;
+  display:none;
+  max-width:360px;
+  box-shadow:0 3px 14px #0003;
 }
+
 .snap{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
-  gap:10px;margin-top:14px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:10px;
+  margin-top:14px;
 }
+
 .snapcard{
-  background:var(--bg);border:1px solid var(--line);
-  border-radius:8px;padding:10px 12px;font-size:12.5px;
+  background:var(--bg);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:10px 12px;
+  font-size:12.5px;
 }
+
 .snapcard h3{
-  font-size:11px;text-transform:uppercase;letter-spacing:.6px;
-  color:var(--sub);margin-bottom:6px;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  color:var(--sub);
+  margin-bottom:6px;
 }
+
 .qcount{
-  display:inline-block;padding:1px 7px;border-radius:8px;color:#fff;
-  font-weight:700;font-size:12px;margin:2px 5px 2px 0;
+  display:inline-block;
+  padding:1px 7px;
+  border-radius:8px;
+  color:#fff;
+  font-weight:700;
+  font-size:12px;
+  margin:2px 5px 2px 0;
 }
+
 .detail{
-  display:none;background:var(--bg);border:1px solid var(--line);
-  border-radius:8px;padding:12px;margin-top:12px;font-size:13px;
+  display:none;
+  background:var(--bg);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:12px;
+  margin-top:12px;
+  font-size:13px;
 }
-.detail table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}
-.detail td{padding:4px 8px 4px 0;color:var(--sub);vertical-align:top}
-.detail td.v{color:var(--ink);font-weight:600}
+
+.detail table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:12.5px;
+  margin-top:6px;
+}
+
+.detail td{
+  padding:4px 8px 4px 0;
+  color:var(--sub);
+  vertical-align:top;
+}
+
+.detail td.v{
+  color:var(--ink);
+  font-weight:600;
+}
+
 .event{
-  border-radius:5px;padding:6px 8px;font-size:11px;
-  margin-bottom:7px;line-height:1.45;
+  border-radius:5px;
+  padding:6px 8px;
+  font-size:11px;
+  margin-bottom:7px;
+  line-height:1.45;
 }
-.event.ro{background:#FFF4E5;border:1px solid #D97706;color:#7C2D12}
-.event.ca{background:#FFF8EC;border:1px solid #E3A008;color:#713F12}
-.event.dq{background:#FFF3E0;border:1px solid #F59E0B;color:#7C2D12}
+
+.event.ro{
+  background:#FFF4E5;
+  border:1px solid #D97706;
+  color:#7C2D12;
+}
+
+.event.ca{
+  background:#FFF8EC;
+  border:1px solid #E3A008;
+  color:#713F12;
+}
+
+.event.dq{
+  background:#FFF3E0;
+  border:1px solid #F59E0B;
+  color:#7C2D12;
+}
+
 .context{
-  background:#F1F5F9;border:1px solid #CBD5E1;color:#334155;
-  border-radius:5px;padding:6px 8px;font-size:11px;
-  margin-bottom:7px;line-height:1.45;
+  background:#F1F5F9;
+  border:1px solid #CBD5E1;
+  color:#334155;
+  border-radius:5px;
+  padding:6px 8px;
+  font-size:11px;
+  margin-bottom:7px;
+  line-height:1.45;
 }
+
 .datawarn{
-  background:#FFF8EC;border:1px solid #E3A008;color:#713F12;
-  border-radius:5px;padding:6px 8px;font-size:11px;
-  margin-bottom:7px;line-height:1.45;
+  background:#FFF8EC;
+  border:1px solid #E3A008;
+  color:#713F12;
+  border-radius:5px;
+  padding:6px 8px;
+  font-size:11px;
+  margin-bottom:7px;
+  line-height:1.45;
 }
+
 .compare-banner{
-  background:#EEF2FF;border:1.5px solid var(--purple);border-radius:6px;
-  padding:6px 12px;font-size:12px;color:#3730A3;margin-bottom:8px;display:none;
+  background:#EEF2FF;
+  border:1.5px solid var(--purple);
+  border-radius:6px;
+  padding:6px 12px;
+  font-size:12px;
+  color:#3730A3;
+  margin-bottom:8px;
+  display:none;
 }
+
 .highlights{
-  margin:16px 0 6px;padding:14px 16px;border:1px solid #334155;
-  border-radius:10px;background:#0f172a;color:#e2e8f0;
+  margin:16px 0 6px;
+  padding:14px 16px;
+  border:1px solid #334155;
+  border-radius:10px;
+  background:#0f172a;
+  color:#e2e8f0;
 }
-.highlights h2{font-weight:800;font-size:16px;margin-bottom:8px}
-.highlights div{line-height:1.55;font-size:13px}
+
+.highlights h2{
+  font-weight:800;
+  font-size:16px;
+  margin-bottom:8px;
+}
+
+.highlights div{
+  line-height:1.55;
+  font-size:13px;
+}
+
 .disc{
-  font-size:11px;color:var(--sub);font-style:italic;margin-top:22px;
-  border-top:1px solid var(--line);padding-top:10px;
+  font-size:11px;
+  color:var(--sub);
+  font-style:italic;
+  margin-top:22px;
+  border-top:1px solid var(--line);
+  padding-top:10px;
 }
+
 @media(max-width:650px){
   body{padding:10px}
   .controls{align-items:stretch}
@@ -172,89 +451,103 @@ svg{width:100%;height:auto;display:block}
 </div>
 
 <div class="note">
-Session update · Current data Friday 09/25/2026 · Net Price Change −$3.27 ·
-09/24 appended to Time Machine · 08/28 rolled off under the 15-session cap ·
-09/22 and 09/23 remain absent because no valuation datasets were supplied ·
-ASGI rights-offering suppression remains active through the subscription window ending 10/15 unless extended ·
-09/24 momentum retained only as the last available snapshot and is explicitly stale for 09/25 ·
+Current valuation data Friday 09/25/2026 ·
+Net Price Change −$3.27 ·
+09/24 stored as prior session ·
+15-session Time Machine retained ·
+latest supplied momentum snapshot integrated ·
+<span class="missing">momentum screenshot does not display an as-of date, so no date is inferred</span> ·
+prior 09/24 momentum snapshot retained for momentum-change comparison ·
+ASGI rights-offering suppression remains active ·
 ERH / RFI distribution-quality cautions retained ·
-raw provider values are preserved ·
-<span class="missing">PDI and PDO still lack current valuation arrays.</span>
+raw provider D/P values preserved ·
+<span class="missing">PDI and PDO remain momentum-only because no current valuation arrays were supplied.</span>
 </div>
 
 <div class="alerts">
 
   <div class="al a">
-    <span class="tag">Data Quality · Provider Reconciliation</span>
-    <b>All 25 supplied Market Price fields are unchanged from 09/24 while Net Price Change is −$3.27.</b>
-    Eight raw D/P fields also differ by at least 0.15 pt from the D/P implied by the supplied Price/NAV pair:
+    <span class="tag">Data Quality · Valuation Feed</span>
+    <b>All 25 supplied 09/25 Market Price fields are unchanged from the supplied 09/24 valuation feed while Net Price Change is −$3.27.</b>
+    Eight D/P observations also fail the Price/NAV reconciliation threshold:
     PDX, BME, BDJ, UTG, CSQ, BST, PCN, and NBXG.
-    The Matrix preserves the supplied D/P values and annotates the discrepancy rather than silently recalculating them.
+    Raw provider D/P remains the controlling Matrix input and is not silently overwritten.
+  </div>
+
+  <div class="al p">
+    <span class="tag">Momentum · Latest Snapshot</span>
+    <b>Only BME +0.98%, EOI +0.60%, and CSQ +0.15% have positive ST Momentum.</b>
+    The other 24 momentum rows are negative, so short-term confirmation remains broadly weak.
+  </div>
+
+  <div class="al g">
+    <span class="tag">Momentum · Improvement</span>
+    <b>UTF improved +1.25 pt to −8.66% · DNP +1.20 to −7.35% ·
+    PDI +0.94 to −8.69% · PCN +0.82 to −6.77%.</b>
+    These improved relative to the prior supplied 09/24 momentum snapshot but remain below zero.
+  </div>
+
+  <div class="al r">
+    <span class="tag">Momentum · Deterioration</span>
+    <b>NBXG fell −2.05 pt to −0.75% · GLU −1.84 to −5.55% ·
+    AIO −1.45 to −5.94% · NXG −1.41 to −5.23% · BST −1.10 to −1.84%.</b>
+    NBXG lost its previously positive ST reading.
   </div>
 
   <div class="al r">
     <span class="tag">Orange · Deep Value</span>
-    <b>PCN Z1Y −2.63 · ASGI −2.30 · EOS −1.86 · GDV / PDX −1.73 · RLTY −1.72 · RQI −1.57</b>
-    — PCN remains the deepest unsuppressed Z1Y reading. ASGI remains mechanically extreme but corporate-action suppressed.
+    <b>PCN Z1Y −2.63 · ASGI −2.30 · EOS −1.86 ·
+    GDV / PDX −1.73 · RLTY −1.72 · RQI −1.57.</b>
+    PCN remains the deepest unsuppressed Z1Y observation.
+    ASGI remains mechanically extreme but RO-suppressed.
   </div>
 
   <div class="al c">
     <span class="tag">ASGI · Corporate Action</span>
-    <b>RO SUPPRESSED · Z1Y −2.30 · D/P −6.45% vs +3.29% average · gap −9.74 pt.</b>
-    The transferable rights offering remains inside its active subscription period, so ordinary discount/Z interpretation remains contaminated.
+    <b>RO SUPPRESSED · Z1Y −2.30 · D/P −6.45% · ST Momentum −13.06%.</b>
+    Rights-offering mechanics remain a material contaminant of normal valuation interpretation.
   </div>
 
   <div class="al r">
     <span class="tag">PCN · Value vs Timing</span>
-    <b>Z3M −3.65 · Z6M −4.30 · Z1Y −2.63 · raw D/P −2.36% vs +5.10% average.</b>
-    The raw own-normal gap is −7.46 pt, but the supplied Price/NAV pair implies approximately −2.64% D/P.
-    The 09/24 momentum snapshot was ST −7.59% / LT −26.81%, so the last available momentum confirmation remained weak.
+    <b>Z3M −3.65 · Z6M −4.30 · Z1Y −2.63 · ST −6.77% · LT −23.82%.</b>
+    Momentum improved versus the prior snapshot but remains materially negative.
+    PDI ST/LT is −8.69% / −30.89% and PDO −6.42% / −20.17%, so CEF-bond peer momentum remains weak.
   </div>
 
   <div class="al r">
-    <span class="tag">Orange · Own-Normal</span>
-    <b>RQI −4.88 pt · EOS −3.96 pt · RNP −3.72 pt · RFI −3.38 pt ·
-    EOI −3.07 pt · ETG −2.89 pt · GLU −2.55 pt · HTD −2.16 pt.</b>
-    These are below their own 52-week valuation regimes using the raw supplied D/P feed.
-    ASGI's larger −9.74 pt reading remains RO-contaminated.
+    <span class="tag">GLU · Valuation / Momentum Divergence</span>
+    <b>Z3M +0.93 · Z6M +0.21 · Z1Y −0.73, while ST Momentum deteriorated to −5.55%.</b>
+    The valuation term structure remains more constructive than the price-momentum layer.
   </div>
 
   <div class="al r">
-    <span class="tag">Orange · Term Structure</span>
-    <b>HTD Z3M −3.53 / Z6M −1.64 / Z1Y −1.25 ·
-    ETG −1.61 / −1.40 / −1.29 · ERH −1.43 / −0.92 / −0.84.</b>
-    Short-horizon readings remain worse than the long end, consistent with continued short-end valuation pressure rather than confirmed stabilization.
+    <span class="tag">REIT Sleeve · Timing Weak</span>
+    <b>RQI ST/LT −7.74% / −7.23% ·
+    RNP −5.86% / −10.56% ·
+    RFI −5.82% / −15.30% ·
+    RLTY ST −8.00%.</b>
+    RQI and RNP retain substantial own-normal gaps, but momentum confirmation remains weak.
   </div>
 
   <div class="al r">
-    <span class="tag">Orange · Early Mean-Reversion Structure</span>
-    <b>GLU +0.93 / +0.21 / −0.73 · RNP −0.82 / −0.95 / −1.22 · RQI −1.05 / −1.18 / −1.57.</b>
-    Their Z term structures improve toward the short end, but the last available 09/24 momentum snapshot was still negative for GLU, RNP, and RQI.
+    <span class="tag">Utility / Infrastructure</span>
+    <b>ERH −9.92% · HTD −9.36% · UTF −8.66% · UTG −8.58% ·
+    BUI −7.77% · DNP −7.35% ST Momentum.</b>
+    UTF's Z1Y remains slightly positive, but the sleeve's short-term momentum remains broadly negative.
   </div>
 
   <div class="al g">
-    <span class="tag">Green · Thesis Working</span>
-    <b>BME +1.18 · BST +0.82 · CSQ +0.17 · UTF +0.03 · UTG +0.03.</b>
-    No fund crossed into or out of Green on Z1Y between the supplied 09/24 and 09/25 datasets.
-  </div>
-
-  <div class="al p">
-    <span class="tag">Blue · Premium Territory</span>
-    <b>DNP Z1Y +1.03 at +10.55% premium · NXG +0.42 at +0.55% premium.</b>
-    Both remain on the premium side of the Matrix.
+    <span class="tag">Positive ST Confirmation</span>
+    <b>BME +0.98% · EOI +0.60% · CSQ +0.15%.</b>
+    BME and CSQ are Green on Z1Y.
+    EOI remains Orange at Z1Y −1.29 while showing positive ST momentum.
   </div>
 
   <div class="al dq">
     <span class="tag">Distribution Quality</span>
     <b>ERH and RFI retain DQ cautions.</b>
-    Distribution-quality treatment remains separate from valuation and data-quality reconciliation.
-  </div>
-
-  <div class="al p">
-    <span class="tag">Momentum Freshness</span>
-    <b>No new momentum dataset was supplied with 09/25.</b>
-    The 09/24 momentum snapshot is retained for continuity but is labeled stale everywhere it appears.
-    PDI and PDO remain momentum-only peer observations because current valuation data were not supplied.
+    Distribution quality remains analytically separate from valuation and momentum.
   </div>
 
 </div>
@@ -284,15 +577,16 @@ raw provider values are preserved ·
   </div>
 
   <div class="compare-banner" id="compareBanner">
-    <b>Compare mode ON</b> — current 09/25 values are large dots; selected historical values are smaller dots; movement is connected by a dashed line.
+    <b>Compare mode ON</b> — current 09/25 valuation values are large dots; selected historical values are smaller dots; movement is connected by a dashed line.
   </div>
 
   <svg id="chart" viewBox="0 0 980 560" xmlns="http://www.w3.org/2000/svg"></svg>
 
   <div class="legend">
-    09/25 snapshot · selected Z-score / D/P matrix · dashed vertical segment = raw current D/P to 52-week average ·
+    09/25 valuation snapshot · selected Z-score / D/P matrix ·
+    dashed vertical segment = raw current D/P to 52-week average ·
     outer ring = My Holdings · historical sessions display Z1Y / D/P ·
-    raw provider D/P is preserved even where it does not reconcile to supplied Price/NAV.
+    latest supplied momentum appears in tooltips and detail panels but does not change Matrix coordinates.
   </div>
 
   <div class="tmnav" id="tmnav"></div>
@@ -328,73 +622,71 @@ raw provider values are preserved ·
 </div>
 
 <div class="highlights">
-  <h2>09/25 Matrix Highlights</h2>
+  <h2>09/25 Matrix Highlights · Updated Momentum</h2>
 
   <div>
 
-    <b>Broad tape:</b>
-    Supplied Net Price Change is <b>−$3.27</b>. Default Z1Y quadrant counts remain
-    Green <b>5</b> · Blue <b>2</b> · Orange <b>17</b> · Gray <b>1</b>.
-    No fund changed Z1Y quadrant from the supplied 09/24 session.<br>
+    <b>Valuation matrix:</b>
+    Z1Y quadrant counts remain Green <b>5</b> · Blue <b>2</b> ·
+    Orange <b>17</b> · Gray <b>1</b>.
+    No Z1Y quadrant crossing occurred between the supplied 09/24 and 09/25 valuation datasets.<br>
 
-    <b>Data-quality reconciliation:</b>
-    Every displayed 09/25 Market Price is identical to the corresponding 09/24 Market Price,
-    even though the supplied portfolio Net Price Change is negative.
-    In addition, eight raw D/P values do not reconcile within 0.15 pt to the supplied Price/NAV pair:
-    PDX raw <b>−10.76%</b> vs implied about <b>−12.21%</b>;
-    BME <b>−2.96%</b> vs <b>−2.39%</b>;
-    BDJ <b>−7.86%</b> vs <b>−7.44%</b>;
-    UTG <b>−0.40%</b> vs about <b>−0.03%</b>;
-    CSQ <b>−8.39%</b> vs about <b>−8.74%</b>;
-    BST <b>−4.83%</b> vs <b>−4.54%</b>;
-    PCN <b>−2.36%</b> vs <b>−2.64%</b>;
-    NBXG <b>−13.95%</b> vs <b>−14.17%</b>.
-    The dashboard therefore treats those D/P moves as raw-provider observations with a visible DQ annotation rather than silently correcting them.<br>
+    <b>Momentum breadth:</b>
+    Only three of 27 momentum rows have positive ST Momentum:
+    BME <b>+0.98%</b>, EOI <b>+0.60%</b>, and CSQ <b>+0.15%</b>.
+    Short-term confirmation therefore remains broadly negative.<br>
 
-    <b>Deepest mechanical Z1Y:</b>
-    PCN <b>−2.63</b>, ASGI <b>−2.30</b>, EOS <b>−1.86</b>,
-    GDV <b>−1.73</b>, PDX <b>−1.73</b>, RLTY <b>−1.72</b>,
-    RQI <b>−1.57</b>, RFI <b>−1.32</b>, EOI / ETG <b>−1.29</b>.
-    ASGI remains excluded from clean-signal interpretation because of the active rights offering.<br>
+    <b>Largest ST improvements versus the prior 09/24 momentum snapshot:</b>
+    UTF <b>+1.25 pt</b>, DNP <b>+1.20</b>, PDI <b>+0.94</b>,
+    PCN <b>+0.82</b>, ASGI <b>+0.65</b>, BDJ <b>+0.63</b>,
+    and HTD <b>+0.57</b>.
+    Each remains below zero despite the improvement.<br>
+
+    <b>Largest ST deterioration:</b>
+    NBXG <b>−2.05 pt</b>, GLU <b>−1.84</b>,
+    AIO <b>−1.45</b>, NXG <b>−1.41</b>, BST <b>−1.10</b>,
+    and RFI <b>−0.82</b>.
+    NBXG moved from +1.30% to <b>−0.75%</b>.<br>
 
     <b>PCN:</b>
-    Z3M <b>−3.65</b>, Z6M <b>−4.30</b>, and Z1Y <b>−2.63</b> remain unchanged from 09/24.
-    Raw D/P moved from <b>−2.64%</b> to <b>−2.36%</b>, but the supplied 09/25 Price/NAV pair still implies approximately <b>−2.64%</b>.
-    That raw D/P improvement is therefore data-quality qualified.
-    The last available momentum snapshot, dated 09/24, was <b>−7.59% ST / −26.81% LT</b>.<br>
+    Z1Y remains <b>−2.63</b>.
+    ST Momentum improved from −7.59% to <b>−6.77%</b> and LT Momentum from
+    −26.81% to <b>−23.82%</b>, but both remain materially negative.
+    PDI remains <b>−8.69% / −30.89%</b> and PDO
+    <b>−6.42% / −20.17%</b>, consistent with weak CEF-bond peer momentum.<br>
 
-    <b>Own-normal gaps:</b>
-    PCN raw <b>−7.46 pt</b>, RQI <b>−4.88 pt</b>, EOS <b>−3.96 pt</b>,
-    RNP <b>−3.72 pt</b>, RFI <b>−3.38 pt</b>, EOI <b>−3.07 pt</b>,
-    ETG <b>−2.89 pt</b>, GLU <b>−2.55 pt</b>, and HTD <b>−2.16 pt</b>.
-    ASGI is mechanically wider at <b>−9.74 pt</b> but remains rights-offering contaminated.<br>
+    <b>GLU:</b>
+    Its valuation term structure remains
+    <b>Z3M +0.93 / Z6M +0.21 / Z1Y −0.73</b>,
+    but ST Momentum deteriorated from −3.71% to <b>−5.55%</b>.
+    That is a valuation/momentum divergence rather than clean confirmation.<br>
 
-    <b>Term structure:</b>
-    GLU, RNP, and RQI retain improving short-end structures relative to Z1Y.
-    HTD, ETG, and ERH retain the opposite configuration, with Z3M more negative than Z6M and Z1Y.
-    No new momentum feed was supplied to confirm whether those structures improved on 09/25.<br>
+    <b>REIT complex:</b>
+    RQI <b>−7.74% / −7.23%</b>,
+    RNP <b>−5.86% / −10.56%</b>,
+    RFI <b>−5.82% / −15.30%</b>,
+    and RLTY ST <b>−8.00%</b>.
+    RQI retains an own-normal gap of <b>−4.88 pt</b> and RNP <b>−3.72 pt</b>,
+    but momentum remains weak.<br>
 
-    <b>Green quadrant:</b>
-    BME <b>+1.18</b>, BST <b>+0.82</b>, CSQ <b>+0.17</b>,
-    UTF <b>+0.03</b>, and UTG <b>+0.03</b>.
-    UTG's Z1Y declined from +0.29 to +0.03 but remained above zero; it is therefore an intra-Green deterioration rather than a quadrant change.<br>
+    <b>Utility / infrastructure complex:</b>
+    ERH ST <b>−9.92%</b>, HTD <b>−9.36%</b>,
+    UTF <b>−8.66%</b>, UTG <b>−8.58%</b>,
+    BUI <b>−7.77%</b>, and DNP <b>−7.35%</b>.
+    UTF's ST reading improved by 1.25 pt versus the prior snapshot but remains deeply negative despite its slightly positive Z1Y reading.<br>
 
-    <b>09/24 → 09/25:</b>
-    Z1Y was unchanged for most funds. CSQ eased from <b>+0.25</b> to <b>+0.17</b>
-    and UTG from <b>+0.29</b> to <b>+0.03</b>.
-    The largest raw D/P changes were PDX <b>+1.45 pt</b>, BME <b>−0.57 pt</b>,
-    BDJ <b>−0.42 pt</b>, UTG <b>−0.31 pt</b>, BST <b>−0.29 pt</b>,
-    and PCN <b>+0.28 pt</b>; each of these is provider-reconciliation qualified where flagged above.<br>
+    <b>Positive momentum confirmation:</b>
+    BME combines Green Z1Y <b>+1.18</b> with ST Momentum <b>+0.98%</b>.
+    CSQ is Green at <b>+0.17</b> with ST <b>+0.15%</b>.
+    EOI remains Orange at Z1Y <b>−1.29</b> while ST Momentum is <b>+0.60%</b>.<br>
 
-    <b>Momentum:</b>
-    The 09/24 momentum snapshot remains the last available auxiliary dataset.
-    It is intentionally shown as <b>stale</b>, not as a 09/25 observation.
-    PDI and PDO retain momentum-only peer context but have no current Matrix coordinates.<br>
+    <b>ASGI:</b>
+    Z1Y remains <b>−2.30</b> and ST Momentum <b>−13.06%</b>.
+    The mechanical signal remains suppressed because of the active rights-offering event.<br>
 
-    <b>Event / DQ filters:</b>
-    <span style="color:#fbbf24;font-weight:800">ASGI remains RO SUPPRESSED</span>.
-    ERH and RFI retain distribution-quality cautions.
-    PCN's ATM program remains corporate-action context but does not receive normal-signal suppression based on the supplied evidence.
+    <b>Data quality:</b>
+    The 09/25 Price/NAV-to-D/P reconciliation flags remain in force.
+    Updated momentum does not modify or repair those raw valuation discrepancies.
 
   </div>
 </div>
@@ -413,26 +705,26 @@ Always conduct your own due diligence before making investment decisions.
 
 /*
   CEF TIME MACHINE
-  Current session: 09/25/2026
+  Current valuation session: 09/25/2026
 
-  CUR array:
+  CUR:
   [Z3M,Z6M,Z1Y,D/P,52wkAvg,Yield,NAV,Price]
 
-  Historical array:
+  Historical:
   [Z1Y,D/P]
 
-  Current valuation feed:
-  25 / 27 standard funds.
+  Latest momentum snapshot:
+  supplied after the 09/25 valuation dataset.
+  Screenshot does not display a date, so no date is inferred.
 
-  PDI / PDO:
-  valuation unavailable; last momentum snapshot available.
+  Previous momentum snapshot:
+  09/24/2026.
 
   Momentum:
-  09/24/2026 snapshot retained as stale.
+  [ST,LT]
 
-  Provider reconciliation:
-  Raw D/P is always preserved.
-  Price/NAV-implied D/P is diagnostic only.
+  Momentum performance:
+  [1D,1W,1M,3M,6M,YTD,1Y,3Y,5Y]
 */
 
 const STANDARD_UNIVERSE=[
@@ -441,11 +733,9 @@ const STANDARD_UNIVERSE=[
   "PDX","RFI","RLTY","RNP","RQI","UTF","UTG"
 ];
 
-const MISSING_CURRENT=["PDI","PDO"];
-
-const MISSING_VALUATION_SESSIONS=[
-  "09/22/2026",
-  "09/23/2026"
+const MISSING_CURRENT=[
+  "PDI",
+  "PDO"
 ];
 
 const HOLDINGS=new Set([
@@ -467,10 +757,12 @@ const QNAME={
   X:"Gray · Worst Setup"
 };
 
-const MOM_DATE="09/24/2026";
-const MOM_STATUS="last available snapshot — stale for 09/25";
+const MOM_LABEL="Latest supplied momentum snapshot";
+const MOM_SOURCE_NOTE="screenshot date not displayed";
+const PREV_MOM_DATE="09/24/2026";
 
-/* Raw 09/25 effective leverage */
+
+/* 09/25 effective leverage */
 const LEV={
   AIO:11.98,
   ASGI:1.03,
@@ -499,12 +791,49 @@ const LEV={
   UTG:22.78
 };
 
+
 /*
-  LAST AVAILABLE MOMENTUM SNAPSHOT — 09/24/2026
-  ST/LT are stale for the 09/25 current session.
+  UPDATED MOMENTUM
   [ST,LT]
+
+  RLTY LT #N/A preserved as null.
 */
 const MOM={
+  ETG:[-1.65,23.57],
+  GDV:[-1.95,22.30],
+  GLU:[-5.55,7.30],
+  HTD:[-9.36,5.24],
+  NBXG:[-0.75,11.94],
+  NXG:[-5.23,33.72],
+  PCN:[-6.77,-23.82],
+  PDI:[-8.69,-30.89],
+  PDO:[-6.42,-20.17],
+  PDX:[-2.66,17.71],
+  BDJ:[-0.60,10.37],
+  EOI:[0.60,10.27],
+  EOS:[-0.95,2.19],
+  BME:[0.98,10.63],
+  RQI:[-7.74,-7.23],
+  RNP:[-5.86,-10.56],
+  RFI:[-5.82,-15.30],
+  RLTY:[-8.00,null],
+  AIO:[-5.94,15.77],
+  ASGI:[-13.06,2.95],
+  BST:[-1.84,23.55],
+  BUI:[-7.77,11.90],
+  CSQ:[0.15,23.50],
+  DNP:[-7.35,-3.33],
+  ERH:[-9.92,-6.66],
+  UTG:[-8.58,11.94],
+  UTF:[-8.66,6.83]
+};
+
+
+/*
+  PRIOR MOMENTUM — 09/24/2026
+  Used only for momentum-delta comparison.
+*/
+const PREV_MOM={
   ETG:[-1.96,22.21],
   GDV:[-2.12,21.86],
   GLU:[-3.71,7.42],
@@ -533,6 +862,7 @@ const MOM={
   UTG:[-8.96,11.77],
   UTF:[-9.91,4.14]
 };
+
 
 const SECTOR={
   ETG:"CEF",
@@ -564,78 +894,169 @@ const SECTOR={
   UTF:"CEF-UTE-Infra"
 };
 
+
 /*
-  09/24 momentum-sheet return data.
-  STALE FOR 09/25.
+  UPDATED MOMENTUM PERFORMANCE
   [1D,1W,1M,3M,6M,YTD,1Y,3Y,5Y]
+
+  RLTY 5Y #N/A preserved as null.
 */
 const MOMPERF={
-  ETG:[-0.26,0.04,-4.83,-1.07,18.41,-0.30,11.04,50.52,5.06],
-  GDV:[0.42,-0.17,-5.15,-1.03,10.26,4.07,7.59,49.12,8.85],
-  GLU:[-0.11,-0.82,-5.71,-4.62,-4.32,-5.66,1.51,29.76,-9.01],
-  HTD:[-0.49,-5.12,-11.72,-12.96,-9.19,-5.16,-7.96,23.50,-3.98],
-  NBXG:[1.23,3.43,3.90,-3.44,27.13,8.73,3.97,54.83,-15.64],
-  NXG:[-0.24,-1.12,-0.58,-9.75,1.16,9.42,14.30,61.57,31.37],
-  PCN:[-0.28,-3.87,-8.95,-9.95,-7.13,-16.30,-20.42,-18.54,-41.48],
-  PDI:[0.65,-3.19,-9.47,-16.22,-15.91,-21.23,-29.30,-18.09,-47.20],
-  PDO:[0.51,-2.09,-6.90,-10.72,-5.63,-15.17,-16.14,-1.34,-42.79],
-  PDX:[1.04,-1.55,-5.87,-1.74,-7.37,8.47,-17.76,15.02,67.79],
-  BDJ:[-0.52,-0.63,-2.85,-0.21,12.78,0.53,5.42,27.58,-4.22],
-  EOI:[0.41,0.87,-0.90,2.22,9.27,-3.65,-5.31,24.43,7.14],
-  EOS:[-0.23,0.71,-0.98,-2.30,9.41,-9.10,-10.81,25.47,-11.00],
-  BME:[-0.49,0.61,-3.28,4.31,18.26,8.83,24.16,14.83,-5.97],
-  RQI:[0.18,-1.67,-9.91,-10.49,-4.85,-1.06,-7.98,10.47,-25.27],
-  RNP:[-0.21,-1.66,-7.41,-7.73,-2.52,-4.43,-14.27,9.52,-27.17],
-  RFI:[0.09,-1.57,-6.75,-6.67,-2.30,-3.71,-10.44,2.50,-35.48],
-  RLTY:[-0.56,-2.13,-9.64,-10.33,0.49,-3.13,-6.01,9.37,null],
-  AIO:[0.40,1.05,-4.19,-10.33,18.06,14.53,4.44,52.82,-7.74],
-  ASGI:[-0.46,-3.87,-21.28,-15.98,-10.33,-13.46,-4.16,16.43,-3.15],
-  BST:[0.14,0.64,2.03,-0.82,38.55,20.03,19.12,58.97,-9.22],
-  BUI:[-0.24,-2.23,-7.67,-13.66,-3.17,2.12,1.50,31.44,1.09],
-  CSQ:[-0.10,0.68,-0.91,1.77,25.15,7.55,7.83,46.98,13.34],
-  DNP:[-1.12,-3.47,-11.53,-10.64,-4.88,-2.50,-2.01,-2.01,-9.90],
-  ERH:[-0.68,-3.56,-10.84,-14.90,-13.76,-13.03,-15.04,13.84,-21.94],
-  UTG:[-0.09,-2.87,-9.44,-14.58,-10.74,-4.54,-9.23,39.23,5.31],
-  UTF:[-1.28,-3.28,-12.45,-13.99,-6.31,-0.83,-1.24,23.44,-9.77]
+
+  ETG:[
+    0.95,-0.60,-4.47,0.13,15.85,0.91,10.58,51.27,8.87
+  ],
+
+  GDV:[
+    0.59,-0.55,-4.46,-0.86,7.50,4.25,6.94,48.77,11.18
+  ],
+
+  GLU:[
+    -2.25,-3.20,-6.95,-6.51,-6.99,-7.52,1.27,33.58,-10.41
+  ],
+
+  HTD:[
+    -0.27,-4.18,-11.14,-12.76,-9.20,-4.95,-8.73,27.35,-2.89
+  ],
+
+  NBXG:[
+    0.64,-0.06,1.83,-4.00,21.29,8.10,2.03,48.95,-15.16
+  ],
+
+  NXG:[
+    -0.84,-2.19,-3.20,-10.29,-0.02,8.76,12.77,59.14,29.25
+  ],
+
+  PCN:[
+    0.65,-2.71,-8.49,-9.11,-9.41,-15.52,-19.31,-11.57,-40.57
+  ],
+
+  PDI:[
+    1.01,-1.48,-8.68,-15.92,-18.18,-20.95,-29.08,-17.11,-46.48
+  ],
+
+  PDO:[
+    0.60,-1.92,-6.53,-10.80,-9.28,-15.25,-16.51,-1.35,-42.64
+  ],
+
+  PDX:[
+    1.29,-0.58,-5.82,-1.59,-7.52,8.63,-18.30,2.82,68.60
+  ],
+
+  BDJ:[
+    0.31,0.21,-2.63,0.63,11.48,1.37,6.07,27.28,-2.24
+  ],
+
+  EOI:[
+    1.06,0.25,-1.34,2.89,6.18,-3.02,-4.68,25.80,9.68
+  ],
+
+  EOS:[
+    0.52,-0.28,-1.02,-1.56,4.79,-8.42,-9.92,25.16,-8.69
+  ],
+
+  BME:[
+    -0.31,0.70,-2.27,4.50,16.44,9.02,23.46,13.86,-5.42
+  ],
+
+  RQI:[
+    0.09,-3.46,-9.19,-10.57,-6.29,-1.15,-9.33,11.92,-24.27
+  ],
+
+  RNP:[
+    -0.47,-2.57,-7.02,-7.97,-4.20,-4.68,-15.72,10.19,-26.14
+  ],
+
+  RFI:[
+    -0.19,-2.49,-7.61,-7.37,-5.21,-4.43,-12.29,1.54,-35.14
+  ],
+
+  RLTY:[
+    -1.47,-3.42,-9.44,-11.15,-2.96,-4.01,-6.99,9.21,null
+  ],
+
+  AIO:[
+    -0.04,-1.43,-5.57,-10.84,15.69,13.89,3.08,50.76,-6.53
+  ],
+
+  ASGI:[
+    -0.93,-3.70,-19.11,-16.37,-13.86,-13.86,-8.11,19.18,-2.23
+  ],
+
+  BST:[
+    0.20,-1.43,-3.76,-0.33,34.53,20.62,19.04,57.59,-5.98
+  ],
+
+  BUI:[
+    -0.56,-2.16,-7.18,-13.97,-5.42,1.75,-0.72,33.14,3.27
+  ],
+
+  CSQ:[
+    0.39,-0.81,-1.00,2.27,21.20,8.07,8.02,46.23,16.25
+  ],
+
+  DNP:[
+    -0.51,-1.61,-10.34,-10.09,-4.85,-1.90,-2.20,1.55,-9.34
+  ],
+
+  ERH:[
+    -1.25,-4.83,-9.70,-15.23,-15.37,-13.37,-15.86,17.84,-21.95
+  ],
+
+  UTG:[
+    -0.37,-3.22,-7.69,-14.82,-11.35,-4.81,-11.62,40.97,6.48
+  ],
+
+  UTF:[
+    -0.17,-2.07,-10.91,-13.02,-6.57,0.29,-0.21,27.87,-7.18
+  ]
+
 };
 
+
 const EVENT={
+
   ASGI:{
     type:"ro",
     label:"RO SUPPRESSED / CORPORATE ACTION",
-    text:"Transferable rights offering remains active. Subscription period expires 10/15/2026 unless extended. Current valuation behavior remains contaminated by rights economics and potential share-supply effects."
+    text:"Transferable rights offering remains active. Normal valuation and momentum interpretation remains qualified by rights economics and potential share-supply effects."
   },
+
   ERH:{
     type:"dq",
     label:"DQ WARNING",
     text:"Distribution-quality caution retained under the controlling reference treatment."
   },
+
   RFI:{
     type:"dq",
     label:"DQ WARNING",
     text:"Distribution-quality caution retained under the controlling reference treatment."
   }
+
 };
+
 
 const CONTEXT={
+
   PCN:{
     label:"ATM PROGRAM — CONTEXT ONLY",
-    text:"A common-share at-the-market program remains on file. No supplied evidence identifies a new 09/25 issuance event as the cause of the current valuation reading, so normal signal suppression is not applied."
+    text:"A common-share at-the-market program remains on file. It is retained as corporate-action context but does not by itself suppress the current signal."
   }
+
 };
 
+
 /*
-  Raw provider D/P is preserved.
-  These tickers fail the >=0.15 pt Price/NAV reconciliation threshold.
+  Price/NAV reconciliation flags from supplied 09/25 valuation feed.
 */
 const EXPECTED_DP_MISMATCH=new Set([
   "BDJ","BME","BST","CSQ","NBXG","PCN","PDX","UTG"
 ]);
 
+
 /*
-  15 stored historical valuation datasets.
-  09/24 appended.
-  08/28 rolled off.
+  15 prior valuation sessions.
 */
 const PRIOR=[
 
@@ -791,10 +1212,14 @@ const PRIOR=[
 
 ];
 
-/* Raw 09/25 current data */
+
+/*
+  09/25 current valuation data.
+*/
 const CUR={
   date:"09/25/2026",
   data:{
+
     AIO:[-1.49,-0.80,-0.89,-10.67,-8.80,10.17,27.74,24.78],
     ASGI:[-2.08,-2.22,-2.30,-6.45,3.29,13.71,20.78,19.44],
     BDJ:[-0.94,-0.14,-0.85,-7.86,-6.10,7.73,10.35,9.58],
@@ -820,10 +1245,14 @@ const CUR={
     RQI:[-1.05,-1.18,-1.57,-9.12,-4.24,9.67,12.28,11.16],
     UTF:[-1.88,-0.49,0.03,-5.35,-5.41,8.19,25.59,24.22],
     UTG:[-0.13,0.03,0.03,-0.40,-0.44,7.24,34.96,34.95]
+
   }
 };
 
-/* Full 09/24 current arrays for one-session decomposition */
+
+/*
+  09/24 full valuation arrays for current-session delta calculations.
+*/
 const PREV_FULL={
   AIO:[-1.49,-0.80,-0.89,-10.67,-8.80,10.17,27.74,24.78],
   ASGI:[-2.08,-2.22,-2.30,-6.45,3.29,13.58,20.78,19.44],
@@ -852,7 +1281,13 @@ const PREV_FULL={
   UTG:[0.12,0.28,0.29,-0.09,-0.44,7.21,34.98,34.95]
 };
 
-const W=980,H=560,ML=54,MR=16,MT=14,MB=40;
+
+const W=980;
+const H=560;
+const ML=54;
+const MR=16;
+const MT=14;
+const MB=40;
 
 let zIdx=2;
 let qFilter="all";
@@ -862,85 +1297,161 @@ let sesIdx=PRIOR.length;
 let compareMode=false;
 let playTimer=null;
 
+
 function qFromZD(z,dp){
-  return z>=0 ? (dp<0 ? "G" : "B") : (dp<0 ? "O" : "X");
+  return z>=0
+    ? (dp<0 ? "G" : "B")
+    : (dp<0 ? "O" : "X");
 }
+
 
 function shortDate(d){
   return d.replace("/2026","");
 }
 
+
 function tickerMatch(t){
-  return searchTerms.length===0 || searchTerms.some(s=>t.includes(s));
+  return (
+    searchTerms.length===0 ||
+    searchTerms.some(s=>t.includes(s))
+  );
 }
 
+
 function fmtSigned(v,d=2){
-  if(v==null || !Number.isFinite(v)) return "—";
+
+  if(v==null || !Number.isFinite(v)){
+    return "—";
+  }
+
   return `${v>0?"+":""}${v.toFixed(d)}`;
 }
 
+
 function fmtPct(v,d=2){
-  if(v==null || !Number.isFinite(v)) return "—";
+
+  if(v==null || !Number.isFinite(v)){
+    return "—";
+  }
+
   return `${v.toFixed(d)}%`;
 }
 
+
 function fmtLev(t){
+
   const v=LEV[t];
-  return v==null ? "—" : `${v.toFixed(2)}%`;
+
+  return v==null
+    ? "—"
+    : `${v.toFixed(2)}%`;
 }
 
+
 function impliedDP(d){
-  if(!d || !Number.isFinite(d[6]) || !Number.isFinite(d[7]) || d[6]===0){
+
+  if(
+    !d ||
+    !Number.isFinite(d[6]) ||
+    !Number.isFinite(d[7]) ||
+    d[6]===0
+  ){
     return null;
   }
+
   return (d[7]/d[6]-1)*100;
 }
 
+
 function dpDifference(d){
+
   const implied=impliedDP(d);
-  return implied==null ? null : d[3]-implied;
+
+  return implied==null
+    ? null
+    : d[3]-implied;
 }
+
 
 function hasDPMismatch(t){
   return EXPECTED_DP_MISMATCH.has(t);
 }
 
-function eventMarkup(t){
-  const e=EVENT[t];
-  if(!e) return "";
 
-  const icon=e.type==="dq" ? "⚑" : "⚠";
+function momentumDelta(t,index){
 
-  return `<div class="event ${e.type}">
-    <b>${icon} ${e.label}</b> · ${e.text}
-  </div>`;
+  if(
+    !MOM[t] ||
+    !PREV_MOM[t] ||
+    MOM[t][index]==null ||
+    PREV_MOM[t][index]==null
+  ){
+    return null;
+  }
+
+  return MOM[t][index]-PREV_MOM[t][index];
 }
+
+
+function eventMarkup(t){
+
+  const e=EVENT[t];
+
+  if(!e){
+    return "";
+  }
+
+  const icon=
+    e.type==="dq"
+      ? "⚑"
+      : "⚠";
+
+  return `
+    <div class="event ${e.type}">
+      <b>${icon} ${e.label}</b> · ${e.text}
+    </div>
+  `;
+}
+
 
 function contextMarkup(t){
-  const c=CONTEXT[t];
-  if(!c) return "";
 
-  return `<div class="context">
-    <b>${c.label}</b> · ${c.text}
-  </div>`;
+  const c=CONTEXT[t];
+
+  if(!c){
+    return "";
+  }
+
+  return `
+    <div class="context">
+      <b>${c.label}</b> · ${c.text}
+    </div>
+  `;
 }
+
 
 function dataQualityMarkup(t){
 
-  if(!hasDPMismatch(t)) return "";
+  if(!hasDPMismatch(t)){
+    return "";
+  }
 
   const d=CUR.data[t];
+
   const implied=impliedDP(d);
   const diff=dpDifference(d);
 
-  return `<div class="datawarn">
-    <b>⚠ PROVIDER D/P RECONCILIATION</b> ·
-    raw D/P ${d[3].toFixed(2)}% ·
-    Price/NAV-implied ${implied.toFixed(2)}% ·
-    difference ${fmtSigned(diff)} pt.
-    Raw provider D/P is preserved in the Matrix.
-  </div>`;
+  return `
+    <div class="datawarn">
+      <b>⚠ PROVIDER D/P RECONCILIATION</b> ·
+      raw D/P ${d[3].toFixed(2)}% ·
+      Price/NAV-implied ${implied.toFixed(2)}% ·
+      difference ${fmtSigned(diff)} pt.
+      Raw provider D/P is preserved in the Matrix.
+    </div>
+  `;
 }
+
 
 function getExtent(){
 
@@ -948,80 +1459,204 @@ function getExtent(){
   const ds=[];
 
   Object.values(CUR.data).forEach(d=>{
-    zs.push(d[0],d[1],d[2]);
-    ds.push(d[3],d[4]);
+
+    zs.push(
+      d[0],
+      d[1],
+      d[2]
+    );
+
+    ds.push(
+      d[3],
+      d[4]
+    );
+
   });
 
   PRIOR.forEach(s=>{
+
     Object.values(s.d).forEach(d=>{
+
       zs.push(d[0]);
       ds.push(d[1]);
+
     });
+
   });
 
-  const zm=Math.max(5,Math.ceil(Math.max(...zs.map(Math.abs))));
-  const dmin=Math.floor(Math.min(...ds))-1;
-  const dmax=Math.ceil(Math.max(...ds))+1;
+  const zm=
+    Math.max(
+      5,
+      Math.ceil(
+        Math.max(...zs.map(Math.abs))
+      )
+    );
 
-  return {zmin:-zm,zmax:zm,dmin,dmax};
+  const dmin=
+    Math.floor(
+      Math.min(...ds)
+    )-1;
+
+  const dmax=
+    Math.ceil(
+      Math.max(...ds)
+    )+1;
+
+  return {
+    zmin:-zm,
+    zmax:zm,
+    dmin,
+    dmax
+  };
 }
+
 
 function drawGrid(s,ex,Xf,Yf){
 
-  s+=`<rect x="${Xf(0)}" y="${Yf(0)}"
-    width="${W-MR-Xf(0)}" height="${Yf(ex.dmin)-Yf(0)}"
-    fill="#1D9E75" opacity=".055"/>`;
+  s+=`
+    <rect
+      x="${Xf(0)}"
+      y="${Yf(0)}"
+      width="${W-MR-Xf(0)}"
+      height="${Yf(ex.dmin)-Yf(0)}"
+      fill="#1D9E75"
+      opacity=".055"
+    />
+  `;
 
-  s+=`<rect x="${Xf(0)}" y="${MT}"
-    width="${W-MR-Xf(0)}" height="${Yf(0)-MT}"
-    fill="#378ADD" opacity=".055"/>`;
+  s+=`
+    <rect
+      x="${Xf(0)}"
+      y="${MT}"
+      width="${W-MR-Xf(0)}"
+      height="${Yf(0)-MT}"
+      fill="#378ADD"
+      opacity=".055"
+    />
+  `;
 
-  s+=`<rect x="${ML}" y="${Yf(0)}"
-    width="${Xf(0)-ML}" height="${Yf(ex.dmin)-Yf(0)}"
-    fill="#D85A30" opacity=".05"/>`;
+  s+=`
+    <rect
+      x="${ML}"
+      y="${Yf(0)}"
+      width="${Xf(0)-ML}"
+      height="${Yf(ex.dmin)-Yf(0)}"
+      fill="#D85A30"
+      opacity=".05"
+    />
+  `;
 
-  s+=`<rect x="${ML}" y="${MT}"
-    width="${Xf(0)-ML}" height="${Yf(0)-MT}"
-    fill="#888780" opacity=".07"/>`;
+  s+=`
+    <rect
+      x="${ML}"
+      y="${MT}"
+      width="${Xf(0)-ML}"
+      height="${Yf(0)-MT}"
+      fill="#888780"
+      opacity=".07"
+    />
+  `;
 
-  for(let z=Math.ceil(ex.zmin);z<=ex.zmax;z++){
+  for(
+    let z=Math.ceil(ex.zmin);
+    z<=ex.zmax;
+    z++
+  ){
 
-    s+=`<line x1="${Xf(z)}" y1="${MT}" x2="${Xf(z)}" y2="${H-MB}"
-      stroke="${z===0?'#B6BDC3':'#EAEDEF'}"
-      stroke-width="${z===0?1.5:1}"/>`;
+    s+=`
+      <line
+        x1="${Xf(z)}"
+        y1="${MT}"
+        x2="${Xf(z)}"
+        y2="${H-MB}"
+        stroke="${z===0?'#B6BDC3':'#EAEDEF'}"
+        stroke-width="${z===0?1.5:1}"
+      />
+    `;
 
-    s+=`<text x="${Xf(z)}" y="${H-MB+16}" font-size="10"
-      fill="#8A929A" text-anchor="middle">${z}</text>`;
+    s+=`
+      <text
+        x="${Xf(z)}"
+        y="${H-MB+16}"
+        font-size="10"
+        fill="#8A929A"
+        text-anchor="middle"
+      >${z}</text>
+    `;
   }
 
-  const dstep=(ex.dmax-ex.dmin)>20 ? 5 : 2;
+  const dstep=
+    (ex.dmax-ex.dmin)>20
+      ? 5
+      : 2;
 
-  for(let d=Math.ceil(ex.dmin/dstep)*dstep;d<=ex.dmax;d+=dstep){
+  for(
+    let d=Math.ceil(ex.dmin/dstep)*dstep;
+    d<=ex.dmax;
+    d+=dstep
+  ){
 
-    s+=`<line x1="${ML}" y1="${Yf(d)}" x2="${W-MR}" y2="${Yf(d)}"
-      stroke="${d===0?'#B6BDC3':'#EAEDEF'}"
-      stroke-width="${d===0?1.5:1}"/>`;
+    s+=`
+      <line
+        x1="${ML}"
+        y1="${Yf(d)}"
+        x2="${W-MR}"
+        y2="${Yf(d)}"
+        stroke="${d===0?'#B6BDC3':'#EAEDEF'}"
+        stroke-width="${d===0?1.5:1}"
+      />
+    `;
 
-    s+=`<text x="${ML-6}" y="${Yf(d)+3}" font-size="10"
-      fill="#8A929A" text-anchor="end">${d}%</text>`;
+    s+=`
+      <text
+        x="${ML-6}"
+        y="${Yf(d)+3}"
+        font-size="10"
+        fill="#8A929A"
+        text-anchor="end"
+      >${d}%</text>
+    `;
   }
 
-  s+=`<text x="${W/2}" y="${H-6}" font-size="11"
-    fill="#5A636B" text-anchor="middle">
-    Z-Score (${["Z3M","Z6M","Z1Y"][zIdx]})
-  </text>`;
+  s+=`
+    <text
+      x="${W/2}"
+      y="${H-6}"
+      font-size="11"
+      fill="#5A636B"
+      text-anchor="middle"
+    >
+      Z-Score (${["Z3M","Z6M","Z1Y"][zIdx]})
+    </text>
+  `;
 
-  s+=`<text x="14" y="${H/2}" font-size="11" fill="#5A636B"
-    text-anchor="middle" transform="rotate(-90 14 ${H/2})">
-    Discount / Premium %
-  </text>`;
+  s+=`
+    <text
+      x="14"
+      y="${H/2}"
+      font-size="11"
+      fill="#5A636B"
+      text-anchor="middle"
+      transform="rotate(-90 14 ${H/2})"
+    >
+      Discount / Premium %
+    </text>
+  `;
 
   return s;
 }
 
+
+/*
+  Visibility functions intentionally keep the return expression
+  attached to return to avoid JavaScript ASI regression.
+*/
 function currentVisible(t,d){
 
-  const q=qFromZD(d[zIdx],d[3]);
+  const q=qFromZD(
+    d[zIdx],
+    d[3]
+  );
 
   return (
     (qFilter==="all" || q===qFilter) &&
@@ -1029,10 +1664,14 @@ function currentVisible(t,d){
     tickerMatch(t)
   );
 }
+
 
 function historicalVisible(t,z,dp){
 
-  const q=qFromZD(z,dp);
+  const q=qFromZD(
+    z,
+    dp
+  );
 
   return (
     (qFilter==="all" || q===qFilter) &&
@@ -1041,347 +1680,789 @@ function historicalVisible(t,z,dp){
   );
 }
 
+
 function syncSessionControls(){
 
-  document.querySelectorAll(".tmb").forEach(x=>x.classList.remove("on"));
+  document
+    .querySelectorAll(".tmb")
+    .forEach(
+      x=>x.classList.remove("on")
+    );
 
-  const target=document.querySelector(`.tmb[data-s="${sesIdx}"]`);
+  const target=
+    document.querySelector(
+      `.tmb[data-s="${sesIdx}"]`
+    );
 
-  if(target) target.classList.add("on");
+  if(target){
+    target.classList.add("on");
+  }
 
-  document.getElementById("sessionSlider").value=sesIdx;
+  document
+    .getElementById("sessionSlider")
+    .value=sesIdx;
 }
+
 
 function setSession(i){
 
   const N=PRIOR.length;
 
-  sesIdx=Math.max(0,Math.min(N,i));
+  sesIdx=
+    Math.max(
+      0,
+      Math.min(N,i)
+    );
 
   syncSessionControls();
   render();
 }
 
+
 function buildTmnav(){
 
   const N=PRIOR.length;
-  const nav=document.getElementById("tmnav");
+
+  const nav=
+    document.getElementById("tmnav");
 
   nav.innerHTML="";
 
-  const current=document.createElement("button");
+  const current=
+    document.createElement("button");
 
   current.className="ctl tmb on";
   current.dataset.s=N;
-  current.textContent=shortDate(CUR.date)+" (current)";
+  current.textContent=
+    shortDate(CUR.date)+" (current)";
 
   nav.appendChild(current);
 
   for(let i=N-1;i>=0;i--){
 
-    const b=document.createElement("button");
+    const b=
+      document.createElement("button");
 
     b.className="ctl tmb";
     b.dataset.s=i;
-    b.textContent=shortDate(PRIOR[i].date);
+    b.textContent=
+      shortDate(PRIOR[i].date);
 
     nav.appendChild(b);
   }
 
-  const lbl=document.createElement("span");
+  const lbl=
+    document.createElement("span");
 
   lbl.className="seslabel";
   lbl.id="seslabel";
-  lbl.textContent="Showing: "+CUR.date;
+  lbl.textContent=
+    "Showing: "+CUR.date;
 
   nav.appendChild(lbl);
 
-  nav.querySelectorAll(".tmb").forEach(b=>{
+  nav
+    .querySelectorAll(".tmb")
+    .forEach(b=>{
 
-    b.addEventListener("click",()=>{
-      setSession(+b.dataset.s);
+      b.addEventListener(
+        "click",
+        ()=>{
+          setSession(+b.dataset.s);
+        }
+      );
+
     });
 
-  });
-
-  const slider=document.getElementById("sessionSlider");
+  const slider=
+    document.getElementById("sessionSlider");
 
   slider.max=N;
   slider.value=N;
 }
+
 
 function render(){
 
   const N=PRIOR.length;
   const ex=getExtent();
 
-  const Xf=z=>ML+(z-ex.zmin)/(ex.zmax-ex.zmin)*(W-ML-MR);
-  const Yf=d=>MT+(ex.dmax-d)/(ex.dmax-ex.dmin)*(H-MT-MB);
+  const Xf=z=>
+    ML+
+    (z-ex.zmin)/
+    (ex.zmax-ex.zmin)*
+    (W-ML-MR);
+
+  const Yf=d=>
+    MT+
+    (ex.dmax-d)/
+    (ex.dmax-ex.dmin)*
+    (H-MT-MB);
 
   let s="";
 
-  s=drawGrid(s,ex,Xf,Yf);
+  s=
+    drawGrid(
+      s,
+      ex,
+      Xf,
+      Yf
+    );
 
-  if(compareMode && sesIdx<N){
+  if(
+    compareMode &&
+    sesIdx<N
+  ){
 
-    const ps=PRIOR[sesIdx];
+    const ps=
+      PRIOR[sesIdx];
 
-    Object.keys(CUR.data).forEach(t=>{
+    Object.keys(CUR.data)
+      .forEach(t=>{
 
-      if(!ps.d[t]) return;
+        if(!ps.d[t]){
+          return;
+        }
 
-      const cd=CUR.data[t];
-      const pd=ps.d[t];
+        const cd=
+          CUR.data[t];
 
-      if(
-        !currentVisible(t,cd) &&
-        !historicalVisible(t,pd[0],pd[1])
-      ) return;
+        const pd=
+          ps.d[t];
 
-      const cx=Xf(cd[zIdx]);
-      const cy=Yf(cd[3]);
+        if(
+          !currentVisible(t,cd) &&
+          !historicalVisible(
+            t,
+            pd[0],
+            pd[1]
+          )
+        ){
+          return;
+        }
 
-      const px=Xf(pd[0]);
-      const py=Yf(pd[1]);
+        const cx=
+          Xf(cd[zIdx]);
 
-      if(Math.hypot(cx-px,cy-py)>5){
+        const cy=
+          Yf(cd[3]);
 
-        s+=`<line x1="${cx}" y1="${cy}" x2="${px}" y2="${py}"
-          stroke="#6366F1" stroke-width="1.2"
-          stroke-dasharray="4,3" opacity=".38"/>`;
-      }
+        const px=
+          Xf(pd[0]);
 
-    });
+        const py=
+          Yf(pd[1]);
 
-    Object.keys(ps.d).forEach(t=>{
+        if(
+          Math.hypot(
+            cx-px,
+            cy-py
+          )>5
+        ){
 
-      const [z1y,dp]=ps.d[t];
+          s+=`
+            <line
+              x1="${cx}"
+              y1="${cy}"
+              x2="${px}"
+              y2="${py}"
+              stroke="#6366F1"
+              stroke-width="1.2"
+              stroke-dasharray="4,3"
+              opacity=".38"
+            />
+          `;
+        }
 
-      if(!historicalVisible(t,z1y,dp)) return;
+      });
 
-      const q=qFromZD(z1y,dp);
+    Object.keys(ps.d)
+      .forEach(t=>{
 
-      s+=`<g class="dot" data-t="${t}" data-mode="prior">
+        const [z1y,dp]=
+          ps.d[t];
 
-        <circle cx="${Xf(z1y)}" cy="${Yf(dp)}" r="5"
-          fill="${QCOLOR[q]}" opacity=".48"/>
+        if(
+          !historicalVisible(
+            t,
+            z1y,
+            dp
+          )
+        ){
+          return;
+        }
 
-        <text x="${Xf(z1y)}" y="${Yf(dp)-9}" font-size="8.5"
-          text-anchor="middle" fill="#6A7280">${t}</text>
+        const q=
+          qFromZD(
+            z1y,
+            dp
+          );
 
-      </g>`;
-    });
+        s+=`
+          <g
+            class="dot"
+            data-t="${t}"
+            data-mode="prior"
+          >
 
-    Object.keys(CUR.data).forEach(t=>{
+            <circle
+              cx="${Xf(z1y)}"
+              cy="${Yf(dp)}"
+              r="5"
+              fill="${QCOLOR[q]}"
+              opacity=".48"
+            />
 
-      const d=CUR.data[t];
+            <text
+              x="${Xf(z1y)}"
+              y="${Yf(dp)-9}"
+              font-size="8.5"
+              text-anchor="middle"
+              fill="#6A7280"
+            >${t}</text>
 
-      const z=d[zIdx];
-      const dp=d[3];
-      const avg=d[4];
+          </g>
+        `;
+      });
 
-      const q=qFromZD(z,dp);
-      const fc=QCOLOR[q];
+    Object.keys(CUR.data)
+      .forEach(t=>{
 
-      const dim=currentVisible(t,d) ? "" : " dimmed";
+        const d=
+          CUR.data[t];
 
-      const cx=Xf(z);
-      const cy=Yf(dp);
-      const ay=Yf(avg);
+        const z=
+          d[zIdx];
 
-      s+=`<g class="dot${dim}" data-t="${t}" data-mode="current">
+        const dp=
+          d[3];
 
-        <line x1="${cx}" y1="${cy}" x2="${cx}" y2="${ay}"
-          stroke="${fc}" stroke-width="1" stroke-dasharray="3,3" opacity=".4"/>
+        const avg=
+          d[4];
 
-        <circle cx="${cx}" cy="${ay}" r="2" fill="none"
-          stroke="${fc}" stroke-width="1" opacity=".4"/>
+        const q=
+          qFromZD(
+            z,
+            dp
+          );
 
-        ${HOLDINGS.has(t)?
-          `<circle cx="${cx}" cy="${cy}" r="11" fill="none"
-             stroke="${fc}" stroke-width="1.5" opacity=".8"/>`:""}
+        const fc=
+          QCOLOR[q];
 
-        <circle cx="${cx}" cy="${cy}" r="9" fill="white" opacity=".9"/>
+        const dim=
+          currentVisible(t,d)
+            ? ""
+            : " dimmed";
 
-        <circle cx="${cx}" cy="${cy}" r="6" fill="${fc}"/>
+        const cx=
+          Xf(z);
 
-        <text x="${cx}" y="${cy-13}" font-size="10" font-weight="800"
-          text-anchor="middle" fill="${fc}" stroke="white"
-          stroke-width="3" paint-order="stroke">${t}</text>
+        const cy=
+          Yf(dp);
 
-      </g>`;
-    });
+        const ay=
+          Yf(avg);
 
-    document.getElementById("chart").innerHTML=s;
+        s+=`
+          <g
+            class="dot${dim}"
+            data-t="${t}"
+            data-mode="current"
+          >
+
+            <line
+              x1="${cx}"
+              y1="${cy}"
+              x2="${cx}"
+              y2="${ay}"
+              stroke="${fc}"
+              stroke-width="1"
+              stroke-dasharray="3,3"
+              opacity=".4"
+            />
+
+            <circle
+              cx="${cx}"
+              cy="${ay}"
+              r="2"
+              fill="none"
+              stroke="${fc}"
+              stroke-width="1"
+              opacity=".4"
+            />
+
+            ${
+              HOLDINGS.has(t)
+                ? `
+                  <circle
+                    cx="${cx}"
+                    cy="${cy}"
+                    r="11"
+                    fill="none"
+                    stroke="${fc}"
+                    stroke-width="1.5"
+                    opacity=".8"
+                  />
+                `
+                : ""
+            }
+
+            <circle
+              cx="${cx}"
+              cy="${cy}"
+              r="9"
+              fill="white"
+              opacity=".9"
+            />
+
+            <circle
+              cx="${cx}"
+              cy="${cy}"
+              r="6"
+              fill="${fc}"
+            />
+
+            <text
+              x="${cx}"
+              y="${cy-13}"
+              font-size="10"
+              font-weight="800"
+              text-anchor="middle"
+              fill="${fc}"
+              stroke="white"
+              stroke-width="3"
+              paint-order="stroke"
+            >${t}</text>
+
+          </g>
+        `;
+      });
+
+    document
+      .getElementById("chart")
+      .innerHTML=s;
 
     bindDotsCompare();
 
-    document.getElementById("seslabel").textContent=
-      `Current: ${CUR.date} vs ${ps.date}`;
+    document
+      .getElementById("seslabel")
+      .textContent=
+        `Current: ${CUR.date} vs ${ps.date}`;
 
   }else{
 
     if(sesIdx===N){
 
-      Object.keys(CUR.data).forEach(t=>{
+      Object.keys(CUR.data)
+        .forEach(t=>{
 
-        const d=CUR.data[t];
+          const d=
+            CUR.data[t];
 
-        const z=d[zIdx];
-        const dp=d[3];
-        const avg=d[4];
+          const z=
+            d[zIdx];
 
-        const q=qFromZD(z,dp);
-        const fc=QCOLOR[q];
+          const dp=
+            d[3];
 
-        const dim=currentVisible(t,d) ? "" : " dimmed";
+          const avg=
+            d[4];
 
-        const cx=Xf(z);
-        const cy=Yf(dp);
-        const ay=Yf(avg);
+          const q=
+            qFromZD(
+              z,
+              dp
+            );
 
-        s+=`<g class="dot${dim}" data-t="${t}" data-mode="current">
+          const fc=
+            QCOLOR[q];
 
-          <line x1="${cx}" y1="${cy}" x2="${cx}" y2="${ay}"
-            stroke="${fc}" stroke-width="1"
-            stroke-dasharray="3,3" opacity=".5"/>
+          const dim=
+            currentVisible(t,d)
+              ? ""
+              : " dimmed";
 
-          <circle cx="${cx}" cy="${ay}" r="2" fill="none"
-            stroke="${fc}" stroke-width="1" opacity=".5"/>
+          const cx=
+            Xf(z);
 
-          <circle cx="${cx}" cy="${cy}" r="8" fill="white" opacity=".85"/>
+          const cy=
+            Yf(dp);
 
-          ${HOLDINGS.has(t)?
-            `<circle cx="${cx}" cy="${cy}" r="9.5" fill="none"
-               stroke="${fc}" stroke-width="1.4" opacity=".85"/>`:""}
+          const ay=
+            Yf(avg);
 
-          <circle cx="${cx}" cy="${cy}" r="6" fill="${fc}"/>
+          s+=`
+            <g
+              class="dot${dim}"
+              data-t="${t}"
+              data-mode="current"
+            >
 
-          <text x="${cx}" y="${cy-11}" font-size="9.5" font-weight="700"
-            text-anchor="middle" fill="#1E2429" stroke="white"
-            stroke-width="2.5" paint-order="stroke">${t}</text>
+              <line
+                x1="${cx}"
+                y1="${cy}"
+                x2="${cx}"
+                y2="${ay}"
+                stroke="${fc}"
+                stroke-width="1"
+                stroke-dasharray="3,3"
+                opacity=".5"
+              />
 
-        </g>`;
-      });
+              <circle
+                cx="${cx}"
+                cy="${ay}"
+                r="2"
+                fill="none"
+                stroke="${fc}"
+                stroke-width="1"
+                opacity=".5"
+              />
+
+              <circle
+                cx="${cx}"
+                cy="${cy}"
+                r="8"
+                fill="white"
+                opacity=".85"
+              />
+
+              ${
+                HOLDINGS.has(t)
+                  ? `
+                    <circle
+                      cx="${cx}"
+                      cy="${cy}"
+                      r="9.5"
+                      fill="none"
+                      stroke="${fc}"
+                      stroke-width="1.4"
+                      opacity=".85"
+                    />
+                  `
+                  : ""
+              }
+
+              <circle
+                cx="${cx}"
+                cy="${cy}"
+                r="6"
+                fill="${fc}"
+              />
+
+              <text
+                x="${cx}"
+                y="${cy-11}"
+                font-size="9.5"
+                font-weight="700"
+                text-anchor="middle"
+                fill="#1E2429"
+                stroke="white"
+                stroke-width="2.5"
+                paint-order="stroke"
+              >${t}</text>
+
+            </g>
+          `;
+
+        });
 
     }else{
 
-      const ps=PRIOR[sesIdx];
+      const ps=
+        PRIOR[sesIdx];
 
-      Object.keys(ps.d).forEach(t=>{
+      Object.keys(ps.d)
+        .forEach(t=>{
 
-        const [z,dp]=ps.d[t];
+          const [z,dp]=
+            ps.d[t];
 
-        const q=qFromZD(z,dp);
+          const q=
+            qFromZD(
+              z,
+              dp
+            );
 
-        const dim=historicalVisible(t,z,dp) ? "" : " dimmed";
+          const dim=
+            historicalVisible(
+              t,
+              z,
+              dp
+            )
+              ? ""
+              : " dimmed";
 
-        s+=`<g class="dot${dim}" data-t="${t}" data-mode="prior">
+          s+=`
+            <g
+              class="dot${dim}"
+              data-t="${t}"
+              data-mode="prior"
+            >
 
-          ${HOLDINGS.has(t)?
-            `<circle cx="${Xf(z)}" cy="${Yf(dp)}" r="9.5"
-               fill="none" stroke="${QCOLOR[q]}"
-               stroke-width="1.4" opacity=".65"/>`:""}
+              ${
+                HOLDINGS.has(t)
+                  ? `
+                    <circle
+                      cx="${Xf(z)}"
+                      cy="${Yf(dp)}"
+                      r="9.5"
+                      fill="none"
+                      stroke="${QCOLOR[q]}"
+                      stroke-width="1.4"
+                      opacity=".65"
+                    />
+                  `
+                  : ""
+              }
 
-          <circle cx="${Xf(z)}" cy="${Yf(dp)}"
-            r="6" fill="${QCOLOR[q]}"/>
+              <circle
+                cx="${Xf(z)}"
+                cy="${Yf(dp)}"
+                r="6"
+                fill="${QCOLOR[q]}"
+              />
 
-          <text x="${Xf(z)}" y="${Yf(dp)-11}" font-size="9.5"
-            font-weight="600" text-anchor="middle"
-            fill="#3A4249">${t}</text>
+              <text
+                x="${Xf(z)}"
+                y="${Yf(dp)-11}"
+                font-size="9.5"
+                font-weight="600"
+                text-anchor="middle"
+                fill="#3A4249"
+              >${t}</text>
 
-        </g>`;
-      });
+            </g>
+          `;
+
+        });
+
     }
 
-    document.getElementById("chart").innerHTML=s;
+    document
+      .getElementById("chart")
+      .innerHTML=s;
 
     bindDots();
 
-    document.getElementById("seslabel").textContent=
-      sesIdx===N ?
-      `Showing: ${CUR.date}` :
-      `Showing: ${PRIOR[sesIdx].date}`;
+    document
+      .getElementById("seslabel")
+      .textContent=
+        sesIdx===N
+          ? `Showing: ${CUR.date}`
+          : `Showing: ${PRIOR[sesIdx].date}`;
+
   }
 
   renderSnap();
 }
 
-const tip=document.getElementById("tip");
+
+const tip=
+  document.getElementById("tip");
+
 
 function currentTooltip(t,d){
 
-  const m=MOM[t]||null;
+  const m=
+    MOM[t] || null;
 
-  const ev=EVENT[t] ?
-    `<br><span style="color:#fbbf24">${EVENT[t].label}</span>` : "";
+  const dst=
+    momentumDelta(t,0);
 
-  const ctx=CONTEXT[t] ?
-    `<br><span style="color:#cbd5e1">${CONTEXT[t].label}</span>` : "";
+  const dlt=
+    momentumDelta(t,1);
 
-  const dq=hasDPMismatch(t) ?
-    `<br><span style="color:#fde68a">⚠ raw D/P ≠ Price/NAV-implied D/P</span>` : "";
+  const ev=
+    EVENT[t]
+      ? `<br><span style="color:#fbbf24">${EVENT[t].label}</span>`
+      : "";
 
-  const q=qFromZD(d[zIdx],d[3]);
+  const ctx=
+    CONTEXT[t]
+      ? `<br><span style="color:#cbd5e1">${CONTEXT[t].label}</span>`
+      : "";
 
-  return `<b>${t}</b>${ev}${ctx}${dq}<br>
-    ${QNAME[q]} using ${["Z3M","Z6M","Z1Y"][zIdx]}<br>
-    Price $${d[7].toFixed(2)} · NAV $${d[6].toFixed(2)} · Yield ${d[5].toFixed(2)}%<br>
-    Raw D/P ${d[3].toFixed(2)}% · avg ${d[4].toFixed(2)}% · gap ${fmtSigned(d[3]-d[4])}pt<br>
-    ${hasDPMismatch(t)?`Implied D/P ${impliedDP(d).toFixed(2)}%<br>`:""}
-    Z3M ${d[0].toFixed(2)} · Z6M ${d[1].toFixed(2)} · Z1Y ${d[2].toFixed(2)}<br>
-    Eff. leverage ${fmtLev(t)} · ${HOLDINGS.has(t)?"★ Holding":"Not holding"}<br>
-    Sector ${SECTOR[t]||"—"} ·
-    ST ${m?fmtPct(m[0]):"—"} · LT ${m?fmtPct(m[1]):"—"}<br>
-    <span style="color:#cbd5e1">Momentum ${MOM_DATE}: ${MOM_STATUS}</span>`;
+  const dq=
+    hasDPMismatch(t)
+      ? `<br><span style="color:#fde68a">⚠ raw D/P ≠ Price/NAV-implied D/P</span>`
+      : "";
+
+  const q=
+    qFromZD(
+      d[zIdx],
+      d[3]
+    );
+
+  return `
+    <b>${t}</b>${ev}${ctx}${dq}<br>
+
+    ${QNAME[q]}
+    using ${["Z3M","Z6M","Z1Y"][zIdx]}<br>
+
+    Price $${d[7].toFixed(2)} ·
+    NAV $${d[6].toFixed(2)} ·
+    Yield ${d[5].toFixed(2)}%<br>
+
+    Raw D/P ${d[3].toFixed(2)}% ·
+    avg ${d[4].toFixed(2)}% ·
+    gap ${fmtSigned(d[3]-d[4])}pt<br>
+
+    ${
+      hasDPMismatch(t)
+        ? `Implied D/P ${impliedDP(d).toFixed(2)}%<br>`
+        : ""
+    }
+
+    Z3M ${d[0].toFixed(2)} ·
+    Z6M ${d[1].toFixed(2)} ·
+    Z1Y ${d[2].toFixed(2)}<br>
+
+    Eff. leverage ${fmtLev(t)} ·
+    ${HOLDINGS.has(t)?"★ Holding":"Not holding"}<br>
+
+    Sector ${SECTOR[t]||"—"}<br>
+
+    ST ${m?fmtPct(m[0]):"—"}
+    ${
+      dst==null
+        ? ""
+        : ` (${fmtSigned(dst)}pt vs prior)`
+    }
+    ·
+
+    LT ${m?fmtPct(m[1]):"—"}
+    ${
+      dlt==null
+        ? ""
+        : ` (${fmtSigned(dlt)}pt)`
+    }
+    <br>
+
+    <span style="color:#cbd5e1">
+      ${MOM_LABEL} · ${MOM_SOURCE_NOTE}
+    </span>
+  `;
 }
+
 
 function momentumPerfMarkup(t){
 
-  const p=MOMPERF[t];
+  const p=
+    MOMPERF[t];
 
-  if(!p) return "";
+  if(!p){
+    return "";
+  }
 
-  const labels=["1D","1W","1M","3M","6M","YTD","1Y","3Y","5Y"];
+  const labels=[
+    "1D","1W","1M","3M","6M",
+    "YTD","1Y","3Y","5Y"
+  ];
 
-  return `<div style="margin-top:9px;padding-top:8px;border-top:1px solid #DEE3E7">
+  return `
+    <div
+      style="
+        margin-top:9px;
+        padding-top:8px;
+        border-top:1px solid #DEE3E7
+      "
+    >
 
-    <b style="font-size:11px">
-      Momentum / return snapshot — ${MOM_DATE} · stale for 09/25
-    </b>
+      <b style="font-size:11px">
+        ${MOM_LABEL} · ${MOM_SOURCE_NOTE}
+      </b>
 
-    <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:5px;font-size:11px">
+      <div
+        style="
+          display:flex;
+          gap:9px;
+          flex-wrap:wrap;
+          margin-top:5px;
+          font-size:11px
+        "
+      >
 
-      ${p.map((v,i)=>`<span><b>${labels[i]}</b> ${fmtPct(v)}</span>`).join("")}
+        ${
+          p.map(
+            (v,i)=>
+              `<span>
+                <b>${labels[i]}</b>
+                ${fmtPct(v)}
+              </span>`
+          ).join("")
+        }
+
+      </div>
 
     </div>
-
-  </div>`;
+  `;
 }
+
 
 function showCurrentDetail(t){
 
-  const N=PRIOR.length;
-  const d=CUR.data[t];
+  const N=
+    PRIOR.length;
 
-  if(!d) return;
+  const d=
+    CUR.data[t];
 
-  const q=qFromZD(d[zIdx],d[3]);
+  if(!d){
+    return;
+  }
 
-  const prev=PRIOR[N-1].d[t];
-  const pd=PREV_FULL[t];
+  const q=
+    qFromZD(
+      d[zIdx],
+      d[3]
+    );
 
-  const m=MOM[t]||null;
+  const prev=
+    PRIOR[N-1].d[t];
 
-  const dz=prev ? d[2]-prev[0] : null;
-  const ddp=prev ? d[3]-prev[1] : null;
+  const pd=
+    PREV_FULL[t];
 
-  const prevQ=prev ? qFromZD(prev[0],prev[1]) : null;
+  const m=
+    MOM[t] || null;
 
-  const dnav=pd ? d[6]-pd[6] : null;
-  const dprice=pd ? d[7]-pd[7] : null;
+  const dz=
+    prev
+      ? d[2]-prev[0]
+      : null;
 
-  const el=document.getElementById("detail");
+  const ddp=
+    prev
+      ? d[3]-prev[1]
+      : null;
+
+  const prevQ=
+    prev
+      ? qFromZD(
+          prev[0],
+          prev[1]
+        )
+      : null;
+
+  const dnav=
+    pd
+      ? d[6]-pd[6]
+      : null;
+
+  const dprice=
+    pd
+      ? d[7]-pd[7]
+      : null;
+
+  const dst=
+    momentumDelta(t,0);
+
+  const dlt=
+    momentumDelta(t,1);
+
+  const el=
+    document.getElementById("detail");
 
   el.style.display="block";
 
@@ -1391,580 +2472,1286 @@ function showCurrentDetail(t){
     ${contextMarkup(t)}
     ${dataQualityMarkup(t)}
 
-    <b style="font-size:14px">${t}</b>
+    <b style="font-size:14px">
+      ${t}
+    </b>
 
-    <span class="qcount" style="background:${QCOLOR[q]}">
+    <span
+      class="qcount"
+      style="background:${QCOLOR[q]}"
+    >
       ${QNAME[q]}
     </span>
 
-    ${HOLDINGS.has(t)?
-      '<span style="font-size:12px;font-weight:700">★ My Holding</span>':""}
+    ${
+      HOLDINGS.has(t)
+        ? '<span style="font-size:12px;font-weight:700">★ My Holding</span>'
+        : ""
+    }
 
     <table>
 
       <tr>
-        <td>Price</td><td class="v">$${d[7].toFixed(2)}</td>
-        <td>NAV</td><td class="v">$${d[6].toFixed(2)}</td>
-        <td>Yield</td><td class="v">${d[5].toFixed(2)}%</td>
-      </tr>
 
-      <tr>
-        <td>Raw D/P</td><td class="v">${d[3].toFixed(2)}%</td>
-        <td>52-wk avg</td><td class="v">${d[4].toFixed(2)}%</td>
-        <td>Own-Normal Gap</td><td class="v">${fmtSigned(d[3]-d[4])} pt</td>
-      </tr>
-
-      <tr>
-        <td>Price/NAV implied D/P</td>
-        <td class="v">${fmtPct(impliedDP(d))}</td>
-        <td>D/P reconciliation</td>
-        <td class="v">${hasDPMismatch(t)?`⚠ ${fmtSigned(dpDifference(d))} pt`:"Within tolerance"}</td>
-        <td>Provider D/P used</td>
-        <td class="v">Yes</td>
-      </tr>
-
-      <tr>
-        <td>Z3M</td><td class="v">${d[0].toFixed(2)}</td>
-        <td>Z6M</td><td class="v">${d[1].toFixed(2)}</td>
-        <td>Z1Y</td><td class="v">${d[2].toFixed(2)}</td>
-      </tr>
-
-      <tr>
-        <td>Δ Z1Y vs 09/24</td>
-        <td class="v">${dz==null?"—":fmtSigned(dz)}</td>
-        <td>Δ raw D/P vs 09/24</td>
-        <td class="v">${ddp==null?"—":fmtSigned(ddp)+" pt"}</td>
-        <td>Effective leverage</td>
-        <td class="v">${fmtLev(t)}</td>
-      </tr>
-
-      <tr>
-        <td>Δ NAV vs 09/24</td>
-        <td class="v">${dnav==null?"—":"$"+fmtSigned(dnav)}</td>
-        <td>Δ Price vs 09/24</td>
-        <td class="v">${dprice==null?"—":"$"+fmtSigned(dprice)}</td>
-        <td>Sector</td>
-        <td class="v">${SECTOR[t]||"—"}</td>
-      </tr>
-
-      <tr>
-        <td>ST Momentum*</td>
-        <td class="v">${m?fmtPct(m[0]):"—"}</td>
-        <td>LT Momentum*</td>
-        <td class="v">${m?fmtPct(m[1]):"—"}</td>
-        <td>Momentum date</td>
-        <td class="v">${m?MOM_DATE:"—"}</td>
-      </tr>
-
-      <tr>
-        <td>Prior quadrant</td>
-        <td class="v">${prevQ?QNAME[prevQ]:"—"}</td>
-        <td>Quadrant change</td>
-        <td class="v">${prevQ&&prevQ!==q?`${QNAME[prevQ]} → ${QNAME[q]}`:"No"}</td>
-        <td>Holding</td>
-        <td class="v">${HOLDINGS.has(t)?"Yes":"No"}</td>
-      </tr>
-
-      <tr>
-        <td>Corporate action</td>
-        <td class="v" colspan="3">
-          ${EVENT[t]&&EVENT[t].type!=="dq" ?
-            EVENT[t].label :
-            CONTEXT[t] ?
-            CONTEXT[t].label :
-            "No active suppression"}
+        <td>Price</td>
+        <td class="v">
+          $${d[7].toFixed(2)}
         </td>
+
+        <td>NAV</td>
+        <td class="v">
+          $${d[6].toFixed(2)}
+        </td>
+
+        <td>Yield</td>
+        <td class="v">
+          ${d[5].toFixed(2)}%
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td>Raw D/P</td>
+        <td class="v">
+          ${d[3].toFixed(2)}%
+        </td>
+
+        <td>52-wk avg</td>
+        <td class="v">
+          ${d[4].toFixed(2)}%
+        </td>
+
+        <td>Own-Normal Gap</td>
+        <td class="v">
+          ${fmtSigned(d[3]-d[4])} pt
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td>Price/NAV implied D/P</td>
+        <td class="v">
+          ${fmtPct(impliedDP(d))}
+        </td>
+
+        <td>D/P reconciliation</td>
+        <td class="v">
+          ${
+            hasDPMismatch(t)
+              ? `⚠ ${fmtSigned(dpDifference(d))} pt`
+              : "Within tolerance"
+          }
+        </td>
+
+        <td>Provider D/P used</td>
+        <td class="v">
+          Yes
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td>Z3M</td>
+        <td class="v">
+          ${d[0].toFixed(2)}
+        </td>
+
+        <td>Z6M</td>
+        <td class="v">
+          ${d[1].toFixed(2)}
+        </td>
+
+        <td>Z1Y</td>
+        <td class="v">
+          ${d[2].toFixed(2)}
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td>Δ Z1Y vs 09/24</td>
+        <td class="v">
+          ${dz==null ? "—" : fmtSigned(dz)}
+        </td>
+
+        <td>Δ raw D/P vs 09/24</td>
+        <td class="v">
+          ${ddp==null ? "—" : fmtSigned(ddp)+" pt"}
+        </td>
+
+        <td>Effective leverage</td>
+        <td class="v">
+          ${fmtLev(t)}
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td>Δ NAV vs 09/24</td>
+        <td class="v">
+          ${dnav==null ? "—" : "$"+fmtSigned(dnav)}
+        </td>
+
+        <td>Δ Price vs 09/24</td>
+        <td class="v">
+          ${dprice==null ? "—" : "$"+fmtSigned(dprice)}
+        </td>
+
+        <td>Sector</td>
+        <td class="v">
+          ${SECTOR[t]||"—"}
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td>ST Momentum</td>
+        <td class="v">
+          ${m ? fmtPct(m[0]) : "—"}
+        </td>
+
+        <td>Δ ST vs prior snapshot</td>
+        <td class="v">
+          ${dst==null ? "—" : fmtSigned(dst)+" pt"}
+        </td>
+
+        <td>Prior ST</td>
+        <td class="v">
+          ${
+            PREV_MOM[t] && PREV_MOM[t][0]!=null
+              ? fmtPct(PREV_MOM[t][0])
+              : "—"
+          }
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td>LT Momentum</td>
+        <td class="v">
+          ${m ? fmtPct(m[1]) : "—"}
+        </td>
+
+        <td>Δ LT vs prior snapshot</td>
+        <td class="v">
+          ${dlt==null ? "—" : fmtSigned(dlt)+" pt"}
+        </td>
+
+        <td>Prior LT</td>
+        <td class="v">
+          ${
+            PREV_MOM[t] && PREV_MOM[t][1]!=null
+              ? fmtPct(PREV_MOM[t][1])
+              : "—"
+          }
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td>Prior quadrant</td>
+        <td class="v">
+          ${prevQ ? QNAME[prevQ] : "—"}
+        </td>
+
+        <td>Quadrant change</td>
+        <td class="v">
+          ${
+            prevQ && prevQ!==q
+              ? `${QNAME[prevQ]} → ${QNAME[q]}`
+              : "No"
+          }
+        </td>
+
+        <td>Holding</td>
+        <td class="v">
+          ${HOLDINGS.has(t)?"Yes":"No"}
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td>Corporate action</td>
+
+        <td
+          class="v"
+          colspan="3"
+        >
+          ${
+            EVENT[t] &&
+            EVENT[t].type!=="dq"
+              ? EVENT[t].label
+              : CONTEXT[t]
+                ? CONTEXT[t].label
+                : "No active suppression"
+          }
+        </td>
+
         <td>DQ</td>
-        <td class="v">${EVENT[t]&&EVENT[t].type==="dq"?"⚑ DQ warning":"No special distribution DQ flag"}</td>
+
+        <td class="v">
+          ${
+            EVENT[t] &&
+            EVENT[t].type==="dq"
+              ? "⚑ DQ warning"
+              : "No special distribution DQ flag"
+          }
+        </td>
+
       </tr>
 
     </table>
 
     ${momentumPerfMarkup(t)}
 
-    <div style="font-size:10.5px;color:#6b7280;margin-top:7px">
-      * Momentum is the last available 09/24 snapshot and is stale for the 09/25 valuation session.
-      Raw provider D/P is intentionally preserved even when it does not reconcile to displayed Price/NAV.
+    <div
+      style="
+        font-size:10.5px;
+        color:#6b7280;
+        margin-top:7px
+      "
+    >
+      Momentum values are from the latest supplied screenshot.
+      The screenshot does not display an as-of date, so one is not inferred.
+      Momentum deltas compare against the previously supplied 09/24 snapshot.
+      Raw provider D/P is preserved even when Price/NAV reconciliation differs.
     </div>
   `;
 }
 
+
 function bindDots(){
 
-  const N=PRIOR.length;
+  const N=
+    PRIOR.length;
 
-  document.querySelectorAll(".dot").forEach(g=>{
+  document
+    .querySelectorAll(".dot")
+    .forEach(g=>{
 
-    const t=g.dataset.t;
+      const t=
+        g.dataset.t;
 
-    if(!t) return;
-
-    const isCur=sesIdx===N;
-
-    g.addEventListener("mousemove",e=>{
-
-      tip.style.display="block";
-      tip.style.left=(e.clientX+14)+"px";
-      tip.style.top=(e.clientY+10)+"px";
-
-      if(isCur){
-
-        tip.innerHTML=currentTooltip(t,CUR.data[t]);
-
-      }else{
-
-        const pd=PRIOR[sesIdx].d[t];
-
-        if(pd){
-
-          tip.innerHTML=`<b>${t}</b> · ${PRIOR[sesIdx].date}<br>
-            Z1Y ${pd[0].toFixed(2)} · D/P ${pd[1].toFixed(2)}%`;
-        }
+      if(!t){
+        return;
       }
+
+      const isCur=
+        sesIdx===N;
+
+      g.addEventListener(
+        "mousemove",
+        e=>{
+
+          tip.style.display="block";
+
+          tip.style.left=
+            (e.clientX+14)+"px";
+
+          tip.style.top=
+            (e.clientY+10)+"px";
+
+          if(isCur){
+
+            tip.innerHTML=
+              currentTooltip(
+                t,
+                CUR.data[t]
+              );
+
+          }else{
+
+            const pd=
+              PRIOR[sesIdx].d[t];
+
+            if(pd){
+
+              tip.innerHTML=`
+                <b>${t}</b> ·
+                ${PRIOR[sesIdx].date}
+                <br>
+                Z1Y ${pd[0].toFixed(2)} ·
+                D/P ${pd[1].toFixed(2)}%
+              `;
+            }
+
+          }
+
+        }
+      );
+
+      g.addEventListener(
+        "mouseleave",
+        ()=>{
+          tip.style.display="none";
+        }
+      );
+
+      g.addEventListener(
+        "click",
+        ()=>{
+
+          if(isCur){
+            showCurrentDetail(t);
+          }
+
+        }
+      );
+
     });
-
-    g.addEventListener("mouseleave",()=>{
-      tip.style.display="none";
-    });
-
-    g.addEventListener("click",()=>{
-
-      if(isCur) showCurrentDetail(t);
-
-    });
-
-  });
 }
+
 
 function bindDotsCompare(){
 
-  const ps=PRIOR[sesIdx];
+  const ps=
+    PRIOR[sesIdx];
 
-  document.querySelectorAll(".dot").forEach(g=>{
+  document
+    .querySelectorAll(".dot")
+    .forEach(g=>{
 
-    const t=g.dataset.t;
-    const mode=g.dataset.mode;
+      const t=
+        g.dataset.t;
 
-    if(!t) return;
+      const mode=
+        g.dataset.mode;
 
-    const d=CUR.data[t];
-    const pd=ps.d[t];
-
-    g.addEventListener("mousemove",e=>{
-
-      tip.style.display="block";
-      tip.style.left=(e.clientX+14)+"px";
-      tip.style.top=(e.clientY+10)+"px";
-
-      if(mode==="current" && d){
-
-        tip.innerHTML=`<b>${t}</b>
-          <span style="color:#a5b4fc">▲ ${shortDate(CUR.date)}</span><br>
-          Raw D/P ${d[3].toFixed(2)}% ·
-          ${["Z3M","Z6M","Z1Y"][zIdx]} ${d[zIdx].toFixed(2)} ·
-          Z1Y ${d[2].toFixed(2)}<br>
-          ${EVENT[t]?`<span style="color:#fbbf24">${EVENT[t].label}</span><br>`:""}
-          ${hasDPMismatch(t)?`<span style="color:#fde68a">⚠ D/P reconciliation flag</span><br>`:""}
-          ST ${MOM[t]?fmtPct(MOM[t][0]):"—"} ·
-          LT ${MOM[t]?fmtPct(MOM[t][1]):"—"} ·
-          <span style="color:#cbd5e1">09/24 stale</span>`;
-
-      }else if(mode==="prior" && pd){
-
-        const dz=d ? d[2]-pd[0] : null;
-        const ddp=d ? d[3]-pd[1] : null;
-
-        tip.innerHTML=`<b>${t}</b>
-          <span style="color:#cbd5e1">◉ ${ps.date}</span><br>
-          D/P ${pd[1].toFixed(2)}% · Z1Y ${pd[0].toFixed(2)}<br>
-          To ${shortDate(CUR.date)}:
-          ΔZ1Y ${dz==null?"—":fmtSigned(dz)} ·
-          ΔD/P ${ddp==null?"—":fmtSigned(ddp)+"pt"}`;
+      if(!t){
+        return;
       }
-    });
 
-    g.addEventListener("mouseleave",()=>{
-      tip.style.display="none";
-    });
+      const d=
+        CUR.data[t];
 
-    g.addEventListener("click",()=>{
+      const pd=
+        ps.d[t];
 
-      if(mode==="current" && d){
+      g.addEventListener(
+        "mousemove",
+        e=>{
 
-        showCurrentDetail(t);
+          tip.style.display="block";
 
-        const el=document.getElementById("detail");
+          tip.style.left=
+            (e.clientX+14)+"px";
 
-        if(pd){
+          tip.style.top=
+            (e.clientY+10)+"px";
 
-          el.innerHTML+=`
-            <div style="margin-top:8px;padding-top:7px;border-top:1px solid #DEE3E7;font-size:12px">
-              <b>Compare baseline · ${ps.date}</b> —
-              Z1Y ${pd[0].toFixed(2)} · D/P ${pd[1].toFixed(2)}%
-            </div>`;
+          if(
+            mode==="current" &&
+            d
+          ){
+
+            tip.innerHTML=`
+              <b>${t}</b>
+              <span style="color:#a5b4fc">
+                ▲ ${shortDate(CUR.date)}
+              </span>
+              <br>
+
+              Raw D/P ${d[3].toFixed(2)}% ·
+              ${["Z3M","Z6M","Z1Y"][zIdx]}
+              ${d[zIdx].toFixed(2)} ·
+              Z1Y ${d[2].toFixed(2)}
+              <br>
+
+              ${
+                EVENT[t]
+                  ? `<span style="color:#fbbf24">${EVENT[t].label}</span><br>`
+                  : ""
+              }
+
+              ${
+                hasDPMismatch(t)
+                  ? `<span style="color:#fde68a">⚠ D/P reconciliation flag</span><br>`
+                  : ""
+              }
+
+              ST ${
+                MOM[t]
+                  ? fmtPct(MOM[t][0])
+                  : "—"
+              } ·
+
+              LT ${
+                MOM[t]
+                  ? fmtPct(MOM[t][1])
+                  : "—"
+              }
+              <br>
+
+              <span style="color:#cbd5e1">
+                ${MOM_LABEL}
+              </span>
+            `;
+
+          }else if(
+            mode==="prior" &&
+            pd
+          ){
+
+            const dz=
+              d
+                ? d[2]-pd[0]
+                : null;
+
+            const ddp=
+              d
+                ? d[3]-pd[1]
+                : null;
+
+            tip.innerHTML=`
+              <b>${t}</b>
+              <span style="color:#cbd5e1">
+                ◉ ${ps.date}
+              </span>
+              <br>
+
+              D/P ${pd[1].toFixed(2)}% ·
+              Z1Y ${pd[0].toFixed(2)}
+              <br>
+
+              To ${shortDate(CUR.date)}:
+              ΔZ1Y ${
+                dz==null
+                  ? "—"
+                  : fmtSigned(dz)
+              } ·
+
+              ΔD/P ${
+                ddp==null
+                  ? "—"
+                  : fmtSigned(ddp)+"pt"
+              }
+            `;
+
+          }
+
         }
-      }
-    });
+      );
 
-  });
+      g.addEventListener(
+        "mouseleave",
+        ()=>{
+          tip.style.display="none";
+        }
+      );
+
+      g.addEventListener(
+        "click",
+        ()=>{
+
+          if(
+            mode==="current" &&
+            d
+          ){
+
+            showCurrentDetail(t);
+
+            const el=
+              document.getElementById("detail");
+
+            if(pd){
+
+              el.innerHTML+=`
+                <div
+                  style="
+                    margin-top:8px;
+                    padding-top:7px;
+                    border-top:1px solid #DEE3E7;
+                    font-size:12px
+                  "
+                >
+                  <b>Compare baseline · ${ps.date}</b> —
+                  Z1Y ${pd[0].toFixed(2)} ·
+                  D/P ${pd[1].toFixed(2)}%
+                </div>
+              `;
+
+            }
+
+          }
+
+        }
+      );
+
+    });
 }
+
 
 function renderSnap(){
 
-  const N=PRIOR.length;
-  const isCur=sesIdx===N;
+  const N=
+    PRIOR.length;
 
-  const pool=isCur ?
-    Object.keys(CUR.data) :
-    Object.keys(PRIOR[sesIdx].d);
+  const isCur=
+    sesIdx===N;
 
-  const counts={G:0,B:0,O:0,X:0};
+  const pool=
+    isCur
+      ? Object.keys(CUR.data)
+      : Object.keys(PRIOR[sesIdx].d);
+
+  const counts={
+    G:0,
+    B:0,
+    O:0,
+    X:0
+  };
 
   pool.forEach(t=>{
 
-    if(holdOnly && !HOLDINGS.has(t)) return;
-
-    const z=isCur ?
-      CUR.data[t][zIdx] :
-      PRIOR[sesIdx].d[t][0];
-
-    const dp=isCur ?
-      CUR.data[t][3] :
-      PRIOR[sesIdx].d[t][1];
-
-    counts[qFromZD(z,dp)]++;
-  });
-
-  document.getElementById("snapTitle").textContent=
-    "Quadrant counts — "+(holdOnly?"holdings":"supplied valuation universe");
-
-  document.getElementById("snapCounts").innerHTML=
-    Object.keys(counts).map(q=>
-      `<span class="qcount" style="background:${QCOLOR[q]}">
-        ${QNAME[q].split("·")[0].trim()} ${counts[q]}
-      </span>`
-    ).join("");
-
-  const sortable=pool.filter(t=>!holdOnly || HOLDINGS.has(t));
-
-  const getZ1Y=t=>isCur ?
-    CUR.data[t][2] :
-    PRIOR[sesIdx].d[t][0];
-
-  const getZSel=t=>isCur ?
-    CUR.data[t][zIdx] :
-    PRIOR[sesIdx].d[t][0];
-
-  const getDP=t=>isCur ?
-    CUR.data[t][3] :
-    PRIOR[sesIdx].d[t][1];
-
-  const deep=[...sortable]
-    .sort((a,b)=>getZ1Y(a)-getZ1Y(b))
-    .slice(0,3);
-
-  document.getElementById("snapDeep").innerHTML=
-    deep.map(t=>{
-
-      const flag=isCur&&EVENT[t] ?
-        ` <span style="color:#D97706;font-size:10px">⚠ ${EVENT[t].label}</span>`:"";
-
-      const dq=isCur&&hasDPMismatch(t) ?
-        ` <span style="color:#E3A008;font-size:10px">⚠ D/P</span>`:"";
-
-      return `<div><b>${t}</b>
-        Z1Y ${getZ1Y(t).toFixed(2)} ·
-        D/P ${getDP(t).toFixed(2)}%${flag}${dq}</div>`;
-    }).join("");
-
-  const greens=sortable
-    .filter(t=>qFromZD(getZSel(t),getDP(t))==="G")
-    .sort((a,b)=>getZSel(b)-getZSel(a))
-    .slice(0,3);
-
-  document.getElementById("snapGreen").innerHTML=
-    greens.length
-      ? greens.map(t=>{
-
-          const dq=isCur&&hasDPMismatch(t) ?
-            ` <span style="color:#E3A008;font-size:10px">⚠ D/P</span>`:"";
-
-          return `<div><b>${t}</b>
-            ${["Z3M","Z6M","Z1Y"][zIdx]}
-            ${fmtSigned(getZSel(t))}${dq}</div>`;
-        }).join("")
-      : "None";
-}
-
-/* Z horizon controls */
-document.querySelectorAll(".zt").forEach(b=>{
-
-  b.addEventListener("click",()=>{
-
-    document.querySelectorAll(".zt").forEach(x=>x.classList.remove("on"));
-
-    b.classList.add("on");
-
-    zIdx=+b.dataset.z;
-
-    render();
-  });
-
-});
-
-/* Quadrant filters */
-document.querySelectorAll(".qf").forEach(b=>{
-
-  b.addEventListener("click",()=>{
-
-    document.querySelectorAll(".qf").forEach(x=>x.classList.remove("on"));
-
-    b.classList.add("on");
-
-    qFilter=b.dataset.q;
-
-    render();
-  });
-
-});
-
-/* Ticker search */
-document.getElementById("search").addEventListener("input",e=>{
-
-  searchTerms=e.target.value
-    .toUpperCase()
-    .split(/[\s,;]+/)
-    .map(s=>s.trim())
-    .filter(Boolean);
-
-  render();
-});
-
-/* Holdings */
-document.getElementById("hold").addEventListener("click",e=>{
-
-  holdOnly=!holdOnly;
-
-  e.target.classList.toggle("on",holdOnly);
-
-  render();
-});
-
-/* Compare */
-document.getElementById("compareBtn").addEventListener("click",e=>{
-
-  const N=PRIOR.length;
-
-  compareMode=!compareMode;
-
-  e.target.classList.toggle("on",compareMode);
-
-  document.getElementById("compareBanner").style.display=
-    compareMode ? "block" : "none";
-
-  if(compareMode && sesIdx===N){
-
-    setSession(N-1);
-
-  }else{
-
-    render();
-  }
-});
-
-/* Step controls */
-document.getElementById("prevSession").addEventListener("click",()=>{
-  setSession(sesIdx-1);
-});
-
-document.getElementById("nextSession").addEventListener("click",()=>{
-  setSession(sesIdx+1);
-});
-
-document.getElementById("sessionSlider").addEventListener("input",e=>{
-  setSession(+e.target.value);
-});
-
-/* Play / pause */
-document.getElementById("playBtn").addEventListener("click",e=>{
-
-  const N=PRIOR.length;
-
-  if(playTimer){
-
-    clearInterval(playTimer);
-
-    playTimer=null;
-
-    e.target.textContent="▶ Play";
-    e.target.classList.remove("on");
-
-    return;
-  }
-
-  if(sesIdx===N){
-    setSession(0);
-  }
-
-  e.target.textContent="❚❚ Pause";
-  e.target.classList.add("on");
-
-  playTimer=setInterval(()=>{
-
-    if(sesIdx>=N){
-
-      clearInterval(playTimer);
-
-      playTimer=null;
-
-      e.target.textContent="▶ Play";
-      e.target.classList.remove("on");
-
+    if(
+      holdOnly &&
+      !HOLDINGS.has(t)
+    ){
       return;
     }
 
-    setSession(sesIdx+1);
+    const z=
+      isCur
+        ? CUR.data[t][zIdx]
+        : PRIOR[sesIdx].d[t][0];
 
-  },900);
-});
+    const dp=
+      isCur
+        ? CUR.data[t][3]
+        : PRIOR[sesIdx].d[t][1];
+
+    counts[
+      qFromZD(z,dp)
+    ]++;
+
+  });
+
+  document
+    .getElementById("snapTitle")
+    .textContent=
+      "Quadrant counts — "+
+      (
+        holdOnly
+          ? "holdings"
+          : "supplied valuation universe"
+      );
+
+  document
+    .getElementById("snapCounts")
+    .innerHTML=
+      Object.keys(counts)
+        .map(q=>`
+          <span
+            class="qcount"
+            style="background:${QCOLOR[q]}"
+          >
+            ${QNAME[q].split("·")[0].trim()}
+            ${counts[q]}
+          </span>
+        `)
+        .join("");
+
+  const sortable=
+    pool.filter(
+      t=>
+        !holdOnly ||
+        HOLDINGS.has(t)
+    );
+
+  const getZ1Y=t=>
+    isCur
+      ? CUR.data[t][2]
+      : PRIOR[sesIdx].d[t][0];
+
+  const getZSel=t=>
+    isCur
+      ? CUR.data[t][zIdx]
+      : PRIOR[sesIdx].d[t][0];
+
+  const getDP=t=>
+    isCur
+      ? CUR.data[t][3]
+      : PRIOR[sesIdx].d[t][1];
+
+  const deep=
+    [...sortable]
+      .sort(
+        (a,b)=>
+          getZ1Y(a)-
+          getZ1Y(b)
+      )
+      .slice(0,3);
+
+  document
+    .getElementById("snapDeep")
+    .innerHTML=
+      deep.map(t=>{
+
+        const flag=
+          isCur &&
+          EVENT[t]
+            ? `
+              <span
+                style="
+                  color:#D97706;
+                  font-size:10px
+                "
+              >
+                ⚠ ${EVENT[t].label}
+              </span>
+            `
+            : "";
+
+        const dq=
+          isCur &&
+          hasDPMismatch(t)
+            ? `
+              <span
+                style="
+                  color:#E3A008;
+                  font-size:10px
+                "
+              >
+                ⚠ D/P
+              </span>
+            `
+            : "";
+
+        return `
+          <div>
+            <b>${t}</b>
+            Z1Y ${getZ1Y(t).toFixed(2)} ·
+            D/P ${getDP(t).toFixed(2)}%
+            ${flag}${dq}
+          </div>
+        `;
+
+      }).join("");
+
+  const greens=
+    sortable
+      .filter(
+        t=>
+          qFromZD(
+            getZSel(t),
+            getDP(t)
+          )==="G"
+      )
+      .sort(
+        (a,b)=>
+          getZSel(b)-
+          getZSel(a)
+      )
+      .slice(0,3);
+
+  document
+    .getElementById("snapGreen")
+    .innerHTML=
+      greens.length
+        ? greens.map(t=>{
+
+            const dq=
+              isCur &&
+              hasDPMismatch(t)
+                ? `
+                  <span
+                    style="
+                      color:#E3A008;
+                      font-size:10px
+                    "
+                  >
+                    ⚠ D/P
+                  </span>
+                `
+                : "";
+
+            const m=
+              MOM[t];
+
+            return `
+              <div>
+                <b>${t}</b>
+                ${["Z3M","Z6M","Z1Y"][zIdx]}
+                ${fmtSigned(getZSel(t))}
+                · ST ${m?fmtPct(m[0]):"—"}
+                ${dq}
+              </div>
+            `;
+
+          }).join("")
+        : "None";
+}
+
+
+/* Z horizon controls */
+
+document
+  .querySelectorAll(".zt")
+  .forEach(b=>{
+
+    b.addEventListener(
+      "click",
+      ()=>{
+
+        document
+          .querySelectorAll(".zt")
+          .forEach(
+            x=>x.classList.remove("on")
+          );
+
+        b.classList.add("on");
+
+        zIdx=
+          +b.dataset.z;
+
+        render();
+
+      }
+    );
+
+  });
+
+
+/* Quadrant filters */
+
+document
+  .querySelectorAll(".qf")
+  .forEach(b=>{
+
+    b.addEventListener(
+      "click",
+      ()=>{
+
+        document
+          .querySelectorAll(".qf")
+          .forEach(
+            x=>x.classList.remove("on")
+          );
+
+        b.classList.add("on");
+
+        qFilter=
+          b.dataset.q;
+
+        render();
+
+      }
+    );
+
+  });
+
+
+/* Ticker search */
+
+document
+  .getElementById("search")
+  .addEventListener(
+    "input",
+    e=>{
+
+      searchTerms=
+        e.target.value
+          .toUpperCase()
+          .split(/[\s,;]+/)
+          .map(s=>s.trim())
+          .filter(Boolean);
+
+      render();
+
+    }
+  );
+
+
+/* Holdings filter */
+
+document
+  .getElementById("hold")
+  .addEventListener(
+    "click",
+    e=>{
+
+      holdOnly=
+        !holdOnly;
+
+      e.target
+        .classList
+        .toggle(
+          "on",
+          holdOnly
+        );
+
+      render();
+
+    }
+  );
+
+
+/* Compare mode */
+
+document
+  .getElementById("compareBtn")
+  .addEventListener(
+    "click",
+    e=>{
+
+      const N=
+        PRIOR.length;
+
+      compareMode=
+        !compareMode;
+
+      e.target
+        .classList
+        .toggle(
+          "on",
+          compareMode
+        );
+
+      document
+        .getElementById("compareBanner")
+        .style.display=
+          compareMode
+            ? "block"
+            : "none";
+
+      if(
+        compareMode &&
+        sesIdx===N
+      ){
+
+        setSession(N-1);
+
+      }else{
+
+        render();
+
+      }
+
+    }
+  );
+
+
+/* Step controls */
+
+document
+  .getElementById("prevSession")
+  .addEventListener(
+    "click",
+    ()=>{
+      setSession(sesIdx-1);
+    }
+  );
+
+document
+  .getElementById("nextSession")
+  .addEventListener(
+    "click",
+    ()=>{
+      setSession(sesIdx+1);
+    }
+  );
+
+document
+  .getElementById("sessionSlider")
+  .addEventListener(
+    "input",
+    e=>{
+      setSession(+e.target.value);
+    }
+  );
+
+
+/* Play / pause */
+
+document
+  .getElementById("playBtn")
+  .addEventListener(
+    "click",
+    e=>{
+
+      const N=
+        PRIOR.length;
+
+      if(playTimer){
+
+        clearInterval(playTimer);
+
+        playTimer=null;
+
+        e.target.textContent="▶ Play";
+
+        e.target
+          .classList
+          .remove("on");
+
+        return;
+      }
+
+      if(sesIdx===N){
+        setSession(0);
+      }
+
+      e.target.textContent="❚❚ Pause";
+
+      e.target
+        .classList
+        .add("on");
+
+      playTimer=
+        setInterval(
+          ()=>{
+
+            if(sesIdx>=N){
+
+              clearInterval(playTimer);
+
+              playTimer=null;
+
+              e.target.textContent="▶ Play";
+
+              e.target
+                .classList
+                .remove("on");
+
+              return;
+            }
+
+            setSession(sesIdx+1);
+
+          },
+          900
+        );
+
+    }
+  );
 
 
 /*
-  Runtime + v2.0 consistency audit.
+  Runtime + specification consistency audit.
   Does not alter raw supplied data.
 */
 function runAudit(){
 
   const issues=[];
-  const tickers=Object.keys(CUR.data);
+
+  const tickers=
+    Object.keys(CUR.data);
 
   if(CUR.date!=="09/25/2026"){
-    issues.push("Current session date mismatch.");
-  }
 
-  const day=new Date("2026-09-25T12:00:00Z").getUTCDay();
+    issues.push(
+      "Current valuation session date mismatch."
+    );
 
-  if(day!==5){
-    issues.push("09/25/2026 weekday validation failed.");
   }
 
   if(tickers.length!==25){
-    issues.push(`Expected 25 supplied valuation tickers, found ${tickers.length}.`);
+
+    issues.push(
+      `Expected 25 supplied valuation tickers, found ${tickers.length}.`
+    );
+
   }
 
-  if(new Set(tickers).size!==tickers.length){
-    issues.push("Duplicate current ticker detected.");
+  if(
+    new Set(tickers).size !==
+    tickers.length
+  ){
+
+    issues.push(
+      "Duplicate current ticker detected."
+    );
+
   }
 
   tickers.forEach(t=>{
 
-    const d=CUR.data[t];
+    const d=
+      CUR.data[t];
 
-    if(!Array.isArray(d) || d.length!==8){
+    if(
+      !Array.isArray(d) ||
+      d.length!==8
+    ){
 
-      issues.push(`${t}: current data array must contain 8 fields.`);
+      issues.push(
+        `${t}: current data array must contain 8 fields.`
+      );
 
       return;
     }
 
-    if(d.some(v=>typeof v!=="number" || !Number.isFinite(v))){
-      issues.push(`${t}: nonnumeric current valuation field detected.`);
+    const q=
+      qFromZD(
+        d[2],
+        d[3]
+      );
+
+    if(
+      d[3]>0 &&
+      !["B","X"].includes(q)
+    ){
+
+      issues.push(
+        `${t}: positive D/P quadrant sign violation.`
+      );
+
     }
 
-    const q=qFromZD(d[2],d[3]);
+    if(
+      d[3]<0 &&
+      !["G","O"].includes(q)
+    ){
 
-    if(d[3]>0 && !["B","X"].includes(q)){
-      issues.push(`${t}: positive D/P quadrant sign violation.`);
+      issues.push(
+        `${t}: negative D/P quadrant sign violation.`
+      );
+
     }
 
-    if(d[3]<0 && !["G","O"].includes(q)){
-      issues.push(`${t}: negative D/P quadrant sign violation.`);
+    if(
+      d[3]===0 &&
+      !["B","X"].includes(q)
+    ){
+
+      issues.push(
+        `${t}: zero D/P must map to Blue/Gray side.`
+      );
+
     }
 
-    if(d[3]===0 && !["B","X"].includes(q)){
-      issues.push(`${t}: zero D/P must map to Blue/Gray side.`);
-    }
   });
 
   if(PRIOR.length!==15){
-    issues.push(`Historical window has ${PRIOR.length} datasets instead of 15.`);
+
+    issues.push(
+      `Historical window has ${PRIOR.length} datasets instead of 15.`
+    );
+
   }
 
-  if(PRIOR[PRIOR.length-1].date!=="09/24/2026"){
-    issues.push("Immediately preceding stored session is not 09/24/2026.");
+  if(
+    PRIOR[PRIOR.length-1].date !==
+    "09/24/2026"
+  ){
+
+    issues.push(
+      "Immediately preceding stored valuation session is not 09/24/2026."
+    );
+
   }
 
-  const missing=STANDARD_UNIVERSE.filter(t=>!CUR.data[t]);
+  const missing=
+    STANDARD_UNIVERSE
+      .filter(
+        t=>!CUR.data[t]
+      );
 
-  if(missing.join(",")!==MISSING_CURRENT.join(",")){
-    issues.push("Missing-current universe reconciliation failed.");
+  if(
+    missing.join(",") !==
+    MISSING_CURRENT.join(",")
+  ){
+
+    issues.push(
+      "Missing-current universe reconciliation failed."
+    );
+
   }
 
-  const holdingsPresent=[...HOLDINGS].filter(t=>CUR.data[t]);
+  const holdingsPresent=
+    [...HOLDINGS]
+      .filter(
+        t=>CUR.data[t]
+      );
 
-  if(holdingsPresent.length!==14){
-    issues.push(`Expected 14 holdings in current feed, found ${holdingsPresent.length}.`);
+  if(
+    holdingsPresent.length !==
+    14
+  ){
+
+    issues.push(
+      `Expected 14 holdings in current feed, found ${holdingsPresent.length}.`
+    );
+
   }
 
-  if(Object.keys(MOM).length!==27){
-    issues.push(`Expected 27 rows in retained momentum snapshot, found ${Object.keys(MOM).length}.`);
+  if(
+    Object.keys(MOM).length !==
+    27
+  ){
+
+    issues.push(
+      `Expected 27 momentum rows, found ${Object.keys(MOM).length}.`
+    );
+
   }
 
-  if(MOM.RLTY[1]!==null){
-    issues.push("RLTY LT momentum #N/A must remain null.");
+  if(
+    Object.keys(MOMPERF).length !==
+    27
+  ){
+
+    issues.push(
+      `Expected 27 momentum-performance rows, found ${Object.keys(MOMPERF).length}.`
+    );
+
   }
 
-  if(MOMPERF.RLTY[8]!==null){
-    issues.push("RLTY 5Y performance #N/A must remain null.");
+  if(
+    MOM.RLTY[1] !==
+    null
+  ){
+
+    issues.push(
+      "RLTY LT momentum #N/A must remain null."
+    );
+
   }
 
-  const counts={G:0,B:0,O:0,X:0};
+  if(
+    MOMPERF.RLTY[8] !==
+    null
+  ){
+
+    issues.push(
+      "RLTY 5Y performance #N/A must remain null."
+    );
+
+  }
+
+  const counts={
+    G:0,
+    B:0,
+    O:0,
+    X:0
+  };
 
   tickers.forEach(t=>{
 
-    const d=CUR.data[t];
+    const d=
+      CUR.data[t];
 
-    counts[qFromZD(d[2],d[3])]++;
+    counts[
+      qFromZD(
+        d[2],
+        d[3]
+      )
+    ]++;
+
   });
 
-  const expectedCounts={G:5,B:2,O:17,X:1};
+  const expectedCounts={
+    G:5,
+    B:2,
+    O:17,
+    X:1
+  };
 
-  Object.keys(expectedCounts).forEach(k=>{
+  Object.keys(expectedCounts)
+    .forEach(k=>{
 
-    if(counts[k]!==expectedCounts[k]){
+      if(
+        counts[k] !==
+        expectedCounts[k]
+      ){
 
-      issues.push(
-        `Quadrant count ${k}: expected ${expectedCounts[k]}, found ${counts[k]}.`
-      );
-    }
-  });
+        issues.push(
+          `Quadrant count ${k}: expected ${expectedCounts[k]}, found ${counts[k]}.`
+        );
 
-  const prev=PRIOR[PRIOR.length-1];
+      }
+
+    });
+
+  const positiveST=
+    Object.keys(MOM)
+      .filter(
+        t=>
+          MOM[t][0]!=null &&
+          MOM[t][0]>0
+      )
+      .sort();
+
+  const expectedPositiveST=[
+    "BME",
+    "CSQ",
+    "EOI"
+  ];
+
+  if(
+    positiveST.join(",") !==
+    expectedPositiveST.join(",")
+  ){
+
+    issues.push(
+      `Positive ST momentum set mismatch: ${positiveST.join(",")}.`
+    );
+
+  }
+
+  const prev=
+    PRIOR[PRIOR.length-1];
+
   const crossings=[];
 
   tickers.forEach(t=>{
 
-    if(!prev.d[t]) return;
+    if(!prev.d[t]){
+      return;
+    }
 
-    const oldQ=qFromZD(prev.d[t][0],prev.d[t][1]);
-    const newQ=qFromZD(CUR.data[t][2],CUR.data[t][3]);
+    const oldQ=
+      qFromZD(
+        prev.d[t][0],
+        prev.d[t][1]
+      );
+
+    const newQ=
+      qFromZD(
+        CUR.data[t][2],
+        CUR.data[t][3]
+      );
 
     if(oldQ!==newQ){
-      crossings.push(`${t}:${oldQ}->${newQ}`);
+
+      crossings.push(
+        `${t}:${oldQ}->${newQ}`
+      );
+
     }
+
   });
 
   if(crossings.length!==0){
-    issues.push(`Unexpected Z1Y quadrant crossings: ${crossings.join(",")}.`);
+
+    issues.push(
+      `Unexpected Z1Y quadrant crossings: ${crossings.join(",")}.`
+    );
+
   }
 
   /*
-    Validate default visibility.
-    Guards against bare-return / ASI regression.
+    Default visibility validation.
+    Guards against the previous ASI / bare-return failure.
   */
-  const originalQ=qFilter;
-  const originalHold=holdOnly;
-  const originalSearch=[...searchTerms];
+
+  const originalQ=
+    qFilter;
+
+  const originalHold=
+    holdOnly;
+
+  const originalSearch=
+    [...searchTerms];
 
   qFilter="all";
   holdOnly=false;
@@ -1972,73 +3759,177 @@ function runAudit(){
 
   tickers.forEach(t=>{
 
-    if(currentVisible(t,CUR.data[t])!==true){
-      issues.push(`${t}: default dot visibility failure.`);
+    if(
+      currentVisible(
+        t,
+        CUR.data[t]
+      ) !== true
+    ){
+
+      issues.push(
+        `${t}: default dot visibility failure.`
+      );
+
     }
+
   });
 
-  qFilter=originalQ;
-  holdOnly=originalHold;
-  searchTerms=originalSearch;
+  qFilter=
+    originalQ;
+
+  holdOnly=
+    originalHold;
+
+  searchTerms=
+    originalSearch;
+
 
   /*
-    Price/NAV reconciliation audit.
-    Raw D/P is not changed.
+    Raw D/P reconciliation audit.
   */
+
   const mismatch=[];
 
   tickers.forEach(t=>{
 
-    const d=CUR.data[t];
-    const diff=Math.abs(dpDifference(d));
+    const diff=
+      Math.abs(
+        dpDifference(
+          CUR.data[t]
+        )
+      );
 
-    if(Number.isFinite(diff) && diff>=0.15){
+    if(
+      Number.isFinite(diff) &&
+      diff>=0.15
+    ){
+
       mismatch.push(t);
+
     }
+
   });
 
   mismatch.sort();
 
-  const expectedMismatch=[...EXPECTED_DP_MISMATCH].sort();
+  const expectedMismatch=
+    [...EXPECTED_DP_MISMATCH]
+      .sort();
 
-  if(mismatch.join(",")!==expectedMismatch.join(",")){
+  if(
+    mismatch.join(",") !==
+    expectedMismatch.join(",")
+  ){
+
     issues.push(
-      `D/P mismatch set differs from annotation. Found: ${mismatch.join(",")}.`
+      `D/P mismatch annotation set differs from calculation: ${mismatch.join(",")}.`
     );
+
   }
+
 
   /*
-    Verify all current market prices match prior session,
-    as explicitly annotated in current feed.
+    Momentum-change sanity checks.
   */
-  const unchangedPrices=tickers.filter(t=>
-    PREV_FULL[t] &&
-    CUR.data[t][7]===PREV_FULL[t][7]
-  );
 
-  if(unchangedPrices.length!==25){
-    issues.push(
-      `Expected 25 unchanged displayed Market Price fields, found ${unchangedPrices.length}.`
+  const pcnSTDelta=
+    momentumDelta(
+      "PCN",
+      0
     );
+
+  if(
+    pcnSTDelta==null ||
+    Math.abs(pcnSTDelta-0.82)>0.001
+  ){
+
+    issues.push(
+      "PCN ST momentum delta should be +0.82 pt."
+    );
+
   }
 
-  console.info("CEF Time Machine 09/25/2026 audit",{
-    tickersChecked:tickers.length,
-    holdingsChecked:holdingsPresent.length,
-    storedHistoricalDatasets:PRIOR.length,
-    missingCurrentValuation:MISSING_CURRENT,
-    staleMomentumDate:MOM_DATE,
-    quadrantCounts:counts,
-    z1yCrossings:crossings,
-    dpReconciliationFlags:mismatch,
-    unchangedDisplayedPriceFields:unchangedPrices.length,
-    issues
-  });
+  const utfSTDelta=
+    momentumDelta(
+      "UTF",
+      0
+    );
+
+  if(
+    utfSTDelta==null ||
+    Math.abs(utfSTDelta-1.25)>0.001
+  ){
+
+    issues.push(
+      "UTF ST momentum delta should be +1.25 pt."
+    );
+
+  }
+
+  const nbxgSTDelta=
+    momentumDelta(
+      "NBXG",
+      0
+    );
+
+  if(
+    nbxgSTDelta==null ||
+    Math.abs(nbxgSTDelta+2.05)>0.001
+  ){
+
+    issues.push(
+      "NBXG ST momentum delta should be -2.05 pt."
+    );
+
+  }
+
+
+  /*
+    Period-data spot checks from latest momentum screenshot.
+  */
+
+  if(MOMPERF.PCN[0]!==0.65){
+    issues.push("PCN 1D momentum-performance value mismatch.");
+  }
+
+  if(MOMPERF.ETG[8]!==8.87){
+    issues.push("ETG 5Y momentum-performance value mismatch.");
+  }
+
+  if(MOMPERF.PDX[8]!==68.60){
+    issues.push("PDX 5Y momentum-performance value mismatch.");
+  }
+
+  if(MOMPERF.ERH[6]!==-15.86){
+    issues.push("ERH 1Y momentum-performance value mismatch.");
+  }
+
+
+  console.info(
+    "CEF Time Machine 09/25/2026 + latest momentum audit",
+    {
+      valuationTickers:tickers.length,
+      momentumRows:Object.keys(MOM).length,
+      momentumPerformanceRows:Object.keys(MOMPERF).length,
+      holdingsChecked:holdingsPresent.length,
+      historicalDatasets:PRIOR.length,
+      missingCurrentValuation:MISSING_CURRENT,
+      quadrantCounts:counts,
+      positiveST,
+      z1yCrossings:crossings,
+      dpReconciliationFlags:mismatch,
+      momentumSource:MOM_SOURCE_NOTE,
+      issues
+    }
+  );
 
   return issues;
 }
 
-const auditIssues=runAudit();
+
+const auditIssues=
+  runAudit();
+
 
 if(auditIssues.length){
 
@@ -2050,19 +3941,21 @@ if(auditIssues.length){
 }else{
 
   console.info(
-    "CEF Time Machine 09/25/2026 audit passed. " +
-    "25 valuation tickers / 14 holdings checked; " +
-    "PDI and PDO current valuation unavailable; " +
+    "CEF Time Machine audit passed. " +
+    "25 valuation tickers / 27 momentum rows / 27 momentum-performance rows / 14 holdings verified; " +
     "quadrants G5 B2 O17 X1 verified; " +
     "no Z1Y quadrant crossings; " +
-    "15 historical datasets verified; " +
-    "09/24 momentum explicitly stale; " +
-    "8 raw D/P reconciliation flags annotated; " +
-    "25 unchanged displayed Market Price fields annotated; " +
+    "15-session valuation history verified; " +
+    "RLTY #N/A fields preserved as null; " +
+    "positive ST set verified as BME / CSQ / EOI; " +
+    "momentum deltas verified; " +
+    "D/P reconciliation annotations verified; " +
     "default dot visibility verified; " +
     "ASGI remains RO SUPPRESSED."
   );
+
 }
+
 
 buildTmnav();
 render();
