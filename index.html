@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>CEF Time Machine · Valuation 09/29/2026 · Momentum 09/30/2026</title>
+<title>CEF Matrix + Time Machine · 09/30/2026 Valuation · 10/01/2026 Momentum</title>
 
 <style>
 :root{
@@ -15,30 +15,26 @@
   --sub:#5A636B;
   --line:#DEE3E7;
   --bg:#F7F8F9;
-  --card:#FFF;
+  --card:#FFFFFF;
   --amber:#E3A008;
+  --olive:#708238;
   --purple:#6366F1;
 }
 
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   background:var(--bg);
   color:var(--ink);
   padding:20px;
-  max-width:1100px;
+  max-width:1120px;
   margin:0 auto;
 }
 
-h1{
-  font-size:19px;
-  font-weight:700;
-}
+h1{font-size:19px;font-weight:750}
+h2{font-size:16px}
+b{font-weight:700}
 
 .hdr{
   display:flex;
@@ -57,27 +53,17 @@ h1{
   border-radius:10px;
 }
 
-.badge.pos{
-  background:#E1F5EE;
-  color:#085041;
-}
-
-.badge.neg{
-  background:#FAECE7;
-  color:#B4431F;
-}
+.badge.pos{background:#E1F5EE;color:#085041}
+.badge.neg{background:#FAECE7;color:#B4431F}
 
 .note{
   font-size:12px;
   color:var(--sub);
-  margin-bottom:10px;
   line-height:1.5;
+  margin-bottom:10px;
 }
 
-.missing{
-  color:#92400E;
-  font-weight:700;
-}
+.missing{font-weight:700;color:#92400E}
 
 .alerts{
   display:flex;
@@ -95,43 +81,20 @@ h1{
   line-height:1.45;
 }
 
-.al.g{
-  border-left-color:var(--green);
-  background:#E1F5EE;
-}
-
-.al.r{
-  border-left-color:var(--orange);
-  background:#FAECE7;
-}
-
-.al.a{
-  border-left-color:var(--amber);
-  background:#FFF8EC;
-}
-
-.al.p{
-  border-left-color:var(--blue);
-  background:#EEF2FF;
-}
-
-.al.c{
-  border-left-color:#7B9E3E;
-  background:#EFF6E8;
-}
-
-.al.dq{
-  border-left-color:#F59E0B;
-  background:#FFF3E0;
-}
+.al.g{border-left-color:var(--green);background:#E1F5EE}
+.al.b{border-left-color:var(--blue);background:#EEF6FF}
+.al.r{border-left-color:var(--orange);background:#FAECE7}
+.al.a{border-left-color:var(--amber);background:#FFF8EC}
+.al.c{border-left-color:var(--olive);background:#F0F5E9}
+.al.dq{border-left-color:#F59E0B;background:#FFF3E0}
 
 .al .tag{
   font-size:10.5px;
-  font-weight:700;
+  font-weight:750;
   text-transform:uppercase;
   letter-spacing:.5px;
   margin-right:6px;
-  opacity:.75;
+  opacity:.76;
 }
 
 .panel{
@@ -150,11 +113,7 @@ h1{
   margin-bottom:10px;
 }
 
-.controls .grp{
-  display:flex;
-  gap:4px;
-  flex-wrap:wrap;
-}
+.grp{display:flex;gap:4px;flex-wrap:wrap}
 
 button.ctl{
   font-size:12px;
@@ -166,49 +125,26 @@ button.ctl{
   color:var(--ink);
 }
 
-button.ctl:hover{
-  background:#F3F4F6;
-}
-
-button.ctl.on{
-  background:var(--ink);
-  color:#fff;
-  border-color:var(--ink);
-}
-
-button.ctl.qg.on{
-  background:var(--green);
-  border-color:var(--green);
-}
-
-button.ctl.qb.on{
-  background:var(--blue);
-  border-color:var(--blue);
-}
-
-button.ctl.qo.on{
-  background:var(--orange);
-  border-color:var(--orange);
-}
-
-button.ctl.qx.on{
-  background:var(--gray);
-  border-color:var(--gray);
-}
+button.ctl:hover{background:#F3F4F6}
+button.ctl.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+button.ctl.qg.on{background:var(--green);border-color:var(--green)}
+button.ctl.qb.on{background:var(--blue);border-color:var(--blue)}
+button.ctl.qo.on{background:var(--orange);border-color:var(--orange)}
+button.ctl.qx.on{background:var(--gray);border-color:var(--gray)}
 
 input.search{
   font-size:12px;
   padding:5px 9px;
   border:1px solid var(--line);
   border-radius:6px;
-  width:155px;
+  width:160px;
 }
 
 .legend{
   font-size:11.5px;
   color:var(--sub);
   margin-top:8px;
-  line-height:1.45;
+  line-height:1.5;
 }
 
 .tmnav{
@@ -253,19 +189,9 @@ input.search{
   accent-color:#1E2429;
 }
 
-svg{
-  width:100%;
-  height:auto;
-  display:block;
-}
-
-.dot{
-  cursor:pointer;
-}
-
-.dimmed{
-  opacity:.10;
-}
+svg{width:100%;height:auto;display:block}
+.dot{cursor:pointer}
+.dimmed{opacity:.10}
 
 .tooltip{
   position:fixed;
@@ -278,7 +204,7 @@ svg{
   border-radius:6px;
   z-index:50;
   display:none;
-  max-width:380px;
+  max-width:400px;
   box-shadow:0 3px 14px #0003;
 }
 
@@ -343,7 +269,7 @@ svg{
   font-weight:600;
 }
 
-.event{
+.event,.context,.momfresh{
   border-radius:5px;
   padding:6px 8px;
   font-size:11px;
@@ -357,6 +283,12 @@ svg{
   color:#7C2D12;
 }
 
+.event.dist{
+  background:#F1F7E8;
+  border:1px solid var(--olive);
+  color:#44531E;
+}
+
 .event.dq{
   background:#FFF3E0;
   border:1px solid #F59E0B;
@@ -367,22 +299,12 @@ svg{
   background:#F1F5F9;
   border:1px solid #CBD5E1;
   color:#334155;
-  border-radius:5px;
-  padding:6px 8px;
-  font-size:11px;
-  margin-bottom:7px;
-  line-height:1.45;
 }
 
 .momfresh{
   background:#ECFDF5;
   border:1px solid #6EE7B7;
   color:#065F46;
-  border-radius:5px;
-  padding:6px 8px;
-  font-size:11px;
-  margin-bottom:7px;
-  line-height:1.45;
 }
 
 .compare-banner{
@@ -401,20 +323,12 @@ svg{
   padding:14px 16px;
   border:1px solid #334155;
   border-radius:10px;
-  background:#0f172a;
-  color:#e2e8f0;
+  background:#0F172A;
+  color:#E2E8F0;
 }
 
-.highlights h2{
-  font-weight:800;
-  font-size:16px;
-  margin-bottom:8px;
-}
-
-.highlights div{
-  line-height:1.58;
-  font-size:13px;
-}
+.highlights h2{font-size:16px;margin-bottom:8px}
+.highlights div{line-height:1.58;font-size:13px}
 
 .disc{
   font-size:11px;
@@ -436,99 +350,93 @@ svg{
 <body>
 
 <div class="hdr">
-  <h1>CEF Time Machine · Valuation 09/29/2026</h1>
-  <span class="badge pos">Net Δ: +$5.49</span>
+  <h1>CEF Matrix + Time Machine · Valuation 09/30/2026</h1>
+  <span class="badge neg">Net Δ: −$1.59</span>
 </div>
 
 <div class="note">
-Valuation feed Tuesday 09/29/2026 ·
-fresh momentum snapshot Wednesday 09/30/2026 ·
-<span class="missing">valuation and momentum are intentionally labeled separately because the 09/30 closing CEF valuation feed is not part of this dataset</span> ·
-09/28 appended to history ·
-09/01 rolled off ·
-15 valid prior sessions retained ·
-ASGI rights-offering suppression active ·
-PCN ATM context retained ·
-ERH / RFI DQ cautions retained ·
-raw provider values preserved ·
-PDI and PDO remain momentum-only because no current valuation arrays were supplied.
+  Valuation feed Wednesday 09/30/2026 ·
+  momentum snapshot Thursday 10/01/2026 ·
+  <span class="missing">valuation and momentum dates are intentionally separated</span> ·
+  09/29 appended to history ·
+  09/02 rolled off ·
+  15 valid prior sessions retained ·
+  ASGI rights-offering suppression active ·
+  NBXG distribution increase event-qualified ·
+  PCN ATM context retained ·
+  ERH / RFI DQ cautions retained ·
+  PDI and PDO remain momentum-only because no current valuation arrays were supplied.
 </div>
 
 
 <div class="alerts">
 
   <div class="al g">
-    <span class="tag">Matrix Rebound</span>
-    <b>Z1Y counts: Green 4 · Blue 1 · Orange 19 · Gray 1.</b>
-    Versus 09/28, BST crossed Orange→Green, UTF Orange→Green, and BUI Orange→Gray.
+    <span class="tag">Matrix</span>
+    <b>Z1Y counts: Green 5 · Blue 2 · Orange 17 · Gray 1.</b>
+    Crossings from 09/29: CSQ Orange→Green, NXG Green→Blue, UTG Orange→Green.
+  </div>
+
+  <div class="al r">
+    <span class="tag">Momentum Breadth · 10/01</span>
+    <b>Only BST +1.40% and NBXG +0.75% have positive ST Momentum.</b>
+    EOI slipped from +0.53% to −0.42%, while DNP, BUI and PCN weakened materially.
+  </div>
+
+  <div class="al c">
+    <span class="tag">NBXG · Distribution Change</span>
+    <b>Monthly distribution raised 10% from $0.120 to $0.132.</b>
+    The new annualized distribution is $1.584/share.
+    The announcement followed the 09/30 market close, so the current 09/30 Matrix does not yet contain a post-announcement market-price response.
+    CEFConnect's raw 09/30 distribution-rate field remains preserved at 9.18%.
   </div>
 
   <div class="al g">
-    <span class="tag">Fresh Momentum · 09/30</span>
-    <b>Only BST +2.04%, EOI +0.53%, and NBXG +0.28% have positive ST Momentum.</b>
-    EOI therefore combines a negative valuation Z with positive current ST momentum.
+    <span class="tag">UTG · Orange → Green</span>
+    <b>Z1Y moved −0.88→+0.13 and D/P −1.52%→−0.29%.</b>
+    The valuation dislocation has largely normalized; ST Momentum remains weak at −8.57%.
   </div>
 
   <div class="al g">
-    <span class="tag">EOI · Value + Confirmation</span>
-    <b>Z3M −1.42 · Z6M −0.82 · Z1Y −1.13 · D/P −7.17% vs −4.51% average · gap −2.66 pt · yield 8.11%.</b>
-    Fresh ST momentum is +0.53% and LT momentum +11.11%.
+    <span class="tag">UTF · Thesis Working</span>
+    <b>Z1Y +1.21 · D/P −2.65% vs −5.38% average.</b>
+    Own-normal gap is +2.73 pt, meaning UTF is materially richer than its own normal discount despite Green status.
   </div>
 
   <div class="al r">
-    <span class="tag">EOS · Deeper Value</span>
-    <b>Z1Y −2.00 · D/P −11.96% vs −7.75% average · gap −4.21 pt · yield 8.59%.</b>
-    Valuation remains extreme, while fresh ST momentum is still −1.91%.
+    <span class="tag">EOI · Value / Confirmation Lost</span>
+    <b>Z1Y −0.93 · D/P −6.71% vs −4.53% average · gap −2.18 pt.</b>
+    ST Momentum moved from +0.53% to −0.42%; LT remains positive at +10.17%.
   </div>
 
   <div class="al r">
-    <span class="tag">BUI · Orange → Gray</span>
-    <b>D/P moved from −0.69% discount to +1.25% premium while Z1Y remains −0.13.</b>
-    ST momentum improved to −6.03% but remains negative.
-    The small portfolio position does not change the current Gray Matrix classification.
-  </div>
-
-  <div class="al r">
-    <span class="tag">UTG · Still Orange</span>
-    <b>Z3M −1.19 · Z6M −0.84 · Z1Y −0.88 · D/P −1.52% vs −0.45% average · gap −1.07 pt.</b>
-    Fresh ST momentum is −8.30% while LT momentum remains positive at +12.34%.
-  </div>
-
-  <div class="al p">
-    <span class="tag">Early Mean Reversion</span>
-    <b>RQI −0.96 / −1.10 / −1.50 and RNP −0.51 / −0.77 / −1.14 satisfy Z3M &gt; Z6M &gt; Z1Y with negative Z1Y.</b>
-    ASGI also meets the mechanical pattern but remains event-suppressed.
-  </div>
-
-  <div class="al r">
-    <span class="tag">Falling Knife</span>
-    <b>ERH −2.39 / −2.07 / −1.76 · HTD −2.82 / −1.78 / −1.39 · PDX −1.18 / −1.13 / −0.81.</b>
-    Each has all-negative Z horizons with the short end worse.
-  </div>
-
-  <div class="al r">
-    <span class="tag">PCN · Deep Value / Weak Confirmation</span>
-    <b>Z1Y −2.56 · D/P −2.64% vs +4.99% average · gap −7.63 pt · yield 12.63%.</b>
-    ST momentum improved to −5.78%, but LT remains −23.48%.
-    ATM context remains active.
+    <span class="tag">PCN · Extreme Value / Weak Tape</span>
+    <b>Z1Y −2.60 · D/P −2.82% vs +4.93% average · gap −7.75 pt.</b>
+    ST Momentum deteriorated to −7.84% and LT to −25.20%; ATM context remains active.
   </div>
 
   <div class="al c">
     <span class="tag">ASGI · Corporate Action</span>
-    <b>RO SUPPRESSED · Z1Y −2.16 · D/P −6.14% vs +3.23% average · mechanical gap −9.37 pt.</b>
-    The transferable rights offering remains inside its subscription period and the normal Add signal is suppressed.
+    <b>RO SUPPRESSED · Z1Y −2.13 · D/P −6.12% vs +3.21% average · gap −9.33 pt.</b>
+    Transferable rights offering remains active through 10/15/2026 unless extended.
   </div>
 
-  <div class="al g">
-    <span class="tag">BST / UTF Recovery</span>
-    <b>BST Z1Y −0.29→+1.40 and D/P −6.79%→−3.35%; UTF Z1Y −0.29→+0.65 and D/P −6.05%→−3.94%.</b>
-    Both crossed Orange→Green. BST also has positive ST momentum at +2.04%; UTF ST remains −6.67%.
+  <div class="al r">
+    <span class="tag">Falling Knife</span>
+    <b>BDJ −2.49 / −1.59 / −1.50 · ERH −0.88 / −0.66 / −0.49 · HTD −2.80 / −2.00 / −1.56 · PDX −0.62 / −0.49 / −0.28.</b>
+    All have negative Z3M/Z6M/Z1Y with the short end worse.
+  </div>
+
+  <div class="al b">
+    <span class="tag">Early Mean Reversion</span>
+    <b>Only ASGI satisfies Z3M &gt; Z6M &gt; Z1Y with negative Z1Y.</b>
+    That signal remains suppressed by the rights offering.
   </div>
 
   <div class="al dq">
     <span class="tag">Distribution Quality</span>
     <b>ERH and RFI retain DQ cautions.</b>
-    DQ remains analytically separate from valuation, momentum and corporate-action suppression.
+    Distribution quality remains analytically separate from valuation, momentum and event suppression.
   </div>
 
 </div>
@@ -555,7 +463,6 @@ PDI and PDO remain momentum-only because no current valuation arrays were suppli
     <input class="search" id="search" placeholder="Tickers (comma/space)…">
 
     <button class="ctl" id="hold">★ My Holdings</button>
-
     <button class="ctl" id="compareBtn">⊕ Compare</button>
 
   </div>
@@ -563,20 +470,16 @@ PDI and PDO remain momentum-only because no current valuation arrays were suppli
 
   <div class="compare-banner" id="compareBanner">
     <b>Compare mode ON.</b>
-    Current points use the selected Z horizon; stored historical points use Z1Y because that is the locked historical Time Machine coordinate.
+    Current points use the selected Z horizon; stored historical points use Z1Y because Z1Y / D/P is the locked historical Time Machine coordinate.
   </div>
 
 
-  <svg
-    id="chart"
-    viewBox="0 0 980 560"
-    xmlns="http://www.w3.org/2000/svg"
-  ></svg>
+  <svg id="chart" viewBox="0 0 980 560" xmlns="http://www.w3.org/2000/svg"></svg>
 
 
   <div class="legend">
-    Current valuation session 09/29/2026 · momentum layer 09/30/2026 ·
-    selected Z-score / D/P matrix · dashed vertical segment = current D/P to 52-week average ·
+    Current valuation session 09/30/2026 · momentum snapshot 10/01/2026 ·
+    selected Z-score / D/P matrix · dashed segment = current D/P to 52-week average ·
     outer ring = My Holdings · historical sessions use stored Z1Y / D/P ·
     PDI / PDO momentum is retained but they are not plotted without valuation coordinates.
   </div>
@@ -599,7 +502,7 @@ PDI and PDO remain momentum-only because no current valuation arrays were suppli
   <div class="snap">
 
     <div class="snapcard">
-      <h3 id="snapTitle">Quadrant counts</h3>
+      <h3>Quadrant counts — visible</h3>
       <div id="snapCounts"></div>
     </div>
 
@@ -620,92 +523,82 @@ PDI and PDO remain momentum-only because no current valuation arrays were suppli
 
 <div class="highlights">
 
-  <h2>09/29 Valuation + 09/30 Momentum Highlights</h2>
+  <h2>09/30 Valuation + 10/01 Momentum Highlights</h2>
 
   <div>
 
     <b>Broad Matrix:</b>
-    Net Price Change rebounded to <b>+$5.49</b>.
-    Default Z1Y counts are Green <b>4</b>, Blue <b>1</b>, Orange <b>19</b>, Gray <b>1</b>.
-    The 09/28 distribution was Green 2 / Blue 1 / Orange 22 / Gray 0.<br>
+    Net Price Change was <b>−$1.59</b>.
+    Default Z1Y counts are Green <b>5</b>, Blue <b>2</b>, Orange <b>17</b>, Gray <b>1</b>.
+    The 09/29 distribution was Green 4 / Blue 1 / Orange 19 / Gray 1.<br>
 
     <b>Crossings:</b>
-    BST <b>Orange→Green</b>,
-    UTF <b>Orange→Green</b>,
-    and BUI <b>Orange→Gray</b>.
-    BUI's move is a valuation deterioration from the entry-timing perspective:
-    D/P moved from a −0.69% discount to a +1.25% premium while Z1Y remains slightly negative.<br>
+    CSQ <b>Orange→Green</b>,
+    NXG <b>Green→Blue</b>,
+    and UTG <b>Orange→Green</b>.<br>
 
-    <b>Fresh momentum breadth:</b>
-    Only BST <b>+2.04%</b>,
-    EOI <b>+0.53%</b>,
-    and NBXG <b>+0.28%</b>
-    have positive ST Momentum in the 09/30 snapshot.
-    BME and CSQ lost their previously positive ST readings.<br>
+    <b>Momentum breadth:</b>
+    only BST <b>+1.40%</b> and NBXG <b>+0.75%</b> have positive ST Momentum.
+    EOI fell from +0.53% to <b>−0.42%</b>.
+    DNP deteriorated from −6.98% to <b>−10.85%</b>,
+    BUI from −6.03% to <b>−8.45%</b>,
+    and PCN from −5.78% to <b>−7.84%</b>.<br>
+
+    <b>NBXG:</b>
+    monthly distribution increased 10% to <b>$0.132</b>, annualized <b>$1.584</b>.
+    CEFConnect's 09/30 raw distribution rate remains <b>9.18%</b>.
+    At the 09/30 closing market price of $15.69, the new annualized distribution would equate mechanically to about <b>10.10%</b>;
+    that derived figure is informational only and does not replace the raw feed.
+    Because the distribution increase was announced after the 09/30 close, the next valuation session is the first clean observation of market reaction.<br>
 
     <b>EOI:</b>
-    Z1Y improved from −1.26 to <b>−1.13</b> while D/P narrowed modestly from −7.45% to <b>−7.17%</b>.
-    Its own-normal gap remains meaningful at <b>−2.66 pt</b>.
-    Fresh momentum is <b>+0.53% ST / +11.11% LT</b>.
-    This is currently one of the cleaner combinations of Orange valuation plus positive short-term confirmation.<br>
-
-    <b>EOS:</b>
-    Z1Y improved from −2.18 to <b>−2.00</b>, D/P narrowed from −12.32% to <b>−11.96%</b>,
-    and the own-normal gap remains <b>−4.21 pt</b>.
-    Fresh ST momentum is <b>−1.91%</b>, so the statistical dislocation is deeper than EOI but confirmation remains weaker.<br>
-
-    <b>BUI:</b>
-    Z1Y improved sharply from −0.79 to <b>−0.13</b>,
-    but D/P moved 1.94 points from −0.69% to <b>+1.25%</b>.
-    That crosses the zero line and changes BUI from Orange to <b>Gray</b>.
-    ST momentum improved from −7.77% to <b>−6.03%</b>, LT momentum is +13.46%, but current valuation no longer carries a discount.<br>
+    Z1Y improved from −1.13 to <b>−0.93</b>,
+    while D/P narrowed from −7.17% to <b>−6.71%</b>.
+    Own-normal gap remains <b>−2.18 pt</b>, but ST momentum is now <b>−0.42%</b> and LT +10.17%.
+    Value remains; short-term confirmation no longer does.<br>
 
     <b>UTG:</b>
-    remains Orange at Z1Y <b>−0.88</b> and D/P <b>−1.52%</b>,
-    with a relatively modest own-normal gap of <b>−1.07 pt</b>.
-    Fresh ST momentum is still weak at <b>−8.30%</b>, while LT remains +12.34%.<br>
+    Z1Y moved from −0.88 to <b>+0.13</b> and D/P from −1.52% to <b>−0.29%</b>.
+    Its own-normal gap is now only <b>+0.16 pt</b>.
+    Green therefore means thesis working rather than unusually cheap.
+    ST momentum remains <b>−8.57%</b>.<br>
 
-    <b>PCN:</b>
-    Z1Y improved from −2.83 to <b>−2.56</b>,
-    D/P narrowed from −3.37% to <b>−2.64%</b>,
-    and the mechanical own-normal gap remains very large at <b>−7.63 pt</b>.
-    ST momentum improved to <b>−5.78%</b> but LT remains <b>−23.48%</b>.
-    ATM context prevents treating the raw valuation statistic in isolation.<br>
+    <b>UTF:</b>
+    Z1Y advanced to <b>+1.21</b> and D/P narrowed to <b>−2.65%</b>.
+    With a −5.38% 52-week average discount, UTF is now <b>+2.73 pt richer than its own norm</b>.
+    ST momentum remains −6.29%.<br>
 
-    <b>Early mean reversion:</b>
-    RQI <b>−0.96 / −1.10 / −1.50</b> and
-    RNP <b>−0.51 / −0.77 / −1.14</b>
-    satisfy the Engine's Z3M &gt; Z6M &gt; Z1Y rule with negative Z1Y.
-    ASGI also satisfies the mechanical pattern but is excluded because of the active rights offering.<br>
+    <b>BUI:</b>
+    remains Gray at Z1Y <b>−0.36</b> with a <b>+0.56%</b> premium.
+    ST momentum weakened to <b>−8.45%</b> even as LT remains positive at +9.91%.<br>
 
-    <b>Falling knives:</b>
-    ERH <b>−2.39 / −2.07 / −1.76</b>,
-    HTD <b>−2.82 / −1.78 / −1.39</b>,
-    and PDX <b>−1.18 / −1.13 / −0.81</b>
-    have the short end progressively worse while all three Z horizons remain negative.<br>
-
-    <b>Extreme Z1Y observations:</b>
-    RLTY <b>−2.58</b>,
-    PCN <b>−2.56</b>,
-    ASGI <b>−2.16 suppressed</b>,
-    GDV <b>−2.15</b>,
-    and EOS <b>−2.00</b>.<br>
+    <b>Extreme Z1Y:</b>
+    PCN <b>−2.60</b>,
+    RLTY <b>−2.57</b>,
+    and ASGI <b>−2.13 suppressed</b>.
+    EOS improved to −1.94 and GDV to −1.88, leaving the formal |Z1Y|≥2 extreme set.<br>
 
     <b>Deep own-normal gaps:</b>
-    ASGI <b>−9.37 pt suppressed</b>,
-    PCN <b>−7.63</b>,
-    RQI <b>−4.74</b>,
-    GLU <b>−4.58</b>,
-    EOS <b>−4.21</b>,
-    RNP <b>−3.36</b>,
-    RLTY <b>−3.17</b>,
-    ETG <b>−2.74</b>,
-    RFI <b>−2.68</b>,
-    and EOI <b>−2.66</b>.<br>
+    ASGI <b>−9.33 pt suppressed</b>,
+    PCN <b>−7.75</b>,
+    RQI <b>−5.15</b>,
+    GLU <b>−4.15</b>,
+    EOS <b>−4.05</b>,
+    RNP <b>−3.71</b>,
+    RLTY <b>−3.19</b>,
+    RFI <b>−2.77</b>,
+    HTD <b>−2.74</b>,
+    BDJ <b>−2.42</b>,
+    ETG <b>−2.42</b>,
+    and EOI <b>−2.18</b>.<br>
+
+    <b>Term structure:</b>
+    ASGI is the only formal early-mean-reversion pattern and remains suppressed.
+    BDJ, ERH, HTD and PDX meet the strict falling-knife test.<br>
 
     <b>Data integrity:</b>
-    all 25 supplied 09/29 valuation arrays reconcile Price/NAV with raw D/P inside the 0.15-point diagnostic threshold.
-    PDI and PDO remain absent from the valuation feed but are present in the 09/30 momentum layer.
+    all 25 supplied 09/30 valuation arrays reconcile Price/NAV with raw D/P inside the 0.15-point diagnostic threshold.
+    PDI and PDO remain present only in the 10/01 momentum layer.
 
   </div>
 
@@ -723,16 +616,16 @@ All analytical output from this system is for informational purposes only. Not i
 <script>
 
 /*
-  CEF TIME MACHINE
+  CEF MATRIX + TIME MACHINE
 
-  CURRENT VALUATION SESSION:
-  09/29/2026
-
-  FRESH MOMENTUM:
+  CURRENT VALUATION:
   09/30/2026
 
-  CUR:
-  [Z3M,Z6M,Z1Y,D/P,52wkAvg,Yield,NAV,Price]
+  MOMENTUM SNAPSHOT:
+  10/01/2026
+
+  CUR array:
+  [Z3M,Z6M,Z1Y,D/P,52W Avg D/P,Distribution Rate,NAV,Market Price]
 
   Historical:
   [Z1Y,D/P]
@@ -745,8 +638,8 @@ All analytical output from this system is for informational purposes only. Not i
 */
 
 
-const VAL_DATE="09/29/2026";
-const MOM_DATE="09/30/2026";
+const VAL_DATE="09/30/2026";
+const MOM_DATE="10/01/2026";
 
 
 const STANDARD_UNIVERSE=[
@@ -756,10 +649,7 @@ const STANDARD_UNIVERSE=[
 ];
 
 
-const MISSING_CURRENT=[
-  "PDI",
-  "PDO"
-];
+const MISSING_CURRENT=["PDI","PDO"];
 
 
 const HOLDINGS=new Set([
@@ -785,43 +675,82 @@ const QNAME={
 
 
 /*
-  Current 09/29 effective leverage.
+  Effective leverage — 09/30/2026.
 */
 const LEV={
-  AIO:11.93,
+  AIO:11.98,
   ASGI:1.05,
   BDJ:0.12,
   BME:0.15,
   BST:0.10,
   BUI:0.11,
-  CSQ:28.23,
-  DNP:24.77,
+  CSQ:28.29,
+  DNP:24.98,
   EOI:null,
   EOS:null,
-  ERH:22.96,
-  ETG:15.79,
-  GDV:16.01,
-  GLU:18.68,
-  HTD:33.13,
+  ERH:23.10,
+  ETG:15.85,
+  GDV:16.12,
+  GLU:18.77,
+  HTD:33.23,
   NBXG:null,
-  NXG:31.74,
+  NXG:34.76,
   PCN:22.56,
-  PDX:22.61,
+  PDX:22.65,
   RFI:0.04,
-  RLTY:34.94,
-  RNP:31.55,
-  RQI:28.40,
-  UTF:29.89,
-  UTG:22.85
+  RLTY:35.16,
+  RNP:31.69,
+  RQI:28.62,
+  UTF:29.94,
+  UTG:23.04
 };
 
 
 /*
-  FRESH MOMENTUM — 09/30/2026
+  MOMENTUM SNAPSHOT — 10/01/2026
   [ST,LT]
 */
 const MOM={
+  ETG:[-2.96,22.08],
+  GDV:[-4.60,19.45],
+  GLU:[-5.79,9.13],
+  HTD:[-9.73,4.84],
+  NBXG:[0.75,11.39],
+  NXG:[-6.56,32.37],
 
+  PCN:[-7.84,-25.20],
+  PDI:[-6.86,-30.95],
+  PDO:[-5.12,-20.22],
+  PDX:[-2.93,17.33],
+
+  BDJ:[-3.73,7.18],
+  EOI:[-0.42,10.17],
+  EOS:[-2.18,0.98],
+  BME:[-1.88,7.70],
+
+  RQI:[-8.19,-9.94],
+  RNP:[-6.80,-12.15],
+  RFI:[-6.38,-16.73],
+  RLTY:[-9.45,null],
+
+  AIO:[-2.69,16.43],
+  ASGI:[-10.94,3.00],
+  BST:[1.40,25.19],
+
+  BUI:[-8.45,9.91],
+  CSQ:[-2.03,21.72],
+  DNP:[-10.85,-5.19],
+  ERH:[-8.12,-6.36],
+  UTG:[-8.57,11.53],
+  UTF:[-6.29,7.73]
+};
+
+
+/*
+  PRIOR MOMENTUM SNAPSHOT — 09/30/2026
+  Used only for momentum-change comparison.
+*/
+const PREV_MOM={
   ETG:[-1.45,23.86],
   GDV:[-3.33,20.70],
   GLU:[-6.26,8.77],
@@ -854,50 +783,6 @@ const MOM={
   ERH:[-9.38,-6.94],
   UTG:[-8.30,12.34],
   UTF:[-6.67,8.23]
-
-};
-
-
-/*
-  PREVIOUS SUPPLIED MOMENTUM SNAPSHOT
-  Source date was not displayed.
-  Used only for momentum-change comparison.
-*/
-const PREV_MOM={
-
-  ETG:[-1.65,23.57],
-  GDV:[-1.95,22.30],
-  GLU:[-5.55,7.30],
-  HTD:[-9.36,5.24],
-  NBXG:[-0.75,11.94],
-  NXG:[-5.23,33.72],
-
-  PCN:[-6.77,-23.82],
-  PDI:[-8.69,-30.89],
-  PDO:[-6.42,-20.17],
-  PDX:[-2.66,17.71],
-
-  BDJ:[-0.60,10.37],
-  EOI:[0.60,10.27],
-  EOS:[-0.95,2.19],
-  BME:[0.98,10.63],
-
-  RQI:[-7.74,-7.23],
-  RNP:[-5.86,-10.56],
-  RFI:[-5.82,-15.30],
-  RLTY:[-8.00,null],
-
-  AIO:[-5.94,15.77],
-  ASGI:[-13.06,2.95],
-  BST:[-1.84,23.55],
-
-  BUI:[-7.77,11.90],
-  CSQ:[0.15,23.50],
-  DNP:[-7.35,-3.33],
-  ERH:[-9.92,-6.66],
-  UTG:[-8.58,11.94],
-  UTF:[-8.66,6.83]
-
 };
 
 
@@ -940,128 +825,137 @@ const SECTOR={
 
 
 /*
-  09/30 MOMENTUM PERFORMANCE
+  10/01/2026 MOMENTUM PERFORMANCE
   [1D,1W,1M,3M,6M,YTD,1Y,3Y,5Y]
 */
 const MOMPERF={
 
   ETG:[
-    0.52,0.43,-4.00,-0.77,13.06,0.78,10.18,51.96,9.45
+    -1.04,-0.91,-4.67,-3.30,11.12,-0.95,7.47,49.35,9.42
   ],
 
   GDV:[
-    0.35,-1.07,-5.40,-3.52,3.86,2.74,5.16,47.82,9.10
+    -0.60,-2.22,-5.95,-5.63,2.44,1.33,3.19,45.80,9.37
   ],
 
   GLU:[
-    0.39,-3.43,-7.22,-8.13,-8.18,-7.99,-2.04,39.94,-11.57
+    0.39,-2.52,-6.75,-8.10,-7.77,-7.58,-2.62,40.57,-10.55
   ],
 
   HTD:[
-    -0.45,-2.71,-11.70,-12.98,-11.53,-5.92,-10.24,31.02,-3.26
+    -0.86,-2.35,-12.83,-14.02,-12.48,-6.93,-11.03,29.61,-4.05
   ],
 
   NBXG:[
-    0.64,0.64,2.55,-2.37,18.00,8.52,1.89,49.24,-19.31
+    0.45,1.48,3.62,-2.84,18.52,9.00,1.81,49.90,-17.55
   ],
 
   NXG:[
-    0.87,-2.04,-2.29,-13.22,3.81,9.18,13.11,64.26,28.52
+    -1.08,-1.95,-2.97,-14.75,2.26,7.54,10.64,61.80,24.66
   ],
 
   PCN:[
-    0.75,0.19,-8.26,-9.27,-10.47,-15.60,-19.51,-9.95,-40.99
+    -1.41,-1.77,-10.16,-11.60,-12.55,-17.55,-21.14,-12.04,-42.42
   ],
 
   PDI:[
-    1.35,2.74,-6.25,-14.73,-18.35,-19.59,-28.08,-15.84,-46.55
+    0.64,1.88,-6.80,-15.65,-19.04,-20.27,-28.83,-16.55,-47.47
   ],
 
   PDO:[
-    1.19,2.14,-4.48,-9.96,-9.89,-13.80,-15.51,2.05,-42.95
+    -0.76,0.94,-4.93,-11.37,-11.10,-14.96,-16.70,0.68,-44.64
   ],
 
   PDX:[
-    0.94,0.89,-6.55,-2.49,-4.94,8.57,-18.21,9.15,64.97
+    0.05,1.09,-6.78,-3.09,-5.08,8.41,-18.59,8.99,61.59
   ],
 
   BDJ:[
-    0.11,-0.63,-4.24,-1.66,7.72,0.11,4.17,25.86,-4.53
+    -0.95,-2.40,-5.17,-3.61,6.13,-1.37,2.52,24.01,-4.98
   ],
 
   EOI:[
-    1.01,1.11,-0.79,1.27,2.83,-2.72,-4.76,27.47,10.62
+    -0.55,0.15,-0.85,-0.55,1.59,-3.89,-6.13,25.94,10.70
   ],
 
   EOS:[
-    -0.05,-0.51,-1.66,-3.54,2.11,-9.14,-11.12,23.02,-8.24
+    -0.80,-0.80,-1.26,-4.47,1.58,-9.61,-12.02,22.38,-7.44
   ],
 
   BME:[
-    0.25,-0.25,-2.37,1.97,16.06,8.22,19.55,14.10,-6.47
+    -0.61,-2.49,-3.86,0.71,14.37,6.64,16.19,12.43,-5.51
   ],
 
   RQI:[
-    -0.18,-2.64,-9.05,-11.60,-10.31,-2.21,-10.45,12.07,-26.48
+    -0.46,-2.69,-10.69,-11.20,-11.85,-3.89,-12.21,10.14,-27.74
   ],
 
   RNP:[
-    -0.80,-1.84,-7.05,-9.39,-7.38,-5.79,-16.77,10.19,-27.62
+    -0.54,-2.47,-8.04,-9.87,-8.27,-6.70,-17.13,9.13,-28.46
   ],
 
   RFI:[
-    -0.85,-1.13,-7.41,-8.62,-6.59,-5.07,-13.31,1.16,-36.00
+    -1.05,-1.89,-8.06,-9.19,-7.57,-6.06,-14.21,0.10,-36.08
   ],
 
   RLTY:[
-    -0.64,-3.47,-10.20,-12.46,-7.45,-5.37,-8.97,8.93,null
+    -1.01,-4.05,-10.78,-13.53,-8.58,-6.53,-10.25,7.60,null
   ],
 
   AIO:[
-    0.56,1.48,-3.58,-6.36,15.67,16.41,5.37,51.80,-6.12
+    0.84,1.45,-2.56,-6.96,14.85,15.59,3.71,50.72,-5.13
   ],
 
   ASGI:[
-    1.15,0.21,-13.89,-16.81,-16.59,-13.46,-8.42,22.62,-2.91
+    -0.98,-1.49,-13.97,-17.35,-17.46,-14.36,-8.24,21.36,-4.11
   ],
 
   BST:[
-    1.30,2.35,-0.53,4.31,36.32,24.79,22.32,59.19,-3.66
+    0.06,2.57,-0.75,2.40,34.68,23.29,20.20,57.27,-1.90
   ],
 
   BUI:[
-    0.48,-0.24,-5.48,-12.38,-4.47,2.73,0.84,34.92,4.61
+    -1.89,-2.51,-7.49,-15.36,-7.24,-0.24,-4.71,31.01,3.42
   ],
 
   CSQ:[
-    0.20,-1.49,-2.39,-0.39,16.40,6.46,5.96,45.69,14.90
+    -0.83,-1.89,-2.17,-2.03,15.49,5.63,4.81,44.55,15.82
   ],
 
   DNP:[
-    0.20,-1.81,-9.44,-9.69,-4.67,-2.00,-2.20,7.11,-8.33
+    -2.20,-5.08,-13.43,-14.06,-8.96,-6.41,-6.31,2.30,-11.54
   ],
 
   ERH:[
-    -0.20,-2.76,-9.49,-15.90,-17.53,-13.62,-17.53,21.69,-24.98
+    -0.29,-0.29,-8.84,-15.21,-16.72,-12.77,-17.45,22.88,-24.52
   ],
 
   UTG:[
-    0.32,-2.38,-8.83,-13.68,-14.49,-5.96,-13.18,44.84,5.36
+    -0.87,-2.15,-8.90,-14.67,-14.99,-6.51,-13.96,44.00,4.56
   ],
 
   UTF:[
-    0.90,0.00,-9.29,-10.71,-6.07,2.03,-0.81,31.97,-6.46
+    -1.05,1.07,-9.17,-10.79,-6.53,1.53,-1.05,31.33,-7.10
   ]
 
 };
 
 
+/*
+  Event flags.
+*/
 const EVENT={
 
   ASGI:{
     type:"ro",
     label:"RO SUPPRESSED / CORPORATE ACTION",
-    text:"Transferable rights offering. Subscription period runs 09/21/2026 through 10/15/2026 unless extended; final scheduled rights trading date is 10/14/2026. Normal valuation and momentum interpretation is suppressed while rights economics affect market pricing."
+    text:"Transferable rights offering remains active through 10/15/2026 unless extended. Normal Add interpretation is suppressed while rights economics affect the market price."
+  },
+
+  NBXG:{
+    type:"dist",
+    label:"DISTRIBUTION CHANGE / EVENT QUALIFIED",
+    text:"Neuberger Berman raised the monthly distribution 10% from $0.120 to $0.132 after the 09/30 close. The current Matrix is therefore a pre-reaction valuation session. Reassess discount behavior after the next market session."
   },
 
   ERH:{
@@ -1083,39 +977,37 @@ const CONTEXT={
 
   PCN:{
     label:"ATM PROGRAM — CONTEXT ONLY",
-    text:"A 2026 SEC prospectus supplement permits up to $350 million of common-share sales through an at-the-market program. This remains context rather than automatic signal suppression."
+    text:"2026 SEC ATM program permits common-share sales from time to time. Context flag only; not automatic suppression absent session-specific evidence."
   }
 
 };
 
 
 /*
-  Current Price/NAV reconciliation.
-  No 09/29 supplied fund breaches the 0.15-point diagnostic threshold.
+  NBXG distribution update.
+  Raw CEFConnect 09/30 distribution rate remains in CUR at 9.18%.
 */
+const NBXG_DIST={
+  oldMonthly:0.120,
+  newMonthly:0.132,
+  increasePct:10.0,
+  annualized:1.584,
+  exDate:"10/15/2026",
+  recordDate:"10/15/2026",
+  payableDate:"10/30/2026",
+  announcementDate:"09/30/2026",
+  announcedAfterClose:true
+};
+
+
 const EXPECTED_DP_MISMATCH=new Set([]);
 
 
 /*
   15 PRIOR VALID VALUATION SESSIONS
-
-  Oldest retained:
-  09/02/2026
-
-  Newest prior:
-  09/28/2026
+  09/03/2026 through 09/29/2026.
 */
 const PRIOR=[
-
-  {date:"09/02/2026",d:{
-    AIO:[0.97,-5.70],ASGI:[0.30,4.58],BDJ:[-0.19,-6.26],BME:[1.28,-2.51],
-    BST:[2.15,-2.28],BUI:[-0.42,0.61],CSQ:[0.62,-7.40],DNP:[1.97,13.43],
-    EOI:[-0.80,-6.09],EOS:[-1.00,-9.60],ERH:[-0.34,-8.07],ETG:[-0.75,-9.00],
-    GDV:[-1.20,-11.52],GLU:[-0.89,-3.83],HTD:[1.54,-3.26],NBXG:[0.05,-12.88],
-    NXG:[0.83,1.86],PCN:[-0.95,2.91],PDX:[1.24,-7.77],RFI:[-0.66,-2.93],
-    RLTY:[-0.68,-8.32],RNP:[-0.95,-6.47],RQI:[-0.91,-6.63],UTF:[1.56,-1.21],
-    UTG:[0.86,0.59]
-  }},
 
   {date:"09/03/2026",d:{
     AIO:[0.87,-5.70],ASGI:[-0.24,2.39],BDJ:[-0.57,-6.26],BME:[1.37,-2.51],
@@ -1255,191 +1147,201 @@ const PRIOR=[
     NXG:[0.24,-0.11],PCN:[-2.83,-3.37],PDX:[-0.90,-11.10],RFI:[-1.46,-5.33],
     RLTY:[-2.97,-11.32],RNP:[-1.40,-8.09],RQI:[-1.75,-9.76],UTF:[-0.29,-6.05],
     UTG:[-0.83,-1.45]
+  }},
+
+  {date:"09/29/2026",d:{
+    AIO:[-0.38,-9.65],ASGI:[-2.16,-6.14],BDJ:[-1.25,-8.13],BME:[0.60,-3.59],
+    BST:[1.40,-3.35],BUI:[-0.13,1.25],CSQ:[-0.18,-8.89],DNP:[1.12,10.95],
+    EOI:[-1.13,-7.17],EOS:[-2.00,-11.96],ERH:[-1.76,-10.09],ETG:[-1.22,-10.44],
+    GDV:[-2.15,-12.35],GLU:[-1.29,-5.73],HTD:[-1.39,-8.29],NBXG:[-0.61,-13.84],
+    NXG:[0.25,-0.04],PCN:[-2.56,-2.64],PDX:[-0.81,-10.98],RFI:[-1.06,-4.34],
+    RLTY:[-2.58,-10.89],RNP:[-1.14,-7.32],RQI:[-1.50,-9.04],UTF:[0.65,-3.94],
+    UTG:[-0.88,-1.52]
   }}
 
 ];
 
 
 /*
-  CURRENT 09/29 VALUATION
+  CURRENT 09/30 VALUATION.
 */
 const CUR={
-  date:"09/29/2026",
+  date:"09/30/2026",
   data:{
 
     AIO:[
-      -0.66,-0.11,-0.38,
-      -9.65,-8.88,
-      10.01,
-      27.87,25.18
+      -1.14,-0.58,-0.73,
+      -10.35,-8.91,
+      10.13,
+      27.74,24.87
     ],
 
     ASGI:[
-      -1.79,-2.07,-2.16,
-      -6.14,3.23,
-      13.61,
-      20.67,19.40
+      -1.72,-2.05,-2.13,
+      -6.12,3.21,
+      13.66,
+      20.58,19.32
     ],
 
     BDJ:[
-      -1.93,-1.03,-1.25,
-      -8.13,-6.12,
-      7.83,
-      10.33,9.49
+      -2.49,-1.59,-1.50,
+      -8.56,-6.14,
+      7.90,
+      10.28,9.40
     ],
 
     BME:[
-      -1.15,-0.18,0.60,
-      -3.59,-4.86,
-      7.05,
-      46.28,44.62
+      -1.12,-0.22,0.60,
+      -3.58,-4.85,
+      7.13,
+      45.77,44.13
     ],
 
     BST:[
-      0.83,1.41,1.40,
-      -3.35,-6.19,
-      6.01,
-      51.67,49.94
+      0.66,1.26,1.25,
+      -3.64,-6.19,
+      6.00,
+      51.86,49.97
     ],
 
     BUI:[
-      0.18,0.55,-0.13,
-      1.25,1.64,
-      7.34,
-      24.87,25.18
+      -0.49,0.17,-0.36,
+      0.56,1.63,
+      7.41,
+      24.79,24.93
     ],
 
     CSQ:[
-      -0.21,0.59,-0.18,
-      -8.89,-8.65,
-      7.94,
-      22.39,20.40
+      0.08,0.82,0.01,
+      -8.65,-8.66,
+      7.95,
+      22.32,20.39
     ],
 
     DNP:[
-      0.04,0.79,1.12,
-      10.95,6.95,
-      7.93,
-      8.86,9.83
+      -1.04,0.28,0.64,
+      9.25,6.97,
+      8.15,
+      8.76,9.57
     ],
 
     EOI:[
-      -1.42,-0.82,-1.13,
-      -7.17,-4.51,
-      8.11,
-      21.33,19.80
+      -0.59,-0.41,-0.93,
+      -6.71,-4.53,
+      8.08,
+      21.30,19.87
     ],
 
     EOS:[
-      -2.08,-2.55,-2.00,
-      -11.96,-7.75,
-      8.59,
-      24.17,21.28
+      -1.89,-2.36,-1.94,
+      -11.84,-7.79,
+      8.58,
+      24.16,21.30
     ],
 
     ERH:[
-      -2.39,-2.07,-1.76,
-      -10.09,-7.74,
-      10.25,
-      11.40,10.25
+      -0.88,-0.66,-0.49,
+      -8.40,-7.75,
+      10.14,
+      11.31,10.36
     ],
 
     ETG:[
-      -1.37,-1.20,-1.22,
-      -10.44,-7.70,
-      6.70,
-      25.86,23.16
+      -0.89,-0.75,-1.08,
+      -10.14,-7.72,
+      6.71,
+      25.73,23.12
     ],
 
     GDV:[
-      -1.94,-1.72,-2.15,
-      -12.35,-10.80,
-      6.32,
-      32.47,28.46
+      -1.57,-1.51,-1.88,
+      -12.17,-10.80,
+      6.36,
+      32.21,28.29
     ],
 
     GLU:[
-      -1.41,-1.21,-1.29,
-      -5.73,-1.15,
-      7.43,
-      18.84,17.76
+      -0.93,-0.89,-1.17,
+      -5.31,-1.16,
+      7.44,
+      18.73,17.74
     ],
 
     HTD:[
-      -2.82,-1.78,-1.39,
-      -8.29,-5.86,
-      8.48,
-      24.38,22.36
+      -2.80,-2.00,-1.56,
+      -8.61,-5.87,
+      8.55,
+      24.27,22.18
     ],
 
     NBXG:[
-      -0.90,-0.36,-0.61,
-      -13.84,-13.09,
-      9.25,
-      18.07,15.57
+      -0.06,0.35,-0.02,
+      -13.12,-13.10,
+      9.18,
+      18.06,15.69
     ],
 
     NXG:[
-      -1.30,0.40,0.25,
-      -0.04,-0.98,
-      13.28,
-      54.24,54.22
+      -0.22,0.80,0.72,
+      1.74,-0.96,
+      13.24,
+      53.45,54.38
     ],
 
     PCN:[
-      -2.73,-3.57,-2.56,
-      -2.64,4.99,
-      12.63,
-      10.98,10.69
+      -2.64,-3.51,-2.60,
+      -2.82,4.93,
+      12.65,
+      10.98,10.67
     ],
 
     PDX:[
-      -1.18,-1.13,-0.81,
-      -10.98,-9.93,
-      7.93,
-      22.68,20.19
+      -0.62,-0.49,-0.28,
+      -10.30,-9.94,
+      7.89,
+      22.63,20.30
     ],
 
     RFI:[
-      -0.69,-0.47,-1.06,
-      -4.34,-1.66,
-      9.07,
-      11.06,10.58
+      -0.85,-0.53,-1.11,
+      -4.46,-1.69,
+      9.15,
+      10.98,10.49
     ],
 
     RLTY:[
-      -2.85,-2.96,-2.58,
-      -10.89,-7.72,
-      9.44,
-      15.70,13.99
+      -2.69,-2.89,-2.57,
+      -10.93,-7.74,
+      9.53,
+      15.55,13.85
     ],
 
     RNP:[
-      -0.51,-0.77,-1.14,
-      -7.32,-3.96,
-      8.65,
-      20.35,18.86
+      -1.32,-1.00,-1.28,
+      -7.72,-4.01,
+      8.75,
+      20.21,18.65
     ],
 
     RQI:[
-      -0.96,-1.10,-1.50,
-      -9.04,-4.30,
-      9.76,
-      12.17,11.07
+      -1.31,-1.20,-1.63,
+      -9.47,-4.32,
+      9.91,
+      12.04,10.90
     ],
 
     UTF:[
-      -0.78,0.09,0.65,
-      -3.94,-5.39,
-      8.12,
-      25.38,24.38
+      0.05,0.64,1.21,
+      -2.65,-5.38,
+      8.03,
+      25.32,24.65
     ],
 
     UTG:[
-      -1.19,-0.84,-0.88,
-      -1.52,-0.45,
-      7.35,
-      34.82,34.29
+      -0.22,0.15,0.13,
+      -0.29,-0.45,
+      7.34,
+      34.45,34.35
     ]
 
   }
@@ -1447,183 +1349,183 @@ const CUR={
 
 
 /*
-  FULL PRIOR SESSION — 09/28/2026
+  FULL PRIOR SESSION — 09/29/2026.
 */
 const PREV_FULL={
 
   AIO:[
-    -0.75,-0.18,-0.44,
-    -9.75,-8.86,
-    10.08,
-    27.69,24.99
+    -0.66,-0.11,-0.38,
+    -9.65,-8.88,
+    10.01,
+    27.87,25.18
   ],
 
   ASGI:[
-    -2.16,-2.49,-2.63,
-    -8.06,3.25,
-    13.86,
-    20.72,19.05
+    -1.79,-2.07,-2.16,
+    -6.14,3.23,
+    13.61,
+    20.67,19.40
   ],
 
   BDJ:[
-    -2.85,-1.69,-1.56,
-    -8.62,-6.11,
-    7.87,
-    10.33,9.44
+    -1.93,-1.03,-1.25,
+    -8.13,-6.12,
+    7.83,
+    10.33,9.49
   ],
 
   BME:[
-    -1.39,-0.34,0.52,
-    -3.77,-4.88,
+    -1.15,-0.18,0.60,
+    -3.59,-4.86,
     7.05,
-    46.38,44.63
+    46.28,44.62
   ],
 
   BST:[
-    -0.82,-0.03,-0.29,
-    -6.79,-6.20,
-    6.26,
-    51.43,47.94
+    0.83,1.41,1.40,
+    -3.35,-6.19,
+    6.01,
+    51.67,49.94
   ],
 
   BUI:[
-    -1.75,-0.44,-0.79,
-    -0.69,1.64,
-    7.50,
-    24.80,24.63
+    0.18,0.55,-0.13,
+    1.25,1.64,
+    7.34,
+    24.87,25.18
   ],
 
   CSQ:[
-    -0.20,0.57,-0.20,
-    -8.91,-8.64,
-    7.93,
-    22.44,20.44
+    -0.21,0.59,-0.18,
+    -8.89,-8.65,
+    7.94,
+    22.39,20.40
   ],
 
   DNP:[
-    -0.44,0.54,0.88,
-    10.08,6.93,
-    8.02,
-    8.83,9.72
+    0.04,0.79,1.12,
+    10.95,6.95,
+    7.93,
+    8.86,9.83
   ],
 
   EOI:[
-    -1.92,-1.06,-1.26,
-    -7.45,-4.48,
-    8.13,
-    21.33,19.74
+    -1.42,-0.82,-1.13,
+    -7.17,-4.51,
+    8.11,
+    21.33,19.80
   ],
 
   EOS:[
-    -2.51,-2.98,-2.18,
-    -12.32,-7.72,
-    8.62,
-    24.18,21.20
+    -2.08,-2.55,-2.00,
+    -11.96,-7.75,
+    8.59,
+    24.17,21.28
   ],
 
   ERH:[
-    -2.32,-1.96,-1.64,
-    -9.91,-7.74,
-    10.32,
-    11.30,10.18
+    -2.39,-2.07,-1.76,
+    -10.09,-7.74,
+    10.25,
+    11.40,10.25
   ],
 
   ETG:[
-    -1.73,-1.53,-1.32,
-    -10.65,-7.69,
-    6.72,
-    25.83,23.08
+    -1.37,-1.20,-1.22,
+    -10.44,-7.70,
+    6.70,
+    25.86,23.16
   ],
 
   GDV:[
-    -1.93,-1.69,-2.10,
-    -12.30,-10.79,
-    6.30,
-    32.60,28.59
+    -1.94,-1.72,-2.15,
+    -12.35,-10.80,
+    6.32,
+    32.47,28.46
   ],
 
   GLU:[
-    -1.52,-1.29,-1.33,
-    -5.82,-1.13,
-    7.42,
-    18.89,17.79
+    -1.41,-1.21,-1.29,
+    -5.73,-1.15,
+    7.43,
+    18.84,17.76
   ],
 
   HTD:[
-    -3.68,-2.30,-1.90,
-    -9.16,-5.86,
-    8.58,
-    24.34,22.11
+    -2.82,-1.78,-1.39,
+    -8.29,-5.86,
+    8.48,
+    24.38,22.36
   ],
 
   NBXG:[
-    -1.67,-1.02,-1.15,
-    -14.50,-13.08,
-    9.39,
-    17.93,15.33
+    -0.90,-0.36,-0.61,
+    -13.84,-13.09,
+    9.25,
+    18.07,15.57
   ],
 
   NXG:[
-    -1.16,0.39,0.24,
-    -0.11,-0.99,
-    13.39,
-    53.82,53.76
+    -1.30,0.40,0.25,
+    -0.04,-0.98,
+    13.28,
+    54.24,54.22
   ],
 
   PCN:[
-    -3.40,-4.28,-2.83,
-    -3.37,5.04,
-    12.74,
-    10.97,10.60
+    -2.73,-3.57,-2.56,
+    -2.64,4.99,
+    12.63,
+    10.98,10.69
   ],
 
   PDX:[
-    -1.29,-1.25,-0.90,
-    -11.10,-9.91,
-    7.90,
-    22.79,20.26
+    -1.18,-1.13,-0.81,
+    -10.98,-9.93,
+    7.93,
+    22.68,20.19
   ],
 
   RFI:[
-    -2.01,-1.10,-1.46,
-    -5.33,-1.62,
-    9.16,
-    11.07,10.48
+    -0.69,-0.47,-1.06,
+    -4.34,-1.66,
+    9.07,
+    11.06,10.58
   ],
 
   RLTY:[
-    -3.68,-3.66,-2.97,
-    -11.32,-7.71,
-    9.46,
-    15.73,13.95
+    -2.85,-2.96,-2.58,
+    -10.89,-7.72,
+    9.44,
+    15.70,13.99
   ],
 
   RNP:[
-    -2.08,-1.27,-1.40,
-    -8.09,-3.91,
-    8.70,
-    20.40,18.75
+    -0.51,-0.77,-1.14,
+    -7.32,-3.96,
+    8.65,
+    20.35,18.86
   ],
 
   RQI:[
-    -1.63,-1.32,-1.75,
-    -9.76,-4.28,
-    9.82,
-    12.19,11.00
+    -0.96,-1.10,-1.50,
+    -9.04,-4.30,
+    9.76,
+    12.17,11.07
   ],
 
   UTF:[
-    -2.15,-0.84,-0.29,
-    -6.05,-5.41,
-    8.28,
-    25.44,23.90
+    -0.78,0.09,0.65,
+    -3.94,-5.39,
+    8.12,
+    25.38,24.38
   ],
 
   UTG:[
-    -0.98,-0.79,-0.83,
-    -1.45,-0.44,
-    7.43,
-    34.40,33.90
+    -1.19,-0.84,-0.88,
+    -1.52,-0.45,
+    7.35,
+    34.82,34.29
   ]
 
 };
@@ -1646,74 +1548,48 @@ let playTimer=null;
 
 
 function qFromZD(z,dp){
-
   return z>=0
     ? (dp<0 ? "G" : "B")
     : (dp<0 ? "O" : "X");
-
 }
 
 
 function shortDate(d){
-
   return d.replace("/2026","");
-
 }
 
 
 function fmtSigned(v,d=2){
-
-  if(
-    v==null ||
-    !Number.isFinite(v)
-  ){
+  if(v==null || !Number.isFinite(v)){
     return "—";
   }
-
   return `${v>0?"+":""}${v.toFixed(d)}`;
-
 }
 
 
 function fmtPct(v,d=2){
-
-  if(
-    v==null ||
-    !Number.isFinite(v)
-  ){
+  if(v==null || !Number.isFinite(v)){
     return "—";
   }
-
   return `${v.toFixed(d)}%`;
-
 }
 
 
 function fmtLev(t){
-
   const v=LEV[t];
-
-  return v==null
-    ? "—"
-    : `${v.toFixed(2)}%`;
-
+  return v==null ? "—" : `${v.toFixed(2)}%`;
 }
 
 
 function tickerMatch(t){
-
   return (
     searchTerms.length===0 ||
-    searchTerms.some(
-      s=>t.includes(s)
-    )
+    searchTerms.some(s=>t.includes(s))
   );
-
 }
 
 
 function impliedDP(d){
-
   if(
     !d ||
     !Number.isFinite(d[6]) ||
@@ -1723,36 +1599,17 @@ function impliedDP(d){
     return null;
   }
 
-  return (
-    d[7] /
-    d[6] -
-    1
-  )*100;
-
+  return (d[7]/d[6]-1)*100;
 }
 
 
 function dpDifference(d){
-
-  const x=
-    impliedDP(d);
-
-  return x==null
-    ? null
-    : d[3]-x;
-
-}
-
-
-function hasDPMismatch(t){
-
-  return EXPECTED_DP_MISMATCH.has(t);
-
+  const x=impliedDP(d);
+  return x==null ? null : d[3]-x;
 }
 
 
 function momentumDelta(t,index){
-
   if(
     !MOM[t] ||
     !PREV_MOM[t] ||
@@ -1762,16 +1619,11 @@ function momentumDelta(t,index){
     return null;
   }
 
-  return (
-    MOM[t][index] -
-    PREV_MOM[t][index]
-  );
-
+  return MOM[t][index]-PREV_MOM[t][index];
 }
 
 
 function eventMarkup(t){
-
   const e=EVENT[t];
 
   if(!e){
@@ -1788,12 +1640,10 @@ function eventMarkup(t){
       <b>${icon} ${e.label}</b> · ${e.text}
     </div>
   `;
-
 }
 
 
 function contextMarkup(t){
-
   const c=CONTEXT[t];
 
   if(!c){
@@ -1805,57 +1655,63 @@ function contextMarkup(t){
       <b>${c.label}</b> · ${c.text}
     </div>
   `;
-
 }
 
 
 function momentumFreshMarkup(t){
-
   if(!MOM[t]){
     return "";
   }
 
   return `
     <div class="momfresh">
-      <b>Fresh momentum layer:</b>
+      <b>Momentum snapshot:</b>
       ${MOM_DATE}. Valuation coordinates remain ${VAL_DATE}.
     </div>
   `;
+}
 
+
+function nbxgDistributionMarkup(t){
+  if(t!=="NBXG"){
+    return "";
+  }
+
+  const d=CUR.data.NBXG;
+  const derived=
+    NBXG_DIST.annualized /
+    d[7] *
+    100;
+
+  return `
+    <div class="event dist">
+      <b>NBXG distribution update:</b>
+      $${NBXG_DIST.oldMonthly.toFixed(3)}
+      → $${NBXG_DIST.newMonthly.toFixed(3)}
+      monthly (+${NBXG_DIST.increasePct.toFixed(0)}%).
+      Annualized distribution $${NBXG_DIST.annualized.toFixed(3)}.
+      Raw CEFConnect 09/30 rate remains ${d[5].toFixed(2)}%.
+      Mechanical forward rate at the 09/30 market price is ${derived.toFixed(2)}%.
+      Ex/record ${NBXG_DIST.exDate}; payable ${NBXG_DIST.payableDate}.
+    </div>
+  `;
 }
 
 
 function getExtent(){
-
   const zs=[];
   const ds=[];
 
-  Object.values(CUR.data)
-    .forEach(d=>{
-
-      zs.push(
-        d[0],
-        d[1],
-        d[2]
-      );
-
-      ds.push(
-        d[3],
-        d[4]
-      );
-
-    });
+  Object.values(CUR.data).forEach(d=>{
+    zs.push(d[0],d[1],d[2]);
+    ds.push(d[3],d[4]);
+  });
 
   PRIOR.forEach(s=>{
-
-    Object.values(s.d)
-      .forEach(d=>{
-
-        zs.push(d[0]);
-        ds.push(d[1]);
-
-      });
-
+    Object.values(s.d).forEach(d=>{
+      zs.push(d[0]);
+      ds.push(d[1]);
+    });
   });
 
   const zm=
@@ -1871,81 +1727,51 @@ function getExtent(){
   return {
     zmin:-zm,
     zmax:zm,
-    dmin:
-      Math.floor(
-        Math.min(...ds)
-      )-1,
-    dmax:
-      Math.ceil(
-        Math.max(...ds)
-      )+1
+    dmin:Math.floor(Math.min(...ds))-1,
+    dmax:Math.ceil(Math.max(...ds))+1
   };
-
 }
 
 
 function drawGrid(s,ex,Xf,Yf){
 
   s+=`
-    <rect
-      x="${Xf(0)}"
-      y="${Yf(0)}"
+    <rect x="${Xf(0)}" y="${Yf(0)}"
       width="${W-MR-Xf(0)}"
       height="${Yf(ex.dmin)-Yf(0)}"
-      fill="#1D9E75"
-      opacity=".055"
-    />
+      fill="#1D9E75" opacity=".055"/>
   `;
 
   s+=`
-    <rect
-      x="${Xf(0)}"
-      y="${MT}"
+    <rect x="${Xf(0)}" y="${MT}"
       width="${W-MR-Xf(0)}"
       height="${Yf(0)-MT}"
-      fill="#378ADD"
-      opacity=".055"
-    />
+      fill="#378ADD" opacity=".055"/>
   `;
 
   s+=`
-    <rect
-      x="${ML}"
-      y="${Yf(0)}"
+    <rect x="${ML}" y="${Yf(0)}"
       width="${Xf(0)-ML}"
       height="${Yf(ex.dmin)-Yf(0)}"
-      fill="#D85A30"
-      opacity=".05"
-    />
+      fill="#D85A30" opacity=".05"/>
   `;
 
   s+=`
-    <rect
-      x="${ML}"
-      y="${MT}"
+    <rect x="${ML}" y="${MT}"
       width="${Xf(0)-ML}"
       height="${Yf(0)-MT}"
-      fill="#888780"
-      opacity=".07"
-    />
+      fill="#888780" opacity=".07"/>
   `;
 
 
-  for(
-    let z=Math.ceil(ex.zmin);
-    z<=ex.zmax;
-    z++
-  ){
+  for(let z=Math.ceil(ex.zmin);z<=ex.zmax;z++){
 
     s+=`
       <line
-        x1="${Xf(z)}"
-        y1="${MT}"
-        x2="${Xf(z)}"
-        y2="${H-MB}"
+        x1="${Xf(z)}" y1="${MT}"
+        x2="${Xf(z)}" y2="${H-MB}"
         stroke="${z===0?'#B6BDC3':'#EAEDEF'}"
-        stroke-width="${z===0?1.5:1}"
-      />
+        stroke-width="${z===0?1.5:1}"/>
     `;
 
     s+=`
@@ -1954,40 +1780,25 @@ function drawGrid(s,ex,Xf,Yf){
         y="${H-MB+16}"
         font-size="10"
         fill="#8A929A"
-        text-anchor="middle"
-      >${z}</text>
+        text-anchor="middle">${z}</text>
     `;
-
   }
 
 
-  const dstep=
-    (
-      ex.dmax-
-      ex.dmin
-    )>20
-      ? 5
-      : 2;
-
+  const dstep=(ex.dmax-ex.dmin)>20 ? 5 : 2;
 
   for(
-    let d=
-      Math.ceil(
-        ex.dmin/dstep
-      )*dstep;
+    let d=Math.ceil(ex.dmin/dstep)*dstep;
     d<=ex.dmax;
     d+=dstep
   ){
 
     s+=`
       <line
-        x1="${ML}"
-        y1="${Yf(d)}"
-        x2="${W-MR}"
-        y2="${Yf(d)}"
+        x1="${ML}" y1="${Yf(d)}"
+        x2="${W-MR}" y2="${Yf(d)}"
         stroke="${d===0?'#B6BDC3':'#EAEDEF'}"
-        stroke-width="${d===0?1.5:1}"
-      />
+        stroke-width="${d===0?1.5:1}"/>
     `;
 
     s+=`
@@ -1996,80 +1807,59 @@ function drawGrid(s,ex,Xf,Yf){
         y="${Yf(d)+3}"
         font-size="10"
         fill="#8A929A"
-        text-anchor="end"
-      >${d}%</text>
+        text-anchor="end">${d}%</text>
     `;
-
   }
 
 
   s+=`
     <text
-      x="${W/2}"
-      y="${H-6}"
+      x="${W/2}" y="${H-6}"
       font-size="11"
       fill="#5A636B"
-      text-anchor="middle"
-    >
+      text-anchor="middle">
       Z-Score (${["Z3M","Z6M","Z1Y"][zIdx]})
     </text>
   `;
 
-
   s+=`
     <text
-      x="14"
-      y="${H/2}"
+      x="14" y="${H/2}"
       font-size="11"
       fill="#5A636B"
       text-anchor="middle"
-      transform="rotate(-90 14 ${H/2})"
-    >
+      transform="rotate(-90 14 ${H/2})">
       Discount / Premium %
     </text>
   `;
 
-
   return s;
-
 }
 
 
 /*
   Visibility functions.
-  Keep the expression directly attached to return.
+  Keep return expressions directly attached to return.
 */
 function currentVisible(t,d){
-
-  const q=
-    qFromZD(
-      d[zIdx],
-      d[3]
-    );
+  const q=qFromZD(d[zIdx],d[3]);
 
   return (
     (qFilter==="all" || q===qFilter) &&
     (!holdOnly || HOLDINGS.has(t)) &&
     tickerMatch(t)
   );
-
 }
 
 
 function historicalVisible(t,z,dp){
-
-  const q=
-    qFromZD(
-      z,
-      dp
-    );
+  const q=qFromZD(z,dp);
 
   return (
     (qFilter==="all" || q===qFilter) &&
     (!holdOnly || HOLDINGS.has(t)) &&
     tickerMatch(t)
   );
-
 }
 
 
@@ -2077,9 +1867,7 @@ function syncSessionControls(){
 
   document
     .querySelectorAll(".tmb")
-    .forEach(
-      x=>x.classList.remove("on")
-    );
+    .forEach(x=>x.classList.remove("on"));
 
   const target=
     document.querySelector(
@@ -2092,96 +1880,58 @@ function syncSessionControls(){
 
   document
     .getElementById("sessionSlider")
-    .value=
-      sesIdx;
-
+    .value=sesIdx;
 }
 
 
 function setSession(i){
 
-  const N=
-    PRIOR.length;
+  const N=PRIOR.length;
 
   sesIdx=
     Math.max(
       0,
-      Math.min(
-        N,
-        i
-      )
+      Math.min(N,i)
     );
 
   syncSessionControls();
   render();
-
 }
 
 
 function buildTmnav(){
 
-  const N=
-    PRIOR.length;
-
-  const nav=
-    document.getElementById("tmnav");
+  const N=PRIOR.length;
+  const nav=document.getElementById("tmnav");
 
   nav.innerHTML="";
 
+  const current=document.createElement("button");
 
-  const current=
-    document.createElement("button");
-
-  current.className=
-    "ctl tmb on";
-
-  current.dataset.s=
-    N;
-
-  current.textContent=
-    shortDate(CUR.date)+
-    " (current)";
+  current.className="ctl tmb on";
+  current.dataset.s=N;
+  current.textContent=shortDate(CUR.date)+" (current)";
 
   nav.appendChild(current);
 
 
-  for(
-    let i=N-1;
-    i>=0;
-    i--
-  ){
+  for(let i=N-1;i>=0;i--){
 
-    const b=
-      document.createElement("button");
+    const b=document.createElement("button");
 
-    b.className=
-      "ctl tmb";
-
-    b.dataset.s=
-      i;
-
-    b.textContent=
-      shortDate(
-        PRIOR[i].date
-      );
+    b.className="ctl tmb";
+    b.dataset.s=i;
+    b.textContent=shortDate(PRIOR[i].date);
 
     nav.appendChild(b);
-
   }
 
 
-  const lbl=
-    document.createElement("span");
+  const lbl=document.createElement("span");
 
-  lbl.className=
-    "seslabel";
-
-  lbl.id=
-    "seslabel";
-
-  lbl.textContent=
-    "Showing: "+
-    CUR.date;
+  lbl.className="seslabel";
+  lbl.id="seslabel";
+  lbl.textContent="Showing: "+CUR.date;
 
   nav.appendChild(lbl);
 
@@ -2190,469 +1940,94 @@ function buildTmnav(){
     .querySelectorAll(".tmb")
     .forEach(b=>{
 
-      b.addEventListener(
-        "click",
-        ()=>{
-          setSession(
-            +b.dataset.s
-          );
-        }
-      );
+      b.addEventListener("click",()=>{
+        setSession(+b.dataset.s);
+      });
 
     });
 
 
-  const slider=
-    document.getElementById(
-      "sessionSlider"
-    );
-
+  const slider=document.getElementById("sessionSlider");
   slider.max=N;
   slider.value=N;
-
 }
 
 
-function render(){
+function currentPointSVG(t,d,Xf,Yf,compare){
 
-  const N=
-    PRIOR.length;
+  const z=d[zIdx];
+  const dp=d[3];
+  const avg=d[4];
 
-  const ex=
-    getExtent();
-
-
-  const Xf=z=>
-    ML+
-    (
-      z-ex.zmin
-    )/
-    (
-      ex.zmax-ex.zmin
-    )*
-    (
-      W-ML-MR
-    );
-
-
-  const Yf=d=>
-    MT+
-    (
-      ex.dmax-d
-    )/
-    (
-      ex.dmax-ex.dmin
-    )*
-    (
-      H-MT-MB
-    );
-
-
-  let s=
-    drawGrid(
-      "",
-      ex,
-      Xf,
-      Yf
-    );
-
-
-  if(
-    compareMode &&
-    sesIdx<N
-  ){
-
-    const ps=
-      PRIOR[sesIdx];
-
-
-    /*
-      Movement connectors:
-      current selected Z horizon vs historical stored Z1Y.
-    */
-    Object.keys(CUR.data)
-      .forEach(t=>{
-
-        if(!ps.d[t]){
-          return;
-        }
-
-        const cd=
-          CUR.data[t];
-
-        const pd=
-          ps.d[t];
-
-        if(
-          !currentVisible(t,cd) &&
-          !historicalVisible(
-            t,
-            pd[0],
-            pd[1]
-          )
-        ){
-          return;
-        }
-
-
-        const cx=
-          Xf(
-            cd[zIdx]
-          );
-
-        const cy=
-          Yf(
-            cd[3]
-          );
-
-        const px=
-          Xf(
-            pd[0]
-          );
-
-        const py=
-          Yf(
-            pd[1]
-          );
-
-
-        if(
-          Math.hypot(
-            cx-px,
-            cy-py
-          )>5
-        ){
-
-          s+=`
-            <line
-              x1="${cx}"
-              y1="${cy}"
-              x2="${px}"
-              y2="${py}"
-              stroke="#6366F1"
-              stroke-width="1.2"
-              stroke-dasharray="4,3"
-              opacity=".38"
-            />
-          `;
-
-        }
-
-      });
-
-
-    Object.keys(ps.d)
-      .forEach(t=>{
-
-        const [z1y,dp]=
-          ps.d[t];
-
-        if(
-          !historicalVisible(
-            t,
-            z1y,
-            dp
-          )
-        ){
-          return;
-        }
-
-        const q=
-          qFromZD(
-            z1y,
-            dp
-          );
-
-
-        s+=`
-          <g
-            class="dot"
-            data-t="${t}"
-            data-mode="prior"
-          >
-
-            <circle
-              cx="${Xf(z1y)}"
-              cy="${Yf(dp)}"
-              r="5"
-              fill="${QCOLOR[q]}"
-              opacity=".48"
-            />
-
-            <text
-              x="${Xf(z1y)}"
-              y="${Yf(dp)-9}"
-              font-size="8.5"
-              text-anchor="middle"
-              fill="#6A7280"
-            >${t}</text>
-
-          </g>
-        `;
-
-      });
-
-
-    Object.keys(CUR.data)
-      .forEach(t=>{
-
-        s+=
-          currentPointSVG(
-            t,
-            CUR.data[t],
-            Xf,
-            Yf,
-            true
-          );
-
-      });
-
-
-    document
-      .getElementById("chart")
-      .innerHTML=
-        s;
-
-
-    bindDotsCompare();
-
-
-    document
-      .getElementById("seslabel")
-      .textContent=
-        `Current: ${CUR.date} vs ${ps.date}`;
-
-
-  }else{
-
-
-    if(
-      sesIdx===N
-    ){
-
-      Object.keys(CUR.data)
-        .forEach(t=>{
-
-          s+=
-            currentPointSVG(
-              t,
-              CUR.data[t],
-              Xf,
-              Yf,
-              false
-            );
-
-        });
-
-
-    }else{
-
-      const ps=
-        PRIOR[sesIdx];
-
-
-      Object.keys(ps.d)
-        .forEach(t=>{
-
-          const [z,dp]=
-            ps.d[t];
-
-          const q=
-            qFromZD(
-              z,
-              dp
-            );
-
-          const dim=
-            historicalVisible(
-              t,
-              z,
-              dp
-            )
-              ? ""
-              : " dimmed";
-
-
-          s+=`
-            <g
-              class="dot${dim}"
-              data-t="${t}"
-              data-mode="prior"
-            >
-
-              ${
-                HOLDINGS.has(t)
-                  ? `
-                    <circle
-                      cx="${Xf(z)}"
-                      cy="${Yf(dp)}"
-                      r="9.5"
-                      fill="none"
-                      stroke="${QCOLOR[q]}"
-                      stroke-width="1.4"
-                      opacity=".65"
-                    />
-                  `
-                  : ""
-              }
-
-              <circle
-                cx="${Xf(z)}"
-                cy="${Yf(dp)}"
-                r="6"
-                fill="${QCOLOR[q]}"
-              />
-
-              <text
-                x="${Xf(z)}"
-                y="${Yf(dp)-11}"
-                font-size="9.5"
-                font-weight="600"
-                text-anchor="middle"
-                fill="#3A4249"
-              >${t}</text>
-
-            </g>
-          `;
-
-        });
-
-    }
-
-
-    document
-      .getElementById("chart")
-      .innerHTML=
-        s;
-
-
-    bindDots();
-
-
-    document
-      .getElementById("seslabel")
-      .textContent=
-        sesIdx===N
-          ? `Showing: ${CUR.date}`
-          : `Showing: ${PRIOR[sesIdx].date} · stored Z1Y`;
-
-  }
-
-
-  renderSnap();
-
-}
-
-
-function currentPointSVG(
-  t,
-  d,
-  Xf,
-  Yf,
-  compare
-){
-
-  const z=
-    d[zIdx];
-
-  const dp=
-    d[3];
-
-  const avg=
-    d[4];
-
-  const q=
-    qFromZD(
-      z,
-      dp
-    );
-
-  const fc=
-    QCOLOR[q];
+  const q=qFromZD(z,dp);
+  const fc=QCOLOR[q];
 
   const dim=
     currentVisible(t,d)
       ? ""
       : " dimmed";
 
-  const cx=
-    Xf(z);
+  const cx=Xf(z);
+  const cy=Yf(dp);
+  const ay=Yf(avg);
 
-  const cy=
-    Yf(dp);
-
-  const ay=
-    Yf(avg);
-
-  const outer=
-    compare
-      ? 11
-      : 9.5;
-
-  const white=
-    compare
-      ? 9
-      : 8;
-
+  const outer=compare ? 11 : 9.5;
+  const white=compare ? 9 : 8;
 
   return `
     <g
       class="dot${dim}"
       data-t="${t}"
-      data-mode="current"
-    >
+      data-mode="current">
 
       <line
-        x1="${cx}"
-        y1="${cy}"
-        x2="${cx}"
-        y2="${ay}"
+        x1="${cx}" y1="${cy}"
+        x2="${cx}" y2="${ay}"
         stroke="${fc}"
         stroke-width="1"
         stroke-dasharray="3,3"
-        opacity=".5"
-      />
+        opacity=".5"/>
 
       <circle
-        cx="${cx}"
-        cy="${ay}"
-        r="2"
+        cx="${cx}" cy="${ay}" r="2"
         fill="none"
         stroke="${fc}"
         stroke-width="1"
-        opacity=".5"
-      />
+        opacity=".5"/>
 
       <circle
-        cx="${cx}"
-        cy="${cy}"
-        r="${white}"
+        cx="${cx}" cy="${cy}" r="${white}"
         fill="white"
-        opacity=".88"
-      />
+        opacity=".88"/>
 
       ${
         HOLDINGS.has(t)
           ? `
             <circle
-              cx="${cx}"
-              cy="${cy}"
-              r="${outer}"
+              cx="${cx}" cy="${cy}" r="${outer}"
               fill="none"
               stroke="${fc}"
               stroke-width="1.5"
-              opacity=".85"
-            />
+              opacity=".85"/>
           `
           : ""
       }
 
       <circle
-        cx="${cx}"
-        cy="${cy}"
-        r="6"
-        fill="${fc}"
-      />
+        cx="${cx}" cy="${cy}" r="6"
+        fill="${fc}"/>
+
+      ${
+        EVENT[t]
+          ? `
+            <circle
+              cx="${cx+8}" cy="${cy-8}" r="3.2"
+              fill="${EVENT[t].type==="dist"?"#708238":"#E3A008"}"
+              stroke="#fff"
+              stroke-width="1"/>
+          `
+          : ""
+      }
 
       <text
         x="${cx}"
@@ -2663,32 +2038,219 @@ function currentPointSVG(
         fill="${compare?fc:"#1E2429"}"
         stroke="white"
         stroke-width="2.6"
-        paint-order="stroke"
-      >${t}</text>
+        paint-order="stroke">${t}</text>
 
     </g>
   `;
-
 }
 
 
-const tip=
-  document.getElementById("tip");
+function render(){
+
+  const N=PRIOR.length;
+  const ex=getExtent();
+
+  const Xf=z=>
+    ML+
+    (z-ex.zmin)/
+    (ex.zmax-ex.zmin)*
+    (W-ML-MR);
+
+  const Yf=d=>
+    MT+
+    (ex.dmax-d)/
+    (ex.dmax-ex.dmin)*
+    (H-MT-MB);
+
+  let s=drawGrid("",ex,Xf,Yf);
+
+
+  if(compareMode && sesIdx<N){
+
+    const ps=PRIOR[sesIdx];
+
+    Object.keys(CUR.data).forEach(t=>{
+
+      if(!ps.d[t]){
+        return;
+      }
+
+      const cd=CUR.data[t];
+      const pd=ps.d[t];
+
+      if(
+        !currentVisible(t,cd) &&
+        !historicalVisible(t,pd[0],pd[1])
+      ){
+        return;
+      }
+
+      const cx=Xf(cd[zIdx]);
+      const cy=Yf(cd[3]);
+      const px=Xf(pd[0]);
+      const py=Yf(pd[1]);
+
+      if(Math.hypot(cx-px,cy-py)>5){
+
+        s+=`
+          <line
+            x1="${cx}" y1="${cy}"
+            x2="${px}" y2="${py}"
+            stroke="#6366F1"
+            stroke-width="1.2"
+            stroke-dasharray="4,3"
+            opacity=".38"/>
+        `;
+      }
+    });
+
+
+    Object.keys(ps.d).forEach(t=>{
+
+      const [z1y,dp]=ps.d[t];
+
+      if(!historicalVisible(t,z1y,dp)){
+        return;
+      }
+
+      const q=qFromZD(z1y,dp);
+
+      s+=`
+        <g
+          class="dot"
+          data-t="${t}"
+          data-mode="prior">
+
+          <circle
+            cx="${Xf(z1y)}"
+            cy="${Yf(dp)}"
+            r="5"
+            fill="${QCOLOR[q]}"
+            opacity=".48"/>
+
+          <text
+            x="${Xf(z1y)}"
+            y="${Yf(dp)-9}"
+            font-size="8.5"
+            text-anchor="middle"
+            fill="#6A7280">${t}</text>
+
+        </g>
+      `;
+    });
+
+
+    Object.keys(CUR.data).forEach(t=>{
+      s+=currentPointSVG(
+        t,
+        CUR.data[t],
+        Xf,
+        Yf,
+        true
+      );
+    });
+
+
+    document.getElementById("chart").innerHTML=s;
+
+    bindDotsCompare();
+
+    document.getElementById("seslabel").textContent=
+      `Current: ${CUR.date} vs ${ps.date}`;
+
+  }else{
+
+
+    if(sesIdx===N){
+
+      Object.keys(CUR.data).forEach(t=>{
+        s+=currentPointSVG(
+          t,
+          CUR.data[t],
+          Xf,
+          Yf,
+          false
+        );
+      });
+
+    }else{
+
+      const ps=PRIOR[sesIdx];
+
+      Object.keys(ps.d).forEach(t=>{
+
+        const [z,dp]=ps.d[t];
+        const q=qFromZD(z,dp);
+
+        const dim=
+          historicalVisible(t,z,dp)
+            ? ""
+            : " dimmed";
+
+        s+=`
+          <g
+            class="dot${dim}"
+            data-t="${t}"
+            data-mode="prior">
+
+            ${
+              HOLDINGS.has(t)
+                ? `
+                  <circle
+                    cx="${Xf(z)}"
+                    cy="${Yf(dp)}"
+                    r="9.5"
+                    fill="none"
+                    stroke="${QCOLOR[q]}"
+                    stroke-width="1.4"
+                    opacity=".65"/>
+                `
+                : ""
+            }
+
+            <circle
+              cx="${Xf(z)}"
+              cy="${Yf(dp)}"
+              r="6"
+              fill="${QCOLOR[q]}"/>
+
+            <text
+              x="${Xf(z)}"
+              y="${Yf(dp)-11}"
+              font-size="9.5"
+              font-weight="600"
+              text-anchor="middle"
+              fill="#3A4249">${t}</text>
+
+          </g>
+        `;
+      });
+    }
+
+
+    document.getElementById("chart").innerHTML=s;
+
+    bindDots();
+
+    document.getElementById("seslabel").textContent=
+      sesIdx===N
+        ? `Showing: ${CUR.date}`
+        : `Showing: ${PRIOR[sesIdx].date} · stored Z1Y`;
+  }
+
+
+  renderSnap();
+}
+
+
+const tip=document.getElementById("tip");
 
 
 function currentTooltip(t,d){
 
-  const m=
-    MOM[t] || null;
-
-  const q=
-    qFromZD(
-      d[zIdx],
-      d[3]
-    );
-
-  const pd=
-    PREV_FULL[t];
+  const m=MOM[t] || null;
+  const q=qFromZD(d[zIdx],d[3]);
+  const pd=PREV_FULL[t];
 
   const dz=
     pd
@@ -2700,17 +2262,13 @@ function currentTooltip(t,d){
       ? d[3]-pd[3]
       : null;
 
-  const dst=
-    momentumDelta(
-      t,
-      0
-    );
+  const dst=momentumDelta(t,0);
 
   const ev=
     EVENT[t]
       ? `
         <br>
-        <span style="color:#fbbf24">
+        <span style="color:#FBBF24">
           ${EVENT[t].label}
         </span>
       `
@@ -2720,12 +2278,11 @@ function currentTooltip(t,d){
     CONTEXT[t]
       ? `
         <br>
-        <span style="color:#cbd5e1">
+        <span style="color:#CBD5E1">
           ${CONTEXT[t].label}
         </span>
       `
       : "";
-
 
   return `
     <b>${t}</b>
@@ -2738,7 +2295,7 @@ function currentTooltip(t,d){
 
     Price $${d[7].toFixed(2)} ·
     NAV $${d[6].toFixed(2)} ·
-    Yield ${d[5].toFixed(2)}%
+    Raw Dist. Rate ${d[5].toFixed(2)}%
     <br>
 
     D/P ${d[3].toFixed(2)}% ·
@@ -2751,7 +2308,7 @@ function currentTooltip(t,d){
     Z1Y ${d[2].toFixed(2)}
     <br>
 
-    ΔZ1Y vs 09/28 ${fmtSigned(dz)} ·
+    ΔZ1Y vs 09/29 ${fmtSigned(dz)} ·
     ΔD/P ${fmtSigned(ddp)}pt
     <br>
 
@@ -2771,18 +2328,16 @@ function currentTooltip(t,d){
     }
     <br>
 
-    <span style="color:#a7f3d0">
+    <span style="color:#A7F3D0">
       Momentum ${MOM_DATE}
     </span>
   `;
-
 }
 
 
 function momentumPerfMarkup(t){
 
-  const p=
-    MOMPERF[t];
+  const p=MOMPERF[t];
 
   if(!p){
     return "";
@@ -2794,15 +2349,13 @@ function momentumPerfMarkup(t){
     "YTD","1Y","3Y","5Y"
   ];
 
-
   return `
     <div
       style="
         margin-top:9px;
         padding-top:8px;
         border-top:1px solid #DEE3E7
-      "
-    >
+      ">
 
       <b style="font-size:11px">
         Momentum performance · ${MOM_DATE}
@@ -2815,18 +2368,16 @@ function momentumPerfMarkup(t){
           flex-wrap:wrap;
           margin-top:5px;
           font-size:11px
-        "
-      >
+        ">
 
         ${
           p.map(
-            (v,i)=>
-              `
-                <span>
-                  <b>${labels[i]}</b>
-                  ${fmtPct(v)}
-                </span>
-              `
+            (v,i)=>`
+              <span>
+                <b>${labels[i]}</b>
+                ${fmtPct(v)}
+              </span>
+            `
           ).join("")
         }
 
@@ -2834,125 +2385,65 @@ function momentumPerfMarkup(t){
 
     </div>
   `;
-
 }
 
 
 function showCurrentDetail(t){
 
-  const d=
-    CUR.data[t];
+  const d=CUR.data[t];
 
   if(!d){
     return;
   }
 
-  const pd=
-    PREV_FULL[t];
-
-  const m=
-    MOM[t] || null;
-
-  const q=
-    qFromZD(
-      d[zIdx],
-      d[3]
-    );
+  const pd=PREV_FULL[t];
+  const m=MOM[t] || null;
+  const q=qFromZD(d[zIdx],d[3]);
 
   const prevQ=
     pd
-      ? qFromZD(
-          pd[2],
-          pd[3]
-        )
+      ? qFromZD(pd[2],pd[3])
       : null;
 
-  const dz3=
-    pd
-      ? d[0]-pd[0]
-      : null;
-
-  const dz6=
-    pd
-      ? d[1]-pd[1]
-      : null;
-
-  const dz1=
-    pd
-      ? d[2]-pd[2]
-      : null;
-
-  const ddp=
-    pd
-      ? d[3]-pd[3]
-      : null;
+  const dz3=pd ? d[0]-pd[0] : null;
+  const dz6=pd ? d[1]-pd[1] : null;
+  const dz1=pd ? d[2]-pd[2] : null;
+  const ddp=pd ? d[3]-pd[3] : null;
 
   const dgap=
     pd
-      ? (
-          d[3]-d[4]
-        )-
-        (
-          pd[3]-pd[4]
-        )
+      ? (d[3]-d[4])-(pd[3]-pd[4])
       : null;
 
-  const dnav=
-    pd
-      ? d[6]-pd[6]
-      : null;
+  const dnav=pd ? d[6]-pd[6] : null;
+  const dprice=pd ? d[7]-pd[7] : null;
 
-  const dprice=
-    pd
-      ? d[7]-pd[7]
-      : null;
+  const dst=momentumDelta(t,0);
+  const dlt=momentumDelta(t,1);
 
-  const dst=
-    momentumDelta(
-      t,
-      0
-    );
+  const el=document.getElementById("detail");
 
-  const dlt=
-    momentumDelta(
-      t,
-      1
-    );
-
-
-  const el=
-    document.getElementById("detail");
-
-  el.style.display=
-    "block";
-
+  el.style.display="block";
 
   el.innerHTML=`
 
     ${eventMarkup(t)}
     ${contextMarkup(t)}
     ${momentumFreshMarkup(t)}
+    ${nbxgDistributionMarkup(t)}
 
-    <b style="font-size:14px">
-      ${t}
-    </b>
+    <b style="font-size:14px">${t}</b>
 
     <span
       class="qcount"
-      style="background:${QCOLOR[q]}"
-    >
+      style="background:${QCOLOR[q]}">
       ${QNAME[q]}
     </span>
 
     ${
       HOLDINGS.has(t)
         ? `
-          <span
-            style="
-              font-size:12px;
-              font-weight:700
-            "
-          >
+          <span style="font-size:12px;font-weight:700">
             ★ My Holding
           </span>
         `
@@ -2969,7 +2460,7 @@ function showCurrentDetail(t){
         <td>NAV</td>
         <td class="v">$${d[6].toFixed(2)}</td>
 
-        <td>Yield</td>
+        <td>Raw Distribution Rate</td>
         <td class="v">${d[5].toFixed(2)}%</td>
       </tr>
 
@@ -2995,7 +2486,11 @@ function showCurrentDetail(t){
 
         <td>Reconciliation</td>
         <td class="v">
-          ${hasDPMismatch(t)?"⚠ flagged":"Within 0.15 pt"}
+          ${
+            EXPECTED_DP_MISMATCH.has(t)
+              ? "⚠ flagged"
+              : "Within 0.15 pt"
+          }
         </td>
       </tr>
 
@@ -3013,7 +2508,7 @@ function showCurrentDetail(t){
 
 
       <tr>
-        <td>Δ Z3M vs 09/28</td>
+        <td>Δ Z3M vs 09/29</td>
         <td class="v">${fmtSigned(dz3)}</td>
 
         <td>Δ Z6M</td>
@@ -3025,7 +2520,7 @@ function showCurrentDetail(t){
 
 
       <tr>
-        <td>Δ D/P vs 09/28</td>
+        <td>Δ D/P vs 09/29</td>
         <td class="v">${fmtSigned(ddp)} pt</td>
 
         <td>Δ Own-Normal Gap</td>
@@ -3037,12 +2532,12 @@ function showCurrentDetail(t){
 
 
       <tr>
-        <td>Δ NAV vs 09/28</td>
+        <td>Δ NAV vs 09/29</td>
         <td class="v">
           ${dnav==null?"—":"$"+fmtSigned(dnav)}
         </td>
 
-        <td>Δ Price vs 09/28</td>
+        <td>Δ Price vs 09/29</td>
         <td class="v">
           ${dprice==null?"—":"$"+fmtSigned(dprice)}
         </td>
@@ -3065,7 +2560,7 @@ function showCurrentDetail(t){
 
 
       <tr>
-        <td>Δ ST vs previous snapshot</td>
+        <td>Δ ST vs 09/30 momentum</td>
         <td class="v">
           ${dst==null?"—":fmtSigned(dst)+" pt"}
         </td>
@@ -3104,18 +2599,13 @@ function showCurrentDetail(t){
 
       <tr>
         <td>Event / context</td>
-
         <td class="v" colspan="5">
           ${
-            EVENT[t] &&
-            EVENT[t].type!=="dq"
+            EVENT[t]
               ? EVENT[t].label
               : CONTEXT[t]
                 ? CONTEXT[t].label
-                : EVENT[t] &&
-                  EVENT[t].type==="dq"
-                    ? EVENT[t].label
-                    : "No special flag"
+                : "No special flag"
           }
         </td>
       </tr>
@@ -3126,269 +2616,171 @@ function showCurrentDetail(t){
     ${momentumPerfMarkup(t)}
 
   `;
-
 }
 
 
 function bindDots(){
 
-  const N=
-    PRIOR.length;
-
+  const N=PRIOR.length;
 
   document
     .querySelectorAll(".dot")
     .forEach(g=>{
 
-      const t=
-        g.dataset.t;
+      const t=g.dataset.t;
 
       if(!t){
         return;
       }
 
-      const isCur=
-        sesIdx===N;
+      const isCur=sesIdx===N;
 
 
-      g.addEventListener(
-        "mousemove",
-        e=>{
+      g.addEventListener("mousemove",e=>{
 
-          tip.style.display=
-            "block";
+        tip.style.display="block";
+        tip.style.left=(e.clientX+14)+"px";
+        tip.style.top=(e.clientY+10)+"px";
 
-          tip.style.left=
-            (e.clientX+14)+"px";
+        if(isCur){
 
-          tip.style.top=
-            (e.clientY+10)+"px";
+          tip.innerHTML=currentTooltip(
+            t,
+            CUR.data[t]
+          );
 
+        }else{
 
-          if(isCur){
+          const pd=PRIOR[sesIdx].d[t];
 
-            tip.innerHTML=
-              currentTooltip(
-                t,
-                CUR.data[t]
-              );
+          if(pd){
 
-          }else{
-
-            const pd=
-              PRIOR[sesIdx].d[t];
-
-            if(pd){
-
-              tip.innerHTML=`
-                <b>${t}</b> ·
-                ${PRIOR[sesIdx].date}
-                <br>
-                Stored Z1Y ${pd[0].toFixed(2)} ·
-                D/P ${pd[1].toFixed(2)}%
-              `;
-
-            }
-
+            tip.innerHTML=`
+              <b>${t}</b> ·
+              ${PRIOR[sesIdx].date}
+              <br>
+              Stored Z1Y ${pd[0].toFixed(2)} ·
+              D/P ${pd[1].toFixed(2)}%
+            `;
           }
-
         }
-      );
+      });
 
 
-      g.addEventListener(
-        "mouseleave",
-        ()=>{
-          tip.style.display=
-            "none";
+      g.addEventListener("mouseleave",()=>{
+        tip.style.display="none";
+      });
+
+
+      g.addEventListener("click",()=>{
+
+        if(isCur){
+          showCurrentDetail(t);
         }
-      );
 
-
-      g.addEventListener(
-        "click",
-        ()=>{
-
-          if(isCur){
-            showCurrentDetail(t);
-          }
-
-        }
-      );
+      });
 
     });
-
 }
 
 
 function bindDotsCompare(){
 
-  const ps=
-    PRIOR[sesIdx];
-
+  const ps=PRIOR[sesIdx];
 
   document
     .querySelectorAll(".dot")
     .forEach(g=>{
 
-      const t=
-        g.dataset.t;
-
-      const mode=
-        g.dataset.mode;
+      const t=g.dataset.t;
+      const mode=g.dataset.mode;
 
       if(!t){
         return;
       }
 
-      const d=
-        CUR.data[t];
-
-      const pd=
-        ps.d[t];
+      const d=CUR.data[t];
+      const pd=ps.d[t];
 
 
-      g.addEventListener(
-        "mousemove",
-        e=>{
+      g.addEventListener("mousemove",e=>{
 
-          tip.style.display=
-            "block";
+        tip.style.display="block";
+        tip.style.left=(e.clientX+14)+"px";
+        tip.style.top=(e.clientY+10)+"px";
 
-          tip.style.left=
-            (e.clientX+14)+"px";
+        if(mode==="current" && d){
 
-          tip.style.top=
-            (e.clientY+10)+"px";
+          tip.innerHTML=currentTooltip(t,d);
 
+        }else if(mode==="prior" && pd){
 
-          if(
-            mode==="current" &&
-            d
-          ){
+          const dz=d ? d[2]-pd[0] : null;
+          const ddp=d ? d[3]-pd[1] : null;
 
-            tip.innerHTML=
-              currentTooltip(
-                t,
-                d
-              );
-
-
-          }else if(
-            mode==="prior" &&
-            pd
-          ){
-
-            const dz=
-              d
-                ? d[2]-pd[0]
-                : null;
-
-            const ddp=
-              d
-                ? d[3]-pd[1]
-                : null;
-
-
-            tip.innerHTML=`
-              <b>${t}</b> ·
-              ${ps.date}
-              <br>
-
-              Stored Z1Y ${pd[0].toFixed(2)} ·
-              D/P ${pd[1].toFixed(2)}%
-              <br>
-
-              To ${shortDate(CUR.date)}:
-              ΔZ1Y ${dz==null?"—":fmtSigned(dz)} ·
-              ΔD/P ${ddp==null?"—":fmtSigned(ddp)+"pt"}
-            `;
-
-          }
-
+          tip.innerHTML=`
+            <b>${t}</b> · ${ps.date}
+            <br>
+            Stored Z1Y ${pd[0].toFixed(2)} ·
+            D/P ${pd[1].toFixed(2)}%
+            <br>
+            To ${shortDate(CUR.date)}:
+            ΔZ1Y ${dz==null?"—":fmtSigned(dz)} ·
+            ΔD/P ${ddp==null?"—":fmtSigned(ddp)+"pt"}
+          `;
         }
-      );
+      });
 
 
-      g.addEventListener(
-        "mouseleave",
-        ()=>{
-          tip.style.display=
-            "none";
+      g.addEventListener("mouseleave",()=>{
+        tip.style.display="none";
+      });
+
+
+      g.addEventListener("click",()=>{
+
+        if(mode==="current" && d){
+          showCurrentDetail(t);
         }
-      );
 
-
-      g.addEventListener(
-        "click",
-        ()=>{
-
-          if(
-            mode==="current" &&
-            d
-          ){
-
-            showCurrentDetail(t);
-
-          }
-
-        }
-      );
+      });
 
     });
-
 }
 
 
 function renderSnap(){
 
-  const N=
-    PRIOR.length;
-
-  const isCur=
-    sesIdx===N;
+  const N=PRIOR.length;
+  const isCur=sesIdx===N;
 
   const pool=
     isCur
       ? Object.keys(CUR.data)
-      : Object.keys(
-          PRIOR[sesIdx].d
-        );
+      : Object.keys(PRIOR[sesIdx].d);
 
 
-  /*
-    Respect active filters in snapshot counts.
-  */
   const visible=
     pool.filter(t=>{
 
       if(isCur){
-
         return currentVisible(
           t,
           CUR.data[t]
         );
-
       }
 
-      const d=
-        PRIOR[sesIdx].d[t];
+      const d=PRIOR[sesIdx].d[t];
 
       return historicalVisible(
         t,
         d[0],
         d[1]
       );
-
     });
 
 
-  const counts={
-    G:0,
-    B:0,
-    O:0,
-    X:0
-  };
+  const counts={G:0,B:0,O:0,X:0};
 
 
   visible.forEach(t=>{
@@ -3403,36 +2795,21 @@ function renderSnap(){
         ? CUR.data[t][3]
         : PRIOR[sesIdx].d[t][1];
 
-    counts[
-      qFromZD(
-        z,
-        dp
-      )
-    ]++;
-
+    counts[qFromZD(z,dp)]++;
   });
 
 
-  document
-    .getElementById("snapTitle")
-    .textContent=
-      "Quadrant counts — visible";
-
-
-  document
-    .getElementById("snapCounts")
-    .innerHTML=
-      Object.keys(counts)
-        .map(q=>`
-          <span
-            class="qcount"
-            style="background:${QCOLOR[q]}"
-          >
-            ${QNAME[q].split("·")[0].trim()}
-            ${counts[q]}
-          </span>
-        `)
-        .join("");
+  document.getElementById("snapCounts").innerHTML=
+    Object.keys(counts)
+      .map(q=>`
+        <span
+          class="qcount"
+          style="background:${QCOLOR[q]}">
+          ${QNAME[q].split("·")[0].trim()}
+          ${counts[q]}
+        </span>
+      `)
+      .join("");
 
 
   const getZ1Y=t=>
@@ -3455,90 +2832,73 @@ function renderSnap(){
 
   const deep=
     [...visible]
-      .sort(
-        (a,b)=>
-          getZ1Y(a)-
-          getZ1Y(b)
-      )
+      .sort((a,b)=>getZ1Y(a)-getZ1Y(b))
       .slice(0,3);
 
 
-  document
-    .getElementById("snapDeep")
-    .innerHTML=
-      deep.length
-        ? deep.map(t=>{
+  document.getElementById("snapDeep").innerHTML=
+    deep.length
+      ? deep.map(t=>{
 
-            const flag=
-              isCur &&
-              EVENT[t]
-                ? `
-                  <span
-                    style="
-                      color:#D97706;
-                      font-size:10px
-                    "
-                  >
-                    ⚠ ${EVENT[t].label}
-                  </span>
-                `
-                : "";
+          const flag=
+            isCur && EVENT[t]
+              ? `
+                <span
+                  style="
+                    color:#D97706;
+                    font-size:10px
+                  ">
+                  ⚠ ${EVENT[t].label}
+                </span>
+              `
+              : "";
 
-            return `
-              <div>
-                <b>${t}</b>
-                Z1Y ${getZ1Y(t).toFixed(2)} ·
-                D/P ${getDP(t).toFixed(2)}%
-                ${flag}
-              </div>
-            `;
+          return `
+            <div>
+              <b>${t}</b>
+              Z1Y ${getZ1Y(t).toFixed(2)} ·
+              D/P ${getDP(t).toFixed(2)}%
+              ${flag}
+            </div>
+          `;
 
-          }).join("")
-        : "None";
+        }).join("")
+      : "None";
 
 
   const greens=
     visible
       .filter(
-        t=>
-          qFromZD(
-            getZSel(t),
-            getDP(t)
-          )==="G"
+        t=>qFromZD(
+          getZSel(t),
+          getDP(t)
+        )==="G"
       )
-      .sort(
-        (a,b)=>
-          getZSel(b)-
-          getZSel(a)
-      )
+      .sort((a,b)=>getZSel(b)-getZSel(a))
       .slice(0,3);
 
 
-  document
-    .getElementById("snapGreen")
-    .innerHTML=
-      greens.length
-        ? greens.map(t=>{
+  document.getElementById("snapGreen").innerHTML=
+    greens.length
+      ? greens.map(t=>{
 
-            const m=
-              MOM[t];
+          const m=MOM[t];
 
-            return `
-              <div>
-                <b>${t}</b>
-                ${["Z3M","Z6M","Z1Y"][zIdx]}
-                ${fmtSigned(getZSel(t))}
-                ${
-                  isCur
-                    ? ` · ST ${m?fmtPct(m[0]):"—"}`
-                    : ""
-                }
-              </div>
-            `;
+          return `
+            <div>
+              <b>${t}</b>
+              ${["Z3M","Z6M","Z1Y"][zIdx]}
+              ${fmtSigned(getZSel(t))}
+              ${
+                isCur
+                  ? ` · ST ${m?fmtPct(m[0]):"—"}`
+                  : ""
+              }
+            </div>
+          `;
 
-          }).join("")
-        : "None";
-
+        }).join("")
+      : "None";
 }
 
 
@@ -3549,25 +2909,18 @@ document
   .querySelectorAll(".zt")
   .forEach(b=>{
 
-    b.addEventListener(
-      "click",
-      ()=>{
+    b.addEventListener("click",()=>{
 
-        document
-          .querySelectorAll(".zt")
-          .forEach(
-            x=>x.classList.remove("on")
-          );
+      document
+        .querySelectorAll(".zt")
+        .forEach(x=>x.classList.remove("on"));
 
-        b.classList.add("on");
+      b.classList.add("on");
 
-        zIdx=
-          +b.dataset.z;
+      zIdx=+b.dataset.z;
 
-        render();
-
-      }
-    );
+      render();
+    });
 
   });
 
@@ -3579,25 +2932,18 @@ document
   .querySelectorAll(".qf")
   .forEach(b=>{
 
-    b.addEventListener(
-      "click",
-      ()=>{
+    b.addEventListener("click",()=>{
 
-        document
-          .querySelectorAll(".qf")
-          .forEach(
-            x=>x.classList.remove("on")
-          );
+      document
+        .querySelectorAll(".qf")
+        .forEach(x=>x.classList.remove("on"));
 
-        b.classList.add("on");
+      b.classList.add("on");
 
-        qFilter=
-          b.dataset.q;
+      qFilter=b.dataset.q;
 
-        render();
-
-      }
-    );
+      render();
+    });
 
   });
 
@@ -3607,23 +2953,17 @@ document
 */
 document
   .getElementById("search")
-  .addEventListener(
-    "input",
-    e=>{
+  .addEventListener("input",e=>{
 
-      searchTerms=
-        e.target.value
-          .toUpperCase()
-          .split(/[\s,;]+/)
-          .map(
-            s=>s.trim()
-          )
-          .filter(Boolean);
+    searchTerms=
+      e.target.value
+        .toUpperCase()
+        .split(/[\s,;]+/)
+        .map(s=>s.trim())
+        .filter(Boolean);
 
-      render();
-
-    }
-  );
+    render();
+  });
 
 
 /*
@@ -3631,112 +2971,74 @@ document
 */
 document
   .getElementById("hold")
-  .addEventListener(
-    "click",
-    e=>{
+  .addEventListener("click",e=>{
 
-      holdOnly=
-        !holdOnly;
+    holdOnly=!holdOnly;
 
-      e.target
-        .classList
-        .toggle(
-          "on",
-          holdOnly
-        );
+    e.target
+      .classList
+      .toggle("on",holdOnly);
 
-      render();
-
-    }
-  );
+    render();
+  });
 
 
 /*
-  Compare.
+  Compare mode.
 */
 document
   .getElementById("compareBtn")
-  .addEventListener(
-    "click",
-    e=>{
+  .addEventListener("click",e=>{
 
-      const N=
-        PRIOR.length;
+    const N=PRIOR.length;
 
-      compareMode=
-        !compareMode;
+    compareMode=!compareMode;
 
-      e.target
-        .classList
-        .toggle(
-          "on",
-          compareMode
-        );
+    e.target
+      .classList
+      .toggle("on",compareMode);
 
-      document
-        .getElementById("compareBanner")
-        .style.display=
-          compareMode
-            ? "block"
-            : "none";
+    document
+      .getElementById("compareBanner")
+      .style.display=
+        compareMode
+          ? "block"
+          : "none";
 
 
-      if(
-        compareMode &&
-        sesIdx===N
-      ){
+    if(compareMode && sesIdx===N){
 
-        setSession(
-          N-1
-        );
+      setSession(N-1);
 
-      }else{
+    }else{
 
-        render();
-
-      }
-
+      render();
     }
-  );
+  });
 
 
 /*
-  Step.
+  Step controls.
 */
 document
   .getElementById("prevSession")
-  .addEventListener(
-    "click",
-    ()=>{
-      setSession(
-        sesIdx-1
-      );
-    }
-  );
+  .addEventListener("click",()=>{
+    setSession(sesIdx-1);
+  });
 
 
 document
   .getElementById("nextSession")
-  .addEventListener(
-    "click",
-    ()=>{
-      setSession(
-        sesIdx+1
-      );
-    }
-  );
+  .addEventListener("click",()=>{
+    setSession(sesIdx+1);
+  });
 
 
 document
   .getElementById("sessionSlider")
-  .addEventListener(
-    "input",
-    e=>{
-      setSession(
-        +e.target.value
-      );
-    }
-  );
+  .addEventListener("input",e=>{
+    setSession(+e.target.value);
+  });
 
 
 /*
@@ -3744,172 +3046,111 @@ document
 */
 document
   .getElementById("playBtn")
-  .addEventListener(
-    "click",
-    e=>{
+  .addEventListener("click",e=>{
 
-      const N=
-        PRIOR.length;
+    const N=PRIOR.length;
 
 
-      if(playTimer){
+    if(playTimer){
 
-        clearInterval(
-          playTimer
-        );
+      clearInterval(playTimer);
+      playTimer=null;
 
-        playTimer=null;
+      e.target.textContent="▶ Play";
+      e.target.classList.remove("on");
 
-        e.target.textContent=
-          "▶ Play";
-
-        e.target
-          .classList
-          .remove("on");
-
-        return;
-
-      }
-
-
-      if(
-        sesIdx===N
-      ){
-        setSession(0);
-      }
-
-
-      e.target.textContent=
-        "❚❚ Pause";
-
-      e.target
-        .classList
-        .add("on");
-
-
-      playTimer=
-        setInterval(
-          ()=>{
-
-            if(
-              sesIdx>=N
-            ){
-
-              clearInterval(
-                playTimer
-              );
-
-              playTimer=null;
-
-              e.target.textContent=
-                "▶ Play";
-
-              e.target
-                .classList
-                .remove("on");
-
-              return;
-
-            }
-
-            setSession(
-              sesIdx+1
-            );
-
-          },
-          900
-        );
-
+      return;
     }
-  );
+
+
+    if(sesIdx===N){
+      setSession(0);
+    }
+
+
+    e.target.textContent="❚❚ Pause";
+    e.target.classList.add("on");
+
+
+    playTimer=
+      setInterval(()=>{
+
+        if(sesIdx>=N){
+
+          clearInterval(playTimer);
+          playTimer=null;
+
+          e.target.textContent="▶ Play";
+          e.target.classList.remove("on");
+
+          return;
+        }
+
+        setSession(sesIdx+1);
+
+      },900);
+  });
 
 
 /*
-  RUNTIME / DATA AUDIT
+  RUNTIME / DATA AUDIT.
 */
 function runAudit(){
 
   const issues=[];
-
-  const tickers=
-    Object.keys(
-      CUR.data
-    );
+  const tickers=Object.keys(CUR.data);
 
 
   /*
     Date checks.
   */
-  if(
-    CUR.date!=="09/29/2026"
-  ){
-    issues.push(
-      "Current valuation date mismatch."
-    );
+  if(CUR.date!=="09/30/2026"){
+    issues.push("Current valuation date mismatch.");
   }
 
 
   const valDay=
     new Date(
-      "2026-09-29T12:00:00Z"
+      "2026-09-30T12:00:00Z"
     ).getUTCDay();
 
-  if(
-    valDay!==2
-  ){
-    issues.push(
-      "09/29/2026 should be Tuesday."
-    );
+  if(valDay!==3){
+    issues.push("09/30/2026 should be Wednesday.");
   }
 
 
   const momDay=
     new Date(
-      "2026-09-30T12:00:00Z"
+      "2026-10-01T12:00:00Z"
     ).getUTCDay();
 
-  if(
-    momDay!==3
-  ){
-    issues.push(
-      "09/30/2026 should be Wednesday."
-    );
+  if(momDay!==4){
+    issues.push("10/01/2026 should be Thursday.");
   }
 
 
   /*
     Universe.
   */
-  if(
-    tickers.length!==25
-  ){
+  if(tickers.length!==25){
     issues.push(
       `Expected 25 valuation tickers, found ${tickers.length}.`
     );
   }
 
 
-  if(
-    new Set(tickers).size!==
-    tickers.length
-  ){
-    issues.push(
-      "Duplicate current ticker detected."
-    );
+  if(new Set(tickers).size!==tickers.length){
+    issues.push("Duplicate current ticker detected.");
   }
 
 
   const missing=
-    STANDARD_UNIVERSE
-      .filter(
-        t=>!CUR.data[t]
-      );
+    STANDARD_UNIVERSE.filter(
+      t=>!CUR.data[t]
+    );
 
 
-  if(
-    missing.join(",")!==
-    MISSING_CURRENT.join(",")
-  ){
+  if(missing.join(",")!==MISSING_CURRENT.join(",")){
     issues.push(
       `Missing-current reconciliation failed: ${missing.join(",")}.`
     );
@@ -3917,17 +3158,13 @@ function runAudit(){
 
 
   /*
-    Arrays and quadrant signs.
+    Arrays and signs.
   */
   tickers.forEach(t=>{
 
-    const d=
-      CUR.data[t];
+    const d=CUR.data[t];
 
-    if(
-      !Array.isArray(d) ||
-      d.length!==8
-    ){
+    if(!Array.isArray(d) || d.length!==8){
       issues.push(
         `${t}: current array must have 8 fields.`
       );
@@ -3948,42 +3185,28 @@ function runAudit(){
     }
 
 
-    const q=
-      qFromZD(
-        d[2],
-        d[3]
-      );
+    const q=qFromZD(d[2],d[3]);
 
 
-    if(
-      d[3]>0 &&
-      !["B","X"].includes(q)
-    ){
+    if(d[3]>0 && !["B","X"].includes(q)){
       issues.push(
         `${t}: positive D/P quadrant violation.`
       );
     }
 
 
-    if(
-      d[3]<0 &&
-      !["G","O"].includes(q)
-    ){
+    if(d[3]<0 && !["G","O"].includes(q)){
       issues.push(
         `${t}: negative D/P quadrant violation.`
       );
     }
 
 
-    if(
-      d[3]===0 &&
-      !["B","X"].includes(q)
-    ){
+    if(d[3]===0 && !["B","X"].includes(q)){
       issues.push(
         `${t}: zero D/P must be on premium side.`
       );
     }
-
   });
 
 
@@ -3991,15 +3214,12 @@ function runAudit(){
     Holdings.
   */
   const holdingsPresent=
-    [...HOLDINGS]
-      .filter(
-        t=>CUR.data[t]
-      );
+    [...HOLDINGS].filter(
+      t=>CUR.data[t]
+    );
 
 
-  if(
-    holdingsPresent.length!==14
-  ){
+  if(holdingsPresent.length!==14){
     issues.push(
       `Expected 14 holdings, found ${holdingsPresent.length}.`
     );
@@ -4009,33 +3229,26 @@ function runAudit(){
   /*
     Time Machine.
   */
-  if(
-    PRIOR.length!==15
-  ){
+  if(PRIOR.length!==15){
     issues.push(
       `Expected 15 historical sessions, found ${PRIOR.length}.`
     );
   }
 
 
-  if(
-    PRIOR[0].date!==
-    "09/02/2026"
-  ){
+  if(PRIOR[0].date!=="09/03/2026"){
     issues.push(
-      "Oldest retained session should be 09/02/2026."
+      "Oldest retained session should be 09/03/2026."
     );
   }
 
 
   if(
-    PRIOR[
-      PRIOR.length-1
-    ].date!==
-    "09/28/2026"
+    PRIOR[PRIOR.length-1].date!==
+    "09/29/2026"
   ){
     issues.push(
-      "Newest prior session should be 09/28/2026."
+      "Newest prior session should be 09/29/2026."
     );
   }
 
@@ -4043,36 +3256,28 @@ function runAudit(){
   /*
     Momentum.
   */
-  if(
-    Object.keys(MOM).length!==27
-  ){
+  if(Object.keys(MOM).length!==27){
     issues.push(
       `Expected 27 momentum rows, found ${Object.keys(MOM).length}.`
     );
   }
 
 
-  if(
-    Object.keys(MOMPERF).length!==27
-  ){
+  if(Object.keys(MOMPERF).length!==27){
     issues.push(
       `Expected 27 momentum-performance rows, found ${Object.keys(MOMPERF).length}.`
     );
   }
 
 
-  if(
-    MOM.RLTY[1]!==null
-  ){
+  if(MOM.RLTY[1]!==null){
     issues.push(
       "RLTY LT #N/A must remain null."
     );
   }
 
 
-  if(
-    MOMPERF.RLTY[8]!==null
-  ){
+  if(MOMPERF.RLTY[8]!==null){
     issues.push(
       "RLTY 5Y #N/A must remain null."
     );
@@ -4080,20 +3285,14 @@ function runAudit(){
 
 
   /*
-    Default Z1Y counts.
+    Default Z1Y quadrant counts.
   */
-  const counts={
-    G:0,
-    B:0,
-    O:0,
-    X:0
-  };
+  const counts={G:0,B:0,O:0,X:0};
 
 
   tickers.forEach(t=>{
 
-    const d=
-      CUR.data[t];
+    const d=CUR.data[t];
 
     counts[
       qFromZD(
@@ -4101,31 +3300,24 @@ function runAudit(){
         d[3]
       )
     ]++;
-
   });
 
 
   const expectedCounts={
-    G:4,
-    B:1,
-    O:19,
+    G:5,
+    B:2,
+    O:17,
     X:1
   };
 
 
-  Object.keys(
-    expectedCounts
-  ).forEach(k=>{
+  Object.keys(expectedCounts).forEach(k=>{
 
-    if(
-      counts[k]!==
-      expectedCounts[k]
-    ){
+    if(counts[k]!==expectedCounts[k]){
       issues.push(
         `Quadrant ${k}: expected ${expectedCounts[k]}, found ${counts[k]}.`
       );
     }
-
   });
 
 
@@ -4137,41 +3329,31 @@ function runAudit(){
 
   tickers.forEach(t=>{
 
-    const p=
-      PREV_FULL[t];
+    const p=PREV_FULL[t];
 
     if(!p){
       return;
     }
 
-    const oldQ=
-      qFromZD(
-        p[2],
-        p[3]
-      );
-
-    const newQ=
-      qFromZD(
-        CUR.data[t][2],
-        CUR.data[t][3]
-      );
+    const oldQ=qFromZD(p[2],p[3]);
+    const newQ=qFromZD(
+      CUR.data[t][2],
+      CUR.data[t][3]
+    );
 
 
-    if(
-      oldQ!==newQ
-    ){
+    if(oldQ!==newQ){
       crossings.push(
         `${t}:${oldQ}->${newQ}`
       );
     }
-
   });
 
 
   const expectedCrossings=[
-    "BST:O->G",
-    "BUI:O->X",
-    "UTF:O->G"
+    "CSQ:O->G",
+    "NXG:G->B",
+    "UTG:O->G"
   ];
 
 
@@ -4200,7 +3382,6 @@ function runAudit(){
 
   const expectedPositiveST=[
     "BST",
-    "EOI",
     "NBXG"
   ];
 
@@ -4216,7 +3397,7 @@ function runAudit(){
 
 
   /*
-    Extreme Z1Y.
+    Extreme |Z1Y| >= 2.
   */
   const extreme=
     tickers
@@ -4231,8 +3412,6 @@ function runAudit(){
 
   const expectedExtreme=[
     "ASGI",
-    "EOS",
-    "GDV",
     "PCN",
     "RLTY"
   ];
@@ -4252,23 +3431,16 @@ function runAudit(){
     Term structure.
   */
   const early=[];
-
   const falling=[];
 
 
   tickers.forEach(t=>{
 
-    const d=
-      CUR.data[t];
+    const d=CUR.data[t];
 
-    const z3=
-      d[0];
-
-    const z6=
-      d[1];
-
-    const z1=
-      d[2];
+    const z3=d[0];
+    const z6=d[1];
+    const z1=d[2];
 
 
     if(
@@ -4289,14 +3461,10 @@ function runAudit(){
     ){
       falling.push(t);
     }
-
   });
 
 
-  if(
-    early.sort().join(",")!==
-    ["ASGI","RNP","RQI"].join(",")
-  ){
+  if(early.sort().join(",")!=="ASGI"){
     issues.push(
       `Early-mean-reversion set mismatch: ${early.join(",")}.`
     );
@@ -4305,7 +3473,7 @@ function runAudit(){
 
   if(
     falling.sort().join(",")!==
-    ["ERH","HTD","PDX"].join(",")
+    ["BDJ","ERH","HTD","PDX"].join(",")
   ){
     issues.push(
       `Falling-knife set mismatch: ${falling.join(",")}.`
@@ -4334,13 +3502,10 @@ function runAudit(){
     ){
       mismatch.push(t);
     }
-
   });
 
 
-  if(
-    mismatch.length!==0
-  ){
+  if(mismatch.length!==0){
     issues.push(
       `Unexpected current D/P reconciliation flags: ${mismatch.join(",")}.`
     );
@@ -4348,16 +3513,53 @@ function runAudit(){
 
 
   /*
+    NBXG update integrity.
+  */
+  if(
+    Math.abs(
+      NBXG_DIST.newMonthly-0.132
+    )>0.000001
+  ){
+    issues.push(
+      "NBXG new monthly distribution should be $0.132."
+    );
+  }
+
+
+  if(
+    Math.abs(
+      CUR.data.NBXG[5]-9.18
+    )>0.000001
+  ){
+    issues.push(
+      "NBXG raw 09/30 CEFConnect distribution rate should remain 9.18%."
+    );
+  }
+
+
+  const nbxgForward=
+    NBXG_DIST.annualized /
+    CUR.data.NBXG[7] *
+    100;
+
+
+  if(
+    Math.abs(
+      nbxgForward-10.0956
+    )>0.02
+  ){
+    issues.push(
+      "NBXG derived forward market distribution rate unexpected."
+    );
+  }
+
+
+  /*
     Default visibility regression test.
   */
-  const originalQ=
-    qFilter;
-
-  const originalHold=
-    holdOnly;
-
-  const originalSearch=
-    [...searchTerms];
+  const originalQ=qFilter;
+  const originalHold=holdOnly;
+  const originalSearch=[...searchTerms];
 
 
   qFilter="all";
@@ -4377,22 +3579,16 @@ function runAudit(){
         `${t}: default dot visibility failure.`
       );
     }
-
   });
 
 
-  qFilter=
-    originalQ;
-
-  holdOnly=
-    originalHold;
-
-  searchTerms=
-    originalSearch;
+  qFilter=originalQ;
+  holdOnly=originalHold;
+  searchTerms=originalSearch;
 
 
   /*
-    Selected spot checks.
+    Spot checks.
   */
   if(
     Math.abs(
@@ -4400,11 +3596,11 @@ function runAudit(){
         CUR.data.EOI[3]-
         CUR.data.EOI[4]
       )-
-      (-2.66)
+      (-2.18)
     )>0.001
   ){
     issues.push(
-      "EOI own-normal gap should be -2.66 pt."
+      "EOI own-normal gap should be -2.18 pt."
     );
   }
 
@@ -4415,35 +3611,53 @@ function runAudit(){
         CUR.data.PCN[3]-
         CUR.data.PCN[4]
       )-
-      (-7.63)
+      (-7.75)
     )>0.001
   ){
     issues.push(
-      "PCN own-normal gap should be -7.63 pt."
+      "PCN own-normal gap should be -7.75 pt."
     );
   }
 
 
   if(
-    MOM.EOI[0]!==0.53
+    Math.abs(
+      (
+        CUR.data.UTF[3]-
+        CUR.data.UTF[4]
+      )-
+      2.73
+    )>0.001
   ){
     issues.push(
-      "EOI 09/30 ST momentum should be +0.53%."
+      "UTF own-normal gap should be +2.73 pt."
     );
   }
 
 
-  if(
-    MOM.BUI[0]!==-6.03
-  ){
+  if(MOM.BST[0]!==1.40){
     issues.push(
-      "BUI 09/30 ST momentum should be -6.03%."
+      "BST 10/01 ST momentum should be +1.40%."
+    );
+  }
+
+
+  if(MOM.NBXG[0]!==0.75){
+    issues.push(
+      "NBXG 10/01 ST momentum should be +0.75%."
+    );
+  }
+
+
+  if(MOM.EOI[0]!==-0.42){
+    issues.push(
+      "EOI 10/01 ST momentum should be -0.42%."
     );
   }
 
 
   console.info(
-    "CEF Time Machine 09/29 valuation + 09/30 momentum audit",
+    "CEF Matrix 09/30 valuation + 10/01 momentum audit",
     {
       valuationDate:VAL_DATE,
       momentumDate:MOM_DATE,
@@ -4459,6 +3673,7 @@ function runAudit(){
       earlyMeanReversion:early,
       fallingKnife:falling,
       dpReconciliationFlags:mismatch,
+      nbxgDistribution:NBXG_DIST,
       asgiSuppressed:true,
       pcnContext:true,
       issues
@@ -4467,43 +3682,38 @@ function runAudit(){
 
 
   return issues;
-
 }
 
 
-const auditIssues=
-  runAudit();
+const auditIssues=runAudit();
 
 
-if(
-  auditIssues.length
-){
+if(auditIssues.length){
 
   console.warn(
-    "CEF Time Machine audit issues:",
+    "CEF Matrix audit issues:",
     auditIssues
   );
-
 
 }else{
 
   console.info(
-    "CEF Time Machine audit passed. " +
-    "09/29 valuation / 09/30 momentum dates separated; " +
+    "CEF Matrix audit passed. " +
+    "09/30 valuation / 10/01 momentum dates separated; " +
     "25 valuation tickers / 27 momentum rows / 14 holdings verified; " +
-    "15 valid prior sessions retained; " +
-    "09/28 appended and 09/01 rolled off; " +
-    "quadrants G4 B1 O19 X1 verified; " +
-    "BST O→G, BUI O→X, UTF O→G verified; " +
-    "positive ST set BST / EOI / NBXG verified; " +
-    "extreme Z1Y set verified; " +
+    "15 prior sessions retained; " +
+    "09/29 appended and 09/02 rolled off; " +
+    "quadrants G5 B2 O17 X1 verified; " +
+    "CSQ O→G, NXG G→B, UTG O→G verified; " +
+    "positive ST set BST / NBXG verified; " +
+    "extreme Z1Y set ASGI / PCN / RLTY verified; " +
     "early-mean-reversion and falling-knife sets verified; " +
     "current Price/NAV reconciliation clean; " +
+    "NBXG distribution increase qualified while raw CEFConnect yield preserved; " +
     "ASGI suppression and PCN context retained; " +
     "RLTY null values preserved; " +
     "default dot visibility verified."
   );
-
 }
 
 
