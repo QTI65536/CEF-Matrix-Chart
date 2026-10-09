@@ -200,14 +200,35 @@ svg{
   overflow:visible;
 }
 
+/*
+  IMPORTANT INTERACTION LAYER
+
+  Every plotted bubble receives exactly one invisible .hit-target circle.
+  Visible SVG children do NOT intercept pointer events.
+  This makes hover/click behavior deterministic rather than depending on
+  browser-specific SVG group hit testing.
+*/
 .dot{
   transition:opacity .6s ease;
   cursor:pointer;
 }
 
-.dot.dimmed{opacity:.10}
-.dot text{pointer-events:none}
-.dot line,.dot circle{pointer-events:none}
+.dot.dimmed{
+  opacity:.10;
+}
+
+.dot text,
+.dot line,
+.dot circle{
+  pointer-events:none;
+}
+
+.dot .hit-target{
+  pointer-events:all;
+  fill:transparent;
+  stroke:none;
+  cursor:pointer;
+}
 
 .legend{
   margin-top:4px;
@@ -533,6 +554,7 @@ svg{
     Dashed vertical segment = current D/P to current 52-week average D/P.
     Outer ring = holding status for that point in time.
     PDX receives a current holding ring from 10/09/2026 forward; pre-entry history remains unringed.
+    Invisible 15px hit targets provide bubble hover/click interaction independently of visible SVG geometry.
   </div>
 
   <div class="tm-controls">
@@ -644,7 +666,11 @@ All analytical output from this system is for informational purposes only. Not i
   [Z1Y, D/P]
 
   PDX became a holding on 10/09/2026.
-  Historical PDX points prior to the entry date intentionally do not receive a holding ring.
+
+  INTERACTION CONTRACT:
+  Every .dot must contain exactly one .hit-target circle.
+  Visible circles, labels, lines and holding rings never consume pointer events.
+  Runtime audit verifies hit-target parity after every render.
 */
 
 const BUILD_DATE="10/09/2026";
@@ -707,7 +733,6 @@ const LEV={
   UTG:22.06
 };
 
-/* Fresh momentum snapshot supplied 10/09/2026. */
 const MOM={
   NBXG:[1.20,14.40],
   ETG:[-0.75,21.32],
@@ -822,13 +847,6 @@ const CUR={
   }
 };
 
-/*
-  Rolling 15 supplied historical market-session datasets.
-
-  10/02 note:
-  Original provider snapshot showed widespread D/P versus Price/NAV timing mismatch.
-  Raw historical [Z1Y,D/P] values are preserved exactly.
-*/
 const PRIOR=[
 
   {
@@ -1087,10 +1105,6 @@ function isCurrentHolding(t){
   return CURRENT_HOLDINGS.has(t);
 }
 
-/*
-  The legacy holding set is treated as historical holdings for available prior
-  sessions. PDX is explicitly excluded before its 10/09/2026 position start.
-*/
 function isHistoricalHolding(t,date){
   if(t==="PDX") return false;
   return CURRENT_HOLDINGS.has(t);
@@ -1098,6 +1112,7 @@ function isHistoricalHolding(t,date){
 
 function currentVisible(t,d){
   const q=qFromZD(d[zIdx],d[3]);
+
   return (
     (qFilter==="all" || q===qFilter) &&
     (!holdOnly || CURRENT_HOLDINGS.has(t)) &&
@@ -1107,6 +1122,7 @@ function currentVisible(t,d){
 
 function historicalVisible(t,z,dp,date){
   const q=qFromZD(z,dp);
+
   return (
     (qFilter==="all" || q===qFilter) &&
     (!holdOnly || isHistoricalHolding(t,date)) &&
@@ -1132,12 +1148,6 @@ function eventMarkup(t){
 
 function dqText(t){
   return DQ[t] || "No special DQ flag in current Engine state.";
-}
-
-function currentQuadrant(t){
-  const d=CUR.data[t];
-  if(!d) return null;
-  return qFromZD(d[zIdx],d[3]);
 }
 
 function getExtent(){
@@ -1170,7 +1180,7 @@ function getExtent(){
 /* ---------- Chart grid ---------- */
 
 function drawGrid(s,ex,Xf,Yf,isCurrentSession){
-  /* Green: positive Z / discount */
+
   s+=`
     <rect x="${Xf(0)}" y="${Yf(0)}"
       width="${W-MR-Xf(0)}"
@@ -1178,7 +1188,6 @@ function drawGrid(s,ex,Xf,Yf,isCurrentSession){
       fill="${QCOLOR.G}" opacity=".055"/>
   `;
 
-  /* Blue: positive Z / premium */
   s+=`
     <rect x="${Xf(0)}" y="${MT}"
       width="${W-MR-Xf(0)}"
@@ -1186,7 +1195,6 @@ function drawGrid(s,ex,Xf,Yf,isCurrentSession){
       fill="${QCOLOR.B}" opacity=".055"/>
   `;
 
-  /* Orange: negative Z / discount */
   s+=`
     <rect x="${ML}" y="${Yf(0)}"
       width="${Xf(0)-ML}"
@@ -1194,7 +1202,6 @@ function drawGrid(s,ex,Xf,Yf,isCurrentSession){
       fill="${QCOLOR.O}" opacity=".055"/>
   `;
 
-  /* Gray: negative Z / premium */
   s+=`
     <rect x="${ML}" y="${MT}"
       width="${Xf(0)-ML}"
@@ -1208,6 +1215,7 @@ function drawGrid(s,ex,Xf,Yf,isCurrentSession){
             x2="${Xf(z)}" y2="${H-MB}"
             stroke="${z===0?"#B6BDC3":"#EAEDEF"}"
             stroke-width="${z===0?1.5:1}"/>
+
       <text x="${Xf(z)}" y="${H-MB+17}"
             font-size="10" fill="#8A929A"
             text-anchor="middle">${z}</text>
@@ -1222,6 +1230,7 @@ function drawGrid(s,ex,Xf,Yf,isCurrentSession){
             x2="${W-MR}" y2="${Yf(d)}"
             stroke="${d===0?"#B6BDC3":"#EAEDEF"}"
             stroke-width="${d===0?1.5:1}"/>
+
       <text x="${ML-7}" y="${Yf(d)+3}"
             font-size="10" fill="#8A929A"
             text-anchor="end">${d}%</text>
@@ -1282,9 +1291,21 @@ function drawGrid(s,ex,Xf,Yf,isCurrentSession){
   return s;
 }
 
+/* ---------- Bubble markup helpers ---------- */
+
+function hitTarget(cx,cy){
+  return `
+    <circle class="hit-target"
+            cx="${cx}"
+            cy="${cy}"
+            r="15"/>
+  `;
+}
+
 /* ---------- Rendering ---------- */
 
 function render(){
+
   const N=PRIOR.length;
   const isCur=sesIdx===N;
 
@@ -1300,12 +1321,9 @@ function render(){
   s=drawGrid(s,ex,Xf,Yf,isCur || compareMode);
 
   if(compareMode && sesIdx<N){
+
     const ps=PRIOR[sesIdx];
 
-    /*
-      Compare mode always compares current Z1Y against historical Z1Y.
-      It forces zIdx=2 before reaching this block.
-    */
     Object.keys(CUR.data).forEach(t=>{
       const pd=ps.d[t];
       if(!pd) return;
@@ -1319,6 +1337,7 @@ function render(){
 
       const cx=Xf(cd[2]);
       const cy=Yf(cd[3]);
+
       const px=Xf(pd[0]);
       const py=Yf(pd[1]);
 
@@ -1336,7 +1355,9 @@ function render(){
 
     /* Historical comparison dots */
     Object.keys(ps.d).forEach(t=>{
+
       const [z,dp]=ps.d[t];
+
       const q=qFromZD(z,dp);
       const vis=historicalVisible(t,z,dp,ps.date);
 
@@ -1348,30 +1369,39 @@ function render(){
            data-t="${t}"
            data-mode="prior">
 
+          ${hitTarget(cx,cy)}
+
           ${isHistoricalHolding(t,ps.date)
             ? `<circle cx="${cx}" cy="${cy}" r="8.0"
-                 fill="none" stroke="${QCOLOR[q]}"
-                 stroke-width="1.2" opacity=".48"/>`
+                 fill="none"
+                 stroke="${QCOLOR[q]}"
+                 stroke-width="1.2"
+                 opacity=".48"/>`
             : ""}
 
           <circle cx="${cx}" cy="${cy}" r="4.5"
-                  fill="${QCOLOR[q]}" opacity=".50"/>
+                  fill="${QCOLOR[q]}"
+                  opacity=".50"/>
 
           <text x="${cx}" y="${cy-8}"
                 font-size="8"
                 font-weight="600"
                 text-anchor="middle"
                 fill="#6A7280">${t}</text>
+
         </g>
       `;
     });
 
     /* Current comparison dots */
     Object.keys(CUR.data).forEach(t=>{
+
       const d=CUR.data[t];
+
       const z=d[2];
       const dp=d[3];
       const avg=d[4];
+
       const q=qFromZD(z,dp);
       const vis=currentVisible(t,d);
 
@@ -1383,6 +1413,8 @@ function render(){
         <g class="dot${vis?"":" dimmed"}"
            data-t="${t}"
            data-mode="current">
+
+          ${hitTarget(cx,cy)}
 
           <line x1="${cx}" y1="${cy}"
                 x2="${cx}" y2="${ay}"
@@ -1398,12 +1430,15 @@ function render(){
                   opacity=".65"/>
 
           <circle cx="${cx}" cy="${cy}" r="8.0"
-                  fill="white" opacity=".90"/>
+                  fill="white"
+                  opacity=".90"/>
 
           ${isCurrentHolding(t)
             ? `<circle cx="${cx}" cy="${cy}" r="10"
-                 fill="none" stroke="${QCOLOR[q]}"
-                 stroke-width="1.6" opacity=".95"/>`
+                 fill="none"
+                 stroke="${QCOLOR[q]}"
+                 stroke-width="1.6"
+                 opacity=".95"/>`
             : ""}
 
           <circle cx="${cx}" cy="${cy}" r="6.2"
@@ -1417,11 +1452,13 @@ function render(){
                 stroke="white"
                 stroke-width="2.7"
                 paint-order="stroke">${t}</text>
+
         </g>
       `;
     });
 
     document.getElementById("chart").innerHTML=s;
+
     bindDotsCompare(ps);
 
     document.getElementById("seslabel").textContent=
@@ -1430,11 +1467,13 @@ function render(){
   }else if(isCur){
 
     Object.keys(CUR.data).forEach(t=>{
+
       const d=CUR.data[t];
 
       const z=d[zIdx];
       const dp=d[3];
       const avg=d[4];
+
       const q=qFromZD(z,dp);
       const vis=currentVisible(t,d);
 
@@ -1446,6 +1485,8 @@ function render(){
         <g class="dot${vis?"":" dimmed"}"
            data-t="${t}"
            data-mode="current">
+
+          ${hitTarget(cx,cy)}
 
           <line x1="${cx}" y1="${cy}"
                 x2="${cx}" y2="${ay}"
@@ -1461,12 +1502,15 @@ function render(){
                   opacity=".65"/>
 
           <circle cx="${cx}" cy="${cy}" r="8.0"
-                  fill="white" opacity=".90"/>
+                  fill="white"
+                  opacity=".90"/>
 
           ${isCurrentHolding(t)
             ? `<circle cx="${cx}" cy="${cy}" r="10"
-                 fill="none" stroke="${QCOLOR[q]}"
-                 stroke-width="1.6" opacity=".96"/>`
+                 fill="none"
+                 stroke="${QCOLOR[q]}"
+                 stroke-width="1.6"
+                 opacity=".96"/>`
             : ""}
 
           <circle cx="${cx}" cy="${cy}" r="6.2"
@@ -1480,11 +1524,13 @@ function render(){
                 stroke="white"
                 stroke-width="2.7"
                 paint-order="stroke">${t}</text>
+
         </g>
       `;
     });
 
     document.getElementById("chart").innerHTML=s;
+
     bindDotsCurrent();
 
     document.getElementById("seslabel").textContent=
@@ -1495,7 +1541,9 @@ function render(){
     const ps=PRIOR[sesIdx];
 
     Object.keys(ps.d).forEach(t=>{
+
       const [z,dp]=ps.d[t];
+
       const q=qFromZD(z,dp);
       const vis=historicalVisible(t,z,dp,ps.date);
 
@@ -1507,10 +1555,14 @@ function render(){
            data-t="${t}"
            data-mode="prior">
 
+          ${hitTarget(cx,cy)}
+
           ${isHistoricalHolding(t,ps.date)
             ? `<circle cx="${cx}" cy="${cy}" r="9.6"
-                 fill="none" stroke="${QCOLOR[q]}"
-                 stroke-width="1.5" opacity=".75"/>`
+                 fill="none"
+                 stroke="${QCOLOR[q]}"
+                 stroke-width="1.5"
+                 opacity=".75"/>`
             : ""}
 
           <circle cx="${cx}" cy="${cy}" r="6.1"
@@ -1524,22 +1576,24 @@ function render(){
                 stroke="white"
                 stroke-width="2.4"
                 paint-order="stroke">${t}</text>
+
         </g>
       `;
     });
 
     document.getElementById("chart").innerHTML=s;
+
     bindDotsHistorical(ps);
 
     document.getElementById("seslabel").textContent=
       `Showing: ${ps.date} historical Z1Y / D/P`;
-
   }
 
   updateSessionWarning();
   updateCompareBanner();
   updateNavState();
   renderSnap();
+  runtimeAudit();
 }
 
 /* ---------- Tooltips ---------- */
@@ -1547,22 +1601,31 @@ function render(){
 const tip=document.getElementById("tip");
 
 function positionTip(e){
+
   const pad=14;
+
   let x=e.clientX+pad;
   let y=e.clientY+10;
 
   const maxX=window.innerWidth-350;
   const maxY=window.innerHeight-180;
 
-  if(x>maxX) x=Math.max(8,e.clientX-335);
-  if(y>maxY) y=Math.max(8,e.clientY-150);
+  if(x>maxX){
+    x=Math.max(8,e.clientX-335);
+  }
+
+  if(y>maxY){
+    y=Math.max(8,e.clientY-150);
+  }
 
   tip.style.left=`${x}px`;
   tip.style.top=`${y}px`;
 }
 
 function currentTooltip(t,d){
+
   const m=MOM[t] || null;
+
   const q=qFromZD(d[zIdx],d[3]);
   const gap=d[3]-d[4];
 
@@ -1582,9 +1645,17 @@ function currentTooltip(t,d){
 }
 
 function historicalTooltip(t,pd,ps){
+
   const current=CUR.data[t];
-  const dz=current ? current[2]-pd[0] : null;
-  const ddp=current ? current[3]-pd[1] : null;
+
+  const dz=current
+    ? current[2]-pd[0]
+    : null;
+
+  const ddp=current
+    ? current[3]-pd[1]
+    : null;
+
   const q=qFromZD(pd[0],pd[1]);
 
   return `
@@ -1598,23 +1669,31 @@ function historicalTooltip(t,pd,ps){
   `;
 }
 
+function showTip(e,html){
+  tip.style.display="block";
+  positionTip(e);
+  tip.innerHTML=html;
+}
+
+function hideTip(){
+  tip.style.display="none";
+}
+
 function bindDotsCurrent(){
-  document.querySelectorAll(".dot").forEach(g=>{
+
+  document.querySelectorAll("#chart .dot").forEach(g=>{
+
     const t=g.dataset.t;
     if(!t) return;
 
     const d=CUR.data[t];
     if(!d) return;
 
-    g.addEventListener("mousemove",e=>{
-      tip.style.display="block";
-      positionTip(e);
-      tip.innerHTML=currentTooltip(t,d);
+    g.addEventListener("pointermove",e=>{
+      showTip(e,currentTooltip(t,d));
     });
 
-    g.addEventListener("mouseleave",()=>{
-      tip.style.display="none";
-    });
+    g.addEventListener("pointerleave",hideTip);
 
     g.addEventListener("click",()=>{
       showCurrentDetail(t);
@@ -1623,20 +1702,19 @@ function bindDotsCurrent(){
 }
 
 function bindDotsHistorical(ps){
-  document.querySelectorAll(".dot").forEach(g=>{
+
+  document.querySelectorAll("#chart .dot").forEach(g=>{
+
     const t=g.dataset.t;
     const pd=ps.d[t];
+
     if(!t || !pd) return;
 
-    g.addEventListener("mousemove",e=>{
-      tip.style.display="block";
-      positionTip(e);
-      tip.innerHTML=historicalTooltip(t,pd,ps);
+    g.addEventListener("pointermove",e=>{
+      showTip(e,historicalTooltip(t,pd,ps));
     });
 
-    g.addEventListener("mouseleave",()=>{
-      tip.style.display="none";
-    });
+    g.addEventListener("pointerleave",hideTip);
 
     g.addEventListener("click",()=>{
       showHistoricalDetail(t,ps);
@@ -1645,7 +1723,9 @@ function bindDotsHistorical(ps){
 }
 
 function bindDotsCompare(ps){
-  document.querySelectorAll(".dot").forEach(g=>{
+
+  document.querySelectorAll("#chart .dot").forEach(g=>{
+
     const t=g.dataset.t;
     const mode=g.dataset.mode;
 
@@ -1654,25 +1734,28 @@ function bindDotsCompare(ps){
     const d=CUR.data[t];
     const pd=ps.d[t];
 
-    g.addEventListener("mousemove",e=>{
-      tip.style.display="block";
-      positionTip(e);
+    g.addEventListener("pointermove",e=>{
 
       if(mode==="current" && d){
-        tip.innerHTML=currentTooltip(t,d);
-      }else if(mode==="prior" && pd){
-        tip.innerHTML=historicalTooltip(t,pd,ps);
+        showTip(e,currentTooltip(t,d));
+        return;
+      }
+
+      if(mode==="prior" && pd){
+        showTip(e,historicalTooltip(t,pd,ps));
       }
     });
 
-    g.addEventListener("mouseleave",()=>{
-      tip.style.display="none";
-    });
+    g.addEventListener("pointerleave",hideTip);
 
     g.addEventListener("click",()=>{
+
       if(mode==="current" && d){
         showCurrentDetail(t,ps);
-      }else if(mode==="prior" && pd){
+        return;
+      }
+
+      if(mode==="prior" && pd){
         showHistoricalDetail(t,ps,true);
       }
     });
@@ -1682,14 +1765,21 @@ function bindDotsCompare(ps){
 /* ---------- Detail panels ---------- */
 
 function showCurrentDetail(t,compareSession=null){
+
   const d=CUR.data[t];
   if(!d) return;
 
   const prev=PRIOR[PRIOR.length-1].d[t];
   const m=MOM[t] || null;
 
-  const dz=prev ? d[2]-prev[0] : null;
-  const ddp=prev ? d[3]-prev[1] : null;
+  const dz=prev
+    ? d[2]-prev[0]
+    : null;
+
+  const ddp=prev
+    ? d[3]-prev[1]
+    : null;
+
   const gap=d[3]-d[4];
   const q=qFromZD(d[zIdx],d[3]);
 
@@ -1706,50 +1796,85 @@ function showCurrentDetail(t,compareSession=null){
   let compareMarkup="";
 
   if(compareSession && compareSession.d[t]){
+
     const pd=compareSession.d[t];
+
     compareMarkup=`
-      <div style="margin-top:9px;padding-top:8px;border-top:1px solid #DEE3E7;font-size:12px">
+      <div style="
+        margin-top:9px;
+        padding-top:8px;
+        border-top:1px solid #DEE3E7;
+        font-size:12px">
+
         <b>Compare baseline · ${compareSession.date}</b> —
-        Z1Y ${fmtNum(pd[0])} · D/P ${fmtPct(pd[1])} ·
+        Z1Y ${fmtNum(pd[0])} ·
+        D/P ${fmtPct(pd[1])} ·
         to current ΔZ1Y ${fmtSigned(d[2]-pd[0])} ·
         ΔD/P ${fmtSigned(d[3]-pd[1])} pt
+
       </div>
     `;
   }
 
   el.innerHTML=`
+
     ${eventMarkup(t)}
 
     <div>
       <b style="font-size:15px">${t}</b>
-      <span class="qcount" style="background:${QCOLOR[q]}">${QNAME[q]}</span>
-      <span style="font-size:12px;font-weight:700">${holdingText}</span>
+
+      <span class="qcount"
+            style="background:${QCOLOR[q]}">
+        ${QNAME[q]}
+      </span>
+
+      <span style="font-size:12px;font-weight:700">
+        ${holdingText}
+      </span>
     </div>
 
     <table>
+
       <tr>
-        <td>Price</td><td class="v">${fmtMoney(d[7])}</td>
-        <td>NAV</td><td class="v">${fmtMoney(d[6])}</td>
-        <td>Distribution yield</td><td class="v">${fmtPct(d[5])}</td>
+        <td>Price</td>
+        <td class="v">${fmtMoney(d[7])}</td>
+
+        <td>NAV</td>
+        <td class="v">${fmtMoney(d[6])}</td>
+
+        <td>Distribution yield</td>
+        <td class="v">${fmtPct(d[5])}</td>
       </tr>
 
       <tr>
-        <td>Current D/P</td><td class="v">${fmtPct(d[3])}</td>
-        <td>52-week avg D/P</td><td class="v">${fmtPct(d[4])}</td>
-        <td>Own-Normal Gap</td><td class="v">${fmtSigned(gap)} pt</td>
+        <td>Current D/P</td>
+        <td class="v">${fmtPct(d[3])}</td>
+
+        <td>52-week avg D/P</td>
+        <td class="v">${fmtPct(d[4])}</td>
+
+        <td>Own-Normal Gap</td>
+        <td class="v">${fmtSigned(gap)} pt</td>
       </tr>
 
       <tr>
-        <td>Z3M</td><td class="v">${fmtNum(d[0])}</td>
-        <td>Z6M</td><td class="v">${fmtNum(d[1])}</td>
-        <td>Z1Y</td><td class="v">${fmtNum(d[2])}</td>
+        <td>Z3M</td>
+        <td class="v">${fmtNum(d[0])}</td>
+
+        <td>Z6M</td>
+        <td class="v">${fmtNum(d[1])}</td>
+
+        <td>Z1Y</td>
+        <td class="v">${fmtNum(d[2])}</td>
       </tr>
 
       <tr>
         <td>Δ Z1Y vs 10/06</td>
         <td class="v">${dz==null?"—":fmtSigned(dz)}</td>
+
         <td>Δ D/P vs 10/06</td>
         <td class="v">${ddp==null?"—":fmtSigned(ddp)+" pt"}</td>
+
         <td>Effective leverage</td>
         <td class="v">${fmtLev(t)}</td>
       </tr>
@@ -1757,15 +1882,19 @@ function showCurrentDetail(t,compareSession=null){
       <tr>
         <td>ST momentum</td>
         <td class="v">${m&&m[0]!=null?fmtPct(m[0]):"—"}</td>
+
         <td>LT momentum</td>
         <td class="v">${m&&m[1]!=null?fmtPct(m[1]):"—"}</td>
+
         <td>Momentum date</td>
         <td class="v">${MOM_DATE}</td>
       </tr>
 
       <tr>
         <td>Distribution quality</td>
-        <td class="v" colspan="5">${dqText(t)}</td>
+        <td class="v" colspan="5">
+          ${dqText(t)}
+        </td>
       </tr>
 
       <tr>
@@ -1774,92 +1903,135 @@ function showCurrentDetail(t,compareSession=null){
           ${EVENT[t]?EVENT[t].label:"No active special event flag"}
         </td>
       </tr>
+
     </table>
 
     ${compareMarkup}
   `;
 
-  el.scrollIntoView({behavior:"smooth",block:"nearest"});
+  el.scrollIntoView({
+    behavior:"smooth",
+    block:"nearest"
+  });
 }
 
 function showHistoricalDetail(t,ps,fromCompare=false){
+
   const pd=ps.d[t];
   if(!pd) return;
 
   const q=qFromZD(pd[0],pd[1]);
   const current=CUR.data[t];
 
-  const holdingText=isHistoricalHolding(t,ps.date)
-    ? "★ Historical holding ring"
-    : t==="PDX"
-      ? "Not yet a holding — PDX tracking starts 10/09/2026"
-      : "No historical holding ring";
+  const holdingText=
+    isHistoricalHolding(t,ps.date)
+      ? "★ Historical holding ring"
+      : t==="PDX"
+        ? "Not yet a holding — PDX tracking starts 10/09/2026"
+        : "No historical holding ring";
 
   const deltaMarkup=current
     ? `
       <tr>
+
         <td>To 10/08 Δ Z1Y</td>
         <td class="v">${fmtSigned(current[2]-pd[0])}</td>
+
         <td>To 10/08 Δ D/P</td>
         <td class="v">${fmtSigned(current[3]-pd[1])} pt</td>
+
       </tr>
     `
     : "";
 
   const qualityMarkup=ps.quality
-    ? `<div class="event info"><b>Data-quality note</b> · ${ps.quality}</div>`
+    ? `
+      <div class="event info">
+        <b>Data-quality note</b> · ${ps.quality}
+      </div>
+    `
     : "";
 
   const el=document.getElementById("detail");
   el.style.display="block";
 
   el.innerHTML=`
+
     ${qualityMarkup}
 
     <div>
+
       <b style="font-size:15px">${t}</b>
-      <span class="qcount" style="background:${QCOLOR[q]}">${QNAME[q]}</span>
-      <span style="font-size:12px;font-weight:700">${holdingText}</span>
+
+      <span class="qcount"
+            style="background:${QCOLOR[q]}">
+        ${QNAME[q]}
+      </span>
+
+      <span style="font-size:12px;font-weight:700">
+        ${holdingText}
+      </span>
+
     </div>
 
     <div class="small" style="margin-top:5px">
-      Historical session ${ps.date}. Historical Time Machine points retain Z1Y / D/P only.
+      Historical session ${ps.date}.
+      Historical Time Machine points retain Z1Y / D/P only.
     </div>
 
     <table>
+
       <tr>
-        <td>Z1Y</td><td class="v">${fmtNum(pd[0])}</td>
-        <td>D/P</td><td class="v">${fmtPct(pd[1])}</td>
+        <td>Z1Y</td>
+        <td class="v">${fmtNum(pd[0])}</td>
+
+        <td>D/P</td>
+        <td class="v">${fmtPct(pd[1])}</td>
       </tr>
+
       ${deltaMarkup}
+
     </table>
 
     ${fromCompare
-      ? `<div class="small" style="margin-top:8px">
-           Compare mode is displaying this historical point against current 10/08 Z1Y / D/P.
-         </div>`
+      ? `
+        <div class="small" style="margin-top:8px">
+          Compare mode is displaying this historical point against
+          current 10/08 Z1Y / D/P.
+        </div>
+      `
       : ""}
+
   `;
 
-  el.scrollIntoView({behavior:"smooth",block:"nearest"});
+  el.scrollIntoView({
+    behavior:"smooth",
+    block:"nearest"
+  });
 }
 
 /* ---------- Snapshot cards ---------- */
 
 function renderSnap(){
+
   const N=PRIOR.length;
   const isCur=sesIdx===N;
 
   let pool=[];
 
   if(isCur || compareMode){
+
     pool=Object.keys(CUR.data)
+
       .filter(t=>{
         const d=CUR.data[t];
         return currentVisible(t,d);
       })
+
       .map(t=>{
+
         const d=CUR.data[t];
+
         return {
           t,
           z:d[zIdx],
@@ -1868,16 +2040,22 @@ function renderSnap(){
           holding:isCurrentHolding(t)
         };
       });
+
   }else{
+
     const ps=PRIOR[sesIdx];
 
     pool=Object.keys(ps.d)
+
       .filter(t=>{
         const [z,dp]=ps.d[t];
         return historicalVisible(t,z,dp,ps.date);
       })
+
       .map(t=>{
+
         const [z,dp]=ps.d[t];
+
         return {
           t,
           z,
@@ -1888,7 +2066,12 @@ function renderSnap(){
       });
   }
 
-  const counts={G:0,B:0,O:0,X:0};
+  const counts={
+    G:0,
+    B:0,
+    O:0,
+    X:0
+  };
 
   pool.forEach(x=>{
     counts[qFromZD(x.z,x.dp)]++;
@@ -1904,11 +2087,18 @@ function renderSnap(){
           : "Quadrant counts — visible universe";
 
   document.getElementById("snapCounts").innerHTML=
-    ["G","B","O","X"].map(q=>`
-      <span class="qcount" style="background:${QCOLOR[q]}">
-        ${QNAME[q].split("·")[0].trim()} ${counts[q]}
-      </span>
-    `).join("");
+    ["G","B","O","X"]
+
+      .map(q=>`
+        <span class="qcount"
+              style="background:${QCOLOR[q]}">
+
+          ${QNAME[q].split("·")[0].trim()} ${counts[q]}
+
+        </span>
+      `)
+
+      .join("");
 
   const deepest=[...pool]
     .sort((a,b)=>a.z1-b.z1)
@@ -1916,9 +2106,9 @@ function renderSnap(){
 
   document.getElementById("snapDeep").innerHTML=
     deepest.length
-      ? deepest.map(x=>
-          `<b>${x.t}</b> ${fmtSigned(x.z1)}`
-        ).join(" · ")
+      ? deepest
+          .map(x=>`<b>${x.t}</b> ${fmtSigned(x.z1)}`)
+          .join(" · ")
       : "No visible funds.";
 
   const green=[...pool]
@@ -1928,122 +2118,173 @@ function renderSnap(){
 
   document.getElementById("snapGreen").innerHTML=
     green.length
-      ? green.map(x=>
-          `<b>${x.t}</b> ${fmtSigned(x.z)}`
-        ).join(" · ")
+      ? green
+          .map(x=>`<b>${x.t}</b> ${fmtSigned(x.z)}`)
+          .join(" · ")
       : "No visible Green funds.";
 }
 
 /* ---------- Time Machine navigation ---------- */
 
 function buildTmnav(){
+
   const nav=document.getElementById("tmnav");
   const N=PRIOR.length;
 
   nav.innerHTML="";
 
   const current=document.createElement("button");
+
   current.className="ctl tmb on";
   current.dataset.s=N;
   current.textContent="10/08 current";
+
   nav.appendChild(current);
 
   for(let i=N-1;i>=0;i--){
+
     const b=document.createElement("button");
+
     b.className="ctl tmb";
     b.dataset.s=i;
     b.textContent=PRIOR[i].date.replace("/2026","");
+
     nav.appendChild(b);
   }
 
   nav.querySelectorAll(".tmb").forEach(b=>{
+
     b.addEventListener("click",()=>{
+
       stopPlay();
+
       sesIdx=Number(b.dataset.s);
 
       if(compareMode && sesIdx===N){
         compareMode=false;
+        document.getElementById("compareBtn").classList.remove("on");
       }
 
       document.getElementById("detail").style.display="none";
+
+      hideTip();
       render();
     });
   });
 }
 
 function updateNavState(){
+
   const N=PRIOR.length;
 
   document.querySelectorAll(".tmb").forEach(b=>{
-    b.classList.toggle("on",Number(b.dataset.s)===sesIdx);
+    b.classList.toggle(
+      "on",
+      Number(b.dataset.s)===sesIdx
+    );
   });
 
-  document.getElementById("tmSlider").value=String(sesIdx);
+  document.getElementById("tmSlider").value=
+    String(sesIdx);
 
-  document.getElementById("prevBtn").disabled=sesIdx<=0;
-  document.getElementById("nextBtn").disabled=sesIdx>=N;
+  document.getElementById("prevBtn").disabled=
+    sesIdx<=0;
+
+  document.getElementById("nextBtn").disabled=
+    sesIdx>=N;
 }
 
 function stepSession(delta){
+
   const N=PRIOR.length;
 
-  sesIdx=Math.max(0,Math.min(N,sesIdx+delta));
+  sesIdx=Math.max(
+    0,
+    Math.min(N,sesIdx+delta)
+  );
 
   if(compareMode && sesIdx===N){
     compareMode=false;
+    document.getElementById("compareBtn").classList.remove("on");
   }
 
   document.getElementById("detail").style.display="none";
+
+  hideTip();
   render();
 }
 
 function startPlay(){
-  if(playTimer) return;
+
+  if(playTimer){
+    return;
+  }
 
   if(sesIdx>=PRIOR.length){
     sesIdx=0;
   }
 
-  document.getElementById("playBtn").textContent="❚❚ Pause";
+  document.getElementById("playBtn").textContent=
+    "❚❚ Pause";
 
   playTimer=setInterval(()=>{
+
     if(sesIdx<PRIOR.length){
+
       sesIdx++;
+      hideTip();
       render();
+
     }else{
+
       stopPlay();
     }
+
   },900);
 }
 
 function stopPlay(){
+
   if(playTimer){
+
     clearInterval(playTimer);
     playTimer=null;
   }
-  document.getElementById("playBtn").textContent="▶ Play";
+
+  document.getElementById("playBtn").textContent=
+    "▶ Play";
 }
 
 /* ---------- Warnings / compare banner ---------- */
 
 function updateSessionWarning(){
+
   const box=document.getElementById("sessionWarning");
 
   if(sesIdx<PRIOR.length && PRIOR[sesIdx].quality){
+
     box.style.display="block";
-    box.innerHTML=`<b>Historical data-quality annotation:</b> ${PRIOR[sesIdx].quality}`;
+
+    box.innerHTML=
+      `<b>Historical data-quality annotation:</b> ${PRIOR[sesIdx].quality}`;
+
   }else{
+
     box.style.display="none";
     box.innerHTML="";
   }
 }
 
 function updateCompareBanner(){
+
   const box=document.getElementById("compareBanner");
 
   if(compareMode && sesIdx<PRIOR.length){
+
     const ps=PRIOR[sesIdx];
+
     box.style.display="block";
+
     box.innerHTML=`
       <b>Compare mode ON</b> —
       Current 10/08 Z1Y / D/P uses large dots.
@@ -2051,7 +2292,9 @@ function updateCompareBanner(){
       Dashed connectors show movement.
       Compare mode is locked to Z1Y because historical sessions store Z1Y only.
     `;
+
   }else{
+
     box.style.display="none";
     box.innerHTML="";
   }
@@ -2060,164 +2303,261 @@ function updateCompareBanner(){
 /* ---------- Runtime audit ---------- */
 
 function runtimeAudit(){
+
   const rawCount=Object.keys(CUR.data).length;
 
   const badDp=[];
+
   Object.entries(CUR.data).forEach(([t,d])=>{
-    const implied=(d[7]/d[6]-1)*100;
+
+    const implied=
+      (d[7]/d[6]-1)*100;
+
     if(Math.abs(implied-d[3])>=0.15){
       badDp.push(t);
     }
   });
 
   const qBad=[];
+
   Object.entries(CUR.data).forEach(([t,d])=>{
-    const q=qFromZD(d[2],d[3]);
+
+    const q=qFromZD(
+      d[2],
+      d[3]
+    );
 
     const signOkay=
       d[3]<0
         ? (q==="G" || q==="O")
         : (q==="B" || q==="X");
 
-    if(!signOkay) qBad.push(t);
+    if(!signOkay){
+      qBad.push(t);
+    }
   });
 
-  const badge=document.getElementById("auditBadge");
+  /*
+    Interaction audit:
+    Every rendered .dot must contain exactly one .hit-target.
+  */
+  const renderedDots=
+    document.querySelectorAll("#chart .dot").length;
 
-  if(rawCount===25 && badDp.length===0 && qBad.length===0){
+  const hitTargets=
+    document.querySelectorAll("#chart .dot .hit-target").length;
+
+  const interactiveClean=
+    renderedDots>0 &&
+    renderedDots===hitTargets;
+
+  const badge=
+    document.getElementById("auditBadge");
+
+  const dataClean=
+    rawCount===25 &&
+    badDp.length===0 &&
+    qBad.length===0;
+
+  if(dataClean && interactiveClean){
+
     badge.textContent=
-      "Runtime audit ✓ 25/25 current valuation points · D/P reconciliation clean · quadrant sign rules clean";
-    badge.style.background="#E1F5EE";
-    badge.style.color="#085041";
+      `Runtime audit ✓ 25/25 valuation points · D/P clean · quadrant signs clean · bubble overlays ${hitTargets}/${renderedDots} armed`;
+
+    badge.style.background=
+      "#E1F5EE";
+
+    badge.style.color=
+      "#085041";
+
   }else{
+
     badge.textContent=
-      `Runtime audit ⚠ points ${rawCount}/25 · D/P exceptions ${badDp.length} · quadrant exceptions ${qBad.length}`;
-    badge.style.background="#FFF3E0";
-    badge.style.color="#7C2D12";
+      `Runtime audit ⚠ points ${rawCount}/25 · D/P exceptions ${badDp.length} · quadrant exceptions ${qBad.length} · bubble hit targets ${hitTargets}/${renderedDots}`;
+
+    badge.style.background=
+      "#FFF3E0";
+
+    badge.style.color=
+      "#7C2D12";
   }
 }
 
 /* ---------- Controls ---------- */
 
 document.querySelectorAll(".zt").forEach(btn=>{
+
   btn.addEventListener("click",()=>{
+
     stopPlay();
 
-    const nextZ=Number(btn.dataset.z);
+    const nextZ=
+      Number(btn.dataset.z);
 
-    /*
-      Historical sessions are Z1Y only.
-      Selecting a non-Z1Y horizon exits Compare mode to avoid mixing current
-      short-horizon Z with historical Z1Y.
-    */
     if(compareMode && nextZ!==2){
+
       compareMode=false;
+
+      document.getElementById("compareBtn")
+        .classList.remove("on");
     }
 
     zIdx=nextZ;
 
     document.querySelectorAll(".zt").forEach(x=>
-      x.classList.toggle("on",x===btn)
+      x.classList.toggle(
+        "on",
+        x===btn
+      )
     );
 
-    document.getElementById("detail").style.display="none";
+    document.getElementById("detail").style.display=
+      "none";
+
+    hideTip();
     render();
   });
 });
 
 document.querySelectorAll(".qf").forEach(btn=>{
+
   btn.addEventListener("click",()=>{
+
     qFilter=btn.dataset.q;
 
     document.querySelectorAll(".qf").forEach(x=>
-      x.classList.toggle("on",x===btn)
+      x.classList.toggle(
+        "on",
+        x===btn
+      )
     );
 
+    hideTip();
     render();
   });
 });
 
-document.getElementById("search").addEventListener("input",e=>{
-  searchTerms=e.target.value
-    .toUpperCase()
-    .split(/[\s,]+/)
-    .map(x=>x.trim())
-    .filter(Boolean);
+document.getElementById("search")
+  .addEventListener("input",e=>{
 
-  render();
-});
+    searchTerms=e.target.value
+      .toUpperCase()
+      .split(/[\s,]+/)
+      .map(x=>x.trim())
+      .filter(Boolean);
 
-document.getElementById("hold").addEventListener("click",e=>{
-  holdOnly=!holdOnly;
-  e.currentTarget.classList.toggle("on",holdOnly);
-  render();
-});
+    hideTip();
+    render();
+  });
 
-document.getElementById("compareBtn").addEventListener("click",e=>{
-  stopPlay();
+document.getElementById("hold")
+  .addEventListener("click",e=>{
 
-  compareMode=!compareMode;
+    holdOnly=!holdOnly;
 
-  if(compareMode){
-    /*
-      Compare must be Z1Y-to-Z1Y.
-      If currently on "Current", automatically choose latest historical session.
-    */
-    zIdx=2;
+    e.currentTarget.classList.toggle(
+      "on",
+      holdOnly
+    );
 
-    document.querySelectorAll(".zt").forEach(btn=>{
-      btn.classList.toggle("on",Number(btn.dataset.z)===2);
-    });
+    hideTip();
+    render();
+  });
 
-    if(sesIdx===PRIOR.length){
-      sesIdx=PRIOR.length-1;
-    }
-  }
+document.getElementById("compareBtn")
+  .addEventListener("click",e=>{
 
-  e.currentTarget.classList.toggle("on",compareMode);
-
-  document.getElementById("detail").style.display="none";
-  render();
-});
-
-document.getElementById("prevBtn").addEventListener("click",()=>{
-  stopPlay();
-  stepSession(-1);
-});
-
-document.getElementById("nextBtn").addEventListener("click",()=>{
-  stopPlay();
-  stepSession(1);
-});
-
-document.getElementById("playBtn").addEventListener("click",()=>{
-  if(playTimer){
     stopPlay();
-  }else{
-    compareMode=false;
-    document.getElementById("compareBtn").classList.remove("on");
-    startPlay();
-  }
-});
 
-document.getElementById("tmSlider").addEventListener("input",e=>{
-  stopPlay();
+    compareMode=!compareMode;
 
-  sesIdx=Number(e.target.value);
+    if(compareMode){
 
-  if(compareMode && sesIdx===PRIOR.length){
-    compareMode=false;
-    document.getElementById("compareBtn").classList.remove("on");
-  }
+      zIdx=2;
 
-  document.getElementById("detail").style.display="none";
-  render();
-});
+      document.querySelectorAll(".zt").forEach(btn=>{
+
+        btn.classList.toggle(
+          "on",
+          Number(btn.dataset.z)===2
+        );
+      });
+
+      if(sesIdx===PRIOR.length){
+        sesIdx=PRIOR.length-1;
+      }
+    }
+
+    e.currentTarget.classList.toggle(
+      "on",
+      compareMode
+    );
+
+    document.getElementById("detail").style.display=
+      "none";
+
+    hideTip();
+    render();
+  });
+
+document.getElementById("prevBtn")
+  .addEventListener("click",()=>{
+
+    stopPlay();
+    stepSession(-1);
+  });
+
+document.getElementById("nextBtn")
+  .addEventListener("click",()=>{
+
+    stopPlay();
+    stepSession(1);
+  });
+
+document.getElementById("playBtn")
+  .addEventListener("click",()=>{
+
+    if(playTimer){
+
+      stopPlay();
+
+    }else{
+
+      compareMode=false;
+
+      document.getElementById("compareBtn")
+        .classList.remove("on");
+
+      startPlay();
+    }
+  });
+
+document.getElementById("tmSlider")
+  .addEventListener("input",e=>{
+
+    stopPlay();
+
+    sesIdx=
+      Number(e.target.value);
+
+    if(compareMode && sesIdx===PRIOR.length){
+
+      compareMode=false;
+
+      document.getElementById("compareBtn")
+        .classList.remove("on");
+    }
+
+    document.getElementById("detail").style.display=
+      "none";
+
+    hideTip();
+    render();
+  });
 
 /* ---------- Initial state ---------- */
 
 buildTmnav();
-runtimeAudit();
 render();
 
 </script>
