@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>CEF Time Machine · 10/08/2026</title>
+<title>CEF Time Machine · 10/14/2026</title>
 
 <style>
 :root{
@@ -22,6 +22,7 @@
 }
 
 *{box-sizing:border-box}
+
 html{scroll-behavior:smooth}
 
 body{
@@ -201,15 +202,14 @@ svg{
 }
 
 /*
-  IMPORTANT INTERACTION LAYER
+  INTERACTION CONTRACT
 
-  Every plotted bubble receives exactly one invisible .hit-target circle.
-  Visible SVG children do NOT intercept pointer events.
-  This makes hover/click behavior deterministic rather than depending on
-  browser-specific SVG group hit testing.
+  Every plotted .dot contains exactly one .hit-target.
+  Visible SVG children never consume pointer events.
+  This prevents the prior "bubble overlay does not work" failure mode.
 */
 .dot{
-  transition:opacity .6s ease;
+  transition:opacity .45s ease;
   cursor:pointer;
 }
 
@@ -225,9 +225,14 @@ svg{
 
 .dot .hit-target{
   pointer-events:all;
-  fill:transparent;
+  fill:#000;
+  fill-opacity:.001;
   stroke:none;
   cursor:pointer;
+}
+
+.dot.dimmed .hit-target{
+  pointer-events:none;
 }
 
 .legend{
@@ -393,25 +398,15 @@ svg{
   line-height:1.58;
 }
 
-.disc{
-  margin-top:12px;
-  padding-top:10px;
-  border-top:1px solid var(--line);
-  font-size:11px;
-  color:var(--sub);
-  font-style:italic;
-  line-height:1.45;
-}
-
 .tooltip{
   display:none;
   position:fixed;
   z-index:1000;
-  max-width:330px;
+  max-width:355px;
   pointer-events:none;
   border-radius:7px;
   padding:8px 10px;
-  background:rgba(15,23,42,.96);
+  background:rgba(15,23,42,.97);
   color:white;
   box-shadow:0 4px 18px rgba(0,0,0,.18);
   font-size:11.5px;
@@ -421,6 +416,14 @@ svg{
 .small{
   font-size:11px;
   color:var(--sub);
+}
+
+.footer{
+  margin-top:12px;
+  padding-top:9px;
+  border-top:1px solid var(--line);
+  color:var(--sub);
+  font-size:10.5px;
 }
 
 @media(max-width:760px){
@@ -439,16 +442,18 @@ svg{
 <body>
 
 <div class="hdr">
-  <h1>CEF Time Machine · 10/08/2026</h1>
-  <span class="badge neg">Net Δ: −$1.79</span>
+  <h1>CEF Time Machine · 10/14/2026</h1>
+  <span class="badge neg">Net Δ: −$10.07</span>
 </div>
 
 <div class="note">
-  Current valuation feed: <b>Thursday 10/08/2026</b> ·
-  fresh momentum snapshot: <b>10/09/2026</b> ·
-  Matrix build/holding status: <b>10/09/2026</b> ·
-  25 valuation tickers supplied; PDI and PDO currently have momentum data but no valuation point.
-  PDX became a tracked holding on 10/09; its earlier Time Machine history is preserved without a historical holding ring.
+  Current valuation feed: <b>Wednesday 10/14/2026</b> ·
+  latest momentum image supplied in the 10/15 update; the image crop itself does not display an as-of date ·
+  25 valuation tickers supplied; PDI and PDO have momentum data but no current valuation points.
+  <br>
+  Time Machine contains the latest <b>15 supplied market-session datasets</b>.
+  10/08 has been rolled into history and 09/14 has rolled off.
+  PDX is tracked as a holding beginning 10/09/2026; its 10/08 and earlier history remains visible but unringed.
   <br>
   <span class="audit" id="auditBadge">Runtime audit pending…</span>
 </div>
@@ -457,58 +462,64 @@ svg{
 
   <div class="al r">
     <span class="tag">Orange · Deep Value</span>
-    <b>RLTY Z1Y −3.62 · GDV −2.82 · PCN −2.36 · HTD −2.28 · EOS −2.24.</b>
-    ASGI is also −2.28 but remains rights-offering suppressed and is excluded from clean-signal interpretation.
+    <b>RLTY Z1Y −3.33 · GDV −2.78 · ERH −2.72 · HTD −2.67 · PCN −2.62 · EOS −2.09 · RNP −2.07.</b>
+    ASGI is also mechanically extreme at −2.23 but remains corporate-action suppressed in the 10/14 snapshot.
   </div>
 
   <div class="al c">
     <span class="tag">ASGI · Corporate Action</span>
-    <b>RO SUPPRESSED.</b>
-    Active transferable rights offering remains in effect with scheduled expiration 10/15/2026 unless extended.
-    ASGI's −7.48% discount versus +3.04% 52-week average produces a mechanical −10.52-point own-normal gap,
-    but normal valuation ranking is suppressed while the offering contaminates the signal.
+    <b>RO SUPPRESSED as of the 10/14 valuation snapshot.</b>
+    The transferable rights offering was scheduled to expire 10/15 unless extended.
+    ASGI's −7.79% discount versus +2.90% 52-week average creates a mechanical −10.69-point own-normal gap,
+    but the normal Add ranking remains suppressed while the rights offering contaminates the valuation signal.
+  </div>
+
+  <div class="al c">
+    <span class="tag">PDX · Holding / Event Qualified</span>
+    <b>PDX crossed Green → Orange.</b>
+    Z1Y moved from +0.47 on 10/08 to −1.99 on 10/14 while D/P widened from −9.46% to −12.30%.
+    Own-normal gap is now −2.25 points.
+    The 10/14 snapshot is post the 10/13 regular ex-dividend date.
+    The confirmed regular distribution increase remains event-qualified; a possible year-end special remains unconfirmed.
   </div>
 
   <div class="al a">
     <span class="tag">Clean Dislocations</span>
-    <b>PCN −7.04 pt · RNP −5.46 pt · GLU −5.41 pt · RLTY −4.91 pt · EOS −4.64 pt · HTD −4.17 pt · RFI −4.04 pt.</b>
-    These are current D/P minus each fund's own 52-week average; more negative is cheaper relative to its own regime.
-  </div>
-
-  <div class="al c">
-    <span class="tag">PDX · New Holding / Event Qualified</span>
-    <b>PDX is now tracked as a holding beginning 10/09/2026.</b>
-    Current valuation snapshot: Z1Y +0.47 · D/P −9.46% vs −10.01% average · yield 8.85% ·
-    ST momentum −2.35% · LT momentum +18.72%.
-    Regular monthly distribution was increased to $0.15302; ex/record date 10/13 and payable 11/02.
-    Possible year-end special remains unconfirmed and is not included as ordinary recurring income.
+    <b>PCN −7.68 pt · GLU −6.09 pt · RNP −5.66 pt · HTD −5.04 pt · RQI −4.90 pt · RLTY −4.83 pt · RFI −4.31 pt.</b>
+    These are current D/P minus each fund's own 52-week average.
   </div>
 
   <div class="al g">
     <span class="tag">Green · Confirmation</span>
-    <b>BME crossed into Green and EOI continues to improve.</b>
-    BME moved from Z1Y −0.25 to +0.20 while ST momentum improved to −0.53%.
-    EOI improved to Z1Y −1.22 and has positive ST momentum of +1.33%, with LT +11.51%.
+    <b>BME is the strongest current momentum-confirmed Green setup.</b>
+    Z1Y is +0.48 and ST momentum is +2.05%.
+    BST, NBXG, UTF and UTG are also Green on the default Z1Y matrix.
   </div>
 
   <div class="al r">
-    <span class="tag">Gray · BUI</span>
-    <b>BUI moved from a −0.63% discount to a +0.87% premium while Z1Y remains slightly negative at −0.23.</b>
-    It is therefore in Gray / Worst Setup mechanically on the default Z1Y matrix even though momentum has improved.
+    <span class="tag">Gray · Premium Risk</span>
+    <b>BUI and DNP are the two Gray / Worst Setup funds.</b>
+    BUI has Z1Y −0.41 at a +0.31% premium.
+    DNP has Z1Y −0.13 at a +6.60% premium.
+  </div>
+
+  <div class="al p">
+    <span class="tag">Momentum</span>
+    <b>Positive ST momentum is now limited to BME +2.05%, BST +3.09%, EOI +0.99% and NBXG +0.30%.</b>
+    PDX weakened to −4.89% ST / +14.73% LT.
+    RLTY is absent from the latest supplied momentum screenshot, so current momentum is shown as unavailable rather than carried forward.
   </div>
 
   <div class="al dq">
     <span class="tag">Distribution Quality</span>
     <b>ERH and RFI retain ROC-primary cautions.</b>
     PCN remains structurally mixed/ambiguous rather than NII-primary.
-    Historical distribution-source references qualify interpretation but do not alter the raw valuation feed.
   </div>
 
   <div class="al p">
     <span class="tag">Data Quality</span>
-    <b>10/08 Price/NAV reconciliation is clean across the 25 supplied valuation tickers.</b>
-    The historical 10/02 provider snapshot remains flagged for a widespread D/P versus Price/NAV timing mismatch;
-    its original Z1Y/D/P values are retained unchanged.
+    <b>10/14 Price/NAV reconciliation is clean across all 25 supplied valuation tickers.</b>
+    The historical 10/02 provider timing mismatch remains explicitly flagged and its raw historical Z1Y/D/P values remain unchanged.
   </div>
 
 </div>
@@ -549,12 +560,13 @@ svg{
   </div>
 
   <div class="legend">
-    Default classification uses Z1Y. Current mode allows Z1Y / Z6M / Z3M switching.
-    Historical sessions are stored as Z1Y / D/P only.
+    Default classification uses Z1Y.
+    Current mode allows Z1Y / Z6M / Z3M switching.
+    Historical sessions always use stored Z1Y / D/P.
     Dashed vertical segment = current D/P to current 52-week average D/P.
-    Outer ring = holding status for that point in time.
-    PDX receives a current holding ring from 10/09/2026 forward; pre-entry history remains unringed.
-    Invisible 15px hit targets provide bubble hover/click interaction independently of visible SVG geometry.
+    Outer ring = actual holding status for that session.
+    Hold-only filtering shows the historical path of today's holdings even before their individual holding-start date.
+    Bubble interaction uses dedicated invisible hit targets and is audited after every render.
   </div>
 
   <div class="tm-controls">
@@ -564,7 +576,10 @@ svg{
     <input class="tm-slider" id="tmSlider" type="range" min="0" max="15" step="1" value="15">
   </div>
 
-  <div class="tm-label" id="seslabel">Showing: 10/08/2026 current valuation · holdings as of 10/09</div>
+  <div class="tm-label" id="seslabel">
+    Showing: 10/14/2026 current valuation
+  </div>
+
   <div class="tmnav" id="tmnav"></div>
 
   <div class="detail" id="detail"></div>
@@ -574,10 +589,12 @@ svg{
       <h3 id="snapTitle">Quadrant Counts</h3>
       <div id="snapCounts"></div>
     </div>
+
     <div class="snapcard">
       <h3>Deepest Z1Y</h3>
       <div id="snapDeep"></div>
     </div>
+
     <div class="snapcard">
       <h3>Strongest Green</h3>
       <div id="snapGreen"></div>
@@ -585,67 +602,78 @@ svg{
   </div>
 
   <div class="aux">
-    <b>Auxiliary-only tickers:</b>
-    PDI momentum −5.85% ST / −29.87% LT ·
-    PDO momentum −3.62% ST / −18.02% LT.
-    No 10/08 valuation arrays were supplied for PDI or PDO, so neither receives a current scatter point.
+    <b>Auxiliary-only momentum tickers:</b>
+    PDI −6.28% ST / −30.00% LT ·
+    PDO −5.30% ST / −18.41% LT.
+    No 10/14 valuation arrays were supplied for PDI or PDO, so neither receives a current scatter point.
+    RLTY is omitted from the latest supplied momentum image and therefore displays current momentum as unavailable.
   </div>
 
 </div>
 
 <div class="highlights">
-  <h2>10/08 Matrix Highlights</h2>
+  <h2>10/14 Matrix Highlights</h2>
+
   <div>
-    <b>Broad tape:</b> Net Price Change was <b>−$1.79</b>. Default Z1Y quadrants are
-    <b>Green 5 · Blue 2 · Orange 17 · Gray 1</b> across the 25 supplied valuation funds.
-    BME migrated Orange → Green. BUI migrated Orange → Gray after moving to a small premium.
-    <br><br>
-
-    <b>Deepest clean Z1Y readings:</b>
-    RLTY <b>−3.62</b>, GDV <b>−2.82</b>, PCN <b>−2.36</b>, HTD <b>−2.28</b>,
-    EOS <b>−2.24</b>. ASGI is also <b>−2.28</b> but remains RO-suppressed.
-    <br><br>
-
-    <b>Own-normal discount gaps:</b>
-    ASGI is mechanically deepest at <b>−10.52 pt</b> but suppressed.
-    Clean large gaps include PCN <b>−7.04 pt</b>, RNP <b>−5.46 pt</b>,
-    GLU <b>−5.41 pt</b>, RLTY <b>−4.91 pt</b>, EOS <b>−4.64 pt</b>,
-    HTD <b>−4.17 pt</b>, and RFI <b>−4.04 pt</b>.
+    <b>Broad tape:</b>
+    Net Price Change was <b>−$10.07</b>.
+    Default Z1Y quadrants are <b>Green 5 · Blue 1 · Orange 17 · Gray 2</b>.
+    PDX crossed Green → Orange, UTG crossed Orange → Green, and DNP crossed Blue → Gray.
     <br><br>
 
     <b>PDX:</b>
-    now tracked as a holding from <b>10/09/2026</b>.
-    Current 10/08 valuation is Z1Y <b>+0.47</b>, D/P <b>−9.46%</b>
-    versus <b>−10.01%</b> normal, own-normal gap <b>+0.55 pt</b>,
-    yield <b>8.85%</b>, ST momentum <b>−2.35%</b>, LT momentum <b>+18.72%</b>.
-    This is an event-qualified income/growth holding rather than a current valuation dislocation.
+    the largest valuation reset in the current update.
+    Z1Y moved <b>+0.47 → −1.99</b>,
+    D/P <b>−9.46% → −12.30%</b>,
+    and own-normal gap <b>+0.55 → −2.25 points</b>.
+    ST momentum is now <b>−4.89%</b> and LT momentum <b>+14.73%</b>.
+    It is now a genuine Orange valuation dislocation signal, but at −1.99 it remains just below the Engine's |Z1Y| ≥ 2 mandatory-extreme threshold.
     <br><br>
 
-    <b>Recent adds:</b>
-    EOI continues to show the best confirmation of the recent group:
-    Z1Y improved from −1.66 on 10/06 to <b>−1.22</b>, while ST momentum strengthened to <b>+1.33%</b>.
-    BUI's valuation edge has largely normalized: it is now at a <b>+0.87%</b> premium with Z1Y <b>−0.23</b>.
-    UTG has also normalized to a <b>−0.69%</b> discount versus <b>−0.49%</b> average,
-    while ST momentum weakened to <b>−5.16%</b>.
+    <b>Deepest clean own-normal gap:</b>
+    PCN at <b>−7.68 points</b>.
+    ASGI is mechanically deeper at −10.69 points but remains RO-suppressed in the 10/14 snapshot.
+    Other large clean gaps are GLU −6.09, RNP −5.66, HTD −5.04, RQI −4.90, RLTY −4.83 and RFI −4.31.
+    <br><br>
+
+    <b>ERH:</b>
+    the prior stabilization did not hold.
+    Z1Y deteriorated from −1.94 to <b>−2.72</b>,
+    the discount widened to <b>−11.78%</b>,
+    and momentum remains weak at <b>−6.23% ST / −6.98% LT</b>.
+    <br><br>
+
+    <b>BME:</b>
+    strongest current Green confirmation.
+    Z1Y is <b>+0.48</b>,
+    discount −3.72% versus −4.68% normal,
+    and ST momentum is <b>+2.05%</b>.
+    Its valuation is not unusually cheap relative to its own regime, but trend confirmation is strong.
+    <br><br>
+
+    <b>NXG:</b>
+    valuation has become substantially richer.
+    Z1Y rose from +0.36 on 10/08 to <b>+1.50</b> while D/P expanded from +0.47% to a <b>+4.80% premium</b>,
+    versus a −0.82% 52-week average discount.
+    LT momentum remains strong at +39.19%, but the entry valuation is materially less attractive.
     <br><br>
 
     <b>Term structure:</b>
-    RQI shows the clean strict early-mean-reversion pattern at
-    <b>+0.70 / −0.46 / −0.85</b> for Z3M/Z6M/Z1Y.
-    ASGI also fits the strict early-reversion pattern but remains corporate-action suppressed.
-    Strict falling-knife structures remain in BDJ, GLU, and RNP.
+    strict early-mean-reversion patterns are now visible in EOS and ASGI.
+    ASGI remains suppressed.
+    Strict falling-knife structures appear in BDJ, DNP, GLU and RNP.
+    RQI no longer satisfies the strict early-MR rule.
     <br><br>
 
-    <b>Data/event filters:</b>
-    ASGI remains RO SUPPRESSED.
-    PDX and NBXG are distribution-change/event-qualified rather than suppressed.
-    ERH and RFI retain distribution-quality cautions.
-    The 10/02 historical provider timing anomaly remains explicitly flagged and is not silently corrected.
+    <b>Time Machine:</b>
+    10/08 has been rolled into the historical stack.
+    09/14 rolled off to preserve the 15-session maximum.
+    PDX's holding start remains 10/09, so the 10/08 historical point is intentionally shown without a holding ring.
   </div>
 </div>
 
-<div class="disc">
-All analytical output from this system is for informational purposes only. Not investment advice. Past performance is no guarantee of future results. Always conduct your own due diligence before making investment decisions.
+<div class="footer">
+  CEF Engine · current entry-opportunity and valuation-dislocation monitor.
 </div>
 
 <div class="tooltip" id="tip"></div>
@@ -655,9 +683,8 @@ All analytical output from this system is for informational purposes only. Not i
 
 /*
   CEF ENGINE / TIME MACHINE
-  Build date: 10/09/2026
-  Current valuation session: 10/08/2026
-  Momentum snapshot: 10/09/2026
+  Build date: 10/15/2026
+  Current valuation session: 10/14/2026
 
   Current array:
   [Z3M, Z6M, Z1Y, Current D/P, 52W Avg D/P, Distribution Yield, NAV, Market Price]
@@ -665,16 +692,19 @@ All analytical output from this system is for informational purposes only. Not i
   Historical array:
   [Z1Y, D/P]
 
-  PDX became a holding on 10/09/2026.
+  Latest supplied momentum image:
+  supplied with the 10/15 update, but its crop does not display an as-of date.
+  It is therefore labeled "latest supplied screenshot" rather than silently date-stamped.
 
   INTERACTION CONTRACT:
-  Every .dot must contain exactly one .hit-target circle.
-  Visible circles, labels, lines and holding rings never consume pointer events.
+  Every rendered .dot must contain exactly one .hit-target.
+  Visible chart children do not intercept pointer events.
   Runtime audit verifies hit-target parity after every render.
 */
 
-const BUILD_DATE="10/09/2026";
-const MOM_DATE="10/09/2026";
+const BUILD_DATE="10/15/2026";
+const MOM_DATE="Latest supplied screenshot";
+const PREV_MOM_DATE="10/09/2026";
 
 const UNIVERSE=[
   "AIO","ASGI","BDJ","BME","BST","BUI","CSQ","DNP","EOI","EOS",
@@ -687,7 +717,14 @@ const CURRENT_HOLDINGS=new Set([
   "AIO","BST","DNP","UTF","ERH","UTG","PDX"
 ]);
 
-const PDX_HOLDING_START="10/09/2026";
+/*
+  Only explicit known start date is PDX.
+  Other current holdings are treated as historical holdings throughout
+  the available Time Machine window.
+*/
+const HOLDING_START={
+  PDX:"2026-10-09"
+};
 
 const QCOLOR={
   G:"#1D9E75",
@@ -704,36 +741,70 @@ const QNAME={
 };
 
 const LEV={
-  AIO:11.88,
-  ASGI:1.05,
+  AIO:12.45,
+  ASGI:1.04,
   BDJ:0.12,
-  BME:0.15,
-  BST:0.10,
-  BUI:0.11,
-  CSQ:28.06,
-  DNP:24.39,
+  BME:0.12,
+  BST:1.39,
+  BUI:1.32,
+  CSQ:28.42,
+  DNP:23.99,
   EOI:null,
   EOS:null,
-  ERH:22.40,
+  ERH:22.35,
   ETG:15.77,
-  GDV:15.97,
-  GLU:18.72,
-  HTD:32.73,
+  GDV:15.98,
+  GLU:17.97,
+  HTD:32.61,
   NBXG:null,
-  NXG:33.80,
-  PCN:22.48,
+  NXG:32.29,
+  PCN:22.73,
   PDI:null,
   PDO:null,
-  PDX:22.42,
+  PDX:22.61,
   RFI:0.04,
-  RLTY:35.25,
-  RNP:31.80,
-  RQI:28.73,
-  UTF:29.47,
-  UTG:22.06
+  RLTY:34.96,
+  RNP:31.67,
+  RQI:28.49,
+  UTF:29.12,
+  UTG:22.49
 };
 
+/*
+  Latest supplied momentum screenshot.
+  RLTY is absent from this screenshot, so it is deliberately null.
+*/
 const MOM={
+  BUI:[-2.57,11.38],
+  DNP:[-4.31,-2.99],
+  ERH:[-6.23,-6.98],
+  UTG:[-4.82,10.58],
+  NXG:[-3.37,39.19],
+  UTF:[-2.08,11.79],
+  BDJ:[-0.55,8.50],
+  EOI:[0.99,9.68],
+  HTD:[-7.52,3.71],
+  RQI:[-5.76,-9.81],
+  EOS:[-0.74,-0.13],
+  BME:[2.05,8.41],
+  PDO:[-5.30,-18.41],
+  ASGI:[-9.15,1.69],
+  GLU:[-5.41,5.83],
+  PCN:[-6.33,-23.26],
+  CSQ:[-1.00,20.03],
+  GDV:[-2.69,19.03],
+  PDI:[-6.28,-30.00],
+  ETG:[-0.93,19.62],
+  AIO:[-4.19,10.83],
+  PDX:[-4.89,14.73],
+  RFI:[-5.05,-17.90],
+  NBXG:[0.30,11.66],
+  RNP:[-6.10,-12.86],
+  BST:[3.09,20.44],
+  RLTY:[null,null]
+};
+
+const PREV_MOM={
   NBXG:[1.20,14.40],
   ETG:[-0.75,21.32],
   GDV:[-2.70,19.94],
@@ -763,41 +834,74 @@ const MOM={
   UTF:[-2.50,12.96]
 };
 
+/*
+  [1D,1W,1M,3M,6M,YTD,1Y,3Y,5Y]
+*/
+const MOMPERF={
+  BUI:[-1.50,0.67,-0.35,-8.04,-4.61,4.53,-0.12,27.77,6.48],
+  DNP:[0.00,1.34,-3.24,-11.02,-6.64,-1.40,-1.70,1.03,-8.29],
+  ERH:[0.00,-1.14,-3.52,-14.04,-15.64,-11.93,-18.48,23.20,-25.64],
+  UTG:[0.00,-2.13,-1.61,-10.74,-15.73,-3.17,-14.49,40.78,5.45],
+  NXG:[-0.67,-2.57,-0.37,-7.18,2.84,8.96,10.93,82.45,24.18],
+  UTF:[0.12,-0.43,2.28,-8.10,-3.92,5.85,5.98,34.46,-5.06],
+  BDJ:[0.63,0.74,-1.65,-0.73,4.26,0.63,5.07,27.54,-7.11],
+  EOI:[0.66,-0.40,2.31,1.07,0.35,-3.16,-2.93,27.38,4.57],
+  HTD:[-0.13,-0.45,-8.34,-13.78,-12.39,-6.13,-11.20,29.43,-7.11],
+  RQI:[0.00,-1.26,-4.77,-11.24,-16.69,-2.83,-9.85,11.59,-31.16],
+  EOS:[0.71,-1.03,1.24,-2.44,-3.37,-9.40,-10.20,21.69,-11.88],
+  BME:[0.00,2.49,0.16,3.50,11.10,7.10,17.50,13.41,-5.69],
+  PDO:[0.00,-2.90,-1.92,-11.08,-12.80,-15.32,-16.17,6.35,-45.41],
+  ASGI:[0.00,0.63,-6.44,-21.65,-21.30,-14.22,-10.21,22.79,-7.52],
+  GLU:[0.00,-0.40,-5.78,-10.05,-12.09,-9.44,-4.12,34.44,-12.84],
+  PCN:[0.00,-2.42,-6.25,-10.33,-12.72,-17.71,-21.11,-6.33,-42.34],
+  CSQ:[0.00,-1.62,-0.89,-0.50,3.77,4.69,5.24,45.55,9.30],
+  GDV:[0.00,-0.21,-3.19,-4.66,-3.29,1.73,4.36,46.22,6.52],
+  PDI:[0.00,-2.44,-1.89,-14.50,-19.79,-21.06,-28.42,-13.65,-47.93],
+  ETG:[-0.13,-0.96,-0.83,-1.00,4.30,-1.34,6.89,47.51,4.45],
+  AIO:[0.00,-5.64,-0.83,-6.09,-0.91,9.98,-0.50,46.12,-13.14],
+  PDX:[-2.93,-4.19,-4.88,-5.60,-2.93,5.91,-10.45,3.38,51.25],
+  RFI:[0.00,0.19,-5.23,-10.10,-12.10,-6.61,-13.20,-0.77,-39.72],
+  NBXG:[0.86,-3.72,2.21,2.42,6.94,5.61,2.42,49.95,-17.39],
+  RNP:[0.00,0.17,-6.72,-11.75,-13.88,-8.46,-16.30,9.12,-31.40],
+  BST:[0.51,-2.55,3.00,8.83,18.41,20.42,17.61,52.80,-9.10],
+  RLTY:[null,null,null,null,null,null,null,null,null]
+};
+
 const EVENT={
   ASGI:{
     type:"ro",
     label:"RO SUPPRESSED",
-    text:"Active transferable rights offering. Scheduled expiration 10/15/2026 unless extended. Current discount/Z readings are corporate-action contaminated and excluded from clean Add interpretation."
+    text:"Rights-offering contamination applies to the 10/14 valuation snapshot. Scheduled expiration was 10/15 unless extended. Normal Add ranking is suppressed for this session."
   },
 
   PDX:{
     type:"ca",
     label:"DISTRIBUTION INCREASE / EVENT QUALIFIED",
-    text:"Regular monthly distribution increased to $0.15302. Ex/record 10/13/2026; payable 11/02/2026. A possible year-end special has been discussed but is not sponsor-declared and remains unconfirmed."
+    text:"PDX is now post its 10/13 regular ex-dividend date. The regular monthly distribution increase remains event-qualified. A possible year-end special has been discussed but remains unconfirmed and is not treated as recurring income."
   },
 
   NBXG:{
     type:"ca",
     label:"DISTRIBUTION CHANGE / EVENT QUALIFIED",
-    text:"Monthly distribution increased from $0.120 to $0.132. Event qualification applies; normal valuation interpretation is not suppressed."
+    text:"Monthly distribution increase remains an event qualification rather than a suppression."
   },
 
   PCN:{
     type:"info",
     label:"ATM CONTEXT",
-    text:"SEC ATM issuance capacity remains contextual information. It does not automatically suppress the valuation signal."
+    text:"ATM issuance capacity remains contextual information and does not automatically suppress the valuation signal."
   },
 
   ERH:{
     type:"dq",
     label:"DQ CAUTION",
-    text:"Retain ROC-primary distribution-quality caution when the referenced distribution-source information remains current."
+    text:"ROC-primary distribution-quality caution retained."
   },
 
   RFI:{
     type:"dq",
     label:"DQ CAUTION",
-    text:"Retain ROC-primary distribution-quality caution when the referenced distribution-source information remains current."
+    text:"ROC-primary distribution-quality caution retained."
   }
 };
 
@@ -812,55 +916,50 @@ const DQ={
   BUI:"Historical reference: mixed income/gains.",
   BST:"Historical reference: gains-primary.",
   AIO:"Current source classification pending/unconfirmed.",
-  UTF:"Current source classification pending/unconfirmed."
+  UTF:"Current source classification pending/unconfirmed.",
+  PDX:"Distribution increase/event qualification; possible year-end special remains unconfirmed."
 };
 
 const CUR={
-  date:"10/08/2026",
-  net:-1.79,
+  date:"10/14/2026",
+  net:-10.07,
   data:{
-    AIO:[-0.37,-0.01,-0.22,-9.46,-9.05,9.94,28.00,25.35],
-    ASGI:[-1.55,-2.05,-2.28,-7.48,3.04,13.85,20.60,19.06],
-    BDJ:[-2.14,-1.96,-1.73,-9.12,-6.24,7.84,10.42,9.47],
-    BME:[-1.68,-1.25,0.20,-4.34,-4.76,7.32,44.93,42.98],
-    BST:[0.13,0.80,0.79,-4.54,-6.16,5.99,52.48,50.10],
-    BUI:[0.18,0.28,-0.23,0.87,1.55,7.26,25.24,25.46],
-    CSQ:[-0.98,-0.15,-0.61,-9.52,-8.75,7.93,22.58,20.43],
-    DNP:[-1.81,-0.40,0.14,7.52,7.02,8.02,9.04,9.72],
-    EOI:[-1.31,-1.08,-1.22,-7.54,-4.71,8.03,21.62,19.99],
-    EOS:[-1.88,-2.45,-2.24,-12.67,-8.03,8.53,24.54,21.43],
-    ERH:[-1.90,-2.14,-1.94,-10.54,-7.85,9.98,11.77,10.53],
-    ETG:[-1.78,-1.98,-1.44,-11.16,-7.83,6.74,25.90,23.01],
-    GDV:[-2.23,-2.16,-2.82,-13.08,-10.84,6.36,32.57,28.31],
-    GLU:[-1.88,-1.75,-1.48,-6.71,-1.30,7.53,18.78,17.52],
-    HTD:[-2.47,-2.66,-2.28,-10.11,-5.94,8.50,24.82,22.31],
-    NBXG:[0.38,0.74,0.37,-12.73,-13.15,10.00,18.15,15.84],
-    NXG:[-0.84,0.46,0.36,0.47,-0.88,12.85,55.77,56.03],
-    PCN:[-1.79,-2.58,-2.36,-2.45,4.59,12.55,11.03,10.76],
-    PDX:[0.05,0.23,0.47,-9.46,-10.01,8.85,22.93,20.76],
-    RFI:[-2.39,-1.51,-1.68,-5.94,-1.90,9.32,10.95,10.30],
-    RLTY:[-3.15,-4.16,-3.62,-12.78,-7.87,9.77,15.49,13.51],
-    RNP:[-3.13,-2.18,-1.96,-9.75,-4.29,8.99,20.11,18.15],
-    RQI:[0.70,-0.46,-0.85,-7.18,-4.43,9.71,11.98,11.12],
-    UTF:[1.00,1.30,1.83,-1.04,-5.28,7.73,25.90,25.63],
-    UTG:[-0.87,-0.12,-0.16,-0.69,-0.49,6.96,36.44,36.19]
+    AIO:[-0.62,-0.32,-0.42,-9.87,-9.12,10.54,26.54,23.92],
+    ASGI:[-1.40,-1.93,-2.23,-7.79,2.90,13.76,20.80,19.18],
+    BDJ:[-1.67,-1.59,-1.54,-8.88,-6.31,7.79,10.47,9.54],
+    BME:[-0.96,-0.63,0.48,-3.72,-4.68,7.10,46.02,44.31],
+    BST:[0.04,0.77,0.81,-4.48,-6.15,6.15,51.11,48.82],
+    BUI:[-0.43,-0.18,-0.41,0.31,1.53,7.21,25.55,25.63],
+    CSQ:[-0.85,-0.01,-0.47,-9.38,-8.80,8.06,22.18,20.10],
+    DNP:[-2.14,-0.87,-0.13,6.60,7.07,7.92,9.24,9.85],
+    EOI:[-0.62,-0.59,-1.00,-7.09,-4.80,8.06,21.43,19.91],
+    EOS:[-1.46,-2.02,-2.09,-12.39,-8.19,8.62,24.21,21.21],
+    ERH:[-2.33,-2.80,-2.72,-11.78,-7.91,10.09,11.80,10.41],
+    ETG:[-1.94,-2.26,-1.54,-11.51,-7.92,6.77,25.90,22.92],
+    GDV:[-2.08,-2.08,-2.78,-13.18,-10.87,6.37,32.54,28.25],
+    GLU:[-2.27,-2.16,-1.64,-7.48,-1.39,7.56,18.86,17.45],
+    HTD:[-2.39,-2.89,-2.67,-11.02,-5.98,8.54,24.96,22.21],
+    NBXG:[0.32,0.72,0.42,-12.71,-13.18,10.39,17.47,15.25],
+    NXG:[2.15,1.41,1.50,4.80,-0.82,13.05,52.66,55.19],
+    PCN:[-1.93,-2.75,-2.62,-3.31,4.37,12.86,10.86,10.50],
+    PDX:[-2.14,-2.33,-1.99,-12.30,-10.05,9.23,22.68,19.89],
+    RFI:[-2.38,-1.80,-1.82,-6.35,-2.04,9.30,11.02,10.32],
+    RLTY:[-2.42,-3.33,-3.33,-12.81,-7.98,9.65,15.69,13.68],
+    RNP:[-2.80,-2.34,-2.07,-10.13,-4.47,8.98,20.23,18.18],
+    RQI:[-1.31,-1.05,-1.49,-9.41,-4.51,9.84,12.12,10.98],
+    UTF:[-0.29,0.25,0.90,-3.11,-5.20,7.76,26.34,25.52],
+    UTG:[-0.47,0.18,0.15,-0.34,-0.52,7.11,35.54,35.42]
   }
 };
 
-const PRIOR=[
+/*
+  Rolling 15 historical market sessions.
+  10/08 is newly rolled into history.
+  09/14 has rolled off.
 
-  {
-    date:"09/14/2026",
-    d:{
-      AIO:[0.19,-8.12],ASGI:[-2.37,-5.99],BDJ:[-0.87,-7.40],BME:[1.36,-2.13],
-      BST:[2.29,-1.79],BUI:[-0.05,1.59],CSQ:[0.32,-8.01],DNP:[0.86,9.85],
-      EOI:[-0.87,-6.37],EOS:[-1.21,-10.16],ERH:[-0.50,-8.31],ETG:[-1.44,-10.67],
-      GDV:[-1.85,-12.00],GLU:[-1.37,-5.67],HTD:[0.48,-5.02],NBXG:[0.89,-11.86],
-      NXG:[0.77,1.73],PCN:[-1.64,0.63],PDX:[-0.13,-9.93],RFI:[-1.03,-4.05],
-      RLTY:[-1.17,-8.99],RNP:[-1.04,-6.92],RQI:[-1.07,-7.30],UTF:[-0.25,-5.94],
-      UTG:[1.45,1.33]
-    }
-  },
+  10/02 raw provider values remain exactly as originally supplied.
+*/
+const PRIOR=[
 
   {
     date:"09/15/2026",
@@ -1043,6 +1142,37 @@ const PRIOR=[
       RLTY:[-3.15,-11.95],RNP:[-1.90,-9.52],RQI:[-1.31,-8.58],UTF:[1.67,-1.50],
       UTG:[-1.70,-2.56]
     }
+  },
+
+  {
+    date:"10/08/2026",
+    d:{
+      AIO:[-0.22,-9.46],
+      ASGI:[-2.28,-7.48],
+      BDJ:[-1.73,-9.12],
+      BME:[0.20,-4.34],
+      BST:[0.79,-4.54],
+      BUI:[-0.23,0.87],
+      CSQ:[-0.61,-9.52],
+      DNP:[0.14,7.52],
+      EOI:[-1.22,-7.54],
+      EOS:[-2.24,-12.67],
+      ERH:[-1.94,-10.54],
+      ETG:[-1.44,-11.16],
+      GDV:[-2.82,-13.08],
+      GLU:[-1.48,-6.71],
+      HTD:[-2.28,-10.11],
+      NBXG:[0.37,-12.73],
+      NXG:[0.36,0.47],
+      PCN:[-2.36,-2.45],
+      PDX:[0.47,-9.46],
+      RFI:[-1.68,-5.94],
+      RLTY:[-3.62,-12.78],
+      RNP:[-1.96,-9.75],
+      RQI:[-0.85,-7.18],
+      UTF:[1.83,-1.04],
+      UTG:[-0.16,-0.69]
+    }
   }
 
 ];
@@ -1098,7 +1228,13 @@ function fmtLev(t){
 }
 
 function tickerMatch(t){
-  return searchTerms.length===0 || searchTerms.some(s=>t.includes(s));
+  return searchTerms.length===0 ||
+    searchTerms.some(s=>t.includes(s));
+}
+
+function toISO(mdY){
+  const [m,d,y]=mdY.split("/");
+  return `${y}-${m.padStart(2,"0")}-${d.padStart(2,"0")}`;
 }
 
 function isCurrentHolding(t){
@@ -1106,7 +1242,21 @@ function isCurrentHolding(t){
 }
 
 function isHistoricalHolding(t,date){
-  if(t==="PDX") return false;
+  if(!CURRENT_HOLDINGS.has(t)) return false;
+
+  const start=HOLDING_START[t];
+
+  if(!start) return true;
+
+  return toISO(date)>=start;
+}
+
+/*
+  Hold-only filtering follows today's holdings so PDX history remains visible
+  before the actual entry date. The outer ring separately reflects whether the
+  position had actually started at that historical point.
+*/
+function historicalTracked(t){
   return CURRENT_HOLDINGS.has(t);
 }
 
@@ -1125,13 +1275,14 @@ function historicalVisible(t,z,dp,date){
 
   return (
     (qFilter==="all" || q===qFilter) &&
-    (!holdOnly || isHistoricalHolding(t,date)) &&
+    (!holdOnly || historicalTracked(t)) &&
     tickerMatch(t)
   );
 }
 
 function eventMarkup(t){
   const e=EVENT[t];
+
   if(!e) return "";
 
   const icon=
@@ -1147,7 +1298,8 @@ function eventMarkup(t){
 }
 
 function dqText(t){
-  return DQ[t] || "No special DQ flag in current Engine state.";
+  return DQ[t] ||
+    "No special DQ flag in current Engine state.";
 }
 
 function getExtent(){
@@ -1175,6 +1327,20 @@ function getExtent(){
     dmin:Math.floor(Math.min(...ds))-1,
     dmax:Math.ceil(Math.max(...ds))+1
   };
+}
+
+function momentumDelta(t){
+  const a=MOM[t];
+  const b=PREV_MOM[t];
+
+  if(!a || !b){
+    return [null,null];
+  }
+
+  return [
+    a[0]==null || b[0]==null ? null : a[0]-b[0],
+    a[1]==null || b[1]==null ? null : a[1]-b[1]
+  ];
 }
 
 /* ---------- Chart grid ---------- */
@@ -1217,14 +1383,19 @@ function drawGrid(s,ex,Xf,Yf,isCurrentSession){
             stroke-width="${z===0?1.5:1}"/>
 
       <text x="${Xf(z)}" y="${H-MB+17}"
-            font-size="10" fill="#8A929A"
+            font-size="10"
+            fill="#8A929A"
             text-anchor="middle">${z}</text>
     `;
   }
 
   const dstep=(ex.dmax-ex.dmin)>22 ? 5 : 2;
 
-  for(let d=Math.ceil(ex.dmin/dstep)*dstep;d<=ex.dmax;d+=dstep){
+  for(
+    let d=Math.ceil(ex.dmin/dstep)*dstep;
+    d<=ex.dmax;
+    d+=dstep
+  ){
     s+=`
       <line x1="${ML}" y1="${Yf(d)}"
             x2="${W-MR}" y2="${Yf(d)}"
@@ -1232,7 +1403,8 @@ function drawGrid(s,ex,Xf,Yf,isCurrentSession){
             stroke-width="${d===0?1.5:1}"/>
 
       <text x="${ML-7}" y="${Yf(d)+3}"
-            font-size="10" fill="#8A929A"
+            font-size="10"
+            fill="#8A929A"
             text-anchor="end">${d}%</text>
     `;
   }
@@ -1243,13 +1415,15 @@ function drawGrid(s,ex,Xf,Yf,isCurrentSession){
 
   s+=`
     <text x="${W/2}" y="${H-7}"
-          font-size="11" fill="#5A636B"
+          font-size="11"
+          fill="#5A636B"
           text-anchor="middle">
       Z-Score (${xLabel})
     </text>
 
     <text x="15" y="${H/2}"
-          font-size="11" fill="#5A636B"
+          font-size="11"
+          fill="#5A636B"
           text-anchor="middle"
           transform="rotate(-90 15 ${H/2})">
       Discount / Premium %
@@ -1257,32 +1431,40 @@ function drawGrid(s,ex,Xf,Yf,isCurrentSession){
 
     <text x="${Xf(ex.zmin)+(Xf(0)-Xf(ex.zmin))/2}"
           y="${Yf(ex.dmin)-12}"
-          font-size="10" font-weight="700"
-          fill="${QCOLOR.O}" opacity=".7"
+          font-size="10"
+          font-weight="700"
+          fill="${QCOLOR.O}"
+          opacity=".7"
           text-anchor="middle">
       Orange · Buy Zone
     </text>
 
     <text x="${Xf(0)+(Xf(ex.zmax)-Xf(0))/2}"
           y="${Yf(ex.dmin)-12}"
-          font-size="10" font-weight="700"
-          fill="${QCOLOR.G}" opacity=".7"
+          font-size="10"
+          font-weight="700"
+          fill="${QCOLOR.G}"
+          opacity=".7"
           text-anchor="middle">
       Green · Thesis Working
     </text>
 
     <text x="${Xf(ex.zmin)+(Xf(0)-Xf(ex.zmin))/2}"
           y="${MT+15}"
-          font-size="10" font-weight="700"
-          fill="${QCOLOR.X}" opacity=".75"
+          font-size="10"
+          font-weight="700"
+          fill="${QCOLOR.X}"
+          opacity=".75"
           text-anchor="middle">
       Gray · Worst Setup
     </text>
 
     <text x="${Xf(0)+(Xf(ex.zmax)-Xf(0))/2}"
           y="${MT+15}"
-          font-size="10" font-weight="700"
-          fill="${QCOLOR.B}" opacity=".75"
+          font-size="10"
+          font-weight="700"
+          fill="${QCOLOR.B}"
+          opacity=".75"
           text-anchor="middle">
       Blue · Premium Territory
     </text>
@@ -1291,7 +1473,7 @@ function drawGrid(s,ex,Xf,Yf,isCurrentSession){
   return s;
 }
 
-/* ---------- Bubble markup helpers ---------- */
+/* ---------- Bubble interaction geometry ---------- */
 
 function hitTarget(cx,cy){
   return `
@@ -1305,7 +1487,6 @@ function hitTarget(cx,cy){
 /* ---------- Rendering ---------- */
 
 function render(){
-
   const N=PRIOR.length;
   const isCur=sesIdx===N;
 
@@ -1318,20 +1499,36 @@ function render(){
     MT+(ex.dmax-d)/(ex.dmax-ex.dmin)*(H-MT-MB);
 
   let s="";
-  s=drawGrid(s,ex,Xf,Yf,isCur || compareMode);
+
+  s=drawGrid(
+    s,
+    ex,
+    Xf,
+    Yf,
+    isCur || compareMode
+  );
 
   if(compareMode && sesIdx<N){
 
     const ps=PRIOR[sesIdx];
 
+    /*
+      Compare mode is always Z1Y-to-Z1Y.
+    */
     Object.keys(CUR.data).forEach(t=>{
       const pd=ps.d[t];
+
       if(!pd) return;
 
       const cd=CUR.data[t];
 
       const cv=currentVisible(t,cd);
-      const hv=historicalVisible(t,pd[0],pd[1],ps.date);
+      const hv=historicalVisible(
+        t,
+        pd[0],
+        pd[1],
+        ps.date
+      );
 
       if(!cv && !hv) return;
 
@@ -1353,13 +1550,16 @@ function render(){
       }
     });
 
-    /* Historical comparison dots */
     Object.keys(ps.d).forEach(t=>{
-
       const [z,dp]=ps.d[t];
 
       const q=qFromZD(z,dp);
-      const vis=historicalVisible(t,z,dp,ps.date);
+      const vis=historicalVisible(
+        t,
+        z,
+        dp,
+        ps.date
+      );
 
       const cx=Xf(z);
       const cy=Yf(dp);
@@ -1372,11 +1572,13 @@ function render(){
           ${hitTarget(cx,cy)}
 
           ${isHistoricalHolding(t,ps.date)
-            ? `<circle cx="${cx}" cy="${cy}" r="8.0"
-                 fill="none"
-                 stroke="${QCOLOR[q]}"
-                 stroke-width="1.2"
-                 opacity=".48"/>`
+            ? `
+              <circle cx="${cx}" cy="${cy}" r="8.0"
+                      fill="none"
+                      stroke="${QCOLOR[q]}"
+                      stroke-width="1.2"
+                      opacity=".48"/>
+            `
             : ""}
 
           <circle cx="${cx}" cy="${cy}" r="4.5"
@@ -1393,9 +1595,7 @@ function render(){
       `;
     });
 
-    /* Current comparison dots */
     Object.keys(CUR.data).forEach(t=>{
-
       const d=CUR.data[t];
 
       const z=d[2];
@@ -1434,11 +1634,13 @@ function render(){
                   opacity=".90"/>
 
           ${isCurrentHolding(t)
-            ? `<circle cx="${cx}" cy="${cy}" r="10"
-                 fill="none"
-                 stroke="${QCOLOR[q]}"
-                 stroke-width="1.6"
-                 opacity=".95"/>`
+            ? `
+              <circle cx="${cx}" cy="${cy}" r="10"
+                      fill="none"
+                      stroke="${QCOLOR[q]}"
+                      stroke-width="1.6"
+                      opacity=".95"/>
+            `
             : ""}
 
           <circle cx="${cx}" cy="${cy}" r="6.2"
@@ -1462,12 +1664,11 @@ function render(){
     bindDotsCompare(ps);
 
     document.getElementById("seslabel").textContent=
-      `Compare: 10/08/2026 current valuation vs ${ps.date} · current holdings as of 10/09`;
+      `Compare: 10/14/2026 current Z1Y/D/P vs ${ps.date}`;
 
   }else if(isCur){
 
     Object.keys(CUR.data).forEach(t=>{
-
       const d=CUR.data[t];
 
       const z=d[zIdx];
@@ -1506,11 +1707,13 @@ function render(){
                   opacity=".90"/>
 
           ${isCurrentHolding(t)
-            ? `<circle cx="${cx}" cy="${cy}" r="10"
-                 fill="none"
-                 stroke="${QCOLOR[q]}"
-                 stroke-width="1.6"
-                 opacity=".96"/>`
+            ? `
+              <circle cx="${cx}" cy="${cy}" r="10"
+                      fill="none"
+                      stroke="${QCOLOR[q]}"
+                      stroke-width="1.6"
+                      opacity=".96"/>
+            `
             : ""}
 
           <circle cx="${cx}" cy="${cy}" r="6.2"
@@ -1534,18 +1737,23 @@ function render(){
     bindDotsCurrent();
 
     document.getElementById("seslabel").textContent=
-      `Showing: 10/08/2026 current valuation · ${ZLABEL[zIdx]} · holdings as of 10/09`;
+      `Showing: 10/14/2026 current valuation · ${ZLABEL[zIdx]}`;
 
   }else{
 
     const ps=PRIOR[sesIdx];
 
     Object.keys(ps.d).forEach(t=>{
-
       const [z,dp]=ps.d[t];
 
       const q=qFromZD(z,dp);
-      const vis=historicalVisible(t,z,dp,ps.date);
+
+      const vis=historicalVisible(
+        t,
+        z,
+        dp,
+        ps.date
+      );
 
       const cx=Xf(z);
       const cy=Yf(dp);
@@ -1558,11 +1766,13 @@ function render(){
           ${hitTarget(cx,cy)}
 
           ${isHistoricalHolding(t,ps.date)
-            ? `<circle cx="${cx}" cy="${cy}" r="9.6"
-                 fill="none"
-                 stroke="${QCOLOR[q]}"
-                 stroke-width="1.5"
-                 opacity=".75"/>`
+            ? `
+              <circle cx="${cx}" cy="${cy}" r="9.6"
+                      fill="none"
+                      stroke="${QCOLOR[q]}"
+                      stroke-width="1.5"
+                      opacity=".75"/>
+            `
             : ""}
 
           <circle cx="${cx}" cy="${cy}" r="6.1"
@@ -1601,21 +1811,26 @@ function render(){
 const tip=document.getElementById("tip");
 
 function positionTip(e){
-
   const pad=14;
 
   let x=e.clientX+pad;
   let y=e.clientY+10;
 
-  const maxX=window.innerWidth-350;
-  const maxY=window.innerHeight-180;
+  const maxX=window.innerWidth-370;
+  const maxY=window.innerHeight-210;
 
   if(x>maxX){
-    x=Math.max(8,e.clientX-335);
+    x=Math.max(
+      8,
+      e.clientX-355
+    );
   }
 
   if(y>maxY){
-    y=Math.max(8,e.clientY-150);
+    y=Math.max(
+      8,
+      e.clientY-180
+    );
   }
 
   tip.style.left=`${x}px`;
@@ -1623,29 +1838,45 @@ function positionTip(e){
 }
 
 function currentTooltip(t,d){
-
   const m=MOM[t] || null;
+  const md=momentumDelta(t);
 
-  const q=qFromZD(d[zIdx],d[3]);
+  const q=qFromZD(
+    d[zIdx],
+    d[3]
+  );
+
   const gap=d[3]-d[4];
 
   const ev=EVENT[t]
-    ? `<br><span style="color:#FCD34D;font-weight:700">${EVENT[t].label}</span>`
+    ? `
+      <br>
+      <span style="color:#FCD34D;font-weight:700">
+        ${EVENT[t].label}
+      </span>
+    `
     : "";
+
+  let momLine="Momentum unavailable in latest screenshot";
+
+  if(m && m[0]!=null){
+    momLine=
+      `ST ${fmtPct(m[0])} (${md[0]==null?"—":fmtSigned(md[0])} Δ) · `+
+      `LT ${m[1]==null?"—":fmtPct(m[1])} (${md[1]==null?"—":fmtSigned(md[1])} Δ)`;
+  }
 
   return `
     <b>${t}</b> · ${QNAME[q]}${ev}<br>
     Price ${fmtMoney(d[7])} · NAV ${fmtMoney(d[6])} · Yield ${fmtPct(d[5])}<br>
     D/P ${fmtPct(d[3])} · avg ${fmtPct(d[4])} · gap ${fmtSigned(gap)} pt<br>
     Z3M ${fmtNum(d[0])} · Z6M ${fmtNum(d[1])} · Z1Y ${fmtNum(d[2])}<br>
-    ST ${m&&m[0]!=null?fmtPct(m[0]):"—"} ·
-    LT ${m&&m[1]!=null?fmtPct(m[1]):"—"} · Momentum ${MOM_DATE}<br>
-    Leverage ${fmtLev(t)} · ${isCurrentHolding(t)?"★ Holding":"Not holding"}
+    ${momLine}<br>
+    Leverage ${fmtLev(t)} · ${isCurrentHolding(t)?"★ Holding":"Not holding"}<br>
+    Momentum source: ${MOM_DATE}
   `;
 }
 
 function historicalTooltip(t,pd,ps){
-
   const current=CUR.data[t];
 
   const dz=current
@@ -1656,16 +1887,29 @@ function historicalTooltip(t,pd,ps){
     ? current[3]-pd[1]
     : null;
 
-  const q=qFromZD(pd[0],pd[1]);
+  const q=qFromZD(
+    pd[0],
+    pd[1]
+  );
+
+  let holdText="Not a historical holding";
+
+  if(isHistoricalHolding(t,ps.date)){
+    holdText="★ Historical holding ring";
+  }else if(CURRENT_HOLDINGS.has(t)){
+    holdText="Tracked current holding · not yet held on this session";
+  }
 
   return `
     <b>${t}</b> · ${ps.date}<br>
     ${QNAME[q]}<br>
     Z1Y ${fmtNum(pd[0])} · D/P ${fmtPct(pd[1])}<br>
-    To 10/08: ΔZ1Y ${dz==null?"—":fmtSigned(dz)} ·
+    To 10/14: ΔZ1Y ${dz==null?"—":fmtSigned(dz)} ·
     ΔD/P ${ddp==null?"—":fmtSigned(ddp)+" pt"}<br>
-    ${isHistoricalHolding(t,ps.date)?"★ Historical holding ring":"No historical holding ring"}
-    ${ps.quality?`<br><span style="color:#FCD34D">${ps.quality}</span>`:""}
+    ${holdText}
+    ${ps.quality
+      ? `<br><span style="color:#FCD34D">${ps.quality}</span>`
+      : ""}
   `;
 }
 
@@ -1680,97 +1924,144 @@ function hideTip(){
 }
 
 function bindDotsCurrent(){
+  document
+    .querySelectorAll("#chart .dot:not(.dimmed)")
+    .forEach(g=>{
 
-  document.querySelectorAll("#chart .dot").forEach(g=>{
+      const t=g.dataset.t;
 
-    const t=g.dataset.t;
-    if(!t) return;
+      if(!t) return;
 
-    const d=CUR.data[t];
-    if(!d) return;
+      const d=CUR.data[t];
 
-    g.addEventListener("pointermove",e=>{
-      showTip(e,currentTooltip(t,d));
+      if(!d) return;
+
+      g.addEventListener(
+        "pointermove",
+        e=>showTip(
+          e,
+          currentTooltip(t,d)
+        )
+      );
+
+      g.addEventListener(
+        "pointerleave",
+        hideTip
+      );
+
+      g.addEventListener(
+        "click",
+        ()=>showCurrentDetail(t)
+      );
     });
-
-    g.addEventListener("pointerleave",hideTip);
-
-    g.addEventListener("click",()=>{
-      showCurrentDetail(t);
-    });
-  });
 }
 
 function bindDotsHistorical(ps){
+  document
+    .querySelectorAll("#chart .dot:not(.dimmed)")
+    .forEach(g=>{
 
-  document.querySelectorAll("#chart .dot").forEach(g=>{
+      const t=g.dataset.t;
+      const pd=ps.d[t];
 
-    const t=g.dataset.t;
-    const pd=ps.d[t];
+      if(!t || !pd) return;
 
-    if(!t || !pd) return;
+      g.addEventListener(
+        "pointermove",
+        e=>showTip(
+          e,
+          historicalTooltip(t,pd,ps)
+        )
+      );
 
-    g.addEventListener("pointermove",e=>{
-      showTip(e,historicalTooltip(t,pd,ps));
+      g.addEventListener(
+        "pointerleave",
+        hideTip
+      );
+
+      g.addEventListener(
+        "click",
+        ()=>showHistoricalDetail(t,ps)
+      );
     });
-
-    g.addEventListener("pointerleave",hideTip);
-
-    g.addEventListener("click",()=>{
-      showHistoricalDetail(t,ps);
-    });
-  });
 }
 
 function bindDotsCompare(ps){
+  document
+    .querySelectorAll("#chart .dot:not(.dimmed)")
+    .forEach(g=>{
 
-  document.querySelectorAll("#chart .dot").forEach(g=>{
+      const t=g.dataset.t;
+      const mode=g.dataset.mode;
 
-    const t=g.dataset.t;
-    const mode=g.dataset.mode;
+      if(!t) return;
 
-    if(!t) return;
+      const d=CUR.data[t];
+      const pd=ps.d[t];
 
-    const d=CUR.data[t];
-    const pd=ps.d[t];
+      g.addEventListener(
+        "pointermove",
+        e=>{
 
-    g.addEventListener("pointermove",e=>{
+          if(mode==="current" && d){
+            showTip(
+              e,
+              currentTooltip(t,d)
+            );
 
-      if(mode==="current" && d){
-        showTip(e,currentTooltip(t,d));
-        return;
-      }
+            return;
+          }
 
-      if(mode==="prior" && pd){
-        showTip(e,historicalTooltip(t,pd,ps));
-      }
+          if(mode==="prior" && pd){
+            showTip(
+              e,
+              historicalTooltip(t,pd,ps)
+            );
+          }
+        }
+      );
+
+      g.addEventListener(
+        "pointerleave",
+        hideTip
+      );
+
+      g.addEventListener(
+        "click",
+        ()=>{
+
+          if(mode==="current" && d){
+            showCurrentDetail(
+              t,
+              ps
+            );
+
+            return;
+          }
+
+          if(mode==="prior" && pd){
+            showHistoricalDetail(
+              t,
+              ps,
+              true
+            );
+          }
+        }
+      );
     });
-
-    g.addEventListener("pointerleave",hideTip);
-
-    g.addEventListener("click",()=>{
-
-      if(mode==="current" && d){
-        showCurrentDetail(t,ps);
-        return;
-      }
-
-      if(mode==="prior" && pd){
-        showHistoricalDetail(t,ps,true);
-      }
-    });
-  });
 }
 
 /* ---------- Detail panels ---------- */
 
 function showCurrentDetail(t,compareSession=null){
-
   const d=CUR.data[t];
+
   if(!d) return;
 
   const prev=PRIOR[PRIOR.length-1].d[t];
   const m=MOM[t] || null;
+  const p=MOMPERF[t] || null;
+  const md=momentumDelta(t);
 
   const dz=prev
     ? d[2]-prev[0]
@@ -1781,22 +2072,24 @@ function showCurrentDetail(t,compareSession=null){
     : null;
 
   const gap=d[3]-d[4];
-  const q=qFromZD(d[zIdx],d[3]);
+
+  const q=qFromZD(
+    d[zIdx],
+    d[3]
+  );
 
   const holdingText=
-    t==="PDX"
-      ? "★ Current holding · tracking start 10/09/2026"
-      : isCurrentHolding(t)
-        ? "★ Current holding"
-        : "Not currently held";
-
-  const el=document.getElementById("detail");
-  el.style.display="block";
+    isCurrentHolding(t)
+      ? (
+          HOLDING_START[t]
+            ? `★ Current holding · tracked from ${HOLDING_START[t]}`
+            : "★ Current holding"
+        )
+      : "Not currently held";
 
   let compareMarkup="";
 
   if(compareSession && compareSession.d[t]){
-
     const pd=compareSession.d[t];
 
     compareMarkup=`
@@ -1811,13 +2104,74 @@ function showCurrentDetail(t,compareSession=null){
         D/P ${fmtPct(pd[1])} ·
         to current ΔZ1Y ${fmtSigned(d[2]-pd[0])} ·
         ΔD/P ${fmtSigned(d[3]-pd[1])} pt
-
       </div>
     `;
   }
 
-  el.innerHTML=`
+  let momRows=`
+    <tr>
+      <td>ST momentum</td>
+      <td class="v">—</td>
+      <td>LT momentum</td>
+      <td class="v">—</td>
+      <td>Momentum source</td>
+      <td class="v">${MOM_DATE}</td>
+    </tr>
+  `;
 
+  if(m && m[0]!=null){
+    momRows=`
+      <tr>
+        <td>ST momentum</td>
+        <td class="v">${fmtPct(m[0])}</td>
+
+        <td>LT momentum</td>
+        <td class="v">${m[1]==null?"—":fmtPct(m[1])}</td>
+
+        <td>Momentum source</td>
+        <td class="v">${MOM_DATE}</td>
+      </tr>
+
+      <tr>
+        <td>Δ ST vs ${PREV_MOM_DATE}</td>
+        <td class="v">${md[0]==null?"—":fmtSigned(md[0])+" pt"}</td>
+
+        <td>Δ LT vs ${PREV_MOM_DATE}</td>
+        <td class="v">${md[1]==null?"—":fmtSigned(md[1])+" pt"}</td>
+
+        <td>1-week</td>
+        <td class="v">${p&&p[1]!=null?fmtPct(p[1]):"—"}</td>
+      </tr>
+
+      <tr>
+        <td>1-month</td>
+        <td class="v">${p&&p[2]!=null?fmtPct(p[2]):"—"}</td>
+
+        <td>3-month</td>
+        <td class="v">${p&&p[3]!=null?fmtPct(p[3]):"—"}</td>
+
+        <td>6-month</td>
+        <td class="v">${p&&p[4]!=null?fmtPct(p[4]):"—"}</td>
+      </tr>
+
+      <tr>
+        <td>YTD</td>
+        <td class="v">${p&&p[5]!=null?fmtPct(p[5]):"—"}</td>
+
+        <td>1-year</td>
+        <td class="v">${p&&p[6]!=null?fmtPct(p[6]):"—"}</td>
+
+        <td>3-year</td>
+        <td class="v">${p&&p[7]!=null?fmtPct(p[7]):"—"}</td>
+      </tr>
+    `;
+  }
+
+  const el=document.getElementById("detail");
+
+  el.style.display="block";
+
+  el.innerHTML=`
     ${eventMarkup(t)}
 
     <div>
@@ -1869,26 +2223,17 @@ function showCurrentDetail(t,compareSession=null){
       </tr>
 
       <tr>
-        <td>Δ Z1Y vs 10/06</td>
+        <td>Δ Z1Y vs 10/08</td>
         <td class="v">${dz==null?"—":fmtSigned(dz)}</td>
 
-        <td>Δ D/P vs 10/06</td>
+        <td>Δ D/P vs 10/08</td>
         <td class="v">${ddp==null?"—":fmtSigned(ddp)+" pt"}</td>
 
         <td>Effective leverage</td>
         <td class="v">${fmtLev(t)}</td>
       </tr>
 
-      <tr>
-        <td>ST momentum</td>
-        <td class="v">${m&&m[0]!=null?fmtPct(m[0]):"—"}</td>
-
-        <td>LT momentum</td>
-        <td class="v">${m&&m[1]!=null?fmtPct(m[1]):"—"}</td>
-
-        <td>Momentum date</td>
-        <td class="v">${MOM_DATE}</td>
-      </tr>
+      ${momRows}
 
       <tr>
         <td>Distribution quality</td>
@@ -1900,7 +2245,9 @@ function showCurrentDetail(t,compareSession=null){
       <tr>
         <td>Corporate/event status</td>
         <td class="v" colspan="5">
-          ${EVENT[t]?EVENT[t].label:"No active special event flag"}
+          ${EVENT[t]
+            ? EVENT[t].label
+            : "No active special event flag"}
         </td>
       </tr>
 
@@ -1915,31 +2262,38 @@ function showCurrentDetail(t,compareSession=null){
   });
 }
 
-function showHistoricalDetail(t,ps,fromCompare=false){
-
+function showHistoricalDetail(
+  t,
+  ps,
+  fromCompare=false
+){
   const pd=ps.d[t];
+
   if(!pd) return;
 
-  const q=qFromZD(pd[0],pd[1]);
+  const q=qFromZD(
+    pd[0],
+    pd[1]
+  );
+
   const current=CUR.data[t];
 
-  const holdingText=
-    isHistoricalHolding(t,ps.date)
-      ? "★ Historical holding ring"
-      : t==="PDX"
-        ? "Not yet a holding — PDX tracking starts 10/09/2026"
-        : "No historical holding ring";
+  let holdingText="Not a historical holding";
+
+  if(isHistoricalHolding(t,ps.date)){
+    holdingText="★ Historical holding ring";
+  }else if(CURRENT_HOLDINGS.has(t)){
+    holdingText="Tracked current holding · not yet held on this historical session";
+  }
 
   const deltaMarkup=current
     ? `
       <tr>
-
-        <td>To 10/08 Δ Z1Y</td>
+        <td>To 10/14 Δ Z1Y</td>
         <td class="v">${fmtSigned(current[2]-pd[0])}</td>
 
-        <td>To 10/08 Δ D/P</td>
+        <td>To 10/14 Δ D/P</td>
         <td class="v">${fmtSigned(current[3]-pd[1])} pt</td>
-
       </tr>
     `
     : "";
@@ -1953,14 +2307,13 @@ function showHistoricalDetail(t,ps,fromCompare=false){
     : "";
 
   const el=document.getElementById("detail");
+
   el.style.display="block";
 
   el.innerHTML=`
-
     ${qualityMarkup}
 
     <div>
-
       <b style="font-size:15px">${t}</b>
 
       <span class="qcount"
@@ -1971,7 +2324,6 @@ function showHistoricalDetail(t,ps,fromCompare=false){
       <span style="font-size:12px;font-weight:700">
         ${holdingText}
       </span>
-
     </div>
 
     <div class="small" style="margin-top:5px">
@@ -1980,7 +2332,6 @@ function showHistoricalDetail(t,ps,fromCompare=false){
     </div>
 
     <table>
-
       <tr>
         <td>Z1Y</td>
         <td class="v">${fmtNum(pd[0])}</td>
@@ -1990,18 +2341,16 @@ function showHistoricalDetail(t,ps,fromCompare=false){
       </tr>
 
       ${deltaMarkup}
-
     </table>
 
     ${fromCompare
       ? `
         <div class="small" style="margin-top:8px">
           Compare mode is displaying this historical point against
-          current 10/08 Z1Y / D/P.
+          current 10/14 Z1Y / D/P.
         </div>
       `
       : ""}
-
   `;
 
   el.scrollIntoView({
@@ -2013,7 +2362,6 @@ function showHistoricalDetail(t,ps,fromCompare=false){
 /* ---------- Snapshot cards ---------- */
 
 function renderSnap(){
-
   const N=PRIOR.length;
   const isCur=sesIdx===N;
 
@@ -2025,11 +2373,14 @@ function renderSnap(){
 
       .filter(t=>{
         const d=CUR.data[t];
-        return currentVisible(t,d);
+
+        return currentVisible(
+          t,
+          d
+        );
       })
 
       .map(t=>{
-
         const d=CUR.data[t];
 
         return {
@@ -2049,11 +2400,16 @@ function renderSnap(){
 
       .filter(t=>{
         const [z,dp]=ps.d[t];
-        return historicalVisible(t,z,dp,ps.date);
+
+        return historicalVisible(
+          t,
+          z,
+          dp,
+          ps.date
+        );
       })
 
       .map(t=>{
-
         const [z,dp]=ps.d[t];
 
         return {
@@ -2061,7 +2417,10 @@ function renderSnap(){
           z,
           z1:z,
           dp,
-          holding:isHistoricalHolding(t,ps.date)
+          holding:isHistoricalHolding(
+            t,
+            ps.date
+          )
         };
       });
   }
@@ -2074,7 +2433,10 @@ function renderSnap(){
   };
 
   pool.forEach(x=>{
-    counts[qFromZD(x.z,x.dp)]++;
+    counts[qFromZD(
+      x.z,
+      x.dp
+    )]++;
   });
 
   document.getElementById("snapTitle").textContent=
@@ -2092,9 +2454,7 @@ function renderSnap(){
       .map(q=>`
         <span class="qcount"
               style="background:${QCOLOR[q]}">
-
           ${QNAME[q].split("·")[0].trim()} ${counts[q]}
-
         </span>
       `)
 
@@ -2112,7 +2472,12 @@ function renderSnap(){
       : "No visible funds.";
 
   const green=[...pool]
-    .filter(x=>qFromZD(x.z,x.dp)==="G")
+    .filter(x=>
+      qFromZD(
+        x.z,
+        x.dp
+      )==="G"
+    )
     .sort((a,b)=>b.z-a.z)
     .slice(0,5);
 
@@ -2127,7 +2492,6 @@ function renderSnap(){
 /* ---------- Time Machine navigation ---------- */
 
 function buildTmnav(){
-
   const nav=document.getElementById("tmnav");
   const N=PRIOR.length;
 
@@ -2137,52 +2501,71 @@ function buildTmnav(){
 
   current.className="ctl tmb on";
   current.dataset.s=N;
-  current.textContent="10/08 current";
+  current.textContent="10/14 current";
 
   nav.appendChild(current);
 
   for(let i=N-1;i>=0;i--){
-
     const b=document.createElement("button");
 
     b.className="ctl tmb";
     b.dataset.s=i;
-    b.textContent=PRIOR[i].date.replace("/2026","");
+    b.textContent=PRIOR[i].date.replace(
+      "/2026",
+      ""
+    );
 
     nav.appendChild(b);
   }
 
-  nav.querySelectorAll(".tmb").forEach(b=>{
+  nav
+    .querySelectorAll(".tmb")
+    .forEach(b=>{
 
-    b.addEventListener("click",()=>{
+      b.addEventListener(
+        "click",
+        ()=>{
 
-      stopPlay();
+          stopPlay();
 
-      sesIdx=Number(b.dataset.s);
+          sesIdx=Number(
+            b.dataset.s
+          );
 
-      if(compareMode && sesIdx===N){
-        compareMode=false;
-        document.getElementById("compareBtn").classList.remove("on");
-      }
+          if(
+            compareMode &&
+            sesIdx===N
+          ){
+            compareMode=false;
 
-      document.getElementById("detail").style.display="none";
+            document
+              .getElementById("compareBtn")
+              .classList.remove("on");
+          }
 
-      hideTip();
-      render();
+          document
+            .getElementById("detail")
+            .style.display="none";
+
+          hideTip();
+          render();
+        }
+      );
     });
-  });
 }
 
 function updateNavState(){
-
   const N=PRIOR.length;
 
-  document.querySelectorAll(".tmb").forEach(b=>{
-    b.classList.toggle(
-      "on",
-      Number(b.dataset.s)===sesIdx
-    );
-  });
+  document
+    .querySelectorAll(".tmb")
+    .forEach(b=>{
+
+      b.classList.toggle(
+        "on",
+        Number(b.dataset.s)===sesIdx
+      );
+    });
 
   document.getElementById("tmSlider").value=
     String(sesIdx);
@@ -2195,30 +2578,37 @@ function updateNavState(){
 }
 
 function stepSession(delta){
-
   const N=PRIOR.length;
 
   sesIdx=Math.max(
     0,
-    Math.min(N,sesIdx+delta)
+    Math.min(
+      N,
+      sesIdx+delta
+    )
   );
 
-  if(compareMode && sesIdx===N){
+  if(
+    compareMode &&
+    sesIdx===N
+  ){
     compareMode=false;
-    document.getElementById("compareBtn").classList.remove("on");
+
+    document
+      .getElementById("compareBtn")
+      .classList.remove("on");
   }
 
-  document.getElementById("detail").style.display="none";
+  document
+    .getElementById("detail")
+    .style.display="none";
 
   hideTip();
   render();
 }
 
 function startPlay(){
-
-  if(playTimer){
-    return;
-  }
+  if(playTimer) return;
 
   if(sesIdx>=PRIOR.length){
     sesIdx=0;
@@ -2227,27 +2617,27 @@ function startPlay(){
   document.getElementById("playBtn").textContent=
     "❚❚ Pause";
 
-  playTimer=setInterval(()=>{
+  playTimer=setInterval(
+    ()=>{
 
-    if(sesIdx<PRIOR.length){
+      if(sesIdx<PRIOR.length){
+        sesIdx++;
 
-      sesIdx++;
-      hideTip();
-      render();
+        hideTip();
+        render();
+      }else{
+        stopPlay();
+      }
 
-    }else{
-
-      stopPlay();
-    }
-
-  },900);
+    },
+    900
+  );
 }
 
 function stopPlay(){
-
   if(playTimer){
-
     clearInterval(playTimer);
+
     playTimer=null;
   }
 
@@ -2258,43 +2648,43 @@ function stopPlay(){
 /* ---------- Warnings / compare banner ---------- */
 
 function updateSessionWarning(){
-
   const box=document.getElementById("sessionWarning");
 
-  if(sesIdx<PRIOR.length && PRIOR[sesIdx].quality){
-
+  if(
+    sesIdx<PRIOR.length &&
+    PRIOR[sesIdx].quality
+  ){
     box.style.display="block";
 
     box.innerHTML=
       `<b>Historical data-quality annotation:</b> ${PRIOR[sesIdx].quality}`;
 
   }else{
-
     box.style.display="none";
     box.innerHTML="";
   }
 }
 
 function updateCompareBanner(){
-
   const box=document.getElementById("compareBanner");
 
-  if(compareMode && sesIdx<PRIOR.length){
-
+  if(
+    compareMode &&
+    sesIdx<PRIOR.length
+  ){
     const ps=PRIOR[sesIdx];
 
     box.style.display="block";
 
     box.innerHTML=`
       <b>Compare mode ON</b> —
-      Current 10/08 Z1Y / D/P uses large dots.
+      Current 10/14 Z1Y / D/P uses large dots.
       ${ps.date} historical Z1Y / D/P uses smaller translucent dots.
       Dashed connectors show movement.
       Compare mode is locked to Z1Y because historical sessions store Z1Y only.
     `;
 
   }else{
-
     box.style.display="none";
     box.innerHTML="";
   }
@@ -2303,66 +2693,92 @@ function updateCompareBanner(){
 /* ---------- Runtime audit ---------- */
 
 function runtimeAudit(){
-
-  const rawCount=Object.keys(CUR.data).length;
+  const rawCount=
+    Object.keys(CUR.data).length;
 
   const badDp=[];
 
-  Object.entries(CUR.data).forEach(([t,d])=>{
+  Object
+    .entries(CUR.data)
+    .forEach(([t,d])=>{
 
-    const implied=
-      (d[7]/d[6]-1)*100;
+      const implied=
+        (d[7]/d[6]-1)*100;
 
-    if(Math.abs(implied-d[3])>=0.15){
-      badDp.push(t);
-    }
-  });
+      if(
+        Math.abs(implied-d[3])>=0.15
+      ){
+        badDp.push(t);
+      }
+    });
 
   const qBad=[];
 
-  Object.entries(CUR.data).forEach(([t,d])=>{
+  Object
+    .entries(CUR.data)
+    .forEach(([t,d])=>{
 
-    const q=qFromZD(
-      d[2],
-      d[3]
-    );
+      const q=qFromZD(
+        d[2],
+        d[3]
+      );
 
-    const signOkay=
-      d[3]<0
-        ? (q==="G" || q==="O")
-        : (q==="B" || q==="X");
+      const signOkay=
+        d[3]<0
+          ? (
+              q==="G" ||
+              q==="O"
+            )
+          : (
+              q==="B" ||
+              q==="X"
+            );
 
-    if(!signOkay){
-      qBad.push(t);
-    }
-  });
+      if(!signOkay){
+        qBad.push(t);
+      }
+    });
 
   /*
-    Interaction audit:
-    Every rendered .dot must contain exactly one .hit-target.
+    Bubble-overlay audit.
+    Every rendered .dot must have exactly one .hit-target.
   */
   const renderedDots=
-    document.querySelectorAll("#chart .dot").length;
+    document.querySelectorAll(
+      "#chart .dot"
+    ).length;
 
   const hitTargets=
-    document.querySelectorAll("#chart .dot .hit-target").length;
+    document.querySelectorAll(
+      "#chart .dot .hit-target"
+    ).length;
 
   const interactiveClean=
     renderedDots>0 &&
     renderedDots===hitTargets;
 
-  const badge=
-    document.getElementById("auditBadge");
+  const historyClean=
+    PRIOR.length===15;
+
+  const holdingsClean=
+    CURRENT_HOLDINGS.size===15;
 
   const dataClean=
     rawCount===25 &&
     badDp.length===0 &&
     qBad.length===0;
 
-  if(dataClean && interactiveClean){
+  const badge=
+    document.getElementById("auditBadge");
 
+  if(
+    dataClean &&
+    interactiveClean &&
+    historyClean &&
+    holdingsClean
+  ){
     badge.textContent=
-      `Runtime audit ✓ 25/25 valuation points · D/P clean · quadrant signs clean · bubble overlays ${hitTargets}/${renderedDots} armed`;
+      `Runtime audit ✓ 25/25 valuation points · D/P clean · quadrant signs clean · 15 historical sessions · 15 holdings · bubble overlays ${hitTargets}/${renderedDots} armed`;
 
     badge.style.background=
       "#E1F5EE";
@@ -2371,9 +2787,8 @@ function runtimeAudit(){
       "#085041";
 
   }else{
-
     badge.textContent=
-      `Runtime audit ⚠ points ${rawCount}/25 · D/P exceptions ${badDp.length} · quadrant exceptions ${qBad.length} · bubble hit targets ${hitTargets}/${renderedDots}`;
+      `Runtime audit ⚠ points ${rawCount}/25 · D/P exceptions ${badDp.length} · quadrant exceptions ${qBad.length} · history ${PRIOR.length}/15 · holdings ${CURRENT_HOLDINGS.size}/15 · hit targets ${hitTargets}/${renderedDots}`;
 
     badge.style.background=
       "#FFF3E0";
@@ -2385,175 +2800,231 @@ function runtimeAudit(){
 
 /* ---------- Controls ---------- */
 
-document.querySelectorAll(".zt").forEach(btn=>{
+document
+  .querySelectorAll(".zt")
+  .forEach(btn=>{
 
-  btn.addEventListener("click",()=>{
+    btn.addEventListener(
+      "click",
+      ()=>{
 
-    stopPlay();
+        stopPlay();
 
-    const nextZ=
-      Number(btn.dataset.z);
+        const nextZ=
+          Number(btn.dataset.z);
 
-    if(compareMode && nextZ!==2){
+        if(
+          compareMode &&
+          nextZ!==2
+        ){
+          compareMode=false;
 
-      compareMode=false;
+          document
+            .getElementById("compareBtn")
+            .classList.remove("on");
+        }
 
-      document.getElementById("compareBtn")
-        .classList.remove("on");
-    }
+        zIdx=nextZ;
 
-    zIdx=nextZ;
+        document
+          .querySelectorAll(".zt")
+          .forEach(x=>{
 
-    document.querySelectorAll(".zt").forEach(x=>
-      x.classList.toggle(
-        "on",
-        x===btn
-      )
-    );
+            x.classList.toggle(
+              "on",
+              x===btn
+            );
+          });
 
-    document.getElementById("detail").style.display=
-      "none";
+        document
+          .getElementById("detail")
+          .style.display="none";
 
-    hideTip();
-    render();
-  });
-});
-
-document.querySelectorAll(".qf").forEach(btn=>{
-
-  btn.addEventListener("click",()=>{
-
-    qFilter=btn.dataset.q;
-
-    document.querySelectorAll(".qf").forEach(x=>
-      x.classList.toggle(
-        "on",
-        x===btn
-      )
-    );
-
-    hideTip();
-    render();
-  });
-});
-
-document.getElementById("search")
-  .addEventListener("input",e=>{
-
-    searchTerms=e.target.value
-      .toUpperCase()
-      .split(/[\s,]+/)
-      .map(x=>x.trim())
-      .filter(Boolean);
-
-    hideTip();
-    render();
-  });
-
-document.getElementById("hold")
-  .addEventListener("click",e=>{
-
-    holdOnly=!holdOnly;
-
-    e.currentTarget.classList.toggle(
-      "on",
-      holdOnly
-    );
-
-    hideTip();
-    render();
-  });
-
-document.getElementById("compareBtn")
-  .addEventListener("click",e=>{
-
-    stopPlay();
-
-    compareMode=!compareMode;
-
-    if(compareMode){
-
-      zIdx=2;
-
-      document.querySelectorAll(".zt").forEach(btn=>{
-
-        btn.classList.toggle(
-          "on",
-          Number(btn.dataset.z)===2
-        );
-      });
-
-      if(sesIdx===PRIOR.length){
-        sesIdx=PRIOR.length-1;
+        hideTip();
+        render();
       }
-    }
-
-    e.currentTarget.classList.toggle(
-      "on",
-      compareMode
     );
-
-    document.getElementById("detail").style.display=
-      "none";
-
-    hideTip();
-    render();
   });
 
-document.getElementById("prevBtn")
-  .addEventListener("click",()=>{
+document
+  .querySelectorAll(".qf")
+  .forEach(btn=>{
 
-    stopPlay();
-    stepSession(-1);
+    btn.addEventListener(
+      "click",
+      ()=>{
+
+        qFilter=
+          btn.dataset.q;
+
+        document
+          .querySelectorAll(".qf")
+          .forEach(x=>{
+
+            x.classList.toggle(
+              "on",
+              x===btn
+            );
+          });
+
+        hideTip();
+        render();
+      }
+    );
   });
 
-document.getElementById("nextBtn")
-  .addEventListener("click",()=>{
+document
+  .getElementById("search")
+  .addEventListener(
+    "input",
+    e=>{
 
-    stopPlay();
-    stepSession(1);
-  });
+      searchTerms=e.target.value
+        .toUpperCase()
+        .split(/[\s,]+/)
+        .map(x=>x.trim())
+        .filter(Boolean);
 
-document.getElementById("playBtn")
-  .addEventListener("click",()=>{
+      hideTip();
+      render();
+    }
+  );
 
-    if(playTimer){
+document
+  .getElementById("hold")
+  .addEventListener(
+    "click",
+    e=>{
+
+      holdOnly=!holdOnly;
+
+      e.currentTarget.classList.toggle(
+        "on",
+        holdOnly
+      );
+
+      hideTip();
+      render();
+    }
+  );
+
+document
+  .getElementById("compareBtn")
+  .addEventListener(
+    "click",
+    e=>{
 
       stopPlay();
 
-    }else{
+      compareMode=!compareMode;
 
-      compareMode=false;
+      if(compareMode){
+        zIdx=2;
 
-      document.getElementById("compareBtn")
-        .classList.remove("on");
+        document
+          .querySelectorAll(".zt")
+          .forEach(btn=>{
 
-      startPlay();
+            btn.classList.toggle(
+              "on",
+              Number(btn.dataset.z)===2
+            );
+          });
+
+        if(
+          sesIdx===PRIOR.length
+        ){
+          sesIdx=
+            PRIOR.length-1;
+        }
+      }
+
+      e.currentTarget.classList.toggle(
+        "on",
+        compareMode
+      );
+
+      document
+        .getElementById("detail")
+        .style.display="none";
+
+      hideTip();
+      render();
     }
-  });
+  );
 
-document.getElementById("tmSlider")
-  .addEventListener("input",e=>{
+document
+  .getElementById("prevBtn")
+  .addEventListener(
+    "click",
+    ()=>{
 
-    stopPlay();
-
-    sesIdx=
-      Number(e.target.value);
-
-    if(compareMode && sesIdx===PRIOR.length){
-
-      compareMode=false;
-
-      document.getElementById("compareBtn")
-        .classList.remove("on");
+      stopPlay();
+      stepSession(-1);
     }
+  );
 
-    document.getElementById("detail").style.display=
-      "none";
+document
+  .getElementById("nextBtn")
+  .addEventListener(
+    "click",
+    ()=>{
 
-    hideTip();
-    render();
-  });
+      stopPlay();
+      stepSession(1);
+    }
+  );
+
+document
+  .getElementById("playBtn")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      if(playTimer){
+        stopPlay();
+      }else{
+        compareMode=false;
+
+        document
+          .getElementById("compareBtn")
+          .classList.remove("on");
+
+        startPlay();
+      }
+    }
+  );
+
+document
+  .getElementById("tmSlider")
+  .addEventListener(
+    "input",
+    e=>{
+
+      stopPlay();
+
+      sesIdx=
+        Number(e.target.value);
+
+      if(
+        compareMode &&
+        sesIdx===PRIOR.length
+      ){
+        compareMode=false;
+
+        document
+          .getElementById("compareBtn")
+          .classList.remove("on");
+      }
+
+      document
+        .getElementById("detail")
+        .style.display="none";
+
+      hideTip();
+      render();
+    }
+  );
 
 /* ---------- Initial state ---------- */
 
