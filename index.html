@@ -135,6 +135,7 @@ button.tm-btn{padding:4px 8px}
     <button class="tm-btn" id="playBtn" onclick="togglePlay()">▶</button>
     <span id="tmDateBtns"></span>
     <button id="compareToggle" onclick="toggleCompare()">Compare</button>
+    <select id="compareSelect" onchange="compareSelectChange(this.value)" style="display:none;font-size:11px;padding:3px 6px;border:1px solid #ccc;border-radius:5px;background:#fff;color:#333"></select>
     <span id="compareInfo" style="font-size:10px;color:#888"></span>
   </div>
 </div>
@@ -454,11 +455,15 @@ function renderChart() {
     });
   }
 
+  // Fixed axis bounds computed once across ALL sessions for consistency
+  const allSessionZ = [], allSessionDP = [];
+  PRIOR.forEach(s => Object.values(s.funds).forEach(f => { if(f){allSessionZ.push(f[0]);allSessionDP.push(f[1]);} }));
+  UNIVERSE.forEach(t => { const d=CUR[t]; if(d){allSessionZ.push(d.z3m,d.z6m,d.z1y);allSessionDP.push(d.dp,d.avg52);} });
   const zPad = 0.8, dpPad = 3;
-  let zMin = Math.min(...allZ, -1) - zPad;
-  let zMax = Math.max(...allZ, 1) + zPad;
-  let dpMin = Math.min(...allDP, -15) - dpPad;
-  let dpMax = Math.max(...allDP, 5) + dpPad;
+  let zMin = Math.min(...allSessionZ, -1) - zPad;
+  let zMax = Math.max(...allSessionZ, 1) + zPad;
+  let dpMin = Math.min(...allSessionDP, -15) - dpPad;
+  let dpMax = Math.max(...allSessionDP, 5) + dpPad;
 
   // Build SVG
   let html = '';
@@ -858,19 +863,33 @@ function togglePlay() {
   }
 }
 
+function buildCompareSelect() {
+  const sel = document.getElementById('compareSelect');
+  sel.innerHTML = PRIOR.map((s, i) => `<option value="${i}"${i === compareHistIdx ? ' selected' : ''}>${s.label}</option>`).join('');
+}
+
+function compareSelectChange(val) {
+  compareHistIdx = parseInt(val);
+  renderChart();
+}
+
 // ── COMPARE ─────────────────────────────────────────────────────────────────────
 function toggleCompare() {
+  // Always snap to current session when enabling compare
   if (tmIdx !== CURRENT_IDX) {
     tmIdx = CURRENT_IDX;
-    document.getElementById('tmSlider').value = CURRENT_IDX;
+    updateTMButtonStates();
   }
   comparing = !comparing;
   if (comparing) {
     // Force Z1Y per spec
     if (zKey !== 'z1y') setZ('z1y');
     compareHistIdx = PRIOR.length - 1;
+    buildCompareSelect();
+    document.getElementById('compareSelect').style.display = 'inline-block';
     document.getElementById('compareToggle').classList.add('active');
   } else {
+    document.getElementById('compareSelect').style.display = 'none';
     document.getElementById('compareToggle').classList.remove('active');
   }
   renderChart();
