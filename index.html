@@ -62,10 +62,13 @@ button.tm-btn{padding:4px 8px}
 .dt-flag.ro{background:#fff3e0;color:#e07c1a;border:1px solid #f0c070}
 .dt-flag.dq{background:#fde8e8;color:#c0392b;border:1px solid #f4a0a0}
 .dt-flag.eq{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7}
-#tmBar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:#fff;border-radius:8px;padding:8px 12px;box-shadow:0 1px 4px rgba(0,0,0,.07);margin-bottom:10px}
-#tmBar .tm-label{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
-#tmSlider{flex:1;min-width:120px;accent-color:#1a1a2e}
-#tmDateDisplay{font-size:11px;font-weight:600;color:#1a1a2e;min-width:60px;text-align:center}
+#tmBar{background:#fff;border-radius:8px;padding:8px 12px;box-shadow:0 1px 4px rgba(0,0,0,.07);margin-bottom:10px}
+#tmBar .tm-label{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;margin-bottom:6px;display:block}
+#tmBtnRow{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.tm-date-btn{font-size:10px;padding:3px 8px;border-radius:4px;border:1px solid #ddd;background:#f8f8f8;cursor:pointer;color:#555;transition:all .15s;white-space:nowrap}
+.tm-date-btn:hover{border-color:#888;background:#eee;color:#1a1a2e}
+.tm-date-btn.active{background:#1a1a2e;color:#fff;border-color:#1a1a2e}
+.tm-date-btn.current{background:#1D9E75;color:#fff;border-color:#1D9E75}
 #compareToggle.active{background:#378ADD;color:#fff;border-color:#378ADD}
 #sessionInfo{font-size:11px;color:#888;text-align:right;margin-bottom:4px}
 #sessionInfo span{font-weight:600;color:#1a1a2e}
@@ -87,7 +90,7 @@ button.tm-btn{padding:4px 8px}
 <div class="header-row">
   <div>
     <h1>QTI CEF Matrix</h1>
-    <div class="subtitle">DSM Dual-Sleeve Model · CEF Engine v2.1</div>
+    <div class="subtitle">DSM Dual-Sleeve Model · CEF Engine v2.1 · Generated 10/21/2026</div>
   </div>
   <div style="text-align:right">
     <div id="netTag" class="net-tag pos">Net +$2.08</div>
@@ -128,13 +131,12 @@ button.tm-btn{padding:4px 8px}
 
 <div id="tmBar">
   <span class="tm-label">Time Machine</span>
-  <button class="tm-btn" id="playBtn" onclick="togglePlay()">▶</button>
-  <button class="tm-btn" onclick="tmStep(-1)">◀</button>
-  <input type="range" id="tmSlider" min="0" max="11" value="11" oninput="tmSliderChange(this.value)">
-  <button class="tm-btn" onclick="tmStep(1)">▶</button>
-  <span id="tmDateDisplay">10/20</span>
-  <button id="compareToggle" onclick="toggleCompare()">Compare</button>
-  <span id="compareInfo" style="font-size:10px;color:#888"></span>
+  <div id="tmBtnRow">
+    <button class="tm-btn" id="playBtn" onclick="togglePlay()">▶</button>
+    <span id="tmDateBtns"></span>
+    <button id="compareToggle" onclick="toggleCompare()">Compare</button>
+    <span id="compareInfo" style="font-size:10px;color:#888"></span>
+  </div>
 </div>
 
 <div id="detail">
@@ -758,9 +760,7 @@ function updateQCounts() {
 // ── TIME MACHINE ─────────────────────────────────────────────────────────────────
 function updateTMBar() {
   const isCur = tmIdx === CURRENT_IDX;
-  const label = isCur ? '10/20 ★' : PRIOR[tmIdx].label;
-  document.getElementById('tmDateDisplay').textContent = label;
-  document.getElementById('tmSlider').value = tmIdx;
+  updateTMButtonStates();
 
   const netEl = document.getElementById('netTag');
   if (isCur) {
@@ -790,6 +790,39 @@ function tmSliderChange(val) {
     document.getElementById('compareToggle').classList.remove('active');
   }
   renderChart();
+}
+
+function buildTMButtons() {
+  const wrap = document.getElementById('tmDateBtns');
+  let html = '';
+  PRIOR.forEach((s, i) => {
+    html += `<button class="tm-date-btn" data-idx="${i}" onclick="tmJump(${i})">${s.label}</button>`;
+  });
+  html += `<button class="tm-date-btn current" data-idx="${CURRENT_IDX}" onclick="tmJump(${CURRENT_IDX})">10/20 ★</button>`;
+  wrap.innerHTML = html;
+}
+
+function tmJump(idx) {
+  tmIdx = idx;
+  if (comparing && tmIdx !== CURRENT_IDX) {
+    comparing = false;
+    document.getElementById('compareToggle').classList.remove('active');
+  }
+  updateTMButtonStates();
+  renderChart();
+}
+
+function updateTMButtonStates() {
+  document.querySelectorAll('.tm-date-btn').forEach(btn => {
+    const idx = parseInt(btn.dataset.idx);
+    btn.classList.toggle('active', idx === tmIdx && idx !== CURRENT_IDX);
+    if (idx === CURRENT_IDX) btn.classList.toggle('current', true);
+    if (idx === CURRENT_IDX && tmIdx === CURRENT_IDX) {
+      btn.style.fontWeight = '800';
+    } else if (idx === CURRENT_IDX) {
+      btn.style.fontWeight = '';
+    }
+  });
 }
 
 function tmStep(dir) {
@@ -880,6 +913,7 @@ function renderAlerts() {
 
 // ── INIT ─────────────────────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
+  buildTMButtons();
   renderAlerts();
   renderChart();
   window.addEventListener('resize', () => renderChart());
