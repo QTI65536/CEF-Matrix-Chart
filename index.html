@@ -1,3037 +1,891 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>CEF Time Machine · 10/14/2026</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CEF Matrix — 10/20/2026</title>
 <style>
-:root{
-  --green:#1D9E75;
-  --blue:#378ADD;
-  --orange:#D85A30;
-  --gray:#888780;
-  --ink:#1E2429;
-  --sub:#5A636B;
-  --line:#DEE3E7;
-  --bg:#F7F8F9;
-  --card:#FFFFFF;
-  --amber:#E3A008;
-  --purple:#6366F1;
-  --olive:#7B9E3E;
-}
-
-*{box-sizing:border-box}
-
-html{scroll-behavior:smooth}
-
-body{
-  margin:0 auto;
-  padding:20px;
-  max-width:1120px;
-  background:var(--bg);
-  color:var(--ink);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-}
-
-h1,h2,h3,p{margin:0}
-
-.hdr{
-  display:flex;
-  justify-content:space-between;
-  align-items:baseline;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-bottom:4px;
-}
-
-h1{
-  font-size:20px;
-  font-weight:800;
-  letter-spacing:-.2px;
-}
-
-.badge{
-  display:inline-block;
-  border-radius:12px;
-  padding:4px 10px;
-  font-size:12px;
-  font-weight:800;
-}
-
-.badge.neg{background:#FAECE7;color:#B4431F}
-.badge.pos{background:#E1F5EE;color:#085041}
-
-.note{
-  font-size:12px;
-  line-height:1.5;
-  color:var(--sub);
-  margin-bottom:12px;
-}
-
-.audit{
-  display:inline-block;
-  margin-top:5px;
-  padding:2px 7px;
-  border-radius:10px;
-  background:#EEF2FF;
-  color:#3730A3;
-  font-weight:700;
-  font-size:11px;
-}
-
-.alerts{
-  display:flex;
-  flex-direction:column;
-  gap:7px;
-  margin-bottom:16px;
-}
-
-.al{
-  border:1px solid var(--line);
-  border-left-width:4px;
-  border-radius:7px;
-  padding:9px 12px;
-  font-size:13px;
-  line-height:1.48;
-}
-
-.al b{font-weight:800}
-.al.r{border-left-color:var(--orange);background:#FAECE7}
-.al.g{border-left-color:var(--green);background:#E1F5EE}
-.al.a{border-left-color:var(--amber);background:#FFF8EC}
-.al.p{border-left-color:var(--blue);background:#EEF2FF}
-.al.c{border-left-color:var(--olive);background:#EFF6E8}
-.al.dq{border-left-color:#F59E0B;background:#FFF3E0}
-
-.tag{
-  display:inline-block;
-  margin-right:6px;
-  text-transform:uppercase;
-  font-size:10.5px;
-  font-weight:800;
-  letter-spacing:.55px;
-  opacity:.78;
-}
-
-.panel{
-  border:1px solid var(--line);
-  border-radius:10px;
-  background:var(--card);
-  padding:14px;
-  margin-bottom:16px;
-}
-
-.controls{
-  display:flex;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-bottom:10px;
-}
-
-.grp{
-  display:flex;
-  flex-wrap:wrap;
-  gap:4px;
-}
-
-button.ctl{
-  appearance:none;
-  border:1px solid var(--line);
-  background:#fff;
-  color:var(--ink);
-  border-radius:6px;
-  font-size:12px;
-  padding:6px 10px;
-  cursor:pointer;
-  transition:background .15s ease,border-color .15s ease,color .15s ease;
-}
-
-button.ctl:hover{background:#F3F4F6}
-button.ctl.on{background:var(--ink);border-color:var(--ink);color:white}
-button.ctl.qg.on{background:var(--green);border-color:var(--green)}
-button.ctl.qb.on{background:var(--blue);border-color:var(--blue)}
-button.ctl.qo.on{background:var(--orange);border-color:var(--orange)}
-button.ctl.qx.on{background:var(--gray);border-color:var(--gray)}
-button.ctl:disabled{opacity:.42;cursor:not-allowed}
-
-.search{
-  border:1px solid var(--line);
-  background:#fff;
-  border-radius:6px;
-  font-size:12px;
-  padding:6px 9px;
-  width:175px;
-}
-
-.compare-banner{
-  display:none;
-  margin-bottom:9px;
-  border:1.5px solid var(--purple);
-  background:#EEF2FF;
-  color:#3730A3;
-  border-radius:7px;
-  padding:7px 10px;
-  font-size:12px;
-  line-height:1.4;
-}
-
-.session-warning{
-  display:none;
-  margin:8px 0;
-  border-left:4px solid var(--amber);
-  background:#FFF8EC;
-  border-radius:6px;
-  padding:7px 10px;
-  font-size:12px;
-  line-height:1.45;
-}
-
-.chart-wrap{
-  position:relative;
-  width:100%;
-}
-
-svg{
-  display:block;
-  width:100%;
-  height:auto;
-  min-height:460px;
-  overflow:visible;
-}
-
-/*
-  INTERACTION CONTRACT
-
-  Every plotted .dot contains exactly one .hit-target.
-  Visible SVG children never consume pointer events.
-  This prevents the prior "bubble overlay does not work" failure mode.
-*/
-.dot{
-  transition:opacity .45s ease;
-  cursor:pointer;
-}
-
-.dot.dimmed{
-  opacity:.10;
-}
-
-.dot text,
-.dot line,
-.dot circle{
-  pointer-events:none;
-}
-
-.dot .hit-target{
-  pointer-events:all;
-  fill:#000;
-  fill-opacity:.001;
-  stroke:none;
-  cursor:pointer;
-}
-
-.dot.dimmed .hit-target{
-  pointer-events:none;
-}
-
-.legend{
-  margin-top:4px;
-  color:var(--sub);
-  font-size:11.5px;
-  line-height:1.45;
-}
-
-.tm-controls{
-  display:grid;
-  grid-template-columns:auto auto auto 1fr;
-  align-items:center;
-  gap:6px;
-  margin-top:12px;
-}
-
-.tm-slider{
-  width:100%;
-  min-width:140px;
-}
-
-.tm-label{
-  margin-top:5px;
-  font-size:12px;
-  color:var(--sub);
-  font-weight:600;
-}
-
-.tmnav{
-  display:flex;
-  gap:4px;
-  flex-wrap:wrap;
-  margin-top:9px;
-}
-
-.tmnav .ctl{
-  padding:4px 8px;
-  font-size:11px;
-}
-
-.detail{
-  display:none;
-  margin-top:12px;
-  border:1px solid var(--line);
-  background:var(--bg);
-  border-radius:9px;
-  padding:12px;
-  font-size:13px;
-}
-
-.detail table{
-  width:100%;
-  border-collapse:collapse;
-  margin-top:8px;
-  font-size:12.5px;
-}
-
-.detail td{
-  padding:4px 9px 4px 0;
-  vertical-align:top;
-  color:var(--sub);
-}
-
-.detail td.v{
-  color:var(--ink);
-  font-weight:700;
-}
-
-.event{
-  border-radius:6px;
-  padding:7px 9px;
-  font-size:11.5px;
-  line-height:1.45;
-  margin-bottom:8px;
-}
-
-.event.ro{
-  border:1px solid #D97706;
-  background:#FFF4E5;
-  color:#7C2D12;
-}
-
-.event.ca{
-  border:1px solid var(--olive);
-  background:#EFF6E8;
-  color:#365314;
-}
-
-.event.dq{
-  border:1px solid #F59E0B;
-  background:#FFF3E0;
-  color:#7C2D12;
-}
-
-.event.info{
-  border:1px solid var(--blue);
-  background:#EEF2FF;
-  color:#1E3A8A;
-}
-
-.qcount{
-  display:inline-block;
-  padding:2px 8px;
-  border-radius:10px;
-  color:#fff;
-  font-weight:800;
-  font-size:11.5px;
-  margin:2px 5px 2px 0;
-}
-
-.snap{
-  margin-top:14px;
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:10px;
-}
-
-.snapcard{
-  min-height:94px;
-  border:1px solid var(--line);
-  border-radius:8px;
-  background:var(--bg);
-  padding:10px 12px;
-  font-size:12.5px;
-  line-height:1.45;
-}
-
-.snapcard h3{
-  margin-bottom:6px;
-  color:var(--sub);
-  font-size:10.5px;
-  text-transform:uppercase;
-  letter-spacing:.65px;
-}
-
-.aux{
-  margin-top:12px;
-  border-top:1px solid var(--line);
-  padding-top:9px;
-  font-size:11.5px;
-  color:var(--sub);
-  line-height:1.5;
-}
-
-.highlights{
-  margin:16px 0 0;
-  padding:14px 16px;
-  border-radius:10px;
-  border:1px solid #334155;
-  background:#0F172A;
-  color:#E2E8F0;
-}
-
-.highlights h2{
-  font-size:16px;
-  font-weight:800;
-  margin-bottom:8px;
-}
-
-.highlights div{
-  font-size:13px;
-  line-height:1.58;
-}
-
-.tooltip{
-  display:none;
-  position:fixed;
-  z-index:1000;
-  max-width:355px;
-  pointer-events:none;
-  border-radius:7px;
-  padding:8px 10px;
-  background:rgba(15,23,42,.97);
-  color:white;
-  box-shadow:0 4px 18px rgba(0,0,0,.18);
-  font-size:11.5px;
-  line-height:1.45;
-}
-
-.small{
-  font-size:11px;
-  color:var(--sub);
-}
-
-.footer{
-  margin-top:12px;
-  padding-top:9px;
-  border-top:1px solid var(--line);
-  color:var(--sub);
-  font-size:10.5px;
-}
-
-@media(max-width:760px){
-  body{padding:10px}
-  .snap{grid-template-columns:1fr}
-  .search{width:100%}
-  .controls{align-items:stretch}
-  .tm-controls{grid-template-columns:auto auto auto;gap:5px}
-  .tm-slider{grid-column:1/-1}
-  svg{min-height:390px}
-  .detail table{font-size:11.5px}
-}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f0f2f5;color:#1a1a2e;font-size:13px}
+#app{max-width:1140px;margin:0 auto;padding:12px}
+h1{font-size:17px;font-weight:700;color:#1a1a2e;letter-spacing:-.3px}
+.subtitle{font-size:11px;color:#666;margin-top:2px}
+.header-row{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.net-tag{font-size:12px;font-weight:700;padding:3px 9px;border-radius:20px;background:#fde8e8;color:#c0392b}
+.net-tag.pos{background:#e8f5e9;color:#27ae60}
+.controls{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;align-items:center}
+.ctrl-group{display:flex;gap:4px;align-items:center}
+.ctrl-label{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-right:2px}
+button{font-size:11px;padding:4px 10px;border-radius:5px;border:1px solid #ccc;background:#fff;cursor:pointer;color:#333;transition:all .15s}
+button:hover{border-color:#666;background:#f5f5f5}
+button.active{background:#1a1a2e;color:#fff;border-color:#1a1a2e}
+button.tm-btn{padding:4px 8px}
+#searchBox{font-size:11px;padding:4px 8px;border:1px solid #ccc;border-radius:5px;width:90px;outline:none}
+#searchBox:focus{border-color:#888}
+.qcounts{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+.qc{font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;cursor:pointer;opacity:.85;transition:opacity .15s}
+.qc:hover,.qc.sel{opacity:1;box-shadow:0 0 0 2px rgba(0,0,0,.18)}
+.qc.green{background:#e1f5ee;color:#1D9E75}
+.qc.blue{background:#eef2ff;color:#378ADD}
+.qc.orange{background:#fdeee8;color:#D85A30}
+.qc.gray{background:#efefef;color:#888780}
+#alerts{margin-bottom:8px}
+.al{border-radius:6px;padding:7px 11px;margin-bottom:5px;font-size:11.5px;line-height:1.5}
+.al strong{font-weight:700}
+.al.g{background:#E1F5EE;border-left:3px solid #1D9E75}
+.al.r{background:#FAECE7;border-left:3px solid #D85A30}
+.al.a{background:#FFF8EC;border-left:3px solid #e6a817}
+.al.p{background:#EEF2FF;border-left:3px solid #378ADD}
+.al.c{background:#EFF6E8;border-left:3px solid #5d8a3c}
+.al.dq{background:#FFF3E0;border-left:3px solid #e07c1a}
+#chartWrap{position:relative;background:#fff;border-radius:8px;box-shadow:0 1px 6px rgba(0,0,0,.08);margin-bottom:10px}
+#chart{width:100%;display:block}
+#tooltip{position:fixed;background:rgba(15,15,30,.93);color:#fff;border-radius:7px;padding:9px 12px;font-size:11px;line-height:1.6;pointer-events:none;z-index:1000;max-width:240px;display:none;box-shadow:0 3px 12px rgba(0,0,0,.3)}
+#tooltip .tt-ticker{font-size:14px;font-weight:700;margin-bottom:4px}
+#tooltip .tt-flag{font-size:10px;font-weight:600;padding:1px 6px;border-radius:3px;display:inline-block;margin-bottom:4px}
+#tooltip .tt-flag.ro{background:#e07c1a;color:#fff}
+#tooltip .tt-flag.dq{background:#d84f30;color:#fff}
+#tooltip .tt-flag.eq{background:#5d8a3c;color:#fff}
+#detail{display:none;background:#fff;border-radius:8px;box-shadow:0 1px 6px rgba(0,0,0,.08);padding:14px;margin-bottom:10px}
+#detail .dt-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+#detail h3{font-size:15px;font-weight:700}
+#detail .dt-close{cursor:pointer;font-size:18px;color:#999;line-height:1;padding:2px 6px;border-radius:3px}
+#detail .dt-close:hover{background:#eee}
+#detail .dt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
+.dt-item{background:#f8f8f8;border-radius:5px;padding:6px 9px}
+.dt-item .k{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.3px}
+.dt-item .v{font-size:13px;font-weight:600;color:#1a1a2e}
+.dt-item .v.pos{color:#1D9E75}
+.dt-item .v.neg{color:#D85A30}
+.dt-flag{margin-top:8px;padding:6px 10px;border-radius:5px;font-size:11px;font-weight:600;grid-column:1/-1}
+.dt-flag.ro{background:#fff3e0;color:#e07c1a;border:1px solid #f0c070}
+.dt-flag.dq{background:#fde8e8;color:#c0392b;border:1px solid #f4a0a0}
+.dt-flag.eq{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7}
+#tmBar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:#fff;border-radius:8px;padding:8px 12px;box-shadow:0 1px 4px rgba(0,0,0,.07);margin-bottom:10px}
+#tmBar .tm-label{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+#tmSlider{flex:1;min-width:120px;accent-color:#1a1a2e}
+#tmDateDisplay{font-size:11px;font-weight:600;color:#1a1a2e;min-width:60px;text-align:center}
+#compareToggle.active{background:#378ADD;color:#fff;border-color:#378ADD}
+#sessionInfo{font-size:11px;color:#888;text-align:right;margin-bottom:4px}
+#sessionInfo span{font-weight:600;color:#1a1a2e}
+#highlights{background:#fff;border-radius:8px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,.08);margin-bottom:10px}
+#highlights h2{font-size:13px;font-weight:700;margin-bottom:8px;color:#1a1a2e;text-transform:uppercase;letter-spacing:.4px}
+#highlights p{font-size:11.5px;line-height:1.6;margin-bottom:5px;color:#333}
+#highlights p:last-child{margin-bottom:0}
+#highlights .hl-label{font-weight:700;color:#1a1a2e}
+#disclaimer{font-size:10px;color:#999;line-height:1.5;padding:8px 12px;background:#fff;border-radius:6px;border:1px solid #eee}
+/* MANDATORY Section 29 pointer-event contract */
+.dot text,.dot line,.dot circle{pointer-events:none}
+.dot .hit-target{pointer-events:all;fill:#000;fill-opacity:.001;stroke:none;cursor:pointer}
+.dot.dimmed .hit-target{pointer-events:none}
 </style>
 </head>
-
 <body>
+<div id="app">
 
-<div class="hdr">
-  <h1>CEF Time Machine · 10/14/2026</h1>
-  <span class="badge neg">Net Δ: −$10.07</span>
-</div>
-
-<div class="note">
-  Current valuation feed: <b>Wednesday 10/14/2026</b> ·
-  latest momentum image supplied in the 10/15 update; the image crop itself does not display an as-of date ·
-  25 valuation tickers supplied; PDI and PDO have momentum data but no current valuation points.
-  <br>
-  Time Machine contains the latest <b>15 supplied market-session datasets</b>.
-  10/08 has been rolled into history and 09/14 has rolled off.
-  PDX is tracked as a holding beginning 10/09/2026; its 10/08 and earlier history remains visible but unringed.
-  <br>
-  <span class="audit" id="auditBadge">Runtime audit pending…</span>
-</div>
-
-<div class="alerts">
-
-  <div class="al r">
-    <span class="tag">Orange · Deep Value</span>
-    <b>RLTY Z1Y −3.33 · GDV −2.78 · ERH −2.72 · HTD −2.67 · PCN −2.62 · EOS −2.09 · RNP −2.07.</b>
-    ASGI is also mechanically extreme at −2.23 but remains corporate-action suppressed in the 10/14 snapshot.
-  </div>
-
-  <div class="al c">
-    <span class="tag">ASGI · Corporate Action</span>
-    <b>RO SUPPRESSED as of the 10/14 valuation snapshot.</b>
-    The transferable rights offering was scheduled to expire 10/15 unless extended.
-    ASGI's −7.79% discount versus +2.90% 52-week average creates a mechanical −10.69-point own-normal gap,
-    but the normal Add ranking remains suppressed while the rights offering contaminates the valuation signal.
-  </div>
-
-  <div class="al c">
-    <span class="tag">PDX · Holding / Event Qualified</span>
-    <b>PDX crossed Green → Orange.</b>
-    Z1Y moved from +0.47 on 10/08 to −1.99 on 10/14 while D/P widened from −9.46% to −12.30%.
-    Own-normal gap is now −2.25 points.
-    The 10/14 snapshot is post the 10/13 regular ex-dividend date.
-    The confirmed regular distribution increase remains event-qualified; a possible year-end special remains unconfirmed.
-  </div>
-
-  <div class="al a">
-    <span class="tag">Clean Dislocations</span>
-    <b>PCN −7.68 pt · GLU −6.09 pt · RNP −5.66 pt · HTD −5.04 pt · RQI −4.90 pt · RLTY −4.83 pt · RFI −4.31 pt.</b>
-    These are current D/P minus each fund's own 52-week average.
-  </div>
-
-  <div class="al g">
-    <span class="tag">Green · Confirmation</span>
-    <b>BME is the strongest current momentum-confirmed Green setup.</b>
-    Z1Y is +0.48 and ST momentum is +2.05%.
-    BST, NBXG, UTF and UTG are also Green on the default Z1Y matrix.
-  </div>
-
-  <div class="al r">
-    <span class="tag">Gray · Premium Risk</span>
-    <b>BUI and DNP are the two Gray / Worst Setup funds.</b>
-    BUI has Z1Y −0.41 at a +0.31% premium.
-    DNP has Z1Y −0.13 at a +6.60% premium.
-  </div>
-
-  <div class="al p">
-    <span class="tag">Momentum</span>
-    <b>Positive ST momentum is now limited to BME +2.05%, BST +3.09%, EOI +0.99% and NBXG +0.30%.</b>
-    PDX weakened to −4.89% ST / +14.73% LT.
-    RLTY is absent from the latest supplied momentum screenshot, so current momentum is shown as unavailable rather than carried forward.
-  </div>
-
-  <div class="al dq">
-    <span class="tag">Distribution Quality</span>
-    <b>ERH and RFI retain ROC-primary cautions.</b>
-    PCN remains structurally mixed/ambiguous rather than NII-primary.
-  </div>
-
-  <div class="al p">
-    <span class="tag">Data Quality</span>
-    <b>10/14 Price/NAV reconciliation is clean across all 25 supplied valuation tickers.</b>
-    The historical 10/02 provider timing mismatch remains explicitly flagged and its raw historical Z1Y/D/P values remain unchanged.
-  </div>
-
-</div>
-
-<div class="panel">
-
-  <div class="controls">
-
-    <div class="grp">
-      <button class="ctl zt on" data-z="2">Z1Y</button>
-      <button class="ctl zt" data-z="1">Z6M</button>
-      <button class="ctl zt" data-z="0">Z3M</button>
-    </div>
-
-    <div class="grp">
-      <button class="ctl qf on" data-q="all">All</button>
-      <button class="ctl qf qg" data-q="G">Green · Thesis Working</button>
-      <button class="ctl qf qb" data-q="B">Blue · Premium Territory</button>
-      <button class="ctl qf qo" data-q="O">Orange · Buy Zone</button>
-      <button class="ctl qf qx" data-q="X">Gray · Worst Setup</button>
-    </div>
-
-    <input class="search" id="search" placeholder="Tickers: PDX, EOI, RQI…">
-
-    <button class="ctl" id="hold">★ My Holdings</button>
-    <button class="ctl" id="compareBtn">⊕ Compare</button>
-
-  </div>
-
-  <div class="compare-banner" id="compareBanner"></div>
-  <div class="session-warning" id="sessionWarning"></div>
-
-  <div class="chart-wrap">
-    <svg id="chart"
-         viewBox="0 0 980 560"
-         xmlns="http://www.w3.org/2000/svg"
-         aria-label="CEF valuation matrix"></svg>
-  </div>
-
-  <div class="legend">
-    Default classification uses Z1Y.
-    Current mode allows Z1Y / Z6M / Z3M switching.
-    Historical sessions always use stored Z1Y / D/P.
-    Dashed vertical segment = current D/P to current 52-week average D/P.
-    Outer ring = actual holding status for that session.
-    Hold-only filtering shows the historical path of today's holdings even before their individual holding-start date.
-    Bubble interaction uses dedicated invisible hit targets and is audited after every render.
-  </div>
-
-  <div class="tm-controls">
-    <button class="ctl" id="prevBtn">◀</button>
-    <button class="ctl" id="playBtn">▶ Play</button>
-    <button class="ctl" id="nextBtn">▶</button>
-    <input class="tm-slider" id="tmSlider" type="range" min="0" max="15" step="1" value="15">
-  </div>
-
-  <div class="tm-label" id="seslabel">
-    Showing: 10/14/2026 current valuation
-  </div>
-
-  <div class="tmnav" id="tmnav"></div>
-
-  <div class="detail" id="detail"></div>
-
-  <div class="snap">
-    <div class="snapcard">
-      <h3 id="snapTitle">Quadrant Counts</h3>
-      <div id="snapCounts"></div>
-    </div>
-
-    <div class="snapcard">
-      <h3>Deepest Z1Y</h3>
-      <div id="snapDeep"></div>
-    </div>
-
-    <div class="snapcard">
-      <h3>Strongest Green</h3>
-      <div id="snapGreen"></div>
-    </div>
-  </div>
-
-  <div class="aux">
-    <b>Auxiliary-only momentum tickers:</b>
-    PDI −6.28% ST / −30.00% LT ·
-    PDO −5.30% ST / −18.41% LT.
-    No 10/14 valuation arrays were supplied for PDI or PDO, so neither receives a current scatter point.
-    RLTY is omitted from the latest supplied momentum image and therefore displays current momentum as unavailable.
-  </div>
-
-</div>
-
-<div class="highlights">
-  <h2>10/14 Matrix Highlights</h2>
-
+<div class="header-row">
   <div>
-    <b>Broad tape:</b>
-    Net Price Change was <b>−$10.07</b>.
-    Default Z1Y quadrants are <b>Green 5 · Blue 1 · Orange 17 · Gray 2</b>.
-    PDX crossed Green → Orange, UTG crossed Orange → Green, and DNP crossed Blue → Gray.
-    <br><br>
-
-    <b>PDX:</b>
-    the largest valuation reset in the current update.
-    Z1Y moved <b>+0.47 → −1.99</b>,
-    D/P <b>−9.46% → −12.30%</b>,
-    and own-normal gap <b>+0.55 → −2.25 points</b>.
-    ST momentum is now <b>−4.89%</b> and LT momentum <b>+14.73%</b>.
-    It is now a genuine Orange valuation dislocation signal, but at −1.99 it remains just below the Engine's |Z1Y| ≥ 2 mandatory-extreme threshold.
-    <br><br>
-
-    <b>Deepest clean own-normal gap:</b>
-    PCN at <b>−7.68 points</b>.
-    ASGI is mechanically deeper at −10.69 points but remains RO-suppressed in the 10/14 snapshot.
-    Other large clean gaps are GLU −6.09, RNP −5.66, HTD −5.04, RQI −4.90, RLTY −4.83 and RFI −4.31.
-    <br><br>
-
-    <b>ERH:</b>
-    the prior stabilization did not hold.
-    Z1Y deteriorated from −1.94 to <b>−2.72</b>,
-    the discount widened to <b>−11.78%</b>,
-    and momentum remains weak at <b>−6.23% ST / −6.98% LT</b>.
-    <br><br>
-
-    <b>BME:</b>
-    strongest current Green confirmation.
-    Z1Y is <b>+0.48</b>,
-    discount −3.72% versus −4.68% normal,
-    and ST momentum is <b>+2.05%</b>.
-    Its valuation is not unusually cheap relative to its own regime, but trend confirmation is strong.
-    <br><br>
-
-    <b>NXG:</b>
-    valuation has become substantially richer.
-    Z1Y rose from +0.36 on 10/08 to <b>+1.50</b> while D/P expanded from +0.47% to a <b>+4.80% premium</b>,
-    versus a −0.82% 52-week average discount.
-    LT momentum remains strong at +39.19%, but the entry valuation is materially less attractive.
-    <br><br>
-
-    <b>Term structure:</b>
-    strict early-mean-reversion patterns are now visible in EOS and ASGI.
-    ASGI remains suppressed.
-    Strict falling-knife structures appear in BDJ, DNP, GLU and RNP.
-    RQI no longer satisfies the strict early-MR rule.
-    <br><br>
-
-    <b>Time Machine:</b>
-    10/08 has been rolled into the historical stack.
-    09/14 rolled off to preserve the 15-session maximum.
-    PDX's holding start remains 10/09, so the 10/08 historical point is intentionally shown without a holding ring.
+    <h1>QTI CEF Matrix</h1>
+    <div class="subtitle">DSM Dual-Sleeve Model · CEF Engine v2.1</div>
+  </div>
+  <div style="text-align:right">
+    <div id="netTag" class="net-tag pos">Net +$2.08</div>
+    <div id="sessionInfo" style="margin-top:4px">Session: <span id="sessionLabel">10/20/2026</span></div>
   </div>
 </div>
 
-<div class="footer">
-  CEF Engine · current entry-opportunity and valuation-dislocation monitor.
+<div id="alerts"></div>
+
+<div class="controls">
+  <div class="ctrl-group">
+    <span class="ctrl-label">Z</span>
+    <button id="bZ1Y" class="active" onclick="setZ('z1y')">1Y</button>
+    <button id="bZ6M" onclick="setZ('z6m')">6M</button>
+    <button id="bZ3M" onclick="setZ('z3m')">3M</button>
+  </div>
+  <div class="ctrl-group">
+    <span class="ctrl-label">Filter</span>
+    <button id="fAll" class="active" onclick="setQFilter('all')">All</button>
+    <button id="fGreen" onclick="setQFilter('green')">Green · Thesis Working</button>
+    <button id="fBlue" onclick="setQFilter('blue')">Blue · Premium Territory</button>
+    <button id="fOrange" onclick="setQFilter('orange')">Orange · Buy Zone</button>
+    <button id="fGray" onclick="setQFilter('gray')">Gray · Worst Setup</button>
+  </div>
+  <div class="ctrl-group">
+    <button id="bHold" onclick="toggleHold()">My Holdings</button>
+  </div>
+  <div class="ctrl-group">
+    <input id="searchBox" placeholder="Search ticker…" oninput="renderChart()">
+  </div>
 </div>
 
-<div class="tooltip" id="tip"></div>
+<div class="qcounts" id="qcounts"></div>
+
+<div id="chartWrap">
+  <svg id="chart"></svg>
+</div>
+
+<div id="tmBar">
+  <span class="tm-label">Time Machine</span>
+  <button class="tm-btn" id="playBtn" onclick="togglePlay()">▶</button>
+  <button class="tm-btn" onclick="tmStep(-1)">◀</button>
+  <input type="range" id="tmSlider" min="0" max="11" value="11" oninput="tmSliderChange(this.value)">
+  <button class="tm-btn" onclick="tmStep(1)">▶</button>
+  <span id="tmDateDisplay">10/20</span>
+  <button id="compareToggle" onclick="toggleCompare()">Compare</button>
+  <span id="compareInfo" style="font-size:10px;color:#888"></span>
+</div>
+
+<div id="detail">
+  <div class="dt-header">
+    <h3 id="dt-title">—</h3>
+    <span class="dt-close" onclick="closeDetail()">×</span>
+  </div>
+  <div class="dt-grid" id="dt-grid"></div>
+</div>
+
+<div id="tooltip"></div>
+
+<!-- Matrix Highlights — immediately above disclaimer per spec -->
+<div id="highlights">
+  <h2>Matrix Highlights — 10/20/2026</h2>
+  <p><span class="hl-label">Broad Tape:</span> Net Price Change <strong>+$2.08</strong> across 25 reporting funds (PDI/PDO absent). First positive tape in several sessions — modest relief after the –$10.07 on 10/14 and –$2.05 on 10/15. Does not reverse the medium-term dislocation trend.</p>
+  <p><span class="hl-label">Quadrant Distribution (Z1Y):</span> Green 4 · Blue 1 · Orange 19 · Gray 1. Distribution unchanged from 10/15; Orange remains dominant at 76% of the universe. DNP holds Gray (Z1Y +0.07, D/P +7.38%).</p>
+  <p><span class="hl-label">Migrations vs 10/15:</span> <strong>NXG: Blue → Orange</strong> (Z1Y +0.94 → –1.97, D/P +2.74% → –8.28%). The most dramatic single-session shift in the window — NXG shed both axes simultaneously. Investigate: Z3M –4.60 is the most extreme reading in the current universe by a wide margin.</p>
+  <p><span class="hl-label">NXG Anomaly — INVESTIGATE:</span> Z3M –4.60 is extreme. Source data shows –4.60 / Z6M –1.66 / Z1Y –1.97 with D/P –8.28% (was +2.74% on 10/15). The 1-week performance in the momentum screenshot reads –16.72% — likely a large ex-distribution or special distribution effect contaminating the short-horizon Z. Qualify NXG short-horizon readings; do not treat Z3M –4.60 as a clean valuation signal until the event is identified and event-window clarified.</p>
+  <p><span class="hl-label">Extreme |Z1Y| ≥ 2.00 (6 funds):</span> ERH –2.58, HTD –2.23, GDV –2.42, RLTY –2.96 (deepest), EOS –2.06, RFI –1.80 (just under but retained for watch). ERH and RFI retain DQ flags.</p>
+  <p><span class="hl-label">Falling-Knife Patterns:</span> ERH Z3M –1.94 &lt; Z6M –2.46 &lt; Z1Y –2.58 (all horizons deteriorating; DQ active); HTD Z3M –1.78 &lt; Z6M –2.35 &lt; Z1Y –2.23; GDV Z3M –1.58 &lt; Z6M –1.78 &lt; Z1Y –2.42; RLTY Z3M –1.87 &lt; Z6M –2.68 &lt; Z1Y –2.96 (no normalization).</p>
+  <p><span class="hl-label">Own-Normal Gaps (widest negative):</span> ASGI –9.27 pts (D/P –6.45% vs. avg +2.82%); PCN –4.49 pts (D/P –0.28% vs. avg +4.21%); GLU –6.24 pts (D/P –7.72% vs. avg –1.48%); RNP –5.16 pts; HTD –4.40 pts.</p>
+  <p><span class="hl-label">Current Holdings Watch:</span> PDX Z1Y –0.02 — nearly at zero; D/P –10.09% keeps it in Orange but the Z axis is essentially neutral. EVENT QUALIFIED status continues (distribution increase confirmed; year-end special unconfirmed). ERH DQ/ROC warning active with persistent falling-knife structure. PCN DQ + leverage anomaly (22.78% vs. ~5.84% historical). BUI D/P –0.12% remains in Orange but thin margin above Gray boundary.</p>
+  <p><span class="hl-label">PDX (10/20):</span> Z1Y –0.02 / D/P –10.09% / Own-Normal Gap –0.02 pts. Z-score essentially at zero — valuation is now at the fund's own 1-year normal. Discount remains significant at –10.09%. Holding since 10/09.</p>
+  <p><span class="hl-label">ASGI:</span> RO VERIFY REQUIRED — rights-offering status must be confirmed against current PIMCO/SEC filings. Z1Y –1.89, Own-Normal Gap –9.27 pts. If RO has expired, signal transitions to clean valuation dislocation under ordinary assessment.</p>
+  <p><span class="hl-label">Momentum (10/21 screenshot — dated 10/21/2026):</span> NXG ST –19.49% is the most extreme negative in the universe — consistent with a large distribution event rather than ordinary price discovery. BME ST +4.45% is the only clearly positive ST reading among holdings. PCN LT –19.38% deepening. RNP LT –10.68% and ERH LT –4.05% both negative, consistent with holding-level deterioration thesis.</p>
+</div>
+
+<div id="disclaimer">All analytical output from this system is for informational purposes only. Not investment advice. Past performance is no guarantee of future results. Always conduct your own due diligence before making investment decisions.</div>
+
+</div>
 
 <script>
-"use strict";
+'use strict';
 
-/*
-  CEF ENGINE / TIME MACHINE
-  Build date: 10/15/2026
-  Current valuation session: 10/14/2026
+const UNIVERSE = ['AIO','ASGI','BDJ','BME','BST','BUI','CSQ','DNP','EOI','EOS',
+  'ERH','ETG','GDV','GLU','HTD','NBXG','NXG','PCN','PDX','RFI',
+  'RLTY','RNP','RQI','UTF','UTG'];
 
-  Current array:
-  [Z3M, Z6M, Z1Y, Current D/P, 52W Avg D/P, Distribution Yield, NAV, Market Price]
+const CURRENT_HOLDINGS = new Set(['PCN','BDJ','EOI','BUI','BME','RQI','RNP',
+  'RFI','AIO','BST','DNP','UTF','ERH','UTG','PDX']);
+const PDX_HOLD_START = '2026-10-09';
 
-  Historical array:
-  [Z1Y, D/P]
+function histIsHeld(ticker, sessionDate) {
+  if (ticker === 'PDX') return sessionDate >= PDX_HOLD_START;
+  return CURRENT_HOLDINGS.has(ticker);
+}
 
-  Latest supplied momentum image:
-  supplied with the 10/15 update, but its crop does not display an as-of date.
-  It is therefore labeled "latest supplied screenshot" rather than silently date-stamped.
+// ── CURRENT DATA (10/20/2026) ─────────────────────────────────────────────────
+const CUR = {
+  AIO: {z3m:-0.71,z6m:-0.50,z1y:-0.52,dp:-10.10,avg52:-9.19,dist:10.80,nav:25.95,price:23.33,lev:12.70,held:true,st:-5.48,lt:12.91},
+  ASGI:{z3m:-1.09,z6m:-1.57,z1y:-1.89,dp:-6.45,avg52:2.82,dist:13.59,nav:20.77,price:19.43,lev:1.04,held:false,flag:'ro',flagLabel:'RO VERIFY REQUIRED',st:-7.75,lt:4.61},
+  BDJ: {z3m:-1.53,z6m:-1.62,z1y:-1.57,dp:-9.04,avg52:-6.37,dist:7.77,nav:10.51,price:9.56,lev:0.12,held:true,st:0.52,lt:11.32},
+  BME: {z3m:-0.61,z6m:-0.34,z1y:0.58,dp:-3.48,avg52:-4.61,dist:6.91,nav:47.14,price:45.50,lev:0.11,held:true,st:4.45,lt:13.35},
+  BST: {z3m:0.30,z6m:0.98,z1y:1.11,dp:-3.81,avg52:-6.13,dist:6.28,nav:49.64,price:47.75,lev:1.43,held:true,st:1.21,lt:21.90},
+  BUI: {z3m:-0.81,z6m:-0.57,z1y:-0.55,dp:-0.12,avg52:1.50,dist:7.26,nav:25.47,price:25.44,lev:1.32,held:true,st:-2.44,lt:15.04},
+  CSQ: {z3m:-0.67,z6m:0.09,z1y:-0.37,dp:-9.28,avg52:-8.85,dist:8.09,nav:22.08,price:20.03,lev:28.51,held:false,st:-1.06,lt:22.29},
+  DNP: {z3m:-1.49,z6m:-0.65,z1y:0.07,dp:7.38,avg52:7.13,dist:7.77,nav:9.35,price:10.04,lev:23.78,held:true,st:-2.58,lt:0.26},
+  EOI: {z3m:-1.13,z6m:-1.09,z1y:-1.17,dp:-7.56,avg52:-4.90,dist:8.20,nav:21.17,price:19.57,lev:null,held:true,st:-1.17,lt:9.74},
+  EOS: {z3m:-1.31,z6m:-1.83,z1y:-2.06,dp:-12.41,avg52:-8.33,dist:8.78,nav:23.77,price:20.82,lev:null,held:false,st:-2.04,lt:0.31},
+  ERH: {z3m:-1.94,z6m:-2.46,z1y:-2.58,dp:-11.83,avg52:-7.96,dist:10.08,nav:11.83,price:10.43,lev:22.31,held:true,flag:'dq',flagLabel:'DQ: ROC-Primary ~64.9%',st:-4.68,lt:-4.05},
+  ETG: {z3m:-1.06,z6m:-1.42,z1y:-1.26,dp:-10.94,avg52:-8.00,dist:6.69,nav:26.04,price:23.19,lev:15.70,held:false,st:0.96,lt:24.33},
+  GDV: {z3m:-1.58,z6m:-1.78,z1y:-2.42,dp:-13.02,avg52:-10.90,dist:6.33,nav:32.71,price:28.45,lev:15.91,held:false,st:-1.44,lt:21.92},
+  GLU: {z3m:-2.17,z6m:-2.15,z1y:-1.65,dp:-7.72,avg52:-1.48,dist:7.57,nav:18.90,price:17.44,lev:17.94,held:false,st:-3.90,lt:10.25},
+  HTD: {z3m:-1.78,z6m:-2.35,z1y:-2.23,dp:-10.45,avg52:-6.05,dist:8.41,nav:25.17,price:22.54,lev:32.42,held:false,st:-4.85,lt:7.90},
+  NBXG:{z3m:1.17,z6m:1.34,z1y:1.04,dp:-12.03,avg52:-13.19,dist:10.57,nav:17.04,price:14.99,lev:null,held:false,flag:'eq',flagLabel:'EVENT QUALIFIED: Distribution Increase',st:-1.35,lt:12.98},
+  NXG: {z3m:-4.60,z6m:-1.66,z1y:-1.97,dp:-8.28,avg52:-0.82,dist:15.93,nav:49.28,price:45.20,lev:33.74,held:false,flag:'eq',flagLabel:'EVENT QUALIFIED: NXG Z3M –4.60 anomaly — large distribution / ex-div effect suspected; short-horizon Z contaminated',st:-19.49,lt:19.57},
+  PCN: {z3m:-0.53,z6m:-1.12,z1y:-1.53,dp:-0.28,avg52:4.21,dist:12.50,nav:10.83,price:10.80,lev:22.78,held:true,flag:'dq',flagLabel:'DQ: Mixed/Ambiguous | Leverage DATA ANOMALY (22.78% vs ~5.84% historical)',st:-2.74,lt:-19.38},
+  PDX: {z3m:-0.39,z6m:-0.32,z1y:-0.02,dp:-10.09,avg52:-10.07,dist:9.00,nav:22.69,price:20.40,lev:22.60,held:true,flag:'eq',flagLabel:'EVENT QUALIFIED: Dist Increase + year-end special unconfirmed',st:-1.25,lt:17.73},
+  PDI: null,
+  PDO: null,
+  RFI: {z3m:-2.00,z6m:-1.74,z1y:-1.80,dp:-6.42,avg52:-2.18,dist:9.15,nav:11.21,price:10.49,lev:0.04,held:true,flag:'dq',flagLabel:'DQ: ROC-Primary ~62%',st:-3.94,lt:-15.08},
+  RLTY:{z3m:-1.87,z6m:-2.68,z1y:-2.96,dp:-12.67,avg52:-8.08,dist:9.44,nav:16.02,price:13.99,lev:34.48,held:false,st:null,lt:null},
+  RNP: {z3m:-1.96,z6m:-1.94,z1y:-1.90,dp:-9.80,avg52:-4.64,dist:8.82,nav:20.52,price:18.51,lev:31.37,held:true,st:-5.12,lt:-10.68},
+  RQI: {z3m:-1.24,z6m:-0.93,z1y:-1.38,dp:-9.19,avg52:-4.58,dist:9.58,nav:12.41,price:11.27,lev:28.01,held:true,st:-4.23,lt:-6.82},
+  UTF: {z3m:-0.60,z6m:-0.10,z1y:0.62,dp:-3.71,avg52:-5.12,dist:7.70,nav:26.69,price:25.70,lev:28.85,held:true,st:-0.26,lt:16.04},
+  UTG: {z3m:-0.97,z6m:-0.19,z1y:-0.27,dp:-0.84,avg52:-0.52,dist:7.34,nav:34.60,price:34.31,lev:22.96,held:true,st:-6.64,lt:13.87}
+};
 
-  INTERACTION CONTRACT:
-  Every rendered .dot must contain exactly one .hit-target.
-  Visible chart children do not intercept pointer events.
-  Runtime audit verifies hit-target parity after every render.
-*/
-
-const BUILD_DATE="10/15/2026";
-const MOM_DATE="Latest supplied screenshot";
-const PREV_MOM_DATE="10/09/2026";
-
-const UNIVERSE=[
-  "AIO","ASGI","BDJ","BME","BST","BUI","CSQ","DNP","EOI","EOS",
-  "ERH","ETG","GDV","GLU","HTD","NBXG","NXG","PCN","PDI","PDO",
-  "PDX","RFI","RLTY","RNP","RQI","UTF","UTG"
+// ── PRIOR HISTORY (11 sessions: 09/01–10/15) ──────────────────────────────────
+// 08/31 rolled off; 10/15 appended as new entry
+const PRIOR = [
+  {label:"09/01",date:"2026-09-01",net:"-$3.48",funds:{
+    AIO:[0.97,-5.63],ASGI:[-0.14,2.77],BDJ:[-0.09,-6.1],BME:[1.49,-2.08],
+    BST:[2.19,-2.23],BUI:[-0.64,-0.04],CSQ:[0.48,-7.62],DNP:[1.86,12.97],
+    EOI:[-0.62,-5.59],EOS:[-1.01,-9.62],ERH:[0.13,-7.45],ETG:[-0.52,-8.5],
+    GDV:[-0.06,-10.77],GLU:[-0.98,-4.12],HTD:[1.6,-3.18],NBXG:[0.79,-11.89],
+    NXG:[1.14,3.01],PCN:[-0.81,3.35],PDX:[0.87,-8.31],RFI:[-0.78,-3.26],
+    RLTY:[-0.69,-8.33],RNP:[-1.01,-6.67],RQI:[-1.0,-6.89],UTF:[1.45,-1.43],UTG:[1.08,0.86]
+  }},
+  {label:"09/02",date:"2026-09-02",net:"-$0.33",funds:{
+    AIO:[0.97,-5.7],ASGI:[0.3,4.58],BDJ:[-0.19,-6.26],BME:[1.28,-2.51],
+    BST:[2.15,-2.28],BUI:[-0.42,0.61],CSQ:[0.62,-7.4],DNP:[1.97,13.43],
+    EOI:[-0.8,-6.09],EOS:[-1.0,-9.6],ERH:[-0.34,-8.07],ETG:[-0.75,-9.0],
+    GDV:[-1.2,-11.52],GLU:[-0.89,-3.83],HTD:[1.54,-3.26],NBXG:[0.05,-12.88],
+    NXG:[0.83,1.86],PCN:[-0.95,2.91],PDX:[1.24,-7.77],RFI:[-0.66,-2.93],
+    RLTY:[-0.68,-8.32],RNP:[-0.95,-6.47],RQI:[-0.91,-6.63],UTF:[1.56,-1.21],UTG:[0.86,0.59]
+  }},
+  {label:"09/03",date:"2026-09-03",net:"+$1.01",funds:{
+    AIO:[0.87,-5.7],ASGI:[-0.24,2.39],BDJ:[-0.57,-6.26],BME:[1.37,-2.51],
+    BST:[1.32,-2.28],BUI:[-0.58,0.61],CSQ:[0.39,-7.79],DNP:[1.5,13.43],
+    EOI:[-0.85,-6.09],EOS:[-1.09,-9.6],ERH:[-0.6,-8.07],ETG:[-0.99,-9.0],
+    GDV:[-1.21,-11.52],GLU:[-1.26,-3.83],HTD:[1.06,-3.26],NBXG:[0.65,-12.88],
+    NXG:[0.26,1.86],PCN:[-1.05,2.91],PDX:[1.4,-7.77],RFI:[-0.74,-3.16],
+    RLTY:[-0.9,-8.65],RNP:[-0.98,-6.6],RQI:[-1.08,-7.17],UTF:[1.21,-2.18],UTG:[0.79,0.5]
+  }},
+  {label:"09/07",date:"2026-09-07",net:"+$1.85",funds:{
+    AIO:[0.58,-6.92],ASGI:[-0.36,1.98],BDJ:[-0.57,-6.87],BME:[1.59,-1.78],
+    BST:[1.72,-3.02],BUI:[-0.42,0.57],CSQ:[0.7,-7.34],DNP:[1.58,12.23],
+    EOI:[-0.91,-6.4],EOS:[-1.09,-9.84],ERH:[0.15,-7.44],ETG:[-0.83,-9.23],
+    GDV:[-1.72,-11.88],GLU:[-0.95,-4.1],HTD:[1.22,-3.79],NBXG:[0.15,-12.77],
+    NXG:[0.5,0.67],PCN:[-0.9,2.99],PDX:[1.1,-8.1],RFI:[-0.67,-3.01],
+    RLTY:[-0.4,-7.94],RNP:[-0.97,-6.59],RQI:[-0.96,-6.85],UTF:[1.21,-2.3],UTG:[0.72,0.42]
+  }},
+  {label:"09/08",date:"2026-09-08",net:"+$0.11",funds:{
+    AIO:[0.18,-7.99],ASGI:[-0.34,2.07],BDJ:[-0.3,-6.45],BME:[1.8,-1.27],
+    BST:[1.24,-3.93],BUI:[-0.36,0.71],CSQ:[0.64,-7.45],DNP:[1.22,11.0],
+    EOI:[-0.79,-6.11],EOS:[-1.0,-9.64],ERH:[0.13,-7.46],ETG:[-0.89,-9.38],
+    GDV:[-1.48,-11.72],GLU:[-1.13,-4.75],HTD:[1.18,-3.84],NBXG:[0.41,-12.44],
+    NXG:[0.26,-0.23],PCN:[-0.92,2.9],PDX:[1.15,-8.05],RFI:[-0.61,-2.86],
+    RLTY:[-1.17,-9.01],RNP:[-1.1,-7.06],RQI:[-0.99,-6.97],UTF:[1.06,-2.74],UTG:[0.38,0.0]
+  }},
+  {label:"09/09",date:"2026-09-09",net:"-$4.64",funds:{
+    AIO:[0.17,-8.06],ASGI:[-0.31,2.22],BDJ:[-1.21,-7.9],BME:[1.34,-2.25],
+    BST:[0.88,-4.63],BUI:[-0.3,0.87],CSQ:[0.59,-7.54],DNP:[1.39,11.62],
+    EOI:[-0.87,-6.34],EOS:[-1.14,-9.98],ERH:[0.14,-7.46],ETG:[-1.09,-9.83],
+    GDV:[-1.34,-11.63],GLU:[-1.16,-4.85],HTD:[1.18,-3.84],NBXG:[0.53,-12.3],
+    NXG:[0.76,1.67],PCN:[-1.06,2.46],PDX:[0.87,-8.5],RFI:[-0.8,-3.4],
+    RLTY:[-1.23,-9.08],RNP:[-0.93,-6.5],RQI:[-0.98,-6.97],UTF:[0.64,-3.82],UTG:[0.94,0.68]
+  }},
+  {label:"09/10",date:"2026-09-10",net:"-$11.29",funds:{
+    AIO:[-0.23,-9.06],ASGI:[-0.31,2.22],BDJ:[-1.6,-8.54],BME:[0.78,-3.44],
+    BST:[0.0,-6.31],BUI:[-0.36,0.68],CSQ:[-0.04,-8.56],DNP:[1.23,11.1],
+    EOI:[-1.33,-7.53],EOS:[-1.83,-11.65],ERH:[-0.17,-7.87],ETG:[-2.03,-11.93],
+    GDV:[-2.67,-12.55],GLU:[-1.22,-5.1],HTD:[0.39,-5.18],NBXG:[-0.66,-13.82],
+    NXG:[0.1,-0.8],PCN:[-1.51,1.05],PDX:[0.85,-8.55],RFI:[-1.43,-5.11],
+    RLTY:[-2.61,-10.94],RNP:[-1.47,-8.36],RQI:[-1.71,-9.21],UTF:[-0.05,-5.47],UTG:[1.16,0.96]
+  }},
+  {label:"09/11",date:"2026-09-11",net:"-$3.61",funds:{
+    AIO:[0.44,-7.44],ASGI:[-0.12,3.01],BDJ:[-1.16,-7.84],BME:[1.33,-2.24],
+    BST:[0.8,-4.77],BUI:[-0.09,1.49],CSQ:[0.56,-7.63],DNP:[1.57,12.28],
+    EOI:[-0.94,-7.12],EOS:[-1.46,-10.62],ERH:[0.58,-6.89],ETG:[-1.34,-10.38],
+    GDV:[-1.68,-11.87],GLU:[-1.04,-4.48],HTD:[1.42,-3.41],NBXG:[0.07,-12.88],
+    NXG:[0.62,1.16],PCN:[-1.22,1.95],PDX:[1.18,-8.09],RFI:[-0.84,-3.59],
+    RLTY:[-1.15,-9.51],RNP:[-0.99,-6.87],RQI:[-1.03,-7.23],UTF:[0.54,-3.93],UTG:[0.72,0.42]
+  }},
+  {label:"10/14",date:"2026-10-14",net:"-$10.07",funds:{
+    AIO:[-0.42,-9.87],ASGI:[-2.23,-7.79],BDJ:[-1.54,-8.88],BME:[0.48,-3.72],
+    BST:[0.81,-4.48],BUI:[-0.41,0.31],CSQ:[-0.47,-9.38],DNP:[-0.13,6.60],
+    EOI:[-1.0,-7.09],EOS:[-2.09,-12.39],ERH:[-2.72,-11.78],ETG:[-1.54,-11.51],
+    GDV:[-2.78,-13.18],GLU:[-1.64,-7.48],HTD:[-2.67,-11.02],NBXG:[0.42,-12.71],
+    NXG:[1.50,4.80],PCN:[-2.62,-3.31],PDX:[-1.99,-12.30],RFI:[-1.82,-6.35],
+    RLTY:[-3.33,-12.81],RNP:[-2.07,-10.13],RQI:[-1.49,-9.41],UTF:[0.90,-3.11],UTG:[0.15,-0.34]
+  }},
+  // 10/15 appended as prior session
+  {label:"10/15",date:"2026-10-15",net:"-$2.05",funds:{
+    AIO:[-0.50,-10.03],ASGI:[-2.10,-7.25],BDJ:[-1.68,-9.14],BME:[0.38,-3.91],
+    BST:[1.19,-3.67],BUI:[-0.53,-0.04],CSQ:[-0.80,-9.79],DNP:[-0.10,6.73],
+    EOI:[-1.19,-7.55],EOS:[-2.16,-12.54],ERH:[-2.84,-12.03],ETG:[-1.48,-11.40],
+    GDV:[-2.69,-13.15],GLU:[-1.55,-7.20],HTD:[-2.41,-10.60],NBXG:[0.16,-13.00],
+    NXG:[0.94,2.74],PCN:[-2.08,-1.74],PDX:[-0.75,-10.91],RFI:[-2.01,-6.83],
+    RLTY:[-3.27,-12.84],RNP:[-1.91,-9.74],RQI:[-1.44,-9.28],UTF:[0.94,-3.00],UTG:[-0.11,-0.65]
+  }}
 ];
 
-const CURRENT_HOLDINGS=new Set([
-  "PCN","BDJ","EOI","BUI","BME","RQI","RNP","RFI",
-  "AIO","BST","DNP","UTF","ERH","UTG","PDX"
-]);
+const CURRENT_IDX = PRIOR.length; // 10 prior + current = index 10 for "current"
 
-/*
-  Only explicit known start date is PDX.
-  Other current holdings are treated as historical holdings throughout
-  the available Time Machine window.
-*/
-const HOLDING_START={
-  PDX:"2026-10-09"
-};
+let zKey = 'z1y';
+let zIdx = 2;
+let qFilter = 'all';
+let holdOnly = false;
+let tmIdx = CURRENT_IDX;
+let comparing = false;
+let compareHistIdx = PRIOR.length - 1;
+let playInterval = null;
 
-const QCOLOR={
-  G:"#1D9E75",
-  B:"#378ADD",
-  O:"#D85A30",
-  X:"#888780"
-};
+const QCOLORS = {green:'#1D9E75',blue:'#378ADD',orange:'#D85A30',gray:'#888780'};
 
-const QNAME={
-  G:"Green · Thesis Working",
-  B:"Blue · Premium Territory",
-  O:"Orange · Buy Zone",
-  X:"Gray · Worst Setup"
-};
-
-const LEV={
-  AIO:12.45,
-  ASGI:1.04,
-  BDJ:0.12,
-  BME:0.12,
-  BST:1.39,
-  BUI:1.32,
-  CSQ:28.42,
-  DNP:23.99,
-  EOI:null,
-  EOS:null,
-  ERH:22.35,
-  ETG:15.77,
-  GDV:15.98,
-  GLU:17.97,
-  HTD:32.61,
-  NBXG:null,
-  NXG:32.29,
-  PCN:22.73,
-  PDI:null,
-  PDO:null,
-  PDX:22.61,
-  RFI:0.04,
-  RLTY:34.96,
-  RNP:31.67,
-  RQI:28.49,
-  UTF:29.12,
-  UTG:22.49
-};
-
-/*
-  Latest supplied momentum screenshot.
-  RLTY is absent from this screenshot, so it is deliberately null.
-*/
-const MOM={
-  BUI:[-2.57,11.38],
-  DNP:[-4.31,-2.99],
-  ERH:[-6.23,-6.98],
-  UTG:[-4.82,10.58],
-  NXG:[-3.37,39.19],
-  UTF:[-2.08,11.79],
-  BDJ:[-0.55,8.50],
-  EOI:[0.99,9.68],
-  HTD:[-7.52,3.71],
-  RQI:[-5.76,-9.81],
-  EOS:[-0.74,-0.13],
-  BME:[2.05,8.41],
-  PDO:[-5.30,-18.41],
-  ASGI:[-9.15,1.69],
-  GLU:[-5.41,5.83],
-  PCN:[-6.33,-23.26],
-  CSQ:[-1.00,20.03],
-  GDV:[-2.69,19.03],
-  PDI:[-6.28,-30.00],
-  ETG:[-0.93,19.62],
-  AIO:[-4.19,10.83],
-  PDX:[-4.89,14.73],
-  RFI:[-5.05,-17.90],
-  NBXG:[0.30,11.66],
-  RNP:[-6.10,-12.86],
-  BST:[3.09,20.44],
-  RLTY:[null,null]
-};
-
-const PREV_MOM={
-  NBXG:[1.20,14.40],
-  ETG:[-0.75,21.32],
-  GDV:[-2.70,19.94],
-  GLU:[-6.08,5.55],
-  NXG:[-2.96,47.60],
-  HTD:[-7.18,5.58],
-  PDX:[-2.35,18.72],
-  PDO:[-3.62,-18.02],
-  PDI:[-5.85,-29.87],
-  PCN:[-4.57,-22.38],
-  EOI:[1.33,11.51],
-  EOS:[-0.62,1.52],
-  BDJ:[-0.40,8.49],
-  BME:[-0.53,6.07],
-  RQI:[-4.87,-7.27],
-  RNP:[-6.59,-11.24],
-  RFI:[-4.98,-15.13],
-  RLTY:[-7.86,null],
-  BST:[1.73,22.96],
-  AIO:[-1.98,17.49],
-  ASGI:[-10.93,1.11],
-  CSQ:[-0.30,22.64],
-  ERH:[-6.21,-6.97],
-  UTG:[-5.16,14.98],
-  BUI:[-2.61,14.43],
-  DNP:[-5.69,-2.86],
-  UTF:[-2.50,12.96]
-};
-
-/*
-  [1D,1W,1M,3M,6M,YTD,1Y,3Y,5Y]
-*/
-const MOMPERF={
-  BUI:[-1.50,0.67,-0.35,-8.04,-4.61,4.53,-0.12,27.77,6.48],
-  DNP:[0.00,1.34,-3.24,-11.02,-6.64,-1.40,-1.70,1.03,-8.29],
-  ERH:[0.00,-1.14,-3.52,-14.04,-15.64,-11.93,-18.48,23.20,-25.64],
-  UTG:[0.00,-2.13,-1.61,-10.74,-15.73,-3.17,-14.49,40.78,5.45],
-  NXG:[-0.67,-2.57,-0.37,-7.18,2.84,8.96,10.93,82.45,24.18],
-  UTF:[0.12,-0.43,2.28,-8.10,-3.92,5.85,5.98,34.46,-5.06],
-  BDJ:[0.63,0.74,-1.65,-0.73,4.26,0.63,5.07,27.54,-7.11],
-  EOI:[0.66,-0.40,2.31,1.07,0.35,-3.16,-2.93,27.38,4.57],
-  HTD:[-0.13,-0.45,-8.34,-13.78,-12.39,-6.13,-11.20,29.43,-7.11],
-  RQI:[0.00,-1.26,-4.77,-11.24,-16.69,-2.83,-9.85,11.59,-31.16],
-  EOS:[0.71,-1.03,1.24,-2.44,-3.37,-9.40,-10.20,21.69,-11.88],
-  BME:[0.00,2.49,0.16,3.50,11.10,7.10,17.50,13.41,-5.69],
-  PDO:[0.00,-2.90,-1.92,-11.08,-12.80,-15.32,-16.17,6.35,-45.41],
-  ASGI:[0.00,0.63,-6.44,-21.65,-21.30,-14.22,-10.21,22.79,-7.52],
-  GLU:[0.00,-0.40,-5.78,-10.05,-12.09,-9.44,-4.12,34.44,-12.84],
-  PCN:[0.00,-2.42,-6.25,-10.33,-12.72,-17.71,-21.11,-6.33,-42.34],
-  CSQ:[0.00,-1.62,-0.89,-0.50,3.77,4.69,5.24,45.55,9.30],
-  GDV:[0.00,-0.21,-3.19,-4.66,-3.29,1.73,4.36,46.22,6.52],
-  PDI:[0.00,-2.44,-1.89,-14.50,-19.79,-21.06,-28.42,-13.65,-47.93],
-  ETG:[-0.13,-0.96,-0.83,-1.00,4.30,-1.34,6.89,47.51,4.45],
-  AIO:[0.00,-5.64,-0.83,-6.09,-0.91,9.98,-0.50,46.12,-13.14],
-  PDX:[-2.93,-4.19,-4.88,-5.60,-2.93,5.91,-10.45,3.38,51.25],
-  RFI:[0.00,0.19,-5.23,-10.10,-12.10,-6.61,-13.20,-0.77,-39.72],
-  NBXG:[0.86,-3.72,2.21,2.42,6.94,5.61,2.42,49.95,-17.39],
-  RNP:[0.00,0.17,-6.72,-11.75,-13.88,-8.46,-16.30,9.12,-31.40],
-  BST:[0.51,-2.55,3.00,8.83,18.41,20.42,17.61,52.80,-9.10],
-  RLTY:[null,null,null,null,null,null,null,null,null]
-};
-
-const EVENT={
-  ASGI:{
-    type:"ro",
-    label:"RO SUPPRESSED",
-    text:"Rights-offering contamination applies to the 10/14 valuation snapshot. Scheduled expiration was 10/15 unless extended. Normal Add ranking is suppressed for this session."
-  },
-
-  PDX:{
-    type:"ca",
-    label:"DISTRIBUTION INCREASE / EVENT QUALIFIED",
-    text:"PDX is now post its 10/13 regular ex-dividend date. The regular monthly distribution increase remains event-qualified. A possible year-end special has been discussed but remains unconfirmed and is not treated as recurring income."
-  },
-
-  NBXG:{
-    type:"ca",
-    label:"DISTRIBUTION CHANGE / EVENT QUALIFIED",
-    text:"Monthly distribution increase remains an event qualification rather than a suppression."
-  },
-
-  PCN:{
-    type:"info",
-    label:"ATM CONTEXT",
-    text:"ATM issuance capacity remains contextual information and does not automatically suppress the valuation signal."
-  },
-
-  ERH:{
-    type:"dq",
-    label:"DQ CAUTION",
-    text:"ROC-primary distribution-quality caution retained."
-  },
-
-  RFI:{
-    type:"dq",
-    label:"DQ CAUTION",
-    text:"ROC-primary distribution-quality caution retained."
-  }
-};
-
-const DQ={
-  PCN:"Mixed / structurally ambiguous; do not classify as NII-primary.",
-  EOI:"Historical reference: LT-Gains Primary / 0% ROC.",
-  RNP:"Historical reference: mixed NII + realized LT gains / 0% ROC.",
-  RFI:"ROC-primary caution retained.",
-  ERH:"ROC-primary caution retained.",
-  BME:"Historical reference: gains-primary, predominantly long-term gains.",
-  BDJ:"Historical reference: mixed NII and long-term gains.",
-  BUI:"Historical reference: mixed income/gains.",
-  BST:"Historical reference: gains-primary.",
-  AIO:"Current source classification pending/unconfirmed.",
-  UTF:"Current source classification pending/unconfirmed.",
-  PDX:"Distribution increase/event qualification; possible year-end special remains unconfirmed."
-};
-
-const CUR={
-  date:"10/14/2026",
-  net:-10.07,
-  data:{
-    AIO:[-0.62,-0.32,-0.42,-9.87,-9.12,10.54,26.54,23.92],
-    ASGI:[-1.40,-1.93,-2.23,-7.79,2.90,13.76,20.80,19.18],
-    BDJ:[-1.67,-1.59,-1.54,-8.88,-6.31,7.79,10.47,9.54],
-    BME:[-0.96,-0.63,0.48,-3.72,-4.68,7.10,46.02,44.31],
-    BST:[0.04,0.77,0.81,-4.48,-6.15,6.15,51.11,48.82],
-    BUI:[-0.43,-0.18,-0.41,0.31,1.53,7.21,25.55,25.63],
-    CSQ:[-0.85,-0.01,-0.47,-9.38,-8.80,8.06,22.18,20.10],
-    DNP:[-2.14,-0.87,-0.13,6.60,7.07,7.92,9.24,9.85],
-    EOI:[-0.62,-0.59,-1.00,-7.09,-4.80,8.06,21.43,19.91],
-    EOS:[-1.46,-2.02,-2.09,-12.39,-8.19,8.62,24.21,21.21],
-    ERH:[-2.33,-2.80,-2.72,-11.78,-7.91,10.09,11.80,10.41],
-    ETG:[-1.94,-2.26,-1.54,-11.51,-7.92,6.77,25.90,22.92],
-    GDV:[-2.08,-2.08,-2.78,-13.18,-10.87,6.37,32.54,28.25],
-    GLU:[-2.27,-2.16,-1.64,-7.48,-1.39,7.56,18.86,17.45],
-    HTD:[-2.39,-2.89,-2.67,-11.02,-5.98,8.54,24.96,22.21],
-    NBXG:[0.32,0.72,0.42,-12.71,-13.18,10.39,17.47,15.25],
-    NXG:[2.15,1.41,1.50,4.80,-0.82,13.05,52.66,55.19],
-    PCN:[-1.93,-2.75,-2.62,-3.31,4.37,12.86,10.86,10.50],
-    PDX:[-2.14,-2.33,-1.99,-12.30,-10.05,9.23,22.68,19.89],
-    RFI:[-2.38,-1.80,-1.82,-6.35,-2.04,9.30,11.02,10.32],
-    RLTY:[-2.42,-3.33,-3.33,-12.81,-7.98,9.65,15.69,13.68],
-    RNP:[-2.80,-2.34,-2.07,-10.13,-4.47,8.98,20.23,18.18],
-    RQI:[-1.31,-1.05,-1.49,-9.41,-4.51,9.84,12.12,10.98],
-    UTF:[-0.29,0.25,0.90,-3.11,-5.20,7.76,26.34,25.52],
-    UTG:[-0.47,0.18,0.15,-0.34,-0.52,7.11,35.54,35.42]
-  }
-};
-
-/*
-  Rolling 15 historical market sessions.
-  10/08 is newly rolled into history.
-  09/14 has rolled off.
-
-  10/02 raw provider values remain exactly as originally supplied.
-*/
-const PRIOR=[
-
-  {
-    date:"09/15/2026",
-    d:{
-      AIO:[-0.52,-9.80],ASGI:[-1.75,-3.57],BDJ:[-0.56,-6.91],BME:[1.14,-2.59],
-      BST:[1.96,-2.41],BUI:[-0.31,0.78],CSQ:[0.24,-8.15],DNP:[0.88,9.94],
-      EOI:[-0.95,-6.58],EOS:[-1.20,-10.12],ERH:[-0.57,-8.40],ETG:[-1.41,-10.62],
-      GDV:[-2.36,-12.37],GLU:[-1.40,-5.80],HTD:[0.73,-4.57],NBXG:[0.07,-12.90],
-      NXG:[0.81,1.93],PCN:[-1.66,0.54],PDX:[-0.67,-10.68],RFI:[-0.96,-3.88],
-      RLTY:[-1.53,-9.44],RNP:[-1.02,-6.84],RQI:[-1.41,-8.35],UTF:[-0.36,-6.20],
-      UTG:[0.75,0.47]
-    }
-  },
-
-  {
-    date:"09/16/2026",
-    d:{
-      AIO:[-0.98,-10.85],ASGI:[-1.67,-3.30],BDJ:[-0.71,-7.16],BME:[1.40,-2.01],
-      BST:[1.58,-3.13],BUI:[-0.52,0.16],CSQ:[0.14,-8.32],DNP:[0.97,10.27],
-      EOI:[-0.95,-6.60],EOS:[-1.37,-10.51],ERH:[-1.46,-9.59],ETG:[-1.39,-10.61],
-      GDV:[-1.51,-11.80],GLU:[-1.35,-5.66],HTD:[0.57,-4.85],NBXG:[-0.10,-13.12],
-      NXG:[0.13,-0.65],PCN:[-1.38,1.35],PDX:[-1.23,-11.44],RFI:[-1.16,-4.43],
-      RLTY:[-1.89,-9.89],RNP:[-1.13,-7.22],RQI:[-1.56,-8.86],UTF:[-0.40,-6.29],
-      UTG:[1.12,0.92]
-    }
-  },
-
-  {
-    date:"09/17/2026",
-    d:{
-      AIO:[-0.98,-10.85],ASGI:[-2.13,-5.23],BDJ:[-0.71,-7.16],BME:[1.40,-2.01],
-      BST:[1.58,-3.13],BUI:[-0.52,0.16],CSQ:[0.12,-8.36],DNP:[0.97,10.27],
-      EOI:[-0.95,-6.60],EOS:[-1.37,-10.51],ERH:[-1.46,-9.59],ETG:[-1.39,-10.61],
-      GDV:[-1.51,-11.80],GLU:[-1.35,-5.66],HTD:[0.57,-4.85],NBXG:[-0.10,-13.12],
-      NXG:[0.13,-0.65],PCN:[-1.38,1.35],PDX:[-1.23,-11.44],RFI:[-0.95,-3.88],
-      RLTY:[-1.91,-9.91],RNP:[-1.02,-6.86],RQI:[-1.58,-8.97],UTF:[-0.22,-5.91],
-      UTG:[0.71,0.42]
-    }
-  },
-
-  {
-    date:"09/18/2026",
-    d:{
-      AIO:[-0.52,-9.83],ASGI:[-2.15,-5.40],BDJ:[-1.04,-7.25],BME:[1.03,-2.37],
-      BST:[1.40,-3.67],BUI:[-0.29,0.82],CSQ:[0.22,-8.24],DNP:[0.79,9.66],
-      EOI:[-1.11,-7.01],EOS:[-1.65,-11.14],ERH:[-1.52,-9.68],ETG:[-1.52,-10.95],
-      GDV:[-1.74,-11.96],GLU:[-1.39,-5.85],HTD:[-0.03,-5.88],NBXG:[-0.90,-14.14],
-      NXG:[0.13,-0.64],PCN:[-1.50,0.00],PDX:[-0.98,-11.47],RFI:[-0.95,-3.91],
-      RLTY:[-1.72,-9.68],RNP:[-1.19,-7.43],RQI:[-1.52,-8.82],UTF:[-0.56,-6.68],
-      UTG:[0.71,0.42]
-    }
-  },
-
-  {
-    date:"09/21/2026",
-    d:{
-      AIO:[-0.54,-9.90],ASGI:[-2.31,-6.15],BDJ:[-1.25,-8.05],BME:[0.96,-2.90],
-      BST:[1.51,-3.20],BUI:[-0.57,0.00],CSQ:[0.39,-8.00],DNP:[0.43,8.38],
-      EOI:[-1.16,-7.14],EOS:[-1.68,-11.23],ERH:[-0.19,-7.96],ETG:[-1.26,-10.39],
-      GDV:[-1.80,-12.03],GLU:[-1.24,-5.40],HTD:[-0.60,-6.87],NBXG:[-0.69,-13.89],
-      NXG:[0.29,0.02],PCN:[-1.96,-0.45],PDX:[-1.51,-11.86],RFI:[-1.17,-4.50],
-      RLTY:[-2.11,-10.15],RNP:[-1.19,-7.43],RQI:[-1.30,-8.17],UTF:[-0.31,-6.12],
-      UTG:[0.02,-0.42]
-    }
-  },
-
-  {
-    date:"09/24/2026",
-    d:{
-      AIO:[-0.89,-10.67],ASGI:[-2.30,-6.45],BDJ:[-0.85,-7.44],BME:[1.18,-2.39],
-      BST:[0.82,-4.54],BUI:[-0.37,0.56],CSQ:[0.25,-8.26],DNP:[1.03,10.55],
-      EOI:[-1.29,-7.50],EOS:[-1.86,-11.60],ERH:[-0.84,-8.82],ETG:[-1.29,-10.54],
-      GDV:[-1.73,-12.01],GLU:[-0.73,-3.64],HTD:[-1.25,-8.00],NBXG:[-0.89,-14.17],
-      NXG:[0.42,0.55],PCN:[-2.63,-2.64],PDX:[-1.73,-12.21],RFI:[-1.32,-4.94],
-      RLTY:[-1.72,-9.71],RNP:[-1.22,-7.54],RQI:[-1.57,-9.12],UTF:[0.03,-5.35],
-      UTG:[0.29,-0.09]
-    }
-  },
-
-  {
-    date:"09/25/2026",
-    d:{
-      AIO:[-0.89,-10.67],ASGI:[-2.30,-6.45],BDJ:[-0.85,-7.86],BME:[1.18,-2.96],
-      BST:[0.82,-4.83],BUI:[-0.37,0.56],CSQ:[0.17,-8.39],DNP:[1.03,10.55],
-      EOI:[-1.29,-7.50],EOS:[-1.86,-11.60],ERH:[-0.84,-8.82],ETG:[-1.29,-10.54],
-      GDV:[-1.73,-12.01],GLU:[-0.73,-3.64],HTD:[-1.25,-8.00],NBXG:[-0.89,-13.95],
-      NXG:[0.42,0.55],PCN:[-2.63,-2.36],PDX:[-1.73,-10.76],RFI:[-1.32,-4.94],
-      RLTY:[-1.72,-9.71],RNP:[-1.22,-7.54],RQI:[-1.57,-9.12],UTF:[0.03,-5.35],
-      UTG:[0.03,-0.40]
-    }
-  },
-
-  {
-    date:"09/28/2026",
-    d:{
-      AIO:[-0.44,-9.75],ASGI:[-2.63,-8.06],BDJ:[-1.56,-8.62],BME:[0.52,-3.77],
-      BST:[-0.29,-6.79],BUI:[-0.79,-0.69],CSQ:[-0.20,-8.91],DNP:[0.88,10.08],
-      EOI:[-1.26,-7.45],EOS:[-2.18,-12.32],ERH:[-1.64,-9.91],ETG:[-1.32,-10.65],
-      GDV:[-2.10,-12.30],GLU:[-1.33,-5.82],HTD:[-1.90,-9.16],NBXG:[-1.15,-14.50],
-      NXG:[0.24,-0.11],PCN:[-2.83,-3.37],PDX:[-0.90,-11.10],RFI:[-1.46,-5.33],
-      RLTY:[-2.97,-11.32],RNP:[-1.40,-8.09],RQI:[-1.75,-9.76],UTF:[-0.29,-6.05],
-      UTG:[-0.83,-1.45]
-    }
-  },
-
-  {
-    date:"09/29/2026",
-    d:{
-      AIO:[-0.38,-9.65],ASGI:[-2.16,-6.14],BDJ:[-1.25,-8.13],BME:[0.60,-3.59],
-      BST:[1.40,-3.35],BUI:[-0.13,1.25],CSQ:[-0.18,-8.89],DNP:[1.12,10.95],
-      EOI:[-1.13,-7.17],EOS:[-2.00,-11.96],ERH:[-1.76,-10.09],ETG:[-1.22,-10.44],
-      GDV:[-2.15,-12.35],GLU:[-1.29,-5.73],HTD:[-1.39,-8.29],NBXG:[-0.61,-13.84],
-      NXG:[0.25,-0.04],PCN:[-2.56,-2.64],PDX:[-0.81,-10.98],RFI:[-1.06,-4.34],
-      RLTY:[-2.58,-10.89],RNP:[-1.14,-7.32],RQI:[-1.50,-9.04],UTF:[0.65,-3.94],
-      UTG:[-0.88,-1.52]
-    }
-  },
-
-  {
-    date:"09/30/2026",
-    d:{
-      AIO:[-0.73,-10.35],ASGI:[-2.13,-6.12],BDJ:[-1.50,-8.56],BME:[0.60,-3.58],
-      BST:[1.25,-3.64],BUI:[-0.36,0.56],CSQ:[0.01,-8.65],DNP:[0.64,9.25],
-      EOI:[-0.93,-6.71],EOS:[-1.94,-11.84],ERH:[-0.49,-8.40],ETG:[-1.08,-10.14],
-      GDV:[-1.88,-12.17],GLU:[-1.17,-5.31],HTD:[-1.56,-8.61],NBXG:[-0.02,-13.12],
-      NXG:[0.72,1.74],PCN:[-2.60,-2.82],PDX:[-0.28,-10.30],RFI:[-1.11,-4.46],
-      RLTY:[-2.57,-10.93],RNP:[-1.28,-7.72],RQI:[-1.63,-9.47],UTF:[1.21,-2.65],
-      UTG:[0.13,-0.29]
-    }
-  },
-
-  {
-    date:"10/01/2026",
-    d:{
-      AIO:[-0.65,-10.21],ASGI:[-2.33,-7.08],BDJ:[-1.30,-8.26],BME:[0.81,-3.11],
-      BST:[2.03,-1.99],BUI:[-1.10,-1.61],CSQ:[-0.28,-9.04],DNP:[-0.36,5.68],
-      EOI:[-1.27,-7.53],EOS:[-2.04,-12.06],ERH:[-1.82,-10.20],ETG:[-1.50,-11.14],
-      GDV:[-2.71,-12.81],GLU:[-1.26,-5.68],HTD:[-1.79,-9.03],NBXG:[0.24,-12.82],
-      NXG:[0.36,0.39],PCN:[-2.42,-2.37],PDX:[0.24,-9.65],RFI:[-1.04,-4.30],
-      RLTY:[-2.40,-10.77],RNP:[-1.28,-7.72],RQI:[-1.53,-9.21],UTF:[1.27,-2.50],
-      UTG:[-0.61,-1.20]
-    }
-  },
-
-  {
-    date:"10/02/2026",
-    quality:"⚠ Original provider snapshot had widespread D/P versus Price/NAV timing mismatch. Stored Z1Y/D/P values are retained exactly as supplied.",
-    d:{
-      AIO:[-0.65,-10.21],ASGI:[-2.37,-7.42],BDJ:[-1.30,-8.26],BME:[0.81,-3.11],
-      BST:[2.03,-1.99],BUI:[-1.10,-1.61],CSQ:[-0.41,-9.22],DNP:[-0.36,5.68],
-      EOI:[-1.27,-7.53],EOS:[-2.04,-12.06],ERH:[-1.82,-10.20],ETG:[-1.50,-11.14],
-      GDV:[-2.71,-12.81],GLU:[-1.26,-5.68],HTD:[-1.79,-9.03],NBXG:[0.24,-12.92],
-      NXG:[0.36,0.39],PCN:[-2.42,-2.37],PDX:[0.24,-9.65],RFI:[-1.06,-4.38],
-      RLTY:[-2.46,-10.89],RNP:[-1.39,-8.04],RQI:[-1.14,-7.99],UTF:[1.79,-1.29],
-      UTG:[0.26,-0.14]
-    }
-  },
-
-  {
-    date:"10/05/2026",
-    d:{
-      AIO:[-1.34,-11.55],ASGI:[-2.23,-6.88],BDJ:[-2.33,-10.02],BME:[-0.24,-5.30],
-      BST:[0.52,-5.09],BUI:[-1.09,-1.63],CSQ:[-1.23,-10.31],DNP:[-0.06,6.76],
-      EOI:[-1.87,-8.98],EOS:[-2.86,-13.86],ERH:[-2.55,-11.26],ETG:[-1.65,-11.54],
-      GDV:[-2.78,-12.92],GLU:[-1.33,-6.01],HTD:[-2.26,-9.95],NBXG:[0.17,-12.93],
-      NXG:[0.35,0.38],PCN:[-2.76,-3.46],PDX:[0.48,-9.39],RFI:[-1.51,-5.48],
-      RLTY:[-3.19,-11.90],RNP:[-2.01,-9.81],RQI:[-1.37,-8.76],UTF:[1.50,-1.91],
-      UTG:[-0.47,-1.04]
-    }
-  },
-
-  {
-    date:"10/06/2026",
-    d:{
-      AIO:[-1.00,-10.91],ASGI:[-1.96,-5.75],BDJ:[-1.88,-9.31],BME:[-0.25,-5.32],
-      BST:[0.58,-4.97],BUI:[-0.74,-0.63],CSQ:[-0.81,-9.77],DNP:[0.28,7.98],
-      EOI:[-1.66,-8.52],EOS:[-2.57,-13.31],ERH:[-2.74,-11.59],ETG:[-1.55,-11.33],
-      GDV:[-2.98,-13.12],GLU:[-1.52,-6.74],HTD:[-1.85,-9.25],NBXG:[0.71,-12.31],
-      NXG:[0.31,0.24],PCN:[-2.37,-2.35],PDX:[0.59,-9.27],RFI:[-1.30,-4.99],
-      RLTY:[-3.15,-11.95],RNP:[-1.90,-9.52],RQI:[-1.31,-8.58],UTF:[1.67,-1.50],
-      UTG:[-1.70,-2.56]
-    }
-  },
-
-  {
-    date:"10/08/2026",
-    d:{
-      AIO:[-0.22,-9.46],
-      ASGI:[-2.28,-7.48],
-      BDJ:[-1.73,-9.12],
-      BME:[0.20,-4.34],
-      BST:[0.79,-4.54],
-      BUI:[-0.23,0.87],
-      CSQ:[-0.61,-9.52],
-      DNP:[0.14,7.52],
-      EOI:[-1.22,-7.54],
-      EOS:[-2.24,-12.67],
-      ERH:[-1.94,-10.54],
-      ETG:[-1.44,-11.16],
-      GDV:[-2.82,-13.08],
-      GLU:[-1.48,-6.71],
-      HTD:[-2.28,-10.11],
-      NBXG:[0.37,-12.73],
-      NXG:[0.36,0.47],
-      PCN:[-2.36,-2.45],
-      PDX:[0.47,-9.46],
-      RFI:[-1.68,-5.94],
-      RLTY:[-3.62,-12.78],
-      RNP:[-1.96,-9.75],
-      RQI:[-0.85,-7.18],
-      UTF:[1.83,-1.04],
-      UTG:[-0.16,-0.69]
-    }
-  }
-
-];
-
-const W=980;
-const H=560;
-const ML=58;
-const MR=18;
-const MT=18;
-const MB=42;
-
-const ZLABEL=["Z3M","Z6M","Z1Y"];
-
-let zIdx=2;
-let qFilter="all";
-let searchTerms=[];
-let holdOnly=false;
-let sesIdx=PRIOR.length;
-let compareMode=false;
-let playTimer=null;
-
-/* ---------- Utilities ---------- */
-
-function qFromZD(z,dp){
-  return z>=0
-    ? (dp<0 ? "G" : "B")
-    : (dp<0 ? "O" : "X");
+function qFromZD(z, dp) {
+  if (z === null || z === undefined || dp === null || dp === undefined) return null;
+  if (z >= 0 && dp < 0) return 'green';
+  if (z >= 0 && dp >= 0) return 'blue';
+  if (z < 0 && dp < 0) return 'orange';
+  return 'gray';
 }
 
-function fmtSigned(v,d=2){
-  if(v==null || !Number.isFinite(v)) return "—";
-  return `${v>0?"+":""}${v.toFixed(d)}`;
+function getZIdx(k) {
+  return k === 'z3m' ? 0 : k === 'z6m' ? 1 : 2;
 }
 
-function fmtNum(v,d=2){
-  if(v==null || !Number.isFinite(v)) return "—";
-  return v.toFixed(d);
+function curQ(t) {
+  const d = CUR[t];
+  if (!d) return null;
+  return qFromZD(d[zKey], d.dp);
 }
 
-function fmtPct(v,d=2){
-  if(v==null || !Number.isFinite(v)) return "—";
-  return `${v.toFixed(d)}%`;
+function histQ(t, sess) {
+  const f = sess.funds[t];
+  if (!f) return null;
+  return qFromZD(f[0], f[1]);
 }
 
-function fmtMoney(v){
-  if(v==null || !Number.isFinite(v)) return "—";
-  return `$${v.toFixed(2)}`;
-}
-
-function fmtLev(t){
-  const v=LEV[t];
-  return v==null ? "—" : `${v.toFixed(2)}%`;
-}
-
-function tickerMatch(t){
-  return searchTerms.length===0 ||
-    searchTerms.some(s=>t.includes(s));
-}
-
-function toISO(mdY){
-  const [m,d,y]=mdY.split("/");
-  return `${y}-${m.padStart(2,"0")}-${d.padStart(2,"0")}`;
-}
-
-function isCurrentHolding(t){
-  return CURRENT_HOLDINGS.has(t);
-}
-
-function isHistoricalHolding(t,date){
-  if(!CURRENT_HOLDINGS.has(t)) return false;
-
-  const start=HOLDING_START[t];
-
-  if(!start) return true;
-
-  return toISO(date)>=start;
-}
-
-/*
-  Hold-only filtering follows today's holdings so PDX history remains visible
-  before the actual entry date. The outer ring separately reflects whether the
-  position had actually started at that historical point.
-*/
-function historicalTracked(t){
-  return CURRENT_HOLDINGS.has(t);
-}
-
-function currentVisible(t,d){
-  const q=qFromZD(d[zIdx],d[3]);
-
+function currentVisible(t, d) {
+  const q = qFromZD(d[zKey], d.dp);
   return (
-    (qFilter==="all" || q===qFilter) &&
+    (qFilter === 'all' || q === qFilter) &&
     (!holdOnly || CURRENT_HOLDINGS.has(t)) &&
     tickerMatch(t)
   );
 }
 
-function historicalVisible(t,z,dp,date){
-  const q=qFromZD(z,dp);
-
-  return (
-    (qFilter==="all" || q===qFilter) &&
-    (!holdOnly || historicalTracked(t)) &&
-    tickerMatch(t)
-  );
+function tickerMatch(t) {
+  const s = document.getElementById('searchBox').value.trim().toUpperCase();
+  return !s || t.includes(s);
 }
 
-function eventMarkup(t){
-  const e=EVENT[t];
+// ── CHART DIMENSIONS ────────────────────────────────────────────────────────────
+const PADDING = {top:30,right:30,bottom:40,left:46};
+let W = 900, H = 520;
 
-  if(!e) return "";
-
-  const icon=
-    e.type==="ro" ? "⚠" :
-    e.type==="dq" ? "⚑" :
-    e.type==="ca" ? "◆" : "ℹ";
-
-  return `
-    <div class="event ${e.type}">
-      <b>${icon} ${e.label}</b> · ${e.text}
-    </div>
-  `;
+function chartDims() {
+  const wrap = document.getElementById('chartWrap');
+  W = wrap ? wrap.clientWidth || 900 : 900;
+  H = Math.max(380, Math.round(W * 0.52));
+  return {W, H, pw: W - PADDING.left - PADDING.right, ph: H - PADDING.top - PADDING.bottom};
 }
 
-function dqText(t){
-  return DQ[t] ||
-    "No special DQ flag in current Engine state.";
+function toSvgX(z, zMin, zMax, pw) {
+  return PADDING.left + ((z - zMin) / (zMax - zMin)) * pw;
+}
+function toSvgY(dp, dpMin, dpMax, ph) {
+  return PADDING.top + ((dpMax - dp) / (dpMax - dpMin)) * ph;
 }
 
-function getExtent(){
-  const zs=[];
-  const ds=[];
+// ── RENDER ALERTS ───────────────────────────────────────────────────────────────
+function buildAlerts() {
+  const alerts = [];
 
-  Object.values(CUR.data).forEach(d=>{
-    zs.push(d[zIdx]);
-    ds.push(d[3],d[4]);
+  // NXG anomaly — top priority
+  alerts.push({cls:'a', html:'<strong>NXG ⚠ EVENT QUALIFIED — INVESTIGATE:</strong> Z3M –4.60 is anomalous (Z6M –1.66 / Z1Y –1.97). 1-week momentum –16.72% in latest screenshot. Suspected large distribution / ex-dividend event contaminating short-horizon Z. Do not treat Z3M as clean valuation signal until event confirmed.'});
+
+  // Green holdings
+  const greenHeld = UNIVERSE.filter(t => CUR[t] && CUR[t].held && qFromZD(CUR[t].z1y, CUR[t].dp) === 'green');
+  if (greenHeld.length > 0) {
+    alerts.push({cls:'g', html:'<strong>Thesis Working (Green · Held):</strong> ' + greenHeld.map(t => {
+      const d = CUR[t];
+      return `${t} Z1Y ${d.z1y >= 0 ? '+' : ''}${d.z1y.toFixed(2)} / D/P ${d.dp.toFixed(2)}%`;
+    }).join(' · ')});
+  }
+
+  // ASGI RO
+  alerts.push({cls:'c', html:'<strong>ASGI RO VERIFY REQUIRED:</strong> Rights-offering status must be confirmed against current PIMCO/SEC filings before changing flag. Z1Y –1.89, Own-Normal Gap –9.27 pts.'});
+
+  // DQ warnings for held funds
+  const dqHeld = UNIVERSE.filter(t => CUR[t] && CUR[t].held && CUR[t].flag === 'dq');
+  if (dqHeld.length > 0) {
+    alerts.push({cls:'dq', html:'<strong>DQ Active (Held Funds):</strong> ' + dqHeld.map(t => `${t} — ${CUR[t].flagLabel}`).join(' | ')});
+  }
+
+  // Extreme Z1Y held funds in Orange
+  const extremeOrangeHeld = UNIVERSE.filter(t => {
+    const d = CUR[t];
+    return d && d.held && Math.abs(d.z1y) >= 2.0 && qFromZD(d.z1y, d.dp) === 'orange' && d.flag !== 'dq';
   });
-
-  PRIOR.forEach(s=>{
-    Object.values(s.d).forEach(([z,dp])=>{
-      zs.push(z);
-      ds.push(dp);
-    });
-  });
-
-  const absZ=Math.max(...zs.map(x=>Math.abs(x)));
-  const zm=Math.max(4,Math.ceil(absZ));
-
-  return {
-    zmin:-zm,
-    zmax:zm,
-    dmin:Math.floor(Math.min(...ds))-1,
-    dmax:Math.ceil(Math.max(...ds))+1
-  };
-}
-
-function momentumDelta(t){
-  const a=MOM[t];
-  const b=PREV_MOM[t];
-
-  if(!a || !b){
-    return [null,null];
+  if (extremeOrangeHeld.length > 0) {
+    alerts.push({cls:'r', html:'<strong>Extreme Z1Y ≥ 2.00 (Held · Orange · No DQ flag):</strong> ' + extremeOrangeHeld.map(t => `${t} Z1Y ${CUR[t].z1y.toFixed(2)}`).join(' · ')});
   }
 
-  return [
-    a[0]==null || b[0]==null ? null : a[0]-b[0],
-    a[1]==null || b[1]==null ? null : a[1]-b[1]
-  ];
+  // PDX event
+  alerts.push({cls:'c', html:'<strong>PDX EVENT QUALIFIED:</strong> Distribution increase confirmed. 10/13 ex-div mechanical effect isolated. Z1Y –0.02 — essentially at own-normal. Year-end special unconfirmed by PIMCO. D/P –10.09%.'});
+
+  // BUI thin margin
+  alerts.push({cls:'a', html:'<strong>BUI:</strong> D/P –0.12% — thin margin above Gray boundary. Z1Y –0.55. Monitor for quadrant flip.'});
+
+  // Net price positive
+  alerts.push({cls:'p', html:'<strong>Broad Tape +$2.08:</strong> First positive net price change in the recent window. 25 funds reporting. PDI / PDO absent.'});
+
+  return alerts;
 }
 
-/* ---------- Chart grid ---------- */
-
-function drawGrid(s,ex,Xf,Yf,isCurrentSession){
-
-  s+=`
-    <rect x="${Xf(0)}" y="${Yf(0)}"
-      width="${W-MR-Xf(0)}"
-      height="${Yf(ex.dmin)-Yf(0)}"
-      fill="${QCOLOR.G}" opacity=".055"/>
-  `;
-
-  s+=`
-    <rect x="${Xf(0)}" y="${MT}"
-      width="${W-MR-Xf(0)}"
-      height="${Yf(0)-MT}"
-      fill="${QCOLOR.B}" opacity=".055"/>
-  `;
-
-  s+=`
-    <rect x="${ML}" y="${Yf(0)}"
-      width="${Xf(0)-ML}"
-      height="${Yf(ex.dmin)-Yf(0)}"
-      fill="${QCOLOR.O}" opacity=".055"/>
-  `;
-
-  s+=`
-    <rect x="${ML}" y="${MT}"
-      width="${Xf(0)-ML}"
-      height="${Yf(0)-MT}"
-      fill="${QCOLOR.X}" opacity=".075"/>
-  `;
-
-  for(let z=Math.ceil(ex.zmin);z<=Math.floor(ex.zmax);z++){
-    s+=`
-      <line x1="${Xf(z)}" y1="${MT}"
-            x2="${Xf(z)}" y2="${H-MB}"
-            stroke="${z===0?"#B6BDC3":"#EAEDEF"}"
-            stroke-width="${z===0?1.5:1}"/>
-
-      <text x="${Xf(z)}" y="${H-MB+17}"
-            font-size="10"
-            fill="#8A929A"
-            text-anchor="middle">${z}</text>
-    `;
-  }
-
-  const dstep=(ex.dmax-ex.dmin)>22 ? 5 : 2;
-
-  for(
-    let d=Math.ceil(ex.dmin/dstep)*dstep;
-    d<=ex.dmax;
-    d+=dstep
-  ){
-    s+=`
-      <line x1="${ML}" y1="${Yf(d)}"
-            x2="${W-MR}" y2="${Yf(d)}"
-            stroke="${d===0?"#B6BDC3":"#EAEDEF"}"
-            stroke-width="${d===0?1.5:1}"/>
-
-      <text x="${ML-7}" y="${Yf(d)+3}"
-            font-size="10"
-            fill="#8A929A"
-            text-anchor="end">${d}%</text>
-    `;
-  }
-
-  const xLabel=isCurrentSession
-    ? ZLABEL[zIdx]
-    : "Z1Y · historical";
-
-  s+=`
-    <text x="${W/2}" y="${H-7}"
-          font-size="11"
-          fill="#5A636B"
-          text-anchor="middle">
-      Z-Score (${xLabel})
-    </text>
-
-    <text x="15" y="${H/2}"
-          font-size="11"
-          fill="#5A636B"
-          text-anchor="middle"
-          transform="rotate(-90 15 ${H/2})">
-      Discount / Premium %
-    </text>
-
-    <text x="${Xf(ex.zmin)+(Xf(0)-Xf(ex.zmin))/2}"
-          y="${Yf(ex.dmin)-12}"
-          font-size="10"
-          font-weight="700"
-          fill="${QCOLOR.O}"
-          opacity=".7"
-          text-anchor="middle">
-      Orange · Buy Zone
-    </text>
-
-    <text x="${Xf(0)+(Xf(ex.zmax)-Xf(0))/2}"
-          y="${Yf(ex.dmin)-12}"
-          font-size="10"
-          font-weight="700"
-          fill="${QCOLOR.G}"
-          opacity=".7"
-          text-anchor="middle">
-      Green · Thesis Working
-    </text>
-
-    <text x="${Xf(ex.zmin)+(Xf(0)-Xf(ex.zmin))/2}"
-          y="${MT+15}"
-          font-size="10"
-          font-weight="700"
-          fill="${QCOLOR.X}"
-          opacity=".75"
-          text-anchor="middle">
-      Gray · Worst Setup
-    </text>
-
-    <text x="${Xf(0)+(Xf(ex.zmax)-Xf(0))/2}"
-          y="${MT+15}"
-          font-size="10"
-          font-weight="700"
-          fill="${QCOLOR.B}"
-          opacity=".75"
-          text-anchor="middle">
-      Blue · Premium Territory
-    </text>
-  `;
-
-  return s;
-}
-
-/* ---------- Bubble interaction geometry ---------- */
-
-function hitTarget(cx,cy){
-  return `
-    <circle class="hit-target"
-            cx="${cx}"
-            cy="${cy}"
-            r="15"/>
-  `;
-}
-
-/* ---------- Rendering ---------- */
-
-function render(){
-  const N=PRIOR.length;
-  const isCur=sesIdx===N;
-
-  const ex=getExtent();
-
-  const Xf=z=>
-    ML+(z-ex.zmin)/(ex.zmax-ex.zmin)*(W-ML-MR);
-
-  const Yf=d=>
-    MT+(ex.dmax-d)/(ex.dmax-ex.dmin)*(H-MT-MB);
-
-  let s="";
-
-  s=drawGrid(
-    s,
-    ex,
-    Xf,
-    Yf,
-    isCur || compareMode
-  );
-
-  if(compareMode && sesIdx<N){
-
-    const ps=PRIOR[sesIdx];
-
-    /*
-      Compare mode is always Z1Y-to-Z1Y.
-    */
-    Object.keys(CUR.data).forEach(t=>{
-      const pd=ps.d[t];
-
-      if(!pd) return;
-
-      const cd=CUR.data[t];
-
-      const cv=currentVisible(t,cd);
-      const hv=historicalVisible(
-        t,
-        pd[0],
-        pd[1],
-        ps.date
-      );
-
-      if(!cv && !hv) return;
-
-      const cx=Xf(cd[2]);
-      const cy=Yf(cd[3]);
-
-      const px=Xf(pd[0]);
-      const py=Yf(pd[1]);
-
-      if(Math.hypot(cx-px,cy-py)>3){
-        s+=`
-          <line x1="${px}" y1="${py}"
-                x2="${cx}" y2="${cy}"
-                stroke="#6366F1"
-                stroke-width="1.3"
-                stroke-dasharray="4,3"
-                opacity=".42"/>
-        `;
-      }
-    });
-
-    Object.keys(ps.d).forEach(t=>{
-      const [z,dp]=ps.d[t];
-
-      const q=qFromZD(z,dp);
-      const vis=historicalVisible(
-        t,
-        z,
-        dp,
-        ps.date
-      );
-
-      const cx=Xf(z);
-      const cy=Yf(dp);
-
-      s+=`
-        <g class="dot${vis?"":" dimmed"}"
-           data-t="${t}"
-           data-mode="prior">
-
-          ${hitTarget(cx,cy)}
-
-          ${isHistoricalHolding(t,ps.date)
-            ? `
-              <circle cx="${cx}" cy="${cy}" r="8.0"
-                      fill="none"
-                      stroke="${QCOLOR[q]}"
-                      stroke-width="1.2"
-                      opacity=".48"/>
-            `
-            : ""}
-
-          <circle cx="${cx}" cy="${cy}" r="4.5"
-                  fill="${QCOLOR[q]}"
-                  opacity=".50"/>
-
-          <text x="${cx}" y="${cy-8}"
-                font-size="8"
-                font-weight="600"
-                text-anchor="middle"
-                fill="#6A7280">${t}</text>
-
-        </g>
-      `;
-    });
-
-    Object.keys(CUR.data).forEach(t=>{
-      const d=CUR.data[t];
-
-      const z=d[2];
-      const dp=d[3];
-      const avg=d[4];
-
-      const q=qFromZD(z,dp);
-      const vis=currentVisible(t,d);
-
-      const cx=Xf(z);
-      const cy=Yf(dp);
-      const ay=Yf(avg);
-
-      s+=`
-        <g class="dot${vis?"":" dimmed"}"
-           data-t="${t}"
-           data-mode="current">
-
-          ${hitTarget(cx,cy)}
-
-          <line x1="${cx}" y1="${cy}"
-                x2="${cx}" y2="${ay}"
-                stroke="${QCOLOR[q]}"
-                stroke-width="1"
-                stroke-dasharray="3,3"
-                opacity=".45"/>
-
-          <circle cx="${cx}" cy="${ay}" r="2.2"
-                  fill="white"
-                  stroke="${QCOLOR[q]}"
-                  stroke-width="1"
-                  opacity=".65"/>
-
-          <circle cx="${cx}" cy="${cy}" r="8.0"
-                  fill="white"
-                  opacity=".90"/>
-
-          ${isCurrentHolding(t)
-            ? `
-              <circle cx="${cx}" cy="${cy}" r="10"
-                      fill="none"
-                      stroke="${QCOLOR[q]}"
-                      stroke-width="1.6"
-                      opacity=".95"/>
-            `
-            : ""}
-
-          <circle cx="${cx}" cy="${cy}" r="6.2"
-                  fill="${QCOLOR[q]}"/>
-
-          <text x="${cx}" y="${cy-11.5}"
-                font-size="9.5"
-                font-weight="800"
-                text-anchor="middle"
-                fill="#1E2429"
-                stroke="white"
-                stroke-width="2.7"
-                paint-order="stroke">${t}</text>
-
-        </g>
-      `;
-    });
-
-    document.getElementById("chart").innerHTML=s;
-
-    bindDotsCompare(ps);
-
-    document.getElementById("seslabel").textContent=
-      `Compare: 10/14/2026 current Z1Y/D/P vs ${ps.date}`;
-
-  }else if(isCur){
-
-    Object.keys(CUR.data).forEach(t=>{
-      const d=CUR.data[t];
-
-      const z=d[zIdx];
-      const dp=d[3];
-      const avg=d[4];
-
-      const q=qFromZD(z,dp);
-      const vis=currentVisible(t,d);
-
-      const cx=Xf(z);
-      const cy=Yf(dp);
-      const ay=Yf(avg);
-
-      s+=`
-        <g class="dot${vis?"":" dimmed"}"
-           data-t="${t}"
-           data-mode="current">
-
-          ${hitTarget(cx,cy)}
-
-          <line x1="${cx}" y1="${cy}"
-                x2="${cx}" y2="${ay}"
-                stroke="${QCOLOR[q]}"
-                stroke-width="1"
-                stroke-dasharray="3,3"
-                opacity=".50"/>
-
-          <circle cx="${cx}" cy="${ay}" r="2.2"
-                  fill="white"
-                  stroke="${QCOLOR[q]}"
-                  stroke-width="1"
-                  opacity=".65"/>
-
-          <circle cx="${cx}" cy="${cy}" r="8.0"
-                  fill="white"
-                  opacity=".90"/>
-
-          ${isCurrentHolding(t)
-            ? `
-              <circle cx="${cx}" cy="${cy}" r="10"
-                      fill="none"
-                      stroke="${QCOLOR[q]}"
-                      stroke-width="1.6"
-                      opacity=".96"/>
-            `
-            : ""}
-
-          <circle cx="${cx}" cy="${cy}" r="6.2"
-                  fill="${QCOLOR[q]}"/>
-
-          <text x="${cx}" y="${cy-11.5}"
-                font-size="9.5"
-                font-weight="800"
-                text-anchor="middle"
-                fill="#1E2429"
-                stroke="white"
-                stroke-width="2.7"
-                paint-order="stroke">${t}</text>
-
-        </g>
-      `;
-    });
-
-    document.getElementById("chart").innerHTML=s;
-
-    bindDotsCurrent();
-
-    document.getElementById("seslabel").textContent=
-      `Showing: 10/14/2026 current valuation · ${ZLABEL[zIdx]}`;
-
-  }else{
-
-    const ps=PRIOR[sesIdx];
-
-    Object.keys(ps.d).forEach(t=>{
-      const [z,dp]=ps.d[t];
-
-      const q=qFromZD(z,dp);
-
-      const vis=historicalVisible(
-        t,
-        z,
-        dp,
-        ps.date
-      );
-
-      const cx=Xf(z);
-      const cy=Yf(dp);
-
-      s+=`
-        <g class="dot${vis?"":" dimmed"}"
-           data-t="${t}"
-           data-mode="prior">
-
-          ${hitTarget(cx,cy)}
-
-          ${isHistoricalHolding(t,ps.date)
-            ? `
-              <circle cx="${cx}" cy="${cy}" r="9.6"
-                      fill="none"
-                      stroke="${QCOLOR[q]}"
-                      stroke-width="1.5"
-                      opacity=".75"/>
-            `
-            : ""}
-
-          <circle cx="${cx}" cy="${cy}" r="6.1"
-                  fill="${QCOLOR[q]}"/>
-
-          <text x="${cx}" y="${cy-11}"
-                font-size="9.3"
-                font-weight="700"
-                text-anchor="middle"
-                fill="#3A4249"
-                stroke="white"
-                stroke-width="2.4"
-                paint-order="stroke">${t}</text>
-
-        </g>
-      `;
-    });
-
-    document.getElementById("chart").innerHTML=s;
-
-    bindDotsHistorical(ps);
-
-    document.getElementById("seslabel").textContent=
-      `Showing: ${ps.date} historical Z1Y / D/P`;
-  }
-
-  updateSessionWarning();
-  updateCompareBanner();
-  updateNavState();
-  renderSnap();
-  runtimeAudit();
-}
-
-/* ---------- Tooltips ---------- */
-
-const tip=document.getElementById("tip");
-
-function positionTip(e){
-  const pad=14;
-
-  let x=e.clientX+pad;
-  let y=e.clientY+10;
-
-  const maxX=window.innerWidth-370;
-  const maxY=window.innerHeight-210;
-
-  if(x>maxX){
-    x=Math.max(
-      8,
-      e.clientX-355
-    );
-  }
-
-  if(y>maxY){
-    y=Math.max(
-      8,
-      e.clientY-180
-    );
-  }
-
-  tip.style.left=`${x}px`;
-  tip.style.top=`${y}px`;
-}
-
-function currentTooltip(t,d){
-  const m=MOM[t] || null;
-  const md=momentumDelta(t);
-
-  const q=qFromZD(
-    d[zIdx],
-    d[3]
-  );
-
-  const gap=d[3]-d[4];
-
-  const ev=EVENT[t]
-    ? `
-      <br>
-      <span style="color:#FCD34D;font-weight:700">
-        ${EVENT[t].label}
-      </span>
-    `
-    : "";
-
-  let momLine="Momentum unavailable in latest screenshot";
-
-  if(m && m[0]!=null){
-    momLine=
-      `ST ${fmtPct(m[0])} (${md[0]==null?"—":fmtSigned(md[0])} Δ) · `+
-      `LT ${m[1]==null?"—":fmtPct(m[1])} (${md[1]==null?"—":fmtSigned(md[1])} Δ)`;
-  }
-
-  return `
-    <b>${t}</b> · ${QNAME[q]}${ev}<br>
-    Price ${fmtMoney(d[7])} · NAV ${fmtMoney(d[6])} · Yield ${fmtPct(d[5])}<br>
-    D/P ${fmtPct(d[3])} · avg ${fmtPct(d[4])} · gap ${fmtSigned(gap)} pt<br>
-    Z3M ${fmtNum(d[0])} · Z6M ${fmtNum(d[1])} · Z1Y ${fmtNum(d[2])}<br>
-    ${momLine}<br>
-    Leverage ${fmtLev(t)} · ${isCurrentHolding(t)?"★ Holding":"Not holding"}<br>
-    Momentum source: ${MOM_DATE}
-  `;
-}
-
-function historicalTooltip(t,pd,ps){
-  const current=CUR.data[t];
-
-  const dz=current
-    ? current[2]-pd[0]
-    : null;
-
-  const ddp=current
-    ? current[3]-pd[1]
-    : null;
-
-  const q=qFromZD(
-    pd[0],
-    pd[1]
-  );
-
-  let holdText="Not a historical holding";
-
-  if(isHistoricalHolding(t,ps.date)){
-    holdText="★ Historical holding ring";
-  }else if(CURRENT_HOLDINGS.has(t)){
-    holdText="Tracked current holding · not yet held on this session";
-  }
-
-  return `
-    <b>${t}</b> · ${ps.date}<br>
-    ${QNAME[q]}<br>
-    Z1Y ${fmtNum(pd[0])} · D/P ${fmtPct(pd[1])}<br>
-    To 10/14: ΔZ1Y ${dz==null?"—":fmtSigned(dz)} ·
-    ΔD/P ${ddp==null?"—":fmtSigned(ddp)+" pt"}<br>
-    ${holdText}
-    ${ps.quality
-      ? `<br><span style="color:#FCD34D">${ps.quality}</span>`
-      : ""}
-  `;
-}
-
-function showTip(e,html){
-  tip.style.display="block";
-  positionTip(e);
-  tip.innerHTML=html;
-}
-
-function hideTip(){
-  tip.style.display="none";
-}
-
-function bindDotsCurrent(){
-  document
-    .querySelectorAll("#chart .dot:not(.dimmed)")
-    .forEach(g=>{
-
-      const t=g.dataset.t;
-
-      if(!t) return;
-
-      const d=CUR.data[t];
-
-      if(!d) return;
-
-      g.addEventListener(
-        "pointermove",
-        e=>showTip(
-          e,
-          currentTooltip(t,d)
-        )
-      );
-
-      g.addEventListener(
-        "pointerleave",
-        hideTip
-      );
-
-      g.addEventListener(
-        "click",
-        ()=>showCurrentDetail(t)
-      );
-    });
-}
-
-function bindDotsHistorical(ps){
-  document
-    .querySelectorAll("#chart .dot:not(.dimmed)")
-    .forEach(g=>{
-
-      const t=g.dataset.t;
-      const pd=ps.d[t];
-
-      if(!t || !pd) return;
-
-      g.addEventListener(
-        "pointermove",
-        e=>showTip(
-          e,
-          historicalTooltip(t,pd,ps)
-        )
-      );
-
-      g.addEventListener(
-        "pointerleave",
-        hideTip
-      );
-
-      g.addEventListener(
-        "click",
-        ()=>showHistoricalDetail(t,ps)
-      );
-    });
-}
-
-function bindDotsCompare(ps){
-  document
-    .querySelectorAll("#chart .dot:not(.dimmed)")
-    .forEach(g=>{
-
-      const t=g.dataset.t;
-      const mode=g.dataset.mode;
-
-      if(!t) return;
-
-      const d=CUR.data[t];
-      const pd=ps.d[t];
-
-      g.addEventListener(
-        "pointermove",
-        e=>{
-
-          if(mode==="current" && d){
-            showTip(
-              e,
-              currentTooltip(t,d)
-            );
-
-            return;
-          }
-
-          if(mode==="prior" && pd){
-            showTip(
-              e,
-              historicalTooltip(t,pd,ps)
-            );
-          }
-        }
-      );
-
-      g.addEventListener(
-        "pointerleave",
-        hideTip
-      );
-
-      g.addEventListener(
-        "click",
-        ()=>{
-
-          if(mode==="current" && d){
-            showCurrentDetail(
-              t,
-              ps
-            );
-
-            return;
-          }
-
-          if(mode==="prior" && pd){
-            showHistoricalDetail(
-              t,
-              ps,
-              true
-            );
-          }
-        }
-      );
-    });
-}
-
-/* ---------- Detail panels ---------- */
-
-function showCurrentDetail(t,compareSession=null){
-  const d=CUR.data[t];
-
-  if(!d) return;
-
-  const prev=PRIOR[PRIOR.length-1].d[t];
-  const m=MOM[t] || null;
-  const p=MOMPERF[t] || null;
-  const md=momentumDelta(t);
-
-  const dz=prev
-    ? d[2]-prev[0]
-    : null;
-
-  const ddp=prev
-    ? d[3]-prev[1]
-    : null;
-
-  const gap=d[3]-d[4];
-
-  const q=qFromZD(
-    d[zIdx],
-    d[3]
-  );
-
-  const holdingText=
-    isCurrentHolding(t)
-      ? (
-          HOLDING_START[t]
-            ? `★ Current holding · tracked from ${HOLDING_START[t]}`
-            : "★ Current holding"
-        )
-      : "Not currently held";
-
-  let compareMarkup="";
-
-  if(compareSession && compareSession.d[t]){
-    const pd=compareSession.d[t];
-
-    compareMarkup=`
-      <div style="
-        margin-top:9px;
-        padding-top:8px;
-        border-top:1px solid #DEE3E7;
-        font-size:12px">
-
-        <b>Compare baseline · ${compareSession.date}</b> —
-        Z1Y ${fmtNum(pd[0])} ·
-        D/P ${fmtPct(pd[1])} ·
-        to current ΔZ1Y ${fmtSigned(d[2]-pd[0])} ·
-        ΔD/P ${fmtSigned(d[3]-pd[1])} pt
-      </div>
-    `;
-  }
-
-  let momRows=`
-    <tr>
-      <td>ST momentum</td>
-      <td class="v">—</td>
-      <td>LT momentum</td>
-      <td class="v">—</td>
-      <td>Momentum source</td>
-      <td class="v">${MOM_DATE}</td>
-    </tr>
-  `;
-
-  if(m && m[0]!=null){
-    momRows=`
-      <tr>
-        <td>ST momentum</td>
-        <td class="v">${fmtPct(m[0])}</td>
-
-        <td>LT momentum</td>
-        <td class="v">${m[1]==null?"—":fmtPct(m[1])}</td>
-
-        <td>Momentum source</td>
-        <td class="v">${MOM_DATE}</td>
-      </tr>
-
-      <tr>
-        <td>Δ ST vs ${PREV_MOM_DATE}</td>
-        <td class="v">${md[0]==null?"—":fmtSigned(md[0])+" pt"}</td>
-
-        <td>Δ LT vs ${PREV_MOM_DATE}</td>
-        <td class="v">${md[1]==null?"—":fmtSigned(md[1])+" pt"}</td>
-
-        <td>1-week</td>
-        <td class="v">${p&&p[1]!=null?fmtPct(p[1]):"—"}</td>
-      </tr>
-
-      <tr>
-        <td>1-month</td>
-        <td class="v">${p&&p[2]!=null?fmtPct(p[2]):"—"}</td>
-
-        <td>3-month</td>
-        <td class="v">${p&&p[3]!=null?fmtPct(p[3]):"—"}</td>
-
-        <td>6-month</td>
-        <td class="v">${p&&p[4]!=null?fmtPct(p[4]):"—"}</td>
-      </tr>
-
-      <tr>
-        <td>YTD</td>
-        <td class="v">${p&&p[5]!=null?fmtPct(p[5]):"—"}</td>
-
-        <td>1-year</td>
-        <td class="v">${p&&p[6]!=null?fmtPct(p[6]):"—"}</td>
-
-        <td>3-year</td>
-        <td class="v">${p&&p[7]!=null?fmtPct(p[7]):"—"}</td>
-      </tr>
-    `;
-  }
-
-  const el=document.getElementById("detail");
-
-  el.style.display="block";
-
-  el.innerHTML=`
-    ${eventMarkup(t)}
-
-    <div>
-      <b style="font-size:15px">${t}</b>
-
-      <span class="qcount"
-            style="background:${QCOLOR[q]}">
-        ${QNAME[q]}
-      </span>
-
-      <span style="font-size:12px;font-weight:700">
-        ${holdingText}
-      </span>
-    </div>
-
-    <table>
-
-      <tr>
-        <td>Price</td>
-        <td class="v">${fmtMoney(d[7])}</td>
-
-        <td>NAV</td>
-        <td class="v">${fmtMoney(d[6])}</td>
-
-        <td>Distribution yield</td>
-        <td class="v">${fmtPct(d[5])}</td>
-      </tr>
-
-      <tr>
-        <td>Current D/P</td>
-        <td class="v">${fmtPct(d[3])}</td>
-
-        <td>52-week avg D/P</td>
-        <td class="v">${fmtPct(d[4])}</td>
-
-        <td>Own-Normal Gap</td>
-        <td class="v">${fmtSigned(gap)} pt</td>
-      </tr>
-
-      <tr>
-        <td>Z3M</td>
-        <td class="v">${fmtNum(d[0])}</td>
-
-        <td>Z6M</td>
-        <td class="v">${fmtNum(d[1])}</td>
-
-        <td>Z1Y</td>
-        <td class="v">${fmtNum(d[2])}</td>
-      </tr>
-
-      <tr>
-        <td>Δ Z1Y vs 10/08</td>
-        <td class="v">${dz==null?"—":fmtSigned(dz)}</td>
-
-        <td>Δ D/P vs 10/08</td>
-        <td class="v">${ddp==null?"—":fmtSigned(ddp)+" pt"}</td>
-
-        <td>Effective leverage</td>
-        <td class="v">${fmtLev(t)}</td>
-      </tr>
-
-      ${momRows}
-
-      <tr>
-        <td>Distribution quality</td>
-        <td class="v" colspan="5">
-          ${dqText(t)}
-        </td>
-      </tr>
-
-      <tr>
-        <td>Corporate/event status</td>
-        <td class="v" colspan="5">
-          ${EVENT[t]
-            ? EVENT[t].label
-            : "No active special event flag"}
-        </td>
-      </tr>
-
-    </table>
-
-    ${compareMarkup}
-  `;
-
-  el.scrollIntoView({
-    behavior:"smooth",
-    block:"nearest"
-  });
-}
-
-function showHistoricalDetail(
-  t,
-  ps,
-  fromCompare=false
-){
-  const pd=ps.d[t];
-
-  if(!pd) return;
-
-  const q=qFromZD(
-    pd[0],
-    pd[1]
-  );
-
-  const current=CUR.data[t];
-
-  let holdingText="Not a historical holding";
-
-  if(isHistoricalHolding(t,ps.date)){
-    holdingText="★ Historical holding ring";
-  }else if(CURRENT_HOLDINGS.has(t)){
-    holdingText="Tracked current holding · not yet held on this historical session";
-  }
-
-  const deltaMarkup=current
-    ? `
-      <tr>
-        <td>To 10/14 Δ Z1Y</td>
-        <td class="v">${fmtSigned(current[2]-pd[0])}</td>
-
-        <td>To 10/14 Δ D/P</td>
-        <td class="v">${fmtSigned(current[3]-pd[1])} pt</td>
-      </tr>
-    `
-    : "";
-
-  const qualityMarkup=ps.quality
-    ? `
-      <div class="event info">
-        <b>Data-quality note</b> · ${ps.quality}
-      </div>
-    `
-    : "";
-
-  const el=document.getElementById("detail");
-
-  el.style.display="block";
-
-  el.innerHTML=`
-    ${qualityMarkup}
-
-    <div>
-      <b style="font-size:15px">${t}</b>
-
-      <span class="qcount"
-            style="background:${QCOLOR[q]}">
-        ${QNAME[q]}
-      </span>
-
-      <span style="font-size:12px;font-weight:700">
-        ${holdingText}
-      </span>
-    </div>
-
-    <div class="small" style="margin-top:5px">
-      Historical session ${ps.date}.
-      Historical Time Machine points retain Z1Y / D/P only.
-    </div>
-
-    <table>
-      <tr>
-        <td>Z1Y</td>
-        <td class="v">${fmtNum(pd[0])}</td>
-
-        <td>D/P</td>
-        <td class="v">${fmtPct(pd[1])}</td>
-      </tr>
-
-      ${deltaMarkup}
-    </table>
-
-    ${fromCompare
-      ? `
-        <div class="small" style="margin-top:8px">
-          Compare mode is displaying this historical point against
-          current 10/14 Z1Y / D/P.
-        </div>
-      `
-      : ""}
-  `;
-
-  el.scrollIntoView({
-    behavior:"smooth",
-    block:"nearest"
-  });
-}
-
-/* ---------- Snapshot cards ---------- */
-
-function renderSnap(){
-  const N=PRIOR.length;
-  const isCur=sesIdx===N;
-
-  let pool=[];
-
-  if(isCur || compareMode){
-
-    pool=Object.keys(CUR.data)
-
-      .filter(t=>{
-        const d=CUR.data[t];
-
-        return currentVisible(
-          t,
-          d
-        );
-      })
-
-      .map(t=>{
-        const d=CUR.data[t];
-
-        return {
-          t,
-          z:d[zIdx],
-          z1:d[2],
-          dp:d[3],
-          holding:isCurrentHolding(t)
-        };
-      });
-
-  }else{
-
-    const ps=PRIOR[sesIdx];
-
-    pool=Object.keys(ps.d)
-
-      .filter(t=>{
-        const [z,dp]=ps.d[t];
-
-        return historicalVisible(
-          t,
-          z,
-          dp,
-          ps.date
-        );
-      })
-
-      .map(t=>{
-        const [z,dp]=ps.d[t];
-
-        return {
-          t,
-          z,
-          z1:z,
-          dp,
-          holding:isHistoricalHolding(
-            t,
-            ps.date
-          )
-        };
-      });
-  }
-
-  const counts={
-    G:0,
-    B:0,
-    O:0,
-    X:0
-  };
-
-  pool.forEach(x=>{
-    counts[qFromZD(
-      x.z,
-      x.dp
-    )]++;
-  });
-
-  document.getElementById("snapTitle").textContent=
-    holdOnly
-      ? "Quadrant counts — holdings filter"
-      : searchTerms.length
-        ? "Quadrant counts — search filter"
-        : qFilter!=="all"
-          ? `Quadrant counts — ${QNAME[qFilter]}`
-          : "Quadrant counts — visible universe";
-
-  document.getElementById("snapCounts").innerHTML=
-    ["G","B","O","X"]
-
-      .map(q=>`
-        <span class="qcount"
-              style="background:${QCOLOR[q]}">
-          ${QNAME[q].split("·")[0].trim()} ${counts[q]}
-        </span>
-      `)
-
-      .join("");
-
-  const deepest=[...pool]
-    .sort((a,b)=>a.z1-b.z1)
-    .slice(0,5);
-
-  document.getElementById("snapDeep").innerHTML=
-    deepest.length
-      ? deepest
-          .map(x=>`<b>${x.t}</b> ${fmtSigned(x.z1)}`)
-          .join(" · ")
-      : "No visible funds.";
-
-  const green=[...pool]
-    .filter(x=>
-      qFromZD(
-        x.z,
-        x.dp
-      )==="G"
-    )
-    .sort((a,b)=>b.z-a.z)
-    .slice(0,5);
-
-  document.getElementById("snapGreen").innerHTML=
-    green.length
-      ? green
-          .map(x=>`<b>${x.t}</b> ${fmtSigned(x.z)}`)
-          .join(" · ")
-      : "No visible Green funds.";
-}
-
-/* ---------- Time Machine navigation ---------- */
-
-function buildTmnav(){
-  const nav=document.getElementById("tmnav");
-  const N=PRIOR.length;
-
-  nav.innerHTML="";
-
-  const current=document.createElement("button");
-
-  current.className="ctl tmb on";
-  current.dataset.s=N;
-  current.textContent="10/14 current";
-
-  nav.appendChild(current);
-
-  for(let i=N-1;i>=0;i--){
-    const b=document.createElement("button");
-
-    b.className="ctl tmb";
-    b.dataset.s=i;
-    b.textContent=PRIOR[i].date.replace(
-      "/2026",
-      ""
-    );
-
-    nav.appendChild(b);
-  }
-
-  nav
-    .querySelectorAll(".tmb")
-    .forEach(b=>{
-
-      b.addEventListener(
-        "click",
-        ()=>{
-
-          stopPlay();
-
-          sesIdx=Number(
-            b.dataset.s
-          );
-
-          if(
-            compareMode &&
-            sesIdx===N
-          ){
-            compareMode=false;
-
-            document
-              .getElementById("compareBtn")
-              .classList.remove("on");
-          }
-
-          document
-            .getElementById("detail")
-            .style.display="none";
-
-          hideTip();
-          render();
-        }
-      );
-    });
-}
-
-function updateNavState(){
-  const N=PRIOR.length;
-
-  document
-    .querySelectorAll(".tmb")
-    .forEach(b=>{
-
-      b.classList.toggle(
-        "on",
-        Number(b.dataset.s)===sesIdx
-      );
-    });
-
-  document.getElementById("tmSlider").value=
-    String(sesIdx);
-
-  document.getElementById("prevBtn").disabled=
-    sesIdx<=0;
-
-  document.getElementById("nextBtn").disabled=
-    sesIdx>=N;
-}
-
-function stepSession(delta){
-  const N=PRIOR.length;
-
-  sesIdx=Math.max(
-    0,
-    Math.min(
-      N,
-      sesIdx+delta
-    )
-  );
-
-  if(
-    compareMode &&
-    sesIdx===N
-  ){
-    compareMode=false;
-
-    document
-      .getElementById("compareBtn")
-      .classList.remove("on");
-  }
-
-  document
-    .getElementById("detail")
-    .style.display="none";
-
-  hideTip();
-  render();
-}
-
-function startPlay(){
-  if(playTimer) return;
-
-  if(sesIdx>=PRIOR.length){
-    sesIdx=0;
-  }
-
-  document.getElementById("playBtn").textContent=
-    "❚❚ Pause";
-
-  playTimer=setInterval(
-    ()=>{
-
-      if(sesIdx<PRIOR.length){
-        sesIdx++;
-
-        hideTip();
-        render();
-      }else{
-        stopPlay();
-      }
-
-    },
-    900
-  );
-}
-
-function stopPlay(){
-  if(playTimer){
-    clearInterval(playTimer);
-
-    playTimer=null;
-  }
-
-  document.getElementById("playBtn").textContent=
-    "▶ Play";
-}
-
-/* ---------- Warnings / compare banner ---------- */
-
-function updateSessionWarning(){
-  const box=document.getElementById("sessionWarning");
-
-  if(
-    sesIdx<PRIOR.length &&
-    PRIOR[sesIdx].quality
-  ){
-    box.style.display="block";
-
-    box.innerHTML=
-      `<b>Historical data-quality annotation:</b> ${PRIOR[sesIdx].quality}`;
-
-  }else{
-    box.style.display="none";
-    box.innerHTML="";
-  }
-}
-
-function updateCompareBanner(){
-  const box=document.getElementById("compareBanner");
-
-  if(
-    compareMode &&
-    sesIdx<PRIOR.length
-  ){
-    const ps=PRIOR[sesIdx];
-
-    box.style.display="block";
-
-    box.innerHTML=`
-      <b>Compare mode ON</b> —
-      Current 10/14 Z1Y / D/P uses large dots.
-      ${ps.date} historical Z1Y / D/P uses smaller translucent dots.
-      Dashed connectors show movement.
-      Compare mode is locked to Z1Y because historical sessions store Z1Y only.
-    `;
-
-  }else{
-    box.style.display="none";
-    box.innerHTML="";
-  }
-}
-
-/* ---------- Runtime audit ---------- */
-
-function runtimeAudit(){
-  const rawCount=
-    Object.keys(CUR.data).length;
-
-  const badDp=[];
-
-  Object
-    .entries(CUR.data)
-    .forEach(([t,d])=>{
-
-      const implied=
-        (d[7]/d[6]-1)*100;
-
-      if(
-        Math.abs(implied-d[3])>=0.15
-      ){
-        badDp.push(t);
-      }
-    });
-
-  const qBad=[];
-
-  Object
-    .entries(CUR.data)
-    .forEach(([t,d])=>{
-
-      const q=qFromZD(
-        d[2],
-        d[3]
-      );
-
-      const signOkay=
-        d[3]<0
-          ? (
-              q==="G" ||
-              q==="O"
-            )
-          : (
-              q==="B" ||
-              q==="X"
-            );
-
-      if(!signOkay){
-        qBad.push(t);
-      }
-    });
-
-  /*
-    Bubble-overlay audit.
-    Every rendered .dot must have exactly one .hit-target.
-  */
-  const renderedDots=
-    document.querySelectorAll(
-      "#chart .dot"
-    ).length;
-
-  const hitTargets=
-    document.querySelectorAll(
-      "#chart .dot .hit-target"
-    ).length;
-
-  const interactiveClean=
-    renderedDots>0 &&
-    renderedDots===hitTargets;
-
-  const historyClean=
-    PRIOR.length===15;
-
-  const holdingsClean=
-    CURRENT_HOLDINGS.size===15;
-
-  const dataClean=
-    rawCount===25 &&
-    badDp.length===0 &&
-    qBad.length===0;
-
-  const badge=
-    document.getElementById("auditBadge");
-
-  if(
-    dataClean &&
-    interactiveClean &&
-    historyClean &&
-    holdingsClean
-  ){
-    badge.textContent=
-      `Runtime audit ✓ 25/25 valuation points · D/P clean · quadrant signs clean · 15 historical sessions · 15 holdings · bubble overlays ${hitTargets}/${renderedDots} armed`;
-
-    badge.style.background=
-      "#E1F5EE";
-
-    badge.style.color=
-      "#085041";
-
-  }else{
-    badge.textContent=
-      `Runtime audit ⚠ points ${rawCount}/25 · D/P exceptions ${badDp.length} · quadrant exceptions ${qBad.length} · history ${PRIOR.length}/15 · holdings ${CURRENT_HOLDINGS.size}/15 · hit targets ${hitTargets}/${renderedDots}`;
-
-    badge.style.background=
-      "#FFF3E0";
-
-    badge.style.color=
-      "#7C2D12";
-  }
-}
-
-/* ---------- Controls ---------- */
-
-document
-  .querySelectorAll(".zt")
-  .forEach(btn=>{
-
-    btn.addEventListener(
-      "click",
-      ()=>{
-
-        stopPlay();
-
-        const nextZ=
-          Number(btn.dataset.z);
-
-        if(
-          compareMode &&
-          nextZ!==2
-        ){
-          compareMode=false;
-
-          document
-            .getElementById("compareBtn")
-            .classList.remove("on");
-        }
-
-        zIdx=nextZ;
-
-        document
-          .querySelectorAll(".zt")
-          .forEach(x=>{
-
-            x.classList.toggle(
-              "on",
-              x===btn
-            );
-          });
-
-        document
-          .getElementById("detail")
-          .style.display="none";
-
-        hideTip();
-        render();
-      }
-    );
-  });
-
-document
-  .querySelectorAll(".qf")
-  .forEach(btn=>{
-
-    btn.addEventListener(
-      "click",
-      ()=>{
-
-        qFilter=
-          btn.dataset.q;
-
-        document
-          .querySelectorAll(".qf")
-          .forEach(x=>{
-
-            x.classList.toggle(
-              "on",
-              x===btn
-            );
-          });
-
-        hideTip();
-        render();
-      }
-    );
-  });
-
-document
-  .getElementById("search")
-  .addEventListener(
-    "input",
-    e=>{
-
-      searchTerms=e.target.value
-        .toUpperCase()
-        .split(/[\s,]+/)
-        .map(x=>x.trim())
-        .filter(Boolean);
-
-      hideTip();
-      render();
+// ── MAIN RENDER ─────────────────────────────────────────────────────────────────
+function renderChart() {
+  const {W: w, H: h, pw, ph} = chartDims();
+  const svg = document.getElementById('chart');
+  svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+  svg.setAttribute('width', w);
+  svg.setAttribute('height', h);
+
+  const isCurrent = tmIdx === CURRENT_IDX;
+  const sess = isCurrent ? null : PRIOR[tmIdx];
+  const comparesess = comparing ? PRIOR[compareHistIdx] : null;
+
+  // Determine axis ranges
+  let allZ = [], allDP = [];
+  UNIVERSE.forEach(t => {
+    if (isCurrent) {
+      const d = CUR[t];
+      if (d) { allZ.push(d[zKey]); allDP.push(d.dp); allZ.push(d.avg52); }
+    } else {
+      const f = sess.funds[t];
+      if (f) { allZ.push(f[0]); allDP.push(f[1]); }
     }
-  );
-
-document
-  .getElementById("hold")
-  .addEventListener(
-    "click",
-    e=>{
-
-      holdOnly=!holdOnly;
-
-      e.currentTarget.classList.toggle(
-        "on",
-        holdOnly
-      );
-
-      hideTip();
-      render();
+    if (comparesess) {
+      const cf = comparesess.funds[t];
+      if (cf) { allZ.push(cf[0]); allDP.push(cf[1]); }
     }
-  );
+  });
+  if (isCurrent) {
+    UNIVERSE.forEach(t => {
+      const d = CUR[t];
+      if (d && comparing) {
+        const cf = (compareHistIdx < PRIOR.length) ? PRIOR[compareHistIdx].funds[t] : null;
+        if (cf) { allZ.push(cf[0]); allDP.push(cf[1]); }
+      }
+    });
+  }
 
-document
-  .getElementById("compareBtn")
-  .addEventListener(
-    "click",
-    e=>{
+  const zPad = 0.8, dpPad = 3;
+  let zMin = Math.min(...allZ, -1) - zPad;
+  let zMax = Math.max(...allZ, 1) + zPad;
+  let dpMin = Math.min(...allDP, -15) - dpPad;
+  let dpMax = Math.max(...allDP, 5) + dpPad;
 
-      stopPlay();
+  // Build SVG
+  let html = '';
 
-      compareMode=!compareMode;
+  // Quadrant backgrounds
+  const x0 = toSvgX(0, zMin, zMax, pw);
+  const y0 = toSvgY(0, dpMin, dpMax, ph);
+  // Green TL (z>=0, dp<0)
+  html += `<rect x="${x0}" y="${PADDING.top}" width="${PADDING.left + pw - x0}" height="${y0 - PADDING.top}" fill="#1D9E75" opacity=".06"/>`;
+  // Blue TR (z>=0, dp>=0)
+  html += `<rect x="${x0}" y="${y0}" width="${PADDING.left + pw - x0}" height="${PADDING.top + ph - y0}" fill="#378ADD" opacity=".06"/>`;
+  // Orange BL (z<0, dp<0)
+  html += `<rect x="${PADDING.left}" y="${PADDING.top}" width="${x0 - PADDING.left}" height="${y0 - PADDING.top}" fill="#D85A30" opacity=".06"/>`;
+  // Gray BR (z<0, dp>=0)
+  html += `<rect x="${PADDING.left}" y="${y0}" width="${x0 - PADDING.left}" height="${PADDING.top + ph - y0}" fill="#888780" opacity=".06"/>`;
 
-      if(compareMode){
-        zIdx=2;
+  // Grid lines
+  const zTicks = [];
+  for (let v = Math.ceil(zMin); v <= Math.floor(zMax); v++) zTicks.push(v);
+  const dpTicks = [];
+  for (let v = Math.ceil(dpMin / 5) * 5; v <= Math.floor(dpMax / 5) * 5; v += 5) dpTicks.push(v);
 
-        document
-          .querySelectorAll(".zt")
-          .forEach(btn=>{
+  zTicks.forEach(v => {
+    const x = toSvgX(v, zMin, zMax, pw);
+    const isZero = v === 0;
+    html += `<line x1="${x}" y1="${PADDING.top}" x2="${x}" y2="${PADDING.top + ph}" stroke="${isZero ? '#999' : '#ddd'}" stroke-width="${isZero ? 1.5 : 0.7}" stroke-dasharray="${isZero ? '' : '3,3'}"/>`;
+    html += `<text x="${x}" y="${PADDING.top + ph + 14}" text-anchor="middle" font-size="10" fill="#999">${v}</text>`;
+  });
+  dpTicks.forEach(v => {
+    const y = toSvgY(v, dpMin, dpMax, ph);
+    const isZero = v === 0;
+    html += `<line x1="${PADDING.left}" y1="${y}" x2="${PADDING.left + pw}" y2="${y}" stroke="${isZero ? '#999' : '#ddd'}" stroke-width="${isZero ? 1.5 : 0.7}" stroke-dasharray="${isZero ? '' : '3,3'}"/>`;
+    html += `<text x="${PADDING.left - 6}" y="${y + 4}" text-anchor="end" font-size="10" fill="#999">${v}%</text>`;
+  });
 
-            btn.classList.toggle(
-              "on",
-              Number(btn.dataset.z)===2
-            );
-          });
+  // Axis labels
+  html += `<text x="${PADDING.left + pw / 2}" y="${h - 4}" text-anchor="middle" font-size="11" fill="#888">Z-Score</text>`;
+  html += `<text transform="rotate(-90)" x="${-(PADDING.top + ph / 2)}" y="13" text-anchor="middle" font-size="11" fill="#888">Discount / Premium %</text>`;
 
-        if(
-          sesIdx===PRIOR.length
-        ){
-          sesIdx=
-            PRIOR.length-1;
+  // Quadrant labels
+  const qlFont = 'font-size="10" font-weight="600" opacity=".35"';
+  html += `<text x="${x0 + 8}" y="${PADDING.top + 14}" ${qlFont} fill="#1D9E75">GREEN · THESIS WORKING</text>`;
+  html += `<text x="${x0 + 8}" y="${y0 + 14}" ${qlFont} fill="#378ADD">BLUE · PREMIUM</text>`;
+  html += `<text x="${PADDING.left + 6}" y="${PADDING.top + 14}" ${qlFont} fill="#D85A30">ORANGE · BUY ZONE</text>`;
+  html += `<text x="${PADDING.left + 6}" y="${y0 + 14}" ${qlFont} fill="#888780">GRAY · WORST SETUP</text>`;
+
+  // Dots
+  const activeTickers = [];
+
+  UNIVERSE.forEach(t => {
+    let z, dp, avgDp, isHeld, isCur, flagType, isActive;
+    if (isCurrent) {
+      const d = CUR[t];
+      if (!d) return;
+      z = d[zKey]; dp = d.dp; avgDp = d.avg52; isHeld = d.held; isCur = true;
+      flagType = d.flag || null;
+      isActive = currentVisible(t, d);
+    } else {
+      const f = sess.funds[t];
+      if (!f) return;
+      z = f[0]; dp = f[1]; avgDp = null;
+      isHeld = histIsHeld(t, sess.date);
+      isCur = false; flagType = null;
+      const qf = qFromZD(z, dp);
+      isActive = (qFilter === 'all' || qf === qFilter) && (!holdOnly || CURRENT_HOLDINGS.has(t)) && tickerMatch(t);
+    }
+
+    const q = qFromZD(z, dp);
+    if (!q) return;
+    const col = QCOLORS[q];
+    const cx = toSvgX(z, zMin, zMax, pw);
+    const cy = toSvgY(dp, dpMin, dpMax, ph);
+
+    let dotHtml = '';
+
+    // Compare line
+    if (comparing) {
+      const csrc = isCurrent ? (compareHistIdx < PRIOR.length ? PRIOR[compareHistIdx].funds[t] : null) : null;
+      if (csrc) {
+        const cz = csrc[0], cdp = csrc[1];
+        const ccx = toSvgX(cz, zMin, zMax, pw);
+        const ccy = toSvgY(cdp, dpMin, dpMax, ph);
+        if (isActive) {
+          dotHtml += `<line x1="${ccx}" y1="${ccy}" x2="${cx}" y2="${cy}" stroke="${col}" stroke-width="1.5" stroke-dasharray="4,3" opacity=".6"/>`;
+          dotHtml += `<circle cx="${ccx}" cy="${ccy}" r="4" fill="${col}" opacity=".35"/>`;
         }
       }
-
-      e.currentTarget.classList.toggle(
-        "on",
-        compareMode
-      );
-
-      document
-        .getElementById("detail")
-        .style.display="none";
-
-      hideTip();
-      render();
     }
-  );
 
-document
-  .getElementById("prevBtn")
-  .addEventListener(
-    "click",
-    ()=>{
-
-      stopPlay();
-      stepSession(-1);
+    // Avg D/P marker
+    if (isCur && avgDp !== null && isActive) {
+      const ax = toSvgX(z, zMin, zMax, pw);
+      const ay = toSvgY(avgDp, dpMin, dpMax, ph);
+      dotHtml += `<line x1="${ax}" y1="${ay - 5}" x2="${ax}" y2="${ay + 5}" stroke="${col}" stroke-width="1.5" opacity=".5"/>`;
     }
-  );
 
-document
-  .getElementById("nextBtn")
-  .addEventListener(
-    "click",
-    ()=>{
+    // Main bubble
+    const r = 12;
+    const dimmed = !isActive;
+    dotHtml += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${col}" opacity="${dimmed ? 0.12 : 0.82}"/>`;
 
-      stopPlay();
-      stepSession(1);
+    // Holding ring
+    if (isHeld && isActive) {
+      dotHtml += `<circle cx="${cx}" cy="${cy}" r="${r + 4}" fill="none" stroke="${col}" stroke-width="2.5" opacity=".9"/>`;
     }
-  );
 
-document
-  .getElementById("playBtn")
-  .addEventListener(
-    "click",
-    ()=>{
+    // Flag indicator
+    if (flagType && isActive) {
+      const sym = flagType === 'ro' ? '⚑' : flagType === 'dq' ? '!' : '✦';
+      dotHtml += `<text x="${cx + 9}" y="${cy - 9}" font-size="9" fill="${flagType === 'dq' ? '#d84f30' : flagType === 'ro' ? '#e07c1a' : '#5d8a3c'}" font-weight="700">${sym}</text>`;
+    }
 
-      if(playTimer){
-        stopPlay();
-      }else{
-        compareMode=false;
+    // Ticker label
+    dotHtml += `<text x="${cx}" y="${cy + 4}" text-anchor="middle" font-size="9" font-weight="700" fill="#fff" opacity="${dimmed ? 0.2 : 1}">${t}</text>`;
 
-        document
-          .getElementById("compareBtn")
-          .classList.remove("on");
+    // Hit target
+    dotHtml += `<circle class="hit-target" cx="${cx}" cy="${cy}" r="15" data-ticker="${t}"/>`;
 
-        startPlay();
+    html += `<g class="dot${dimmed ? ' dimmed' : ''}" data-ticker="${t}">${dotHtml}</g>`;
+    if (!dimmed) activeTickers.push(t);
+  });
+
+  svg.innerHTML = html;
+
+  // Rebind events
+  svg.querySelectorAll('.dot:not(.dimmed) .hit-target').forEach(el => {
+    el.addEventListener('pointermove', onHover);
+    el.addEventListener('pointerleave', onLeave);
+    el.addEventListener('click', onClick);
+  });
+
+  // Runtime audit
+  const rDots = svg.querySelectorAll('.dot').length;
+  const rHT = svg.querySelectorAll('.hit-target').length;
+  if (rDots !== rHT) {
+    console.warn(`HIT TARGET AUDIT FAIL: dots=${rDots} hitTargets=${rHT}`);
+  }
+
+  updateQCounts();
+  updateTMBar();
+}
+
+// ── TOOLTIP / DETAIL ─────────────────────────────────────────────────────────────
+function fmtZ(v) {
+  if (v === null || v === undefined) return '–';
+  return (v >= 0 ? '+' : '') + v.toFixed(2);
+}
+function fmtPct(v) {
+  if (v === null || v === undefined) return '–';
+  return (v >= 0 ? '+' : '') + v.toFixed(2) + '%';
+}
+
+function onHover(e) {
+  const t = e.currentTarget.dataset.ticker;
+  const isCurrent = tmIdx === CURRENT_IDX;
+  const tt = document.getElementById('tooltip');
+
+  let lines = [`<div class="tt-ticker">${t}</div>`];
+
+  if (isCurrent) {
+    const d = CUR[t];
+    if (!d) return;
+    if (d.flag) {
+      const fc = d.flag; const fl = d.flagLabel;
+      lines.push(`<div class="tt-flag ${fc}">${fl}</div>`);
+    }
+    const q = qFromZD(d[zKey], d.dp);
+    const qNames = {green:'Green · Thesis Working',blue:'Blue · Premium',orange:'Orange · Buy Zone',gray:'Gray · Worst Setup'};
+    lines.push(`<b>${qNames[q] || q}</b>`);
+    lines.push(`Price $${d.price.toFixed(2)} · NAV $${d.nav.toFixed(2)}`);
+    lines.push(`D/P ${fmtPct(d.dp)} · 52wk Avg ${fmtPct(d.avg52)}`);
+    lines.push(`Own-Normal Gap ${fmtPct(d.dp - d.avg52)}`);
+    lines.push(`Z3M ${fmtZ(d.z3m)} · Z6M ${fmtZ(d.z6m)} · Z1Y ${fmtZ(d.z1y)}`);
+    lines.push(`Dist ${fmtPct(d.dist)} · Lev ${d.lev !== null ? d.lev.toFixed(2) + '%' : '–'}`);
+    lines.push(`ST Mom ${fmtPct(d.st)} (10/21 screenshot)`);
+    lines.push(`LT Mom ${fmtPct(d.lt)} (10/21 screenshot)`);
+    if (d.held) lines.push(`◉ Current Holding`);
+  } else {
+    const sess = PRIOR[tmIdx];
+    const f = sess.funds[t];
+    if (!f) return;
+    const q = qFromZD(f[0], f[1]);
+    const qNames = {green:'Green',blue:'Blue',orange:'Orange',gray:'Gray'};
+    lines.push(`${sess.label} · ${qNames[q] || q}`);
+    lines.push(`Z1Y ${fmtZ(f[0])} · D/P ${fmtPct(f[1])}`);
+    if (histIsHeld(t, sess.date)) lines.push(`◉ Held on ${sess.label}`);
+  }
+
+  tt.innerHTML = lines.join('<br>');
+  tt.style.display = 'block';
+  positionTooltip(e);
+}
+
+function positionTooltip(e) {
+  const tt = document.getElementById('tooltip');
+  const margin = 14;
+  let x = e.clientX + margin;
+  let y = e.clientY + margin;
+  const tw = tt.offsetWidth, th = tt.offsetHeight;
+  if (x + tw > window.innerWidth - 8) x = e.clientX - tw - margin;
+  if (y + th > window.innerHeight - 8) y = e.clientY - th - margin;
+  tt.style.left = x + 'px';
+  tt.style.top = y + 'px';
+}
+
+function onLeave() {
+  document.getElementById('tooltip').style.display = 'none';
+}
+
+function onClick(e) {
+  const t = e.currentTarget.dataset.ticker;
+  openDetail(t);
+}
+
+function openDetail(t) {
+  const isCurrent = tmIdx === CURRENT_IDX;
+  const dt = document.getElementById('detail');
+  const grid = document.getElementById('dt-grid');
+  document.getElementById('dt-title').textContent = t;
+
+  let items = [];
+  if (isCurrent) {
+    const d = CUR[t];
+    if (!d) return;
+    const q = qFromZD(d[zKey], d.dp);
+    const qNames = {green:'Green · Thesis Working',blue:'Blue · Premium',orange:'Orange · Buy Zone',gray:'Gray · Worst Setup'};
+    const gap = d.dp - d.avg52;
+    items = [
+      {k:'Quadrant (Z1Y)', v: qNames[q], cls: q},
+      {k:'Price', v:`$${d.price.toFixed(2)}`},
+      {k:'NAV', v:`$${d.nav.toFixed(2)}`},
+      {k:'Dist Yield', v:`${d.dist.toFixed(2)}%`},
+      {k:'D/P', v:`${fmtPct(d.dp)}`, cls: d.dp < 0 ? 'neg' : 'pos'},
+      {k:'52w Avg D/P', v:`${fmtPct(d.avg52)}`},
+      {k:'Own-Normal Gap', v:`${fmtPct(gap)}`, cls: gap < 0 ? 'neg' : 'pos'},
+      {k:'Z3M', v:`${fmtZ(d.z3m)}`, cls: d.z3m < 0 ? 'neg' : 'pos'},
+      {k:'Z6M', v:`${fmtZ(d.z6m)}`, cls: d.z6m < 0 ? 'neg' : 'pos'},
+      {k:'Z1Y', v:`${fmtZ(d.z1y)}`, cls: d.z1y < 0 ? 'neg' : 'pos'},
+      {k:'Eff. Leverage', v: d.lev !== null ? `${d.lev.toFixed(2)}%` : '–'},
+      {k:'ST Momentum', v:`${fmtPct(d.st)}`, cls: d.st !== null ? (d.st < 0 ? 'neg' : 'pos') : ''},
+      {k:'LT Momentum', v:`${fmtPct(d.lt)}`, cls: d.lt !== null ? (d.lt < 0 ? 'neg' : 'pos') : ''},
+      {k:'Mom Source', v:'10/21 screenshot'},
+      {k:'Held', v: d.held ? 'Yes ◉' : 'No'},
+    ];
+  } else {
+    const sess = PRIOR[tmIdx];
+    const f = sess.funds[t];
+    if (!f) return;
+    const q = qFromZD(f[0], f[1]);
+    const qNames = {green:'Green · Thesis Working',blue:'Blue · Premium',orange:'Orange · Buy Zone',gray:'Gray · Worst Setup'};
+    items = [
+      {k:'Session', v: sess.label},
+      {k:'Quadrant', v: qNames[q]},
+      {k:'Z1Y', v:`${fmtZ(f[0])}`, cls: f[0] < 0 ? 'neg' : 'pos'},
+      {k:'D/P', v:`${fmtPct(f[1])}`, cls: f[1] < 0 ? 'neg' : 'pos'},
+      {k:'Held', v: histIsHeld(t, sess.date) ? 'Yes ◉' : 'No'},
+    ];
+  }
+
+  grid.innerHTML = items.map(item => {
+    return `<div class="dt-item"><div class="k">${item.k}</div><div class="v ${item.cls || ''}">${item.v}</div></div>`;
+  }).join('');
+
+  if (isCurrent && CUR[t] && CUR[t].flag) {
+    const fc = CUR[t].flag, fl = CUR[t].flagLabel;
+    grid.innerHTML += `<div class="dt-flag ${fc}">${fl}</div>`;
+  }
+
+  dt.style.display = 'block';
+}
+
+function closeDetail() {
+  document.getElementById('detail').style.display = 'none';
+}
+
+// ── QUADRANT COUNTS ─────────────────────────────────────────────────────────────
+function updateQCounts() {
+  const isCur = tmIdx === CURRENT_IDX;
+  const counts = {green:0,blue:0,orange:0,gray:0};
+  UNIVERSE.forEach(t => {
+    let q;
+    if (isCur) {
+      const d = CUR[t]; if (!d) return;
+      q = qFromZD(d.z1y, d.dp);
+    } else {
+      const f = PRIOR[tmIdx].funds[t]; if (!f) return;
+      q = qFromZD(f[0], f[1]);
+    }
+    if (q) counts[q]++;
+  });
+  const qNames = {green:'Green · Thesis Working',blue:'Blue · Premium Territory',orange:'Orange · Buy Zone',gray:'Gray · Worst Setup'};
+  const el = document.getElementById('qcounts');
+  el.innerHTML = Object.entries(counts).map(([q,c]) => {
+    const sel = qFilter === q ? ' sel' : '';
+    return `<span class="qc ${q}${sel}" onclick="setQFilter('${q}')">${qNames[q]} <b>${c}</b></span>`;
+  }).join('');
+}
+
+// ── TIME MACHINE ─────────────────────────────────────────────────────────────────
+function updateTMBar() {
+  const isCur = tmIdx === CURRENT_IDX;
+  const label = isCur ? '10/20 ★' : PRIOR[tmIdx].label;
+  document.getElementById('tmDateDisplay').textContent = label;
+  document.getElementById('tmSlider').value = tmIdx;
+
+  const netEl = document.getElementById('netTag');
+  if (isCur) {
+    netEl.textContent = 'Net +$2.08';
+    netEl.className = 'net-tag pos';
+    document.getElementById('sessionLabel').textContent = '10/20/2026';
+  } else {
+    const sess = PRIOR[tmIdx];
+    const net = sess.net || '';
+    netEl.textContent = `Net ${net}`;
+    netEl.className = 'net-tag' + (net.startsWith('+') ? ' pos' : '');
+    document.getElementById('sessionLabel').textContent = sess.label + '/2026 (Historical)';
+  }
+
+  if (comparing) {
+    const cl = compareHistIdx < PRIOR.length ? PRIOR[compareHistIdx].label : '10/20';
+    document.getElementById('compareInfo').textContent = `vs ${cl}`;
+  } else {
+    document.getElementById('compareInfo').textContent = '';
+  }
+}
+
+function tmSliderChange(val) {
+  tmIdx = parseInt(val);
+  if (comparing && tmIdx !== CURRENT_IDX) {
+    comparing = false;
+    document.getElementById('compareToggle').classList.remove('active');
+  }
+  renderChart();
+}
+
+function tmStep(dir) {
+  const newIdx = Math.max(0, Math.min(CURRENT_IDX, tmIdx + dir));
+  if (newIdx !== tmIdx) {
+    tmIdx = newIdx;
+    if (comparing && tmIdx !== CURRENT_IDX) {
+      comparing = false;
+      document.getElementById('compareToggle').classList.remove('active');
+    }
+    renderChart();
+  }
+}
+
+function togglePlay() {
+  if (playInterval) {
+    clearInterval(playInterval);
+    playInterval = null;
+    document.getElementById('playBtn').textContent = '▶';
+  } else {
+    if (tmIdx === CURRENT_IDX) tmIdx = 0;
+    document.getElementById('playBtn').textContent = '⏸';
+    playInterval = setInterval(() => {
+      if (tmIdx >= CURRENT_IDX) {
+        clearInterval(playInterval);
+        playInterval = null;
+        document.getElementById('playBtn').textContent = '▶';
+        return;
       }
-    }
-  );
+      tmIdx++;
+      renderChart();
+    }, 600);
+  }
+}
 
-document
-  .getElementById("tmSlider")
-  .addEventListener(
-    "input",
-    e=>{
+// ── COMPARE ─────────────────────────────────────────────────────────────────────
+function toggleCompare() {
+  if (tmIdx !== CURRENT_IDX) {
+    tmIdx = CURRENT_IDX;
+    document.getElementById('tmSlider').value = CURRENT_IDX;
+  }
+  comparing = !comparing;
+  if (comparing) {
+    // Force Z1Y per spec
+    if (zKey !== 'z1y') setZ('z1y');
+    compareHistIdx = PRIOR.length - 1;
+    document.getElementById('compareToggle').classList.add('active');
+  } else {
+    document.getElementById('compareToggle').classList.remove('active');
+  }
+  renderChart();
+}
 
-      stopPlay();
+// ── CONTROLS ─────────────────────────────────────────────────────────────────────
+function setZ(k) {
+  zKey = k; zIdx = getZIdx(k);
+  ['z1y','z6m','z3m'].forEach(z => {
+    document.getElementById('b' + z.replace('z','Z').replace('m','M').replace('y','Y')).classList.toggle('active', z === k);
+  });
+  if (comparing && k !== 'z1y') {
+    comparing = false;
+    document.getElementById('compareToggle').classList.remove('active');
+  }
+  renderChart();
+}
 
-      sesIdx=
-        Number(e.target.value);
+function setQFilter(q) {
+  qFilter = q;
+  ['All','Green','Blue','Orange','Gray'].forEach(n => {
+    const el = document.getElementById('f' + n);
+    if (el) el.classList.toggle('active', n.toLowerCase() === q || (q === 'all' && n === 'All'));
+  });
+  renderChart();
+}
 
-      if(
-        compareMode &&
-        sesIdx===PRIOR.length
-      ){
-        compareMode=false;
+function toggleHold() {
+  holdOnly = !holdOnly;
+  document.getElementById('bHold').classList.toggle('active', holdOnly);
+  renderChart();
+}
 
-        document
-          .getElementById("compareBtn")
-          .classList.remove("on");
-      }
+// ── ALERTS RENDER ────────────────────────────────────────────────────────────────
+function renderAlerts() {
+  const panel = document.getElementById('alerts');
+  const alerts = buildAlerts();
+  panel.innerHTML = alerts.map(a => `<div class="al ${a.cls}">${a.html}</div>`).join('');
+}
 
-      document
-        .getElementById("detail")
-        .style.display="none";
-
-      hideTip();
-      render();
-    }
-  );
-
-/* ---------- Initial state ---------- */
-
-buildTmnav();
-render();
-
+// ── INIT ─────────────────────────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  renderAlerts();
+  renderChart();
+  window.addEventListener('resize', () => renderChart());
+});
 </script>
-
 </body>
 </html>
+
+</body></html>
