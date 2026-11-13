@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CEF Matrix — 11/06/2026</title>
+<title>CEF Matrix — 11/12/2026</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:#f0f2f5;color:#1a1a2e;font-size:13px}
@@ -47,7 +47,7 @@ button.tm-btn{padding:4px 8px}
 #tooltip .tt-flag.ro{background:#e07c1a;color:#fff}
 #tooltip .tt-flag.dq{background:#d84f30;color:#fff}
 #tooltip .tt-flag.eq{background:#5d8a3c;color:#fff}
-#tooltip .tt-flag.nxg{background:#378ADD;color:#fff}
+#tooltip .tt-flag.warn{background:#c0392b;color:#fff}
 #detail{display:none;background:#fff;border-radius:8px;box-shadow:0 1px 6px rgba(0,0,0,.08);padding:14px;margin-bottom:10px}
 #detail .dt-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 #detail h3{font-size:15px;font-weight:700}
@@ -63,7 +63,7 @@ button.tm-btn{padding:4px 8px}
 .dt-flag.ro{background:#fff3e0;color:#e07c1a;border:1px solid #f0c070}
 .dt-flag.dq{background:#fde8e8;color:#c0392b;border:1px solid #f4a0a0}
 .dt-flag.eq{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7}
-.dt-flag.nxg{background:#eef2ff;color:#1a56c8;border:1px solid #a0b8f0}
+.dt-flag.warn{background:#fde8e8;color:#c0392b;border:1px solid #f4a0a0}
 #tmBar{background:#fff;border-radius:8px;padding:8px 12px;box-shadow:0 1px 4px rgba(0,0,0,.07);margin-bottom:10px}
 #tmBar .tm-label{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;margin-bottom:6px;display:block}
 #tmBtnRow{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
@@ -92,11 +92,11 @@ button.tm-btn{padding:4px 8px}
 <div class="header-row">
   <div>
     <h1>QTI CEF Matrix</h1>
-    <div class="subtitle">DSM Dual-Sleeve Model · CEF Engine v2.1 · Generated 11/07/2026</div>
+    <div class="subtitle">DSM Dual-Sleeve Model · CEF Engine v2.1 · Generated 11/13/2026</div>
   </div>
   <div style="text-align:right">
-    <div id="netTag" class="net-tag">Net –$11.93</div>
-    <div id="sessionInfo" style="margin-top:4px">Session: <span id="sessionLabel">11/06/2026</span></div>
+    <div id="netTag" class="net-tag">Net –$3.76</div>
+    <div id="sessionInfo" style="margin-top:4px">Session: <span id="sessionLabel">11/12/2026</span></div>
   </div>
 </div>
 
@@ -154,18 +154,19 @@ button.tm-btn{padding:4px 8px}
 
 <!-- Matrix Highlights — immediately above disclaimer per spec -->
 <div id="highlights">
-  <h2>Matrix Highlights — 11/06/2026</h2>
-  <p><span class="hl-label">Broad Tape:</span> Net Price Change <strong>–$11.93</strong> across 25 reporting funds (PDI/PDO absent from valuation data; PDI/PDO momentum present in screenshot). Second consecutive negative price session. Despite the price decline, Z-score picture remains broadly elevated for equity names — the NAV erosion is coming through pricing, not Z-score collapse.</p>
-  <p><span class="hl-label">Quadrant Distribution (Z1Y):</span> Green 8 · Blue 1 · Orange 16 · Gray 2. Green count holds at 8 for a second session — a rare stretch for this universe. The Blue entry (NXG) requires investigation.</p>
-  <p><span class="hl-label">⚠ NXG: Orange → Blue — INVESTIGATE:</span> D/P crossed to +1.17% premium. NAV $42.86 vs. price $43.36 confirms the premium. Z1Y only +0.54 — not an extreme positive. The 10/30 session showed NXG at –4.02% discount; it has compressed 5+ points in one week. NXG carries 36–40% effective leverage and ST momentum is –19.56% (worst in universe). The D/P crossing to premium while momentum collapses is a divergent signal. Mandatory investigation: check for rights offering, tender, merger, or other event. EVENT QUALIFIED pending research.</p>
-  <p><span class="hl-label">AIO Extreme Positive Territory:</span> Z3M +2.24 / Z6M +2.86 / Z1Y +2.75 · D/P –5.03% vs. avg –9.34%. Own-Normal Gap: +4.31 pts (richer than own regime). All three Z horizons now above +2.0. ST momentum –10.01% (11/7 data). Held. The valuation picture is flashing Green deeply, but the extreme richness relative to own normal and the sharply negative short-term momentum create a classic trim-consideration setup, not a add signal. The Z structure is the inverse of a falling knife — a soaring hawk, perhaps — but overshoot conditions can resolve abruptly.</p>
-  <p><span class="hl-label">PCN: Orange → Gray (Held, DQ):</span> D/P moved from –0.18% to +1.47% — premium. Z1Y –0.81. PCN is now in the worst-setup quadrant. Held fund. DQ flag active (mixed/ambiguous). PCN trading at a premium while in a negative Z posture is exactly the Gray setup the DSM warns against. Worth monitoring whether the premium persists or reverts.</p>
-  <p><span class="hl-label">UTG: Green → Orange:</span> Z1Y +0.04 → –0.31, D/P –0.40% → –0.76%. ST momentum –9.96% (11/7, worst among utility names). The utility/infrastructure sleeve is showing real weakness — UTG down hard on price, momentum collapsing. Held. The brief Green was a one-session affair.</p>
-  <p><span class="hl-label">CSQ: Orange → Green:</span> Z1Y –0.39 → +0.32 · D/P –8.57% vs. avg –8.93%. Own-Normal Gap: +0.36 pts (near-normal). Not a compelling deep-value setup — the Green classification reflects Z crossing zero, not a dramatic dislocation. Unleveraged-equivalent status makes it lower-urgency.</p>
-  <p><span class="hl-label">AIO / BST Momentum Divergence (Held):</span> AIO ST –10.01% · BST ST –10.17%. Both in deep Green on Z1Y yet experiencing the worst short-term momentum in the equity-tech cohort. This is a textbook valuation/momentum divergence — the market is repricing these despite the Z structure saying they're statistically well-positioned. BST own-normal gap is +3.45 pts rich. Neither is a current add candidate; both are watch-for-reversion names.</p>
-  <p><span class="hl-label">Bond Complex Persistent Orange:</span> RNP Z1Y –1.88 / D/P –10.14% · RQI Z1Y –1.49 / D/P –10.02% · ERH Z1Y –1.48 (DQ) · RFI Z1Y –1.63 (DQ) · RLTY Z1Y –1.86. All showing modest Z improvement from the 10/14 lows but no two-session confirmation anywhere. RNP / RQI are held — still statistically cheap; still not confirming. RNP ST –0.58% and LT –9.14% — the LT momentum story has deteriorated materially.</p>
-  <p><span class="hl-label">DNP (Gray, Held):</span> D/P +5.61% premium, Z1Y –0.40. Utility premium persisting. Own-Normal Gap: –1.42 pts (trading cheaper than own average on a relative basis, despite the premium). Not a critical alert but Gray is never the ideal setup for a held income fund. Monitor the premium compression.</p>
-  <p><span class="hl-label">Momentum (11/7/2026 screenshot):</span> BME leads ST at +4.81% — only positive reading in top-tier names. GLU +1.78% notable. All equity-tech names severely negative: BST –10.17%, AIO –10.01%, NBXG –10.36%, NXG –19.56%. Utility/infra showing stress: UTG –9.96%, CSQ –6.13%, UTF –2.28%.</p>
+  <h2>Matrix Highlights — 11/12/2026</h2>
+  <p><span class="hl-label">Broad Tape:</span> Net Price Change <strong>–$3.76</strong> across 25 reporting funds (PDI/PDO absent from valuation). Relatively contained session after back-to-back –$10–12 sessions. The distribution reflects stabilization in equity-tech names but continued softness in the utility/REIT complex.</p>
+  <p><span class="hl-label">Quadrant Distribution (Z1Y):</span> Green 4 · Blue 0 · Orange 19 · Gray 2. The Green count has contracted from 7 to 4 in one session — the equity-tech complex is rotating through its valuation thesis faster than the bond complex can confirm entry. Blue disappears entirely as NXG reverses its one-week premium incursion.</p>
+  <p><span class="hl-label">⚠ UTG: Z1Y –2.61 — INVESTIGATE IMMEDIATELY:</span> UTG was at Z1Y +0.04 (10/30), briefly +0.04 / Green, then –0.31 (11/06), and is now –2.61. That is a 2.65-point Z collapse in two sessions. NAV $35.26 / Price $34.10 / D/P –3.29%. Z3M –3.09 / Z6M –2.15. All three horizons extreme negative. ST momentum –6.27% (11/13). Held. Mandatory research: check for distribution cut, leverage stress, rights offering, or sector event. The June 2026 UTG episode is the precedent — that resolved as event-adjacent; this requires the same treatment until cleared.</p>
+  <p><span class="hl-label">AIO Extreme Positive — Z1Y +3.09:</span> Deepest positive Z in the universe. Z3M +2.21 / Z6M +2.92 / Z1Y +3.09. D/P –4.45% vs. avg –9.33%. Own-Normal Gap: +4.88 pts (richer than own history by nearly 5 points). ST momentum –3.98% (11/13 — improving from –10.01%). Held. This is now the most statistically overextended fund on the Z1Y axis — a trim signal in any objective reading of the DSM framework. The valuation is well above the own-normal regime.</p>
+  <p><span class="hl-label">BST: Z1Y Crosses +2.00 (+2.07):</span> Z3M +1.76 / Z6M +1.61 / Z1Y +2.07. D/P –1.09% vs. avg –5.87%. Own-Normal Gap: +4.78 pts rich. ST momentum –6.89% (11/13 — improving from –10.17%). Held. Same trim-watch architecture as AIO. The discount has nearly closed from –5.87% average to –1.09% current. Not a valuation buy zone — the thesis has worked.</p>
+  <p><span class="hl-label">NXG: Blue → Orange (D/P –1.10%):</span> The one-week premium incursion has reversed. D/P went +1.17% → –1.10% in one week. Z1Y –0.03 (essentially zero). The EVENT QUALIFIED flag remains — the premium spike and reversal mechanism deserves investigation. The ST momentum –13.38% (11/13) is still worst in universe. The overcorrection thesis appears to be resolving, but the momentum story hasn't turned. Watch for Z1Y to clear positive for a clean Green signal.</p>
+  <p><span class="hl-label">PCN: Gray → Orange (D/P –0.83%):</span> Also reversed its premium. Held fund back in Orange. Z1Y –1.59, D/P –0.83% vs. avg +3.67%. Own-Normal Gap: –4.50 pts — statistically cheap relative to own regime. DQ flag remains (mixed/ambiguous). The premium incursion was brief.</p>
+  <p><span class="hl-label">BUI: Green → Gray (D/P +0.11%):</span> Crossed to tiny premium. Z1Y –0.44. Held. The 11/06 D/P was –0.23% discount — a 34bp move into premium territory. Utility sleeve weakness continues.</p>
+  <p><span class="hl-label">DNP Z6M –2.08 (Extreme):</span> DNP Z3M –1.73 / Z6M –2.08 / Z1Y –1.01. D/P +3.40% premium vs. avg +6.99% — own-normal gap –3.59 pts (cheaper than own normal despite still trading premium). Gray quadrant (held). The Z6M crossing –2.00 while still at premium is an unusual configuration — the compression toward its own mean is statistically extreme but doesn't qualify as a clean discount candidate.</p>
+  <p><span class="hl-label">Bond/REIT Complex — Persistent Orange:</span> RNP Z1Y –1.95 / D/P –10.49% (held) · RQI Z1Y –1.49 / D/P –10.15% (held) · ERH Z1Y –2.14 DQ (held) · RFI Z1Y –2.14 DQ (held) · RLTY Z1Y –1.67 · HTD Z1Y –2.10. The bond complex Z-scores are holding at extreme negative levels with no two-session confirmation anywhere. RNP and RQI continue to be statistically very cheap relative to own history — the entry timing signal remains absent.</p>
+  <p><span class="hl-label">GLU Term Structure Anomaly:</span> GLU Z3M +1.95 / Z6M +1.77 / Z1Y –0.17. The short-horizon Z scores are extremely positive while the 1Y is barely negative — a compressed term structure suggesting recent rapid normalization. D/P –2.46% vs. avg –1.80%. Not a dislocation setup but an interesting normalization-overshoot to monitor.</p>
+  <p><span class="hl-label">Momentum (11/13/2026 screenshot):</span> BME leads ST +5.09% (only clean positive among top names). UTG ST –6.27% consistent with Z collapse narrative. NXG ST –13.38% still worst universe. AIO ST –3.98% and BST ST –6.89% both improving week-over-week. RLTY momentum unavailable (not in screenshot — null).</p>
 </div>
 
 <div id="disclaimer">All analytical output from this system is for informational purposes only. Not investment advice. Past performance is no guarantee of future results. Always conduct your own due diligence before making investment decisions.</div>
@@ -188,39 +189,39 @@ function histIsHeldLocal(ticker, sessionDate) {
   return CURRENT_HOLDINGS.has(ticker);
 }
 
-// ── CURRENT DATA (11/06/2026) ──────────────────────────────────────────────────
-// Momentum source: 11/7/2026 screenshot (dated)
+// ── CURRENT DATA (11/12/2026) ─────────────────────────────────────────────────
+// Momentum source: 11/13/2026 screenshot (dated)
 const CUR = {
-  AIO: {z3m:2.24,z6m:2.86,z1y:2.75,dp:-5.03,avg52:-9.34,dist:11.40,nav:23.66,price:22.47,lev:13.76,held:true,st:-10.01,lt:2.78},
-  ASGI:{z3m:-0.01,z6m:-0.40,z1y:-0.57,dp:-0.24,avg52:2.69,dist:12.80,nav:21.01,price:20.85,lev:1.03,held:false,flag:'ro',flagLabel:'RO VERIFY REQUIRED — confirm rights-offering expiration status',st:-0.88,lt:12.13},
-  BDJ: {z3m:-0.59,z6m:-0.80,z1y:-1.11,dp:-8.49,avg52:-6.55,dist:7.86,nav:10.38,price:9.49,lev:0.12,held:true,st:-1.63,lt:9.25},
-  BME: {z3m:0.14,z6m:0.32,z1y:0.80,dp:-2.94,avg52:-4.37,dist:6.76,nav:48.06,price:46.87,lev:0.11,held:true,st:4.81,lt:14.12},
-  BST: {z3m:0.98,z6m:1.22,z1y:1.55,dp:-2.53,avg52:-5.98,dist:6.99,nav:43.75,price:43.45,lev:1.59,held:true,st:-10.17,lt:4.19},
-  BUI: {z3m:-0.81,z6m:-0.86,z1y:-0.57,dp:-0.23,avg52:1.45,dist:7.13,nav:26.12,price:26.06,lev:1.29,held:true,st:-0.67,lt:16.15},
-  CSQ: {z3m:0.17,z6m:0.80,z1y:0.32,dp:-8.57,avg52:-8.93,dist:8.58,nav:20.76,price:19.06,lev:29.70,held:false,st:-6.13,lt:13.40},
-  DNP: {z3m:-1.22,z6m:-1.30,z1y:-0.40,dp:5.61,avg52:7.03,dist:7.78,nav:9.62,price:10.16,lev:23.27,held:true,st:-0.51,lt:2.49},
-  EOI: {z3m:0.02,z6m:-0.14,z1y:-0.80,dp:-6.95,avg52:-5.15,dist:9.48,nav:19.97,price:18.73,lev:null,held:true,st:-5.21,lt:2.85},
-  EOS: {z3m:-0.16,z6m:-0.82,z1y:-1.34,dp:-11.32,avg52:-8.67,dist:9.98,nav:22.04,price:19.74,lev:null,held:false,st:-6.88,lt:-6.94},
-  ERH: {z3m:-0.67,z6m:-1.17,z1y:-1.48,dp:-10.55,avg52:-8.25,dist:9.72,nav:12.13,price:10.85,lev:21.88,held:true,flag:'dq',flagLabel:'DQ: ROC-Primary ~64.9%',st:-1.28,lt:-4.75},
-  ETG: {z3m:0.33,z6m:-0.12,z1y:-0.75,dp:-10.05,avg52:-8.28,dist:8.68,nav:25.07,price:22.55,lev:16.20,held:false,st:-3.44,lt:16.58},
-  GDV: {z3m:-0.54,z6m:-1.10,z1y:-1.59,dp:-12.58,avg52:-11.02,dist:6.35,nav:32.50,price:28.41,lev:16.00,held:false,st:-2.54,lt:19.39},
-  GLU: {z3m:0.95,z6m:0.49,z1y:-0.61,dp:-4.19,avg52:-1.77,dist:7.17,nav:19.33,price:18.52,lev:17.61,held:false,st:1.78,lt:16.39},
-  HTD: {z3m:-0.79,z6m:-1.40,z1y:-1.36,dp:-9.22,avg52:-6.30,dist:8.16,nav:25.76,price:23.23,lev:32.06,held:false,st:-1.91,lt:7.30},
-  NBXG:{z3m:1.99,z6m:1.86,z1y:1.77,dp:-11.32,avg52:-13.22,dist:11.87,nav:15.37,price:13.63,lev:null,held:false,flag:'eq',flagLabel:'EVENT QUALIFIED: Distribution Increase',st:-10.36,lt:-2.83},
-  NXG: {z3m:0.34,z6m:0.52,z1y:0.54,dp:1.17,avg52:-0.96,dist:17.13,nav:42.86,price:43.36,lev:39.92,held:false,flag:'nxg',flagLabel:'⚠ INVESTIGATE: D/P crossed to +1.17% premium — ST momentum –19.56% — event research required',st:-19.56,lt:12.89},
-  PCN: {z3m:0.40,z6m:-0.11,z1y:-0.81,dp:1.47,avg52:3.76,dist:12.37,nav:10.92,price:11.07,lev:22.65,held:true,flag:'dq',flagLabel:'DQ: Mixed/Ambiguous — Gray quadrant (premium, negative Z1Y)',st:-0.66,lt:-22.18},
-  PDX: {z3m:0.35,z6m:0.43,z1y:0.78,dp:-9.20,avg52:-10.08,dist:9.09,nav:22.60,price:20.54,lev:22.65,held:true,flag:'eq',flagLabel:'EVENT QUALIFIED: Dist Increase + year-end special unconfirmed',st:-2.48,lt:16.21},
+  AIO: {z3m:2.21,z6m:2.92,z1y:3.09,dp:-4.45,avg52:-9.33,dist:10.57,nav:24.94,price:23.83,lev:13.15,held:true,st:-3.98,lt:7.60,flag:'warn',flagLabel:'⚠ TRIM WATCH: Z1Y +3.09 extreme positive — own-normal gap +4.88 pts rich — ST improving but thesis fully normalized'},
+  ASGI:{z3m:-0.08,z6m:-0.54,z1y:-0.80,dp:-1.37,avg52:2.71,dist:12.06,nav:21.19,price:20.90,lev:1.02,held:false,st:-1.36,lt:11.07,flag:'ro',flagLabel:'RO VERIFY REQUIRED — confirm rights-offering expiration status'},
+  BDJ: {z3m:-0.46,z6m:-0.72,z1y:-1.04,dp:-8.42,avg52:-6.58,dist:7.67,nav:10.57,price:9.68,lev:0.12,held:true,st:-0.04,lt:9.64},
+  BME: {z3m:0.33,z6m:0.50,z1y:0.87,dp:-2.78,avg52:-4.29,dist:6.60,nav:48.98,price:47.62,lev:0.11,held:true,st:5.09,lt:14.28},
+  BST: {z3m:1.76,z6m:1.61,z1y:2.07,dp:-1.09,avg52:-5.87,dist:6.61,nav:45.89,price:45.39,lev:1.55,held:true,st:-6.89,lt:6.76,flag:'warn',flagLabel:'⚠ TRIM WATCH: Z1Y +2.07 — own-normal gap +4.78 pts rich — discount nearly closed from –5.87% avg'},
+  BUI: {z3m:-0.31,z6m:-0.60,z1y:-0.44,dp:0.11,avg52:1.43,dist:6.98,nav:26.45,price:26.48,lev:1.27,held:true},
+  CSQ: {z3m:-0.69,z6m:0.09,z1y:-0.21,dp:-9.17,avg52:-8.94,dist:8.30,nav:21.48,price:19.51,lev:29.08,held:false,st:-4.08,lt:13.94},
+  DNP: {z3m:-1.73,z6m:-2.08,z1y:-1.01,dp:3.40,avg52:6.99,dist:7.78,nav:9.70,price:10.03,lev:23.12,held:true,st:-1.91,lt:1.12,flag:'warn',flagLabel:'Z6M –2.08 extreme — Gray (premium, held) — own-normal gap –3.59 pts despite premium posture'},
+  EOI: {z3m:-0.60,z6m:-0.73,z1y:-0.98,dp:-7.42,avg52:-5.19,dist:9.22,nav:20.63,price:19.10,lev:null,held:true,st:-3.49,lt:2.61},
+  EOS: {z3m:-0.62,z6m:-1.21,z1y:-1.62,dp:-11.99,avg52:-8.75,dist:9.68,nav:22.94,price:20.19,lev:null,held:false,st:-4.38,lt:-6.32},
+  ERH: {z3m:-1.12,z6m:-1.69,z1y:-2.14,dp:-11.68,avg52:-8.34,dist:9.65,nav:12.24,price:10.81,lev:21.72,held:true,flag:'dq',flagLabel:'DQ: ROC-Primary ~64.9% | Z1Y –2.14 extreme',st:-1.09,lt:-5.59},
+  ETG: {z3m:-0.09,z6m:-0.62,z1y:-0.92,dp:-10.52,avg52:-8.37,dist:8.36,nav:25.66,price:22.96,lev:15.89,held:false,st:-2.01,lt:15.65},
+  GDV: {z3m:-0.34,z6m:-0.93,z1y:-1.43,dp:-12.48,avg52:-11.04,dist:6.17,nav:33.34,price:29.18,lev:15.66,held:false,st:-0.13,lt:20.50},
+  GLU: {z3m:1.95,z6m:1.77,z1y:-0.17,dp:-2.46,avg52:-1.80,dist:6.93,nav:19.54,price:19.06,lev:17.46,held:false,st:1.31,lt:16.37,flag:'warn',flagLabel:'Term structure anomaly: Z3M +1.95 / Z6M +1.77 vs Z1Y –0.17 — rapid recent normalization'},
+  HTD: {z3m:-1.24,z6m:-1.93,z1y:-2.10,dp:-11.00,avg52:-6.38,dist:8.31,nav:25.63,price:22.81,lev:32.03,held:false,st:-2.92,lt:5.89},
+  NBXG:{z3m:1.87,z6m:1.70,z1y:1.66,dp:-11.45,avg52:-13.23,dist:11.13,nav:16.07,price:14.23,lev:null,held:false,flag:'eq',flagLabel:'EVENT QUALIFIED: Distribution Increase',st:-5.61,lt:0.35},
+  NXG: {z3m:-0.21,z6m:-0.06,z1y:-0.03,dp:-1.10,avg52:-0.97,dist:15.45,nav:47.12,price:46.60,lev:34.66,held:false,flag:'warn',flagLabel:'INVESTIGATE: D/P returned to –1.10% discount from +1.17% premium (11/06) — premium spike/reversal mechanism unclear — ST –13.38% still worst universe',st:-13.38,lt:17.28},
+  PCN: {z3m:-0.55,z6m:-1.20,z1y:-1.59,dp:-0.83,avg52:3.67,dist:12.59,nav:10.81,price:10.72,lev:22.81,held:true,flag:'dq',flagLabel:'DQ: Mixed/Ambiguous — own-normal gap –4.50 pts despite near-flat D/P',st:-4.09,lt:-23.77},
+  PDX: {z3m:-0.52,z6m:-0.66,z1y:-0.29,dp:-10.41,avg52:-10.08,dist:9.04,nav:22.67,price:20.31,lev:22.61,held:true,flag:'eq',flagLabel:'EVENT QUALIFIED: Dist Increase + year-end special unconfirmed',st:-2.60,lt:11.63},
   PDI: null,
   PDO: null,
-  RFI: {z3m:-1.02,z6m:-1.34,z1y:-1.63,dp:-6.65,avg52:-2.63,dist:8.86,nav:11.58,price:10.81,lev:0.04,held:true,flag:'dq',flagLabel:'DQ: ROC-Primary ~62%',st:-0.18,lt:-13.46},
-  RLTY:{z3m:-0.68,z6m:-1.30,z1y:-1.86,dp:-11.69,avg52:-8.40,dist:9.01,nav:16.59,price:14.65,lev:33.70,held:false,st:null,lt:null},
-  RNP: {z3m:-1.40,z6m:-1.73,z1y:-1.88,dp:-10.14,avg52:-5.19,dist:8.54,nav:21.21,price:19.06,lev:30.66,held:true,st:-0.58,lt:-9.14},
-  RQI: {z3m:-1.53,z6m:-1.04,z1y:-1.49,dp:-10.02,avg52:-4.82,dist:9.20,nav:12.97,price:11.67,lev:27.13,held:true,st:-0.50,lt:-4.88},
-  UTF: {z3m:-0.83,z6m:-0.80,z1y:0.20,dp:-4.51,avg52:-4.96,dist:7.67,nav:27.04,price:25.82,lev:28.58,held:true,st:-2.28,lt:11.48},
-  UTG: {z3m:-0.68,z6m:-0.18,z1y:-0.31,dp:-0.76,avg52:-0.42,dist:7.78,nav:33.11,price:32.86,lev:23.75,held:true,st:-9.96,lt:5.56}
+  RFI: {z3m:-1.67,z6m:-2.23,z1y:-2.14,dp:-8.12,avg52:-2.75,dist:9.03,nav:11.57,price:10.63,lev:0.04,held:true,flag:'dq',flagLabel:'DQ: ROC-Primary ~62% | Z1Y –2.14 extreme | Z6M –2.23 extreme',st:-1.70,lt:-16.78},
+  RLTY:{z3m:-0.47,z6m:-1.10,z1y:-1.67,dp:-11.47,avg52:-8.48,dist:8.96,nav:16.65,price:14.74,lev:33.62,held:false,st:null,lt:null},
+  RNP: {z3m:-1.46,z6m:-1.87,z1y:-1.95,dp:-10.49,avg52:-5.33,dist:8.61,nav:21.17,price:18.95,lev:30.70,held:true,st:-1.28,lt:-11.41},
+  RQI: {z3m:-1.52,z6m:-1.05,z1y:-1.49,dp:-10.15,avg52:-4.88,dist:9.25,nav:13.00,price:11.68,lev:27.08,held:true,st:0.26,lt:-6.26},
+  UTF: {z3m:-1.79,z6m:-1.98,z1y:-0.67,dp:-6.44,avg52:-4.94,dist:7.70,nav:27.47,price:25.70,lev:28.26,held:true,st:-1.91,lt:8.69},
+  UTG: {z3m:-3.09,z6m:-2.15,z1y:-2.61,dp:-3.29,avg52:-0.42,dist:7.39,nav:35.26,price:34.10,lev:22.63,held:true,flag:'warn',flagLabel:'⚠ INVESTIGATE URGENTLY: Z1Y –2.61 (was +0.04 on 10/30) — Z3M –3.09 / Z6M –2.15 — 2.65pt Z collapse in 2 sessions — June 2026 precedent applies',st:-6.27,lt:6.74}
 };
 
-// ── PRIOR HISTORY (13 sessions) ───────────────────────────────────────────────
+// ── PRIOR HISTORY (11 sessions) ───────────────────────────────────────────────
 const PRIOR = [
   {label:"09/01",date:"2026-09-01",net:"-$3.48",funds:{
     AIO:[0.97,-5.63],ASGI:[-0.14,2.77],BDJ:[-0.09,-6.1],BME:[1.49,-2.08],
@@ -230,22 +231,6 @@ const PRIOR = [
     NXG:[1.14,3.01],PCN:[-0.81,3.35],PDX:[0.87,-8.31],RFI:[-0.78,-3.26],
     RLTY:[-0.69,-8.33],RNP:[-1.01,-6.67],RQI:[-1.0,-6.89],UTF:[1.45,-1.43],UTG:[1.08,0.86]
   }},
-  {label:"09/03",date:"2026-09-03",net:"+$1.01",funds:{
-    AIO:[0.87,-5.7],ASGI:[-0.24,2.39],BDJ:[-0.57,-6.26],BME:[1.37,-2.51],
-    BST:[1.32,-2.28],BUI:[-0.58,0.61],CSQ:[0.39,-7.79],DNP:[1.5,13.43],
-    EOI:[-0.85,-6.09],EOS:[-1.09,-9.6],ERH:[-0.6,-8.07],ETG:[-0.99,-9.0],
-    GDV:[-1.21,-11.52],GLU:[-1.26,-3.83],HTD:[1.06,-3.26],NBXG:[0.65,-12.88],
-    NXG:[0.26,1.86],PCN:[-1.05,2.91],PDX:[1.4,-7.77],RFI:[-0.74,-3.16],
-    RLTY:[-0.9,-8.65],RNP:[-0.98,-6.6],RQI:[-1.08,-7.17],UTF:[1.21,-2.18],UTG:[0.79,0.5]
-  }},
-  {label:"09/08",date:"2026-09-08",net:"+$0.11",funds:{
-    AIO:[0.18,-7.99],ASGI:[-0.34,2.07],BDJ:[-0.3,-6.45],BME:[1.8,-1.27],
-    BST:[1.24,-3.93],BUI:[-0.36,0.71],CSQ:[0.64,-7.45],DNP:[1.22,11.0],
-    EOI:[-0.79,-6.11],EOS:[-1.0,-9.64],ERH:[0.13,-7.46],ETG:[-0.89,-9.38],
-    GDV:[-1.48,-11.72],GLU:[-1.13,-4.75],HTD:[1.18,-3.84],NBXG:[0.41,-12.44],
-    NXG:[0.26,-0.23],PCN:[-0.92,2.9],PDX:[1.15,-8.05],RFI:[-0.61,-2.86],
-    RLTY:[-1.17,-9.01],RNP:[-1.1,-7.06],RQI:[-0.99,-6.97],UTF:[1.06,-2.74],UTG:[0.38,0.0]
-  }},
   {label:"09/10",date:"2026-09-10",net:"-$11.29",funds:{
     AIO:[-0.23,-9.06],ASGI:[-0.31,2.22],BDJ:[-1.6,-8.54],BME:[0.78,-3.44],
     BST:[0.0,-6.31],BUI:[-0.36,0.68],CSQ:[-0.04,-8.56],DNP:[1.23,11.1],
@@ -254,14 +239,6 @@ const PRIOR = [
     NXG:[0.1,-0.8],PCN:[-1.51,1.05],PDX:[0.85,-8.55],RFI:[-1.43,-5.11],
     RLTY:[-2.61,-10.94],RNP:[-1.47,-8.36],RQI:[-1.71,-9.21],UTF:[-0.05,-5.47],UTG:[1.16,0.96]
   }},
-  {label:"09/11",date:"2026-09-11",net:"-$3.61",funds:{
-    AIO:[0.44,-7.44],ASGI:[-0.12,3.01],BDJ:[-1.16,-7.84],BME:[1.33,-2.24],
-    BST:[0.8,-4.77],BUI:[-0.09,1.49],CSQ:[0.56,-7.63],DNP:[1.57,12.28],
-    EOI:[-0.94,-7.12],EOS:[-1.46,-10.62],ERH:[0.58,-6.89],ETG:[-1.34,-10.38],
-    GDV:[-1.68,-11.87],GLU:[-1.04,-4.48],HTD:[1.42,-3.41],NBXG:[0.07,-12.88],
-    NXG:[0.62,1.16],PCN:[-1.22,1.95],PDX:[1.18,-8.09],RFI:[-0.84,-3.59],
-    RLTY:[-1.15,-9.51],RNP:[-0.99,-6.87],RQI:[-1.03,-7.23],UTF:[0.54,-3.93],UTG:[0.72,0.42]
-  }},
   {label:"10/14",date:"2026-10-14",net:"-$10.07",funds:{
     AIO:[-0.42,-9.87],ASGI:[-2.23,-7.79],BDJ:[-1.54,-8.88],BME:[0.48,-3.72],
     BST:[0.81,-4.48],BUI:[-0.41,0.31],CSQ:[-0.47,-9.38],DNP:[-0.13,6.60],
@@ -269,14 +246,6 @@ const PRIOR = [
     GDV:[-2.78,-13.18],GLU:[-1.64,-7.48],HTD:[-2.67,-11.02],NBXG:[0.42,-12.71],
     NXG:[1.50,4.80],PCN:[-2.62,-3.31],PDX:[-1.99,-12.30],RFI:[-1.82,-6.35],
     RLTY:[-3.33,-12.81],RNP:[-2.07,-10.13],RQI:[-1.49,-9.41],UTF:[0.90,-3.11],UTG:[0.15,-0.34]
-  }},
-  {label:"10/15",date:"2026-10-15",net:"-$2.05",funds:{
-    AIO:[-0.50,-10.03],ASGI:[-2.10,-7.25],BDJ:[-1.68,-9.14],BME:[0.38,-3.91],
-    BST:[1.19,-3.67],BUI:[-0.53,-0.04],CSQ:[-0.80,-9.79],DNP:[-0.10,6.73],
-    EOI:[-1.19,-7.55],EOS:[-2.16,-12.54],ERH:[-2.84,-12.03],ETG:[-1.48,-11.40],
-    GDV:[-2.69,-13.15],GLU:[-1.55,-7.20],HTD:[-2.41,-10.60],NBXG:[0.16,-13.00],
-    NXG:[0.94,2.74],PCN:[-2.08,-1.74],PDX:[-0.75,-10.91],RFI:[-2.01,-6.83],
-    RLTY:[-3.27,-12.84],RNP:[-1.91,-9.74],RQI:[-1.44,-9.28],UTF:[0.94,-3.00],UTG:[-0.11,-0.65]
   }},
   {label:"10/20",date:"2026-10-20",net:"+$2.08",funds:{
     AIO:[-0.52,-10.10],ASGI:[-1.89,-6.45],BDJ:[-1.57,-9.04],BME:[0.58,-3.48],
@@ -309,13 +278,20 @@ const PRIOR = [
     GDV:[-1.59,-12.58],GLU:[-0.61,-4.19],HTD:[-1.36,-9.22],NBXG:[1.77,-11.32],
     NXG:[0.54,1.17],PCN:[-0.81,1.47],PDX:[0.78,-9.20],RFI:[-1.63,-6.65],
     RLTY:[-1.86,-11.69],RNP:[-1.88,-10.14],RQI:[-1.49,-10.02],UTF:[0.20,-4.51],UTG:[-0.31,-0.76]
+  }},
+  {label:"11/12",date:"2026-11-12",net:"-$3.76",funds:{
+    AIO:[3.09,-4.45],ASGI:[-0.80,-1.37],BDJ:[-1.04,-8.42],BME:[0.87,-2.78],
+    BST:[2.07,-1.09],BUI:[-0.44,0.11],CSQ:[-0.21,-9.17],DNP:[-1.01,3.40],
+    EOI:[-0.98,-7.42],EOS:[-1.62,-11.99],ERH:[-2.14,-11.68],ETG:[-0.92,-10.52],
+    GDV:[-1.43,-12.48],GLU:[-0.17,-2.46],HTD:[-2.10,-11.00],NBXG:[1.66,-11.45],
+    NXG:[-0.03,-1.10],PCN:[-1.59,-0.83],PDX:[-0.29,-10.41],RFI:[-2.14,-8.12],
+    RLTY:[-1.67,-11.47],RNP:[-1.95,-10.49],RQI:[-1.49,-10.15],UTF:[-0.67,-6.44],UTG:[-2.61,-3.29]
   }}
 ];
 
-const CURRENT_IDX = PRIOR.length; // 11 prior sessions + current
+const CURRENT_IDX = PRIOR.length;
 
 let zKey = 'z1y';
-let zIdx = 2;
 let qFilter = 'all';
 let holdOnly = false;
 let tmIdx = CURRENT_IDX;
@@ -351,7 +327,6 @@ function tickerMatch(t) {
   return !s || t.includes(s);
 }
 
-// ── CHART DIMENSIONS ───────────────────────────────────────────────────────────
 const PADDING = {top:30,right:30,bottom:40,left:46};
 let W = 900, H = 520;
 
@@ -369,11 +344,10 @@ function toSvgY(dp, dpMin, dpMax, ph) {
   return PADDING.top + ((dpMax - dp) / (dpMax - dpMin)) * ph;
 }
 
-// ── ALERTS ────────────────────────────────────────────────────────────────────
 function buildAlerts() {
   const alerts = [];
 
-  alerts.push({cls:'a', html:'<strong>⚠ NXG: D/P Crossed to +1.17% Premium — INVESTIGATE:</strong> NAV $42.86 / Price $43.36 confirms premium. Z1Y only +0.54. ST momentum –19.56% (worst in universe). The D/P compressed from –4.02% (10/30) to +1.17% premium in one week while momentum collapsed. Mandatory event research required before treating as clean Blue.'});
+  alerts.push({cls:'r', html:'<strong>⚠ UTG URGENT — Z1Y –2.61 Extreme Negative (Was +0.04 on 10/30):</strong> Z3M –3.09 / Z6M –2.15 / Z1Y –2.61 · D/P –3.29% · NAV $35.26 / Price $34.10. Held. A 2.65-point Z collapse in two sessions is not a normal valuation drift. Mandatory corporate-action research required before treating as a clean add. June 2026 UTG episode is the precedent — that resolved event-adjacent. ST momentum –6.27% (11/13).'});
 
   const greenHeld = UNIVERSE.filter(t => CUR[t] && CUR[t].held && qFromZD(CUR[t].z1y, CUR[t].dp) === 'green');
   if (greenHeld.length > 0) {
@@ -383,25 +357,26 @@ function buildAlerts() {
     }).join(' · ')});
   }
 
-  alerts.push({cls:'a', html:'<strong>AIO Extreme Positive — Trim Watch:</strong> Z3M +2.24 / Z6M +2.86 / Z1Y +2.75 · D/P –5.03% vs. avg –9.34%. Own-Normal Gap +4.31 pts (richer than own history). ST momentum –10.01%. All three Z horizons above +2.0 — the valuation thesis has fully normalized and then some. Not an add candidate; trim consideration warranted.'});
+  alerts.push({cls:'a', html:'<strong>AIO Z1Y +3.09 — Deepest Positive in Universe:</strong> Z3M +2.21 / Z6M +2.92 / Z1Y +3.09 · D/P –4.45% vs avg –9.33%. Own-Normal Gap +4.88 pts rich. ST mom –3.98% (improving). Held. The valuation thesis has not just worked — it has overshot. Trim consideration warranted.'});
 
-  alerts.push({cls:'r', html:'<strong>PCN → Gray (Held, DQ):</strong> D/P +1.47% premium · Z1Y –0.81. Held fund in worst-setup quadrant with active DQ flag. Premium + negative Z + mixed distribution quality = no-action zone. Monitor for premium compression.'});
+  alerts.push({cls:'a', html:'<strong>BST Z1Y +2.07 — Trim Watch:</strong> D/P –1.09% vs avg –5.87%. Own-Normal Gap +4.78 pts rich. Discount has compressed from 5.87% average to 1.09% current. ST –6.89% improving. Held.'});
 
-  alerts.push({cls:'r', html:'<strong>UTG → Orange:</strong> Z1Y +0.04 → –0.31 · D/P –0.76% · ST momentum –9.96%. One-session Green visit ended. Utility sleeve showing broad ST weakness: UTF ST –2.28%, DNP still Gray at +5.61% premium.'});
+  alerts.push({cls:'p', html:'<strong>NXG: Blue → Orange — Premium Fully Reversed:</strong> D/P –1.10% (was +1.17% premium on 11/06). Z1Y –0.03 ≈ zero. The one-week premium incursion resolved in one session. ST –13.38% (worst universe). EVENT QUALIFIED flag maintained pending investigation of premium spike mechanism.'});
+
+  alerts.push({cls:'r', html:'<strong>BUI → Gray (D/P +0.11% · Held):</strong> Utility sleeve held fund crossed to premium. Z1Y –0.44. PCN also remains near zero D/P (–0.83% — discount by a hair). Gray quadrant for a held income fund is a no-action zone.'});
 
   const dqHeld = UNIVERSE.filter(t => CUR[t] && CUR[t].held && CUR[t].flag === 'dq');
   if (dqHeld.length > 0) {
     alerts.push({cls:'dq', html:'<strong>DQ Active (Held Funds):</strong> ' + dqHeld.map(t => `${t} — ${CUR[t].flagLabel}`).join(' | ')});
   }
 
-  alerts.push({cls:'r', html:'<strong>Deep Orange Bond Complex:</strong> RNP Z1Y –1.88 / D/P –10.14% (held) · RQI Z1Y –1.49 / D/P –10.02% (held) · RLTY Z1Y –1.86 / D/P –11.69% · RFI Z1Y –1.63 DQ (held). RNP LT momentum now –9.14% — the multi-horizon deterioration story continues. No two-session confirmation in any bond/leveraged-income name.'});
+  alerts.push({cls:'r', html:'<strong>Extreme Negative Z1Y (|Z1Y| ≥ 2.00):</strong> UTG –2.61 ⚠ · ERH –2.14 (DQ) · RFI –2.14 (DQ) · HTD –2.10 · AIO +3.09 · BST +2.07. UTG and AIO/BST are both extreme — but on opposite poles. The extreme positive AIO/BST setup is a thesis-worked signal; the UTG extreme negative requires investigation before interpretation.'});
 
-  alerts.push({cls:'p', html:'<strong>Broad Tape –$11.93:</strong> Second negative session. 25 funds reporting. Z-scores held broadly stable despite price declines — NAV compression in held equity-tech names (AIO, BST) is consistent with market-wide tech momentum reversal documented separately.'});
+  alerts.push({cls:'p', html:'<strong>Broad Tape –$3.76:</strong> Relatively contained after –$11.93 (11/06) and –$3.76 today. Green count compressed 7→4. The equity-tech names (AIO, BST, BME) remain Green but are increasingly in trim territory rather than add territory.'});
 
   return alerts;
 }
 
-// ── MAIN RENDER ────────────────────────────────────────────────────────────────
 function renderChart() {
   const {W: w, H: h, pw, ph} = chartDims();
   const svg = document.getElementById('chart');
@@ -424,7 +399,6 @@ function renderChart() {
 
   let html = '';
 
-  // Quadrant backgrounds
   const x0=toSvgX(0,zMin,zMax,pw);
   const y0=toSvgY(0,dpMin,dpMax,ph);
   html+=`<rect x="${x0}" y="${PADDING.top}" width="${PADDING.left+pw-x0}" height="${y0-PADDING.top}" fill="#1D9E75" opacity=".06"/>`;
@@ -432,7 +406,6 @@ function renderChart() {
   html+=`<rect x="${PADDING.left}" y="${PADDING.top}" width="${x0-PADDING.left}" height="${y0-PADDING.top}" fill="#D85A30" opacity=".06"/>`;
   html+=`<rect x="${PADDING.left}" y="${y0}" width="${x0-PADDING.left}" height="${PADDING.top+ph-y0}" fill="#888780" opacity=".06"/>`;
 
-  // Grid lines
   for(let v=Math.ceil(zMin);v<=Math.floor(zMax);v++){
     const x=toSvgX(v,zMin,zMax,pw);
     const iz=v===0;
@@ -476,7 +449,6 @@ function renderChart() {
 
     let dotHtml='';
 
-    // Compare overlay
     if(comparing&&isCurrent){
       const csrc=(compareHistIdx<PRIOR.length)?PRIOR[compareHistIdx].funds[t]:null;
       if(csrc){
@@ -489,7 +461,6 @@ function renderChart() {
       }
     }
 
-    // 52-week avg D/P tick
     if(isCur&&avgDp!==null&&isActive){
       const ay=toSvgY(avgDp,dpMin,dpMax,ph);
       dotHtml+=`<line x1="${cx}" y1="${ay-5}" x2="${cx}" y2="${ay+5}" stroke="${col}" stroke-width="1.5" opacity=".5"/>`;
@@ -503,8 +474,8 @@ function renderChart() {
     }
 
     if(flagType&&isActive){
-      const sym=flagType==='dq'?'!':flagType==='ro'?'⚑':flagType==='nxg'?'?':'✦';
-      const fc=flagType==='dq'?'#d84f30':flagType==='ro'?'#e07c1a':flagType==='nxg'?'#378ADD':'#5d8a3c';
+      const sym=flagType==='dq'?'!':flagType==='ro'?'⚑':flagType==='warn'?'⚠':'✦';
+      const fc=flagType==='dq'?'#d84f30':flagType==='ro'?'#e07c1a':flagType==='warn'?'#c0392b':'#5d8a3c';
       dotHtml+=`<text x="${cx+9}" y="${cy-9}" font-size="9" fill="${fc}" font-weight="700">${sym}</text>`;
     }
 
@@ -530,7 +501,6 @@ function renderChart() {
   updateTMBar();
 }
 
-// ── TOOLTIP ───────────────────────────────────────────────────────────────────
 function fmtZ(v){if(v===null||v===undefined)return'–';return(v>=0?'+':'')+v.toFixed(2);}
 function fmtPct(v){if(v===null||v===undefined)return'–';return(v>=0?'+':'')+v.toFixed(2)+'%';}
 
@@ -542,7 +512,7 @@ function onHover(e){
 
   if(isCur){
     const d=CUR[t]; if(!d) return;
-    if(d.flag) lines.push(`<div class="tt-flag ${d.flag}">${d.flagLabel.substring(0,60)}</div>`);
+    if(d.flag) lines.push(`<div class="tt-flag ${d.flag}">${d.flagLabel.substring(0,65)}</div>`);
     const q=qFromZD(getZVal(d,zKey),d.dp);
     const qN={green:'Green · Thesis Working',blue:'Blue · Premium',orange:'Orange · Buy Zone',gray:'Gray · Worst Setup'};
     lines.push(`<b>${qN[q]||q}</b>`);
@@ -551,7 +521,7 @@ function onHover(e){
     lines.push(`Gap ${fmtPct(d.dp-d.avg52)}`);
     lines.push(`Z3M ${fmtZ(d.z3m)} · Z6M ${fmtZ(d.z6m)} · Z1Y ${fmtZ(d.z1y)}`);
     lines.push(`Dist ${fmtPct(d.dist)} · Lev ${d.lev!==null?d.lev.toFixed(2)+'%':'–'}`);
-    if(d.st!==null) lines.push(`Mom ST ${fmtPct(d.st)} / LT ${fmtPct(d.lt)} (11/7)`);
+    if(d.st!==null) lines.push(`Mom ST ${fmtPct(d.st)} / LT ${fmtPct(d.lt)} (11/13)`);
     if(d.held) lines.push(`◉ Current Holding`);
   } else {
     const sess=PRIOR[tmIdx];
@@ -604,8 +574,8 @@ function openDetail(t){
       {k:'Z3M',v:fmtZ(d.z3m),cls:d.z3m!==null?(d.z3m<0?'neg':'pos'):''},
       {k:'Z6M',v:fmtZ(d.z6m),cls:d.z6m!==null?(d.z6m<0?'neg':'pos'):''},
       {k:'Z1Y',v:fmtZ(d.z1y),cls:d.z1y!==null?(d.z1y<0?'neg':'pos'):''},
-      {k:'ST Mom (11/7)',v:d.st!==null?fmtPct(d.st):'–',cls:d.st!==null?(d.st<0?'neg':'pos'):''},
-      {k:'LT Mom (11/7)',v:d.lt!==null?fmtPct(d.lt):'–',cls:d.lt!==null?(d.lt<0?'neg':'pos'):''},
+      {k:'ST Mom (11/13)',v:d.st!==null?fmtPct(d.st):'–',cls:d.st!==null?(d.st<0?'neg':'pos'):''},
+      {k:'LT Mom (11/13)',v:d.lt!==null?fmtPct(d.lt):'–',cls:d.lt!==null?(d.lt<0?'neg':'pos'):''},
       {k:'Eff. Leverage',v:d.lev!==null?`${d.lev.toFixed(2)}%`:'–'},
       {k:'Held',v:d.held?'Yes ◉':'No'},
     ];
@@ -636,7 +606,6 @@ function openDetail(t){
 
 function closeDetail(){document.getElementById('detail').style.display='none';}
 
-// ── QUADRANT COUNTS ───────────────────────────────────────────────────────────
 function updateQCounts(){
   const isCur=tmIdx===CURRENT_IDX;
   const counts={green:0,blue:0,orange:0,gray:0};
@@ -653,24 +622,24 @@ function updateQCounts(){
   }).join('');
 }
 
-// ── TIME MACHINE ──────────────────────────────────────────────────────────────
 function updateTMBar(){
   const isCur=tmIdx===CURRENT_IDX;
   updateTMButtonStates();
   const netEl=document.getElementById('netTag');
   if(isCur){
-    netEl.textContent='Net –$11.93';
+    netEl.textContent='Net –$3.76';
     netEl.className='net-tag';
-    document.getElementById('sessionLabel').textContent='11/06/2026';
+    document.getElementById('sessionLabel').textContent='11/12/2026';
   } else {
     const sess=PRIOR[tmIdx];
     const net=sess.net||'';
+    const isPos=net.startsWith('+');
     netEl.textContent=`Net ${net}`;
-    netEl.className='net-tag'+(net.startsWith('+')?'  pos':'');
+    netEl.className='net-tag'+(isPos?' pos':'');
     document.getElementById('sessionLabel').textContent=sess.label+'/2026 (Historical)';
   }
   if(comparing){
-    const cl=compareHistIdx<PRIOR.length?PRIOR[compareHistIdx].label:'11/06';
+    const cl=compareHistIdx<PRIOR.length?PRIOR[compareHistIdx].label:'11/12';
     document.getElementById('compareInfo').textContent=`vs ${cl}`;
   } else {
     document.getElementById('compareInfo').textContent='';
@@ -683,7 +652,7 @@ function buildTMButtons(){
   PRIOR.forEach((s,i)=>{
     html+=`<button class="tm-date-btn" data-idx="${i}" onclick="tmJump(${i})">${s.label}</button>`;
   });
-  html+=`<button class="tm-date-btn current" data-idx="${CURRENT_IDX}" onclick="tmJump(${CURRENT_IDX})">11/06 ★</button>`;
+  html+=`<button class="tm-date-btn current" data-idx="${CURRENT_IDX}" onclick="tmJump(${CURRENT_IDX})">11/12 ★</button>`;
   wrap.innerHTML=html;
 }
 
@@ -748,7 +717,6 @@ function toggleCompare(){
   renderChart();
 }
 
-// ── CONTROLS ──────────────────────────────────────────────────────────────────
 function setZ(k){
   zKey=k;
   document.getElementById('bZ1Y').classList.toggle('active',k==='z1y');
@@ -772,7 +740,6 @@ function toggleHold(){
   renderChart();
 }
 
-// ── INIT ──────────────────────────────────────────────────────────────────────
 function init(){
   document.getElementById('alerts').innerHTML=buildAlerts().map(a=>`<div class="al ${a.cls}">${a.html}</div>`).join('');
   buildTMButtons();
